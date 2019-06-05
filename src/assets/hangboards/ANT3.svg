@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="176px" height="115px" viewBox="0 0 176 115" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>ANT3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ANT3" transform="translate(1.000000, 1.000000)" stroke="#000000">
+            <g id="hangboard">
+                <g transform="translate(0.000000, 4.000000)">
+                    <path d="M175,0.722167969 L44.9091797,0.722167969 L2.64453125,20.4990234 C-0.401041667,22.1663411 -0.769856771,25.3333333 1.53808594,30 C3.84602865,34.6666667 15.8654094,59.1608073 37.5962282,103.482422 C39.1433402,107.160807 44.3381082,109 53.1805322,109 C62.0229563,109 102.629446,108.732 175,108.196" id="Path-9" fill="#D0D2D3"></path>
+                    <circle id="Oval" fill="#FFFFFF" cx="52" cy="15" r="9"></circle>
+                    <circle id="Oval" fill="#9DA6A6" cx="52" cy="15" r="6"></circle>
+                    <circle id="Oval" fill="#B1BCB4" cx="52" cy="15" r="3"></circle>
+                    <circle id="Oval" fill="#494949" cx="52" cy="15" r="1"></circle>
+                    <circle id="Oval" fill="#9DA6A6" cx="52" cy="90" r="6"></circle>
+                    <circle id="Oval" fill="#B1BCB4" cx="52" cy="90" r="3"></circle>
+                    <circle id="Oval" fill="#494949" cx="52" cy="90" r="1"></circle>
+                </g>
+                <polyline id="Path-10" fill="#BBBDBF" points="175 0.27734375 76.0449219 0 44.7519531 4.72216797 175 4.72216797"></polyline>
+                <path d="M50.5,102.5 L88,102.5 C90.4852814,102.5 92.5,100.485281 92.5,98 L92.5,94 C92.5,91.5147186 90.4852814,89.5 88,89.5 L59.2174619,89.5 L59.0689467,89.2781298 C57.5005344,86.9350437 54.8723831,85.5 52,85.5 C47.3055796,85.5 43.5,89.3055796 43.5,94 C43.5,97.9898421 46.2712132,101.418166 50.1106433,102.289379 L50.5,102.377729 L50.5,102.5 Z" id="Combined-Shape"></path>
+            </g>
+            <path d="M125,89 L170,89 C172.761424,89 175,91.2385763 175,94 L175,98 C175,100.761424 172.761424,103 170,103 L125,103" id="h12" fill="#D8D8D8" transform="translate(150.000000, 96.000000) rotate(180.000000) translate(-150.000000, -96.000000) "></path>
+            <rect id="h11" fill="#D8D8D8" x="125" y="89" width="24" height="14" rx="5"></rect>
+            <circle id="h10" fill="#FFFFFF" cx="109" cy="96" r="7"></circle>
+            <rect id="h9" fill="#D8D8D8" x="72.5" y="89.5" width="20" height="13" rx="5"></rect>
+            <rect id="h8" fill="#D8D8D8" x="63.5" y="63.5" width="96" height="13" rx="5"></rect>
+            <rect id="h7" fill="#D8D8D8" x="102.5" y="63.5" width="57" height="13" rx="5"></rect>
+            <circle id="h6" fill="#FFFFFF" cx="36.5" cy="71.5" r="6.5"></circle>
+            <rect id="h5" fill="#D8D8D8" x="65.5" y="38.5" width="92" height="13" rx="5"></rect>
+            <rect id="h4" fill="#D8D8D8" x="63.5" y="38.5" width="47" height="13" rx="5"></rect>
+            <rect id="h3" fill="#D8D8D8" transform="translate(31.307508, 46.643165) rotate(-15.000000) translate(-31.307508, -46.643165) " x="18.8075079" y="40.6431655" width="25" height="12" rx="5"></rect>
+            <rect id="h2" fill="#D8D8D8" x="68.5" y="12.5" width="88" height="13" rx="5"></rect>
+            <rect id="h1" fill="#D8D8D8" x="119.5" y="12.5" width="37" height="13" rx="5"></rect>
+        </g>
+    </g>
+</svg>

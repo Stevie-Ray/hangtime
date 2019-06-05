@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="204px" height="74px" viewBox="0 0 204 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>ANT2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ANT2" transform="translate(1.000000, 1.000000)">
+            <g id="hangboard" transform="translate(0.412160, 0.000000)">
+                <path d="M202.58784,0 L129.128856,1.53125 L9.70698102,11.5527344 C3.29440056,13.094401 0.0881103368,16.5664062 0.0881103368,21.96875 C0.0881103368,30.0722656 -2.03715961,47.5307617 14.5878404,49.9521484 C31.2128404,52.3735352 189.382274,72.3583984 202.58784,71.6791992" id="Path-4" stroke="#000000" fill="#D0D2D3"></path>
+                <path d="M198.58784,66 C200.796979,66 202.58784,64.209139 202.58784,62 C202.58784,59.790861 200.796979,58 198.58784,58" id="Oval" stroke="#000000" fill="#9DA6A6" transform="translate(200.587840, 62.000000) rotate(180.000000) translate(-200.587840, -62.000000) "></path>
+                <polyline id="Star" fill="#000000" transform="translate(201.721815, 62.000000) rotate(90.000000) translate(-201.721815, -62.000000) " points="201.721815 62.1339746 200.721815 62.8660254 200.85579 61.6339746 199.721815 61.1339746 203.721815 61.1339746 202.58784 61.6339746 202.721815 62.8660254"></polyline>
+                <circle id="Oval" stroke="#000000" fill="#9DA6A6" cx="144.58784" cy="12" r="4"></circle>
+                <polygon id="Star" fill="#000000" transform="translate(144.587840, 12.000000) rotate(90.000000) translate(-144.587840, -12.000000) " points="144.58784 13 143.58784 13.7320508 143.721815 12.5 142.58784 12 143.721815 11.5 143.58784 10.2679492 144.58784 11 145.58784 10.2679492 145.453866 11.5 146.58784 12 145.453866 12.5 145.58784 13.7320508"></polygon>
+            </g>
+            <circle id="h3" stroke="#000000" fill="#A6A8AB" cx="167.5" cy="37.5" r="10.5"></circle>
+            <path d="M117.515472,37.9845276 C128.015472,30.181955 128.015472,30.181955 128.015472,24.3829651 C128.015472,18.5839752 123.314462,13.8829651 117.515472,13.8829651 C111.716483,13.8829651 110.758881,15.9010315 103.882965,22.1891174" id="h2" stroke="#000000" fill="#BBBDBF" transform="translate(115.949219, 25.933746) rotate(90.000000) translate(-115.949219, -25.933746) "></path>
+            <circle id="h2" stroke="#000000" fill="#E5E6E7" cx="112.5" cy="21.5" r="10.5"></circle>
+            <rect id="h1" stroke="#000000" fill="#A6A8AB" x="14.5" y="20.5" width="78" height="16" rx="5"></rect>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,220 @@
+<template>
+  <v-layout row class="tabs">
+    <!-- app: Designates the component as part of the application layout. Used for dynamically adjusting content sizing. Components using this prop should reside outside of v-content to function properly-->
+    <v-app-bar
+      app
+      fixed
+      tabs
+      dark
+      color="primary"
+      hide-on-scroll
+      extended
+      :class="{ offline: !networkOnLine }"
+    >
+      <v-img class="app-logo mr-1" :src="getImg('icons/logo.svg')" contain />
+
+      <v-toolbar-title to="/">
+        {{ appTitle }}
+      </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <!--      <v-btn icon>-->
+      <!--      <v-icon>mdi-magnify</v-icon>-->
+      <!--      </v-btn>-->
+      <v-chip
+        v-if="!networkOnLine"
+        label
+        small
+        outline
+        disabled
+        color="white"
+        class="text-uppercase"
+        >Offline
+      </v-chip>
+
+      <!--      <v-avatar-->
+      <!--        v-if="isUserLoggedIn && networkOnLine"-->
+      <!--        :size="32"-->
+      <!--        color="grey lighten-2"-->
+      <!--      >-->
+      <!--        <img :src="user.photoURL" :alt="user.displayName" />-->
+      <!--      </v-avatar>-->
+
+      <v-menu bottom left min-width="200">
+        <template v-slot:activator="{ on }">
+          <v-btn dark icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+            v-if="user && user.settings.hangboards.length > 1"
+            @click="hangboardDialog = true"
+          >
+            <v-list-item-title>Switch hangboard</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/settings">
+            <v-list-item-title>Settings</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-tabs
+        slot="extension"
+        v-model="activeTab"
+        centered
+        dark
+        grow
+        color="white"
+        exact
+        slider-color="white"
+      >
+        <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.route">
+          {{ tab.name }}
+        </v-tab>
+      </v-tabs>
+    </v-app-bar>
+
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout justify-center>
+          <v-flex xs12 sm8 md6>
+            <v-tabs-items
+              v-model="activeTab"
+              fill-height
+              @change="updateRouter($event)"
+            >
+              <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.route">
+                <router-view></router-view>
+              </v-tab-item>
+            </v-tabs-items>
+
+            <v-fab-transition>
+              <v-btn
+                v-if="networkOnLine"
+                :key="activeFab.icon"
+                fixed
+                fab
+                large
+                bottom
+                right
+                color="secondary"
+                @click="
+                  activeFab.click
+                    ? (dialog = true)
+                    : updateRouter(activeFab.route)
+                "
+              >
+                <v-icon>{{ activeFab.icon }}</v-icon>
+              </v-btn>
+            </v-fab-transition>
+
+            <add-workout v-model="dialog"></add-workout>
+
+            <switch-hangboard v-model="hangboardDialog"></switch-hangboard>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-layout>
+</template>
+
+<script>
+import { mapGetters, mapState } from 'vuex'
+import { getImg } from '@/misc/helpers'
+import AddWorkout from '@/components/AddWorkout'
+import SwitchHangboard from '@/components/SwitchHangboard'
+
+export default {
+  components: {
+    AddWorkout,
+    SwitchHangboard
+  },
+  data: () => ({
+    dialog: false,
+    hangboardDialog: false,
+    activeTab: '/',
+    tabs: [
+      { id: 0, name: 'workouts', route: `/` },
+      { id: 1, name: 'community', route: `/community` },
+      { id: 2, name: 'hangtime', route: `/hangtime` }
+    ]
+  }),
+  computed: {
+    ...mapGetters('authentication', ['isUserLoggedIn']),
+    ...mapState('authentication', ['user']),
+    ...mapState('app', ['networkOnLine', 'appTitle']),
+    activeFab() {
+      switch (this.activeTab) {
+        case '/':
+          return { route: '/', icon: 'mdi-plus', click: true }
+        case '/community':
+          return { route: '/community', icon: 'mdi-tune' }
+        case '/hangtime':
+          return { route: '/hangtime', icon: 'mdi-timer' }
+        default:
+          return {}
+      }
+    }
+  },
+  methods: {
+    updateRouter(val) {
+      this.$router.push(val)
+    },
+    getImg
+  }
+}
+</script>
+
+<style lang="scss">
+@import '@/theme/variables.scss';
+
+#app .v-toolbar {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__content,
+  &__extension {
+    flex: 0 0 auto;
+    flex-basis: 100%;
+    max-width: 100%;
+    // sm
+    @media (min-width: 600px) {
+      flex-basis: 66.6666666667%;
+      max-width: 66.6666666667%;
+    }
+    @media (min-width: 960px) {
+      flex-basis: 50.1%;
+      max-width: 50.1%;
+    }
+  }
+}
+.tabs {
+  &.offline {
+    background: $navbar-offline-color;
+  }
+
+  .app-logo {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .v-window {
+    height: 100%;
+  }
+
+  .offline-label {
+    padding: 0px 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-left: 1.5rem;
+  }
+}
+</style>
