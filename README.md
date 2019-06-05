@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Hangtime :wave:</h1>
 
-<p align="center">Hangboarding App</p>
+<p align="center">Full-Stack Hangboarding PWA applications with Vue.js and Firebase</p>
 
 <br />
 
@@ -33,7 +33,3 @@
 - :leftwards_arrow_with_hook: Smart redirection for auth protected routes
 - :sparkles: Products page example to demonstrate app data management with firestore and vuex
 - :muscle: Better PWA support for all browsers with [PWACompat](https://github.com/GoogleChromeLabs/pwacompat)
-
-## Known issues
-
-- Before IOS 12.2, OAuth redirection is not working when the PWA is running in standalone.

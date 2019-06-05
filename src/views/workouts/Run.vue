@@ -1,8 +1,10 @@
 <template>
   <v-layout row class="profile">
-    <v-app-bar v-if="data !== null" color="primary" app fixed dark>
+    <v-app-bar v-if="currentWorkout" color="primary" app fixed dark>
       <v-icon
-        @click="$router.push({ name: 'workout', params: { id: data.id } })"
+        @click="
+          $router.push({ name: 'workout', params: { id: currentWorkout.id } })
+        "
         >mdi-arrow-left</v-icon
       >
       <v-avatar size="32px">
@@ -15,132 +17,146 @@
         />
       </v-avatar>
       <v-toolbar-title>
-        {{ data.name }}
-        <div class="subheading">{{ data.description }}</div>
+        {{ currentWorkout.name }}
+        <div class="subheading">{{ currentWorkout.description }}</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-content v-if="currentExercise !== null">
+    <v-content v-if="currentExercise">
       <v-container fluid fill-height>
-        <v-layout justify-space-around column text-xs-center>
-          <!-- circle -->
+        <v-layout>
           <v-flex xs12 sm8 md6>
-            <v-progress-circular
-              class="mt-3"
-              :rotate="270"
-              :size="300"
-              :width="5"
-              :value="progressCircular"
-            >
-              <v-avatar size="80" aspect-ratio="1" class="grey lighten-2 mb-3">
-                <img
-                  :alt="options[currentExercise.exercise].name"
-                  :src="getImg(options[currentExercise.exercise].image)"
-                />
-              </v-avatar>
-
-              <div class="subtitle font-weight-bold text-uppercase">
-                {{ direction }}
-              </div>
-
-              <div id="timer" class="display-3 font-weight-bold">
-                {{ count(totalTime) }}
-              </div>
-
-              <div class="bottom-data">
-                <div class="bottom-data__exercise">
-                  <div class="data">
-                    <v-icon small>mdi-timer</v-icon>
-                    {{ currentStep + 1 }}/{{ exercises.length }}
-                  </div>
-                </div>
-                <div
-                  v-if="currentExercise.repeat > 1"
-                  class="bottom-data__repeat"
+            <v-layout justify-space-around column fill-height text-xs-center>
+              <!-- circle -->
+              <v-flex>
+                <v-progress-circular
+                  class="mt-3"
+                  :rotate="270"
+                  :size="300"
+                  :width="5"
+                  :value="progressCircular"
                 >
-                  <div class="data">
-                    <v-icon small>mdi-repeat</v-icon>
-                    0/{{ currentExercise.repeat }}
+                  <v-avatar
+                    size="80"
+                    aspect-ratio="1"
+                    class="grey lighten-2 mb-3"
+                  >
+                    <img
+                      :alt="options[currentExercise.exercise].name"
+                      :src="getImg(options[currentExercise.exercise].image)"
+                    />
+                  </v-avatar>
+
+                  <div class="subtitle font-weight-bold text-uppercase">
+                    {{ direction }}
+                  </div>
+
+                  <div id="timer" class="display-3 font-weight-bold">
+                    {{ count(totalTime) }}
+                  </div>
+
+                  <div class="bottom-data">
+                    <div class="bottom-data__exercise">
+                      <div class="data">
+                        <v-icon small>mdi-timer</v-icon>
+                        {{ currentStep + 1 }}/{{ exercises.length }}
+                      </div>
+                    </div>
+                    <div
+                      v-if="currentExercise.repeat > 1"
+                      class="bottom-data__repeat"
+                    >
+                      <div class="data">
+                        <v-icon small>mdi-restore-clock</v-icon>
+                        {{ stepRepeat }}/{{ currentExercise.repeat }}
+                      </div>
+                    </div>
+                  </div>
+                </v-progress-circular>
+              </v-flex>
+
+              <!-- hangboard -->
+              <v-flex>
+                <div
+                  class="hangboard"
+                  :class="
+                    companies[
+                      user.settings.hangboards[user.settings.selected].company
+                    ].hangboards[
+                      user.settings.hangboards[user.settings.selected].hangboard
+                    ].name
+                  "
+                >
+                  <div class="leftside">
+                    <img
+                      :class="
+                        companies[
+                          user.settings.hangboards[user.settings.selected]
+                            .company
+                        ].hangboards[
+                          user.settings.hangboards[user.settings.selected]
+                            .hangboard
+                        ].holds[currentExercise.left].id
+                      "
+                      :src="
+                        getImg(
+                          companies[
+                            user.settings.hangboards[user.settings.selected]
+                              .company
+                          ].hangboards[
+                            user.settings.hangboards[user.settings.selected]
+                              .hangboard
+                          ].image
+                        )
+                      "
+                    />
+                  </div>
+                  <div class="rightside">
+                    <img
+                      :class="
+                        companies[
+                          user.settings.hangboards[user.settings.selected]
+                            .company
+                        ].hangboards[
+                          user.settings.hangboards[user.settings.selected]
+                            .hangboard
+                        ].holds[currentExercise.right].id
+                      "
+                      :src="
+                        getImg(
+                          companies[
+                            user.settings.hangboards[user.settings.selected]
+                              .company
+                          ].hangboards[
+                            user.settings.hangboards[user.settings.selected]
+                              .hangboard
+                          ].image
+                        )
+                      "
+                    />
                   </div>
                 </div>
-              </div>
-            </v-progress-circular>
-          </v-flex>
+              </v-flex>
 
-          <!-- hangboard -->
-          <v-flex xs12 sm8 md6>
-            <div
-              class="hangboard"
-              :class="
-                companies[
-                  user.settings.hangboards[user.settings.selected].company
-                ].hangboards[
-                  user.settings.hangboards[user.settings.selected].hangboard
-                ].name
-              "
-            >
-              <div class="leftside">
-                <img
-                  :class="
-                    companies[
-                      user.settings.hangboards[user.settings.selected].company
-                    ].hangboards[
-                      user.settings.hangboards[user.settings.selected].hangboard
-                    ].holds[currentExercise.left].id
-                  "
-                  :src="
-                    getImg(
-                      companies[
-                        user.settings.hangboards[user.settings.selected].company
-                      ].hangboards[
-                        user.settings.hangboards[user.settings.selected]
-                          .hangboard
-                      ].image
-                    )
-                  "
-                />
-              </div>
-              <div class="rightside">
-                <img
-                  :class="
-                    companies[
-                      user.settings.hangboards[user.settings.selected].company
-                    ].hangboards[
-                      user.settings.hangboards[user.settings.selected].hangboard
-                    ].holds[currentExercise.right].id
-                  "
-                  :src="
-                    getImg(
-                      companies[
-                        user.settings.hangboards[user.settings.selected].company
-                      ].hangboards[
-                        user.settings.hangboards[user.settings.selected]
-                          .hangboard
-                      ].image
-                    )
-                  "
-                />
-              </div>
-            </div>
-          </v-flex>
-
-          <!-- title -->
-          <v-flex xs12 sm8 md6>
-            <div class="title">
-              <span v-if="currentExercise.repeat > 1"
-                >{{ currentExercise.repeat }}x</span
-              >
-              <span v-if="currentExercise.pullups > 1">
-                {{ currentExercise.pullups }}</span
-              >
-              <span> {{ options[currentExercise.exercise].name }}</span>
-              <span v-if="currentExercise.pullups > 1">s</span>
-            </div>
-            <div class="subheading">
-              <span>Hold for {{ currentExercise.hold }} sec. </span>
-              <span>Rest for {{ currentExercise.rest }} sec.</span>
-            </div>
+              <!-- title -->
+              <v-flex>
+                <div class="title">
+                  <span v-if="currentExercise.repeat > 1"
+                    >{{ currentExercise.repeat }}x</span
+                  >
+                  <span v-if="currentExercise.pullups > 1">
+                    {{ currentExercise.pullups }}</span
+                  >
+                  <span> {{ options[currentExercise.exercise].name }}</span>
+                  <span v-if="currentExercise.pullups > 1">s</span>
+                </div>
+                <div class="subheading">
+                  <span>Hold for {{ currentExercise.hold }} sec. </span>
+                  <span>Rest for {{ currentExercise.rest }} sec.</span>
+                </div>
+              </v-flex>
+            </v-layout>
           </v-flex>
         </v-layout>
       </v-container>
@@ -155,21 +171,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { getImg, count, speak, sound } from '@/misc/helpers'
 
 export default {
   props: {
-    data: Object
+    id: String
   },
   data: () => ({
     currentStep: 0,
     stepRepeat: 0,
-    currentExercise: null,
     totalTime: 0,
     timer: null,
     progressCircular: 0,
-    initial: 0,
+    initalTime: 0,
     synth: window.speechSynthesis,
     voiceList: [],
     down: false,
@@ -180,6 +195,7 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('exercises', ['exercises', 'options']),
     ...mapState('companies', ['companies']),
+    ...mapGetters('workouts', ['workoutById']),
     direction() {
       if (this.finished) {
         return 'Done'
@@ -199,31 +215,40 @@ export default {
         string += 's'
       }
       return string
+    },
+    currentExercise() {
+      // set current exercise based on currentStep
+      if (!this.exercises) return
+      return this.exercises[this.currentStep]
+    },
+    currentWorkout() {
+      return this.workoutById(this.id)
     }
   },
   created() {
     // TODO: remove ugly code
-    this.$store.dispatch('exercises/getWorkoutExercises', this.data.id)
-
-    // set current exercise based on currentStep
-    this.currentExercise = this.exercises[this.currentStep]
-    // update Timer
-    this.totalTime = this.currentExercise.pause
+    this.$store.dispatch('exercises/getWorkoutExercises', this.id)
+  },
+  mounted() {
     // set timer
     this.timer = setInterval(() => this.countdown(), 1000)
-    // set initalTime to totalTime
-    this.initalTime = this.totalTime
-    // get voice list
+
+    // TODO: why do i get the voice list?
     this.voiceList = this.synth
       .getVoices()
       .filter(voice => /^(en|EN)/.test(voice.lang))
   },
-  mounted() {
-    //
-  },
   updated() {
     this.$nextTick(function() {
+      // update Timer
+      if (this.currentExercise && this.initalTime === 0) {
+        this.totalTime = this.currentExercise.pause
+        // set initalTime to totalTime
+        this.initalTime = this.totalTime
+      }
+      //
       if (this.stepRepeat === 0 && this.initalTime - 1 === this.totalTime) {
+        // speak if enabled
         if (this.user.settings.speak) {
           this.speak('Next exercise')
           if (this.currentExercise.pullups > 1) {
@@ -280,9 +305,8 @@ export default {
     speak,
     sound,
     countdown() {
+      // if there is time left
       if (this.totalTime >= 1) {
-        // if there is time left
-
         // totalTime -1
         this.totalTime = this.totalTime - 1
         // update circle
@@ -302,27 +326,28 @@ export default {
         } else {
           // this.down = false;
         }
-      } else if (this.stepRepeat !== this.currentExercise.repeat) {
-        // if step repeats
+      }
+      // if step repeats
+      else if (this.stepRepeat !== this.currentExercise.repeat) {
         this.stepRepeat = this.stepRepeat + 1
 
         // set timers
         this.totalTime = this.currentExercise.hold + this.currentExercise.rest
         this.initalTime = this.totalTime
-      } else if (this.currentStep < this.exercises.length - 1) {
-        // check if all steps are done
+      }
+      // check if all steps are done
+      else if (this.currentStep < this.exercises.length - 1) {
+        // // set next exercise
         this.currentStep = this.currentStep + 1
         this.stepRepeat = 0
-
-        // set next exercise
-        this.currentExercise = this.exercises[this.currentStep]
 
         // set time
         this.totalTime = this.currentExercise.pause
         this.initalTime = this.totalTime
-      } else {
-        // done!
-        // this.finished = true
+      }
+      // done!
+      else {
+        this.finished = true
         // this.stop()
       }
     }
