@@ -130,8 +130,7 @@
           label="Repeat"
         >
           <template #append>
-            <v-label v-if="!editWorkout">{{ dataRepeat }}x.</v-label
-            >
+            <v-label v-if="!editWorkout">{{ dataRepeat }}x.</v-label>
           </template>
         </v-slider>
 

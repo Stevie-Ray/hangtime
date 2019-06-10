@@ -59,7 +59,6 @@ export default {
     border-color: rgba(0, 0, 0, 0.08);
   }
 
-
   /* global hangboard css */
   .hangboard {
     padding: 0 16px;
