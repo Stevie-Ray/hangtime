@@ -62,7 +62,7 @@ export default {
   },
 
   /**
-   * Callback fired when changing a exercise
+   * Callback fired when changing an exercise
    */
   triggerUpdateExercise: ({ dispatch, state }, payload) => {
     if (!state.exercises) return

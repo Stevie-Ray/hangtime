@@ -91,8 +91,7 @@
                     <v-layout wrap>
                       <v-flex xs12>
                         <v-text-field
-                          v-model="currentWorkout.name"
-                          focus
+                          v-model="dataName"
                           placeholder="New workout"
                           :rules="[rules.required, rules.length(24)]"
                           label="Workout name *"
@@ -104,10 +103,10 @@
                       <v-flex xs12>
                         <v-textarea
                           v-if="editWorkout"
-                          v-model="currentWorkout.description"
+                          v-model="dataDescription"
                           counter="140"
                           :rules="[rules.length(140)]"
-                          placeholder="For example: Beginner warming up or maximum hangtime on good holds."
+                          placeholder="Give a short description of your workout, for example indicate when this training is suitable"
                           label="Workout description"
                         >
                         </v-textarea>
@@ -143,7 +142,7 @@
                     v-if="editWorkout"
                     text
                     :disabled="currentWorkout.name === ''"
-                    @click="dialogs.generalgeneral = false"
+                    @click="clickUpdateWorkout"
                     >Save
                   </v-btn>
                 </v-card-actions>
@@ -212,7 +211,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
 import ExerciseList from '@/components/ExerciseList'
 import { getImg, count } from '@/misc/helpers'
 
@@ -258,16 +257,37 @@ export default {
         return this.editingWorkout
       }
       return this.edit
+    },
+    dataName: {
+      get() {
+        return this.currentWorkout.name
+      },
+      set(value) {
+        this.setWorkoutName({ id: this.currentWorkout.id, value: value })
+      }
+    },
+    dataDescription: {
+      get() {
+        return this.currentWorkout.description
+      },
+      set(value) {
+        this.setWorkoutDescription({ id: this.currentWorkout.id, value: value })
+      }
     }
   },
   methods: {
     count,
     getImg,
     ...mapActions('exercises', ['triggerAddExerciseAction']),
-    ...mapActions('workouts', ['deleteUserWorkout']),
+    ...mapActions('workouts', ['deleteUserWorkout', 'triggerUpdateWorkout']),
+    ...mapMutations('workouts', ['setWorkoutName', 'setWorkoutDescription']),
     deleteWorkout(id) {
       this.deleteUserWorkout(id)
       this.$router.go(-1)
+    },
+    clickUpdateWorkout() {
+      this.triggerUpdateWorkout(this.currentWorkout)
+      this.dialogs.general = false
     }
   }
 }

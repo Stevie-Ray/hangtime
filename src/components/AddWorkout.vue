@@ -10,25 +10,26 @@
           <v-container>
             <v-layout row wrap>
               <v-flex xs12>
-                <input
-                  placeholder="workout name..."
+                <v-text-field
+                  v-model="workoutToCreateName"
+                  placeholder="New workout"
                   class="workout-name-input"
-                  type="text"
-                  :value="workoutToCreate.name"
-                  @input="setWorkoutToCreate({ name: $event.target.value })"
-                />
+                  :rules="[rules.required, rules.length(24)]"
+                  label="Workout name *"
+                  required
+                >
+                </v-text-field>
               </v-flex>
 
               <v-flex xs12>
-                <textarea
-                  placeholder="workout description..."
+                <v-textarea
+                  v-model="workoutToCreateDescription"
+                  counter="140"
+                  :rules="[rules.length(140)]"
                   class="workout-description-input"
-                  type="text"
-                  :value="workoutToCreate.description"
-                  @input="
-                    setWorkoutToCreate({ description: $event.target.value })
-                  "
-                ></textarea>
+                  placeholder="Give a short description of your workout, for example indicate when this training is suitable"
+                  label="Workout description"
+                ></v-textarea>
               </v-flex>
             </v-layout>
           </v-container>
@@ -46,6 +47,7 @@
           text
           color="primary"
           class="add-exersice-btn"
+          :disabled="workoutToCreateName === ''"
           @click="saveWorkout"
         >
           Save
@@ -64,11 +66,32 @@ export default {
     value: Boolean
   },
   data: () => ({
-    dialog: true
+    dialog: true,
+    rules: {
+      length: len => v =>
+        (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
+      required: v => !!v || 'This field is required'
+    }
   }),
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['workoutToCreate', 'workoutCreationPending']),
+    workoutToCreateName: {
+      get() {
+        return this.workoutToCreate.name
+      },
+      set(value) {
+        this.setWorkoutToCreate({ name: value })
+      }
+    },
+    workoutToCreateDescription: {
+      get() {
+        return this.workoutToCreate.description
+      },
+      set(value) {
+        this.setWorkoutToCreate({ description: value })
+      }
+    },
     show: {
       get() {
         return this.value

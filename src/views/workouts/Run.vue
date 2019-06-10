@@ -352,14 +352,10 @@ export default {
   }
 }
 
-
-
-#app .profile{
+#app .profile {
   .v-toolbar {
-
     &__content,
     &__extension {
-
       // sm
       @media (min-width: 600px) {
         flex-basis: 100%;
@@ -376,7 +372,4 @@ export default {
     }
   }
 }
-
-
-
 </style>

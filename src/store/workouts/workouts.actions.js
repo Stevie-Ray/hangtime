@@ -51,5 +51,24 @@ export default {
     await userWorkoutsDb.delete(workoutId)
     commit('removeWorkoutById', workoutId)
     commit('removeWorkoutDeletionPending', workoutId)
+  },
+  /**
+   * Update workout
+   */
+  updateWorkout: async ({ rootState }, payload) => {
+    const userWorkoutsDb = new UserWorkoutsDB(rootState.authentication.user.id)
+    await userWorkoutsDb.update(payload)
+  },
+
+  /**
+   * Callback fired when changing a workout
+   */
+  triggerUpdateWorkout: ({ dispatch, state }, payload) => {
+    if (!state.workouts) return
+
+    // const workout = state.workouts.find(
+    //   workout => workout.id === payload.workout.id
+    // )
+    dispatch('updateWorkout', payload)
   }
 }
