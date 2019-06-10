@@ -1,8 +1,8 @@
 <template>
   <div class="exercise-item">
     <v-list-item ripple @click="$emit('goToExerciseDetails', data.id)">
-      <v-list-item-avatar class="handle">
-        <v-icon>mdi-drag-indicator</v-icon>
+      <v-list-item-avatar>
+        <v-icon v-if="editWorkout" class="handle">mdi-drag-vertical</v-icon>
 
         <img
           :src="getImg(options[data.exercise].image)"
@@ -47,6 +47,7 @@ import { getImg, count } from '@/misc/helpers'
 export default {
   props: {
     data: Object,
+    editWorkout: Boolean,
     index: Number,
     // isWorkoutDeletionPending: Boolean,
     // isWorkoutUpdatePending: Boolean,

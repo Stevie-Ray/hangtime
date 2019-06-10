@@ -33,7 +33,13 @@
           :index="index"
           :disable-actions="!networkOnLine"
           :data="exercise"
-          @goToExerciseDetails="$router.push(`/workouts/${id}/${$event}`)"
+          :edit-workout="editWorkout"
+          @goToExerciseDetails="
+            $router.push({
+              name: 'exercise',
+              params: { id: id, exercise: $event, editingWorkout: editWorkout }
+            })
+          "
         ></exercise-list-item>
       </draggable>
     </v-list>
@@ -48,7 +54,8 @@ import { mapState, mapActions } from 'vuex'
 export default {
   components: { ExerciseListItem, draggable },
   props: {
-    id: String
+    id: String,
+    editWorkout: Boolean
   },
   computed: {
     ...mapState('exercises', ['exercises']),
@@ -57,8 +64,9 @@ export default {
       get() {
         return this.exercises
       },
-      set(value) {
-        this.triggerReorderExercises({ exercises: value, workout: this.id })
+      set() {
+        return this.exercises
+        // this.triggerReorderExercises({ exercises: value, workout: this.id })
       }
     }
   },

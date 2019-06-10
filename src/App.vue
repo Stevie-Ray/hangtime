@@ -68,37 +68,18 @@ export default {
     height: auto;
   }
 
-  .hangboard {
-    padding: 0 16px;
+  .v-toolbar {
+    &__title {
+      line-height: 1.25;
+      margin-left: 13px;
 
-    .leftside,
-    .rightside {
-      display: inline-block;
-      width: 50%;
-      text-align: right;
+      .subheading {
+        font-size: 12px !important;
+      }
     }
-    .rightside {
-      transform: rotateY(180deg);
-    }
-  }
 
-  .simple-svg-wrapper {
-    &.h1 #h1,
-    &.h2 #h2,
-    &.h3 #h3,
-    &.h4 #h4,
-    &.h5 #h5,
-    &.h6 #h6,
-    &.h7 #h7,
-    &.h8 #h8,
-    &.h9 #h9,
-    &.h10 #h10,
-    &.h11 #h11,
-    &.h12 #h12,
-    &.h13 #h13,
-    &.h14 #h14,
-    &.h15 #h15 {
-      fill: rgb(115, 146, 112);
+    &__content > .v-icon {
+      margin-left: -4px;
     }
   }
 }

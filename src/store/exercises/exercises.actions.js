@@ -93,16 +93,17 @@ export default {
   /**
    * Delete a user exercise from its id
    */
-  deleteUserExercise: async ({ rootState, commit, getters }, payload) => {
+  deleteUserExercise: async ({ rootState, getters }, payload) => {
     if (getters.isExerciseDeletionPending(payload.exerciseId)) return
     const userExercisesDb = new UserExercisesDB(
       rootState.authentication.user.id,
       payload.workout
     )
-    // TODO: this probably doesn't work
-    commit('addExerciseDeletionPending', payload.exerciseId)
+    // TODO: fix pending state
+    // commit('addExerciseDeletionPending', payload.exerciseId)
     await userExercisesDb.delete(payload.exerciseId)
-    commit('removeExerciseById', payload.exerciseId)
-    commit('removeExerciseDeletionPending', payload.exerciseId)
+    // TODO: enable removeExerciseById when state / exercise issues are fixed
+    // commit('removeExerciseById', payload.exerciseId)
+    // commit('removeExerciseDeletionPending', payload.exerciseId)
   }
 }

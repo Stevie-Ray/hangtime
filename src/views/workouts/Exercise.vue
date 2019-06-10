@@ -1,7 +1,13 @@
 <template>
   <v-layout row class="exercise">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ name: 'workout', params: { id: id } })"
+      <v-icon
+        @click="
+          $router.push({
+            name: 'workout',
+            params: { id: id, editingWorkout: editWorkout }
+          })
+        "
         >mdi-arrow-left
       </v-icon>
       <v-avatar size="32px">
@@ -29,12 +35,15 @@
 
       <v-spacer></v-spacer>
 
+      <v-btn v-if="!editWorkout" icon @click="edit = true">
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
       <v-btn
-        v-if="currentExercise"
+        v-if="currentExercise && editWorkout"
         icon
         class="delete-btn"
-        @click="
-          deleteUserExercise({ workout: id, exerciseId: currentExercise.id })
+        @click.stop="
+          deleteExercise({ workout: id, exerciseId: currentExercise.id })
         "
       >
         <v-icon
@@ -51,17 +60,22 @@
         <v-layout justify-center>
           <v-flex text-xs-center xs12 sm8 md6>
             <!-- Get exercises item -->
-            <exercise-item :id="id" :data="currentExercise"> </exercise-item>
+            <exercise-item
+              :id="id"
+              :data="currentExercise"
+              :edit-workout="editWorkout"
+            ></exercise-item>
 
             <v-speed-dial bottom right fixed>
               <v-btn
+                v-if="editWorkout"
                 slot="activator"
                 color="secondary"
                 dark
                 fab
                 large
                 @click="
-                  triggerUpdateExercise({
+                  clickUpdateExercise({
                     workout: id,
                     exercise: currentExercise
                   })
@@ -87,8 +101,12 @@ export default {
   props: {
     id: String,
     exercise: String,
+    editingWorkout: Boolean,
     isWorkoutDeletionPending: Boolean
   },
+  data: () => ({
+    edit: null
+  }),
   head: {
     title: {
       inner: 'Exercise'
@@ -108,12 +126,26 @@ export default {
     ...mapGetters('exercises', ['exerciseById', 'isExerciseDeletionPending']),
     currentExercise() {
       return this.exerciseById(this.exercise)
+    },
+    editWorkout() {
+      if (this.editingWorkout && this.edit === null) {
+        return this.editingWorkout
+      }
+      return this.edit
     }
   },
   methods: {
     count,
     getImg,
-    ...mapActions('exercises', ['deleteUserExercise', 'triggerUpdateExercise'])
+    ...mapActions('exercises', ['deleteUserExercise', 'triggerUpdateExercise']),
+    deleteExercise(data) {
+      this.deleteUserExercise(data)
+      this.$router.push({ name: 'workout', params: { id: data.workout } })
+    },
+    clickUpdateExercise(data) {
+      this.triggerUpdateExercise(data)
+      this.edit = false
+    }
   }
 }
 </script>

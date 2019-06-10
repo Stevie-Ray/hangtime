@@ -38,6 +38,18 @@ export default {
     )
     state.exercises[index].repeat = payload.value
   },
+  setRightHold: (state, payload) => {
+    const index = state.exercises.findIndex(
+      exercise => exercise.id === payload.id
+    )
+    state.exercises[index].right = payload.value
+  },
+  setLeftHold: (state, payload) => {
+    const index = state.exercises.findIndex(
+      exercise => exercise.id === payload.id
+    )
+    state.exercises[index].left = payload.value
+  },
   setRest: (state, payload) => {
     const index = state.exercises.findIndex(
       exercise => exercise.id === payload.id

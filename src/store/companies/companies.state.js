@@ -294,7 +294,7 @@ export default {
             },
             {
               id: 'h9',
-              class: 7,
+              class: 8,
               name: 'deep 2 finger pocket'
             },
             {

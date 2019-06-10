@@ -19,13 +19,14 @@
           item-text="name"
           item-value="id"
           label="Exercise"
+          :disabled="!editWorkout"
           required
         >
           <template v-slot:selection="data">
             <span v-text="data.item.name"></span>
           </template>
           <template v-slot:item="data">
-            <v-list-item-avatar tile>
+            <v-list-item-avatar>
               <img :alt="data.item.name" :src="getImg(data.item.image)" />
             </v-list-item-avatar>
             <v-list-item-content>
@@ -37,56 +38,7 @@
 
       <v-flex xs12>
         <!-- hangboard -->
-        <div
-          class="hangboard"
-          :class="
-            companies[user.settings.hangboards[user.settings.selected].company]
-              .hangboards[
-              user.settings.hangboards[user.settings.selected].hangboard
-            ].name
-          "
-        >
-          <div class="leftside">
-            <img
-              :class="
-                companies[
-                  user.settings.hangboards[user.settings.selected].company
-                ].hangboards[
-                  user.settings.hangboards[user.settings.selected].hangboard
-                ].holds[data.left].id
-              "
-              :src="
-                getImg(
-                  companies[
-                    user.settings.hangboards[user.settings.selected].company
-                  ].hangboards[
-                    user.settings.hangboards[user.settings.selected].hangboard
-                  ].image
-                )
-              "
-            />
-          </div>
-          <div class="rightside">
-            <img
-              :class="
-                companies[
-                  user.settings.hangboards[user.settings.selected].company
-                ].hangboards[
-                  user.settings.hangboards[user.settings.selected].hangboard
-                ].holds[data.right].id
-              "
-              :src="
-                getImg(
-                  companies[
-                    user.settings.hangboards[user.settings.selected].company
-                  ].hangboards[
-                    user.settings.hangboards[user.settings.selected].hangboard
-                  ].image
-                )
-              "
-            />
-          </div>
-        </div>
+        <hangboard :data="data" :edit-workout="editWorkout"></hangboard>
       </v-flex>
 
       <v-flex xs12>
@@ -103,9 +55,13 @@
           thumb-label="always"
           hint="Time before the exercise"
           persistent-hint
+          :disabled="!editWorkout"
           prepend-icon="mdi-clock-outline"
           label="Pause"
         >
+          <template #append>
+            <v-label v-if="!editWorkout">{{ dataPause }}s.</v-label>
+          </template>
         </v-slider>
 
         <v-divider class="my-4"></v-divider>
@@ -120,10 +76,14 @@
           always-dirty
           thumb-label="always"
           prepend-icon="mdi-clock"
+          :disabled="!editWorkout"
           hint="Time to do an exercise"
           persistent-hint
           label="Hold"
         >
+          <template #append>
+            <v-label v-if="!editWorkout">{{ dataHold }}s.</v-label>
+          </template>
         </v-slider>
 
         <v-divider
@@ -141,28 +101,38 @@
           ticks
           always-dirty
           thumb-label="always"
+          :disabled="!editWorkout"
           prepend-icon="mdi-clock-alert"
           hint="Number of pull ups you have to perform"
           persistent-hint
           label="Pull-ups"
         >
+          <template #append>
+            <v-label v-if="!editWorkout">{{ dataPullups }}x.</v-label>
+          </template>
         </v-slider>
 
         <v-divider class="my-4"></v-divider>
 
         <!-- repeat  -->
         <v-slider
+          v-if="editWorkout || data.repeat > 1"
           v-model="dataRepeat"
           :max="10"
           :min="1"
           step="1"
           ticks
           thumb-label="always"
+          :disabled="!editWorkout"
           prepend-icon="mdi-restore-clock"
           hint="Easy way to repeat this exercise"
           persistent-hint
           label="Repeat"
         >
+          <template #append>
+            <v-label v-if="!editWorkout">{{ dataRepeat }}x.</v-label
+            >
+          </template>
         </v-slider>
 
         <v-divider v-if="data.repeat > 1" class="my-4"></v-divider>
@@ -177,11 +147,15 @@
           ticks
           always-dirty
           thumb-label="always"
+          :disabled="!editWorkout"
           prepend-icon="mdi-progress-clock"
           hint="Time to rest between repeating exercises"
           persistent-hint
           label="Rest"
         >
+          <template #append>
+            <v-label v-if="!editWorkout">{{ dataRest }}s.</v-label>
+          </template>
         </v-slider>
       </v-flex>
     </v-layout>
@@ -190,13 +164,15 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import Hangboard from '@/components/Hangboard'
 import { getImg } from '@/misc/helpers'
 
 export default {
-  components: {},
+  components: { Hangboard },
   props: {
     id: String,
-    data: Object
+    data: Object,
+    editWorkout: Boolean
   },
   computed: {
     ...mapState('app', ['networkOnLine']),

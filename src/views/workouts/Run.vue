@@ -78,65 +78,7 @@
 
               <!-- hangboard -->
               <v-flex>
-                <div
-                  class="hangboard"
-                  :class="
-                    companies[
-                      user.settings.hangboards[user.settings.selected].company
-                    ].hangboards[
-                      user.settings.hangboards[user.settings.selected].hangboard
-                    ].name
-                  "
-                >
-                  <div class="leftside">
-                    <img
-                      :class="
-                        companies[
-                          user.settings.hangboards[user.settings.selected]
-                            .company
-                        ].hangboards[
-                          user.settings.hangboards[user.settings.selected]
-                            .hangboard
-                        ].holds[currentExercise.left].id
-                      "
-                      :src="
-                        getImg(
-                          companies[
-                            user.settings.hangboards[user.settings.selected]
-                              .company
-                          ].hangboards[
-                            user.settings.hangboards[user.settings.selected]
-                              .hangboard
-                          ].image
-                        )
-                      "
-                    />
-                  </div>
-                  <div class="rightside">
-                    <img
-                      :class="
-                        companies[
-                          user.settings.hangboards[user.settings.selected]
-                            .company
-                        ].hangboards[
-                          user.settings.hangboards[user.settings.selected]
-                            .hangboard
-                        ].holds[currentExercise.right].id
-                      "
-                      :src="
-                        getImg(
-                          companies[
-                            user.settings.hangboards[user.settings.selected]
-                              .company
-                          ].hangboards[
-                            user.settings.hangboards[user.settings.selected]
-                              .hangboard
-                          ].image
-                        )
-                      "
-                    />
-                  </div>
-                </div>
+                <hangboard :data="currentExercise"></hangboard>
               </v-flex>
 
               <!-- title -->
@@ -172,9 +114,11 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import Hangboard from '@/components/Hangboard'
 import { getImg, count, speak, sound } from '@/misc/helpers'
 
 export default {
+  components: { Hangboard },
   props: {
     id: String
   },
@@ -260,9 +204,7 @@ export default {
             this.speak(this.options[this.currentExercise.exercise].name)
           }
           this.speak(
-            `for ${this.currentExercise.hold} seconds. Than rest for ${
-              this.currentExercise.rest
-            } seconds.`
+            `for ${this.currentExercise.hold} seconds. Than rest for ${this.currentExercise.rest} seconds.`
           )
         }
       }
