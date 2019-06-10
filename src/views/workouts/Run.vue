@@ -313,7 +313,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<style lang="scss">
 .bottom-data {
   > div {
     display: inline-block;
@@ -351,4 +351,32 @@ export default {
     grid-area: Title;
   }
 }
+
+
+
+#app .profile{
+  .v-toolbar {
+
+    &__content,
+    &__extension {
+
+      // sm
+      @media (min-width: 600px) {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      @media (min-width: 960px) {
+        flex-basis: 66.6666666667%;
+        max-width: 66.6666666667%;
+      }
+      @media (min-width: 1264px) {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+    }
+  }
+}
+
+
+
 </style>
