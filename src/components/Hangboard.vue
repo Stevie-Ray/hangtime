@@ -1,18 +1,24 @@
 <template>
-  <div class="hangboard" :class="hangboard.name">
-    <div class="leftside" @click="toggleLeft">
-      <svg-inline
-        :class="hangboard.holds[data.left].id"
-        :filepath="getImg(hangboard.image)"
-      />
-    </div>
-    <div class="rightside" @click="toggleRight">
-      <svg-inline
-        :class="hangboard.holds[data.right].id"
-        :filepath="getImg(hangboard.image)"
-      />
-    </div>
-  </div>
+  <v-container fill-height>
+    <v-layout align-center justify-center row>
+      <v-flex xs12 style="max-width: 500px;">
+        <div class="hangboard" :class="hangboard.name">
+          <div class="leftside" @click="toggleLeft">
+            <svg-inline
+              :class="hangboard.holds[data.left].id"
+              :filepath="getImg(hangboard.image)"
+            />
+          </div>
+          <div class="rightside" @click="toggleRight">
+            <svg-inline
+              :class="hangboard.holds[data.right].id"
+              :filepath="getImg(hangboard.image)"
+            />
+          </div>
+        </div>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -68,6 +74,8 @@ export default {
 <style lang="scss">
 .hangboard {
   padding: 0 16px;
+  margin: 0 auto;
+  max-width: 500px;
 
   .leftside,
   .rightside {

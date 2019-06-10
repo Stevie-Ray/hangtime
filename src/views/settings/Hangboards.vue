@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="hangboard">
+  <v-layout row class="hangboards">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push({ name: 'settings' })"
         >mdi-arrow-left</v-icon
@@ -14,13 +14,13 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center>
-          <v-flex sm8 md6>
+          <v-flex xs12 sm8 md6>
             <v-card
               v-for="(item, index) in user.settings['hangboards']"
               :key="index"
               class="mb-4"
             >
-              <div class="hangboard mt-4">
+              <div class="hangboard mt-4 pt-4">
                 <div class="leftside">
                   <v-img
                     :src="
@@ -117,4 +117,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss"></style>
+<style lang="scss">
+</style>

@@ -170,30 +170,6 @@ export default {
 
 <style lang="scss">
 @import '@/theme/variables.scss';
-
-#app .v-toolbar {
-  display: flex;
-  flex: 0 1 auto;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  &__content,
-  &__extension {
-    flex: 0 0 auto;
-    flex-basis: 100%;
-    max-width: 100%;
-    // sm
-    @media (min-width: 600px) {
-      flex-basis: 66.6666666667%;
-      max-width: 66.6666666667%;
-    }
-    @media (min-width: 960px) {
-      flex-basis: 50.1%;
-      max-width: 50.1%;
-    }
-  }
-}
 .tabs {
   &.offline {
     background: $navbar-offline-color;

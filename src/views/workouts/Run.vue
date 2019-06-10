@@ -25,11 +25,11 @@
 
     <v-content v-if="currentExercise">
       <v-container fluid fill-height>
-        <v-layout>
-          <v-flex xs12 sm8 md6>
-            <v-layout justify-space-around column fill-height text-xs-center>
+        <v-layout justify-center>
+          <v-flex xs12 md8 lg6>
+            <v-layout justify-space-around align-center fill-height text-xs-center v-bind="binding" class="canvas">
               <!-- circle -->
-              <v-flex>
+              <v-flex class="Counter">
                 <v-progress-circular
                   class="mt-3"
                   :rotate="270"
@@ -77,12 +77,12 @@
               </v-flex>
 
               <!-- hangboard -->
-              <v-flex>
+              <v-flex class="Hangboard">
                 <hangboard :data="currentExercise"></hangboard>
               </v-flex>
 
               <!-- title -->
-              <v-flex>
+              <v-flex class="Title">
                 <div class="title">
                   <span v-if="currentExercise.repeat > 1"
                     >{{ currentExercise.repeat }}x</span
@@ -140,6 +140,14 @@ export default {
     ...mapState('exercises', ['exercises', 'options']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
+    // vuetify grid-system breakpoint binding
+    binding() {
+      const binding = {}
+
+      if (this.$vuetify.breakpoint.xs) binding.column = true
+
+      return binding
+    },
     direction() {
       if (this.finished) {
         return 'Done'
@@ -311,4 +319,22 @@ export default {
   font-weight: bold;
   padding: 0 8px;
 }
+  .canvas {
+    &:not(.column){
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "Counter Hangboard" "Counter Title";
+    height: inherit;
+      @media (min-width: 960px) {
+       padding-top:40px;
+       padding-bottom: 40px;
+      }
+  }
+    .Counter { grid-area: Counter; }
+
+    .Hangboard { grid-area: Hangboard; width: 100% }
+
+    .Title { grid-area: Title; }
+  }
 </style>

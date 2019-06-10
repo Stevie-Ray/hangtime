@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="hangboard">
+  <v-layout row class="add-hangboard">
     <v-app-bar color="primary" app fixed dark>
       <v-toolbar-title>
         <v-icon @click="$router.push({ name: 'settings-hangboards' })"
