@@ -36,12 +36,17 @@ export default {
 
 <style lang="scss">
 .theme {
-  &--light.application {
-    background-color: #ffffff;
+  &--light {
+    .v-sheet,
+    .v-list {
+      background-color: #fafafa;
+    }
   }
 
-  &--dark.application {
-    background-color: #424242;
+  &--dark {
+    &.application {
+      background-color: #424242;
+    }
   }
 }
 

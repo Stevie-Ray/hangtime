@@ -69,7 +69,7 @@
                 <hangboard
                   v-if="currentStats"
                   :data="currentStats[index]"
-                  :edit-workout="true"
+                  :edit-workout="false"
                 ></hangboard>
               </v-flex>
 

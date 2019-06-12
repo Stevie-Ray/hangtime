@@ -71,7 +71,7 @@
                 <v-card-text>
                   <hangboard
                     :data="hangboardData"
-                    :edit-workout="true"
+                    :edit-workout="false"
                   ></hangboard>
                 </v-card-text>
 
@@ -79,7 +79,12 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="dialog = false">
+                  <v-btn color="primary" text @click="
+                    $router.push({
+                      name: 'progress-record',
+                      params: { data: {left: 0, right: 0}, index: 0, id: currentType.id }
+                    })
+                  ">
                     Start recording
                   </v-btn>
                 </v-card-actions>
