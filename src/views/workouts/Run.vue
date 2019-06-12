@@ -326,31 +326,6 @@ export default {
   font-weight: bold;
   padding: 0 8px;
 }
-.canvas {
-  &:not(.column) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: 'Counter Hangboard' 'Counter Title';
-    height: inherit;
-    @media (min-width: 960px) {
-      padding-top: 40px;
-      padding-bottom: 40px;
-    }
-  }
-  .Counter {
-    grid-area: Counter;
-  }
-
-  .Hangboard {
-    grid-area: Hangboard;
-    width: 100%;
-  }
-
-  .Title {
-    grid-area: Title;
-  }
-}
 
 #app .profile {
   .v-toolbar {

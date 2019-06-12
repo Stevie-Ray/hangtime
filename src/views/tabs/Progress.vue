@@ -1,13 +1,19 @@
 <template>
   <v-layout row>
     <v-flex>
+      <!--      <v-subheader>-->
+      <!--        {{ companies[user.settings.hangboards[user.settings.selected].company].name }}-->
+      <!--        {{ companies[user.settings.hangboards[user.settings.selected].company-->
+      <!--        ].hangboards[user.settings.hangboards[user.settings.selected].hangboard].name }}-->
+      <!--      </v-subheader>-->
+
       <v-list two-line>
         <span v-for="(option, index) in options" :key="index">
           <v-list-item
             @click="
               $router.push({
                 name: 'progress-type',
-                params: { type: encodeUrl(option.name), option: option }
+                params: { type: encodeUrl(option.name), id: option.id }
               })
             "
           >
@@ -43,12 +49,12 @@ import { getImg, count } from '@/misc/helpers'
 export default {
   head: {
     title: {
-      inner: 'Measure strength'
+      inner: 'Progress'
     },
     meta: [
       {
         name: 'description',
-        content: 'HangTime home page',
+        content: 'Measure strength and become a better climber',
         id: 'desc'
       }
     ]
@@ -60,7 +66,8 @@ export default {
   computed: {
     ...mapState('authentication', ['user', 'stats']),
     ...mapState('exercises', ['options']),
-    ...mapState('app', ['networkOnLine'])
+    ...mapState('app', ['networkOnLine']),
+    ...mapState('companies', ['companies'])
   },
   methods: {
     getImg,

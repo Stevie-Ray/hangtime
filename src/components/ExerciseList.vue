@@ -1,9 +1,14 @@
 <template>
   <div>
-    <div v-if="exercises === null" class="loading">
-      <v-progress-circular :size="60" color="primary" indeterminate>
+    <div v-if="exercises === null" class="loading text-xs-center">
+      <v-progress-circular
+        :size="60"
+        color="primary"
+        indeterminate
+        class="my-4"
+      >
       </v-progress-circular>
-      <div class="text-xs-center">Loading exercises...</div>
+      <div>Loading exercises...</div>
     </div>
     <v-list v-if="exercises && !exercises.length" two-line>
       <v-list-item>

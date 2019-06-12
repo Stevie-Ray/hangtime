@@ -80,12 +80,30 @@ const router = new Router({
         )
     },
     {
-      path: '/progress/:type',
-      name: 'progress-type',
-      props: true,
+      path: '/progress/:id/:type/record/:index',
+      name: 'progress-record',
+      props(route) {
+        const props = { ...route.params }
+        props.id = +props.id
+        props.index = +props.index
+        return props
+      },
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Option.vue'
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Record.vue'
+        )
+    },
+    {
+      path: '/progress/:id/:type',
+      name: 'progress-type',
+      props(route) {
+        const props = { ...route.params }
+        props.id = +props.id
+        return props
+      },
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Type.vue'
         )
     },
 

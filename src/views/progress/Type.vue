@@ -4,16 +4,16 @@
       <v-icon @click="$router.push({ name: 'progress' })"
         >mdi-arrow-left</v-icon
       >
-      <v-avatar size="32px">
+      <v-avatar v-if="currentType" size="32px">
         <v-img
-          :src="getImg(option.image)"
-          :alt="option.name"
+          :src="getImg(currentType.image)"
+          :alt="currentType.name"
           aspect-ratio="1"
           class="grey lighten-2"
         />
       </v-avatar>
-      <v-toolbar-title>
-        {{ option.name }}
+      <v-toolbar-title v-if="currentType">
+        {{ currentType.name }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -22,7 +22,7 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex xs12 sm8 md6>
-            <v-list v-if="!stats.length">
+            <v-list v-if="!currentStats.length">
               <v-list-item>
                 <v-list-item-title>
                   No recordings added yet
@@ -30,7 +30,7 @@
               </v-list-item>
             </v-list>
 
-            <v-card v-for="(data, index) in stats" :key="index">
+            <v-card v-for="(data, index) in currentStats" :key="index">
               <v-card-text>
                 <hangboard :data="data" :edit-workout="false"></hangboard>
                 <div class="text-xs-center">
@@ -47,7 +47,16 @@
                 <v-btn text>
                   Recordings
                 </v-btn>
-                <v-btn color="primary" text>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="
+                    $router.push({
+                      name: 'progress-record',
+                      params: { data: data, index: index, id: data.id }
+                    })
+                  "
+                >
                   Start
                 </v-btn>
               </v-card-actions>
@@ -60,7 +69,10 @@
                 </v-card-title>
 
                 <v-card-text>
-                  <hangboard :data="data" :edit-workout="true"></hangboard>
+                  <hangboard
+                    :data="hangboardData"
+                    :edit-workout="true"
+                  ></hangboard>
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -93,25 +105,25 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count } from '@/misc/helpers'
 
 export default {
   components: { Hangboard },
   props: {
-    option: Object
+    id: Number
   },
   data: () => ({
     dialog: false,
-    data: {
+    hangboardData: {
       left: 0,
       right: 0
     }
   }),
   head: {
     title: {
-      inner: 'Workout'
+      inner: 'Progress'
     },
     meta: [
       {
@@ -122,7 +134,15 @@ export default {
     ]
   },
   computed: {
-    ...mapState('authentication', ['user', 'stats'])
+    ...mapState('authentication', ['user']),
+    ...mapGetters('authentication', ['statsById']),
+    ...mapGetters('exercises', ['typeById']),
+    currentStats() {
+      return this.statsById({ type: this.currentType.id })
+    },
+    currentType() {
+      return this.typeById(this.id)
+    }
   },
   methods: {
     getImg,

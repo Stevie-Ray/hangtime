@@ -10,5 +10,10 @@ export default {
   /**
    * Get an exercise by id
    */
-  exerciseById: state => exerciseId => find(state.exercises, { id: exerciseId })
+  exerciseById: state => exerciseId =>
+    find(state.exercises, { id: exerciseId }),
+  /**
+   * Get an option by id
+   */
+  typeById: state => typeId => find(state.options, { id: typeId })
 }
