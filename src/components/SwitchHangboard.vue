@@ -76,7 +76,6 @@ export default {
     ...mapActions('authentication', ['triggerUpdateUser']),
     ...mapMutations('authentication', ['setSelected']),
     changeHangboard(index) {
-      console.log(index)
       this.setSelected(index)
       this.triggerUpdateUser()
     },

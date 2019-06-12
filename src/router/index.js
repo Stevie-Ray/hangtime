@@ -43,11 +43,11 @@ const router = new Router({
             )
         },
         {
-          path: '/hangtime',
-          name: 'hangtime',
+          path: '/progress',
+          name: 'progress',
           component: () =>
             import(
-              /* webpackChunkName: "client-chunk-hangtime" */ '@/views/tabs/HangTime.vue'
+              /* webpackChunkName: "client-chunk-hangtime" */ '@/views/tabs/Progress.vue'
             )
         }
       ]
@@ -79,6 +79,16 @@ const router = new Router({
           /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Exercise.vue'
         )
     },
+    {
+      path: '/progress/:type',
+      name: 'progress-type',
+      props: true,
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Option.vue'
+        )
+    },
+
     {
       path: '/settings',
       name: 'settings',

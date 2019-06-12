@@ -93,7 +93,7 @@
 
             <v-fab-transition>
               <v-btn
-                v-if="networkOnLine"
+                v-if="networkOnLine && activeFab.icon !== ''"
                 :key="activeFab.icon"
                 fixed
                 fab
@@ -139,7 +139,7 @@ export default {
     tabs: [
       { id: 0, name: 'workouts', route: `/` },
       { id: 1, name: 'community', route: `/community` },
-      { id: 2, name: 'hangtime', route: `/hangtime` }
+      { id: 2, name: 'progress', route: `/progress` }
     ]
   }),
   computed: {
@@ -152,8 +152,8 @@ export default {
           return { route: '/', icon: 'mdi-plus', click: true }
         case '/community':
           return { route: '/community', icon: 'mdi-tune' }
-        case '/hangtime':
-          return { route: '/hangtime', icon: 'mdi-timer' }
+        case '/progress':
+          return { route: '/progress', icon: 'mdi-account-multiple-plus' }
         default:
           return {}
       }

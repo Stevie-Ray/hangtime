@@ -106,7 +106,6 @@ export default {
     ...mapActions('workouts', ['triggerAddWorkoutAction']),
     getImg,
     saveWorkout($event) {
-      console.log('fire')
       this.triggerAddWorkoutAction($event)
       this.$emit('input', false)
     }

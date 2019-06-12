@@ -117,5 +117,11 @@ export default {
       margin-left: -4px;
     }
   }
+  .tabs {
+    .v-toolbar__title {
+      margin-left: 0;
+      font-weight: 700;
+    }
+  }
 }
 </style>

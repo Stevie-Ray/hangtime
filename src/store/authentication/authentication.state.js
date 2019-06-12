@@ -17,14 +17,21 @@ export default {
     voice: 0,
     vibrate: false
   },
-  stats: {
-    hangtime: {
-      labels: [],
-      value: []
+  stats: [
+    {
+      id: 0,
+      left: 0,
+      right: 0,
+      labels: ['13 may', '3 jun', '12 jun', '12 jun'],
+      value: [30, 43, 35, 45]
     },
-    pullups: {
-      labels: [],
-      value: []
+    {
+      id: 1,
+      left: 3,
+      right: 3,
+      configurable: true,
+      labels: ['13 may', '13 may', '3 jun'],
+      value: [10, 8, 12]
     }
-  }
+  ]
 }
