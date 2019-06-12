@@ -79,12 +79,20 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="
-                    $router.push({
-                      name: 'progress-record',
-                      params: { data: {left: 0, right: 0}, index: 0, id: currentType.id }
-                    })
-                  ">
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="
+                      $router.push({
+                        name: 'progress-record',
+                        params: {
+                          data: { left: 0, right: 0 },
+                          index: 0,
+                          id: currentType.id
+                        }
+                      })
+                    "
+                  >
                     Start recording
                   </v-btn>
                 </v-card-actions>

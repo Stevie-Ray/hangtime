@@ -37,9 +37,11 @@ export default {
 <style lang="scss">
 .theme {
   &--light {
-    .v-sheet,
-    .v-list {
-      background-color: #fafafa;
+    .theme--light{
+      &.v-sheet,
+      &.v-list {
+        background-color: #fafafa;
+      }
     }
   }
 
