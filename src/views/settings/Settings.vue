@@ -46,7 +46,7 @@
               <v-divider></v-divider>
 
               <v-list-item to="/settings/hangboards">
-                <!--                <v-btn flat icon to="settings/hangboard">-->
+                <!--                <v-btn text icon to="settings/hangboard">-->
                 <!--                  <v-img :src="getImg('icons/hangboard-menu.svg')"/>-->
                 <!--                </v-btn>-->
                 <v-list-item-avatar>

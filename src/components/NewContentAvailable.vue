@@ -5,7 +5,7 @@
     </template>
     <template v-else>
       New content available
-      <v-btn flat @click="refesh">
+      <v-btn text @click="refesh">
         refesh
       </v-btn>
     </template>

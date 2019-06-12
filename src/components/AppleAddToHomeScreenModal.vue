@@ -29,7 +29,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn flat @click="$emit('close')">
+        <v-btn text @click="$emit('close')">
           Close
         </v-btn>
       </v-card-actions>

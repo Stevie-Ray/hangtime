@@ -30,10 +30,10 @@
 
       <!--      <v-card-actions>-->
       <!--        <v-spacer></v-spacer>-->
-      <!--        <v-btn flat @click="$emit('input', false)">-->
+      <!--        <v-btn text @click="$emit('input', false)">-->
       <!--          Close-->
       <!--        </v-btn>-->
-      <!--        <v-btn flat color="primary" @click="$emit('input', false)">-->
+      <!--        <v-btn text color="primary" @click="$emit('input', false)">-->
       <!--          Save-->
       <!--        </v-btn>-->
       <!--      </v-card-actions>-->
