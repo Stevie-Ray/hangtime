@@ -27,10 +27,10 @@
             <v-list-item-action>
               <v-list-item-action-text>
                 <span v-if="option.configurable">
-                  0x
+                  {{ bestStats(option) }}x
                 </span>
                 <span v-else>
-                  {{ count(0) }}
+                  {{ count(bestStats(option)) }}
                 </span>
               </v-list-item-action-text>
             </v-list-item-action>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
 
 export default {
@@ -67,11 +67,15 @@ export default {
     ...mapState('authentication', ['user', 'stats']),
     ...mapState('exercises', ['options']),
     ...mapState('app', ['networkOnLine']),
-    ...mapState('companies', ['companies'])
+    ...mapState('companies', ['companies']),
+    ...mapGetters('authentication', ['bestStatsById'])
   },
   methods: {
     getImg,
     count,
+    bestStats(option) {
+      return this.bestStatsById(option)
+    },
     encodeUrl(url) {
       return url
         .toString() // Convert to string

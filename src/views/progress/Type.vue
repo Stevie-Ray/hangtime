@@ -44,7 +44,15 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn text>
+                <v-btn
+                  text
+                  @click="
+                    $router.push({
+                      name: 'progress-list',
+                      params: { data: data, index: index, id: data.id }
+                    })
+                  "
+                >
                   Recordings
                 </v-btn>
                 <v-btn

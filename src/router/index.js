@@ -94,6 +94,20 @@ const router = new Router({
         )
     },
     {
+      path: '/progress/:id/:type/list/:index',
+      name: 'progress-list',
+      props(route) {
+        const props = { ...route.params }
+        props.id = +props.id
+        props.index = +props.index
+        return props
+      },
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/List.vue'
+        )
+    },
+    {
       path: '/progress/:id/:type',
       name: 'progress-type',
       props(route) {
