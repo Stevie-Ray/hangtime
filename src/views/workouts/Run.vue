@@ -219,7 +219,9 @@ export default {
             this.speak(this.options[this.currentExercise.exercise].name)
           }
           this.speak(
-            `for ${this.currentExercise.hold} seconds. Than rest for ${this.currentExercise.rest} seconds.`
+            `for ${this.currentExercise.hold} seconds. Than rest for ${
+              this.currentExercise.rest
+            } seconds.`
           )
         }
       }

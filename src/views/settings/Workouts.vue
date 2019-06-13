@@ -199,7 +199,9 @@ export default {
       this.triggerUpdateUser()
     },
     greet(event) {
-      this.greetingSpeech.text = `You choose ${event.name}, this is my new voice`
+      this.greetingSpeech.text = `You choose ${
+        event.name
+      }, this is my new voice`
 
       // this.greetingSpeech.voice = this.voiceList[this.settings.voice]
 

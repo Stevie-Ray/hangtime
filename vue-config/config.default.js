@@ -22,6 +22,6 @@ module.exports = {
       //   // Required - Routes to prerender.
       //   routes: prerenderedRoutesList
       // })
-    ],
+    ]
   }
 }
