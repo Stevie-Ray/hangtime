@@ -1,6 +1,6 @@
 {
   "name": "hangtime",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -53,17 +53,33 @@
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-vue": "^5.2.2",
     "firebase-tools": "^7.0.0",
-    "node-sass": "^4.12.0",
     "prerender-spa-plugin": "^3.4.0",
     "sass": "^1.21.0",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
     "vue-cli-plugin-vuetify": "https://github.com/vuetifyjs/vue-cli-plugin-vuetify.git#dev",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-merge": "^4.2.1"
   },
+  "bundlesize": [
+    {
+      "path": "./dist/js/chunk-vendors*.js",
+      "maxSize": "125 kB"
+    },
+    {
+      "path": "./dist/js/chunk-firestore*.js",
+      "maxSize": "95 kB"
+    },
+    {
+      "path": "./dist/js/app*.js",
+      "maxSize": "15 kB"
+    },
+    {
+      "path": "./dist/js/client-chunk-*.js",
+      "maxSize": "6 kB"
+    }
+  ],
   "eslintConfig": {
     "root": true,
     "env": {
@@ -112,27 +128,6 @@
     "testURL": "http://localhost/",
     "setupTestFrameworkScriptFile": "<rootDir>/tests/unit/setup.js"
   },
-  "_id": "bento-starter@0.1.0",
-  "bundlesize": [
-    {
-      "path": "./dist/js/chunk-vendors*.js",
-      "maxSize": "125 kB"
-    },
-    {
-      "path": "./dist/js/chunk-firestore*.js",
-      "maxSize": "95 kB"
-    },
-    {
-      "path": "./dist/js/app*.js",
-      "maxSize": "15 kB"
-    },
-    {
-      "path": "./dist/js/client-chunk-*.js",
-      "maxSize": "6 kB"
-    }
-  ],
-  "engines": {
-    "npm": ">=5.5.0",
-    "node": ">=9.3.0"
-  }
+  "readme": "README.md",
+  "_id": "hangtime@1.0.0"
 }
