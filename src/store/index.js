@@ -6,6 +6,7 @@ import authentication from './authentication'
 import app from './app'
 import companies from './companies'
 import exercises from './exercises'
+import progress from './progress'
 import workouts from './workouts'
 
 Vue.use(Vuex)
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     authentication,
     app,
     companies,
+    progress,
     exercises,
     workouts
   }

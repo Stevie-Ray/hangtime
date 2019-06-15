@@ -22,7 +22,7 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex xs12 sm8 md6>
-            <v-list v-if="!currentStats.length">
+            <v-list v-if="currentStats && !currentStats.length">
               <v-list-item>
                 <v-list-item-title>
                   No recordings added yet
@@ -30,45 +30,59 @@
               </v-list-item>
             </v-list>
 
-            <v-card v-for="(data, index) in currentStats" :key="index">
-              <v-card-text>
-                <hangboard :data="data" :edit-workout="false"></hangboard>
-                <div class="text-xs-center">
-                  <span v-if="!data.configurable">
-                    Best: {{ count(Math.max(...data.value)) }}
+            <v-flex v-for="(data, index) in currentStats" :key="index">
+              <v-card flat>
+                <v-img class="" min-height="150px">
+                  <hangboard :data="data" :edit-workout="false"></hangboard>
+                </v-img>
+
+                <v-card-title>
+                  <span v-if="!currentType.configurable">
+                    {{ count(bestStatsById(data.id)) }}
                   </span>
-                  <span v-else> Best: {{ Math.max(...data.value) }}x </span>
-                  <span> - </span>
-                  <span> {{ data.value.length }} Recordings </span>
-                </div>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  text
-                  @click="
-                    $router.push({
-                      name: 'progress-list',
-                      params: { data: data, index: index, id: data.id }
-                    })
-                  "
-                >
-                  Recordings
-                </v-btn>
-                <v-btn
-                  color="primary"
-                  text
-                  @click="
-                    $router.push({
-                      name: 'progress-record',
-                      params: { data: data, index: index, id: data.id }
-                    })
-                  "
-                >
-                  Start
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+                  <span v-else>
+                    Best:
+                    {{ bestStatsById(data.id) }}x
+                  </span>
+                </v-card-title>
+                <v-card-text>
+                  <div>
+                    <strong>{{ data.recordings.length }} Recordings</strong>
+                  </div>
+                  <div v-if="data.recordings.length">
+                    <i>Last recording: {{ shortDate(data.updateTimestamp) }}</i>
+                  </div>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="
+                      $router.push({
+                        name: 'progress-record',
+                        params: { data: data, index: index, id: currentType.id }
+                      })
+                    "
+                  >
+                    Start
+                  </v-btn>
+                  <v-btn
+                    v-if="data.recordings.length > 0"
+                    text
+                    @click="
+                      $router.push({
+                        name: 'progress-list',
+                        params: { data: data, index: index, id: currentType.id }
+                      })
+                    "
+                  >
+                    Recordings
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+
+              <v-divider></v-divider>
+            </v-flex>
 
             <v-dialog v-model="dialog">
               <v-card>
@@ -79,7 +93,9 @@
                 <v-card-text>
                   <hangboard
                     :data="hangboardData"
-                    :edit-workout="false"
+                    :edit-workout="true"
+                    @left="hangboardData.left = $event.value"
+                    @right="hangboardData.right = $event.value"
                   ></hangboard>
                 </v-card-text>
 
@@ -87,25 +103,13 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    color="primary"
-                    text
-                    @click="
-                      $router.push({
-                        name: 'progress-record',
-                        params: {
-                          data: { left: 0, right: 0 },
-                          index: 0,
-                          id: currentType.id
-                        }
-                      })
-                    "
-                  >
-                    Start recording
+                  <v-btn color="primary" text @click="clickAddHangboard">
+                    Add Holds
                   </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
+
             <v-speed-dial bottom right fixed>
               <v-btn
                 slot="activator"
@@ -126,9 +130,9 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Hangboard from '@/components/Hangboard'
-import { getImg, count } from '@/misc/helpers'
+import { getImg, count, shortDate } from '@/misc/helpers'
 
 export default {
   components: { Hangboard },
@@ -156,18 +160,33 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapGetters('authentication', ['statsById']),
+    ...mapGetters('progress', ['statsById', 'bestStatsById']),
     ...mapGetters('exercises', ['typeById']),
     currentStats() {
-      return this.statsById({ type: this.currentType.id })
+      return this.statsById(this.currentType.id)
     },
     currentType() {
       return this.typeById(this.id)
     }
   },
   methods: {
+    ...mapActions('progress', ['triggerAddHangboardAction']),
     getImg,
-    count
+    count,
+    shortDate,
+    clickAddHangboard() {
+      const progress = this.hangboardData
+      progress['type'] = this.id
+      progress['recordings'] = []
+      progress['hangboard'] = this.user.settings.hangboards[
+        this.user.settings.selected
+      ].hangboard
+      progress['company'] = this.user.settings.hangboards[
+        this.user.settings.selected
+      ].company
+      this.triggerAddHangboardAction(progress)
+      this.dialog = false
+    }
   }
 }
 </script>

@@ -31,15 +31,15 @@
         <v-layout justify-center>
           <v-flex xs12 md8 lg6>
             <v-sheet
-              v-if="currentStats[index].labels.length > 1"
+              v-if="currentStats[index]"
               class="mt-4 mb-2"
               color="secondary"
               max-width="calc(100% - 32px)"
               style="margin: 0 auto"
             >
               <v-sparkline
-                :labels="currentStats[index].labels"
-                :value="currentStats[index].value"
+                :labels="currentStatsLabels"
+                :value="currentStatsValue"
                 color="white"
                 line-width="2"
                 padding="16"
@@ -47,12 +47,19 @@
             </v-sheet>
 
             <v-flex>
-              <hangboard :data="data" :edit-workout="false"></hangboard>
+              <hangboard
+                :data="currentStats[index]"
+                :edit-workout="false"
+              ></hangboard>
             </v-flex>
 
-            <v-list two-line>
+            <v-list
+              v-if="currentStats[index]['recordings'].length > 0"
+              two-line
+            >
               <span
-                v-for="(notUsed, item) in currentStats[index].value"
+                v-for="(notUsed, item) in currentStats[index]['recordings']
+                  .length"
                 :key="item"
               >
                 <v-list-item>
@@ -68,19 +75,20 @@
                   <v-list-item-content>
                     <v-list-item-title>
                       <span>{{ currentType.name }}</span>
-                      <span v-if="currentType.configurable">s</span>
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                      {{ currentStats[index].labels[item] }}
+                      {{ currentStats[index]['recordings'][item].label }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                   <v-list-item-action>
                     <v-list-item-action-text>
                       <span v-if="currentType.configurable">
-                        {{ currentStats[index].value[item] }}x
+                        {{ currentStats[index]['recordings'][item].value }}x
                       </span>
                       <span v-else>
-                        {{ count(currentStats[index].value[item]) }}
+                        {{
+                          count(currentStats[index]['recordings'][item].value)
+                        }}
                       </span>
                     </v-list-item-action-text>
                   </v-list-item-action>
@@ -102,7 +110,7 @@
           @click="
             $router.push({
               name: 'progress-record',
-              params: { data: data, index: index, id: data.id }
+              params: { data: data, index: index, id: currentType.id }
             })
           "
         >
@@ -116,7 +124,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
-import { getImg, count } from '@/misc/helpers'
+import { getImg, count, shortDate } from '@/misc/helpers'
 
 export default {
   components: { Hangboard },
@@ -140,7 +148,7 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapGetters('authentication', ['statsById']),
+    ...mapGetters('progress', ['statsById']),
     ...mapGetters('exercises', ['typeById']),
     binding() {
       const binding = {}
@@ -150,7 +158,25 @@ export default {
       return binding
     },
     currentStats() {
-      return this.statsById({ type: this.currentType.id })
+      return this.statsById(this.currentType.id)
+    },
+    currentStatsLabels() {
+      if (
+        this.currentStats[this.index] &&
+        this.currentStats[this.index]['recordings'].length === 0
+      ) {
+        return
+      }
+      return this.currentStats[this.index]['recordings'].map(a => a.label)
+    },
+    currentStatsValue() {
+      if (
+        this.currentStats[this.index] &&
+        this.currentStats[this.index]['recordings'].length === 0
+      ) {
+        return
+      }
+      return this.currentStats[this.index]['recordings'].map(a => a.value)
     },
     currentType() {
       return this.typeById(this.id)
@@ -159,6 +185,7 @@ export default {
   methods: {
     getImg,
     count,
+    shortDate,
     encodeUrl(url) {
       return url
         .toString() // Convert to string

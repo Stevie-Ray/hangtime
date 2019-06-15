@@ -66,7 +66,7 @@
               class="exercise-list"
             ></exercise-list>
 
-            <!-- General Dialog TODO: use firebase -->
+            <!-- General Dialog -->
             <v-dialog
               v-if="currentWorkout"
               v-model="dialogs.general"

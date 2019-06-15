@@ -81,3 +81,11 @@ export function sound(sound) {
     audio.play()
   }
 }
+
+export function shortDate(string) {
+  const date = new Date(string)
+  const day = date.getDate()
+  const month = date.toLocaleString('en-us', { month: 'short' })
+
+  return `${day} ${month}`
+}

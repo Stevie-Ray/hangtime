@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 import { getImg } from '@/misc/helpers'
 import { SimpleSVG } from 'vue-simple-svg'
 
@@ -45,7 +45,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('exercises', ['setRightHold', 'setLeftHold']),
     getImg,
     toggleLeft(e) {
       if (this.editWorkout) {
@@ -53,7 +52,7 @@ export default {
           hold => hold.id === e.target.id
         )
         if (clicked) {
-          this.setLeftHold({ id: this.data.id, value: clicked.class })
+          this.$emit('left', { id: this.data.id, value: clicked.class })
         }
       }
     },
@@ -63,7 +62,7 @@ export default {
           hold => hold.id === e.target.id
         )
         if (clicked) {
-          this.setRightHold({ id: this.data.id, value: clicked.class })
+          this.$emit('right', { id: this.data.id, value: clicked.class })
         }
       }
     }

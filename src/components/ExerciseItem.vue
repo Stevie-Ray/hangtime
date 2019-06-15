@@ -38,7 +38,12 @@
 
       <v-flex xs12>
         <!-- hangboard -->
-        <hangboard :data="data" :edit-workout="editWorkout"></hangboard>
+        <hangboard
+          :data="data"
+          :edit-workout="editWorkout"
+          @left="setLeftHold($event)"
+          @right="setRightHold($event)"
+        ></hangboard>
       </v-flex>
 
       <v-flex xs12>
@@ -238,7 +243,9 @@ export default {
       'setHold',
       'setPullups',
       'setRepeat',
-      'setRest'
+      'setRest',
+      'setLeftHold',
+      'setRightHold'
     ]),
     getImg
   }

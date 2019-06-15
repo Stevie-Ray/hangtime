@@ -16,6 +16,7 @@ export default {
 
     commit('setUser', user)
     dispatch('workouts/getUserWorkouts', null, { root: true })
+    dispatch('progress/getUserProgress', null, { root: true })
   },
 
   /**

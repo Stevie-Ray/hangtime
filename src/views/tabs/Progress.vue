@@ -27,10 +27,10 @@
             <v-list-item-action>
               <v-list-item-action-text>
                 <span v-if="option.configurable">
-                  {{ bestStats(option) }}x
+                  {{ bestStats(option.id) }}x
                 </span>
                 <span v-else>
-                  {{ count(bestStats(option)) }}
+                  {{ count(bestStats(option.id)) }}
                 </span>
               </v-list-item-action-text>
             </v-list-item-action>
@@ -64,17 +64,18 @@ export default {
     type: 'hangtime'
   }),
   computed: {
-    ...mapState('authentication', ['user', 'stats']),
+    ...mapState('authentication', ['user']),
+    ...mapState('progress', ['progress']),
     ...mapState('exercises', ['options']),
     ...mapState('app', ['networkOnLine']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('authentication', ['bestStatsById'])
+    ...mapGetters('progress', ['totalBestStatsById'])
   },
   methods: {
     getImg,
     count,
     bestStats(option) {
-      return this.bestStatsById(option)
+      return this.totalBestStatsById(option)
     },
     encodeUrl(url) {
       return url

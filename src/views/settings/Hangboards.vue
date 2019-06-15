@@ -18,6 +18,7 @@
             <v-card
               v-for="(item, index) in user.settings['hangboards']"
               :key="index"
+              flat
               class="mb-4"
             >
               <div class="hangboard mt-4 pt-4">

@@ -170,7 +170,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count } from '@/misc/helpers'
 
@@ -202,7 +202,7 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapGetters('authentication', ['statsById']),
+    ...mapGetters('progress', ['statsById']),
     ...mapGetters('exercises', ['typeById']),
     binding() {
       const binding = {}
@@ -212,13 +212,14 @@ export default {
       return binding
     },
     currentStats() {
-      return this.statsById({ type: this.currentType.id })
+      return this.statsById(this.currentType.id)
     },
     currentType() {
       return this.typeById(this.id)
     }
   },
   methods: {
+    ...mapActions('progress', ['AddRecording']),
     getImg,
     count,
     encodeUrl(url) {
@@ -247,7 +248,10 @@ export default {
         this.dialog = true
         return
       }
-      // this.$store.dispatch('addRecording', [this.type, 'value', this.totalTime]);
+      this.AddRecording({
+        data: this.currentStats[this.index],
+        value: this.totalTime
+      })
       this.$router.push({
         name: 'progress-type',
         params: {
@@ -256,9 +260,11 @@ export default {
         }
       })
     },
-    savePullups() {
-      // const value = parseInt(this.pullups, 10);
-      // this.$store.dispatch('addRecording', [this.type, 'value', value]);
+    savePullups(value) {
+      this.AddRecording({
+        data: this.currentStats[this.index].id,
+        value: value
+      })
       this.$router.push({
         name: 'progress-type',
         params: {
