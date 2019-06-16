@@ -274,8 +274,11 @@ export default {
   methods: {
     count,
     getImg,
-    ...mapActions('exercises', ['triggerAddExerciseAction']),
-    ...mapActions('workouts', ['deleteUserWorkout', 'triggerUpdateWorkout']),
+    ...mapActions('workouts', [
+      'deleteUserWorkout',
+      'triggerUpdateWorkout',
+      'triggerAddExerciseAction'
+    ]),
     ...mapMutations('workouts', ['setWorkoutName', 'setWorkoutDescription']),
     deleteWorkout(id) {
       this.deleteUserWorkout(id)

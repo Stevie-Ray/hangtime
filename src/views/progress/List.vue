@@ -149,7 +149,7 @@ export default {
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('progress', ['statsById']),
-    ...mapGetters('exercises', ['typeById']),
+    ...mapGetters('workouts', ['typeById']),
     binding() {
       const binding = {}
 

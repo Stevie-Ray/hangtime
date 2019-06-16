@@ -67,7 +67,9 @@
                     <div class="bottom-data__exercise">
                       <div class="data">
                         <v-icon small>mdi-timer</v-icon>
-                        {{ currentStep + 1 }}/{{ exercises.length }}
+                        {{ currentStep + 1 }}/{{
+                          currentWorkout.exercises.length
+                        }}
                       </div>
                     </div>
                     <div
@@ -144,7 +146,7 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapState('exercises', ['exercises', 'options']),
+    ...mapState('workouts', ['options']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
     // vuetify grid-system breakpoint binding
@@ -156,6 +158,7 @@ export default {
       return binding
     },
     direction() {
+      // TODO remove this
       if (this.finished) {
         return 'Done'
       }
@@ -177,16 +180,12 @@ export default {
     },
     currentExercise() {
       // set current exercise based on currentStep
-      if (!this.exercises) return
-      return this.exercises[this.currentStep]
+      if (!this.currentWorkout) return
+      return this.currentWorkout.exercises[this.currentStep]
     },
     currentWorkout() {
       return this.workoutById(this.id)
     }
-  },
-  created() {
-    // TODO: remove ugly code
-    this.$store.dispatch('exercises/getWorkoutExercises', this.id)
   },
   mounted() {
     // set timer
@@ -200,7 +199,11 @@ export default {
   updated() {
     this.$nextTick(function() {
       // update Timer
-      if (this.currentExercise && this.initalTime === 0) {
+      if (
+        this.currentExercise &&
+        this.currentWorkout &&
+        this.initalTime === 0
+      ) {
         this.totalTime = this.currentExercise.pause
         // set initalTime to totalTime
         this.initalTime = this.totalTime
@@ -295,7 +298,7 @@ export default {
         this.initalTime = this.totalTime
       }
       // check if all steps are done
-      else if (this.currentStep < this.exercises.length - 1) {
+      else if (this.currentStep < this.currentWorkout.exercises.length - 1) {
         // // set next exercise
         this.currentStep = this.currentStep + 1
         this.stepRepeat = 0

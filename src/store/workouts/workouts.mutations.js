@@ -22,7 +22,6 @@ export default {
     state.workouts[index].description = payload.value
   },
   addWorkout: (state, workout) => state.workouts.push(workout),
-
   removeWorkoutById: (state, workoutId) => {
     const index = state.workouts.findIndex(workout => workout.id === workoutId)
     state.workouts.splice(index, 1)
@@ -35,8 +34,76 @@ export default {
     const index = state.workouts.findIndex(workout => workout.id === workoutId)
     state.workoutDeletionPending.splice(index, 1)
   },
-
+  setExercises: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises = payload.data
+  },
   /* Workout creation */
   setWorkoutCreationPending: (state, value) =>
-    (state.workoutCreationPending = value)
+    (state.workoutCreationPending = value),
+
+  addExercise: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises.push(payload.data)
+  },
+
+  setExercise: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].exercise = payload.value
+  },
+  setPause: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].pause = payload.value
+  },
+  setHold: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].hold = payload.value
+  },
+  setPullups: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].pullups = payload.value
+  },
+  setRepeat: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].repeat = payload.value
+  },
+  setRightHold: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].right = payload.value
+  },
+  setLeftHold: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].left = payload.value
+  },
+  setRest: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    state.workouts[index].exercises[payload.index].rest = payload.value
+  },
+  /* Exercise inputs */
+  setExerciseToCreate: (state, exerciseFieldToCreate) =>
+    // state.exerciseToCreate[exerciseFieldToCreate] = exerciseFieldContentToCreate
+    (state.exerciseToCreate = {
+      ...state.exerciseToCreate,
+      ...exerciseFieldToCreate
+    }),
+  /* Exercises */
+  removeExerciseById: (state, exerciseId) => {
+    const index = state.exercises.findIndex(
+      exercise => exercise.id === exerciseId
+    )
+    state.exercises.splice(index, 1)
+  },
+
+  /* Exercises deletion */
+  addExerciseDeletionPending: (state, exerciseId) =>
+    state.exerciseDeletionPending.push(exerciseId),
+  removeExerciseDeletionPending: (state, exerciseId) => {
+    const index = state.exercises.findIndex(
+      exercise => exercise.id === exerciseId
+    )
+    state.exerciseDeletionPending.splice(index, 1)
+  },
+  /* Exercise creation */
+  setExerciseCreationPending: (state, value) =>
+    (state.exerciseCreationPending = value)
 }

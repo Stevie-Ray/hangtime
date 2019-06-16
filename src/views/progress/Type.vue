@@ -158,7 +158,7 @@ export default {
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('progress', ['statsById', 'bestStatsById']),
-    ...mapGetters('exercises', ['typeById']),
+    ...mapGetters('workouts', ['typeById']),
     currentStats() {
       return this.statsById(this.currentType.id)
     },

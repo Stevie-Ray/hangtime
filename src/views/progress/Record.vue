@@ -59,8 +59,25 @@
                     />
                   </v-avatar>
 
+                  <div class="subtitle font-weight-bold text-uppercase">
+                    <span>{{ currentType.name }}</span>
+                  </div>
+
                   <div id="timer" class="display-3 font-weight-bold">
                     {{ count(totalTime) }}
+                  </div>
+
+                  <div
+                    v-if="currentStats[index].recordings.length > 0"
+                    class="text-uppercase font-weight-bold"
+                  >
+                    Best:
+                    <span v-if="!currentType.configurable">
+                      {{ count(bestStatsById(currentStats[index].id)) }}
+                    </span>
+                    <span v-else>
+                      {{ bestStatsById(currentStats[index].id) }}x
+                    </span>
                   </div>
                 </v-progress-circular>
               </v-flex>
@@ -202,8 +219,8 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapGetters('progress', ['statsById']),
-    ...mapGetters('exercises', ['typeById']),
+    ...mapGetters('progress', ['statsById', 'bestStatsById']),
+    ...mapGetters('workouts', ['typeById']),
     binding() {
       const binding = {}
 

@@ -1,6 +1,6 @@
 <template>
   <div class="exercise-item">
-    <v-list-item ripple @click="$emit('goToExerciseDetails', data.id)">
+    <v-list-item ripple @click="$emit('goToExerciseDetails', index)">
       <v-list-item-avatar>
         <v-icon v-if="editWorkout" class="handle">mdi-drag-vertical</v-icon>
 
@@ -54,7 +54,7 @@ export default {
     disableActions: Boolean
   },
   computed: {
-    ...mapState('exercises', ['options'])
+    ...mapState('workouts', ['options'])
   },
   methods: {
     getImg,

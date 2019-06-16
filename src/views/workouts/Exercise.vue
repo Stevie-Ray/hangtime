@@ -61,7 +61,9 @@
           <v-flex text-xs-center xs12 sm8 md6>
             <!-- Get exercises item -->
             <exercise-item
+              v-if="currentExercise"
               :id="id"
+              :index="index"
               :data="currentExercise"
               :edit-workout="editWorkout"
             ></exercise-item>
@@ -74,12 +76,7 @@
                 dark
                 fab
                 large
-                @click="
-                  clickUpdateExercise({
-                    workout: id,
-                    exercise: currentExercise
-                  })
-                "
+                @click="clickUpdateExercise(workoutById(id))"
               >
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
@@ -100,7 +97,7 @@ export default {
   components: { ExerciseItem },
   props: {
     id: String,
-    exercise: String,
+    index: Number,
     editingWorkout: Boolean,
     isWorkoutDeletionPending: Boolean
   },
@@ -122,10 +119,11 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapState('exercises', ['options']),
-    ...mapGetters('exercises', ['exerciseById', 'isExerciseDeletionPending']),
+    ...mapState('workouts', ['options']),
+    ...mapGetters('workouts', ['workoutById', 'isExerciseDeletionPending']),
     currentExercise() {
-      return this.exerciseById(this.exercise)
+      if (!this.workoutById(this.id)) return
+      return this.workoutById(this.id).exercises[this.index]
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {
@@ -137,13 +135,13 @@ export default {
   methods: {
     count,
     getImg,
-    ...mapActions('exercises', ['deleteUserExercise', 'triggerUpdateExercise']),
+    ...mapActions('workouts', ['deleteUserExercise', 'triggerUpdateWorkout']),
     deleteExercise(data) {
       this.deleteUserExercise(data)
       this.$router.push({ name: 'workout', params: { id: data.workout } })
     },
     clickUpdateExercise(data) {
-      this.triggerUpdateExercise(data)
+      this.triggerUpdateWorkout(data)
       this.edit = false
     }
   }

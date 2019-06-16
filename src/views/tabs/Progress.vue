@@ -66,7 +66,7 @@ export default {
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('progress', ['progress']),
-    ...mapState('exercises', ['options']),
+    ...mapState('workouts', ['options']),
     ...mapState('app', ['networkOnLine']),
     ...mapState('companies', ['companies']),
     ...mapGetters('progress', ['totalBestStatsById'])

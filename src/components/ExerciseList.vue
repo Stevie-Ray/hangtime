@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="exercises === null" class="loading text-xs-center">
+    <div v-if="currentWorkout === null" class="loading text-xs-center">
       <v-progress-circular
         :size="60"
         color="primary"
@@ -10,19 +10,19 @@
       </v-progress-circular>
       <div>Loading exercises...</div>
     </div>
-    <v-list v-if="exercises && !exercises.length" two-line>
+    <v-list v-if="currentWorkout && !currentWorkout.exercises.length" two-line>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title>No exercises added yet</v-list-item-title>
           <v-list-item-subtitle
-            >use the
+            >use the <v-icon small>mdi-pencil</v-icon> and
             <v-icon small>mdi-plus</v-icon>
             button to add an exercise
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <v-list two-line>
+    <v-list v-if="currentWorkout && currentWorkout.exercises.length" two-line>
       <draggable
         v-model="exerciseList"
         class="draggable"
@@ -42,7 +42,7 @@
           @goToExerciseDetails="
             $router.push({
               name: 'exercise',
-              params: { id: id, exercise: $event, editingWorkout: editWorkout }
+              params: { id: id, index: $event, editingWorkout: editWorkout }
             })
           "
         ></exercise-list-item>
@@ -54,7 +54,7 @@
 <script>
 import ExerciseListItem from '@/components/ExerciseListItem'
 import draggable from 'vuedraggable'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   components: { ExerciseListItem, draggable },
@@ -63,24 +63,26 @@ export default {
     editWorkout: Boolean
   },
   computed: {
-    ...mapState('exercises', ['exercises']),
     ...mapState('app', ['networkOnLine']),
+    ...mapGetters('workouts', ['workoutById']),
+    currentWorkout() {
+      return this.workoutById(this.id)
+    },
     exerciseList: {
       get() {
-        return this.exercises
+        return this.currentWorkout.exercises
       },
-      set() {
-        return this.exercises
-        // this.triggerReorderExercises({ exercises: value, workout: this.id })
+      set(value) {
+        // return this.currentWorkout.exercises
+        this.triggerReorderExercises({
+          exercises: value,
+          workout: this.currentWorkout
+        })
       }
     }
   },
-  created() {
-    // TODO: remove ugly code
-    this.$store.dispatch('exercises/getWorkoutExercises', this.id)
-  },
   methods: {
-    ...mapActions('exercises', ['triggerReorderExercises'])
+    ...mapActions('workouts', ['triggerReorderExercises'])
   }
 }
 </script>

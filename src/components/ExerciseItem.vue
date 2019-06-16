@@ -41,8 +41,8 @@
         <hangboard
           :data="data"
           :edit-workout="editWorkout"
-          @left="setLeftHold($event)"
-          @right="setRightHold($event)"
+          @left="setLeftHold({ id: id, value: $event, index: index })"
+          @right="setRightHold({ id: id, value: $event, index: index })"
         ></hangboard>
       </v-flex>
 
@@ -175,12 +175,13 @@ export default {
   components: { Hangboard },
   props: {
     id: String,
+    index: Number,
     data: Object,
     editWorkout: Boolean
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('exercises', ['options']),
+    ...mapState('workouts', ['options']),
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
     dataExercise: {
@@ -188,7 +189,7 @@ export default {
         return this.data.exercise
       },
       set(value) {
-        this.setExercise({ id: this.data.id, value: value })
+        this.setExercise({ id: this.id, value: value, index: this.index })
       }
     },
     dataPause: {
@@ -196,7 +197,7 @@ export default {
         return this.data.pause
       },
       set(value) {
-        this.setPause({ id: this.data.id, value: value })
+        this.setPause({ id: this.id, value: value, index: this.index })
       }
     },
     dataHold: {
@@ -204,7 +205,7 @@ export default {
         return this.data.hold
       },
       set(value) {
-        this.setHold({ id: this.data.id, value: value })
+        this.setHold({ id: this.id, value: value, index: this.index })
       }
     },
     dataPullups: {
@@ -212,7 +213,7 @@ export default {
         return this.data.pullups
       },
       set(value) {
-        this.setPullups({ id: this.data.id, value: value })
+        this.setPullups({ id: this.id, value: value, index: this.index })
       }
     },
     dataRepeat: {
@@ -220,7 +221,7 @@ export default {
         return this.data.repeat
       },
       set(value) {
-        this.setRepeat({ id: this.data.id, value: value })
+        this.setRepeat({ id: this.id, value: value, index: this.index })
       }
     },
     dataRest: {
@@ -228,16 +229,12 @@ export default {
         return this.data.rest
       },
       set(value) {
-        this.setRest({ id: this.data.id, value: value })
+        this.setRest({ id: this.id, value: value, index: this.index })
       }
     }
   },
-  created() {
-    // TODO: remove ugly code
-    this.$store.dispatch('exercises/getWorkoutExercises', this.id)
-  },
   methods: {
-    ...mapMutations('exercises', [
+    ...mapMutations('workouts', [
       'setExercise',
       'setPause',
       'setHold',

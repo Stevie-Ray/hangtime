@@ -5,7 +5,6 @@ import Vuex from 'vuex'
 import authentication from './authentication'
 import app from './app'
 import companies from './companies'
-import exercises from './exercises'
 import progress from './progress'
 import workouts from './workouts'
 
@@ -20,7 +19,6 @@ export default new Vuex.Store({
     app,
     companies,
     progress,
-    exercises,
     workouts
   }
   // plugins: [createPersistedState()]

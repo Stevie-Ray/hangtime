@@ -30,7 +30,8 @@ export default {
     if (state.workoutToCreate.name === '') return
     const workout = {
       name: state.workoutToCreate.name,
-      description: state.workoutToCreate.description
+      description: state.workoutToCreate.description,
+      exercises: []
     }
     commit('setWorkoutToCreate', '')
     dispatch('createUserWorkout', workout)
@@ -56,8 +57,10 @@ export default {
    * Update workout
    */
   updateWorkout: async ({ rootState }, payload) => {
+    // commit('setWorkoutCreationPending', true)
     const userWorkoutsDb = new UserWorkoutsDB(rootState.authentication.user.id)
     await userWorkoutsDb.update(payload)
+    // commit('setWorkoutCreationPending', false)
   },
 
   /**
@@ -70,5 +73,42 @@ export default {
     //   workout => workout.id === payload.workout.id
     // )
     dispatch('updateWorkout', payload)
+  },
+  /**
+   * Create a new exercise for current logged in user and reset exercise name input
+   */
+  triggerAddExerciseAction: ({ dispatch, state, commit }, id) => {
+    if (!id) return
+    commit('addExercise', { id: id, data: state.exerciseToCreate })
+
+    const workout = state.workouts.find(workout => workout.id === id)
+
+    dispatch('updateWorkout', workout)
+  },
+  /**
+   * Callback fired when changing the order of exercises
+   */
+  triggerReorderExercises: ({ commit, state, dispatch }, payload) => {
+    if (!state.workouts) return
+    commit('setExercises', { id: payload.workout.id, data: payload.exercises })
+
+    const workout = state.workouts.find(
+      workout => workout.id === payload.workout.id
+    )
+
+    dispatch('updateWorkout', workout)
   }
+  /**
+   * Delete a user exercise from its id
+   */
+  // deleteUserExercise: async ({ rootState, getters }, payload) => {
+  // if (getters.isExerciseDeletionPending(payload.exerciseId)) return
+  // const userWorkoutsDb = new UserWorkoutsDB(rootState.authentication.user.id)
+  // TODO: fix pending state
+  // commit('addExerciseDeletionPending', payload.exerciseId)
+  // await userExercisesDb.delete(payload.exerciseId)
+  // TODO: enable removeExerciseById when state / exercise issues are fixed
+  // commit('removeExerciseById', payload.exerciseId)
+  // commit('removeExerciseDeletionPending', payload.exerciseId)
+  // }
 }
