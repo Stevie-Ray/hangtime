@@ -40,12 +40,11 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="$emit('input', false)">
+        <v-btn text color="primary" @click="$emit('input', false)">
           Close
         </v-btn>
         <v-btn
           text
-          color="primary"
           class="add-exersice-btn"
           :disabled="workoutToCreateName === ''"
           @click="saveWorkout"

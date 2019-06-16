@@ -260,10 +260,10 @@ export default {
         }
       })
     },
-    savePullups(value) {
+    savePullups() {
       this.AddRecording({
-        data: this.currentStats[this.index].id,
-        value: value
+        data: this.currentStats[this.index],
+        value: this.pullups
       })
       this.$router.push({
         name: 'progress-type',

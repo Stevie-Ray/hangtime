@@ -40,10 +40,7 @@
                   <span v-if="!currentType.configurable">
                     {{ count(bestStatsById(data.id)) }}
                   </span>
-                  <span v-else>
-                    Best:
-                    {{ bestStatsById(data.id) }}x
-                  </span>
+                  <span v-else> {{ bestStatsById(data.id) }}x </span>
                 </v-card-title>
                 <v-card-text>
                   <div>
@@ -55,7 +52,6 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
-                    color="primary"
                     text
                     @click="
                       $router.push({
@@ -69,6 +65,7 @@
                   <v-btn
                     v-if="data.recordings.length > 0"
                     text
+                    color="primary"
                     @click="
                       $router.push({
                         name: 'progress-list',
@@ -103,7 +100,7 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="clickAddHangboard">
+                  <v-btn text @click="clickAddHangboard">
                     Add Holds
                   </v-btn>
                 </v-card-actions>

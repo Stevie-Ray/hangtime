@@ -165,14 +165,10 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn text @click="dialogs.delete = false">
+                  <v-btn text color="primary" @click="dialogs.delete = false">
                     Cancel
                   </v-btn>
-                  <v-btn
-                    color="primary"
-                    text
-                    @click="deleteWorkout(currentWorkout.id)"
-                  >
+                  <v-btn text @click="deleteWorkout(currentWorkout.id)">
                     Delete
                   </v-btn>
                 </v-card-actions>
