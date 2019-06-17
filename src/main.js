@@ -15,23 +15,25 @@ import 'pwacompat'
 
 Vue.config.productionTip = false
 
+// https://color.adobe.com/_DS89712-color-theme-12679944
 const opts = {
   icons: {
     iconfont: 'mdi'
   },
   theme: {
-    dark: true,
+    dark: false,
     themes: {
       light: {
-        primary: '#4E7352',
-        secondary: '#739270',
-        tertiary: '#FE0064',
-        accent: '#739270'
+        primary: '#012E40',
+        secondary: '#366D73',
+        tertiary: '#5A8C8C',
+        accent: '#BCBFA4'
       },
       dark: {
-        primary: '#4E7352',
-        secondary: '#739270',
-        accent: '#739270'
+        primary: '#012E40',
+        secondary: '#366D73',
+        tertiary: '#5A8C8C',
+        accent: '#BCBFA4'
       }
     }
   }

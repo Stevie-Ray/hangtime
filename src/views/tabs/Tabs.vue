@@ -172,7 +172,7 @@ export default {
 @import '@/theme/variables.scss';
 .tabs {
   &.offline {
-    background: $navbar-offline-color;
+    /*background: #FFF;*/
   }
 
   .app-logo {

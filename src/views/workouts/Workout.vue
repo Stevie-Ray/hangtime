@@ -296,6 +296,6 @@ export default {
 <style lang="scss">
 .ghost {
   opacity: 0.5;
-  background: #4e7352;
+  background: #012e40;
 }
 </style>

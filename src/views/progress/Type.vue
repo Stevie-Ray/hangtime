@@ -36,7 +36,7 @@
                   <hangboard :data="data" :edit-workout="false"></hangboard>
                 </v-img>
 
-                <v-card-title>
+                <v-card-title v-if="data.recordings.length">
                   <span v-if="!currentType.configurable">
                     {{ count(bestStatsById(data.id)) }}
                   </span>

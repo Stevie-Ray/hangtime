@@ -58,6 +58,26 @@
     max-width: 100vw;
     flex-wrap: wrap;
     justify-content: center;
+
+    // show sloth
+    .v-slide-group__wrapper {
+      contain: inherit;
+      overflow: visible;
+    }
+
+    // sloth
+    .v-tabs-slider-wrapper .v-tabs-slider::after {
+      z-index: 999999;
+      background-image: url('~@/assets/icons/sloth.svg');
+      background-repeat: no-repeat;
+      content: '';
+      position: absolute;
+      bottom: -25px;
+      right: 10px;
+      height: 30px;
+      width: 30px;
+    }
+
     &__title {
       line-height: 1.25;
       margin-left: 13px;

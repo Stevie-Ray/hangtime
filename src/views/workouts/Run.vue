@@ -56,7 +56,7 @@
                   </v-avatar>
 
                   <div class="subtitle font-weight-bold text-uppercase">
-                    {{ direction }}
+                    {{ progressText }}
                   </div>
 
                   <div id="timer" class="display-3 font-weight-bold">
@@ -113,8 +113,28 @@
       </v-container>
 
       <v-speed-dial bottom right fixed>
-        <v-btn slot="activator" color="secondary" dark fab large>
-          <v-icon>mdi-stop</v-icon>
+        <v-btn
+          v-if="timer !== null"
+          slot="activator"
+          color="secondary"
+          dark
+          fab
+          large
+          @click="pauseWorkout"
+        >
+          <v-icon v-if="!paused">mdi-pause</v-icon>
+          <v-icon v-else>mdi-play</v-icon>
+        </v-btn>
+        <v-btn
+          v-if="timer === null"
+          slot="activator"
+          color="secondary"
+          dark
+          fab
+          large
+          @click="startWorkout"
+        >
+          <v-icon>mdi-play</v-icon>
         </v-btn>
       </v-speed-dial>
     </v-content>
@@ -136,11 +156,13 @@ export default {
     stepRepeat: 0,
     totalTime: 0,
     timer: null,
+    paused: false,
     progressCircular: 0,
+    progressText: 'Get Ready',
     initalTime: 0,
     synth: window.speechSynthesis,
     voiceList: [],
-    down: false,
+
     finished: false
   }),
   computed: {
@@ -157,27 +179,27 @@ export default {
 
       return binding
     },
-    direction() {
-      // TODO remove this
-      if (this.finished) {
-        return 'Done'
-      }
-      if (this.stepRepeat === 0) {
-        return 'Pause'
-      }
-      if (this.down) {
-        return 'Rest'
-      }
-      let string = ''
-      if (this.currentExercise.pullups > 1) {
-        string += `${this.currentExercise.pullups}`
-      }
-      string += ` ${this.options[this.currentExercise.exercise].name}`
-      if (this.currentExercise.pullups > 1) {
-        string += 's'
-      }
-      return string
-    },
+    // direction() {
+    // if (this.finished) {
+    //   return 'Done'
+    // }
+    // if (this.stepRepeat === 0) {
+    //   return 'Pause'
+    // }
+    // if (this.down) {
+    //   return 'Rest'
+    // }
+    // let string = ''
+    // TODO move this
+    // if (this.currentExercise.pullups > 1) {
+    //   string += `${this.currentExercise.pullups}`
+    // }
+    // string += ` ${this.options[this.currentExercise.exercise].name}`
+    // if (this.currentExercise.pullups > 1) {
+    //   string += 's'
+    // }
+    // return string
+    // },
     currentExercise() {
       // set current exercise based on currentStep
       if (!this.currentWorkout) return
@@ -189,77 +211,81 @@ export default {
   },
   mounted() {
     // set timer
-    this.timer = setInterval(() => this.countdown(), 1000)
-
-    // TODO: why do i get the voice list?
+    // TODO: Why do I get the voice list here?
     this.voiceList = this.synth
       .getVoices()
       .filter(voice => /^(en|EN)/.test(voice.lang))
   },
   updated() {
-    this.$nextTick(function() {
-      // update Timer
-      if (
-        this.currentExercise &&
-        this.currentWorkout &&
-        this.initalTime === 0
-      ) {
-        this.totalTime = this.currentExercise.pause
-        // set initalTime to totalTime
-        this.initalTime = this.totalTime
-      }
-      //
-      if (this.stepRepeat === 0 && this.initalTime - 1 === this.totalTime) {
-        // speak if enabled
-        if (this.user.settings.speak) {
-          this.speak('Next exercise')
-          if (this.currentExercise.pullups > 1) {
-            this.speak(
-              `${this.currentExercise.pullups +
-                this.options[this.currentExercise.exercise].name}s`
-            )
-          } else {
-            this.speak(this.options[this.currentExercise.exercise].name)
-          }
-          this.speak(
-            `for ${this.currentExercise.hold} seconds. Than rest for ${
-              this.currentExercise.rest
-            } seconds.`
-          )
-        }
-      }
-
-      if (
-        this.stepRepeat !== 0 &&
-        this.totalTime === this.currentExercise.rest
-      ) {
-        if (this.user.settings.vibrate) {
-          navigator.vibrate([80, 40, 120])
-        }
-        if (this.user.settings.sound) {
-          this.sound('stop.mp3')
-        }
-        if (this.user.settings.speak) {
-          this.speak('... and rest')
-        }
-      }
-
-      if (this.totalTime <= 3) {
-        if (this.totalTime === 0) {
-          if (this.user.settings.vibrate) {
-            navigator.vibrate([80, 40, 120])
-          }
-          if (this.user.settings.sound) {
-            this.sound('start.mp3')
-          }
-          if (this.user.settings.speak) {
-            this.speak('Go!')
-          }
-        } else if (this.user.settings.speak) {
-          this.speak(this.totalTime)
-        }
-      }
-    })
+    // this.$nextTick(function() {
+    //   // update Timer
+    //   if (
+    //     this.currentExercise &&
+    //     this.currentWorkout &&
+    //     this.initalTime === 0
+    //   ) {
+    //
+    //     this.totalTime = this.currentExercise.pause
+    //     // set initalTime to totalTime
+    //     this.initalTime = this.totalTime
+    //     console.log(this.totalTime)
+    //     console.log(this.initalTime)
+    //   }
+    //
+    //   //
+    //   if (this.stepRepeat === 0 && this.initalTime - 1 === this.totalTime) {
+    //     console.log(this.totalTime)
+    //     console.log(this.initalTime)
+    //     // speak if enabled
+    //     if (this.user.settings.speak) {
+    //       this.speak('Next exercise')
+    //       if (this.currentExercise.pullups > 1) {
+    //         this.speak(
+    //           `${this.currentExercise.pullups +
+    //             this.options[this.currentExercise.exercise].name}s`
+    //         )
+    //       } else {
+    //         this.speak(this.options[this.currentExercise.exercise].name)
+    //       }
+    //       this.speak(
+    //         `for ${this.currentExercise.hold} seconds. Than rest for ${
+    //           this.currentExercise.rest
+    //         } seconds.`
+    //       )
+    //     }
+    //   }
+    //
+    //   if (
+    //     this.stepRepeat !== 0 &&
+    //     this.totalTime === this.currentExercise.rest
+    //   ) {
+    //     if (this.user.settings.vibrate) {
+    //       navigator.vibrate([80, 40, 120])
+    //     }
+    //     if (this.user.settings.sound) {
+    //       this.sound('stop.mp3')
+    //     }
+    //     if (this.user.settings.speak) {
+    //       this.speak('... and rest')
+    //     }
+    //   }
+    //
+    //   if (this.totalTime <= 3) {
+    //     if (this.totalTime === 0) {
+    //       if (this.user.settings.vibrate) {
+    //         navigator.vibrate([80, 40, 120])
+    //       }
+    //       if (this.user.settings.sound) {
+    //         this.sound('start.mp3')
+    //       }
+    //       if (this.user.settings.speak) {
+    //         this.speak('Go!')
+    //       }
+    //     } else if (this.user.settings.speak) {
+    //       this.speak(this.totalTime)
+    //     }
+    //   }
+    // })
   },
   methods: {
     getImg,
@@ -268,7 +294,8 @@ export default {
     sound,
     countdown() {
       // if there is time left
-      if (this.totalTime >= 1) {
+      if (this.totalTime > 0) {
+        console.log('there is time left')
         // totalTime -1
         this.totalTime = this.totalTime - 1
         // update circle
@@ -276,17 +303,24 @@ export default {
           ((this.initalTime - this.totalTime) * 100) / this.initalTime
 
         if (this.stepRepeat !== 0) {
-          if (this.totalTime < this.currentExercise.rest) {
-            this.down = true
+          console.log('there are repeating steps')
+          // check if rest && if hold time is done
+          if (
+            this.currentExercise.rest > 0 &&
+            this.totalTime < this.currentExercise.rest
+          ) {
+            this.progressText = 'Rest'
           }
+          // whut?
           if (
             this.totalTime ===
             this.currentExercise.hold + this.currentExercise.rest - 1
           ) {
-            this.down = false
+            this.progressText = 'Hold'
           }
+          // why?
         } else {
-          // this.down = false;
+          this.progressText = 'Pause'
         }
       }
       // if step repeats
@@ -309,9 +343,18 @@ export default {
       }
       // done!
       else {
+        this.progressText = 'Done'
         this.finished = true
         // this.stop()
       }
+    },
+    startWorkout() {
+      this.timer = setInterval(() => {
+        if (!this.paused) this.countdown()
+      }, 1000)
+    },
+    pauseWorkout() {
+      this.paused = !this.paused
     }
   }
 }
