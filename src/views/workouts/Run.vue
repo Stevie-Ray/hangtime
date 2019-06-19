@@ -210,7 +210,6 @@ export default {
 
       // if there is time left
       if (this.totalTime > 0) {
-
         // totalTime -1
         this.totalTime = this.totalTime - 1
 
@@ -220,7 +219,6 @@ export default {
 
         // STATES
         if (this.stepRepeat !== 0) {
-
           // STATE REST: check if rest && if hold time is done && not last repeat
           if (
             this.currentExercise.rest > 0 &&
@@ -228,30 +226,26 @@ export default {
           ) {
             this.progressText = 'Rest'
 
-
-              // this happens only once
-              if (this.totalTime === this.currentExercise.rest - 1) {
-
-                  this.vibratePhone
-                  this.playSound('stop.mp3')
-                  this.speakText('... and rest')
-
-
+            // this happens only once
+            if (this.totalTime === this.currentExercise.rest - 1) {
+              this.vibratePhone
+              this.playSound('stop.mp3')
+              this.speakText('... and rest')
+            }
+            // rest: start counting down
+            if (
+              this.totalTime <= 3 &&
+              this.stepRepeat !== this.currentExercise.repeat
+            ) {
+              // if 0
+              if (this.totalTime > 0) {
+                this.speakText(this.totalTime)
+              } else {
+                this.vibratePhone
+                this.playSound('start.mp3')
+                this.speakText('Go!')
               }
-              // rest: start counting down
-              if (this.totalTime <= 3 &&
-                      this.stepRepeat !== this.currentExercise.repeat) {
-
-                // if 0
-                if (this.totalTime > 0) {
-                  this.speakText(this.totalTime)
-                } else {
-                  this.vibratePhone
-                  this.playSound('start.mp3')
-                  this.speakText('Go!')
-                }
-              }
-
+            }
           }
 
           // STATE: HOLD -> eenmalig
@@ -308,7 +302,7 @@ export default {
           }
 
           // start count down
-          if (this.totalTime <= 3 ) {
+          if (this.totalTime <= 3) {
             // if 0
             if (this.totalTime > 0) {
               this.speakText(this.totalTime)
@@ -323,7 +317,6 @@ export default {
 
       // if step repeats !== exercise repeats
       else if (this.stepRepeat !== this.currentExercise.repeat) {
-
         this.stepRepeat = this.stepRepeat + 1
 
         // set timers
