@@ -87,11 +87,11 @@ export default {
       ...exerciseFieldToCreate
     }),
   /* Exercises */
-  removeExerciseById: (state, exerciseId) => {
-    const index = state.exercises.findIndex(
-      exercise => exercise.id === exerciseId
+  removeExerciseByIndex: (state, payload) => {
+    const index = state.workouts.findIndex(
+      workout => workout.id === payload.workout.id
     )
-    state.exercises.splice(index, 1)
+    state.workouts[index].exercises.splice(payload.index, 1)
   },
 
   /* Exercises deletion */

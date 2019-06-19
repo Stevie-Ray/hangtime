@@ -1,12 +1,12 @@
 <template>
-  <v-container v-if="data" grid-list-md text-center-xs>
+  <v-container v-if="currentExercise" grid-list-md text-center-xs>
     <v-layout row wrap>
       <v-flex xs3>
         <!-- exercise image  -->
         <v-avatar>
           <img
-            :alt="options[data.exercise].name"
-            :src="getImg(options[data.exercise].image)"
+            :alt="options[currentExercise.exercise].name"
+            :src="getImg(options[currentExercise.exercise].image)"
           />
         </v-avatar>
       </v-flex>
@@ -39,7 +39,7 @@
       <v-flex xs12>
         <!-- hangboard -->
         <hangboard
-          :data="data"
+          :data="currentExercise"
           :edit-workout="editWorkout"
           @left="setLeftHold({ id: id, value: $event, index: index })"
           @right="setRightHold({ id: id, value: $event, index: index })"
@@ -92,13 +92,13 @@
         </v-slider>
 
         <v-divider
-          v-if="options[data.exercise].configurable"
+          v-if="options[currentExercise.exercise].configurable"
           class="my-4"
         ></v-divider>
 
         <!-- pullups  -->
         <v-slider
-          v-if="options[data.exercise].configurable"
+          v-if="options[currentExercise.exercise].configurable"
           v-model="dataPullups"
           :max="10"
           :min="1"
@@ -121,7 +121,7 @@
 
         <!-- repeat  -->
         <v-slider
-          v-if="editWorkout || data.repeat > 1"
+          v-if="editWorkout || currentExercise.repeat > 1"
           v-model="dataRepeat"
           :max="10"
           :min="1"
@@ -139,11 +139,11 @@
           </template>
         </v-slider>
 
-        <v-divider v-if="data.repeat > 1" class="my-4"></v-divider>
+        <v-divider v-if="currentExercise.repeat > 1" class="my-4"></v-divider>
 
         <!-- rest  -->
         <v-slider
-          v-if="data.repeat > 1"
+          v-if="currentExercise.repeat > 1"
           v-model="dataRest"
           :max="60"
           :min="5"
@@ -167,7 +167,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import { getImg } from '@/misc/helpers'
 
@@ -176,7 +176,6 @@ export default {
   props: {
     id: String,
     index: Number,
-    data: Object,
     editWorkout: Boolean
   },
   computed: {
@@ -184,9 +183,14 @@ export default {
     ...mapState('workouts', ['options']),
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
+    ...mapGetters('workouts', ['workoutById']),
+    currentExercise() {
+      if (!this.workoutById(this.id)) return
+      return this.workoutById(this.id).exercises[this.index]
+    },
     dataExercise: {
       get() {
-        return this.data.exercise
+        return this.currentExercise.exercise
       },
       set(value) {
         this.setExercise({ id: this.id, value: value, index: this.index })
@@ -194,7 +198,7 @@ export default {
     },
     dataPause: {
       get() {
-        return this.data.pause
+        return this.currentExercise.pause
       },
       set(value) {
         this.setPause({ id: this.id, value: value, index: this.index })
@@ -202,7 +206,7 @@ export default {
     },
     dataHold: {
       get() {
-        return this.data.hold
+        return this.currentExercise.hold
       },
       set(value) {
         this.setHold({ id: this.id, value: value, index: this.index })
@@ -210,7 +214,7 @@ export default {
     },
     dataPullups: {
       get() {
-        return this.data.pullups
+        return this.currentExercise.pullups
       },
       set(value) {
         this.setPullups({ id: this.id, value: value, index: this.index })
@@ -218,7 +222,7 @@ export default {
     },
     dataRepeat: {
       get() {
-        return this.data.repeat
+        return this.currentExercise.repeat
       },
       set(value) {
         this.setRepeat({ id: this.id, value: value, index: this.index })
@@ -226,7 +230,7 @@ export default {
     },
     dataRest: {
       get() {
-        return this.data.rest
+        return this.currentExercise.rest
       },
       set(value) {
         this.setRest({ id: this.id, value: value, index: this.index })

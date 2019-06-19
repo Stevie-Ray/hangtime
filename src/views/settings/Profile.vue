@@ -96,7 +96,7 @@
                     v-model="userStatus"
                     required
                     label="Status"
-                    @keypress.enter="triggerUpdateUser"
+                    @change="triggerUpdateUser"
                   >
                   </v-text-field>
                 </v-list-item-content>

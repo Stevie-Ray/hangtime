@@ -11,7 +11,7 @@
 
     #sloth {
       fill:#5A8C8C;
-      animation: moving-sloth 10s ease infinite;
+      animation: moving-sloth 8s ease infinite;
       transform-origin: left top;
     }
     /* ]]> */

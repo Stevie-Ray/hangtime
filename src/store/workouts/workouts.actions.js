@@ -97,18 +97,17 @@ export default {
     )
 
     dispatch('updateWorkout', workout)
-  }
+  },
   /**
    * Delete a user exercise from its id
    */
-  // deleteUserExercise: async ({ rootState, getters }, payload) => {
-  // if (getters.isExerciseDeletionPending(payload.exerciseId)) return
-  // const userWorkoutsDb = new UserWorkoutsDB(rootState.authentication.user.id)
-  // TODO: fix pending state
-  // commit('addExerciseDeletionPending', payload.exerciseId)
-  // await userExercisesDb.delete(payload.exerciseId)
-  // TODO: enable removeExerciseById when state / exercise issues are fixed
-  // commit('removeExerciseById', payload.exerciseId)
-  // commit('removeExerciseDeletionPending', payload.exerciseId)
-  // }
+  deleteUserExercise: ({ commit, dispatch }, payload) => {
+    // TODO: fix pending state
+    // if (getters.isExerciseDeletionPending({ workout: payload.workout.id, index: payload.index})) return
+
+    // commit('addExerciseDeletionPending', { workout: payload.workout.id, index: payload.index})
+    commit('removeExerciseByIndex', payload)
+    dispatch('updateWorkout', payload.workout)
+    // commit('removeExerciseDeletionPending', payload.exerciseId)
+  }
 }

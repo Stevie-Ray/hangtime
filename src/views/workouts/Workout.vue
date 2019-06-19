@@ -281,7 +281,7 @@ export default {
     ...mapMutations('workouts', ['setWorkoutName', 'setWorkoutDescription']),
     deleteWorkout(id) {
       this.deleteUserWorkout(id)
-      this.$router.go(-1)
+      this.$router.push({ name: 'workouts' })
     },
     clickUpdateWorkout() {
       this.triggerUpdateWorkout(this.currentWorkout)

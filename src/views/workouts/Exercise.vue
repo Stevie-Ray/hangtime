@@ -39,12 +39,10 @@
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn
-        v-if="currentExercise && editWorkout"
+        v-if="editWorkout"
         icon
         class="delete-btn"
-        @click.stop="
-          deleteExercise({ workout: id, exerciseId: currentExercise.id })
-        "
+        @click.stop="deleteExercise"
       >
         <v-icon
           >{{
@@ -76,7 +74,7 @@
                 dark
                 fab
                 large
-                @click="clickUpdateExercise(workoutById(id))"
+                @click="clickUpdateExercise"
               >
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
@@ -136,12 +134,15 @@ export default {
     count,
     getImg,
     ...mapActions('workouts', ['deleteUserExercise', 'triggerUpdateWorkout']),
-    deleteExercise(data) {
-      this.deleteUserExercise(data)
-      this.$router.push({ name: 'workout', params: { id: data.workout } })
+    deleteExercise() {
+      this.deleteUserExercise({
+        workout: this.workoutById(this.id),
+        index: this.index
+      })
+      this.$router.push({ name: 'workout', params: { id: this.id } })
     },
-    clickUpdateExercise(data) {
-      this.triggerUpdateWorkout(data)
+    clickUpdateExercise() {
+      this.triggerUpdateWorkout(this.workoutById(this.id))
       this.edit = false
     }
   }

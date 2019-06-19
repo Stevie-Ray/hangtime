@@ -25,7 +25,7 @@
                 <v-textarea
                   v-model="workoutToCreateDescription"
                   counter="140"
-                  :rules="[rules.length(140)]"
+                  :rules="[rules.required, rules.length(140)]"
                   class="workout-description-input"
                   placeholder="Give a short description of your workout, for example indicate when this training is suitable"
                   label="Workout description"
@@ -46,7 +46,9 @@
         <v-btn
           text
           class="add-exersice-btn"
-          :disabled="workoutToCreateName === ''"
+          :disabled="
+            workoutToCreateName === '' || workoutToCreateDescription === ''
+          "
           @click="saveWorkout"
         >
           Save
