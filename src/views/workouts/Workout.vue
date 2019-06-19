@@ -70,8 +70,7 @@
             <v-dialog
               v-if="currentWorkout"
               v-model="dialogs.general"
-              scrollable
-              width="400"
+              width="500"
             >
               <v-card class="mx-auto">
                 <v-card-title
@@ -153,7 +152,7 @@
             <v-dialog
               v-if="currentWorkout"
               v-model="dialogs.delete"
-              width="400"
+              width="500"
             >
               <v-card>
                 <v-card-title class="headline">Delete workout</v-card-title>

@@ -103,7 +103,7 @@ export default {
   &.h13 #h13,
   &.h14 #h14,
   &.h15 #h15 {
-    fill: rgb(115, 146, 112);
+    fill: #366d73;
   }
 }
 </style>

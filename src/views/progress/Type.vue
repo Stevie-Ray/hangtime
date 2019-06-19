@@ -81,7 +81,7 @@
               <v-divider></v-divider>
             </v-flex>
 
-            <v-dialog v-model="dialog">
+            <v-dialog v-model="dialog" width="500">
               <v-card>
                 <v-card-title class="headline" primary-title>
                   Select Holds
@@ -116,7 +116,11 @@
                 large
                 @click="dialog = true"
               >
-                <v-img :src="getImg('icons/hangboard.svg')"></v-img>
+                <v-img
+                  :src="getImg('icons/hangboard.svg')"
+                  width="25"
+                  height="14"
+                ></v-img>
               </v-btn>
             </v-speed-dial>
           </v-flex>

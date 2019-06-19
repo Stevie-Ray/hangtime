@@ -121,7 +121,7 @@
         </v-layout>
       </v-container>
 
-      <v-dialog v-model="dialog" persistent width="400">
+      <v-dialog v-model="dialog" persistent width="500">
         <v-card>
           <v-card-title class="headline">Pull-ups result</v-card-title>
 
