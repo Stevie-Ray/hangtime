@@ -226,6 +226,10 @@ export default {
       },
       set(value) {
         this.setRepeat({ id: this.id, value: value, index: this.index })
+        // reset Rest
+        if (value === 1) {
+          this.setRest({ id: this.id, value: 0, index: this.index })
+        }
       }
     },
     dataRest: {

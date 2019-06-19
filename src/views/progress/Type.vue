@@ -164,7 +164,10 @@ export default {
     ...mapGetters('progress', ['statsById', 'bestStatsById']),
     ...mapGetters('workouts', ['typeById']),
     currentStats() {
-      return this.statsById(this.currentType.id)
+      return this.statsById({
+        type: this.currentType.id,
+        settings: this.user.settings
+      })
     },
     currentType() {
       return this.typeById(this.id)

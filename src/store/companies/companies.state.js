@@ -429,6 +429,7 @@ export default {
       name: 'Crusher',
       id: 3,
       website: 'http://crusherholds.co.uk/',
+      disabled: true,
       hangboards: [
         {
           name: 'Matrix',
@@ -484,6 +485,7 @@ export default {
       name: 'Entre-Prises',
       id: 4,
       website: 'https://www.entre-prises.us/',
+      disabled: true,
       hangboards: [
         {
           name: 'Hang Time',
@@ -539,6 +541,7 @@ export default {
       name: 'Kraxlboard',
       id: 5,
       website: 'https://www.kraxl-board.net/',
+      disabled: true,
       hangboards: [
         {
           name: 'Classic',
@@ -594,6 +597,7 @@ export default {
       name: 'Max Climbing',
       id: 6,
       website: 'https://www.maxclimbing.com/',
+      disabled: true,
       hangboards: [
         {
           name: 'Spinchboard',
@@ -613,6 +617,7 @@ export default {
       name: 'Metolius',
       id: 7,
       website: 'https://www.maxclimbing.com/',
+      disabled: true,
       hangboards: [
         {
           name: 'Contact',
@@ -692,6 +697,7 @@ export default {
       name: 'Moon',
       id: 8,
       website: 'https://moonclimbing.com/',
+      disabled: true,
       hangboards: [
         {
           name: 'Fingerboard',
@@ -723,6 +729,7 @@ export default {
       name: 'OCUN',
       id: 9,
       website: 'http://www.ocun.com/',
+      disabled: true,
       hangboards: [
         {
           name: 'Finger Board',
@@ -742,6 +749,7 @@ export default {
       name: 'Problemsolver',
       id: 10,
       website: 'https://www.problemsolver.rocks/',
+      disabled: true,
       hangboards: [
         {
           name: 'Hanzo',
@@ -773,6 +781,7 @@ export default {
       name: 'So iLL',
       id: 11,
       website: 'https://soillholds.com/',
+      disabled: true,
       hangboards: [
         {
           name: 'Blister Board',
@@ -852,6 +861,7 @@ export default {
       name: 'Tension',
       id: 12,
       website: 'https://www.tensionclimbing.com/',
+      disabled: true,
       hangboards: [
         {
           name: 'Flash',
@@ -895,6 +905,7 @@ export default {
       name: 'Trango',
       id: 13,
       website: 'http://www.trango.com/',
+      disabled: true,
       hangboards: [
         {
           name: 'Rock Prodigy',
@@ -911,6 +922,38 @@ export default {
         {
           name: 'Rock Prodigy Forge',
           id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: '',
+              class: 0,
+              name: ''
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Zlagboard',
+      id: 14,
+      website: 'https://www.zlagboard.com/',
+      disabled: true,
+      hangboards: [
+        {
+          name: 'Zlagboard Pro',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: '',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Zlagboard Evo',
+          id: 0,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {

@@ -79,9 +79,24 @@ export default {
    */
   triggerAddExerciseAction: ({ dispatch, state, commit }, id) => {
     if (!id) return
-    commit('addExercise', { id: id, data: state.exerciseToCreate })
+
+    const exercise = state.exerciseToCreate
+
+    commit('addExercise', { id: id, data: exercise })
 
     const workout = state.workouts.find(workout => workout.id === id)
+
+    commit('setExerciseToCreate', {
+      exercise: 0,
+      left: 0,
+      right: 0,
+      pause: 10,
+      hold: 10,
+      repeat: 1,
+      rest: 0
+    })
+
+    console.log(workout)
 
     dispatch('updateWorkout', workout)
   },

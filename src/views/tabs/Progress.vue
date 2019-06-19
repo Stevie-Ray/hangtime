@@ -75,7 +75,10 @@ export default {
     getImg,
     count,
     bestStats(option) {
-      return this.totalBestStatsById(option)
+      return this.totalBestStatsById({
+        type: option,
+        settings: this.user.settings
+      })
     },
     encodeUrl(url) {
       return url

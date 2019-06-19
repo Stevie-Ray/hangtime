@@ -158,7 +158,10 @@ export default {
       return binding
     },
     currentStats() {
-      return this.statsById(this.currentType.id)
+      return this.statsById({
+        type: this.currentType.id,
+        settings: this.user.settings
+      })
     },
     currentStatsLabels() {
       if (

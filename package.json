@@ -20,6 +20,7 @@
     "firebase": "^6.2.0",
     "is_js": "^0.9.0",
     "lodash": "^4.17.11",
+    "nosleep.js": "^0.9.0",
     "pwacompat": "^2.0.9",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",

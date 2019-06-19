@@ -190,6 +190,7 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count } from '@/misc/helpers'
+import * as NoSleep from 'nosleep.js/dist/NoSleep'
 
 export default {
   components: { Hangboard },
@@ -199,11 +200,12 @@ export default {
     index: Number
   },
   data: () => ({
-    totalTime: 0,
-    timer: null,
-    running: false,
+    dialog: false,
+    noSleep: new NoSleep(),
     pullups: 0,
-    dialog: false
+    running: false,
+    timer: null,
+    totalTime: 0
   }),
   head: {
     title: {
@@ -229,7 +231,10 @@ export default {
       return binding
     },
     currentStats() {
-      return this.statsById(this.currentType.id)
+      return this.statsById({
+        type: this.currentType.id,
+        settings: this.user.settings
+      })
     },
     currentType() {
       return this.typeById(this.id)
@@ -256,11 +261,13 @@ export default {
       this.totalTime = this.totalTime + 1
     },
     startRecording() {
-      this.timer = setInterval(() => this.counter(), 1000)
       this.running = true
+      this.noSleep.enable()
+      this.timer = setInterval(() => this.counter(), 1000)
     },
     stopRecording() {
       this.running = false
+      this.noSleep.disable()
       if (this.currentType.configurable) {
         this.dialog = true
         return

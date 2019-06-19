@@ -147,6 +147,7 @@
 import { mapState, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count, speak, sound } from '@/misc/helpers'
+import * as NoSleep from 'nosleep.js/dist/NoSleep'
 
 export default {
   components: { Hangboard },
@@ -163,7 +164,8 @@ export default {
     progressText: 'Press Play',
     initialTime: 0,
     synth: window.speechSynthesis,
-    voiceList: []
+    voiceList: [],
+    noSleep: new NoSleep()
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
@@ -288,16 +290,6 @@ export default {
               this.speakText(
                 `Than rest for ${this.currentExercise.rest} seconds.`
               )
-
-              // let string = ''
-              // TODO fix pull-ups
-              // if (this.currentExercise.pullups > 1) {
-              //   string += `${this.currentExercise.pullups}`
-              // }
-              // string += ` ${this.options[this.currentExercise.exercise].name}`
-              // if (this.currentExercise.pullups > 1) {
-              //   string += 's'
-              // }
             }
           }
 
@@ -338,16 +330,19 @@ export default {
       else {
         this.progressText = 'Done'
         this.speakText('Well done')
+        this.noSleep.disable()
         this.paused = true
         clearInterval(this.timer)
       }
     },
     startWorkout() {
+      this.noSleep.enable()
       this.timer = setInterval(() => {
         if (!this.paused) this.countdown()
       }, 1000)
     },
     pauseWorkout() {
+      this.noSleep.disable()
       this.paused = !this.paused
     },
     speakText(text) {
