@@ -68,7 +68,10 @@
                   </div>
 
                   <div
-                    v-if="currentStats[index].recordings.length > 0"
+                    v-if="
+                      currentStats[index] &&
+                        currentStats[index].recordings.length > 0
+                    "
                     class="text-uppercase font-weight-bold"
                   >
                     Best:
@@ -123,35 +126,53 @@
 
       <v-dialog v-model="dialog" persistent width="500">
         <v-card>
-          <v-card-title class="headline">Pull-ups result</v-card-title>
+          <v-card-title class="headline">Recording result</v-card-title>
 
           <v-card-text>
-            How many pull-ups did you do?
-            <v-container fluid grid-list-lg>
-              <v-layout row wrap>
-                <v-flex shrink style="width: 45px">
-                  <v-text-field
-                    v-model="pullups"
-                    class="mt-0"
-                    hide-details
-                    single-line
-                    type="number"
-                  >
-                  </v-text-field>
-                </v-flex>
+            <div v-if="currentType.configurable">
+              How many pull-ups did you do?
+              <v-container fluid grid-list-lg>
+                <v-layout row wrap>
+                  <v-flex shrink style="width: 45px">
+                    <v-text-field
+                      v-model="pullups"
+                      class="mt-0"
+                      hide-details
+                      single-line
+                      type="number"
+                    >
+                    </v-text-field>
+                  </v-flex>
 
-                <v-flex>
-                  <v-subheader>
-                    Pullups
-                  </v-subheader>
-                </v-flex>
-              </v-layout>
-            </v-container>
+                  <v-flex>
+                    <v-subheader>
+                      Pullups
+                    </v-subheader>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </div>
+            <div v-else>
+              <span>
+                You did a <strong>{{ currentType.name }}</strong> for
+                {{ count(totalTime) }}.
+              </span>
+              <br />
+              <span v-if="bestStatsById(currentStats[index].id) > 0">
+                Your best recording:
+                {{ count(bestStatsById(currentStats[index].id)) }}.
+                <br />
+              </span>
+              <br />
+              <span v-if="bestStatsById(currentStats[index].id) < totalTime">
+                This is a new record!
+              </span>
+            </div>
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text @click="savePullups">
+            <v-btn text @click="saveRecording">
               save
             </v-btn>
           </v-card-actions>
@@ -266,31 +287,25 @@ export default {
       this.timer = setInterval(() => this.counter(), 1000)
     },
     stopRecording() {
+      clearInterval(this.timer)
       this.running = false
       this.noSleep.disable()
-      if (this.currentType.configurable) {
-        this.dialog = true
-        return
-      }
-      this.AddRecording({
-        data: this.currentStats[this.index],
-        value: this.totalTime
-      })
-      this.$router.push({
-        name: 'progress-type',
-        params: {
-          type: this.encodeUrl(this.currentType.name),
-          id: this.currentType.id
-        }
-      })
+      this.dialog = true
     },
-    savePullups() {
-      this.AddRecording({
-        data: this.currentStats[this.index],
-        value: this.pullups
-      })
+    saveRecording() {
+      if (this.currentType.configurable) {
+        this.AddRecording({
+          data: this.currentStats[this.index],
+          value: this.pullups
+        })
+      } else {
+        this.AddRecording({
+          data: this.currentStats[this.index],
+          value: this.totalTime
+        })
+      }
       this.$router.push({
-        name: 'progress-type',
+        name: 'progress-list',
         params: {
           type: this.encodeUrl(this.currentType.name),
           id: this.currentType.id
@@ -302,4 +317,25 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss"></style>
+<style lang="scss">
+#app .workout {
+  .v-toolbar {
+    &__content,
+    &__extension {
+      // sm
+      @media (min-width: 600px) {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      @media (min-width: 960px) {
+        flex-basis: 66.6666666667%;
+        max-width: 66.6666666667%;
+      }
+      @media (min-width: 1264px) {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+    }
+  }
+}
+</style>

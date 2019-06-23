@@ -22,7 +22,13 @@ export default {
    * Check if a exercise has deletion pending
    */
   isExerciseDeletionPending: state => exerciseId =>
-    state.exerciseDeletionPending.includes(exerciseId)
+    state.exerciseDeletionPending.includes(exerciseId),
+
+  /**
+   * Get a workouts difficulty by value
+   */
+  difficultyById: state => levelValue =>
+    find(state.levels, { value: levelValue })
 
   // /**
   //  * Get an exercise by id

@@ -13,13 +13,21 @@
 
       <v-list-item-content>
         <v-list-item-title>{{ data.name }}</v-list-item-title>
-        <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
+        <v-list-item-subtitle
+          >{{ count(data.time) }} - {{ data.description }}</v-list-item-subtitle
+        >
       </v-list-item-content>
 
-      <v-list-item-action>
-        <v-list-item-action-text>{{
-          count(data.time)
-        }}</v-list-item-action-text>
+      <v-list-item-action class="text-xs-right">
+        <v-list-item-action-text>
+          <span>{{
+            gradeConvert(user.settings.grade, 'ircra', user.settings.scale)
+          }}</span>
+          <br />
+          <strong v-if="difficultyById(data.level)">
+            {{ difficultyById(data.level).name }}
+          </strong>
+        </v-list-item-action-text>
       </v-list-item-action>
     </v-list-item>
 
@@ -28,8 +36,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
+import gradeConvert from '@/misc/ircra'
 
 export default {
   props: {
@@ -37,11 +46,13 @@ export default {
     index: Number
   },
   computed: {
-    ...mapState('authentication', ['user'])
+    ...mapState('authentication', ['user']),
+    ...mapGetters('workouts', ['difficultyById'])
   },
   methods: {
     getImg,
-    count
+    count,
+    gradeConvert
   }
 }
 </script>

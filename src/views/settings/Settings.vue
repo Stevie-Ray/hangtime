@@ -45,6 +45,21 @@
 
               <v-divider></v-divider>
 
+              <v-list-item to="/settings/general">
+                <v-list-item-avatar>
+                  <v-icon color="primary lighten-1">mdi-settings</v-icon>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>General</v-list-item-title>
+                  <v-list-item-subtitle
+                    >Grading scale, dark mode</v-list-item-subtitle
+                  >
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider inset></v-divider>
+
               <v-list-item to="/settings/hangboards">
                 <!--                <v-btn text icon to="settings/hangboard">-->
                 <!--                  <v-img :src="getImg('icons/hangboard-menu.svg')"/>-->

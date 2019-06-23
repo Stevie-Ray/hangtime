@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="profile">
+  <v-layout row class="run">
     <v-app-bar v-if="currentWorkout" color="primary" app fixed dark>
       <v-icon
         @click="
@@ -375,7 +375,7 @@ export default {
   padding: 0 8px;
 }
 
-#app .profile {
+#app .run {
   .v-toolbar {
     &__content,
     &__extension {

@@ -14,6 +14,7 @@
                   v-model="workoutToCreateName"
                   placeholder="New workout"
                   class="workout-name-input"
+                  counter="24"
                   :rules="[rules.required, rules.length(24)]"
                   label="Workout name *"
                   required
@@ -30,6 +31,17 @@
                   placeholder="Give a short description of your workout, for example indicate when this training is suitable"
                   label="Workout description"
                 ></v-textarea>
+              </v-flex>
+
+              <v-flex>
+                <v-select
+                  v-model="workoutToCreateDifficulty"
+                  :items="levels"
+                  item-text="name"
+                  item-value="value"
+                  label="Difficulty"
+                >
+                </v-select>
               </v-flex>
             </v-layout>
           </v-container>
@@ -76,7 +88,11 @@ export default {
   }),
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapState('workouts', ['workoutToCreate', 'workoutCreationPending']),
+    ...mapState('workouts', [
+      'levels',
+      'workoutToCreate',
+      'workoutCreationPending'
+    ]),
     workoutToCreateName: {
       get() {
         return this.workoutToCreate.name
@@ -91,6 +107,14 @@ export default {
       },
       set(value) {
         this.setWorkoutToCreate({ description: value })
+      }
+    },
+    workoutToCreateDifficulty: {
+      get() {
+        return this.workoutToCreate.level
+      },
+      set(value) {
+        this.setWorkoutToCreate({ level: value })
       }
     },
     show: {

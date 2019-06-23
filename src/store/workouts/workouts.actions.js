@@ -31,6 +31,7 @@ export default {
     const workout = {
       name: state.workoutToCreate.name,
       description: state.workoutToCreate.description,
+      level: state.workoutToCreate.level,
       exercises: []
     }
     commit('setWorkoutToCreate', '')

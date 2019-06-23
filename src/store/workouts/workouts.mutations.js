@@ -21,6 +21,12 @@ export default {
     )
     state.workouts[index].description = payload.value
   },
+  setWorkoutDifficulty: (state, payload) => {
+    const index = state.workouts.findIndex(
+      exercise => exercise.id === payload.id
+    )
+    state.workouts[index].level = payload.value
+  },
   addWorkout: (state, workout) => state.workouts.push(workout),
   removeWorkoutById: (state, workoutId) => {
     const index = state.workouts.findIndex(workout => workout.id === workoutId)

@@ -15,54 +15,58 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex xs12 sm8 md6>
-            <v-card
+            <v-flex
               v-for="(item, index) in user.settings['hangboards']"
               :key="index"
-              flat
-              class="mb-4"
             >
-              <div class="hangboard mt-4 pt-4">
-                <div class="leftside">
-                  <v-img
-                    :src="
-                      getImg(
-                        companies[item.company].hangboards[item.hangboard].image
-                      )
-                    "
-                  />
+              <v-card flat class="mb-2">
+                <div class="hangboard mt-4 pt-4">
+                  <div class="leftside">
+                    <v-img
+                      :src="
+                        getImg(
+                          companies[item.company].hangboards[item.hangboard]
+                            .image
+                        )
+                      "
+                    />
+                  </div>
+                  <div class="rightside">
+                    <v-img
+                      :src="
+                        getImg(
+                          companies[item.company].hangboards[item.hangboard]
+                            .image
+                        )
+                      "
+                    />
+                  </div>
                 </div>
-                <div class="rightside">
-                  <v-img
-                    :src="
-                      getImg(
-                        companies[item.company].hangboards[item.hangboard].image
-                      )
-                    "
-                  />
-                </div>
-              </div>
 
-              <v-card-title primary-title>
-                <div class="text-xs-center">
-                  <h3 class="headline ">
-                    {{ companies[item.company].name }}
-                    {{
-                      companies[item.company].hangboards[item.hangboard].name
-                    }}
-                  </h3>
-                </div>
-              </v-card-title>
+                <v-card-title primary-title>
+                  <div class="text-xs-center">
+                    <h3 class="headline ">
+                      {{ companies[item.company].name }}
+                      {{
+                        companies[item.company].hangboards[item.hangboard].name
+                      }}
+                    </h3>
+                  </div>
+                </v-card-title>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn v-if="user.settings.selected === index" text disabled
-                  >Seclected</v-btn
-                >
-                <v-btn v-else text @click="changeHangboard(index)"
-                  >Select</v-btn
-                >
-              </v-card-actions>
-            </v-card>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn v-if="user.settings.selected === index" text disabled
+                    >Seclected</v-btn
+                  >
+                  <v-btn v-else text @click="changeHangboard(index)"
+                    >Select</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+
+              <v-divider></v-divider>
+            </v-flex>
 
             <v-speed-dial bottom right fixed>
               <v-btn

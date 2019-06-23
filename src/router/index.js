@@ -112,6 +112,12 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Settings.vue')
     },
     {
+      path: '/settings/general',
+      name: 'settings-general',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/General.vue')
+    },
+    {
       path: '/settings/hangboards',
       name: 'settings-hangboards',
       component: () =>

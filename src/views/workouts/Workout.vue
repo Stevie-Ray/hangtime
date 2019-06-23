@@ -82,9 +82,17 @@
                 </v-card-title>
 
                 <v-card-text>
-                  <span v-if="!editWorkout">
-                    {{ currentWorkout.description }}</span
-                  >
+                  <div v-if="!editWorkout">
+                    {{ currentWorkout.description }}
+                  </div>
+
+                  <div v-if="!editWorkout">
+                    <br />
+                    Difficulty:
+                    <strong v-if="difficultyById(currentWorkout.level)">
+                      {{ difficultyById(currentWorkout.level).name }}
+                    </strong>
+                  </div>
 
                   <v-container v-if="editWorkout" grid-list-md>
                     <v-layout wrap>
@@ -92,6 +100,7 @@
                         <v-text-field
                           v-model="dataName"
                           placeholder="New workout"
+                          counter="24"
                           :rules="[rules.required, rules.length(24)]"
                           label="Workout name *"
                           required
@@ -110,6 +119,17 @@
                         >
                         </v-textarea>
                       </v-flex>
+
+                      <v-flex xs12>
+                        <v-select
+                          v-model="dataDifficulty"
+                          :items="levels"
+                          item-text="name"
+                          item-value="value"
+                          label="Difficulty"
+                        >
+                        </v-select>
+                      </v-flex>
                     </v-layout>
                   </v-container>
                 </v-card-text>
@@ -126,9 +146,18 @@
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title>{{
-                      user.displayName
-                    }}</v-list-item-title>
+                    <v-list-item-title
+                      >{{ user.displayName }} ({{
+                        gradeConvert(
+                          user.settings.grade,
+                          'ircra',
+                          user.settings.scale
+                        )
+                      }})</v-list-item-title
+                    >
+                    <v-list-item-subtitle>
+                      {{ user.status }}
+                    </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
 
@@ -136,6 +165,9 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
+                  <v-btn v-if="!edit" text primary @click="edit = true"
+                    >edit</v-btn
+                  >
                   <v-btn text @click="dialogs.general = false">Close</v-btn>
                   <v-btn
                     v-if="editWorkout"
@@ -209,6 +241,7 @@
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
 import ExerciseList from '@/components/ExerciseList'
 import { getImg, count } from '@/misc/helpers'
+import gradeConvert from '@/misc/ircra'
 
 export default {
   components: { ExerciseList },
@@ -243,7 +276,8 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapGetters('workouts', ['workoutById']),
+    ...mapState('workouts', ['levels']),
+    ...mapGetters('workouts', ['workoutById', 'difficultyById']),
     currentWorkout() {
       return this.workoutById(this.id)
     },
@@ -268,17 +302,30 @@ export default {
       set(value) {
         this.setWorkoutDescription({ id: this.currentWorkout.id, value: value })
       }
+    },
+    dataDifficulty: {
+      get() {
+        return this.currentWorkout.level
+      },
+      set(value) {
+        this.setWorkoutDifficulty({ id: this.currentWorkout.id, value: value })
+      }
     }
   },
   methods: {
     count,
     getImg,
+    gradeConvert,
     ...mapActions('workouts', [
       'deleteUserWorkout',
       'triggerUpdateWorkout',
       'triggerAddExerciseAction'
     ]),
-    ...mapMutations('workouts', ['setWorkoutName', 'setWorkoutDescription']),
+    ...mapMutations('workouts', [
+      'setWorkoutName',
+      'setWorkoutDescription',
+      'setWorkoutDifficulty'
+    ]),
     deleteWorkout(id) {
       this.deleteUserWorkout(id)
       this.$router.push({ name: 'workouts' })

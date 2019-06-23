@@ -22,54 +22,46 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center>
-          <v-flex sm8 md6>
+          <v-flex xs12 sm8 md6>
             <div class="text-xs-center">
               <v-badge overlap bottom class="pa-4">
-                <v-icon slot="badge" dark @click="captureFile"
-                  >mdi-camera</v-icon
-                >
+                <!--                <v-icon slot="badge" dark @click="captureFile"-->
+                <!--                  >mdi-camera</v-icon-->
+                <!--                >-->
 
+                <!--             add: v-avatar @click="pickFile"-->
                 <v-avatar
+                  v-if="user"
                   size="144"
                   aspect-ratio="1"
                   class="grey lighten-2"
-                  @click="pickFile"
                 >
                   <img :src="user.photoURL" />
                 </v-avatar>
 
-                <v-form
-                  enctype="multipart/form-data"
-                  @submit.prevent="onFilePicked"
-                >
-                  <input
-                    ref="image"
-                    type="file"
-                    style="display: none"
-                    accept="image/*"
-                    @change="onFilePicked"
-                  />
+                <!--                <v-form-->
+                <!--                  enctype="multipart/form-data"-->
+                <!--                  @submit.prevent="onFilePicked"-->
+                <!--                >-->
+                <!--                  <input-->
+                <!--                    ref="image"-->
+                <!--                    type="file"-->
+                <!--                    style="display: none"-->
+                <!--                    accept="image/*"-->
+                <!--                    @change="onFilePicked"-->
+                <!--                  />-->
 
-                  <input
-                    ref="capture"
-                    type="file"
-                    style="display: none"
-                    accept="image/*"
-                    capture="user"
-                    @change="onFilePicked"
-                  />
-                </v-form>
+                <!--                  <input-->
+                <!--                    ref="capture"-->
+                <!--                    type="file"-->
+                <!--                    style="display: none"-->
+                <!--                    accept="image/*"-->
+                <!--                    capture="user"-->
+                <!--                    @change="onFilePicked"-->
+                <!--                  />-->
+                <!--                </v-form>-->
               </v-badge>
             </div>
-
-            <!--            <div class="pa-4">-->
-            <!--              <v-avatar-->
-            <!--                size="144"-->
-            <!--                aspect-ratio="1"-->
-            <!--                class="grey lighten-2">-->
-            <!--                <img :src="user.image"/>-->
-            <!--              </v-avatar>-->
-            <!--            </div>-->
 
             <v-list two-line>
               <v-list-item>
@@ -77,12 +69,30 @@
                   <v-icon color="primary lighten-1">mdi-account</v-icon>
                 </v-list-item-avatar>
 
-                <v-list-item-content>
-                  <!--<v-list-item-title>-->
-                  <!--{{ user().name }}-->
-                  <!--</v-list-item-title>-->
-
+                <v-list-item-content v-if="user">
                   <v-list-item-title>{{ user.displayName }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-icon color="primary lighten-1"
+                    >mdi-chart-timeline-variant</v-icon
+                  >
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-select
+                    v-if="user"
+                    v-model="settingsGrade"
+                    :items="grades"
+                    :item-text="user.settings.scale"
+                    item-value="ircra"
+                    label="Grade"
+                    persistent-hint
+                    hint="What grade are you currently climbing?"
+                    @change="triggerUpdateUser"
+                  ></v-select>
                 </v-list-item-content>
               </v-list-item>
 
@@ -93,7 +103,11 @@
 
                 <v-list-item-content>
                   <v-text-field
+                    v-if="user"
                     v-model="userStatus"
+                    placeholder="At the gym"
+                    :rules="[rules.required, rules.length(24)]"
+                    counter="24"
                     required
                     label="Status"
                     @change="triggerUpdateUser"
@@ -108,27 +122,10 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ user.email }}</v-list-item-title>
+                  <v-list-item-title v-if="user">{{
+                    user.email
+                  }}</v-list-item-title>
                 </v-list-item-content>
-              </v-list-item>
-
-              <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1"
-                    >mdi-theme-light-dark</v-icon
-                  >
-                </v-list-item-avatar>
-
-                <v-list-item-content
-                  @click="$vuetify.theme.dark = !$vuetify.theme.dark"
-                >
-                  <v-list-item-title>Dark mode</v-list-item-title>
-                  <v-list-item-subtitle>Enable dark mode</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-checkbox v-model="$vuetify.theme.dark"></v-checkbox>
-                </v-list-item-action>
               </v-list-item>
             </v-list>
           </v-flex>
@@ -142,6 +139,7 @@
 import firebase from 'firebase/app'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
+import grades from '@/misc/gradeMap'
 
 export default {
   head: {
@@ -156,10 +154,35 @@ export default {
       }
     ]
   },
+  data: () => ({
+    grades: grades.data,
+    rules: {
+      length: len => v =>
+        (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
+      required: v => !!v || 'This field is required'
+    }
+  }),
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState(['settings', 'settings']),
     ...mapState('authentication', ['user']),
+    settingsScale: {
+      get() {
+        return this.user.settings.scale
+      },
+      set(value) {
+        // this.scaleSelected = value
+        this.setScale(value)
+      }
+    },
+    settingsGrade: {
+      get() {
+        return this.user.settings.grade
+      },
+      set(value) {
+        // this.gradeSelected = value
+        this.setGrade(value)
+      }
+    },
     userStatus: {
       get() {
         return this.user.status
@@ -172,7 +195,7 @@ export default {
   methods: {
     getImg,
     ...mapActions('authentication', ['triggerUpdateUser']),
-    ...mapMutations('authentication', ['setStatus']),
+    ...mapMutations('authentication', ['setStatus', 'setGrade']),
     async logout() {
       await firebase.auth().signOut()
     },

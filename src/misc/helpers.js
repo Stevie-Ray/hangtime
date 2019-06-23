@@ -16,6 +16,8 @@ export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
         hangboard: 0
       }
     ],
+    scale: 'font',
+    grade: 12,
     sound: true,
     speak: false,
     voice: 0,
