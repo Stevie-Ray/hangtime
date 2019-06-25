@@ -116,11 +116,7 @@
                 large
                 @click="dialog = true"
               >
-                <v-img
-                  :src="getImg('icons/hangboard.svg')"
-                  width="25"
-                  height="14"
-                ></v-img>
+                <v-icon>mdi-plus</v-icon>
               </v-btn>
             </v-speed-dial>
           </v-flex>

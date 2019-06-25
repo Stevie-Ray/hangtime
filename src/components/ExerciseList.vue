@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import ExerciseListItem from '@/components/ExerciseListItem'
 import draggable from 'vuedraggable'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import ExerciseListItem from '@/components/ExerciseListItem'
 
 export default {
   components: { ExerciseListItem, draggable },

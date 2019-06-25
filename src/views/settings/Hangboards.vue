@@ -20,7 +20,7 @@
               :key="index"
             >
               <v-card flat class="mb-2">
-                <div class="hangboard mt-4 pt-4">
+                <div class="hangboard mt-4">
                   <div class="leftside">
                     <v-img
                       :src="
@@ -55,13 +55,25 @@
                 </v-card-title>
 
                 <v-card-actions>
+                  <v-btn v-if="user.settings.selected === index" text disabled>
+                    Selected
+                  </v-btn>
+                  <v-btn
+                    v-else
+                    text
+                    @click="triggerChangeHangboardAction(index)"
+                  >
+                    Select
+                  </v-btn>
+                  <v-btn
+                    v-if="user.settings.selected !== index"
+                    text
+                    color="primary"
+                    @click="triggerRemoveHangboardAction(index)"
+                  >
+                    Delete
+                  </v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn v-if="user.settings.selected === index" text disabled
-                    >Seclected</v-btn
-                  >
-                  <v-btn v-else text @click="changeHangboard(index)"
-                    >Select</v-btn
-                  >
                 </v-card-actions>
               </v-card>
 
@@ -110,11 +122,11 @@ export default {
     ...mapState('companies', ['companies'])
   },
   methods: {
-    changeHangboard(index) {
-      this.setSelected(index)
-      this.triggerUpdateUser()
-    },
-    ...mapActions('authentication', ['triggerUpdateUser']),
+    ...mapActions('authentication', [
+      'triggerUpdateUser',
+      'triggerChangeHangboardAction',
+      'triggerRemoveHangboardAction'
+    ]),
     ...mapMutations('authentication', ['setSelected']),
     getImg
   }

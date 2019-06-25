@@ -11,5 +11,7 @@ export default {
   setCompany: (state, value) => (state.hangboardToAdd.company = value),
   setHangboard: (state, value) => (state.hangboardToAdd.hangboard = value),
   addHangboard: (state, value) => state.user.settings.hangboards.push(value),
-  resetHangboard: state => (state.hangboardToAdd.hangboard = 0)
+  resetHangboard: state => (state.hangboardToAdd.hangboard = 0),
+  removeHangboard: (state, index) =>
+    state.user.settings.hangboards.splice(index, 1)
 }

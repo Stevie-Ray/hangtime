@@ -209,9 +209,9 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import * as NoSleep from 'nosleep.js/dist/NoSleep'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count } from '@/misc/helpers'
-import * as NoSleep from 'nosleep.js/dist/NoSleep'
 
 export default {
   components: { Hangboard },

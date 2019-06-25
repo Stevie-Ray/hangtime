@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Head from 'vue-head'
-import CheckLogin from '@/views/authentication/CheckLogin'
 import { isNil } from 'lodash'
+import CheckLogin from '@/views/authentication/CheckLogin'
 import store from '@/store'
 
 Vue.use(Router)

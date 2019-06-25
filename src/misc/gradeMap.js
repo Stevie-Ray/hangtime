@@ -1,5 +1,6 @@
 export default {
   data: [
+    // disable low grades
     // {
     //   group: {
     //     male: 1,
@@ -291,7 +292,7 @@ export default {
         female: 3
       },
       vermin: 'V2',
-      font: '6A',
+      font: ['6A', '6A+'],
       ircra: 16,
       yds: '5.11c',
       french: '6c+',
@@ -348,7 +349,7 @@ export default {
         female: 3
       },
       vermin: 'V5',
-      font: '6C',
+      font: ['6C', '6C+'],
       ircra: 19,
       yds: '5.12b',
       french: '7b',
@@ -416,6 +417,196 @@ export default {
       uiaa: 'IX+',
       uiaa_metric: '9.33',
       watts: '4.00'
+    },
+
+    {
+      group: {
+        male: 3,
+        female: 4
+      },
+      vermin: ['V8', 'V9'],
+      font: '7B+',
+      ircra: 23,
+      yds: '5.13b',
+      french: '8a',
+      british: '7a',
+      tech: '6c',
+      ewbank: 29,
+      brz: '9c',
+      uiaa: 'X-',
+      uiaa_metric: '9.66',
+      watts: '4.25'
+    },
+
+    {
+      group: {
+        male: 4,
+        female: 4
+      },
+      vermin: ['V9', 'V10'],
+      font: '7C',
+      ircra: 24,
+      yds: '5.13c',
+      french: '8a+',
+      british: '7a',
+      tech: '6c',
+      ewbank: 30,
+      brz: '10a',
+      uiaa: ['X-', 'X'],
+      uiaa_metric: ['9.66', '10.00'],
+      watts: '4.50'
+    },
+
+    {
+      group: {
+        male: 4,
+        female: 4
+      },
+      vermin: 'v10',
+      font: ['7C', '7C+'],
+      ircra: 25,
+      yds: '5.13d',
+      french: '8b',
+      british: '7a',
+      tech: null,
+      ewbank: 31,
+      brz: '10b',
+      uiaa: ['X', 'X+'],
+      uiaa_metric: ['10.00', '10.33'],
+      watts: '4.75'
+    },
+
+    {
+      group: {
+        male: 4,
+        female: 4
+      },
+      vermin: 'v11',
+      font: '8A',
+      ircra: 26,
+      yds: '5.14a',
+      french: '8b+',
+      british: '7a',
+      tech: null,
+      ewbank: 32,
+      brz: '10c',
+      uiaa: ['X+', 'XI-'],
+      uiaa_metric: ['10.33', '10.66'],
+      watts: '5.00'
+    },
+
+    {
+      group: {
+        male: 4,
+        female: 5
+      },
+      vermin: 'v12',
+      font: '8A+',
+      ircra: 27,
+      yds: '5.14b',
+      french: '8c',
+      british: '7a',
+      tech: '7b',
+      ewbank: 33,
+      brz: '11a',
+      uiaa: 'XI-',
+      uiaa_metric: '10.66',
+      watts: '5.25'
+    },
+
+    {
+      group: {
+        male: 5,
+        female: 5
+      },
+      vermin: 'v13',
+      font: '8B',
+      ircra: 28,
+      yds: '5.14c',
+      french: '8c+',
+      british: null,
+      tech: '7b',
+      ewbank: 34,
+      brz: '11b',
+      uiaa: 'XI',
+      uiaa_metric: '11.00',
+      watts: '5.50'
+    },
+
+    {
+      group: {
+        male: 5,
+        female: 5
+      },
+      vermin: 'v14',
+      font: '8B+',
+      ircra: 29,
+      yds: '5.14d',
+      french: '9a',
+      british: null,
+      tech: '7b',
+      ewbank: 35,
+      brz: '11c',
+      uiaa: 'XI+',
+      uiaa_metric: ['11.00', '11.33'],
+      watts: '5.75'
+    },
+
+    {
+      group: {
+        male: 5,
+        female: 5
+      },
+      vermin: ['v14', 'v15'],
+      font: ['8B+', '8C'],
+      ircra: 30,
+      yds: '5.15a',
+      french: '9a+',
+      british: null,
+      tech: '7b',
+      ewbank: 36,
+      brz: '12a',
+      uiaa: ['XI+', 'XII-'],
+      uiaa_metric: ['11.33', '11.66'],
+      watts: '6.00'
+    },
+
+    {
+      group: {
+        male: 5,
+        female: 5
+      },
+      vermin: 'v15',
+      font: '8C',
+      ircra: 31,
+      yds: '5.15b',
+      french: '9b',
+      british: null,
+      tech: '7b',
+      ewbank: 37,
+      brz: '12b',
+      uiaa: 'XII-',
+      uiaa_metric: '11.66',
+      watts: '6.25'
+    },
+
+    {
+      group: {
+        male: 5,
+        female: 5
+      },
+      vermin: 'v16',
+      font: '8C+',
+      ircra: 32,
+      yds: '5.15c',
+      french: '9b+',
+      british: null,
+      tech: '7b',
+      ewbank: 38,
+      brz: '12c',
+      uiaa: 'XII',
+      uiaa_metric: '12.00',
+      watts: '6.50'
     }
   ]
 }

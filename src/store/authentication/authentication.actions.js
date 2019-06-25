@@ -1,5 +1,5 @@
-import router from '@/router'
 import { isNil } from 'lodash'
+import router from '@/router'
 import { createNewUserFromFirebaseAuthUser } from '@/misc/helpers'
 import UsersDB from '@/firebase/users-db'
 
@@ -66,5 +66,16 @@ export default {
     if (state.hangboardToAdd.hangboard === '') return
     // commit('setHangboardToCreate', {company: 0, hangboard: 0})
     dispatch('addUserHangboard', state.hangboardToAdd)
+  },
+
+  triggerChangeHangboardAction: ({ commit, dispatch, state }, index) => {
+    commit('setSelected', index)
+    dispatch('updateUser', state.user)
+  },
+
+  triggerRemoveHangboardAction: ({ commit, dispatch, state }, index) => {
+    commit('removeHangboard', index)
+    commit('setSelected', 0)
+    dispatch('updateUser', state.user)
   }
 }

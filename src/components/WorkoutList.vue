@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import WorkoutListItem from '@/components/WorkoutListItem'
 import { mapState } from 'vuex'
+import WorkoutListItem from '@/components/WorkoutListItem'
 
 export default {
   components: { WorkoutListItem },

@@ -23,8 +23,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getImg } from '@/misc/helpers'
 import { SimpleSVG } from 'vue-simple-svg'
+import { getImg } from '@/misc/helpers'
 
 export default {
   components: { 'svg-inline': SimpleSVG },

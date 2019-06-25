@@ -87,8 +87,8 @@
 </template>
 
 <script>
-import ExerciseItem from '@/components/ExerciseItem'
 import { mapGetters, mapState, mapActions } from 'vuex'
+import ExerciseItem from '@/components/ExerciseItem'
 import { getImg, count } from '@/misc/helpers'
 
 export default {

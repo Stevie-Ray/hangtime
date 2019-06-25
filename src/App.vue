@@ -17,9 +17,9 @@
   </v-app>
 </template>
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
 import NewContentAvailable from '@/components/NewContentAvailable'
 import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
-import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   components: { NewContentAvailable, AppleAddToHomeScreenModal },
