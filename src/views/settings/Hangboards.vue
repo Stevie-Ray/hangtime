@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { getImg } from '@/misc/helpers'
 
 export default {
@@ -123,11 +123,9 @@ export default {
   },
   methods: {
     ...mapActions('authentication', [
-      'triggerUpdateUser',
       'triggerChangeHangboardAction',
       'triggerRemoveHangboardAction'
     ]),
-    ...mapMutations('authentication', ['setSelected']),
     getImg
   }
 }

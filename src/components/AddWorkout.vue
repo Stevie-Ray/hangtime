@@ -131,6 +131,12 @@ export default {
     ...mapActions('workouts', ['triggerAddWorkoutAction']),
     getImg,
     saveWorkout($event) {
+      this.setWorkoutToCreate({
+        company: this.user.settings.hangboards[this.user.settings.selected]
+          .company,
+        hangboard: this.user.settings.hangboards[this.user.settings.selected]
+          .hangboard
+      })
       this.triggerAddWorkoutAction($event)
       this.$emit('input', false)
     }

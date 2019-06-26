@@ -32,6 +32,8 @@ export default {
       name: state.workoutToCreate.name,
       description: state.workoutToCreate.description,
       level: state.workoutToCreate.level,
+      hangboard: state.workoutToCreate.hangboard,
+      company: state.workoutToCreate.company,
       exercises: []
     }
     commit('setWorkoutToCreate', '')

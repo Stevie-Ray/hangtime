@@ -40,15 +40,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import WorkoutListItem from '@/components/WorkoutListItem'
 
 export default {
   components: { WorkoutListItem },
   computed: {
-    ...mapState('workouts', ['workouts']),
+    ...mapGetters('workouts', ['workoutsByHangboard']),
     ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user'])
+    ...mapState('authentication', ['user']),
+    workouts() {
+      return this.workoutsByHangboard(this.user)
+    }
   }
 }
 </script>

@@ -1,4 +1,4 @@
-import { find } from 'lodash'
+import { find, filter } from 'lodash'
 
 export default {
   /**
@@ -8,7 +8,17 @@ export default {
     state.workoutDeletionPending.includes(workoutId),
 
   /**
-   * Get a product by id
+   * Get workouts for the currently selected hangboard
+   */
+  workoutsByHangboard: state => payload =>
+    filter(state.workouts, {
+      company: payload.settings.hangboards[payload.settings.selected].company,
+      hangboard:
+        payload.settings.hangboards[payload.settings.selected].hangboard
+    }),
+
+  /**
+   * Get a workout by id
    */
   workoutById: state => workoutId => find(state.workouts, { id: workoutId }),
 
@@ -29,10 +39,4 @@ export default {
    */
   difficultyById: state => levelValue =>
     find(state.levels, { value: levelValue })
-
-  // /**
-  //  * Get an exercise by id
-  //  */
-  // exerciseById: state => exerciseId =>
-  //   find(state.exercises, { id: exerciseId }),
 }

@@ -15,7 +15,12 @@ export default function(grade, system, desiredGrade) {
   const gradeSet = grades.data.find(gradeSet => gradeSet[system] === grade)
 
   if (gradeSet) {
-    if (desiredGrade) return gradeSet[desiredGrade]
+    if (desiredGrade) {
+      if (gradeSet[desiredGrade].constructor === Array) {
+        return gradeSet[desiredGrade].join(' / ')
+      }
+      return gradeSet[desiredGrade]
+    }
     return gradeSet
   }
 }
