@@ -52,20 +52,23 @@
         <!-- pause  -->
         <v-slider
           v-model="dataPause"
-          :max="60"
-          :min="5"
-          step="5"
+          :max="300"
+          :min="15"
+          step="15"
           ticks
           always-dirty
-          thumb-label="always"
+          thumb-size="48"
           hint="Time before the exercise"
           persistent-hint
           :disabled="!editWorkout"
           prepend-icon="mdi-clock-outline"
           label="Pause"
         >
+          <template v-slot:thumb-label="props">
+            {{ count(props.value) }}
+          </template>
           <template #append>
-            <v-label v-if="!editWorkout">{{ dataPause }}s.</v-label>
+            <v-label>{{ count(dataPause) }}</v-label>
           </template>
         </v-slider>
 
@@ -79,15 +82,18 @@
           step="5"
           ticks
           always-dirty
-          thumb-label="always"
+          thumb-size="48"
           prepend-icon="mdi-clock"
           :disabled="!editWorkout"
           hint="Time to do an exercise"
           persistent-hint
           label="Hold"
         >
+          <template v-slot:thumb-label="props">
+            {{ count(props.value) }}
+          </template>
           <template #append>
-            <v-label v-if="!editWorkout">{{ dataHold }}s.</v-label>
+            <v-label>{{ count(dataHold) }}</v-label>
           </template>
         </v-slider>
 
@@ -100,20 +106,23 @@
         <v-slider
           v-if="options[currentExercise.exercise].configurable"
           v-model="dataPullups"
-          :max="10"
+          :max="20"
           :min="1"
           step="1"
           ticks
           always-dirty
-          thumb-label="always"
+          thumb-size="48"
           :disabled="!editWorkout"
           prepend-icon="mdi-clock-alert"
           hint="Number of pull ups you have to perform"
           persistent-hint
           label="Pull-ups"
         >
+          <template v-slot:thumb-label="props">
+            {{ props.value }}x
+          </template>
           <template #append>
-            <v-label v-if="!editWorkout">{{ dataPullups }}x.</v-label>
+            <v-label>{{ dataPullups }}x</v-label>
           </template>
         </v-slider>
 
@@ -127,15 +136,18 @@
           :min="1"
           step="1"
           ticks
-          thumb-label="always"
+          thumb-size="48"
           :disabled="!editWorkout"
           prepend-icon="mdi-restore-clock"
           hint="Easy way to repeat this exercise"
           persistent-hint
           label="Repeat"
         >
+          <template v-slot:thumb-label="props">
+            {{ props.value }}x
+          </template>
           <template #append>
-            <v-label v-if="!editWorkout">{{ dataRepeat }}x.</v-label>
+            <v-label>{{ dataRepeat }}x</v-label>
           </template>
         </v-slider>
 
@@ -150,15 +162,18 @@
           step="5"
           ticks
           always-dirty
-          thumb-label="always"
+          thumb-size="48"
           :disabled="!editWorkout"
           prepend-icon="mdi-progress-clock"
           hint="Time to rest between repeating exercises"
           persistent-hint
           label="Rest"
         >
+          <template v-slot:thumb-label="props">
+            {{ count(props.value) }}
+          </template>
           <template #append>
-            <v-label v-if="!editWorkout">{{ dataRest }}s.</v-label>
+            <v-label>{{ count(dataRest) }}</v-label>
           </template>
         </v-slider>
       </v-flex>
@@ -169,7 +184,7 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
-import { getImg } from '@/misc/helpers'
+import { getImg, count } from '@/misc/helpers'
 
 export default {
   components: { Hangboard },
@@ -257,7 +272,8 @@ export default {
       'setLeftHold',
       'setRightHold'
     ]),
-    getImg
+    getImg,
+    count
   }
 }
 </script>

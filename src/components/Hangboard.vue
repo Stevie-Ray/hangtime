@@ -62,7 +62,7 @@ export default {
           hold => hold.id === e.target.id
         )
         if (clicked) {
-          this.$emit('right', clicked.class )
+          this.$emit('right', clicked.class)
         }
       }
     }

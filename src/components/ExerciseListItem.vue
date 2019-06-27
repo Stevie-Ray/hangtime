@@ -1,9 +1,8 @@
 <template>
-  <div class="exercise-item">
+  <div class="exercise-item" :class="{ active: editWorkout }">
     <v-list-item ripple @click="$emit('goToExerciseDetails', index)">
+      <v-icon v-if="editWorkout" class="handle">mdi-drag</v-icon>
       <v-list-item-avatar>
-        <v-icon v-if="editWorkout" class="handle">mdi-drag-vertical</v-icon>
-
         <img
           :src="getImg(options[data.exercise].image)"
           alt=""
@@ -65,4 +64,22 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/theme/variables.scss';
+
+.exercise-item.active {
+  .handle {
+    height: 40px;
+    min-width: 24px;
+    width: 24px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    margin-top: 16px;
+  }
+  .v-avatar {
+    margin-right: 24px;
+  }
+  .v-divider--inset:not(.v-divider--vertical) {
+    margin-left: 112px;
+    max-width: calc(100% - 112px);
+  }
+}
 </style>
