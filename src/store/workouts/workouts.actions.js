@@ -69,12 +69,15 @@ export default {
   /**
    * Callback fired when changing a workout
    */
-  triggerUpdateWorkout: ({ dispatch, state }, payload) => {
+  triggerUpdateWorkout: ({ commit, dispatch, state }, payload) => {
     if (!state.workouts) return
 
+    commit('setTotalTime', payload.id)
+
     // const workout = state.workouts.find(
-    //   workout => workout.id === payload.workout.id
+    //   workout => workout.id === payload.id
     // )
+
     dispatch('updateWorkout', payload)
   },
   /**
@@ -87,6 +90,8 @@ export default {
 
     commit('addExercise', { id: id, data: exercise })
 
+    commit('setTotalTime', id)
+
     const workout = state.workouts.find(workout => workout.id === id)
 
     commit('setExerciseToCreate', {
@@ -96,10 +101,9 @@ export default {
       pause: 10,
       hold: 10,
       repeat: 1,
-      rest: 0
+      rest: 0,
+      time: 20
     })
-
-    console.log(workout)
 
     dispatch('updateWorkout', workout)
   },
@@ -125,6 +129,7 @@ export default {
 
     // commit('addExerciseDeletionPending', { workout: payload.workout.id, index: payload.index})
     commit('removeExerciseByIndex', payload)
+    commit('setTotalTime', payload.id)
     dispatch('updateWorkout', payload.workout)
     // commit('removeExerciseDeletionPending', payload.exerciseId)
   }

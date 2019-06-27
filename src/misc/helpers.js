@@ -40,21 +40,6 @@ function padTime(time) {
   return (time < 10 ? '0' : '') + time
 }
 export function count(item) {
-  // const total = []
-  // let x = 0
-  // if (item.time) {
-  //   total.push(item.time)
-  // } else {
-  //   // single exercise
-  //   let time = item.pause + item.hold + item.rest
-  //   if (item.repeat > 0) {
-  //     time = item.pause + (item.hold + item.rest) * item.repeat
-  //   }
-  //   total.push(time) // the value of the current key.
-  // }
-  //
-  // x = total.reduce((total, num) => total + num, 0)
-
   let minutes = '00',
     seconds = '00'
 

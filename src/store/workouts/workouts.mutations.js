@@ -85,6 +85,21 @@ export default {
     const index = state.workouts.findIndex(workout => workout.id === payload.id)
     state.workouts[index].exercises[payload.index].rest = payload.value
   },
+  setTime: (state, payload) => {
+    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    const item = state.workouts[index].exercises[payload.index]
+    let time = item.pause + item.hold
+    if (item.repeat > 1) {
+      time = item.pause + (item.hold + item.rest) * item.repeat
+    }
+    state.workouts[index].exercises[payload.index].time = time
+  },
+  setTotalTime: (state, workoutId) => {
+    const index = state.workouts.findIndex(workout => workout.id === workoutId)
+    const item = state.workouts[index].exercises
+    const time = item.reduce((sum, { time }) => sum + time, 0)
+    state.workouts[index].time = time
+  },
   /* Exercise inputs */
   setExerciseToCreate: (state, exerciseFieldToCreate) =>
     // state.exerciseToCreate[exerciseFieldToCreate] = exerciseFieldContentToCreate

@@ -11,7 +11,8 @@ export default {
     pause: 10,
     hold: 10,
     repeat: 1,
-    rest: 0
+    rest: 0,
+    time: 20
   },
   levels: [
     { name: 'easy', value: 1 },

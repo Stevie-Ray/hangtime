@@ -202,6 +202,7 @@ export default {
       },
       set(value) {
         this.setPause({ id: this.id, value: value, index: this.index })
+        this.setTime({ id: this.id, index: this.index })
       }
     },
     dataHold: {
@@ -210,6 +211,7 @@ export default {
       },
       set(value) {
         this.setHold({ id: this.id, value: value, index: this.index })
+        this.setTime({ id: this.id, index: this.index })
       }
     },
     dataPullups: {
@@ -226,6 +228,7 @@ export default {
       },
       set(value) {
         this.setRepeat({ id: this.id, value: value, index: this.index })
+        this.setTime({ id: this.id, index: this.index })
         // reset Rest
         if (value === 1) {
           this.setRest({ id: this.id, value: 0, index: this.index })
@@ -238,6 +241,7 @@ export default {
       },
       set(value) {
         this.setRest({ id: this.id, value: value, index: this.index })
+        this.setTime({ id: this.id, index: this.index })
       }
     }
   },
@@ -249,6 +253,7 @@ export default {
       'setPullups',
       'setRepeat',
       'setRest',
+      'setTime',
       'setLeftHold',
       'setRightHold'
     ]),

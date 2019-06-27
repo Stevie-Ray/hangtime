@@ -19,18 +19,21 @@
           class="grey lighten-2"
         />
       </v-avatar>
-      <v-toolbar-title>
+      <v-toolbar-title v-if="currentExercise">
         <!-- Exercise details -->
-        <span v-if="currentExercise">
-          <span v-if="currentExercise.repeat > 1"
-            >{{ currentExercise.repeat }}x</span
-          >
-          <span v-if="currentExercise.pullups > 1">
-            {{ currentExercise.pullups }}</span
-          >
-          <span> {{ options[currentExercise.exercise].name }}</span>
-          <span v-if="currentExercise.pullups > 1">s</span>
-        </span>
+
+        <span v-if="currentExercise.repeat > 1"
+          >{{ currentExercise.repeat }}x</span
+        >
+        <span v-if="currentExercise.pullups > 1">
+          {{ currentExercise.pullups }}</span
+        >
+        <span> {{ options[currentExercise.exercise].name }}</span>
+        <span v-if="currentExercise.pullups > 1">s</span>
+
+        <div v-if="currentExercise.time" class="subheading">
+          {{ count(currentExercise.time) }}
+        </div>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
