@@ -91,8 +91,8 @@
                   <hangboard
                     :data="hangboardData"
                     :edit-workout="true"
-                    @left="hangboardData.left = $event.value"
-                    @right="hangboardData.right = $event.value"
+                    @left="hangboardData.left = $event"
+                    @right="hangboardData.right = $event"
                   ></hangboard>
                 </v-card-text>
 
