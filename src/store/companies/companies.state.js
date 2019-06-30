@@ -614,8 +614,28 @@ export default {
       ]
     },
     {
-      name: 'Metolius',
+      name: 'Mammut',
       id: 7,
+      website: 'https://www.mammut.com/',
+      disabled: true,
+      hangboards: [
+        {
+          name: 'Diamond Fingerboard',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: '',
+              class: 0,
+              name: ''
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Metolius',
+      id: 8,
       website: 'https://www.maxclimbing.com/',
       disabled: true,
       hangboards: [
@@ -695,7 +715,7 @@ export default {
     },
     {
       name: 'Moon',
-      id: 8,
+      id: 9,
       website: 'https://moonclimbing.com/',
       disabled: true,
       hangboards: [
@@ -727,7 +747,7 @@ export default {
     },
     {
       name: 'OCUN',
-      id: 9,
+      id: 10,
       website: 'http://www.ocun.com/',
       disabled: true,
       hangboards: [
@@ -747,7 +767,7 @@ export default {
     },
     {
       name: 'Problemsolver',
-      id: 10,
+      id: 11,
       website: 'https://www.problemsolver.rocks/',
       disabled: true,
       hangboards: [
@@ -779,7 +799,7 @@ export default {
     },
     {
       name: 'So iLL',
-      id: 11,
+      id: 12,
       website: 'https://soillholds.com/',
       disabled: true,
       hangboards: [
@@ -859,7 +879,7 @@ export default {
     },
     {
       name: 'Tension',
-      id: 12,
+      id: 13,
       website: 'https://www.tensionclimbing.com/',
       disabled: true,
       hangboards: [
@@ -903,7 +923,7 @@ export default {
     },
     {
       name: 'Trango',
-      id: 13,
+      id: 14,
       website: 'http://www.trango.com/',
       disabled: true,
       hangboards: [
@@ -935,12 +955,12 @@ export default {
     },
     {
       name: 'Zlagboard',
-      id: 14,
+      id: 15,
       website: 'https://www.zlagboard.com/',
       disabled: true,
       hangboards: [
         {
-          name: 'Zlagboard Pro',
+          name: 'Zlagboard Mini',
           id: 0,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
@@ -953,7 +973,31 @@ export default {
         },
         {
           name: 'Zlagboard Evo',
-          id: 0,
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: '',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Zlagboard Pro 2.0',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: '',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Zlagboard Pro',
+          id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {

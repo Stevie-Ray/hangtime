@@ -23,6 +23,12 @@ export default {
   workoutById: state => workoutId => find(state.workouts, { id: workoutId }),
 
   /**
+   * Get a workout by id
+   */
+  communityWorkoutById: state => workoutId =>
+    find(state.communityWorkouts, { id: workoutId }),
+
+  /**
    * Get an option by id
    */
 

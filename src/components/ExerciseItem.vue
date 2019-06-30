@@ -198,10 +198,11 @@ export default {
     ...mapState('workouts', ['options']),
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('workouts', ['workoutById']),
+    ...mapGetters('workouts', ['workoutById', 'communityWorkoutById']),
     currentExercise() {
-      if (!this.workoutById(this.id)) return
-      return this.workoutById(this.id).exercises[this.index]
+      if (this.workoutById(this.id))
+        return this.workoutById(this.id).exercises[this.index]
+      return this.communityWorkoutById(this.id).exercises[this.index]
     },
     dataExercise: {
       get() {

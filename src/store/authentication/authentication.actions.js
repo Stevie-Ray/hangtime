@@ -16,6 +16,7 @@ export default {
 
     commit('setUser', user)
     dispatch('workouts/getUserWorkouts', null, { root: true })
+    dispatch('workouts/getCommunityWorkouts', null, { root: true })
     dispatch('progress/getUserProgress', null, { root: true })
   },
 
@@ -62,7 +63,6 @@ export default {
    * Check if hangboard has been added and add it to current logged in user
    */
   triggerAddHangboardAction: ({ dispatch, state }) => {
-    // TODO: check if hangboard exists
     if (state.hangboardToAdd.hangboard === '') return
     // commit('setHangboardToCreate', {company: 0, hangboard: 0})
     dispatch('addUserHangboard', state.hangboardToAdd)

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="workouts !== null" class="loading text-xs-center">
+    <div v-if="communityWorkouts === null" class="loading text-xs-center">
       <v-progress-circular
         :size="60"
         color="primary"
@@ -8,33 +8,38 @@
         class="my-4"
       >
       </v-progress-circular>
-      <div>Loading community workouts... (soon)</div>
+      <div>Loading community workouts...</div>
     </div>
-    <div v-if="workouts && !workouts.length" class="infos-label">
+    <div
+      v-if="communityWorkouts && !communityWorkouts.length"
+      class="infos-label"
+    >
       No community workouts added yet
     </div>
     <v-list two-line>
-      <!--      <workout-list-item-->
-      <!--        v-for="(workout, index) in workouts"-->
-      <!--        :key="workout.id"-->
-      <!--        class="workout-row"-->
-      <!--        :index="index"-->
-      <!--        :disable-actions="!networkOnLine"-->
-      <!--        :data="workout"-->
-      <!--      ></workout-list-item>-->
+      <workout-list-item
+        v-for="(workout, index) in communityWorkouts"
+        :key="workout.id"
+        class="community-workout-row"
+        :index="index"
+        :disable-actions="!networkOnLine"
+        :data="workout"
+        @goToWorkoutDetails="$router.push(`/community/${$event}`)"
+      ></workout-list-item>
     </v-list>
   </div>
 </template>
 
 <script>
-// import WorkoutListItem from '@/components/WorkoutListItem'
 import { mapState } from 'vuex'
+import WorkoutListItem from '@/components/WorkoutListItem'
 
 export default {
-  // components: { WorkoutListItem },
+  components: { WorkoutListItem },
   data: () => ({}),
   computed: {
-    ...mapState('app', ['networkOnLine'])
+    ...mapState('app', ['networkOnLine']),
+    ...mapState('workouts', ['communityWorkouts'])
   }
 }
 </script>

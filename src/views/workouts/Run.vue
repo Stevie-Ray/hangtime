@@ -172,7 +172,7 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['options']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('workouts', ['workoutById']),
+    ...mapGetters('workouts', ['workoutById', 'communityWorkoutById']),
     // vuetify grid-system breakpoint binding
     binding() {
       const binding = {}
@@ -187,7 +187,8 @@ export default {
       return this.currentWorkout.exercises[this.currentStep]
     },
     currentWorkout() {
-      return this.workoutById(this.id)
+      if (this.workoutById(this.id)) return this.workoutById(this.id)
+      return this.communityWorkoutById(this.id)
     }
   },
   mounted() {
@@ -196,6 +197,11 @@ export default {
     this.voiceList = this.synth
       .getVoices()
       .filter(voice => /^(en|EN)/.test(voice.lang))
+  },
+  beforeRouteLeave(to, from, next) {
+    // make sure timer is disabled on leave
+    if (this.timer !== null) clearInterval(this.timer)
+    next()
   },
   methods: {
     getImg,

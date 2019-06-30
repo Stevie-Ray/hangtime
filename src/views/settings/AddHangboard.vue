@@ -170,7 +170,14 @@ export default {
     ]),
     getImg,
     addHangboard() {
-      this.triggerAddHangboardAction()
+      const exists = this.user.settings.hangboards.some(
+        el =>
+          el.company === this.hangboardToAdd.company &&
+          el.hangboard === this.hangboardToAdd.hangboard
+      )
+      if (!exists) {
+        this.triggerAddHangboardAction()
+      }
       this.$router.push('/settings/hangboards/')
     }
   }

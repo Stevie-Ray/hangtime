@@ -1,4 +1,5 @@
 import UserWorkoutsDB from '@/firebase/user-workouts-db'
+import UsersDB from '@/firebase/users-db'
 
 export default {
   /**
@@ -10,6 +11,12 @@ export default {
 
     const workouts = await userWorkoutsDb.readAll()
     commit('setWorkouts', workouts)
+  },
+  getCommunityWorkouts: async ({ rootState, commit }) => {
+    console.log('request UsersDB')
+    const usersDb = new UsersDB(rootState.authentication.user.id)
+    const communityWorkouts = await usersDb.readAll()
+    commit('setCommunityWorkouts', communityWorkouts)
   },
   /**
    * Create a workout for current logged in user
@@ -129,7 +136,7 @@ export default {
 
     // commit('addExerciseDeletionPending', { workout: payload.workout.id, index: payload.index})
     commit('removeExerciseByIndex', payload)
-    commit('setTotalTime', payload.id)
+    commit('setTotalTime', payload.workout.id)
     dispatch('updateWorkout', payload.workout)
     // commit('removeExerciseDeletionPending', payload.exerciseId)
   }

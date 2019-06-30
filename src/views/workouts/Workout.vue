@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="workout">
+  <v-layout row class="workout-list">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push('/')">mdi-arrow-left</v-icon>
       <v-avatar size="32px">
@@ -277,9 +277,14 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['levels']),
-    ...mapGetters('workouts', ['workoutById', 'difficultyById']),
+    ...mapGetters('workouts', [
+      'workoutById',
+      'communityWorkoutById',
+      'difficultyById'
+    ]),
     currentWorkout() {
-      return this.workoutById(this.id)
+      if (this.workoutById(this.id)) return this.workoutById(this.id)
+      return this.communityWorkoutById(this.id)
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {

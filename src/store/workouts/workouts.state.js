@@ -1,4 +1,5 @@
 export default {
+  communityWorkouts: null,
   workouts: null,
   workoutToCreate: '',
   workoutDeletionPending: [],

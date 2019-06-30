@@ -115,16 +115,7 @@ export default {
     state.workouts[index].exercises.splice(payload.index, 1)
   },
 
-  /* Exercises deletion */
-  addExerciseDeletionPending: (state, exerciseId) =>
-    state.exerciseDeletionPending.push(exerciseId),
-  removeExerciseDeletionPending: (state, exerciseId) => {
-    const index = state.exercises.findIndex(
-      exercise => exercise.id === exerciseId
-    )
-    state.exerciseDeletionPending.splice(index, 1)
-  },
-  /* Exercise creation */
-  setExerciseCreationPending: (state, value) =>
-    (state.exerciseCreationPending = value)
+  /* Community */
+  setCommunityWorkouts: (state, communityWorkouts) =>
+    (state.communityWorkouts = communityWorkouts)
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="workout">
+  <v-layout row class="progress-type">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push({ name: 'progress' })"
         >mdi-arrow-left</v-icon
@@ -176,15 +176,22 @@ export default {
     shortDate,
     clickAddHangboard() {
       const progress = this.hangboardData
+      const selected = this.user.settings.selected
       progress['type'] = this.id
       progress['recordings'] = []
-      progress['hangboard'] = this.user.settings.hangboards[
-        this.user.settings.selected
-      ].hangboard
-      progress['company'] = this.user.settings.hangboards[
-        this.user.settings.selected
-      ].company
-      this.triggerAddHangboardAction(progress)
+      progress['hangboard'] = this.user.settings.hangboards[selected].hangboard
+      progress['company'] = this.user.settings.hangboards[selected].company
+
+      const exists = this.currentStats.some(
+        el =>
+          el.right === this.hangboardData.right &&
+          el.left === this.hangboardData.left
+      )
+
+      if (!exists) {
+        this.triggerAddHangboardAction(progress)
+      }
+
       this.dialog = false
     }
   }

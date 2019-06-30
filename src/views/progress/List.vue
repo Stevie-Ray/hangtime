@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="workout">
+  <v-layout row class="progress-list">
     <v-app-bar color="primary" app dark fixed>
       <v-icon
         v-if="currentType"
@@ -29,7 +29,7 @@
     <v-content v-if="currentType">
       <v-container fluid fill-height>
         <v-layout justify-center>
-          <v-flex xs12 md8 lg6>
+          <v-flex xs12 sm8 md6>
             <v-sheet
               v-if="currentStats[index]"
               class="mt-4 mb-2"

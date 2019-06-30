@@ -53,7 +53,6 @@ export default {
    * Check if hangboard has been added and add it to current logged in user
    */
   triggerAddHangboardAction: ({ dispatch }, progress) => {
-    // TODO: check if hangboard exists
     // if (state.progressToAdd === '') return
     // commit('setHangboardToAdd', { left: 0, right: 0})
 

@@ -33,7 +33,7 @@
       >
         <exercise-list-item
           v-for="(exercise, index) in exerciseList"
-          :key="exercise.order"
+          :key="index"
           class="exercise-row"
           :index="index"
           :disable-actions="!networkOnLine"
@@ -64,9 +64,10 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapGetters('workouts', ['workoutById']),
+    ...mapGetters('workouts', ['workoutById', 'communityWorkoutById']),
     currentWorkout() {
-      return this.workoutById(this.id)
+      if (this.workoutById(this.id)) return this.workoutById(this.id)
+      return this.communityWorkoutById(this.id)
     },
     exerciseList: {
       get() {

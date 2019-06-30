@@ -17,7 +17,7 @@
   "dependencies": {
     "@mdi/font": "^3.7.95",
     "core-js": "^3.1.4",
-    "firebase": "^6.2.3",
+    "firebase": "^6.2.4",
     "is_js": "^0.9.0",
     "lodash": "^4.17.11",
     "nosleep.js": "^0.9.0",
@@ -33,7 +33,7 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.134",
+    "@types/lodash": "^4.14.135",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-e2e-cypress": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
@@ -55,7 +55,7 @@
     "eslint-plugin-vue": "^5.2.3",
     "firebase-tools": "^7.0.1",
     "prerender-spa-plugin": "^3.4.0",
-    "sass": "^1.22.0",
+    "sass": "^1.22.1",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-vuetify": "git+https://github.com/vuetifyjs/vue-cli-plugin-vuetify.git#dev",
     "vue-template-compiler": "^2.6.10",

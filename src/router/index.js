@@ -70,6 +70,13 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Exercise.vue')
     },
     {
+      path: '/community/:id',
+      name: 'community-workout',
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue')
+    },
+    {
       path: '/progress/:id/:type/record/:index',
       name: 'progress-record',
       props(route) {
@@ -156,7 +163,7 @@ const router = new Router({
       }
     },
     {
-      path: '/login',
+      path: '/lcommunity-workoutcommunity-workoutogin',
       name: 'login',
       component: () =>
         import(/* webpackChunkName: "client-chunk-login" */ '@/views/authentication/Login.vue'),

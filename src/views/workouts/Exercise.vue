@@ -121,10 +121,15 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['options']),
-    ...mapGetters('workouts', ['workoutById', 'isExerciseDeletionPending']),
+    ...mapGetters('workouts', [
+      'workoutById',
+      'communityWorkoutById',
+      'isExerciseDeletionPending'
+    ]),
     currentExercise() {
-      if (!this.workoutById(this.id)) return
-      return this.workoutById(this.id).exercises[this.index]
+      if (this.workoutById(this.id))
+        return this.workoutById(this.id).exercises[this.index]
+      return this.communityWorkoutById(this.id).exercises[this.index]
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {

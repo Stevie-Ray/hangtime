@@ -1,32 +1,29 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-  function authenticated() { return request.auth.uid != null }
+    function authenticated() { return request.auth.uid != null }
 
-    match /users/{userId} {
-       allow get: if authenticated() && request.auth.uid == userId;
-       allow create: if authenticated() && request.auth.uid == userId;
-       allow update, delete: if authenticated() && request.auth.uid == userId;
+    match /{document=**} {
+      allow read, write;
     }
 
-    match /users/{userId}/workouts/{workoutId} {
+    match /users/{userId} {
       allow get: if authenticated() && request.auth.uid == userId;
-			allow list: if authenticated() && request.auth.uid == userId;
       allow create: if authenticated() && request.auth.uid == userId;
       allow update, delete: if authenticated() && request.auth.uid == userId;
     }
 
-     match /users/{userId}/workouts/{workoutId}/exercises/{exerciseId} {
-          allow get: if authenticated() && request.auth.uid == userId;
-    			allow list: if authenticated() && request.auth.uid == userId;
-          allow create: if authenticated() && request.auth.uid == userId;
-          allow update, delete: if authenticated() && request.auth.uid == userId;
-     }
+    match /users/{userId}/workouts/{workoutId} {
+      allow get: if authenticated() && request.auth.uid == userId;
+      allow list: if authenticated() && request.auth.uid == userId;
+      allow create: if authenticated() && request.auth.uid == userId;
+      allow update, delete: if authenticated() && request.auth.uid == userId;
+    }
 
      match /users/{userId}/progress/{progressId} {
-       allow get: if authenticated() && request.auth.uid == userId;
-            allow list: if authenticated() && request.auth.uid == userId;
-       allow create: if authenticated() && request.auth.uid == userId;
-       allow update, delete: if authenticated() && request.auth.uid == userId;
-     }
+      allow get: if authenticated() && request.auth.uid == userId;
+      allow list: if authenticated() && request.auth.uid == userId;
+      allow create: if authenticated() && request.auth.uid == userId;
+      allow update, delete: if authenticated() && request.auth.uid == userId;
+    }
   }
 }
