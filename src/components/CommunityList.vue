@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="communityWorkouts === null" class="loading text-xs-center">
+    <div
+      v-if="communityWorkouts === null && user"
+      class="loading text-xs-center"
+    >
       <v-progress-circular
         :size="60"
         color="primary"
@@ -10,12 +13,22 @@
       </v-progress-circular>
       <div>Loading community workouts...</div>
     </div>
-    <div
-      v-if="communityWorkouts && !communityWorkouts.length"
-      class="infos-label"
+    <v-list
+      v-if="
+        (!user && !communityWorkouts) ||
+          (communityWorkouts && !communityWorkouts.length)
+      "
+      two-line
     >
-      No community workouts added yet
-    </div>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>No workouts found</v-list-item-title>
+          <v-list-item-subtitle
+            >No community workouts added yet
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
     <v-list two-line>
       <workout-list-item
         v-for="(workout, index) in communityWorkouts"
@@ -38,7 +51,7 @@ export default {
   components: { WorkoutListItem },
   data: () => ({}),
   computed: {
-    ...mapState('app', ['networkOnLine']),
+    ...mapState('app', ['user', 'networkOnLine']),
     ...mapState('workouts', ['communityWorkouts'])
   }
 }

@@ -26,7 +26,7 @@
         v-if="!networkOnLine"
         label
         small
-        outline
+        outlined
         disabled
         color="white"
         class="text-uppercase"

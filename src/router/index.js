@@ -163,7 +163,7 @@ const router = new Router({
       }
     },
     {
-      path: '/lcommunity-workoutcommunity-workoutogin',
+      path: '/login',
       name: 'login',
       component: () =>
         import(/* webpackChunkName: "client-chunk-login" */ '@/views/authentication/Login.vue'),

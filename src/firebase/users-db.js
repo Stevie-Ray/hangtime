@@ -8,9 +8,7 @@ export default class UsersDB extends GenericDB {
 
   // Here you can extend UsersDB with custom methods
   async readAll(constraints = null) {
-    const collectionRef = (await firestore())
-      .collectionGroup('workouts')
-      .where('share', '==', true)
+    const collectionRef = (await firestore()).collectionGroup('workouts')
 
     let query = collectionRef
 

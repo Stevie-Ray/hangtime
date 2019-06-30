@@ -15,7 +15,13 @@ export default {
   getCommunityWorkouts: async ({ rootState, commit }) => {
     console.log('request UsersDB')
     const usersDb = new UsersDB(rootState.authentication.user.id)
-    const communityWorkouts = await usersDb.readAll()
+    const selected = rootState.authentication.user.settings.selected
+    const hangboards = rootState.authentication.user.settings.hangboards
+    const communityWorkouts = await usersDb.readAll([
+      ['share', '==', true],
+      ['company', '==', hangboards[selected].company],
+      ['hangboard', '==', hangboards[selected].hangboard]
+    ])
     commit('setCommunityWorkouts', communityWorkouts)
   },
   /**
