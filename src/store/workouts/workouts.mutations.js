@@ -27,7 +27,7 @@ export default {
     )
     state.workouts[index].level = payload.value
   },
-  addWorkout: (state, workout) => state.workouts.push(workout),
+  addWorkout: (state, workout) => state.workouts.unshift(workout),
   removeWorkoutById: (state, workoutId) => {
     const index = state.workouts.findIndex(workout => workout.id === workoutId)
     state.workouts.splice(index, 1)
@@ -120,7 +120,15 @@ export default {
     (state.communityWorkouts = communityWorkouts),
 
   shareWorkout: (state, workoutId) => {
-    const index = state.workouts.findIndex(workout => workout.id === workoutId)
+    let index = state.workouts.findIndex(workout => workout.id === workoutId)
     state.workouts[index].share = !state.workouts[index].share
+    if (state.workouts[index].share)
+      state.communityWorkouts.unshift(state.workouts[index])
+    else {
+      index = state.communityWorkouts.findIndex(
+        workout => workout.id === workoutId
+      )
+      state.communityWorkouts.splice(index, 1)
+    }
   }
 }

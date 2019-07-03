@@ -17,6 +17,13 @@ export default {
         payload.settings.hangboards[payload.settings.selected].hangboard
     }),
 
+  communityWorkoutsByHangboard: state => payload =>
+    filter(state.communityWorkouts, {
+      company: payload.settings.hangboards[payload.settings.selected].company,
+      hangboard:
+        payload.settings.hangboards[payload.settings.selected].hangboard
+    }),
+
   /**
    * Get a workout by id
    */

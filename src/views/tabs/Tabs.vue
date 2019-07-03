@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
 import AddWorkout from '@/components/AddWorkout'
 import SwitchHangboard from '@/components/SwitchHangboard'
@@ -135,7 +135,6 @@ export default {
   data: () => ({
     dialog: false,
     hangboardDialog: false,
-    activeTab: '/',
     tabs: [
       { id: 0, name: 'workouts', route: `/` },
       { id: 1, name: 'community', route: `/community` },
@@ -145,7 +144,7 @@ export default {
   computed: {
     ...mapGetters('authentication', ['isUserLoggedIn']),
     ...mapState('authentication', ['user']),
-    ...mapState('app', ['networkOnLine', 'appTitle']),
+    ...mapState('app', ['networkOnLine', 'appTitle', 'currentTab']),
     activeFab() {
       switch (this.activeTab) {
         case '/':
@@ -157,9 +156,18 @@ export default {
         default:
           return {}
       }
+    },
+    activeTab: {
+      get() {
+        return this.currentTab
+      },
+      set(value) {
+        this.setTab(value)
+      }
     }
   },
   methods: {
+    ...mapMutations('app', ['setTab']),
     updateRouter(val) {
       this.$router.push(val)
     },

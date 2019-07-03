@@ -1,7 +1,7 @@
 <template>
   <v-layout row class="progress-type">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ name: 'progress' })"
+      <v-icon @click="$router.push({ path: currentTab })"
         >mdi-arrow-left</v-icon
       >
       <v-avatar v-if="currentType" size="32px">
@@ -157,6 +157,7 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['user']),
+    ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapGetters('progress', ['statsById', 'bestStatsById']),
     ...mapGetters('workouts', ['typeById']),
     currentStats() {

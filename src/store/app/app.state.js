@@ -4,5 +4,6 @@ export default {
   networkOnLine: false,
   SWRegistrationForNewContent: null,
   showAddToHomeScreenModalForApple: false,
-  refreshingApp: false
+  refreshingApp: false,
+  currentTab: '/'
 }

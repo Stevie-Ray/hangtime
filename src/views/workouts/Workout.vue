@@ -1,7 +1,9 @@
 <template>
   <v-layout row class="workout-list">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push('/')">mdi-arrow-left</v-icon>
+      <v-icon @click="$router.push({ path: currentTab })"
+        >mdi-arrow-left</v-icon
+      >
       <v-avatar v-if="currentWorkout" size="32px">
         <v-img
           v-if="networkOnLine"
@@ -232,7 +234,7 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="dialogs.delete = false">
+                  <v-btn text color="primary" @click="dialogs.share = false">
                     Cancel
                   </v-btn>
                   <v-btn text @click="clickshareWorkout">
@@ -311,7 +313,7 @@ export default {
     ]
   },
   computed: {
-    ...mapState('app', ['networkOnLine']),
+    ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['levels']),
     ...mapGetters('workouts', ['workoutById', 'difficultyById']),
@@ -379,11 +381,15 @@ export default {
     triggerShareWorkout() {
       if (!this.currentWorkout.share) {
         this.dialogs.share = true
-      } else this.shareWorkout(this.currentWorkout.id)
+      } else {
+        this.shareWorkout(this.currentWorkout.id)
+        this.$router.push({ path: this.currentTab })
+      }
     },
     clickshareWorkout() {
       this.shareWorkout(this.currentWorkout.id)
       this.dialogs.share = false
+      this.$router.push({ name: 'community' })
     }
   }
 }

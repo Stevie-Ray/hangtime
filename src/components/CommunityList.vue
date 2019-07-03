@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      v-if="communityWorkouts === null && user"
-      class="loading text-xs-center"
-    >
+    <div v-if="workouts === null && user" class="loading text-xs-center">
       <v-progress-circular
         :size="60"
         color="primary"
@@ -14,10 +11,7 @@
       <div>Loading community workouts...</div>
     </div>
     <v-list
-      v-if="
-        (!user && !communityWorkouts) ||
-          (communityWorkouts && !communityWorkouts.length)
-      "
+      v-if="(!user && !workouts) || (workouts && !workouts.length)"
       two-line
     >
       <v-list-item>
@@ -31,7 +25,7 @@
     </v-list>
     <v-list two-line>
       <workout-list-item
-        v-for="(workout, index) in communityWorkouts"
+        v-for="(workout, index) in workouts"
         :key="workout.id"
         class="community-workout-row"
         :index="index"
@@ -44,15 +38,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import WorkoutListItem from '@/components/WorkoutListItem'
 
 export default {
   components: { WorkoutListItem },
   data: () => ({}),
   computed: {
-    ...mapState('app', ['user', 'networkOnLine']),
-    ...mapState('workouts', ['communityWorkouts'])
+    ...mapGetters('workouts', ['communityWorkoutsByHangboard']),
+    ...mapState('app', ['networkOnLine']),
+    ...mapState('authentication', ['user']),
+    workouts() {
+      if (!this.user) return
+      return this.communityWorkoutsByHangboard(this.user)
+    }
   }
 }
 </script>
