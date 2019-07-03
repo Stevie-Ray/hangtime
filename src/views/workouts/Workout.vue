@@ -2,11 +2,11 @@
   <v-layout row class="workout-list">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push('/')">mdi-arrow-left</v-icon>
-      <v-avatar size="32px">
+      <v-avatar v-if="currentWorkout" size="32px">
         <v-img
           v-if="networkOnLine"
-          :src="user.photoURL"
-          :alt="user.displayName"
+          :src="currentWorkout.user.photoURL"
+          :alt="currentWorkout.user.displayName"
           aspect-ratio="1"
           class="grey lighten-2"
         />
@@ -30,7 +30,18 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn v-if="!editWorkout" icon @click="edit = true">
+      <v-btn
+        v-if="currentWorkout && userWorkout"
+        icon
+        @click="triggerShareWorkout"
+      >
+        <v-icon v-if="currentWorkout.share">mdi-account-group</v-icon>
+        <v-icon v-else>mdi-account-group-outline</v-icon>
+      </v-btn>
+      <v-btn v-if="currentWorkout && !userWorkout" icon>
+        <v-icon>mdi-star-outline</v-icon>
+      </v-btn>
+      <v-btn v-if="!editWorkout && userWorkout" icon @click="edit = true">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
 
@@ -134,11 +145,14 @@
                   </v-container>
                 </v-card-text>
 
-                <v-list-item v-if="!editWorkout" class="grow my-2">
+                <v-list-item
+                  v-if="!editWorkout && currentWorkout"
+                  class="grow my-2"
+                >
                   <v-list-item-avatar size="32" style="margin-right: 12px;">
                     <v-img
-                      :src="user.photoURL"
-                      :alt="user.displayName"
+                      :src="currentWorkout.user.photoURL"
+                      :alt="currentWorkout.user.displayName"
                       width="32px"
                       class="grey lighten-2"
                       aspect-ratio="1"
@@ -146,17 +160,17 @@
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title
-                      >{{ user.displayName }} ({{
+                    <v-list-item-title>{{
+                      currentWorkout.user.displayName
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{
                         gradeConvert(
-                          user.settings.grade,
+                          currentWorkout.user.grade,
                           'ircra',
                           user.settings.scale
                         )
-                      }})</v-list-item-title
-                    >
-                    <v-list-item-subtitle>
-                      {{ user.status }}
+                      }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -173,7 +187,7 @@
                     v-if="editWorkout"
                     text
                     :disabled="currentWorkout.name === ''"
-                    @click="clickUpdateWorkout"
+                    @click="UpdateWorkout"
                     >Save
                   </v-btn>
                 </v-card-actions>
@@ -201,6 +215,28 @@
                   </v-btn>
                   <v-btn text @click="deleteWorkout(currentWorkout.id)">
                     Delete
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+            <!-- Share Dialog -->
+            <v-dialog v-if="currentWorkout" v-model="dialogs.share" width="500">
+              <v-card>
+                <v-card-title class="headline">Share workout</v-card-title>
+
+                <v-card-text>
+                  Are you sure you want to share
+                  <strong>{{ currentWorkout.name }}</strong> with the community?
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="dialogs.delete = false">
+                    Cancel
+                  </v-btn>
+                  <v-btn text @click="clickshareWorkout">
+                    Share
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -253,6 +289,7 @@ export default {
     edit: null,
     dialogs: {
       general: false,
+      share: false,
       delete: false
     },
     rules: {
@@ -277,20 +314,19 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['levels']),
-    ...mapGetters('workouts', [
-      'workoutById',
-      'communityWorkoutById',
-      'difficultyById'
-    ]),
+    ...mapGetters('workouts', ['workoutById', 'difficultyById']),
     currentWorkout() {
-      if (this.workoutById(this.id)) return this.workoutById(this.id)
-      return this.communityWorkoutById(this.id)
+      return this.workoutById(this.id)
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {
         return this.editingWorkout
       }
       return this.edit
+    },
+    userWorkout() {
+      if (!this.currentWorkout) return
+      return this.currentWorkout.user.id === this.user.id
     },
     dataName: {
       get() {
@@ -324,7 +360,8 @@ export default {
     ...mapActions('workouts', [
       'deleteUserWorkout',
       'triggerUpdateWorkout',
-      'triggerAddExerciseAction'
+      'triggerAddExerciseAction',
+      'shareWorkout'
     ]),
     ...mapMutations('workouts', [
       'setWorkoutName',
@@ -335,9 +372,18 @@ export default {
       this.deleteUserWorkout(id)
       this.$router.push({ name: 'workouts' })
     },
-    clickUpdateWorkout() {
+    UpdateWorkout() {
       this.triggerUpdateWorkout(this.currentWorkout)
       this.dialogs.general = false
+    },
+    triggerShareWorkout() {
+      if (!this.currentWorkout.share) {
+        this.dialogs.share = true
+      } else this.shareWorkout(this.currentWorkout.id)
+    },
+    clickshareWorkout() {
+      this.shareWorkout(this.currentWorkout.id)
+      this.dialogs.share = false
     }
   }
 }

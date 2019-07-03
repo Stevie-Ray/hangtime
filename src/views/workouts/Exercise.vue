@@ -13,8 +13,8 @@
       <v-avatar size="32px">
         <v-img
           v-if="networkOnLine"
-          :src="user.photoURL"
-          :alt="user.displayName"
+          :src="currentWorkout.user.photoURL"
+          :alt="currentWorkout.user.displayName"
           aspect-ratio="1"
           class="grey lighten-2"
         />
@@ -38,7 +38,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn v-if="!editWorkout" icon @click="edit = true">
+      <v-btn v-if="!editWorkout && userWorkout" icon @click="edit = true">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn
@@ -121,15 +121,15 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['options']),
-    ...mapGetters('workouts', [
-      'workoutById',
-      'communityWorkoutById',
-      'isExerciseDeletionPending'
-    ]),
+    ...mapGetters('workouts', ['workoutById', 'isExerciseDeletionPending']),
+    currentWorkout() {
+      return this.workoutById(this.id)
+    },
     currentExercise() {
-      if (this.workoutById(this.id))
-        return this.workoutById(this.id).exercises[this.index]
-      return this.communityWorkoutById(this.id).exercises[this.index]
+      return this.currentWorkout.exercises[this.index]
+    },
+    userWorkout() {
+      return this.currentWorkout.user.id === this.user.id
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {

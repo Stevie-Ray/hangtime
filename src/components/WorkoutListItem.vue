@@ -1,11 +1,11 @@
 <template>
   <div class="workout-item">
     <v-list-item ripple @click="$emit('goToWorkoutDetails', data.id)">
-      <!-- TODO: get actual workout user -->
-      <v-list-item-avatar v-if="user">
+      <v-list-item-avatar>
         <v-img
-          :src="user.photoURL"
-          :alt="user.displayName"
+          v-if="data.user"
+          :src="data.user.photoURL"
+          :alt="data.user.displayName"
           aspect-ratio="1"
           class="grey lighten-2"
         />
@@ -21,7 +21,7 @@
       <v-list-item-action class="text-xs-right">
         <v-list-item-action-text>
           <span>{{
-            gradeConvert(user.settings.grade, 'ircra', user.settings.scale)
+            gradeConvert(data.user.grade, 'ircra', user.settings.scale)
           }}</span>
           <br />
           <strong v-if="difficultyById(data.level)">

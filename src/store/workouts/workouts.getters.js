@@ -20,13 +20,17 @@ export default {
   /**
    * Get a workout by id
    */
-  workoutById: state => workoutId => find(state.workouts, { id: workoutId }),
+  workoutById: state => workoutId => {
+    let data = find(state.workouts, { id: workoutId })
+    if (!data) data = find(state.communityWorkouts, { id: workoutId })
+    return data
+  },
 
-  /**
-   * Get a workout by id
-   */
-  communityWorkoutById: state => workoutId =>
-    find(state.communityWorkouts, { id: workoutId }),
+  // /**
+  //  * Get a workout by id
+  //  */
+  // communityWorkoutById: state => workoutId =>
+  //   find(state.communityWorkouts, { id: workoutId }),
 
   /**
    * Get an option by id

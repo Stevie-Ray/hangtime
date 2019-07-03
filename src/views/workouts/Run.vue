@@ -10,8 +10,8 @@
       <v-avatar size="32px">
         <v-img
           v-if="networkOnLine"
-          :src="user.photoURL"
-          :alt="user.displayName"
+          :src="currentWorkout.user.photoURL"
+          :alt="currentWorkout.user.displayName"
           aspect-ratio="1"
           class="grey lighten-2"
         />
@@ -172,7 +172,7 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['options']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('workouts', ['workoutById', 'communityWorkoutById']),
+    ...mapGetters('workouts', ['workoutById']),
     // vuetify grid-system breakpoint binding
     binding() {
       const binding = {}
@@ -182,13 +182,10 @@ export default {
       return binding
     },
     currentExercise() {
-      // set current exercise based on currentStep
-      if (!this.currentWorkout) return
       return this.currentWorkout.exercises[this.currentStep]
     },
     currentWorkout() {
-      if (this.workoutById(this.id)) return this.workoutById(this.id)
-      return this.communityWorkoutById(this.id)
+      return this.workoutById(this.id)
     }
   },
   mounted() {

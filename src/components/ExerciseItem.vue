@@ -198,11 +198,9 @@ export default {
     ...mapState('workouts', ['options']),
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('workouts', ['workoutById', 'communityWorkoutById']),
+    ...mapGetters('workouts', ['workoutById']),
     currentExercise() {
-      if (this.workoutById(this.id))
-        return this.workoutById(this.id).exercises[this.index]
-      return this.communityWorkoutById(this.id).exercises[this.index]
+      return this.workoutById(this.id).exercises[this.index]
     },
     dataExercise: {
       get() {

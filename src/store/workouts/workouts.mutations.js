@@ -117,5 +117,10 @@ export default {
 
   /* Community */
   setCommunityWorkouts: (state, communityWorkouts) =>
-    (state.communityWorkouts = communityWorkouts)
+    (state.communityWorkouts = communityWorkouts),
+
+  shareWorkout: (state, workoutId) => {
+    const index = state.workouts.findIndex(workout => workout.id === workoutId)
+    state.workouts[index].share = !state.workouts[index].share
+  }
 }

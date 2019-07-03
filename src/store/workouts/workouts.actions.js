@@ -41,13 +41,21 @@ export default {
    */
   triggerAddWorkoutAction: ({ dispatch, state, commit }) => {
     if (state.workoutToCreate.name === '') return
+
+    // map fields
     const workout = {
       name: state.workoutToCreate.name,
       description: state.workoutToCreate.description,
       level: state.workoutToCreate.level,
       hangboard: state.workoutToCreate.hangboard,
       company: state.workoutToCreate.company,
-      exercises: []
+      exercises: [],
+      user: {
+        displayName: state.workoutToCreate.user.displayName,
+        grade: state.workoutToCreate.user.grade,
+        id: state.workoutToCreate.user.id,
+        photoURL: state.workoutToCreate.user.photoURL
+      }
     }
     commit('setWorkoutToCreate', '')
     dispatch('createUserWorkout', workout)
@@ -145,5 +153,12 @@ export default {
     commit('setTotalTime', payload.workout.id)
     dispatch('updateWorkout', payload.workout)
     // commit('removeExerciseDeletionPending', payload.exerciseId)
+  },
+  shareWorkout: ({ state, commit, dispatch }, id) => {
+    commit('shareWorkout', id)
+
+    const workout = state.workouts.find(workout => workout.id === id)
+
+    dispatch('updateWorkout', workout)
   }
 }

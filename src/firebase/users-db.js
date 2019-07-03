@@ -17,12 +17,18 @@ export default class UsersDB extends GenericDB {
     }
 
     const formatResult = result =>
-      result.docs.map(ref =>
-        this.convertObjectTimestampPropertiesToDate({
+      result.docs.map(ref => {
+        // const userRef = ref.ref.parent.parent;
+        // userRef.get().then(parentSnap => {
+        //   const user = parentSnap.data();
+        //   console.log(user.displayName);
+        // });
+
+        return this.convertObjectTimestampPropertiesToDate({
           id: ref.id,
           ...ref.data()
         })
-      )
+      })
 
     return query.get().then(formatResult)
   }

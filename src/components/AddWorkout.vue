@@ -135,7 +135,13 @@ export default {
         company: this.user.settings.hangboards[this.user.settings.selected]
           .company,
         hangboard: this.user.settings.hangboards[this.user.settings.selected]
-          .hangboard
+          .hangboard,
+        user: {
+          displayName: this.user.displayName,
+          grade: this.user.settings.grade,
+          id: this.user.id,
+          photoURL: this.user.photoURL
+        }
       })
       this.triggerAddWorkoutAction($event)
       this.$emit('input', false)

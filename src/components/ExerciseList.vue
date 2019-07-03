@@ -64,10 +64,9 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapGetters('workouts', ['workoutById', 'communityWorkoutById']),
+    ...mapGetters('workouts', ['workoutById']),
     currentWorkout() {
-      if (this.workoutById(this.id)) return this.workoutById(this.id)
-      return this.communityWorkoutById(this.id)
+      return this.workoutById(this.id)
     },
     exerciseList: {
       get() {
