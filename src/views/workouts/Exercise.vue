@@ -5,7 +5,7 @@
         @click="
           $router.push({
             name: 'workout',
-            params: { id: id, editingWorkout: editWorkout }
+            params: { id: id, editingWorkout: editWorkout, userId: userId }
           })
         "
         >mdi-arrow-left
@@ -99,6 +99,7 @@ export default {
   props: {
     id: String,
     index: Number,
+    userId: String,
     editingWorkout: Boolean,
     isWorkoutDeletionPending: Boolean
   },
@@ -147,7 +148,10 @@ export default {
         workout: this.workoutById(this.id),
         index: this.index
       })
-      this.$router.push({ name: 'workout', params: { id: this.id } })
+      this.$router.push({
+        name: 'workout',
+        params: { id: this.id, UserId: this.UserId }
+      })
     },
     clickUpdateExercise() {
       this.triggerUpdateWorkout(this.workoutById(this.id))

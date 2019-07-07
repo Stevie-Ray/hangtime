@@ -3,7 +3,10 @@
     <v-app-bar v-if="currentWorkout" color="primary" app fixed dark>
       <v-icon
         @click="
-          $router.push({ name: 'workout', params: { id: currentWorkout.id } })
+          $router.push({
+            name: 'workout',
+            params: { id: currentWorkout.id, userId: userId }
+          })
         "
         >mdi-arrow-left</v-icon
       >
@@ -152,7 +155,8 @@ import { getImg, count, speak, sound } from '@/misc/helpers'
 export default {
   components: { Hangboard },
   props: {
-    id: String
+    id: String,
+    userId: String
   },
   data: () => ({
     currentStep: 0,

@@ -31,7 +31,12 @@
         :index="index"
         :disable-actions="!networkOnLine"
         :data="workout"
-        @goToWorkoutDetails="$router.push(`/community/${$event}`)"
+        @goToWorkoutDetails="
+          $router.push({
+            name: 'workout',
+            params: { id: $event, userId: workout.user.id }
+          })
+        "
       ></workout-list-item>
     </v-list>
   </div>

@@ -20,6 +20,13 @@ service cloud.firestore {
       allow update, delete: if authenticated() && request.auth.uid == userId;
     }
 
+    match /{path=**}/workouts/{workoutId}/subscribers/{subscriberId} {
+      allow get: if authenticated()
+      allow list: if authenticated()
+      allow create: if authenticated() && request.auth.uid == subscriberId;
+      allow update, delete: if authenticated() && request.auth.uid == subscriberId;
+    }
+
      match /users/{userId}/progress/{progressId} {
       allow get: if authenticated() && request.auth.uid == userId;
       allow list: if authenticated() && request.auth.uid == userId;

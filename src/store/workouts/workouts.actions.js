@@ -1,5 +1,6 @@
 import UserWorkoutsDB from '@/firebase/user-workouts-db'
 import UsersDB from '@/firebase/users-db'
+import WorkoutSubscriberDB from '@/firebase/workout-subscriber-db'
 
 export default {
   /**
@@ -160,5 +161,38 @@ export default {
     const workout = state.workouts.find(workout => workout.id === id)
 
     dispatch('updateWorkout', workout)
+  },
+  getWorkoutSubscribers: async ({ commit }, payload) => {
+    const workoutSubscriberDb = new WorkoutSubscriberDB(
+      payload.user,
+      payload.id
+    )
+
+    const subscribers = await workoutSubscriberDb.readAll()
+
+    const subscriberList = {
+      id: payload.id,
+      subscribers: subscribers
+    }
+
+    commit('setSubscribers', subscriberList)
+  },
+  triggerAddWorkoutSubscriber: async ({ commit }, payload) => {
+    const workoutSubscriberDb = new WorkoutSubscriberDB(
+      payload.userId,
+      payload.id
+    )
+    await workoutSubscriberDb.create({ id: payload.user }, payload.user)
+
+    commit('addSubscriber', { id: payload.id, user: payload.user })
+  },
+  triggerRemoveWorkoutSubscriber: async ({ commit }, payload) => {
+    const workoutSubscriberDb = new WorkoutSubscriberDB(
+      payload.userId,
+      payload.id
+    )
+    await workoutSubscriberDb.delete(payload.user)
+
+    commit('removeSubscriber', { id: payload.id, user: payload.user })
   }
 }

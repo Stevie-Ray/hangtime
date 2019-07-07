@@ -33,7 +33,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        v-if="currentWorkout && userWorkout"
+        v-if="currentWorkout && userWorkout && !editWorkout"
         icon
         @click="triggerShareWorkout"
       >
@@ -41,7 +41,35 @@
         <v-icon v-else>mdi-account-group-outline</v-icon>
       </v-btn>
       <v-btn v-if="currentWorkout && !userWorkout" icon>
-        <v-icon>mdi-star-outline</v-icon>
+        <v-icon
+          v-if="isSubscribed"
+          @click="
+            triggerRemoveWorkoutSubscriber({
+              id: id,
+              user: user.id,
+              userId: userId
+            })
+          "
+        >
+          mdi-star
+        </v-icon>
+        <v-icon
+          v-else
+          @click="
+            triggerAddWorkoutSubscriber({
+              id: id,
+              user: user.id,
+              userId: userId
+            })
+          "
+        >
+          mdi-star-outline
+        </v-icon>
+        <span
+          v-if="currentSubscribers && currentSubscribers.subscribers.length > 0"
+        >
+          {{ currentSubscribers.subscribers.length }}
+        </span>
       </v-btn>
       <v-btn v-if="!editWorkout && userWorkout" icon @click="edit = true">
         <v-icon>mdi-pencil</v-icon>
@@ -285,7 +313,8 @@ export default {
   components: { ExerciseList },
   props: {
     id: String,
-    editingWorkout: Boolean
+    editingWorkout: Boolean,
+    userId: String
   },
   data: () => ({
     edit: null,
@@ -316,9 +345,16 @@ export default {
     ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['levels']),
-    ...mapGetters('workouts', ['workoutById', 'difficultyById']),
+    ...mapGetters('workouts', [
+      'workoutById',
+      'difficultyById',
+      'subscribersById'
+    ]),
     currentWorkout() {
       return this.workoutById(this.id)
+    },
+    currentSubscribers() {
+      return this.subscribersById(this.id)
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {
@@ -329,6 +365,14 @@ export default {
     userWorkout() {
       if (!this.currentWorkout) return
       return this.currentWorkout.user.id === this.user.id
+    },
+    isSubscribed() {
+      if (!this.currentSubscribers) return
+      if (!this.currentSubscribers.subscribers.length > 0) return
+      const subscribed = this.currentSubscribers.subscribers.some(
+        subscriber => subscriber.id === this.user.id
+      )
+      return subscribed
     },
     dataName: {
       get() {
@@ -355,6 +399,11 @@ export default {
       }
     }
   },
+  mounted() {
+    if (!this.userWorkout && !this.currentSubscribers) {
+      this.getWorkoutSubscribers({ id: this.id, user: this.userId })
+    }
+  },
   methods: {
     count,
     getImg,
@@ -363,7 +412,10 @@ export default {
       'deleteUserWorkout',
       'triggerUpdateWorkout',
       'triggerAddExerciseAction',
-      'shareWorkout'
+      'shareWorkout',
+      'getWorkoutSubscribers',
+      'triggerAddWorkoutSubscriber',
+      'triggerRemoveWorkoutSubscriber'
     ]),
     ...mapMutations('workouts', [
       'setWorkoutName',

@@ -32,6 +32,12 @@ export default {
     if (!data) data = find(state.communityWorkouts, { id: workoutId })
     return data
   },
+  /**
+   * Get subscribers of a workout by id
+   */
+  subscribersById: state => workoutId => {
+    return find(state.subscribers, { id: workoutId })
+  },
 
   // /**
   //  * Get a workout by id

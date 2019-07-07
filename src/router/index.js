@@ -45,21 +45,21 @@ const router = new Router({
       ]
     },
     {
-      path: '/workouts/:id',
+      path: '/:userId/workout/:id',
       name: 'workout',
       props: true,
       component: () =>
         import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue')
     },
     {
-      path: '/workouts/:id/run',
+      path: '/:userId/workout/:id/run',
       name: 'run',
       props: true,
       component: () =>
         import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Run.vue')
     },
     {
-      path: '/workouts/:id/:index',
+      path: '/:userId/workout/:id/:index',
       name: 'exercise',
       props(route) {
         const props = { ...route.params }
@@ -70,7 +70,7 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Exercise.vue')
     },
     {
-      path: '/community/:id',
+      path: '/:userId/community/:id',
       name: 'community-workout',
       props: true,
       component: () =>
