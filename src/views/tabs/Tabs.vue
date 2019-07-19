@@ -65,8 +65,8 @@
         slot="extension"
         v-model="activeTab"
         centered
-        dark
         grow
+        background-color="primary"
         color="white"
         exact
         slider-color="white"
