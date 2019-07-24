@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="exercise">
+  <v-layout class="exercise">
     <v-app-bar color="primary" app dark fixed>
       <v-icon
         @click="
@@ -59,7 +59,7 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center>
-          <v-flex text-xs-center xs12 sm8 md6>
+          <v-flex text-center xs12 sm8 md6>
             <!-- Get exercises item -->
             <exercise-item
               v-if="currentExercise"
@@ -76,7 +76,6 @@
                 color="secondary"
                 dark
                 fab
-                large
                 @click="clickUpdateExercise"
               >
                 <v-icon>mdi-content-save</v-icon>

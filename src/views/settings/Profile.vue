@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="profile">
+  <v-layout class="profile">
     <v-app-bar color="primary" app fixed dark>
       <v-icon @click="$router.push({ name: 'settings' })"
         >mdi-arrow-left</v-icon
@@ -23,7 +23,7 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex xs12 sm8 md6>
-            <div class="text-xs-center">
+            <div class="text-center">
               <v-badge overlap bottom class="pa-4">
                 <!--                <v-icon slot="badge" dark @click="captureFile"-->
                 <!--                  >mdi-camera</v-icon-->

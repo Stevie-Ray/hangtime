@@ -2,7 +2,7 @@
   <v-content>
     <v-container fluid fill-height>
       <v-layout justify-center>
-        <v-flex text-xs-center xs12 sm8 md6>
+        <v-flex text-center xs12 sm8 md6>
           <v-flex class="mx-auto pa-4">
             <div class="title font-weight-light mb-2">{{ appTitle }}</div>
             <div class="subheading font-weight-light grey--text mb-4">
@@ -20,7 +20,7 @@
             <div v-show="user === undefined" data-test="loader">
               <v-progress-circular :size="60" color="primary" indeterminate>
               </v-progress-circular>
-              <div class="text-xs-center">Authenticating...</div>
+              <div class="text-center">Authenticating...</div>
             </div>
 
             <!-- Offline instruction -->
@@ -55,8 +55,16 @@
             </v-flex>
 
             <v-flex xs12 class="mt-5 caption grey--text font-weight-light">
-              &copy; 2019 HangTime.<br />
-              Development: Stevie-Ray Hartog.
+              &copy; 2019 HangTime.<br /><br />
+              Development:
+              <a href="https://stevie-ray.nl/" target="_blank">
+                Stevie-Ray Hartog
+              </a>
+              <br />
+              Illustrations:
+              <a href="https://dribbble.com/jurrienvrijsen" target="_blank">
+                Jurriën Vrijsen
+              </a>
             </v-flex>
           </v-flex>
         </v-flex>

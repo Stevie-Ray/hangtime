@@ -5,7 +5,7 @@
         <div class="loading">
           <v-progress-circular :size="60" color="primary" indeterminate>
           </v-progress-circular>
-          <div class="text-xs-center">
+          <div class="text-center">
             Loading...
           </div>
         </div>

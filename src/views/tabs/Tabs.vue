@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="tabs">
+  <v-layout class="tabs">
     <!-- app: Designates the component as part of the application layout. Used for dynamically adjusting content sizing. Components using this prop should reside outside of v-content to function properly-->
     <v-app-bar
       app
@@ -97,7 +97,6 @@
                 :key="activeFab.icon"
                 fixed
                 fab
-                large
                 bottom
                 right
                 color="secondary"
@@ -195,7 +194,7 @@ export default {
   }
 
   .offline-label {
-    padding: 0px 10px;
+    padding: 0 10px;
     border: 1px solid white;
     border-radius: 5px;
     margin-left: 1.5rem;

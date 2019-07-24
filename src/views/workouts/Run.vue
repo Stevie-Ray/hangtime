@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="run">
+  <v-layout class="run">
     <v-app-bar v-if="currentWorkout" color="primary" app fixed dark>
       <v-icon
         @click="
@@ -34,7 +34,7 @@
               justify-space-around
               align-center
               fill-height
-              text-xs-center
+              text-center
               v-bind="binding"
               class="canvas"
             >
@@ -124,7 +124,6 @@
           color="secondary"
           dark
           fab
-          large
           @click="pauseWorkout"
         >
           <v-icon v-if="!paused">mdi-pause</v-icon>
@@ -136,7 +135,6 @@
           color="secondary"
           dark
           fab
-          large
           @click="startWorkout"
         >
           <v-icon>mdi-play</v-icon>

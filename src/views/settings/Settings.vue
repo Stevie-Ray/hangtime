@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="settings">
+  <v-layout class="settings">
     <v-app-bar color="primary" app fixed dark>
       <v-icon @click="$router.push({ name: 'workouts' })"
         >mdi-arrow-left</v-icon

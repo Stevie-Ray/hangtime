@@ -13,17 +13,13 @@ module.exports = {
         analyzerMode: 'disabled',
         generateStatsFile: true
       }),
-      configureWebpack: {
-        plugins: [
-          /* See https://github.com/chrisvfritz/prerender-spa-plugin for more details */
-          new PrerenderSPAPlugin({
-            // Required - The path to the webpack-outputted app to prerender.
-            staticDir: path.join(__rootDirname),
-            // Required - Routes to prerender.
-            routes: prerenderedRoutesList
-          })
-        ]
-      }
+      /* See https://github.com/chrisvfritz/prerender-spa-plugin for more details */
+      new PrerenderSPAPlugin({
+        // Required - The path to the webpack-outputted app to prerender.
+        staticDir: path.join(__rootDirname),
+        // Required - Routes to prerender.
+        routes: prerenderedRoutesList
+      })
     ]
   }
 }

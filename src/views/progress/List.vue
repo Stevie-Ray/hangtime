@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="progress-list">
+  <v-layout class="progress-list">
     <v-app-bar color="primary" app dark fixed>
       <v-icon
         v-if="currentType"
@@ -106,7 +106,6 @@
           color="secondary"
           dark
           fab
-          large
           @click="
             $router.push({
               name: 'progress-record',

@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="add-hangboard">
+  <v-layout class="add-hangboard">
     <v-app-bar color="primary" app fixed dark>
       <v-toolbar-title>
         <v-icon @click="$router.push({ name: 'settings-hangboards' })"
@@ -89,7 +89,7 @@
                   />
                 </div>
               </div>
-              <div class="text-xs-center">
+              <div class="text-center">
                 <p>
                   Hangboard by
                   <a
@@ -107,7 +107,6 @@
                 slot="activator"
                 color="secondary"
                 fab
-                large
                 @click="addHangboard"
               >
                 <v-icon>mdi-content-save</v-icon>

@@ -1,6 +1,7 @@
 .theme {
   &--light {
     .theme--light {
+      &.v-tabs-items,
       &.v-sheet,
       &.v-list {
         background-color: #fafafa;
@@ -16,13 +17,15 @@
 }
 
 #app {
-  // vuetify 2.0.0-beta0 fix
+  // vuetify 2.0.0 fix
   .v-tab:hover:before {
     opacity: 0;
   }
 
   .v-content__wrap > .container {
-    padding: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .v-content .theme--light.v-divider {
@@ -101,10 +104,6 @@
         flex-basis: 50.1%;
         max-width: 50.1%;
       }
-    }
-
-    &__content > .v-icon {
-      margin-left: -4px;
     }
   }
   .tabs {

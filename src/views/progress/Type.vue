@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="progress-type">
+  <v-layout class="progress-type">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push({ path: currentTab })"
         >mdi-arrow-left</v-icon
@@ -113,7 +113,6 @@
                 color="secondary"
                 dark
                 fab
-                large
                 @click="dialog = true"
               >
                 <v-icon>mdi-plus</v-icon>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="hangboards">
+  <v-layout class="hangboards">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push({ name: 'settings' })"
         >mdi-arrow-left</v-icon
@@ -44,7 +44,7 @@
                 </div>
 
                 <v-card-title primary-title>
-                  <div class="text-xs-center">
+                  <div class="text-center">
                     <h3 class="headline ">
                       {{ companies[item.company].name }}
                       {{
@@ -86,7 +86,6 @@
                 color="secondary"
                 dark
                 fab
-                large
                 to="/settings/hangboards/add"
               >
                 <v-icon>mdi-plus</v-icon>

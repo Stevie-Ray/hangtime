@@ -18,7 +18,7 @@
         >
       </v-list-item-content>
 
-      <v-list-item-action class="text-xs-right">
+      <v-list-item-action class="text-right">
         <v-list-item-action-text>
           <span>{{
             gradeConvert(data.user.grade, 'ircra', user.settings.scale)

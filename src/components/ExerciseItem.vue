@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="currentExercise" grid-list-md text-center-xs>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs3>
         <!-- exercise image  -->
         <v-avatar>

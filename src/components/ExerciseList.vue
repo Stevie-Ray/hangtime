@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="currentWorkout === null" class="loading text-xs-center">
+    <div v-if="currentWorkout === null" class="loading text-center">
       <v-progress-circular
         :size="60"
         color="primary"

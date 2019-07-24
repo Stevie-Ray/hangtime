@@ -8,7 +8,7 @@
       <v-card-text>
         <v-form class="workout-action-bar">
           <v-container>
-            <v-layout row wrap>
+            <v-layout wrap>
               <v-flex xs12>
                 <v-text-field
                   v-model="workoutToCreateName"

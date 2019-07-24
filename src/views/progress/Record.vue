@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="workout">
+  <v-layout class="workout">
     <v-app-bar color="primary" app dark fixed>
       <v-icon
         v-if="currentType"
@@ -35,7 +35,7 @@
               justify-space-around
               align-center
               fill-height
-              text-xs-center
+              text-center
               v-bind="binding"
               class="canvas"
             >
@@ -132,7 +132,7 @@
             <div v-if="currentType.configurable">
               How many pull-ups did you do?
               <v-container fluid grid-list-lg>
-                <v-layout row wrap>
+                <v-layout wrap>
                   <v-flex shrink style="width: 45px">
                     <v-text-field
                       v-model="pullups"
@@ -186,7 +186,6 @@
           color="secondary"
           dark
           fab
-          large
           @click="startRecording"
         >
           <v-icon>mdi-timer</v-icon>
@@ -197,7 +196,6 @@
           color="secondary"
           dark
           fab
-          large
           @click="stopRecording"
         >
           <v-icon>mdi-stop</v-icon>

@@ -1,12 +1,6 @@
 <template>
-  <v-layout row>
+  <v-layout>
     <v-flex>
-      <!--      <v-subheader>-->
-      <!--        {{ companies[user.settings.hangboards[user.settings.selected].company].name }}-->
-      <!--        {{ companies[user.settings.hangboards[user.settings.selected].company-->
-      <!--        ].hangboards[user.settings.hangboards[user.settings.selected].hangboard].name }}-->
-      <!--      </v-subheader>-->
-
       <v-list two-line>
         <span v-for="(option, index) in options" :key="index">
           <v-list-item

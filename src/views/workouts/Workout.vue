@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="workout-list">
+  <v-layout class="workout-list">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push({ path: currentTab })"
         >mdi-arrow-left</v-icon
@@ -209,8 +209,12 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn v-if="!edit" text primary @click="edit = true"
-                    >edit</v-btn
+                  <v-btn
+                    v-if="!edit && userWorkout"
+                    text
+                    primary
+                    @click="edit = true"
+                    >Edit</v-btn
                   >
                   <v-btn text @click="dialogs.general = false">Close</v-btn>
                   <v-btn
@@ -279,7 +283,6 @@
                 color="secondary"
                 dark
                 fab
-                large
                 :to="{ name: 'run', params: { data: currentWorkout } }"
               >
                 <v-icon>mdi-play</v-icon>
@@ -290,7 +293,6 @@
                 color="secondary"
                 dark
                 fab
-                large
                 @click="triggerAddExerciseAction(id)"
               >
                 <v-icon>mdi-plus</v-icon>
