@@ -663,7 +663,7 @@ export default {
               id: 'h8',
               class: 7,
               name: ''
-            },
+            }
           ]
         }
       ]
