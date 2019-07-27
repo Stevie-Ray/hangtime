@@ -1,10 +1,10 @@
 <template>
   <v-layout class="add-hangboard">
     <v-app-bar color="primary" app fixed dark>
+      <v-icon @click="$router.push({ name: 'settings-hangboards' })"
+        >mdi-arrow-left</v-icon
+      >
       <v-toolbar-title>
-        <v-icon @click="$router.push({ name: 'settings-hangboards' })"
-          >mdi-arrow-left</v-icon
-        >
         Add a hangboard
       </v-toolbar-title>
 

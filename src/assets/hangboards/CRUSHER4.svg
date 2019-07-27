@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="626px" height="262px" viewBox="0 0 626 262" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>CRUSHER4</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CRUSHER4" transform="translate(313.500000, 131.000000) scale(-1, 1) translate(-313.500000, -131.000000) translate(1.000000, 1.000000)" stroke="#292929">
+            <path d="M0,259.72 L620,259.72 C622.761424,259.72 625,257.481424 625,254.72 L625,5.28 C625,2.51857625 622.761424,0.28 620,0.28 L208.36,0.28 L201.36,4.58 L0,4.58" id="Path" fill="#FFFFFF"></path>
+            <polyline id="Path" points="208.36 0.28 208.36 34.92 0 34.92"></polyline>
+            <polyline id="Path" points="2.84217094e-14 4.58 201.36 4.58 201.36 4.58 208.36 34.92 2.84217094e-14 34.92"></polyline>
+            <rect id="h5" x="54.03" y="62.33" width="76.74" height="45.74" rx="22.87"></rect>
+            <rect id="h4" x="153.9" y="62.33" width="152.08" height="45.74" rx="22.87"></rect>
+            <rect id="h3" transform="translate(397.343708, 90.970816) rotate(-25.850000) translate(-397.343708, -90.970816) " x="321.733708" y="69.9108159" width="151.22" height="42.12" rx="21.06"></rect>
+            <rect id="h2" transform="translate(547.455914, 105.217591) rotate(46.880000) translate(-547.455914, -105.217591) " x="477.635914" y="84.1625912" width="139.64" height="42.11" rx="21.055"></rect>
+            <rect id="h8" x="54.03" y="124.42" width="76.74" height="45.74" rx="22.87"></rect>
+            <path d="M0,191.64 L60.39,191.64 C65.7888886,191.639999 70.9665068,193.785384 74.7831597,197.603912 C78.5998126,201.42244 80.742653,206.601112 80.74,212 L80.74,212 C80.74,223.238995 71.6289947,232.35 60.39,232.35 L0,232.35" id="h14"></path>
+            <rect id="h12" x="179.92" y="191.64" width="76.77" height="40.7" rx="20.35"></rect>
+            <rect id="h10" x="339.05" y="191.64" width="76.77" height="40.7" rx="20.35"></rect>
+            <rect id="h9" x="437.14" y="191.64" width="158.54" height="40.7" rx="20.35"></rect>
+            <rect id="h6" x="407.29" y="124.42" width="113.44" height="45.74" rx="22.87"></rect>
+            <rect id="h7" x="153.9" y="124.42" width="152.08" height="45.74" rx="22.87"></rect>
+            <circle id="h13" cx="136.24" cy="211.98" r="20.35"></circle>
+            <circle id="h11" cx="296.87" cy="211.98" r="20.35"></circle>
+        </g>
+    </g>
+</svg>

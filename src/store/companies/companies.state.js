@@ -429,12 +429,11 @@ export default {
       name: 'Crusher',
       id: 3,
       website: 'http://crusherholds.co.uk/',
-      disabled: true,
       hangboards: [
         {
           name: 'Matrix',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRUSHERMATRIX.svg',
           holds: [
             {
               id: '',
@@ -446,7 +445,7 @@ export default {
         {
           name: 'Mission',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRUSHERMISSION.svg',
           holds: [
             {
               id: '',
@@ -458,7 +457,7 @@ export default {
         {
           name: 'Crusher 3',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRUSHER3.svg',
           holds: [
             {
               id: '',
@@ -470,7 +469,7 @@ export default {
         {
           name: 'Crusher 4',
           id: 3,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRUSHER4.svg',
           holds: [
             {
               id: '',
@@ -485,12 +484,11 @@ export default {
       name: 'Entre-Prises',
       id: 4,
       website: 'https://www.entre-prises.us/',
-      disabled: true,
       hangboards: [
         {
           name: 'Hang Time',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ENTREHANG.svg',
           holds: [
             {
               id: '',
@@ -502,6 +500,7 @@ export default {
         {
           name: 'Hang Time 2',
           id: 1,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -514,6 +513,7 @@ export default {
         {
           name: 'Kineboard',
           id: 2,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -526,6 +526,7 @@ export default {
         {
           name: 'Trainingboard',
           id: 3,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -957,12 +958,11 @@ export default {
       name: 'Zlagboard',
       id: 15,
       website: 'https://www.zlagboard.com/',
-      disabled: true,
       hangboards: [
         {
           name: 'Zlagboard Mini',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ZLAGMINI.svg',
           holds: [
             {
               id: '',
@@ -974,19 +974,7 @@ export default {
         {
           name: 'Zlagboard Evo',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: [
-            {
-              id: '',
-              class: 0,
-              name: ''
-            }
-          ]
-        },
-        {
-          name: 'Zlagboard Pro 2.0',
-          id: 2,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ZLAGEVO.svg',
           holds: [
             {
               id: '',
@@ -997,8 +985,20 @@ export default {
         },
         {
           name: 'Zlagboard Pro',
+          id: 2,
+          image: 'hangboards/ZLAGPRO.svg',
+          holds: [
+            {
+              id: '',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Zlagboard Pro 2.0',
           id: 3,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ZLAGPRO2.svg',
           holds: [
             {
               id: '',
