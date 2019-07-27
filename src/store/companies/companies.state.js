@@ -618,18 +618,52 @@ export default {
       name: 'Mammut',
       id: 7,
       website: 'https://www.mammut.com/',
-      disabled: true,
       hangboards: [
         {
           name: 'Diamond Fingerboard',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/MAMMUTDIAMOND.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
               name: ''
-            }
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
           ]
         }
       ]
