@@ -22,6 +22,14 @@
     opacity: 0;
   }
 
+  // vuetify 2.0.2 fix
+  .v-tabs-bar.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
+    > .v-slide-group__wrapper
+    > .v-tabs-bar__content
+    > .v-tab:first-of-type {
+    margin-left: 0;
+  }
+
   .v-content__wrap > .container {
     padding-top: 0;
     padding-right: 0;
