@@ -97,6 +97,7 @@ export default {
   setTotalTime: (state, workoutId) => {
     const index = state.workouts.findIndex(workout => workout.id === workoutId)
     const item = state.workouts[index].exercises
+    // eslint-disable-next-line no-shadow
     const time = item.reduce((sum, { time }) => sum + time, 0)
     state.workouts[index].time = time
   },
@@ -146,6 +147,7 @@ export default {
     const subscribersList = state.subscribers[index]
 
     const subscriber = subscribersList.subscribers.findIndex(
+      // eslint-disable-next-line no-shadow
       subscriber => (subscriber.id = payload.user)
     )
     state.subscribers[index].subscribers.splice(subscriber, 1)

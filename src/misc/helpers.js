@@ -31,17 +31,20 @@ export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
     settings
   }
 
-  return await userDb.create(user, firebaseAuthUser.uid)
+  const userData = await userDb.create(user, firebaseAuthUser.uid)
+
+  return userData
 }
 export function getImg(path) {
-  return require(`@/assets/${path}`) // eslint-disable-line import/no-dynamic-require
+  // eslint-disable-next-line global-require,import/no-dynamic-require
+  return require(`@/assets/${path}`)
 }
 function padTime(time) {
   return (time < 10 ? '0' : '') + time
 }
 export function count(item) {
-  let minutes = '00',
-    seconds = '00'
+  let minutes = '00'
+  let seconds = '00'
 
   if (item) {
     minutes = padTime(Math.floor(item / 60))
@@ -61,11 +64,12 @@ export function speak(text) {
   }
 }
 
-export function sound(sound) {
-  if (sound) {
-    const file = require(`@/assets/${sound}`) // eslint-disable-line import/no-dynamic-require
-    const audio = new Audio(file)
-    audio.play()
+export function sound(audio) {
+  if (audio) {
+    // eslint-disable-next-line global-require
+    const file = require(`@/assets/${audio}`) // eslint-disable-line import/no-dynamic-require
+    const audioPlayer = new Audio(file)
+    audioPlayer.play()
   }
 }
 

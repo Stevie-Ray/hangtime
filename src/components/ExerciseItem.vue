@@ -207,7 +207,7 @@ export default {
         return this.currentExercise.exercise
       },
       set(value) {
-        this.setExercise({ id: this.id, value: value, index: this.index })
+        this.setExercise({ id: this.id, value, index: this.index })
       }
     },
     dataPause: {
@@ -215,7 +215,7 @@ export default {
         return this.currentExercise.pause
       },
       set(value) {
-        this.setPause({ id: this.id, value: value, index: this.index })
+        this.setPause({ id: this.id, value, index: this.index })
         this.setTime({ id: this.id, index: this.index })
       }
     },
@@ -224,7 +224,7 @@ export default {
         return this.currentExercise.hold
       },
       set(value) {
-        this.setHold({ id: this.id, value: value, index: this.index })
+        this.setHold({ id: this.id, value, index: this.index })
         this.setTime({ id: this.id, index: this.index })
       }
     },
@@ -233,7 +233,7 @@ export default {
         return this.currentExercise.pullups
       },
       set(value) {
-        this.setPullups({ id: this.id, value: value, index: this.index })
+        this.setPullups({ id: this.id, value, index: this.index })
       }
     },
     dataRepeat: {
@@ -241,7 +241,7 @@ export default {
         return this.currentExercise.repeat
       },
       set(value) {
-        this.setRepeat({ id: this.id, value: value, index: this.index })
+        this.setRepeat({ id: this.id, value, index: this.index })
         this.setTime({ id: this.id, index: this.index })
         // reset Rest
         if (value === 1) {
@@ -254,7 +254,7 @@ export default {
         return this.currentExercise.rest
       },
       set(value) {
-        this.setRest({ id: this.id, value: value, index: this.index })
+        this.setRest({ id: this.id, value, index: this.index })
         this.setTime({ id: this.id, index: this.index })
       }
     }

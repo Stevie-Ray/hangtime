@@ -22,10 +22,9 @@ export default {
         payload.settings.hangboards[payload.settings.selected].hangboard
     })
     if (!progress || progress.length <= 0) return 0
-    return Math.max.apply(
-      Math,
-      progress.map(function(o) {
-        return getters.bestStatsById(o['id'])
+    return Math.max(
+      ...progress.map(function map(o) {
+        return getters.bestStatsById(o.id)
       })
     )
   },
@@ -34,10 +33,9 @@ export default {
    */
   bestStatsById: state => progressId => {
     const progress = find(state.progress, { id: progressId })
-    if (!progress['recordings'] || progress['recordings'].length <= 0) return 0
-    return Math.max.apply(
-      Math,
-      progress['recordings'].map(function(o) {
+    if (!progress.recordings || progress.recordings.length <= 0) return 0
+    return Math.max(
+      ...progress.recordings.map(function map(o) {
         return o.value
       })
     )

@@ -1,7 +1,6 @@
-'use strict'
-
 import grades from './gradeMap'
 
+// eslint-disable-next-line consistent-return
 export default function(grade, system, desiredGrade) {
   const errors = []
 
@@ -12,6 +11,7 @@ export default function(grade, system, desiredGrade) {
     throw new Error(`${errors.join(' and ')} are required.`)
   }
 
+  // eslint-disable-next-line no-shadow
   const gradeSet = grades.data.find(gradeSet => gradeSet[system] === grade)
 
   if (gradeSet) {

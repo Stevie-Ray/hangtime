@@ -16,8 +16,8 @@ export default {
   getCommunityWorkouts: async ({ rootState, commit }) => {
     console.log('request UsersDB')
     const usersDb = new UsersDB(rootState.authentication.user.id)
-    const selected = rootState.authentication.user.settings.selected
-    const hangboards = rootState.authentication.user.settings.hangboards
+    const { selected } = rootState.authentication.user.settings
+    const { hangboards } = rootState.authentication.user.settings
     const communityWorkouts = await usersDb.readAll([
       ['share', '==', true],
       ['company', '==', hangboards[selected].company],
@@ -110,10 +110,11 @@ export default {
 
     const exercise = state.exerciseToCreate
 
-    commit('addExercise', { id: id, data: exercise })
+    commit('addExercise', { id, data: exercise })
 
     commit('setTotalTime', id)
 
+    // eslint-disable-next-line no-shadow
     const workout = state.workouts.find(workout => workout.id === id)
 
     commit('setExerciseToCreate', {
@@ -137,6 +138,7 @@ export default {
     commit('setExercises', { id: payload.workout.id, data: payload.exercises })
 
     const workout = state.workouts.find(
+      // eslint-disable-next-line no-shadow
       workout => workout.id === payload.workout.id
     )
 
@@ -158,6 +160,7 @@ export default {
   shareWorkout: ({ state, commit, dispatch }, id) => {
     commit('shareWorkout', id)
 
+    // eslint-disable-next-line no-shadow
     const workout = state.workouts.find(workout => workout.id === id)
 
     dispatch('updateWorkout', workout)
@@ -172,7 +175,7 @@ export default {
 
     const subscriberList = {
       id: payload.id,
-      subscribers: subscribers
+      subscribers
     }
 
     commit('setSubscribers', subscriberList)

@@ -88,7 +88,7 @@ export default class GenericDB {
    * @param data
    */
   async update(data) {
-    const id = data.id
+    const { id } = data
     const clonedData = cloneDeep(data)
     delete clonedData.id
 

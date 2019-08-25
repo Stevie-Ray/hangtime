@@ -235,7 +235,7 @@ export default {
 
             // this happens only once
             if (this.totalTime === this.currentExercise.rest - 1) {
-              this.vibratePhone
+              this.vibratePhone()
               this.playSound('stop.mp3')
               this.speakText('... and rest')
             }
@@ -248,7 +248,7 @@ export default {
               if (this.totalTime > 0) {
                 this.speakText(this.totalTime)
               } else {
-                this.vibratePhone
+                this.vibratePhone()
                 this.playSound('start.mp3')
                 this.speakText('Go!')
               }
@@ -304,7 +304,7 @@ export default {
             if (this.totalTime > 0) {
               this.speakText(this.totalTime)
             } else {
-              this.vibratePhone
+              this.vibratePhone()
               this.playSound('start.mp3')
               this.speakText('Go!')
             }

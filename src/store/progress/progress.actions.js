@@ -33,6 +33,7 @@ export default {
     commit('addRecording', { id: payload.data.id, data: recording })
 
     const progress = state.progress.find(
+      // eslint-disable-next-line no-shadow
       progress => progress.id === payload.data.id
     )
 

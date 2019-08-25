@@ -176,11 +176,11 @@ export default {
     shortDate,
     clickAddHangboard() {
       const progress = this.hangboardData
-      const selected = this.user.settings.selected
-      progress['type'] = this.id
-      progress['recordings'] = []
-      progress['hangboard'] = this.user.settings.hangboards[selected].hangboard
-      progress['company'] = this.user.settings.hangboards[selected].company
+      const { selected } = this.user.settings
+      progress.type = this.id
+      progress.recordings = []
+      progress.hangboard = this.user.settings.hangboards[selected].hangboard
+      progress.company = this.user.settings.hangboards[selected].company
 
       const exists = this.currentStats.some(
         el =>

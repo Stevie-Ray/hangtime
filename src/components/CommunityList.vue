@@ -55,6 +55,7 @@ export default {
     ...mapState('authentication', ['user']),
     workouts() {
       if (!this.user) return
+      // eslint-disable-next-line consistent-return
       return this.communityWorkoutsByHangboard(this.user)
     }
   }

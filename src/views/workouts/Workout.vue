@@ -366,6 +366,7 @@ export default {
     },
     userWorkout() {
       if (!this.currentWorkout) return
+      // eslint-disable-next-line consistent-return
       return this.currentWorkout.user.id === this.user.id
     },
     isSubscribed() {
@@ -374,6 +375,7 @@ export default {
       const subscribed = this.currentSubscribers.subscribers.some(
         subscriber => subscriber.id === this.user.id
       )
+      // eslint-disable-next-line consistent-return
       return subscribed
     },
     dataName: {
@@ -381,7 +383,7 @@ export default {
         return this.currentWorkout.name
       },
       set(value) {
-        this.setWorkoutName({ id: this.currentWorkout.id, value: value })
+        this.setWorkoutName({ id: this.currentWorkout.id, value })
       }
     },
     dataDescription: {
@@ -389,7 +391,7 @@ export default {
         return this.currentWorkout.description
       },
       set(value) {
-        this.setWorkoutDescription({ id: this.currentWorkout.id, value: value })
+        this.setWorkoutDescription({ id: this.currentWorkout.id, value })
       }
     },
     dataDifficulty: {
@@ -397,7 +399,7 @@ export default {
         return this.currentWorkout.level
       },
       set(value) {
-        this.setWorkoutDifficulty({ id: this.currentWorkout.id, value: value })
+        this.setWorkoutDifficulty({ id: this.currentWorkout.id, value })
       }
     }
   },

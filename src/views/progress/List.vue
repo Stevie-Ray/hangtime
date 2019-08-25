@@ -165,20 +165,22 @@ export default {
     currentStatsLabels() {
       if (
         this.currentStats[this.index] &&
-        this.currentStats[this.index]['recordings'].length === 0
+        this.currentStats[this.index].recordings.length === 0
       ) {
         return
       }
-      return this.currentStats[this.index]['recordings'].map(a => a.label)
+      // eslint-disable-next-line consistent-return
+      return this.currentStats[this.index].recordings.map(a => a.label)
     },
     currentStatsValue() {
       if (
         this.currentStats[this.index] &&
-        this.currentStats[this.index]['recordings'].length === 0
+        this.currentStats[this.index].recordings.length === 0
       ) {
         return
       }
-      return this.currentStats[this.index]['recordings'].map(a => a.value)
+      // eslint-disable-next-line consistent-return
+      return this.currentStats[this.index].recordings.map(a => a.value)
     },
     currentType() {
       return this.typeById(this.id)

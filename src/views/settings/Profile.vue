@@ -225,6 +225,7 @@ export default {
         fr.readAsDataURL(files[0])
         fr.addEventListener('load', () => {
           this.imageUrl = fr.result
+          // eslint-disable-next-line prefer-destructuring
           this.imageFile = files[0] // this is an image file that can be sent to server...
           // this.data.body.avatar = this.imageFile;
           // this.user.photoURL = this.imageUrl;
