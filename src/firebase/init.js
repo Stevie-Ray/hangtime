@@ -4,7 +4,7 @@ import 'firebase/auth'
 // The configuration below is not sensitive data. You can serenely add your config here
 const config = {
   apiKey: 'AIzaSyDkE4T_MphbbPVq8gdnZjyRcLCDcqrheW8',
-  authDomain: 'hangtime-app.firebaseapp.com',
+  authDomain: 'auth.hangtime.stevie-ray.nl',
   databaseURL: 'https://hangtime-app.firebaseio.com',
   projectId: 'hangtime-app',
   storageBucket: 'hangtime-app.appspot.com',
