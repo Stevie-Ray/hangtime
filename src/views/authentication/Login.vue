@@ -134,7 +134,7 @@ export default {
         // eslint-disable-next-line no-unused-expressions
         isDekstop()
           ? await firebase.auth().signInWithPopup(provider)
-          : await firebase.auth().signInWithRedirect(provider)
+          : await firebase.auth().signInWithPopup(provider)
       } catch (err) {
         this.loginError = err
         this.setUser(null)
