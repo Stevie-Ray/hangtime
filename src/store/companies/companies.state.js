@@ -836,11 +836,88 @@ export default {
       name: 'So iLL',
       id: 12,
       website: 'https://soillholds.com/',
-      disabled: true,
       hangboards: [
         {
-          name: 'Blister Board',
+          name: 'All Chalk No Action',
           id: 0,
+          image: 'hangboards/SOILLALLCHALK.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Blister Board',
+          id: 1,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -852,7 +929,8 @@ export default {
         },
         {
           name: 'Remedy Board',
-          id: 1,
+          id: 2,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -864,7 +942,8 @@ export default {
         },
         {
           name: 'Boost Board',
-          id: 2,
+          id: 3,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -876,7 +955,8 @@ export default {
         },
         {
           name: 'Crimp Reaper',
-          id: 3,
+          id: 4,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -888,7 +968,8 @@ export default {
         },
         {
           name: 'Iron Palm',
-          id: 4,
+          id: 5,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -900,7 +981,8 @@ export default {
         },
         {
           name: 'SlopeyMon',
-          id: 5,
+          id: 6,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
