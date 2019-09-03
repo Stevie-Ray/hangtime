@@ -138,7 +138,7 @@
           ticks
           thumb-size="48"
           :disabled="!editWorkout"
-          prepend-icon="mdi-restore-clock"
+          prepend-icon="mdi-history"
           hint="Easy way to repeat this exercise"
           persistent-hint
           label="Repeat"

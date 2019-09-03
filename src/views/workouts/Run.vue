@@ -70,9 +70,11 @@
                     <div class="bottom-data__exercise">
                       <div class="data">
                         <v-icon small>mdi-timer</v-icon>
-                        {{ currentStep + 1 }}/{{
-                          currentWorkout.exercises.length
-                        }}
+                        <span
+                          >{{ currentStep + 1 }}/{{
+                            currentWorkout.exercises.length
+                          }}</span
+                        >
                       </div>
                     </div>
                     <div
@@ -80,8 +82,10 @@
                       class="bottom-data__repeat"
                     >
                       <div class="data">
-                        <v-icon small>mdi-restore-clock</v-icon>
-                        {{ stepRepeat }}/{{ currentExercise.repeat }}
+                        <v-icon small>mdi-history</v-icon>
+                        <span
+                          >{{ stepRepeat }}/{{ currentExercise.repeat }}</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -368,9 +372,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 .bottom-data {
-  > div {
-    display: inline-block;
-    width: 50%;
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  > div > div {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 12px;
+    span {
+      display: inline-block;
+      padding: 0 4px;
+    }
   }
 }
 
@@ -378,6 +397,10 @@ export default {
   font-size: 1.8rem;
   font-weight: bold;
   padding: 0 8px;
+}
+
+.v-progress-circular__info {
+  flex-direction: column;
 }
 
 #app .run {
