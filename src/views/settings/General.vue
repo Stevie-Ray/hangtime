@@ -61,6 +61,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
 
 export default {
@@ -77,20 +78,7 @@ export default {
     ]
   },
   data: () => ({
-    scale: [
-      { name: 'Hueco / Vermin', value: 'vermin' },
-      { name: 'Fontainebleau', value: 'font' },
-      { name: 'IRCRA - Rock Climbing Association', value: 'ircra' },
-      { name: 'YDS - Yosemite Decimal System', value: 'yds' },
-      { name: 'French', value: 'french' },
-      { name: 'British - Adjectival', value: 'british' },
-      { name: 'British - Technical', value: 'tech' },
-      { name: 'Ewbank', value: 'ewbank' },
-      { name: 'Brazilian', value: 'brz' },
-      { name: 'UIAA - Associations d’Alpinisme', value: 'uiaa' },
-      { name: 'UIAA Metric', value: 'uiaa_metric' },
-      { name: 'Watts', value: 'watts' }
-    ]
+    scale: new IRCRA().scale()
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),

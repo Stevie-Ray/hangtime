@@ -30,6 +30,7 @@ export default {
   workoutById: state => workoutId => {
     let data = find(state.workouts, { id: workoutId })
     if (!data) data = find(state.communityWorkouts, { id: workoutId })
+    if (workoutId === 'new') return state.workoutToCreate
     return data
   },
   /**

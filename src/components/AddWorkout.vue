@@ -17,7 +17,6 @@
                   counter="24"
                   :rules="[rules.required, rules.length(24)]"
                   label="Workout name *"
-                  required
                 >
                 </v-text-field>
               </v-flex>
@@ -29,7 +28,7 @@
                   :rules="[rules.required, rules.length(140)]"
                   class="workout-description-input"
                   placeholder="Give a short description of your workout, for example indicate when this training is suitable"
-                  label="Workout description"
+                  label="Workout description *"
                 ></v-textarea>
               </v-flex>
 
@@ -39,7 +38,8 @@
                   :items="levels"
                   item-text="name"
                   item-value="value"
-                  label="Difficulty"
+                  label="Difficulty *"
+                  :rules="[rules.required]"
                 >
                 </v-select>
               </v-flex>
@@ -59,7 +59,11 @@
           text
           class="add-exersice-btn"
           :disabled="
-            workoutToCreateName === '' || workoutToCreateDescription === ''
+            workoutToCreateName === '' ||
+              typeof workoutToCreateName === 'undefined' ||
+              workoutToCreateDescription === '' ||
+              typeof workoutToCreateDescription === 'undefined' ||
+              typeof workoutToCreateDifficulty === 'undefined'
           "
           @click="saveWorkout"
         >
@@ -97,33 +101,31 @@ export default {
       get() {
         return this.workoutToCreate.name
       },
-      set(value) {
-        this.setWorkoutToCreate({ name: value })
+      set(input) {
+        this.setWorkoutToCreate({ name: input })
       }
     },
     workoutToCreateDescription: {
       get() {
         return this.workoutToCreate.description
       },
-      set(value) {
-        this.setWorkoutToCreate({ description: value })
+      set(input) {
+        this.setWorkoutToCreate({ description: input })
       }
     },
     workoutToCreateDifficulty: {
       get() {
         return this.workoutToCreate.level
       },
-      set(value) {
-        this.setWorkoutToCreate({ level: value })
+      set(input) {
+        this.setWorkoutToCreate({ level: input })
       }
     },
     show: {
       get() {
         return this.value
       },
-      set(value) {
-        this.$emit('input', value)
-      }
+      set() {}
     }
   },
   methods: {

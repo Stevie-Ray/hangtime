@@ -155,6 +155,7 @@ export default {
     ]
   },
   data: () => ({
+    ircra: new IRCRA(),
     rules: {
       length: len => v =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
@@ -175,11 +176,16 @@ export default {
     },
     settingsGrade: {
       get() {
-        return this.user.settings.grade
+        const ircraGrade = this.ircra
+          .convert('ircra', this.user.settings.grade)
+          .to(this.user.settings.scale)[this.user.settings.scale]
+        return ircraGrade
       },
       set(value) {
-        // this.gradeSelected = value
-        this.setGrade(value)
+        const ircraGrade = this.ircra
+          .convert(this.user.settings.scale, value)
+          .to('ircra').ircra
+        this.setGrade(ircraGrade)
       }
     },
     userStatus: {
@@ -191,7 +197,7 @@ export default {
       }
     },
     grades() {
-      return JSON.parse(new IRCRA().get(this.user.settings.scale))
+      return this.ircra.get(this.user.settings.scale)
     }
   },
   methods: {

@@ -7,7 +7,7 @@ export default {
       ...workoutFieldToCreate
     }),
   /* Workouts */
-  setWorkouts: (state, workouts) => (state.workouts = workouts),
+  setWorkouts: (state, workouts) => (state.workouts = workouts.reverse()),
   // setWorkout: (state, workout) => (state.workout = workout),
   setWorkoutName: (state, payload) => {
     const index = state.workouts.findIndex(
@@ -118,7 +118,7 @@ export default {
 
   /* Community */
   setCommunityWorkouts: (state, communityWorkouts) =>
-    (state.communityWorkouts = communityWorkouts),
+    (state.communityWorkouts = communityWorkouts.reverse()),
 
   shareWorkout: (state, workoutId) => {
     let index = state.workouts.findIndex(workout => workout.id === workoutId)

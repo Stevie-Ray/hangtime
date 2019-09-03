@@ -24,7 +24,7 @@
             </span>
           </div>
         </span>
-        <!-- This will be display while loading the products -->
+        <!-- This will be display while loading workouts -->
         <span v-else>
           Fetching workout...
         </span>
@@ -32,6 +32,7 @@
 
       <v-spacer></v-spacer>
 
+      <!-- share -->
       <v-btn
         v-if="currentWorkout && userWorkout && !editWorkout"
         icon
@@ -40,6 +41,8 @@
         <v-icon v-if="currentWorkout.share">mdi-account-group</v-icon>
         <v-icon v-else>mdi-account-group-outline</v-icon>
       </v-btn>
+
+      <!-- subscribe -->
       <v-btn v-if="currentWorkout && !userWorkout" icon>
         <v-icon
           v-if="isSubscribed"
@@ -71,14 +74,18 @@
           {{ currentSubscribers.subscribers.length }}
         </span>
       </v-btn>
+
+      <!-- edit -->
       <v-btn v-if="!editWorkout && userWorkout" icon @click="edit = true">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
 
+      <!-- save -->
       <v-btn v-if="editWorkout" icon @click="edit = false">
         <v-icon>mdi-content-save</v-icon>
       </v-btn>
 
+      <!-- menu -->
       <v-menu v-if="editWorkout" bottom left min-width="200">
         <template v-slot:activator="{ on }">
           <v-btn dark icon v-on="on">
@@ -195,11 +202,9 @@
                     }}</v-list-item-title>
                     <v-list-item-subtitle>
                       {{
-                        JSON.parse(
-                          ircra
-                            .convert('ircra', currentWorkout.user.grade)
-                            .to(user.settings.scale)
-                        )[user.settings.scale]
+                        ircra
+                          .convert('ircra', currentWorkout.user.grade)
+                          .to(user.settings.scale)[user.settings.scale]
                       }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
@@ -407,6 +412,9 @@ export default {
   mounted() {
     if (!this.userWorkout && !this.currentSubscribers) {
       this.getWorkoutSubscribers({ id: this.id, user: this.userId })
+    }
+    if (this.userWorkout && !this.currentWorkout.exercises.length) {
+      this.edit = true
     }
   },
   methods: {

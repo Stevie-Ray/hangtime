@@ -15,7 +15,7 @@
         <v-list-item-content>
           <v-list-item-title>No exercises added yet</v-list-item-title>
           <v-list-item-subtitle
-            >use the <v-icon small>mdi-pencil</v-icon> and
+            >use the
             <v-icon small>mdi-plus</v-icon>
             button to add an exercise
           </v-list-item-subtitle>

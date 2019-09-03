@@ -16,16 +16,21 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title> {{ option.name }}</v-list-item-title>
-              <v-list-item-subtitle></v-list-item-subtitle>
+              <v-list-item-subtitle v-if="lastStats(option.id)">
+                Last recording: {{ shortDate(lastStats(option.id)) }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle v-else>
+                No recordings yet
+              </v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-action>
+            <v-list-item-action class="text-right">
               <v-list-item-action-text>
-                <span v-if="option.configurable">
+                <v-chip class="mt-2" x-small v-if="option.configurable">
                   {{ bestStats(option.id) }}x
-                </span>
-                <span v-else>
+                </v-chip>
+                <v-chip x-small v-else>
                   {{ count(bestStats(option.id)) }}
-                </span>
+                </v-chip>
               </v-list-item-action-text>
             </v-list-item-action>
           </v-list-item>
@@ -38,7 +43,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { getImg, count } from '@/misc/helpers'
+import { getImg, count, shortDate } from '@/misc/helpers'
 
 export default {
   head: {
@@ -63,13 +68,20 @@ export default {
     ...mapState('workouts', ['options']),
     ...mapState('app', ['networkOnLine']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('progress', ['totalBestStatsById'])
+    ...mapGetters('progress', ['totalBestStatsById', 'lastStatsById'])
   },
   methods: {
     getImg,
     count,
+    shortDate,
     bestStats(option) {
       return this.totalBestStatsById({
+        type: option,
+        settings: this.user.settings
+      })
+    },
+    lastStats(option) {
+      return this.lastStatsById({
         type: option,
         settings: this.user.settings
       })

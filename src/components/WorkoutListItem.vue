@@ -20,15 +20,16 @@
 
       <v-list-item-action class="text-right">
         <v-list-item-action-text>
-          <span>{{
-            JSON.parse(
-              ircra.convert('ircra', data.user.grade).to(user.settings.scale)
-            )[user.settings.scale]
-          }}</span>
-          <br />
-          <strong v-if="difficultyById(data.level)">
+          <v-chip class="mt-2" x-small v-if="difficultyById(data.level)">
             {{ difficultyById(data.level).name }}
-          </strong>
+          </v-chip>
+          <div class="mr-3 mt-1">
+            {{
+              ircra.convert('ircra', data.user.grade).to(user.settings.scale)[
+                user.settings.scale
+              ]
+            }}
+          </div>
         </v-list-item-action-text>
       </v-list-item-action>
     </v-list-item>
