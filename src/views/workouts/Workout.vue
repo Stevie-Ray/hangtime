@@ -195,11 +195,11 @@
                     }}</v-list-item-title>
                     <v-list-item-subtitle>
                       {{
-                        gradeConvert(
-                          currentWorkout.user.grade,
-                          'ircra',
-                          user.settings.scale
-                        )
+                        JSON.parse(
+                          ircra
+                            .convert('ircra', currentWorkout.user.grade)
+                            .to(user.settings.scale)
+                        )[user.settings.scale]
                       }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
@@ -307,9 +307,9 @@
 
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
+import IRCRA from 'ircra'
 import ExerciseList from '@/components/ExerciseList'
 import { getImg, count } from '@/misc/helpers'
-import gradeConvert from '@/misc/ircra'
 
 export default {
   components: { ExerciseList },
@@ -319,6 +319,7 @@ export default {
     userId: String
   },
   data: () => ({
+    ircra: new IRCRA(),
     edit: null,
     dialogs: {
       general: false,
@@ -411,7 +412,6 @@ export default {
   methods: {
     count,
     getImg,
-    gradeConvert,
     ...mapActions('workouts', [
       'deleteUserWorkout',
       'triggerUpdateWorkout',

@@ -21,7 +21,9 @@
       <v-list-item-action class="text-right">
         <v-list-item-action-text>
           <span>{{
-            gradeConvert(data.user.grade, 'ircra', user.settings.scale)
+            JSON.parse(
+              ircra.convert('ircra', data.user.grade).to(user.settings.scale)
+            )[user.settings.scale]
           }}</span>
           <br />
           <strong v-if="difficultyById(data.level)">
@@ -37,22 +39,24 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import IRCRA from 'ircra'
 import { getImg, count } from '@/misc/helpers'
-import gradeConvert from '@/misc/ircra'
 
 export default {
   props: {
     data: Object,
     index: Number
   },
+  data: () => ({
+    ircra: new IRCRA()
+  }),
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('workouts', ['difficultyById'])
   },
   methods: {
     getImg,
-    count,
-    gradeConvert
+    count
   }
 }
 </script>

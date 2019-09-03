@@ -138,8 +138,8 @@
 <script>
 import firebase from 'firebase/app'
 import { mapState, mapActions, mapMutations } from 'vuex'
+import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
-import grades from '@/misc/gradeMap'
 
 export default {
   head: {
@@ -155,7 +155,6 @@ export default {
     ]
   },
   data: () => ({
-    grades: grades.data,
     rules: {
       length: len => v =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
@@ -190,6 +189,9 @@ export default {
       set(value) {
         this.setStatus(value)
       }
+    },
+    grades() {
+      return JSON.parse(new IRCRA().get(this.user.settings.scale))
     }
   },
   methods: {

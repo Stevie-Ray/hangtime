@@ -62,7 +62,6 @@
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
-import grades from '@/misc/gradeMap'
 
 export default {
   head: {
@@ -78,7 +77,6 @@ export default {
     ]
   },
   data: () => ({
-    grades: grades.data,
     scale: [
       { name: 'Hueco / Vermin', value: 'vermin' },
       { name: 'Fontainebleau', value: 'font' },
