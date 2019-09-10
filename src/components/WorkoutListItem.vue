@@ -20,7 +20,7 @@
 
       <v-list-item-action class="text-right">
         <v-list-item-action-text>
-          <v-chip class="mt-2" x-small v-if="difficultyById(data.level)">
+          <v-chip v-if="difficultyById(data.level)" class="mt-2" x-small>
             {{ difficultyById(data.level).name }}
           </v-chip>
           <div class="mr-3 mt-1">
