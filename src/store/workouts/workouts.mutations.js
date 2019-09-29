@@ -132,24 +132,19 @@ export default {
       state.communityWorkouts.splice(index, 1)
     }
   },
-  setSubscribers: (state, subscribers) =>
-    state.subscribers.unshift(subscribers),
   addSubscriber: (state, payload) => {
-    const index = state.subscribers.findIndex(
+    const index = state.communityWorkouts.findIndex(
       workout => workout.id === payload.id
     )
-    state.subscribers[index].subscribers.unshift({ id: payload.user })
+    const { subscribers } = state.communityWorkouts[index]
+    subscribers.unshift(payload.user)
   },
   removeSubscriber: (state, payload) => {
-    const index = state.subscribers.findIndex(
+    const index = state.communityWorkouts.findIndex(
       workout => workout.id === payload.id
     )
-    const subscribersList = state.subscribers[index]
-
-    const subscriber = subscribersList.subscribers.findIndex(
-      // eslint-disable-next-line no-shadow
-      subscriber => (subscriber.id = payload.user)
-    )
-    state.subscribers[index].subscribers.splice(subscriber, 1)
+    const { subscribers } = state.communityWorkouts[index]
+    const userIndex = subscribers.indexOf(payload.user)
+    subscribers.splice(userIndex, 1)
   }
 }

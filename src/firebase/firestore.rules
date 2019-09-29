@@ -11,6 +11,7 @@ service cloud.firestore {
 
     match /{path=**}/workouts/{workoutId} {
       allow read: if authenticated()
+      allow update: if authenticated()
     }
 
     match /users/{userId}/workouts/{workoutId} {
@@ -18,13 +19,6 @@ service cloud.firestore {
       allow list: if authenticated() && request.auth.uid == userId;
       allow create: if authenticated() && request.auth.uid == userId;
       allow update, delete: if authenticated() && request.auth.uid == userId;
-    }
-
-    match /{path=**}/workouts/{workoutId}/subscribers/{subscriberId} {
-      allow get: if authenticated()
-      allow list: if authenticated()
-      allow create: if authenticated() && request.auth.uid == subscriberId;
-      allow update, delete: if authenticated() && request.auth.uid == subscriberId;
     }
 
      match /users/{userId}/progress/{progressId} {

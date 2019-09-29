@@ -1,6 +1,5 @@
 import UserWorkoutsDB from '@/firebase/user-workouts-db'
 import UsersDB from '@/firebase/users-db'
-import WorkoutSubscriberDB from '@/firebase/workout-subscriber-db'
 
 export default {
   /**
@@ -8,9 +7,10 @@ export default {
    */
   getUserWorkouts: async ({ rootState, commit }) => {
     console.log('request UserWorkoutsDB')
-    const userWorkoutsDb = new UserWorkoutsDB(rootState.authentication.user.id)
-
-    const workouts = await userWorkoutsDb.readAll()
+    const usersDb = new UsersDB(rootState.authentication.user.id)
+    const workouts = await usersDb.readAll([
+      ['subscribers', 'array-contains', rootState.authentication.user.id]
+    ])
     commit('setWorkouts', workouts)
   },
   getCommunityWorkouts: async ({ rootState, commit }) => {
@@ -51,6 +51,7 @@ export default {
       hangboard: state.workoutToCreate.hangboard,
       company: state.workoutToCreate.company,
       exercises: [],
+      subscribers: [state.workoutToCreate.user.id],
       user: {
         displayName: state.workoutToCreate.user.displayName,
         grade: state.workoutToCreate.user.grade,
@@ -165,37 +166,27 @@ export default {
 
     dispatch('updateWorkout', workout)
   },
-  getWorkoutSubscribers: async ({ commit }, payload) => {
-    const workoutSubscriberDb = new WorkoutSubscriberDB(
-      payload.user,
-      payload.id
-    )
-
-    const subscribers = await workoutSubscriberDb.readAll()
-
-    const subscriberList = {
-      id: payload.id,
-      subscribers
-    }
-
-    commit('setSubscribers', subscriberList)
-  },
-  triggerAddWorkoutSubscriber: async ({ commit }, payload) => {
-    const workoutSubscriberDb = new WorkoutSubscriberDB(
-      payload.userId,
-      payload.id
-    )
-    await workoutSubscriberDb.create({ id: payload.user }, payload.user)
-
+  triggerAddWorkoutSubscriber: async ({ state, commit }, payload) => {
     commit('addSubscriber', { id: payload.id, user: payload.user })
-  },
-  triggerRemoveWorkoutSubscriber: async ({ commit }, payload) => {
-    const workoutSubscriberDb = new WorkoutSubscriberDB(
-      payload.userId,
-      payload.id
-    )
-    await workoutSubscriberDb.delete(payload.user)
 
+    const workout = state.communityWorkouts.find(
+      // eslint-disable-next-line no-shadow
+      workout => workout.id === payload.id
+    )
+
+    const userWorkoutsDb = new UserWorkoutsDB(payload.userId)
+    await userWorkoutsDb.update(workout)
+    commit('addWorkout', workout)
+  },
+  triggerRemoveWorkoutSubscriber: async ({ state, commit }, payload) => {
     commit('removeSubscriber', { id: payload.id, user: payload.user })
+
+    const workout = state.communityWorkouts.find(
+      // eslint-disable-next-line no-shadow
+      workout => workout.id === payload.id
+    )
+    commit('removeWorkoutById', workout.id)
+    const userWorkoutsDb = new UserWorkoutsDB(payload.userId)
+    await userWorkoutsDb.update(workout)
   }
 }

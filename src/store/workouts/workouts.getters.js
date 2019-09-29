@@ -33,12 +33,12 @@ export default {
     if (workoutId === 'new') return state.workoutToCreate
     return data
   },
-  /**
-   * Get subscribers of a workout by id
-   */
-  subscribersById: state => workoutId => {
-    return find(state.subscribers, { id: workoutId })
-  },
+  // /**
+  //  * Get subscribers of a workout by id
+  //  */
+  // subscribersById: state => workoutId => {
+  //   return find(state.subscribers, { id: workoutId })
+  // },
 
   // /**
   //  * Get a workout by id

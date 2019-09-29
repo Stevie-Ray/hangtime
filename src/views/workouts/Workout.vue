@@ -38,8 +38,8 @@
         icon
         @click="triggerShareWorkout"
       >
-        <v-icon v-if="currentWorkout.share">mdi-account-group</v-icon>
-        <v-icon v-else>mdi-account-group-outline</v-icon>
+        <v-icon v-if="!currentWorkout.share">mdi-share</v-icon>
+        <v-icon v-else>mdi-share-off</v-icon>
       </v-btn>
 
       <!-- subscribe -->
@@ -68,10 +68,8 @@
         >
           mdi-star-outline
         </v-icon>
-        <span
-          v-if="currentSubscribers && currentSubscribers.subscribers.length > 0"
-        >
-          {{ currentSubscribers.subscribers.length }}
+        <span v-if="currentSubscribers && currentSubscribers.length > 0">
+          {{ currentSubscribers.length }}
         </span>
       </v-btn>
 
@@ -362,7 +360,9 @@ export default {
       return this.workoutById(this.id)
     },
     currentSubscribers() {
-      return this.subscribersById(this.id)
+      if (!this.currentWorkout) return
+      // eslint-disable-next-line consistent-return
+      return this.currentWorkout.subscribers
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {
@@ -377,9 +377,9 @@ export default {
     },
     isSubscribed() {
       if (!this.currentSubscribers) return
-      if (!this.currentSubscribers.subscribers.length > 0) return
-      const subscribed = this.currentSubscribers.subscribers.some(
-        subscriber => subscriber.id === this.user.id
+      if (!this.currentSubscribers.length > 0) return
+      const subscribed = this.currentSubscribers.some(
+        subscriber => subscriber === this.user.id
       )
       // eslint-disable-next-line consistent-return
       return subscribed
@@ -410,9 +410,6 @@ export default {
     }
   },
   mounted() {
-    if (!this.userWorkout && !this.currentSubscribers) {
-      this.getWorkoutSubscribers({ id: this.id, user: this.userId })
-    }
     if (this.userWorkout && !this.currentWorkout.exercises.length) {
       this.edit = true
     }
@@ -425,7 +422,6 @@ export default {
       'triggerUpdateWorkout',
       'triggerAddExerciseAction',
       'shareWorkout',
-      'getWorkoutSubscribers',
       'triggerAddWorkoutSubscriber',
       'triggerRemoveWorkoutSubscriber'
     ]),
