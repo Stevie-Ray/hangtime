@@ -17,7 +17,7 @@
   "dependencies": {
     "@mdi/font": "^4.4.95",
     "core-js": "^3.2.1",
-    "firebase": "^6.6.2",
+    "firebase": "^7.0.0",
     "ircra": "^2.2.4",
     "is_js": "^0.9.0",
     "lodash": "^4.17.15",
@@ -29,7 +29,7 @@
     "vue-router": "^3.1.3",
     "vue-simple-svg": "^1.3.2",
     "vuedraggable": "^2.23.1",
-    "vuetify": "^2.0.19",
+    "vuetify": "^2.1.0",
     "vuex": "^3.1.1",
     "vuex-persistedstate": "^2.5.4"
   },
@@ -48,7 +48,7 @@
     "babel-jest": "^24.9.0",
     "babel-plugin-lodash": "^3.3.4",
     "bundlesize": "github:kefranabg/bundlesize",
-    "eslint": "^6.5.0",
+    "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-google": "^0.14.0",

@@ -672,16 +672,100 @@ export default {
       name: 'Metolius',
       id: 8,
       website: 'https://www.maxclimbing.com/',
-      disabled: true,
       hangboards: [
         {
           name: 'Contact',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/METOLIUSCONTACT.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
+              name: ''
+            },
+            {
+              id: 'h15',
+              class: 14,
+              name: ''
+            },
+            {
+              id: 'h16',
+              class: 15,
+              name: ''
+            },
+            {
+              id: 'h17',
+              class: 16,
+              name: ''
+            },
+            {
+              id: 'h18',
+              class: 17,
               name: ''
             }
           ]
@@ -689,6 +773,7 @@ export default {
         {
           name: 'Simulator 3D',
           id: 1,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -701,6 +786,7 @@ export default {
         {
           name: 'The Foundry',
           id: 2,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -713,6 +799,7 @@ export default {
         {
           name: 'Project',
           id: 3,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -725,6 +812,7 @@ export default {
         {
           name: 'Wood Grips - Compact II',
           id: 4,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -737,6 +825,7 @@ export default {
         {
           name: 'Wood Grips - Deluxe II',
           id: 5,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
