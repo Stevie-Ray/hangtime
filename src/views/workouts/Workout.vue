@@ -296,7 +296,7 @@
                 color="secondary"
                 dark
                 fab
-                @click="triggerAddExerciseAction(id)"
+                @click="addExercise"
               >
                 <v-icon>mdi-playlist-plus</v-icon>
               </v-btn>
@@ -426,6 +426,17 @@ export default {
       'setWorkoutDescription',
       'setWorkoutDifficulty'
     ]),
+    addExercise() {
+      this.triggerAddExerciseAction(this.id)
+      this.$router.push({
+        name: 'exercise',
+        params: {
+          id: this.id,
+          index: this.currentWorkout.exercises.length - 1,
+          editingWorkout: true
+        }
+      })
+    },
     deleteWorkout(id) {
       this.deleteUserWorkout(id)
       this.$router.push({ name: 'workouts' })

@@ -140,7 +140,14 @@ export default {
           photoURL: this.user.photoURL
         }
       })
-      this.setTotalTime('new')
+      this.$router.push({
+        name: 'exercise',
+        params: {
+          id: 'new',
+          index: this.currentWorkout.exercises.length - 1,
+          editingWorkout: true
+        }
+      })
     },
     saveExercises() {
       this.dialog = true
