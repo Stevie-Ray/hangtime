@@ -121,7 +121,7 @@ export default {
       exercise: 0,
       left: 0,
       right: 0,
-      pause: 15,
+      pause: 10,
       hold: 10,
       repeat: 1,
       rest: 0,
