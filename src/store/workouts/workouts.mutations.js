@@ -1,4 +1,11 @@
+import Vue from 'vue'
+
 export default {
+  resetWorkoutToCreate: state => {
+    state.workoutToCreate = {
+      exercises: []
+    }
+  },
   /* Workout inputs */
   setWorkoutToCreate: (state, workoutFieldToCreate) =>
     // state.workoutToCreate[workoutFieldToCreate] = workoutFieldContentToCreate
@@ -42,7 +49,11 @@ export default {
   },
   setExercises: (state, payload) => {
     const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises = payload.data
+    if (index >= 0) {
+      state.workouts[index].exercises = payload.data
+    } else {
+      state.workoutToCreate.exercises = payload.data
+    }
   },
   /* Workout creation */
   setWorkoutCreationPending: (state, value) =>
@@ -50,56 +61,69 @@ export default {
 
   addExercise: (state, payload) => {
     const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises.push(payload.data)
+    if (payload.id === 'new') {
+      state.workoutToCreate.exercises.push(payload.data)
+      // state.workoutToCreate.exercises = {
+      //   ...state.workoutToCreate.exercises,
+      //   ...payload.data
+      // }
+    } else {
+      state.workouts[index].exercises.push(payload.data)
+    }
   },
-
-  setExercise: (state, payload) => {
+  setData: (state, payload) => {
     const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].exercise = payload.value
-  },
-  setPause: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].pause = payload.value
-  },
-  setHold: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].hold = payload.value
-  },
-  setPullups: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].pullups = payload.value
-  },
-  setRepeat: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].repeat = payload.value
-  },
-  setRightHold: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].right = payload.value
-  },
-  setLeftHold: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].left = payload.value
-  },
-  setRest: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    state.workouts[index].exercises[payload.index].rest = payload.value
+    if (payload.id === 'new') {
+      const data = {
+        ...state.workoutToCreate.exercises[payload.index],
+        ...payload.value
+      }
+      Vue.set(state.workoutToCreate.exercises, payload.index, data)
+    } else {
+      const data = {
+        ...state.workouts[index].exercises[payload.index],
+        ...payload.value
+      }
+      Vue.set(state.workouts[index].exercises, payload.index, data)
+    }
   },
   setTime: (state, payload) => {
     const index = state.workouts.findIndex(workout => workout.id === payload.id)
-    const item = state.workouts[index].exercises[payload.index]
+    let item
+    if (payload.id === 'new') {
+      item = state.workoutToCreate.exercises[payload.index]
+    } else {
+      item = state.workouts[index].exercises[payload.index]
+    }
     let time = item.pause + item.hold
     if (item.repeat > 1) {
       time = item.pause + (item.hold + item.rest) * item.repeat
     }
-    state.workouts[index].exercises[payload.index].time = time
+    if (payload.id === 'new') {
+      Vue.set(state.workoutToCreate.exercises[payload.index], 'time', time)
+    } else {
+      Vue.set(state.workouts[index].exercises[payload.index], 'time', time)
+    }
   },
   setTotalTime: (state, workoutId) => {
     const index = state.workouts.findIndex(workout => workout.id === workoutId)
-    const item = state.workouts[index].exercises
+    let item
+    if (workoutId === 'new') {
+      item = state.workoutToCreate.exercises
+    } else {
+      item = state.workouts[index].exercises
+    }
     // eslint-disable-next-line no-shadow
     const time = item.reduce((sum, { time }) => sum + time, 0)
-    state.workouts[index].time = time
+    if (workoutId === 'new') {
+      state.workoutToCreate.time = time
+    } else {
+      state.workouts[index].time = time
+    }
+  },
+  addExerciseToCreate(state, exercise) {
+    // mutate state
+    state.workoutToCreate.exercises.push(exercise)
   },
   /* Exercise inputs */
   setExerciseToCreate: (state, exerciseFieldToCreate) =>
@@ -113,7 +137,11 @@ export default {
     const index = state.workouts.findIndex(
       workout => workout.id === payload.workout.id
     )
-    state.workouts[index].exercises.splice(payload.index, 1)
+    if (index >= 0) {
+      state.workouts[index].exercises.splice(payload.index, 1)
+    } else {
+      state.workoutToCreate.exercises.splice(payload.index, 1)
+    }
   },
 
   /* Community */

@@ -298,7 +298,7 @@
                 fab
                 @click="triggerAddExerciseAction(id)"
               >
-                <v-icon>mdi-plus</v-icon>
+                <v-icon>mdi-playlist-plus</v-icon>
               </v-btn>
             </v-speed-dial>
           </v-flex>
@@ -351,11 +351,7 @@ export default {
     ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['levels']),
-    ...mapGetters('workouts', [
-      'workoutById',
-      'difficultyById',
-      'subscribersById'
-    ]),
+    ...mapGetters('workouts', ['workoutById', 'difficultyById']),
     currentWorkout() {
       return this.workoutById(this.id)
     },

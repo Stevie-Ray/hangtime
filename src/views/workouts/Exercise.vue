@@ -1,16 +1,8 @@
 <template>
   <v-layout class="exercise">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon
-        @click="
-          $router.push({
-            name: 'workout',
-            params: { id: id, editingWorkout: editWorkout, userId: userId }
-          })
-        "
-        >mdi-arrow-left
-      </v-icon>
-      <v-avatar size="32px">
+      <v-icon @click="goBack">mdi-arrow-left </v-icon>
+      <v-avatar v-if="currentWorkout && currentWorkout.user" size="32px">
         <v-img
           v-if="networkOnLine"
           :src="currentWorkout.user.photoURL"
@@ -89,7 +81,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
 import ExerciseItem from '@/components/ExerciseItem'
 import { getImg, count } from '@/misc/helpers'
 
@@ -129,6 +121,7 @@ export default {
       return this.currentWorkout.exercises[this.index]
     },
     userWorkout() {
+      if (!this.currentWorkout.user) return false
       return this.currentWorkout.user.id === this.user.id
     },
     editWorkout() {
@@ -142,19 +135,41 @@ export default {
     count,
     getImg,
     ...mapActions('workouts', ['deleteUserExercise', 'triggerUpdateWorkout']),
+    ...mapMutations('workouts', ['setTotalTime']),
     deleteExercise() {
       this.deleteUserExercise({
         workout: this.workoutById(this.id),
         index: this.index
       })
+      let name = 'workout'
+      if (this.id === 'new') {
+        name = 'new-workout'
+        this.setTotalTime('new')
+      }
       this.$router.push({
-        name: 'workout',
+        name,
         params: { id: this.id, UserId: this.UserId }
       })
     },
     clickUpdateExercise() {
       this.triggerUpdateWorkout(this.workoutById(this.id))
       this.edit = false
+      this.goBack()
+    },
+    goBack() {
+      let name = 'workout'
+      if (this.id === 'new') {
+        name = 'new-workout'
+        this.setTotalTime('new')
+      }
+      this.$router.push({
+        name,
+        params: {
+          id: this.id,
+          editingWorkout: this.editWorkout,
+          userId: this.userId
+        }
+      })
     }
   }
 }

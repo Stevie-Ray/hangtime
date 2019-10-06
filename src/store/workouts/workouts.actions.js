@@ -50,7 +50,8 @@ export default {
       level: state.workoutToCreate.level,
       hangboard: state.workoutToCreate.hangboard,
       company: state.workoutToCreate.company,
-      exercises: [],
+      exercises: state.workoutToCreate.exercises,
+      time: state.workoutToCreate.time,
       subscribers: [state.workoutToCreate.user.id],
       user: {
         displayName: state.workoutToCreate.user.displayName,
@@ -59,7 +60,7 @@ export default {
         photoURL: state.workoutToCreate.user.photoURL
       }
     }
-    commit('setWorkoutToCreate', '')
+    commit('resetWorkoutToCreate')
     dispatch('createUserWorkout', workout)
   },
   /**
@@ -94,14 +95,12 @@ export default {
    */
   triggerUpdateWorkout: ({ commit, dispatch, state }, payload) => {
     if (!state.workouts) return
-
+    if (!payload.id) payload.id = 'new'
     commit('setTotalTime', payload.id)
 
-    // const workout = state.workouts.find(
-    //   workout => workout.id === payload.id
-    // )
-
-    dispatch('updateWorkout', payload)
+    if (payload.id !== 'new') {
+      dispatch('updateWorkout', payload)
+    }
   },
   /**
    * Create a new exercise for current logged in user and reset exercise name input
@@ -136,14 +135,24 @@ export default {
    */
   triggerReorderExercises: ({ commit, state, dispatch }, payload) => {
     if (!state.workouts) return
-    commit('setExercises', { id: payload.workout.id, data: payload.exercises })
 
-    const workout = state.workouts.find(
-      // eslint-disable-next-line no-shadow
-      workout => workout.id === payload.workout.id
-    )
+    if (payload.workout.id) {
+      commit('setExercises', {
+        id: payload.workout.id,
+        data: payload.exercises
+      })
 
-    dispatch('updateWorkout', workout)
+      const workout = state.workouts.find(
+        // eslint-disable-next-line no-shadow
+        workout => workout.id === payload.workout.id
+      )
+
+      dispatch('updateWorkout', workout)
+    } else {
+      commit('setExercises', {
+        data: payload.exercises
+      })
+    }
   },
   /**
    * Delete a user exercise from its id
@@ -154,8 +163,12 @@ export default {
 
     // commit('addExerciseDeletionPending', { workout: payload.workout.id, index: payload.index})
     commit('removeExerciseByIndex', payload)
-    commit('setTotalTime', payload.workout.id)
-    dispatch('updateWorkout', payload.workout)
+    if (payload.workout.id) {
+      commit('setTotalTime', payload.workout.id)
+      dispatch('updateWorkout', payload.workout)
+    } else {
+      commit('setTotalTime', 'new')
+    }
     // commit('removeExerciseDeletionPending', payload.exerciseId)
   },
   shareWorkout: ({ state, commit, dispatch }, id) => {

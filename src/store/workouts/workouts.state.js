@@ -2,7 +2,9 @@ export default {
   communityWorkouts: null,
   workouts: null,
   subscribers: [],
-  workoutToCreate: [],
+  workoutToCreate: {
+    exercises: []
+  },
   workoutDeletionPending: [],
   workoutCreationPending: false,
   exerciseToCreate: {

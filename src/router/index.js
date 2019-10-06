@@ -45,6 +45,12 @@ const router = new Router({
       ]
     },
     {
+      path: '/:userId/workout/new',
+      name: 'new-workout',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/New.vue')
+    },
+    {
       path: '/:userId/workout/:id',
       name: 'workout',
       props: true,

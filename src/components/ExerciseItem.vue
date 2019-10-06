@@ -41,8 +41,8 @@
         <hangboard
           :data="currentExercise"
           :edit-workout="editWorkout"
-          @left="setLeftHold({ id: id, value: $event, index: index })"
-          @right="setRightHold({ id: id, value: $event, index: index })"
+          @left="setData({ id: id, value: { left: $event }, index: index })"
+          @right="setData({ id: id, value: { right: $event }, index: index })"
         ></hangboard>
       </v-flex>
 
@@ -199,6 +199,9 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
+    // currentWorkout() {
+    //   return this.workoutById(this.id)
+    // },
     currentExercise() {
       return this.workoutById(this.id).exercises[this.index]
     },
@@ -207,15 +210,31 @@ export default {
         return this.currentExercise.exercise
       },
       set(value) {
-        this.setExercise({ id: this.id, value, index: this.index })
+        this.setData({
+          id: this.id,
+          value: { exercise: value },
+          // value,
+          // key: 'exercise',
+          index: this.index
+        })
       }
     },
     dataPause: {
       get() {
         return this.currentExercise.pause
+
+        // if (!this.$store.state.workoutToCreate.exercises) return
+        // return this.workoutById(this.id).exercises[this.index].pause
+        // return this.$store.state.workoutToCreate.exercises[this.index].pause
       },
       set(value) {
-        this.setPause({ id: this.id, value, index: this.index })
+        this.setData({
+          id: this.id,
+          value: { pause: value },
+          // value,
+          // key: 'pause',
+          index: this.index
+        })
         this.setTime({ id: this.id, index: this.index })
       }
     },
@@ -224,7 +243,12 @@ export default {
         return this.currentExercise.hold
       },
       set(value) {
-        this.setHold({ id: this.id, value, index: this.index })
+        this.setData({
+          id: this.id,
+          value: { hold: value },
+          // value, key: 'hold',
+          index: this.index
+        })
         this.setTime({ id: this.id, index: this.index })
       }
     },
@@ -233,7 +257,13 @@ export default {
         return this.currentExercise.pullups
       },
       set(value) {
-        this.setPullups({ id: this.id, value, index: this.index })
+        this.setData({
+          id: this.id,
+          value: { pullups: value },
+          // value,
+          // key: 'pullups',
+          index: this.index
+        })
       }
     },
     dataRepeat: {
@@ -241,11 +271,23 @@ export default {
         return this.currentExercise.repeat
       },
       set(value) {
-        this.setRepeat({ id: this.id, value, index: this.index })
+        this.setData({
+          id: this.id,
+          // value,
+          // key: 'repeat',
+          value: { repeat: value },
+          index: this.index
+        })
         this.setTime({ id: this.id, index: this.index })
         // reset Rest
         if (value === 1) {
-          this.setRest({ id: this.id, value: 0, index: this.index })
+          this.setData({
+            id: this.id,
+            // value: 0,
+            // key: 'repeat',
+            value: { repeat: 0 },
+            index: this.index
+          })
         }
       }
     },
@@ -254,23 +296,13 @@ export default {
         return this.currentExercise.rest
       },
       set(value) {
-        this.setRest({ id: this.id, value, index: this.index })
+        this.setData({ id: this.id, value, key: 'rest', index: this.index })
         this.setTime({ id: this.id, index: this.index })
       }
     }
   },
   methods: {
-    ...mapMutations('workouts', [
-      'setExercise',
-      'setPause',
-      'setHold',
-      'setPullups',
-      'setRepeat',
-      'setRest',
-      'setTime',
-      'setLeftHold',
-      'setRightHold'
-    ]),
+    ...mapMutations('workouts', ['setTime', 'setData']),
     getImg,
     count
   }

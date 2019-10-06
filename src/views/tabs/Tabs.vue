@@ -106,11 +106,11 @@
                     : updateRouter(activeFab.route)
                 "
               >
-                <v-icon>{{ activeFab.icon }}</v-icon>
+                <v-icon v-if="activeFab.icon != ''">{{
+                  activeFab.icon
+                }}</v-icon>
               </v-btn>
             </v-fab-transition>
-
-            <add-workout v-model="dialog"></add-workout>
 
             <switch-hangboard v-model="hangboardDialog"></switch-hangboard>
           </v-flex>
@@ -123,16 +123,13 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
-import AddWorkout from '@/components/AddWorkout'
 import SwitchHangboard from '@/components/SwitchHangboard'
 
 export default {
   components: {
-    AddWorkout,
     SwitchHangboard
   },
   data: () => ({
-    dialog: false,
     hangboardDialog: false,
     tabs: [
       { id: 0, name: 'workouts', route: `/` },
@@ -147,11 +144,11 @@ export default {
     activeFab() {
       switch (this.activeTab) {
         case '/':
-          return { route: '/', icon: 'mdi-plus', click: true }
+          return { route: `/${this.user.id}/workout/new`, icon: 'mdi-plus' }
         case '/community':
-          return { route: '/community', icon: 'mdi-tune' }
+          return { route: '/community', icon: '' }
         case '/progress':
-          return { route: '/progress', icon: 'mdi-account-multiple-plus' }
+          return { route: '/progress', icon: '' }
         default:
           return {}
       }
