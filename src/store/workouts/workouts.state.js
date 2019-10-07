@@ -3,7 +3,8 @@ export default {
   workouts: null,
   subscribers: [],
   workoutToCreate: {
-    exercises: []
+    exercises: [],
+    level: 2
   },
   workoutDeletionPending: [],
   workoutCreationPending: false,

@@ -58,7 +58,7 @@
           ticks
           always-dirty
           thumb-size="48"
-          hint="Time before the exercise"
+          hint="Time to prepare / break before the exercise"
           persistent-hint
           :disabled="!editWorkout"
           prepend-icon="mdi-clock-outline"
@@ -85,7 +85,7 @@
           thumb-size="48"
           prepend-icon="mdi-clock"
           :disabled="!editWorkout"
-          hint="Time to do an exercise"
+          hint="Time to perform the exercise"
           persistent-hint
           label="Hold"
         >
@@ -157,9 +157,9 @@
         <v-slider
           v-if="currentExercise.repeat > 1"
           v-model="dataRest"
-          :max="60"
-          :min="5"
-          step="5"
+          :max="300"
+          :min="15"
+          step="15"
           ticks
           always-dirty
           thumb-size="48"
@@ -296,7 +296,7 @@ export default {
         return this.currentExercise.rest
       },
       set(value) {
-        this.setData({ id: this.id, value, key: 'rest', index: this.index })
+        this.setData({ id: this.id, value: { rest: value }, index: this.index })
         this.setTime({ id: this.id, index: this.index })
       }
     }

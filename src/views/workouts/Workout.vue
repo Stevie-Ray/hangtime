@@ -159,9 +159,9 @@
                           v-if="editWorkout"
                           v-model="dataDescription"
                           counter="140"
-                          :rules="[rules.length(140)]"
-                          placeholder="Give a short description of your workout, for example indicate when this training is suitable"
-                          label="Workout description"
+                          :rules="[rules.required, rules.length(140)]"
+                          placeholder="For example indicate when this training is suitable"
+                          label="Workout description *"
                         >
                         </v-textarea>
                       </v-flex>
@@ -172,7 +172,13 @@
                           :items="levels"
                           item-text="name"
                           item-value="value"
-                          label="Difficulty"
+                          :label="
+                            `Difficulty for a ${
+                              ircra
+                                .convert('ircra', user.settings.grade)
+                                .to(user.settings.scale)[user.settings.scale]
+                            } climber *`
+                          "
                         >
                         </v-select>
                       </v-flex>

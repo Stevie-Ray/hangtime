@@ -1,50 +1,57 @@
 <template>
   <v-dialog v-model="show" width="500">
-    <v-card class="modal-wrapper">
-      <v-card-title class="headline" primary-title>
-        Add a new workout
+    <v-card class="modal-wrapper mx-auto">
+      <v-card-title primary-title class="pb-0">
+        <div>Your almost there!</div>
       </v-card-title>
 
       <v-card-text>
+        <div class="subtitle-2 mb-6">Name your workout and get going.</div>
         <v-form class="workout-action-bar">
-          <v-container>
-            <v-layout wrap>
-              <v-flex xs12>
-                <v-text-field
-                  v-model="workoutToCreateName"
-                  placeholder="New workout"
-                  class="workout-name-input"
-                  counter="24"
-                  :rules="[rules.required, rules.length(24)]"
-                  label="Workout name *"
-                >
-                </v-text-field>
-              </v-flex>
+          <!--          <v-container>-->
+          <!--            <v-layout wrap>-->
+          <!--              <v-flex xs12>-->
+          <v-text-field
+            v-model="workoutToCreateName"
+            placeholder="New workout"
+            class="workout-name-input"
+            counter="24"
+            :rules="[rules.required, rules.length(24)]"
+            label="Workout name *"
+          >
+          </v-text-field>
+          <!--              </v-flex>-->
 
-              <v-flex xs12>
-                <v-textarea
-                  v-model="workoutToCreateDescription"
-                  counter="140"
-                  :rules="[rules.required, rules.length(140)]"
-                  class="workout-description-input"
-                  placeholder="Give a short description of your workout, for example indicate when this training is suitable"
-                  label="Workout description *"
-                ></v-textarea>
-              </v-flex>
+          <!--              <v-flex xs12>-->
+          <v-textarea
+            v-model="workoutToCreateDescription"
+            counter="140"
+            :rules="[rules.required, rules.length(140)]"
+            class="workout-description-input"
+            placeholder="For example indicate when this training is suitable"
+            label="Workout description *"
+          ></v-textarea>
+          <!--              </v-flex>-->
 
-              <v-flex>
-                <v-select
-                  v-model="workoutToCreateDifficulty"
-                  :items="levels"
-                  item-text="name"
-                  item-value="value"
-                  label="Difficulty *"
-                  :rules="[rules.required]"
-                >
-                </v-select>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <!--              <v-flex>-->
+          <v-select
+            v-model="workoutToCreateDifficulty"
+            :items="levels"
+            item-text="name"
+            item-value="value"
+            :label="
+              `Difficulty for a ${
+                ircra
+                  .convert('ircra', user.settings.grade)
+                  .to(user.settings.scale)[user.settings.scale]
+              } climber *`
+            "
+            :rules="[rules.required]"
+          >
+          </v-select>
+          <!--              </v-flex>-->"
+          <!--            </v-layout>-->
+          <!--          </v-container>-->
         </v-form>
       </v-card-text>
 
@@ -76,6 +83,7 @@
 
 <script>
 import { mapMutations, mapState, mapActions } from 'vuex'
+import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
 
 export default {
@@ -84,6 +92,7 @@ export default {
   },
   data: () => ({
     dialog: true,
+    ircra: new IRCRA(),
     rules: {
       length: len => v =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
