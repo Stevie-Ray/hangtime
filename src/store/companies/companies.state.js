@@ -491,8 +491,43 @@ export default {
           image: 'hangboards/ENTREHANG.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
               name: ''
             }
           ]
@@ -500,12 +535,41 @@ export default {
         {
           name: 'Hang Time 2',
           id: 1,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ENTREHANG2.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
               name: ''
             }
           ]
@@ -542,16 +606,65 @@ export default {
       name: 'Kraxlboard',
       id: 5,
       website: 'https://www.kraxl-board.net/',
-      disabled: true,
       hangboards: [
         {
           name: 'Classic',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/KRAXLCLASSIC.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
               name: ''
             }
           ]
@@ -559,6 +672,7 @@ export default {
         {
           name: 'Portable',
           id: 1,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -571,6 +685,7 @@ export default {
         {
           name: 'Rock',
           id: 2,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -583,6 +698,7 @@ export default {
         {
           name: 'Xtreme',
           id: 3,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -598,16 +714,50 @@ export default {
       name: 'Max Climbing',
       id: 6,
       website: 'https://www.maxclimbing.com/',
-      disabled: true,
       hangboards: [
         {
-          name: 'Spinchboard',
+          name: 'Spinchboard Solo',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/MAXSPINCHSOLO.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
               name: ''
             }
           ]
@@ -841,16 +991,35 @@ export default {
       name: 'Moon',
       id: 9,
       website: 'https://moonclimbing.com/',
-      disabled: true,
       hangboards: [
         {
           name: 'Fingerboard',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/MOONFINGER.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
               name: ''
             }
           ]
@@ -858,6 +1027,7 @@ export default {
         {
           name: 'Phat Boy',
           id: 1,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -873,16 +1043,50 @@ export default {
       name: 'OCUN',
       id: 10,
       website: 'http://www.ocun.com/',
-      disabled: true,
       hangboards: [
         {
           name: 'Finger Board',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/OCUNFINGER.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
               name: ''
             }
           ]
@@ -893,16 +1097,25 @@ export default {
       name: 'Problemsolver',
       id: 11,
       website: 'https://www.problemsolver.rocks/',
-      disabled: true,
       hangboards: [
         {
           name: 'Hanzo',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/PROBLEMHANZO.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
               name: ''
             }
           ]
@@ -910,6 +1123,7 @@ export default {
         {
           name: 'Training Hangboard',
           id: 1,
+          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {
@@ -1090,7 +1304,7 @@ export default {
       disabled: true,
       hangboards: [
         {
-          name: 'Flash',
+          name: 'Grindstone',
           id: 0,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
@@ -1102,20 +1316,8 @@ export default {
           ]
         },
         {
-          name: 'Grindstone',
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: [
-            {
-              id: '',
-              class: 0,
-              name: ''
-            }
-          ]
-        },
-        {
           name: 'Grindstone Pro',
-          id: 2,
+          id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: [
             {

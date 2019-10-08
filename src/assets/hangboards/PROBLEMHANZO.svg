@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="630px" height="338px" viewBox="0 0 630 338" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>PROBLEMHANZO</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(-56.000000, -468.000000)" fill="#FFFFFF" stroke="#000000">
+            <g id="PROBLEMHANZO" transform="translate(57.000000, 469.000000)">
+                <path d="M628.035156,336 L628.035156,336 L94,336 C42.0852335,336 0,293.914766 0,242 L0,94 C0,42.0852335 42.0852335,0 94,0 L94,0 L628.146484,0 L628.146484,0" id="hangboard"></path>
+                <path d="M628,281 L93,281 C72.0131795,281 55,263.98682 55,243 L55,238 C55,217.01318 72.0131795,200 93,200 L628,200" id="h2"></path>
+                <path d="M628.107422,281 L441,281 C420.01318,281 403,263.98682 403,243 L403,238 C403,217.01318 420.01318,200 441,200 L628.107422,200" id="h3"></path>
+                <rect id="h1" x="55" y="46" width="369" height="81" rx="40.5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
