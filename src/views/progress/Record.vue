@@ -42,46 +42,48 @@
               <!-- circle -->
               <v-flex class="Counter">
                 <v-progress-circular
-                  class="mt-3"
+                  class="mt-3 flex-column"
                   :rotate="270"
                   :size="300"
                   :width="5"
                   :value="100"
                 >
-                  <v-avatar
-                    size="80"
-                    aspect-ratio="1"
-                    class="grey lighten-2 mb-3"
-                  >
-                    <img
-                      :alt="currentType.name"
-                      :src="getImg(currentType.image)"
-                    />
-                  </v-avatar>
+                  <v-flex class="flex-column">
+                    <v-avatar
+                      size="80"
+                      aspect-ratio="1"
+                      class="grey lighten-2 mb-3"
+                    >
+                      <img
+                        :alt="currentType.name"
+                        :src="getImg(currentType.image)"
+                      />
+                    </v-avatar>
 
-                  <div class="subtitle font-weight-bold text-uppercase">
-                    <span>{{ currentType.name }}</span>
-                  </div>
+                    <div class="subtitle font-weight-bold text-uppercase">
+                      <span>{{ currentType.name }}</span>
+                    </div>
 
-                  <div id="timer" class="display-3 font-weight-bold">
-                    {{ count(totalTime) }}
-                  </div>
+                    <div id="timer" class="display-3 font-weight-bold">
+                      {{ count(totalTime) }}
+                    </div>
 
-                  <div
-                    v-if="
-                      currentStats[index] &&
-                        currentStats[index].recordings.length > 0
-                    "
-                    class="text-uppercase font-weight-bold"
-                  >
-                    Best:
-                    <span v-if="!currentType.configurable">
-                      {{ count(bestStatsById(currentStats[index].id)) }}
-                    </span>
-                    <span v-else>
-                      {{ bestStatsById(currentStats[index].id) }}x
-                    </span>
-                  </div>
+                    <div
+                      v-if="
+                        currentStats[index] &&
+                          currentStats[index].recordings.length > 0
+                      "
+                      class="text-uppercase font-weight-bold"
+                    >
+                      Best:
+                      <span v-if="!currentType.configurable">
+                        {{ count(bestStatsById(currentStats[index].id)) }}
+                      </span>
+                      <span v-else>
+                        {{ bestStatsById(currentStats[index].id) }}x
+                      </span>
+                    </div>
+                  </v-flex>
                 </v-progress-circular>
               </v-flex>
 

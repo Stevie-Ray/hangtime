@@ -47,48 +47,50 @@
                   :width="5"
                   :value="progressCircular"
                 >
-                  <v-avatar
-                    size="80"
-                    aspect-ratio="1"
-                    class="grey lighten-2 mb-3"
-                  >
-                    <img
-                      :alt="options[currentExercise.exercise].name"
-                      :src="getImg(options[currentExercise.exercise].image)"
-                    />
-                  </v-avatar>
-
-                  <div class="subtitle font-weight-bold text-uppercase">
-                    {{ progressText }}
-                  </div>
-
-                  <div id="timer" class="display-3 font-weight-bold">
-                    {{ count(totalTime) }}
-                  </div>
-
-                  <div class="bottom-data">
-                    <div class="bottom-data__exercise">
-                      <div class="data">
-                        <v-icon small>mdi-timer</v-icon>
-                        <span
-                          >{{ currentStep + 1 }}/{{
-                            currentWorkout.exercises.length
-                          }}</span
-                        >
-                      </div>
-                    </div>
-                    <div
-                      v-if="currentExercise.repeat > 1"
-                      class="bottom-data__repeat"
+                  <v-flex class="flex-column">
+                    <v-avatar
+                      size="80"
+                      aspect-ratio="1"
+                      class="grey lighten-2 mb-3"
                     >
-                      <div class="data">
-                        <v-icon small>mdi-history</v-icon>
-                        <span
-                          >{{ stepRepeat }}/{{ currentExercise.repeat }}</span
-                        >
+                      <img
+                        :alt="options[currentExercise.exercise].name"
+                        :src="getImg(options[currentExercise.exercise].image)"
+                      />
+                    </v-avatar>
+
+                    <div class="subtitle font-weight-bold text-uppercase">
+                      {{ progressText }}
+                    </div>
+
+                    <div id="timer" class="display-3 font-weight-bold">
+                      {{ count(totalTime) }}
+                    </div>
+
+                    <div class="bottom-data">
+                      <div class="bottom-data__exercise">
+                        <div class="data">
+                          <v-icon small>mdi-timer</v-icon>
+                          <span
+                            >{{ currentStep + 1 }}/{{
+                              currentWorkout.exercises.length
+                            }}</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        v-if="currentExercise.repeat > 1"
+                        class="bottom-data__repeat"
+                      >
+                        <div class="data">
+                          <v-icon small>mdi-history</v-icon>
+                          <span
+                            >{{ stepRepeat }}/{{ currentExercise.repeat }}</span
+                          >
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </v-flex>
                 </v-progress-circular>
               </v-flex>
 
@@ -397,10 +399,6 @@ export default {
   font-size: 1.8rem;
   font-weight: bold;
   padding: 0 8px;
-}
-
-.v-progress-circular__info {
-  flex-direction: column;
 }
 
 #app .run {

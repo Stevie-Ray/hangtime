@@ -65,7 +65,11 @@ export default {
   triggerAddHangboardAction: ({ dispatch, state }) => {
     if (state.hangboardToAdd.hangboard === '') return
     // commit('setHangboardToCreate', {company: 0, hangboard: 0})
-    dispatch('addUserHangboard', state.hangboardToAdd)
+    const hangboard = {
+      company: state.hangboardToAdd.company,
+      hangboard: state.hangboardToAdd.hangboard
+    }
+    dispatch('addUserHangboard', hangboard)
   },
 
   triggerChangeHangboardAction: ({ commit, dispatch, state }, index) => {
