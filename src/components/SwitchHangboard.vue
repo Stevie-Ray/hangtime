@@ -61,7 +61,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions('authentication', ['triggerUpdateUser', 'triggerSwitchHangboard']),
+    ...mapActions('authentication', [
+      'triggerUpdateUser',
+      'triggerSwitchHangboard'
+    ]),
     ...mapMutations('authentication', ['setSelected']),
     changeHangboard(index) {
       this.setSelected(index)
