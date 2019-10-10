@@ -50,6 +50,12 @@ export default {
     dispatch('updateUser', state.user)
   },
   /**
+   * Callback fired when changing hangboards
+   */
+  triggerSwitchHangboard: ({ dispatch }) => {
+    dispatch('workouts/getCommunityWorkouts', null, { root: true })
+  },
+  /**
    * Add a new hangboard  for current logged in user
    */
   addUserHangboard: ({ commit, state, dispatch }, hangboard) => {

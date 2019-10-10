@@ -13,11 +13,11 @@
     <v-list v-if="currentWorkout && !currentWorkout.exercises.length" two-line>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title>No exercises added yet</v-list-item-title>
+          <v-list-item-title>Start adding exercises</v-list-item-title>
           <v-list-item-subtitle
             >Add multiple exercises using the
             <v-icon small>mdi-playlist-plus</v-icon>
-            button
+            button.
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>

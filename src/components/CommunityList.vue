@@ -12,13 +12,22 @@
     </div>
     <v-list
       v-if="(!user && !workouts) || (workouts && !workouts.length)"
-      two-line
+      three-line
     >
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title>No workouts found</v-list-item-title>
+          <v-list-item-title>No community workouts found</v-list-item-title>
           <v-list-item-subtitle
-            >No community workouts added yet
+            >Add your personal
+            {{
+              companies[
+                user.settings.hangboards[user.settings.selected].company
+              ].hangboards[
+                user.settings.hangboards[user.settings.selected].hangboard
+              ].name
+            }}
+            workouts to the community using the
+            <v-icon small>mdi-share</v-icon> button.
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -53,6 +62,7 @@ export default {
     ...mapGetters('workouts', ['communityWorkoutsByHangboard']),
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
+    ...mapState('companies', ['companies']),
     workouts() {
       if (!this.user) return
       // eslint-disable-next-line consistent-return

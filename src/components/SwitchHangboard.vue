@@ -25,18 +25,6 @@
           </v-radio>
         </v-radio-group>
       </v-card-text>
-
-      <!--      <v-divider></v-divider>-->
-
-      <!--      <v-card-actions>-->
-      <!--        <v-spacer></v-spacer>-->
-      <!--        <v-btn text @click="$emit('input', false)">-->
-      <!--          Close-->
-      <!--        </v-btn>-->
-      <!--        <v-btn text color="primary" @click="$emit('input', false)">-->
-      <!--          Save-->
-      <!--        </v-btn>-->
-      <!--      </v-card-actions>-->
     </v-card>
   </v-dialog>
 </template>
@@ -73,11 +61,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('authentication', ['triggerUpdateUser']),
+    ...mapActions('authentication', ['triggerUpdateUser', 'triggerSwitchHangboard']),
     ...mapMutations('authentication', ['setSelected']),
     changeHangboard(index) {
       this.setSelected(index)
       this.triggerUpdateUser()
+      this.triggerSwitchHangboard()
     },
     getImg
   }

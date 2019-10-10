@@ -12,15 +12,27 @@
     </div>
     <v-list
       v-if="(!user && !workouts) || (workouts && !workouts.length)"
-      two-line
+      three-line
     >
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title>No workouts found</v-list-item-title>
+          <v-list-item-title>No personal workouts found</v-list-item-title>
           <v-list-item-subtitle
-            >use the
-            <v-icon small>mdi-plus</v-icon>
-            button to add a workout
+            >You haven't added any
+            {{
+              companies[
+                user.settings.hangboards[user.settings.selected].company
+              ].name
+            }}
+            {{
+              companies[
+                user.settings.hangboards[user.settings.selected].company
+              ].hangboards[
+                user.settings.hangboards[user.settings.selected].hangboard
+              ].name
+            }}
+            workouts. Use the <v-icon small>mdi-plus</v-icon> button to get
+            started.
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -54,6 +66,7 @@ export default {
     ...mapGetters('workouts', ['workoutsByHangboard']),
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
+    ...mapState('companies', ['companies']),
     workouts() {
       return this.workoutsByHangboard(this.user)
     }

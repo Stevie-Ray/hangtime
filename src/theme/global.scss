@@ -1,3 +1,4 @@
+// theme background
 .theme {
   &--light {
     .theme--light {
@@ -17,7 +18,7 @@
 }
 
 #app {
-  // vuetify 2.0.0 fix
+  // vuetify 2.0.0 - remove tab background
   .v-tab:hover:before {
     opacity: 0;
   }
@@ -36,6 +37,7 @@
     padding-left: 0;
   }
 
+  // divider color
   .v-content .theme--light.v-divider {
     border-color: rgba(0, 0, 0, 0.08);
   }
@@ -57,6 +59,7 @@
     }
   }
 
+  // responsive image
   img {
     max-width: 100%;
     height: auto;
@@ -70,24 +73,24 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    // show sloth
+    //// show sloth
     .v-slide-group__wrapper {
       contain: inherit;
       overflow: visible;
     }
 
-    // sloth
-    .v-tabs-slider-wrapper .v-tabs-slider::after {
-      //z-index: 999999;
-      //background-image: url('~@/assets/icons/sloth.svg');
-      //background-repeat: no-repeat;
-      //content: '';
-      //position: absolute;
-      //bottom: -25px;
-      //right: 10px;
-      //height: 30px;
-      //width: 30px;
-    }
+    ////sloth
+    //.v-tabs-slider-wrapper .v-tabs-slider::after {
+    //z-index: 999999;
+    //background-image: url('~@/assets/icons/sloth.svg');
+    //background-repeat: no-repeat;
+    //content: '';
+    //position: absolute;
+    //bottom: -25px;
+    //right: 10px;
+    //height: 30px;
+    //width: 30px;
+    //}
 
     &__title {
       line-height: 1.25;
@@ -98,6 +101,7 @@
       }
     }
 
+    // content full height
     &__content,
     &__extension {
       flex: 0 0 auto;
@@ -114,6 +118,16 @@
       }
     }
   }
+
+  // fix three-line height
+  .v-list-item .v-list-item__subtitle {
+    .v-icon {
+      line-height: 1.2;
+    }
+
+    max-width: 375px;
+  }
+
   .tabs {
     .v-toolbar__title {
       margin-left: 0;
