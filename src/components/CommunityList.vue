@@ -27,7 +27,7 @@
               ].name
             }}
             workouts to the community using the
-            <v-icon small>mdi-share</v-icon> button.
+            <v-icon small>mdi-star-outline</v-icon> button.
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>

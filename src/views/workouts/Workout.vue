@@ -38,8 +38,8 @@
         icon
         @click="triggerShareWorkout"
       >
-        <v-icon v-if="!currentWorkout.share">mdi-share</v-icon>
-        <v-icon v-else>mdi-share-off</v-icon>
+        <v-icon v-if="!currentWorkout.share">mdi-star-outline</v-icon>
+        <v-icon v-else>mdi-star-off</v-icon>
       </v-btn>
 
       <!-- subscribe -->
@@ -182,6 +182,13 @@
                         >
                         </v-select>
                       </v-flex>
+                      <v-flex xs12>
+                        <v-switch
+                          v-model="currentWorkout.share"
+                          label="Share with the community"
+                          @change="shareWorkout(currentWorkout)"
+                        ></v-switch>
+                      </v-flex>
                     </v-layout>
                   </v-container>
                 </v-card-text>
@@ -217,6 +224,13 @@
                 <v-divider></v-divider>
 
                 <v-card-actions>
+                  <v-btn
+                    v-if="shareAPI && currentWorkout && currentWorkout.share"
+                    text
+                    primary
+                    @click="shareExternal"
+                    >Share
+                  </v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
                     v-if="!edit && userWorkout"
@@ -286,6 +300,10 @@
             </v-dialog>
 
             <v-speed-dial bottom right fixed>
+              <v-btn fab dark small color="indigo">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+
               <v-btn
                 v-if="!editWorkout"
                 slot="activator"
@@ -330,6 +348,7 @@ export default {
   data: () => ({
     ircra: new IRCRA(),
     edit: null,
+    shareAPI: navigator.share,
     dialogs: {
       general: false,
       share: false,
@@ -463,6 +482,18 @@ export default {
       this.shareWorkout(this.currentWorkout.id)
       this.dialogs.share = false
       this.$router.push({ name: 'community' })
+    },
+    shareExternal() {
+      navigator
+        .share({
+          title: `${this.currentWorkout.name} | Hangtime`,
+          text: this.currentWorkout.description,
+          url: document.location.href
+        })
+        .then(() => {
+          console.log('Thanks for sharing!')
+        })
+        .catch(console.error)
     }
   }
 }

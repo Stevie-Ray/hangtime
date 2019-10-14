@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@mdi/font": "^4.5.95",
-    "core-js": "^3.2.1",
-    "firebase": "^7.1.0",
+    "core-js": "^3.3.2",
+    "firebase": "^7.2.0",
     "ircra": "^2.2.4",
     "is_js": "^0.9.0",
     "lodash": "^4.17.15",
