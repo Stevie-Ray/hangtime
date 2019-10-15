@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import SelectHangboard from '@/components/SelectHangboard'
 
 export default {

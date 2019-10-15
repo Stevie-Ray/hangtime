@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
 
 export default {

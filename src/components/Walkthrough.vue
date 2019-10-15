@@ -135,7 +135,7 @@ export default {
     e1: 0
   }),
   computed: {
-    ...mapState('authentication', ['user']),
+    ...mapState('authentication', ['user', 'hangboardToAdd']),
     ...mapState('companies', ['companies']),
     settingsScale: {
       get() {
@@ -177,7 +177,8 @@ export default {
     ]),
     ...mapActions('authentication', [
       'triggerAddHangboardAction',
-      'triggerChangeHangboardAction'
+      'triggerChangeHangboardAction',
+      'triggerUpdateUser'
     ]),
     finishWalkthrough() {
       this.$emit('input', false)
@@ -195,6 +196,8 @@ export default {
         this.triggerChangeHangboardAction(
           this.user.settings.hangboards.length - 1
         )
+      } else {
+        this.triggerUpdateUser()
       }
       this.e1 = 4
     }
