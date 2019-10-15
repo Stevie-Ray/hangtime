@@ -21,7 +21,8 @@ export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
     sound: true,
     speak: false,
     voice: 0,
-    vibrate: false
+    vibrate: false,
+    walkthrough: false
   }
 
   const user = {

@@ -112,6 +112,10 @@
               </v-btn>
             </v-fab-transition>
 
+            <walkthrough
+              v-if="!user.settings.walkthrough"
+              v-model="walkthroughDialog"
+            ></walkthrough>
             <switch-hangboard v-model="hangboardDialog"></switch-hangboard>
           </v-flex>
         </v-layout>
@@ -124,13 +128,16 @@
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
 import SwitchHangboard from '@/components/SwitchHangboard'
+import Walkthrough from '@/components/Walkthrough'
 
 export default {
   components: {
-    SwitchHangboard
+    SwitchHangboard,
+    Walkthrough
   },
   data: () => ({
     hangboardDialog: false,
+    walkthroughDialog: true,
     tabs: [
       { id: 0, name: 'workouts', route: `/` },
       { id: 1, name: 'community', route: `/community` },
