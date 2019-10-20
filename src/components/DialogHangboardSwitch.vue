@@ -37,9 +37,7 @@ export default {
   props: {
     value: Boolean
   },
-  data: () => ({
-    dialog: true
-  }),
+  data: () => ({}),
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),

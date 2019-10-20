@@ -52,7 +52,7 @@
               class="exercise-list"
             ></exercise-list>
 
-            <add-workout v-model="dialog"></add-workout>
+            <dialog-new-workout-add v-model="dialog"></dialog-new-workout-add>
 
             <v-speed-dial bottom right fixed>
               <v-btn
@@ -76,13 +76,13 @@
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import IRCRA from 'ircra'
 import ExerciseList from '@/components/ExerciseList'
-import AddWorkout from '@/components/AddWorkout'
+import DialogNewWorkoutAdd from '@/components/DialogNewWorkoutAdd'
 import { getImg, count } from '@/misc/helpers'
 
 export default {
   components: {
     ExerciseList,
-    AddWorkout
+    DialogNewWorkoutAdd
   },
   props: {
     userId: String

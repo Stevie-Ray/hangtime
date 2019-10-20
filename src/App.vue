@@ -8,21 +8,21 @@
       :refreshing-app="refreshingApp"
       @refresh="serviceWorkerSkipWaiting"
     ></new-content-available>
-    <apple-add-to-home-screen-modal
+    <dialog-apple-add-to-home-screen
       v-if="showAddToHomeScreenModalForApple"
       class="apple-add-to-home-screen-modal"
       @close="closeAddToHomeScreenModalForApple(false)"
     >
-    </apple-add-to-home-screen-modal>
+    </dialog-apple-add-to-home-screen>
   </v-app>
 </template>
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import NewContentAvailable from '@/components/NewContentAvailable'
-import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
+import DialogAppleAddToHomeScreen from '@/components/DialogAppleAddToHomeScreen'
 
 export default {
-  components: { NewContentAvailable, AppleAddToHomeScreenModal },
+  components: { NewContentAvailable, DialogAppleAddToHomeScreen },
   computed: {
     ...mapGetters('app', ['newContentAvailable']),
     ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp'])

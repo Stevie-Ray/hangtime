@@ -15,7 +15,7 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex sm8 md6>
-            <select-hangboard></select-hangboard>
+            <hangboard-select></hangboard-select>
 
             <v-speed-dial bottom right fixed>
               <v-btn
@@ -36,7 +36,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import SelectHangboard from '@/components/SelectHangboard'
+import HangboardSelect from '@/components/HangboardSelect'
 
 export default {
   head: {
@@ -51,7 +51,7 @@ export default {
       }
     ]
   },
-  components: { SelectHangboard },
+  components: { HangboardSelect },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user', 'hangboardToAdd'])

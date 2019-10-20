@@ -42,7 +42,7 @@
 
         <v-stepper-content step="2">
           <v-card flat class="mb-12">
-            <select-hangboard></select-hangboard>
+            <hangboard-select></hangboard-select>
           </v-card>
 
           <v-btn color="primary" @click="e1 = 3">
@@ -123,10 +123,10 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 import IRCRA from 'ircra'
-import SelectHangboard from '@/components/SelectHangboard'
+import HangboardSelect from '@/components/HangboardSelect'
 
 export default {
-  components: { SelectHangboard },
+  components: { HangboardSelect },
   props: {
     value: Boolean
   },
