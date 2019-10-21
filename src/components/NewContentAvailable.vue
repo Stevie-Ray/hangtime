@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar v-model="snackbar" timeout bottom>
+  <v-snackbar v-model="snackbar" :timeout="0" bottom>
     <template v-if="refreshingApp">
       Loading new content...
     </template>
