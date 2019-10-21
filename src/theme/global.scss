@@ -161,4 +161,7 @@
       grid-area: Title;
     }
   }
+  .v-card__title {
+    word-break: break-word;
+  }
 }

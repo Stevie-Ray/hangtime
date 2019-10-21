@@ -1,8 +1,16 @@
 <template>
   <div v-if="currentWorkout">
-    <v-btn icon @click="triggerShareWorkout">
-      <v-icon v-if="!currentWorkout.share">mdi-star-outline</v-icon>
-      <v-icon v-else>mdi-star-off</v-icon>
+    <v-btn icon @click="dialogs.share = true">
+      <v-icon v-if="!currentWorkout.share" :small="small"
+        >mdi-star-outline</v-icon
+      >
+      <v-icon v-else :small="small">mdi-star-off</v-icon>
+      <span
+        v-if="currentWorkout.share && currentWorkout.subscribers.length > 1"
+        :class="{ 'subtitle-2': small }"
+      >
+        {{ currentWorkout.subscribers.length - 1 }}
+      </span>
     </v-btn>
 
     <!-- Share Dialog -->
@@ -14,16 +22,18 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import DialogWorkoutShare from '@/components/DialogWorkoutShare'
 
 export default {
+  name: 'WorkoutShare',
   components: {
     DialogWorkoutShare
   },
   props: {
     currentWorkout: Object,
-    userWorkout: Boolean
+    userWorkout: Boolean,
+    small: Boolean
   },
   data: () => ({
     dialogs: {
@@ -34,16 +44,6 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['currentTab'])
   },
-  methods: {
-    ...mapActions('workouts', ['shareWorkout']),
-    triggerShareWorkout() {
-      if (!this.currentWorkout.share) {
-        this.dialogs.share = true
-      } else {
-        this.shareWorkout(this.currentWorkout.id)
-        this.$router.push({ path: this.currentTab })
-      }
-    }
-  }
+  methods: {}
 }
 </script>

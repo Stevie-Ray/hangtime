@@ -1,45 +1,47 @@
 <template>
-  <v-btn icon>
-    <v-icon
-      v-if="isSubscribed"
-      @click="
-        triggerRemoveWorkoutSubscriber({
-          id: id,
-          user: user.id,
-          userId: userId
-        })
-      "
-    >
-      mdi-star
-    </v-icon>
-    <v-icon
-      v-else
-      @click="
-        triggerAddWorkoutSubscriber({
-          id: id,
-          user: user.id,
-          userId: userId
-        })
-      "
-    >
-      mdi-star-outline
-    </v-icon>
-    <span v-if="currentSubscribers && currentSubscribers.length > 0">
-      {{ currentSubscribers.length }}
-    </span>
-  </v-btn>
+  <div v-if="currentWorkout">
+    <v-btn icon @click="dialogs.subscribe = true">
+      <v-icon v-if="isSubscribed" :small="small">mdi-star</v-icon>
+      <v-icon v-else :small="small">mdi-star-outline</v-icon>
+      <span
+        v-if="currentSubscribers && currentSubscribers.length > 1"
+        :class="{ 'subtitle-2': small }"
+      >
+        {{ currentSubscribers.length - 1 }}
+      </span>
+    </v-btn>
+
+    <!-- Subscribe Dialog -->
+    <dialog-workout-subscribe
+      :id="id"
+      v-model="dialogs.subscribe"
+      :current-workout="currentWorkout"
+      :is-subscribed="isSubscribed"
+      :user-id="userId"
+    ></dialog-workout-subscribe>
+  </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
+import DialogWorkoutSubscribe from '@/components/DialogWorkoutSubscribe'
 
 export default {
+  name: 'WorkoutSubscribe',
+  components: {
+    DialogWorkoutSubscribe
+  },
   props: {
     currentWorkout: Object,
     id: String,
+    small: Boolean,
     userId: String
   },
-  data: () => ({}),
+  data: () => ({
+    dialogs: {
+      subscribe: false
+    }
+  }),
   computed: {
     ...mapState('authentication', ['user']),
     currentSubscribers() {
@@ -57,12 +59,6 @@ export default {
       return subscribed
     }
   },
-  methods: {
-    ...mapActions('workouts', [
-      'shareWorkout',
-      'triggerAddWorkoutSubscriber',
-      'triggerRemoveWorkoutSubscriber'
-    ])
-  }
+  methods: {}
 }
 </script>

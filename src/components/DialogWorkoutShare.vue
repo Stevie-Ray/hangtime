@@ -1,11 +1,20 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="headline">Share workout</v-card-title>
+      <v-card-title class="headline">
+        <span v-if="!currentWorkout.share">Share with the community</span>
+        <span v-else>Remove from the community</span>
+      </v-card-title>
 
       <v-card-text>
-        Are you sure you want to share
-        <strong>{{ currentWorkout.name }}</strong> with the community?
+        <span v-if="!currentWorkout.share">
+          Are you sure you want to share
+          <strong>{{ currentWorkout.name }}</strong> with the community?
+        </span>
+        <span v-else>
+          Are you sure you want to remove
+          <strong>{{ currentWorkout.name }}</strong> from the community?
+        </span>
       </v-card-text>
 
       <v-card-actions>
@@ -14,7 +23,8 @@
           Cancel
         </v-btn>
         <v-btn text @click="clickshareWorkout">
-          Share
+          <span v-if="!currentWorkout.share">Share</span>
+          <span v-else>Remove</span>
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -25,6 +35,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  name: 'DialogWorkoutShare',
   props: {
     value: Boolean,
     currentWorkout: Object
@@ -45,7 +56,9 @@ export default {
     clickshareWorkout() {
       this.shareWorkout(this.currentWorkout.id)
       this.$emit('input', false)
-      this.$router.push({ name: 'community' })
+      if (this.currentWorkout.share) {
+        this.$router.push({ name: 'community' })
+      }
     }
   }
 }

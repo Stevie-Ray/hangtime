@@ -85,7 +85,9 @@
                         <div class="data">
                           <v-icon small>mdi-history</v-icon>
                           <span
-                            >{{ stepRepeat }}/{{ currentExercise.repeat }}</span
+                            >{{ ExerciseRepeat }}/{{
+                              currentExercise.repeat
+                            }}</span
                           >
                         </div>
                       </div>
@@ -164,7 +166,7 @@ export default {
   },
   data: () => ({
     currentStep: 0,
-    stepRepeat: 0,
+    ExerciseRepeat: 0,
     totalTime: 0,
     timer: null,
     paused: false,
@@ -214,136 +216,41 @@ export default {
     speak,
     sound,
     countdown() {
-      // init countdown
+      // set initial state before starting
       if (this.initialTime === 0) {
-        this.totalTime = this.currentExercise.pause
-        // set initialTime to totalTime to prevent next init
-        this.initialTime = this.totalTime
+        this.exerciseSetup()
       }
-
-      // if there is time left
+      // check if there is time left
       if (this.totalTime > 0) {
-        // totalTime -1
-        this.totalTime = this.totalTime - 1
+        this.updateTime()
 
-        // update circle
-        this.progressCircular =
-          ((this.initialTime - this.totalTime) * 100) / this.initialTime
-
-        // STATES
-        if (this.stepRepeat !== 0) {
-          // STATE REST: check if rest && if hold time is done && not last repeat
+        // check if not repeating
+        if (this.ExerciseRepeat !== 0) {
           if (
             this.currentExercise.rest > 0 &&
             this.totalTime < this.currentExercise.rest
           ) {
-            this.progressText = 'Rest'
-
-            // this happens only once
-            if (this.totalTime === this.currentExercise.rest - 1) {
-              this.vibratePhone()
-              this.playSound('stop.mp3')
-              this.speakText('... and rest')
-            }
-            // rest: start counting down
-            if (
-              this.totalTime <= 3 &&
-              this.stepRepeat !== this.currentExercise.repeat
-            ) {
-              // if 0
-              if (this.totalTime > 0) {
-                this.speakText(this.totalTime)
-              } else {
-                this.vibratePhone()
-                this.playSound('start.mp3')
-                this.speakText('Go!')
-              }
-            }
+            // STATE REST
+            this.exerciseRest()
           }
-
-          // STATE: HOLD -> eenmalig
-          if (
-            this.totalTime ===
-            this.currentExercise.hold + this.currentExercise.rest - 1
-          ) {
-            this.progressText = 'Hold'
-          }
-
-          if (this.totalTime === 0 && this.currentExercise.repeat === 1) {
-            this.playSound('stop.mp3')
-            if (this.currentStep + 1 !== this.currentWorkout.exercises.length) {
-              this.speakText('... and pause')
-            }
-          }
-        }
-        // STATE: PAUSE
-        else {
-          this.progressText = 'Pause'
-
-          if (
-            this.stepRepeat === 0 &&
-            this.initialTime - 1 === this.totalTime
-          ) {
-            this.speakText('Next exercise')
-            if (this.currentExercise.pullups > 1) {
-              this.speakText(
-                `${this.currentExercise.pullups +
-                  this.options[this.currentExercise.exercise].name}s`
-              )
-            } else {
-              this.speakText(this.options[this.currentExercise.exercise].name)
-            }
-            this.speakText(`for ${this.currentExercise.hold} seconds.`)
-            if (
-              this.currentExercise.rest > 0 &&
-              this.currentExercise.repeat > 1
-            ) {
-              this.speakText(
-                `Than rest for ${this.currentExercise.rest} seconds.`
-              )
-            }
-          }
-
-          // start count down
-          if (this.totalTime <= 3) {
-            // if 0
-            if (this.totalTime > 0) {
-              this.speakText(this.totalTime)
-            } else {
-              this.vibratePhone()
-              this.playSound('start.mp3')
-              this.speakText('Go!')
-            }
-          }
+          // STATE HOLD
+          this.exerciseHold()
+        } else {
+          // STATE PAUSE
+          this.exercisePause()
         }
       }
-
-      // if step repeats !== exercise repeats
-      else if (this.stepRepeat !== this.currentExercise.repeat) {
-        this.stepRepeat = this.stepRepeat + 1
-
-        // set timers
-        this.totalTime = this.currentExercise.hold + this.currentExercise.rest
-        this.initialTime = this.totalTime
+      // repeating exercise
+      else if (this.ExerciseRepeat !== this.currentExercise.repeat) {
+        this.repeatExercise()
       }
-
-      // check if all steps are done
+      // check if there a next exercise
       else if (this.currentStep < this.currentWorkout.exercises.length - 1) {
-        // // set next exercise
-        this.currentStep = this.currentStep + 1
-        this.stepRepeat = 0
-
-        // set time
-        this.totalTime = this.currentExercise.pause
-        this.initialTime = this.totalTime
+        this.nextExercise()
       }
-      // done!
+      // all done!
       else {
-        this.progressText = 'Done'
-        this.speakText('Well done')
-        this.noSleep.disable()
-        this.paused = true
-        clearInterval(this.timer)
+        this.finishWorkout()
       }
     },
     startWorkout() {
@@ -351,6 +258,113 @@ export default {
       this.timer = setInterval(() => {
         if (!this.paused) this.countdown()
       }, 1000)
+    },
+    exerciseSetup() {
+      this.totalTime = this.currentExercise.pause
+      // set initialTime to totalTime to prevent next init
+      this.initialTime = this.totalTime
+    },
+    updateTime() {
+      this.totalTime = this.totalTime - 1
+
+      // update circle
+      this.progressCircular =
+        ((this.initialTime - this.totalTime) * 100) / this.initialTime
+    },
+    exerciseHold() {
+      if (
+        this.totalTime ===
+        this.currentExercise.hold + this.currentExercise.rest - 1
+      ) {
+        this.progressText = 'Hold'
+      }
+
+      if (this.totalTime === 0 && this.currentExercise.repeat === 1) {
+        this.playSound('stop.mp3')
+        if (this.currentStep + 1 !== this.currentWorkout.exercises.length) {
+          this.speakText('... and pause')
+        }
+      }
+    },
+    exerciseRest() {
+      this.progressText = 'Rest'
+
+      // this happens only once
+      if (this.totalTime === this.currentExercise.rest - 1) {
+        this.vibratePhone()
+        this.playSound('stop.mp3')
+        this.speakText('... and rest')
+      }
+      // rest: start counting down
+      if (
+        this.totalTime <= 3 &&
+        this.ExerciseRepeat !== this.currentExercise.repeat
+      ) {
+        // if 0
+        if (this.totalTime > 0) {
+          this.speakText(this.totalTime)
+        } else {
+          this.vibratePhone()
+          this.playSound('start.mp3')
+          this.speakText('Go!')
+        }
+      }
+    },
+    exercisePause() {
+      this.progressText = 'Pause'
+
+      if (
+        this.ExerciseRepeat === 0 &&
+        this.initialTime - 1 === this.totalTime
+      ) {
+        this.speakText('Next exercise')
+        if (this.currentExercise.pullups > 1) {
+          this.speakText(
+            `${this.currentExercise.pullups +
+              this.options[this.currentExercise.exercise].name}s`
+          )
+        } else {
+          this.speakText(this.options[this.currentExercise.exercise].name)
+        }
+        this.speakText(`for ${this.currentExercise.hold} seconds.`)
+        if (this.currentExercise.rest > 0 && this.currentExercise.repeat > 1) {
+          this.speakText(`Than rest for ${this.currentExercise.rest} seconds.`)
+        }
+      }
+
+      // start count down
+      if (this.totalTime <= 3) {
+        // if 0
+        if (this.totalTime > 0) {
+          this.speakText(this.totalTime)
+        } else {
+          this.vibratePhone()
+          this.playSound('start.mp3')
+          this.speakText('Go!')
+        }
+      }
+    },
+    nextExercise() {
+      this.currentStep = this.currentStep + 1
+      this.ExerciseRepeat = 0
+
+      // set time
+      this.totalTime = this.currentExercise.pause
+      this.initialTime = this.totalTime
+    },
+    repeatExercise() {
+      this.ExerciseRepeat = this.ExerciseRepeat + 1
+
+      // set timers
+      this.totalTime = this.currentExercise.hold + this.currentExercise.rest
+      this.initialTime = this.totalTime
+    },
+    finishWorkout() {
+      this.progressText = 'Done'
+      this.speakText('Well done')
+      this.noSleep.disable()
+      this.paused = true
+      clearInterval(this.timer)
     },
     pauseWorkout() {
       this.noSleep.disable()
