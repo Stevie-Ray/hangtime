@@ -4,7 +4,11 @@
       <v-icon @click="$router.push({ path: currentTab })"
         >mdi-arrow-left</v-icon
       >
-      <v-avatar v-if="currentWorkout" size="32px">
+      <v-avatar
+        v-if="currentWorkout"
+        size="32px"
+        @click.stop="dialogs.user = true"
+      >
         <v-img
           v-if="networkOnLine"
           :src="currentWorkout.user.photoURL"
@@ -103,6 +107,12 @@
               :current-workout="currentWorkout"
             ></dialog-workout-delete>
 
+            <dialog-user-image
+              v-if="currentWorkout"
+              v-model="dialogs.user"
+              :data="currentWorkout"
+            ></dialog-user-image>
+
             <v-speed-dial bottom right fixed>
               <v-btn fab dark small color="indigo">
                 <v-icon>mdi-plus</v-icon>
@@ -143,6 +153,7 @@ import WorkoutSubscribe from '@/components/WorkoutSubscribe'
 import WorkoutShare from '@/components/WorkoutShare'
 import DialogWorkoutGeneral from '@/components/DialogWorkoutGeneral'
 import DialogWorkoutDelete from '@/components/DialogWorkoutDelete'
+import DialogUserImage from '@/components/DialogUserImage'
 import { count } from '@/misc/helpers'
 
 export default {
@@ -151,7 +162,8 @@ export default {
     WorkoutSubscribe,
     WorkoutShare,
     DialogWorkoutGeneral,
-    DialogWorkoutDelete
+    DialogWorkoutDelete,
+    DialogUserImage
   },
   props: {
     id: String,
@@ -162,7 +174,8 @@ export default {
     edit: null,
     dialogs: {
       general: false,
-      delete: false
+      delete: false,
+      user: false
     }
   }),
   head: {

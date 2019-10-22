@@ -77,7 +77,11 @@ export function sound(audio) {
 export function shortDate(string) {
   const date = new Date(string)
   const day = date.getDate()
+  const year = date
+    .getFullYear()
+    .toString()
+    .substr(-2)
   const month = date.toLocaleString('default', { month: 'short' })
 
-  return `${day} ${month}`
+  return `${day} ${month}, ${year}`
 }

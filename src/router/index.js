@@ -83,6 +83,13 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue')
     },
     {
+      path: '/profile/:userId/',
+      name: 'user-profile',
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/user/Profile.vue')
+    },
+    {
       path: '/progress/:id/:type/record/:index',
       name: 'progress-record',
       props(route) {

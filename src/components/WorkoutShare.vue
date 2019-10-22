@@ -1,13 +1,13 @@
 <template>
   <div v-if="currentWorkout">
-    <v-btn icon @click="dialogs.share = true">
+    <v-btn :x-small="small" icon @click="dialogs.share = true">
       <v-icon v-if="!currentWorkout.share" :small="small"
         >mdi-star-outline</v-icon
       >
       <v-icon v-else :small="small">mdi-star-off</v-icon>
       <span
         v-if="currentWorkout.share && currentWorkout.subscribers.length > 1"
-        :class="{ 'subtitle-2': small }"
+        :class="{ 'subtitle-2 pr-4': small }"
       >
         {{ currentWorkout.subscribers.length - 1 }}
       </span>

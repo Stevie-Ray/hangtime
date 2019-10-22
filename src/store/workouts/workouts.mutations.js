@@ -14,7 +14,11 @@ export default {
       ...workoutFieldToCreate
     }),
   /* Workouts */
-  setWorkouts: (state, workouts) => (state.workouts = workouts.reverse()),
+  setWorkouts: (state, workouts) => {
+    if (workouts) {
+      state.workouts = workouts.reverse()
+    }
+  },
   // setWorkout: (state, workout) => (state.workout = workout),
   setWorkoutName: (state, payload) => {
     const index = state.workouts.findIndex(

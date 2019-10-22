@@ -25,12 +25,16 @@
               </v-list-item-content>
 
               <v-list-item-action>
-                <v-tooltip top style="opacity: 1 !important;">
-                  <template v-slot:activator="{ on }">
-                    <v-icon v-on="on">mdi-information-outline</v-icon>
-                  </template>
-                  <span>Soon</span>
-                </v-tooltip>
+                <v-btn
+                  icon
+                  @click="
+                    $router.push({
+                      path: `/profile/${data.user.id}`
+                    })
+                  "
+                >
+                  <v-icon>mdi-information-outline</v-icon>
+                </v-btn>
               </v-list-item-action>
             </v-list-item>
           </v-col>

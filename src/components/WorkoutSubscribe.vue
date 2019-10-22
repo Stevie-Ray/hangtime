@@ -1,11 +1,11 @@
 <template>
   <div v-if="currentWorkout">
-    <v-btn icon @click="dialogs.subscribe = true">
+    <v-btn :x-small="small" icon @click="dialogs.subscribe = true">
       <v-icon v-if="isSubscribed" :small="small">mdi-star</v-icon>
       <v-icon v-else :small="small">mdi-star-outline</v-icon>
       <span
         v-if="currentSubscribers && currentSubscribers.length > 1"
-        :class="{ 'subtitle-2': small }"
+        :class="{ 'subtitle-2 pr-4': small }"
       >
         {{ currentSubscribers.length - 1 }}
       </span>
