@@ -577,25 +577,150 @@ export default {
         {
           name: 'Kineboard',
           id: 2,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ENTREKINE.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
               name: ''
             }
           ]
         },
         {
-          name: 'Trainingboard',
+          name: 'Genesis',
           id: 3,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ENTREGENESIS.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Training Board',
+          id: 4,
+          image: 'hangboards/ENTRETRAINING.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
+              name: ''
+            },
+            {
+              id: 'h15',
+              class: 14,
               name: ''
             }
           ]
@@ -672,12 +797,41 @@ export default {
         {
           name: 'Portable',
           id: 1,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/KRAXLPORT.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
               name: ''
             }
           ]
