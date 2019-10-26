@@ -774,7 +774,7 @@ export default {
             },
             {
               id: 'h8',
-              class: 9,
+              class: 7,
               name: ''
             },
             {
@@ -790,6 +790,46 @@ export default {
             {
               id: 'h11',
               class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
+              name: ''
+            },
+            {
+              id: 'h15',
+              class: 14,
+              name: ''
+            },
+            {
+              id: 'h16',
+              class: 15,
+              name: ''
+            },
+            {
+              id: 'h17',
+              class: 16,
+              name: ''
+            },
+            {
+              id: 'h18',
+              class: 17,
+              name: ''
+            },
+            {
+              id: 'h19',
+              class: 18,
               name: ''
             }
           ]
@@ -839,12 +879,41 @@ export default {
         {
           name: 'Rock',
           id: 2,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/KRAXLROCK.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
               name: ''
             }
           ]
@@ -852,8 +921,7 @@ export default {
         {
           name: 'Xtreme',
           id: 3,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/KRAXLXTREME.svg',
           holds: [
             {
               id: '',
@@ -1077,12 +1145,96 @@ export default {
         {
           name: 'Simulator 3D',
           id: 1,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/METOLIUSSIMU3D.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
+              name: ''
+            },
+            {
+              id: 'h15',
+              class: 14,
+              name: ''
+            },
+            {
+              id: 'h16',
+              class: 15,
+              name: ''
+            },
+            {
+              id: 'h17',
+              class: 16,
+              name: ''
+            },
+            {
+              id: 'h18',
+              class: 17,
               name: ''
             }
           ]
