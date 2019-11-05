@@ -25,6 +25,19 @@
           </v-radio>
         </v-radio-group>
       </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+
+        <v-btn text class="add-hangboard" to="/settings/hangboards">
+          hangboards
+        </v-btn>
+        <v-btn text color="primary" @click="$emit('input', false)">
+          Save
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>

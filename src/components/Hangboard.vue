@@ -6,13 +6,17 @@
           <div class="leftside" @click="toggleLeft">
             <svg-inline
               :class="hangboard.holds[data.left].id"
-              :filepath="getImg(hangboard.image)"
+              :custom-class-name="hangboard.holds[data.left].id"
+              :src="getImg(hangboard.image)"
+              width="100%"
             />
           </div>
           <div class="rightside" @click="toggleRight">
             <svg-inline
               :class="hangboard.holds[data.right].id"
-              :filepath="getImg(hangboard.image)"
+              :custom-class-name="hangboard.holds[data.right].id"
+              :src="getImg(hangboard.image)"
+              width="100%"
             />
           </div>
         </div>
@@ -70,43 +74,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.hangboard {
-  padding: 0 16px;
-  margin: 0 auto;
-  max-width: 500px;
-
-  .leftside,
-  .rightside {
-    display: inline-block;
-    width: 50%;
-    text-align: right;
-  }
-  .rightside {
-    transform: rotateY(180deg);
-  }
-}
-
-.simple-svg-wrapper {
-  &.h1 #h1,
-  &.h2 #h2,
-  &.h3 #h3,
-  &.h4 #h4,
-  &.h5 #h5,
-  &.h6 #h6,
-  &.h7 #h7,
-  &.h8 #h8,
-  &.h9 #h9,
-  &.h10 #h10,
-  &.h11 #h11,
-  &.h12 #h12,
-  &.h13 #h13,
-  &.h14 #h14,
-  &.h15 #h15,
-  &.h16 #h16,
-  &.h17 #h17,
-  &.h18 #h18 {
-    fill: #366d73;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
