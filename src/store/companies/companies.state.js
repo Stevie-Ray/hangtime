@@ -1874,7 +1874,7 @@ export default {
         {
           name: 'Boost Board',
           id: 3,
-          image: 'hangboards/SOILLBIGBOOST.svg',
+          image: 'hangboards/SOILLBOOST.svg',
           holds: [
             {
               id: 'h1',

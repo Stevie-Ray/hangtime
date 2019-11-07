@@ -6,7 +6,6 @@ workbox.core.setCacheNameDetails({ prefix: 'hangtime' })
  * See https://goo.gl/S9QRab
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || [])
-workbox.precaching.suppressWarnings()
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
 // Redirect to index.html if sw cannot find matching route
