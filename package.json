@@ -16,13 +16,13 @@
   },
   "dependencies": {
     "@mdi/font": "^4.5.95",
-    "core-js": "^3.3.6",
+    "core-js": "^3.4.0",
     "firebase": "^7.2.3",
     "ircra": "^2.2.4",
     "is_js": "^0.9.0",
     "lodash": "^4.17.15",
     "nosleep.js": "^0.9.0",
-    "pwacompat": "^2.0.9",
+    "pwacompat": "^2.0.10",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-head": "^2.1.2",
@@ -34,7 +34,7 @@
     "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.144",
+    "@types/lodash": "^4.14.145",
     "@vue/cli-plugin-babel": "^4.0.5",
     "@vue/cli-plugin-e2e-cypress": "^4.0.5",
     "@vue/cli-plugin-eslint": "^4.0.5",

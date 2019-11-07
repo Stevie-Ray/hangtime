@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="333px" height="278px" viewBox="0 0 333 278" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>SOILLBIGBLISTER</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SOILLBIGBLISTER" transform="translate(0.770508, 0.260739)" fill="#FFFFFF">
+            <g transform="translate(0.229492, 0.739261)">
+                <path d="M331.976608,38.9993591 L264.732861,39.3368019 C239.996063,35.9086947 223.35046,30.3935038 214.796055,22.7912294 C201.964446,11.3878176 165.003676,0 143.568868,0 C122.134061,0 85.5294802,4.47538877 61.7369905,22.7912294 C37.9445008,41.1070699 0.00884418103,88.1507737 0.00884418103,128.989766 C0.00884418103,142.04745 -0.583176083,165.416436 7.92015684,186.226159 C26.0117047,230.500574 68.7560448,276 129.862888,276 C219.690978,276 270.056581,225.835129 331.952576,225.835129" id="hangboard" stroke="#000000"></path>
+                <rect id="h7" stroke="#000000" x="189" y="194" width="51" height="34" rx="17"></rect>
+                <rect id="h6" stroke="#000000" x="102" y="194" width="69" height="40" rx="18"></rect>
+                <path d="M332,170 L71,170 C61.0588745,170 53,161.941125 53,152 L53,149 C53,139.058875 61.0588745,131 71,131 L332,131" id="h5" stroke="#000000"></path>
+                <rect id="h4" stroke="#000000" x="53" y="131" width="140" height="39" rx="18"></rect>
+                <path d="M332,102 L226.5,102 C218.491871,102 212,95.5081289 212,87.5 C212,79.4918711 218.491871,73 226.5,73 L332,73" id="h3" stroke="#000000"></path>
+                <rect id="h2" stroke="#000000" x="66" y="62" width="117" height="40" rx="18"></rect>
+                <path d="M206,37 L66,37 C85.8173337,18.3333333 109.150667,9 136,9 C162.849333,9 186.182666,18.3333333 206,37 Z" id="h1"></path>
+            </g>
+        </g>
+    </g>
+</svg>
