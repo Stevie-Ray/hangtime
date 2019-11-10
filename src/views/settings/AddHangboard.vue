@@ -39,18 +39,6 @@ import { mapState, mapActions } from 'vuex'
 import HangboardSelect from '@/components/HangboardSelect'
 
 export default {
-  head: {
-    title: {
-      inner: 'Select Hangboard'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'HangTime user',
-        id: 'desc'
-      }
-    ]
-  },
   components: { HangboardSelect },
   computed: {
     ...mapState('app', ['networkOnLine']),
@@ -69,6 +57,18 @@ export default {
       }
       this.$router.push('/settings/hangboards/')
     }
+  },
+  head: {
+    title: {
+      inner: 'Select Hangboard'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'HangTime user',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

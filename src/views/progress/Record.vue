@@ -228,18 +228,6 @@ export default {
     timer: null,
     totalTime: 0
   }),
-  head: {
-    title: {
-      inner: 'Record'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('progress', ['statsById', 'bestStatsById']),
@@ -312,6 +300,18 @@ export default {
         }
       })
     }
+  },
+  head: {
+    title: {
+      inner: 'Record'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

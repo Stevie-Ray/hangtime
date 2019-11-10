@@ -97,18 +97,6 @@ export default {
       required: v => !!v || 'This field is required'
     }
   }),
-  head: {
-    title: {
-      inner: 'Add Workout'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapState('authentication', ['user']),
@@ -152,6 +140,18 @@ export default {
     saveExercises() {
       this.dialog = true
     }
+  },
+  head: {
+    title: {
+      inner: 'New Workout'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

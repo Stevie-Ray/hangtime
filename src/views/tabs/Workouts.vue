@@ -7,6 +7,8 @@ import { mapState } from 'vuex'
 import WorkoutList from '@/components/WorkoutList'
 
 export default {
+  components: { WorkoutList },
+  computed: mapState('app', ['networkOnLine']),
   head: {
     title: {
       inner: 'Workouts'
@@ -18,9 +20,7 @@ export default {
         id: 'desc'
       }
     ]
-  },
-  components: { WorkoutList },
-  computed: mapState('app', ['networkOnLine'])
+  }
 }
 </script>
 

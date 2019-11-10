@@ -10,15 +10,22 @@
       </v-progress-circular>
       <div>Loading community workouts...</div>
     </div>
-    <v-list
+    <v-container
       v-if="(!user && !workouts) || (workouts && !workouts.length)"
-      three-line
+      fluid
     >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>No community workouts found</v-list-item-title>
-          <v-list-item-subtitle
-            >Add your personal
+      <v-row justify="center" align="center">
+        <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+          <img src="@/assets/sloth/baby.svg" alt="sloth baby" />
+        </v-avatar>
+      </v-row>
+      <v-row>
+        <v-card flat>
+          <v-card-title>
+            No community workouts found
+          </v-card-title>
+          <v-card-subtitle>
+            After creating a
             {{
               companies[
                 user.settings.hangboards[user.settings.selected].company
@@ -26,9 +33,21 @@
                 user.settings.hangboards[user.settings.selected].hangboard
               ].name
             }}
-            workouts to the community using the
-            <v-icon small>mdi-star-outline</v-icon> button.
-          </v-list-item-subtitle>
+            workout use the
+            <v-icon small>mdi-star-outline</v-icon> button to add it to the
+            community.
+          </v-card-subtitle>
+        </v-card>
+      </v-row>
+    </v-container>
+    <v-list
+      v-if="(!user && !workouts) || (workouts && !workouts.length)"
+      three-line
+    >
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title></v-list-item-title>
+          <v-list-item-subtitle> </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>

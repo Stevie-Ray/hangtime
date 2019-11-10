@@ -142,18 +142,6 @@ import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
 
 export default {
-  head: {
-    title: {
-      inner: 'Profile'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'HangTime settings',
-        id: 'desc'
-      }
-    ]
-  },
   data: () => ({
     ircra: new IRCRA(),
     rules: {
@@ -245,6 +233,18 @@ export default {
         this.imageUrl = ''
       }
     }
+  },
+  head: {
+    title: {
+      inner: 'Profile'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'HangTime settings',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

@@ -133,18 +133,6 @@ export default {
     index: Number
   },
   data: () => ({}),
-  head: {
-    title: {
-      inner: 'Record'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('progress', ['statsById']),
@@ -236,6 +224,18 @@ export default {
         }
       })
     }
+  },
+  head: {
+    title: {
+      inner: 'Record'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

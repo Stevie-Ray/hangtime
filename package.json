@@ -17,7 +17,7 @@
   "dependencies": {
     "@mdi/font": "^4.5.95",
     "core-js": "^3.4.0",
-    "firebase": "^7.2.3",
+    "firebase": "^7.3.0",
     "ircra": "^2.2.4",
     "is_js": "^0.9.0",
     "lodash": "^4.17.15",
@@ -30,11 +30,11 @@
     "vue-simple-svg": "^2.0.2",
     "vuedraggable": "^2.23.2",
     "vuetify": "^2.1.9",
-    "vuex": "^3.1.1",
+    "vuex": "^3.1.2",
     "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.145",
+    "@types/lodash": "^4.14.146",
     "@vue/cli-plugin-babel": "^4.0.5",
     "@vue/cli-plugin-e2e-cypress": "^4.0.5",
     "@vue/cli-plugin-eslint": "^4.0.5",
@@ -54,8 +54,8 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.18.1",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^5.2.3",
-    "firebase-tools": "^7.6.2",
+    "eslint-plugin-vue": "^6.0.0",
+    "firebase-tools": "^7.7.0",
     "prerender-spa-plugin": "^3.4.0",
     "sass": "^1.23.3",
     "sass-loader": "^7.3.1",

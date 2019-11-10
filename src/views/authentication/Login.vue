@@ -4,8 +4,8 @@
       <v-layout justify-center>
         <v-flex text-center xs12 sm8 md6>
           <v-flex class="mx-auto pa-4">
-            <div class="title font-weight-light mb-2">{{ appTitle }}</div>
-            <div class="subheading font-weight-light grey--text mb-4">
+            <div class="title ">{{ appTitle }}</div>
+            <div class="subheading font-weight-light grey--text">
               Version {{ appVersion }}
             </div>
 
@@ -13,7 +13,7 @@
               height="144px"
               width="144px"
               :src="getImg('logo.svg')"
-              class="mb-4"
+              class="my-4"
             />
 
             <!-- Loader -->
@@ -33,21 +33,23 @@
               <p>{{ loginError }}</p>
             </div>
             <!-- Auth UI -->
-            <v-flex xs12 class="my-3">
+            <v-flex xs12 class="mb-4">
               <v-btn
                 v-show="user !== undefined && !user && networkOnLine"
                 data-test="login-btn"
                 class="login-btn"
+                min-width="250"
                 @click="login('facebook')"
               >
                 Login with Facebook
               </v-btn>
             </v-flex>
-            <v-flex xs12 class="my-3">
+            <v-flex xs12 class="mb-4">
               <v-btn
                 v-show="user !== undefined && !user && networkOnLine"
                 data-test="login-btn"
                 class="login-btn"
+                min-width="250"
                 @click="login('google')"
               >
                 Login with Google
@@ -55,16 +57,7 @@
             </v-flex>
 
             <v-flex xs12 class="mt-5 caption grey--text font-weight-light">
-              &copy; 2019 HangTime.<br /><br />
-              Development:
-              <a href="https://stevie-ray.nl/" target="_blank">
-                Stevie-Ray Hartog
-              </a>
-              <br />
-              Illustrations:
-              <a href="https://dribbble.com/jurrienvrijsen" target="_blank">
-                Jurriën Vrijsen
-              </a>
+              &copy; 2019 HangTime.
             </v-flex>
           </v-flex>
         </v-flex>
@@ -82,18 +75,6 @@ import { getImg } from '@/misc/helpers'
 
 export default {
   data: () => ({ loginError: null }),
-  head: {
-    title: {
-      inner: 'Login'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Sign in or sign up to HangTime',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'appTitle', 'appVersion'])
@@ -140,6 +121,18 @@ export default {
         this.setUser(null)
       }
     }
+  },
+  head: {
+    title: {
+      inner: 'Login'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Sign in or sign up to HangTime',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

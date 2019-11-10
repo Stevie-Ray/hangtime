@@ -12,7 +12,12 @@
             "
           >
             <v-list-item-avatar>
-              <img :alt="option.name" :src="getImg(option.image)" />
+              <img
+                :alt="option.name"
+                :src="getImg(option.image)"
+                aspect-ratio="1"
+                class="grey lighten-2"
+              />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title> {{ option.name }}</v-list-item-title>
@@ -46,18 +51,6 @@ import { mapState, mapGetters } from 'vuex'
 import { getImg, count, shortDate } from '@/misc/helpers'
 
 export default {
-  head: {
-    title: {
-      inner: 'Progress'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Measure strength and become a better climber',
-        id: 'desc'
-      }
-    ]
-  },
   components: {},
   data: () => ({
     type: 'hangtime'
@@ -99,6 +92,18 @@ export default {
         .replace(/^-*/, '') // Remove starting dashes
         .replace(/-*$/, '') // Remove trailing dashes
     }
+  },
+  head: {
+    title: {
+      inner: 'Progress'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Measure strength and become a better climber',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

@@ -22,13 +22,24 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex xs12 sm8 md6>
-            <v-list v-if="currentStats && !currentStats.length">
-              <v-list-item>
-                <v-list-item-title>
-                  No recordings added yet
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
+            <v-container v-if="currentStats && !currentStats.length" fluid>
+              <v-row justify="center" align="center">
+                <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+                  <img src="@/assets/sloth/sleepy.svg" alt="sloth sleepy" />
+                </v-avatar>
+              </v-row>
+              <v-row>
+                <v-card flat>
+                  <v-card-title>
+                    No recordings added yet
+                  </v-card-title>
+                  <v-card-subtitle>
+                    Start recording your progress using the
+                    <v-icon small>mdi-plus</v-icon> icon.
+                  </v-card-subtitle>
+                </v-card>
+              </v-row>
+            </v-container>
 
             <v-flex v-for="(data, index) in currentStats" :key="index">
               <v-card flat>
@@ -94,6 +105,9 @@
                     @left="hangboardData.left = $event"
                     @right="hangboardData.right = $event"
                   ></hangboard>
+                  <v-checkbox
+                    :label="`${currentType.name} Pull-ups`"
+                  ></v-checkbox>
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -101,7 +115,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn text @click="clickAddHangboard">
-                    Add Holds
+                    Track your progress
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -142,18 +156,6 @@ export default {
       right: 0
     }
   }),
-  head: {
-    title: {
-      inner: 'Progress'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'currentTab']),
@@ -194,6 +196,18 @@ export default {
 
       this.dialog = false
     }
+  },
+  head: {
+    title: {
+      inner: 'Progress'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

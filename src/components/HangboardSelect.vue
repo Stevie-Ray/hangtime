@@ -90,18 +90,6 @@ import { mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
 
 export default {
-  head: {
-    title: {
-      inner: 'Select Hangboard'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'HangTime user',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user', 'hangboardToAdd']),

@@ -381,6 +381,18 @@ export default {
         if (this.user.settings.vibrate) navigator.vibrate([80, 40, 120])
       }
     }
+  },
+  head: {
+    title: {
+      inner: 'Workout'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

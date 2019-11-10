@@ -21,6 +21,7 @@
           {{ currentExercise.pullups }}</span
         >
         <span> {{ options[currentExercise.exercise].name }}</span>
+        <span v-if="currentExercise.pullups > 0"> Pull-up</span>
         <span v-if="currentExercise.pullups > 1">s</span>
 
         <div v-if="currentExercise.time" class="subheading">
@@ -97,18 +98,6 @@ export default {
   data: () => ({
     edit: null
   }),
-  head: {
-    title: {
-      inner: 'Exercise'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
@@ -171,6 +160,18 @@ export default {
         }
       })
     }
+  },
+  head: {
+    title: {
+      inner: 'Exercise'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

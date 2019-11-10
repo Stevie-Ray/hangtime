@@ -94,6 +94,7 @@
                       style="width: calc(100% - 32px)"
                       @change="changeVoice($event)"
                     >
+                      <!--  eslint-disable-next-line vue/no-unused-vars-->
                       <template v-slot:selection="data">
                         <span
                           >{{ voiceList[user.settings.voice].name }} ({{
@@ -211,6 +212,18 @@ export default {
         console.log('speechSynthesis not available', ex)
       }
     }
+  },
+  head: {
+    title: {
+      inner: 'Workout Settings'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'HangTime settings',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

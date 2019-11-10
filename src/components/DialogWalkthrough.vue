@@ -21,14 +21,23 @@
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <v-card flat class="mb-12">
-            <v-card-title>Welcome to HangTime</v-card-title>
+          <v-card flat class="mb-4">
+            <v-container fluid>
+              <v-row justify="center">
+                <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+                  <img src="@/assets/sloth/hello.svg" alt="sloth hello" />
+                </v-avatar>
+              </v-row>
+            </v-container>
+
+            <v-card-title>
+              Welcome to HangTime
+            </v-card-title>
             <v-card-text>
-              <span>Hello {{ user.displayName }},</span><br />
               <span class="text--primary">
                 <span
                   >HangTime lets you create your own training sequences, get and
-                  share them from our community and track your hangboarding
+                  share workouts with our community and track your hangboarding
                   progress.</span
                 >
               </span>
@@ -41,8 +50,13 @@
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-card flat class="mb-12">
-            <hangboard-select></hangboard-select>
+          <v-card flat class="mb-4">
+            <v-card-title>
+              Select you hangboard
+            </v-card-title>
+            <v-card-text>
+              <hangboard-select></hangboard-select>
+            </v-card-text>
           </v-card>
 
           <v-btn color="primary" @click="e1 = 3">
@@ -51,7 +65,10 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <v-card flat class="mb-12" height="200px">
+          <v-card flat class="mb-4">
+            <v-card-title>
+              What's your current grade?
+            </v-card-title>
             <v-list two-line>
               <v-list-item>
                 <v-list-item-avatar>
@@ -82,8 +99,6 @@
                     :item-text="user.settings.scale"
                     item-value="ircra"
                     label="Grade"
-                    persistent-hint
-                    hint="What grade are you currently climbing?"
                   ></v-select>
                 </v-list-item-content>
               </v-list-item>
@@ -95,14 +110,23 @@
         </v-stepper-content>
 
         <v-stepper-content step="4">
-          <v-card flat class="mb-12">
+          <v-card flat class="mb-4">
+            <v-container fluid>
+              <v-row justify="center">
+                <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+                  <img
+                    src="@/assets/sloth/upside-down.svg"
+                    alt="sloth upside down"
+                  />
+                </v-avatar>
+              </v-row>
+            </v-container>
             <v-card-title>Now start training!</v-card-title>
             <v-card-text>
-              <span>You're ready to do your first workout</span><br />
               <span class="text--primary">
                 <span
                   >Add your first workout, do a community workout or start
-                  recording your progress so far. It's up to you!</span
+                  recording your progress. It's up to you!</span
                 >
               </span>
             </v-card-text>

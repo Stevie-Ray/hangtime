@@ -115,18 +115,6 @@ import IRCRA from 'ircra'
 import { getImg, shortDate } from '@/misc/helpers'
 
 export default {
-  head: {
-    title: {
-      inner: 'Profile'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'HangTime',
-        id: 'desc'
-      }
-    ]
-  },
   props: {
     userId: String
   },
@@ -141,6 +129,18 @@ export default {
   methods: {
     getImg,
     shortDate
+  },
+  head: {
+    title: {
+      inner: 'Profile'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'HangTime',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

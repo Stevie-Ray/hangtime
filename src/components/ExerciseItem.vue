@@ -1,54 +1,7 @@
 <template>
   <v-container v-if="currentExercise" grid-list-md text-center-xs>
-    <v-layout wrap>
-      <v-flex xs3>
-        <!-- exercise image  -->
-        <v-avatar>
-          <img
-            :alt="options[currentExercise.exercise].name"
-            :src="getImg(options[currentExercise.exercise].image)"
-          />
-        </v-avatar>
-      </v-flex>
-
-      <v-flex xs9>
-        <!-- exercise  -->
-        <v-select
-          v-model="dataExercise"
-          :items="options"
-          item-text="name"
-          item-value="id"
-          label="Exercise"
-          :disabled="!editWorkout"
-          required
-        >
-          <template v-slot:selection="data">
-            <span v-text="data.item.name"></span>
-          </template>
-          <template v-slot:item="data">
-            <v-list-item-avatar>
-              <img :alt="data.item.name" :src="getImg(data.item.image)" />
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>{{ data.item.name }}</v-list-item-title>
-            </v-list-item-content>
-          </template>
-        </v-select>
-      </v-flex>
-
-      <v-flex xs12>
-        <!-- hangboard -->
-        <hangboard
-          :data="currentExercise"
-          :edit-workout="editWorkout"
-          @left="setData({ id: id, value: { left: $event }, index: index })"
-          @right="setData({ id: id, value: { right: $event }, index: index })"
-        ></hangboard>
-      </v-flex>
-
-      <v-flex xs12>
-        <v-divider class="my-4"></v-divider>
-
+    <v-row wrap>
+      <v-col cols="12">
         <!-- pause  -->
         <v-slider
           v-model="dataPause"
@@ -72,7 +25,63 @@
           </template>
         </v-slider>
 
-        <v-divider class="my-4"></v-divider>
+        <v-divider class="mt-4"></v-divider>
+      </v-col>
+    </v-row>
+    <v-row wrap>
+      <v-col cols="3">
+        <!-- exercise image  -->
+        <v-avatar>
+          <img
+            :alt="options[currentExercise.exercise].name"
+            :src="getImg(options[currentExercise.exercise].image)"
+            aspect-ratio="1"
+            class="grey lighten-2"
+          />
+        </v-avatar>
+      </v-col>
+
+      <v-col cols="9">
+        <!-- exercise  -->
+        <v-select
+          v-model="dataExercise"
+          :items="options"
+          item-text="name"
+          item-value="id"
+          label="Exercise"
+          :disabled="!editWorkout"
+          required
+        >
+          <template v-slot:selection="data">
+            <span v-text="data.item.name"></span>
+          </template>
+          <template v-slot:item="data">
+            <v-list-item-avatar>
+              <img :alt="data.item.name" :src="getImg(data.item.image)" />
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title>{{ data.item.name }}</v-list-item-title>
+            </v-list-item-content>
+          </template>
+        </v-select>
+      </v-col>
+    </v-row>
+
+    <v-row wrap>
+      <v-col cols="12">
+        <v-divider class="mb-4"></v-divider>
+
+        <!-- hangboard -->
+        <hangboard
+          :data="currentExercise"
+          :edit-workout="editWorkout"
+          @left="setData({ id: id, value: { left: $event }, index: index })"
+          @right="setData({ id: id, value: { right: $event }, index: index })"
+        ></hangboard>
+      </v-col>
+
+      <v-col cols="12">
+        <v-divider class="mb-4"></v-divider>
 
         <!-- hold  -->
         <v-slider
@@ -97,17 +106,17 @@
           </template>
         </v-slider>
 
-        <v-divider
-          v-if="options[currentExercise.exercise].configurable"
-          class="my-4"
-        ></v-divider>
+        <v-divider class="mt-4"></v-divider>
+
+        <v-subheader><strong>Optional</strong></v-subheader>
+
+        <v-divider class="mb-4"></v-divider>
 
         <!-- pullups  -->
         <v-slider
-          v-if="options[currentExercise.exercise].configurable"
           v-model="dataPullups"
           :max="20"
-          :min="1"
+          :min="0"
           step="1"
           ticks
           always-dirty
@@ -176,8 +185,8 @@
             <v-label>{{ count(dataRest) }}</v-label>
           </template>
         </v-slider>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

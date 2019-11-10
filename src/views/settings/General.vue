@@ -65,18 +65,6 @@ import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
 
 export default {
-  head: {
-    title: {
-      inner: 'General'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'HangTime settings',
-        id: 'desc'
-      }
-    ]
-  },
   data: () => ({
     scale: new IRCRA().scale()
   }),
@@ -97,6 +85,18 @@ export default {
     getImg,
     ...mapActions('authentication', ['triggerUpdateUser']),
     ...mapMutations('authentication', ['setScale'])
+  },
+  head: {
+    title: {
+      inner: 'General'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'HangTime settings',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

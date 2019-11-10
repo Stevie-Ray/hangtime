@@ -178,18 +178,6 @@ export default {
       user: false
     }
   }),
-  head: {
-    title: {
-      inner: 'Workout'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapState('authentication', ['user']),
@@ -228,6 +216,18 @@ export default {
         }
       })
     }
+  },
+  head: {
+    title: {
+      inner: 'Workout'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

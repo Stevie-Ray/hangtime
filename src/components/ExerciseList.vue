@@ -10,18 +10,28 @@
       </v-progress-circular>
       <div>Loading exercises...</div>
     </div>
-    <v-list v-if="currentWorkout && !currentWorkout.exercises.length" two-line>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Start adding exercises</v-list-item-title>
-          <v-list-item-subtitle
-            >Add multiple exercises using the
+    <v-container
+      v-if="currentWorkout && !currentWorkout.exercises.length"
+      fluid
+    >
+      <v-row justify="center" align="center">
+        <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+          <img src="@/assets/sloth/sitting.svg" alt="sloth sitting" />
+        </v-avatar>
+      </v-row>
+      <v-row>
+        <v-card flat>
+          <v-card-title>
+            Start adding exercises
+          </v-card-title>
+          <v-card-subtitle>
+            Add multiple exercises using the
             <v-icon small>mdi-playlist-plus</v-icon>
             button.
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+          </v-card-subtitle>
+        </v-card>
+      </v-row>
+    </v-container>
     <v-list v-if="currentWorkout && currentWorkout.exercises.length" two-line>
       <draggable
         v-model="exerciseList"

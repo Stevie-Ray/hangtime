@@ -10,15 +10,19 @@
       </v-progress-circular>
       <div>Loading workouts...</div>
     </div>
-    <v-list
-      v-if="(!user && !workouts) || (workouts && !workouts.length)"
-      three-line
-    >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>No personal workouts found</v-list-item-title>
-          <v-list-item-subtitle
-            >You haven't added any
+    <v-container v-if="(!user && !workouts) || (workouts && !workouts.length)">
+      <v-row justify="center" align="center">
+        <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+          <img src="@/assets/sloth/upside-down.svg" alt="sloth upside down" />
+        </v-avatar>
+      </v-row>
+      <v-row>
+        <v-card flat>
+          <v-card-title>
+            No personal workouts found
+          </v-card-title>
+          <v-card-subtitle>
+            You haven't added any
             {{
               companies[
                 user.settings.hangboards[user.settings.selected].company
@@ -33,10 +37,10 @@
             }}
             workouts. Use the <v-icon small>mdi-plus</v-icon> button to get
             started.
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+          </v-card-subtitle>
+        </v-card>
+      </v-row>
+    </v-container>
     <v-list two-line>
       <workout-list-item
         v-for="(workout, index) in workouts"

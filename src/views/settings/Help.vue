@@ -27,10 +27,13 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
-
-            <!--       <v-subheader>Contact us</v-subheader>-->
-
             <v-list>
+              <v-list-item
+                href="https://www.metoliusclimbing.com/"
+                target="_blank"
+              >
+                <v-list-item-title>Source: Metolius Climbing</v-list-item-title>
+              </v-list-item>
               <v-list-item href="mailto:mail@stevie-ray.nl">
                 <v-list-item-title>Question? Need help?</v-list-item-title>
               </v-list-item>
@@ -53,7 +56,19 @@ export default {
   computed: {
     ...mapState('workouts', ['options'])
   },
-  methods: {}
+  methods: {},
+  head: {
+    title: {
+      inner: 'Help'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
+  }
 }
 </script>
 
