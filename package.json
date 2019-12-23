@@ -72,7 +72,7 @@
     },
     {
       "path": "./dist/js/chunk-firestore*.js",
-      "maxSize": "95 kB"
+      "maxSize": "100 kB"
     },
     {
       "path": "./dist/js/app*.js",
