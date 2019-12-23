@@ -21,8 +21,8 @@
             >
               <v-card flat class="mb-2">
                 <v-container fluid class="py-0">
-                  <v-row>
-                    <v-col cols="12">
+                  <v-row justify="center">
+                    <v-col cols="12" sm="8" md="6">
                       <div class="hangboard mt-4">
                         <div class="leftside">
                           <v-img

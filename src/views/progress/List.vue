@@ -20,8 +20,15 @@
         />
       </v-avatar>
       <v-toolbar-title v-if="currentType">
+        <span
+          v-if="
+            currentStats[index].left === null ||
+              currentStats[index].right === null
+          "
+          >One-Arm
+        </span>
         <span>{{ currentType.name }}</span>
-        <span> Tries</span>
+        <span> Strength</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -80,6 +87,13 @@
 
                   <v-list-item-content>
                     <v-list-item-title>
+                      <span
+                        v-if="
+                          currentStats[index].left === null ||
+                            currentStats[index].right === null
+                        "
+                        >One-Arm
+                      </span>
                       <span>{{ currentType.name }}</span>
                     </v-list-item-title>
                     <v-list-item-subtitle>

@@ -43,8 +43,8 @@
     </v-list>
 
     <v-container fluid class="py-0">
-      <v-row>
-        <v-col cols="12">
+      <v-row justify="center">
+        <v-col cols="12" md="10" lg="8">
           <div
             class="hangboard"
             :class="

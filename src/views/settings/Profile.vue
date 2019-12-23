@@ -80,7 +80,6 @@
                     >mdi-chart-timeline-variant</v-icon
                   >
                 </v-list-item-avatar>
-
                 <v-list-item-content>
                   <v-select
                     v-if="user"
@@ -185,7 +184,7 @@ export default {
       }
     },
     grades() {
-      return this.ircra.get(this.user.settings.scale)
+      return this.ircra.get(this.user.settings.scale).filter(n => n)
     }
   },
   methods: {

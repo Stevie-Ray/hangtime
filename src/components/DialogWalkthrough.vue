@@ -85,7 +85,7 @@
                   ></v-select>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item>
+              <v-list-item v-if="user">
                 <v-list-item-avatar>
                   <v-icon color="primary lighten-1"
                     >mdi-chart-timeline-variant</v-icon
@@ -163,6 +163,8 @@ export default {
     ...mapState('companies', ['companies']),
     settingsScale: {
       get() {
+        if (!this.user) return
+        // eslint-disable-next-line consistent-return
         return this.user.settings.scale
       },
       set(value) {
@@ -171,9 +173,11 @@ export default {
     },
     settingsGrade: {
       get() {
+        if (!this.user) return
         const ircraGrade = this.ircra
           .convert('ircra', this.user.settings.grade)
           .to(this.user.settings.scale)[this.user.settings.scale]
+        // eslint-disable-next-line consistent-return
         return ircraGrade
       },
       set(value) {
@@ -190,7 +194,9 @@ export default {
       set() {}
     },
     grades() {
-      return this.ircra.get(this.user.settings.scale)
+      if (!this.user) return
+      // eslint-disable-next-line consistent-return
+      return this.ircra.get(this.user.settings.scale).filter(n => n)
     }
   },
   methods: {

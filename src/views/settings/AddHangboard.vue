@@ -13,8 +13,8 @@
 
     <v-content>
       <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 sm8 md6>
+        <v-row justify="center" align="start" class="fill-height">
+          <v-col cols="12" sm="8" md="6">
             <hangboard-select></hangboard-select>
 
             <v-speed-dial bottom right fixed>
@@ -27,8 +27,8 @@
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
             </v-speed-dial>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

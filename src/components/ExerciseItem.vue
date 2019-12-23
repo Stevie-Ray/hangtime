@@ -106,14 +106,21 @@
           </template>
         </v-slider>
 
-        <v-divider class="mt-4"></v-divider>
+        <div v-if="editWorkout">
+          <v-divider class="mt-4"></v-divider>
 
-        <v-subheader><strong>Optional</strong></v-subheader>
+          <v-subheader><strong>Optional</strong></v-subheader>
 
-        <v-divider class="mb-4"></v-divider>
+          <v-divider class="mb-4"></v-divider>
+        </div>
+
+        <div v-else>
+          <v-divider class="my-4"></v-divider>
+        </div>
 
         <!-- pullups  -->
         <v-slider
+          v-if="editWorkout || currentExercise.pullups > 0"
           v-model="dataPullups"
           :max="20"
           :min="0"
@@ -133,7 +140,10 @@
           </template>
         </v-slider>
 
-        <v-divider class="my-4"></v-divider>
+        <v-divider
+          v-if="editWorkout || currentExercise.pullups > 0"
+          class="my-4"
+        ></v-divider>
 
         <!-- repeat  -->
         <v-slider
