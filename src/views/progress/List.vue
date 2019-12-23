@@ -21,7 +21,7 @@
       </v-avatar>
       <v-toolbar-title v-if="currentType">
         <span>{{ currentType.name }}</span>
-        <span> Recordings</span>
+        <span> Tries</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -47,10 +47,16 @@
             </v-sheet>
 
             <v-flex>
-              <hangboard
-                :data="currentStats[index]"
-                :edit-workout="false"
-              ></hangboard>
+              <v-container fluid class="py-0">
+                <v-row>
+                  <v-col cols="12" class="py-0">
+                    <hangboard
+                      :data="currentStats[index]"
+                      :edit-workout="false"
+                    ></hangboard>
+                  </v-col>
+                </v-row>
+              </v-container>
             </v-flex>
 
             <v-list
@@ -192,7 +198,7 @@ export default {
         .replace(/-*$/, '') // Remove trailing dashes
     },
     counter() {
-      this.totalTime = this.totalTime + 1
+      this.totalTime += 1
     },
     startRecording() {
       this.timer = setInterval(() => this.counter(), 1000)

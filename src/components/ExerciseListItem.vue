@@ -17,9 +17,11 @@
         </v-list-item-subtitle>
 
         <v-list-item-title>
-          <span v-if="data.repeat > 1">{{ data.repeat }}x</span>
-          <span v-if="data.pullups > 1"> {{ data.pullups }}</span>
-          <span> {{ options[data.exercise].name }}</span>
+          <span v-if="data.repeat > 1">{{ data.repeat }}x </span>
+          <span v-if="data.pullups > 1">{{ data.pullups }} </span>
+          <span v-if="data.left === null || data.right === null">One-Arm </span>
+          <span>{{ options[data.exercise].name }}</span>
+          <span v-if="data.pullups > 0"> Pull-up</span>
           <span v-if="data.pullups > 1">s</span>
         </v-list-item-title>
 

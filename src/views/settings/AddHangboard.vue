@@ -14,7 +14,7 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center>
-          <v-flex sm8 md6>
+          <v-flex xs12 sm8 md6>
             <hangboard-select></hangboard-select>
 
             <v-speed-dial bottom right fixed>

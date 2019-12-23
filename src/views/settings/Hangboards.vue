@@ -20,28 +20,36 @@
               :key="index"
             >
               <v-card flat class="mb-2">
-                <div class="hangboard mt-4">
-                  <div class="leftside">
-                    <v-img
-                      :src="
-                        getImg(
-                          companies[item.company].hangboards[item.hangboard]
-                            .image
-                        )
-                      "
-                    />
-                  </div>
-                  <div class="rightside">
-                    <v-img
-                      :src="
-                        getImg(
-                          companies[item.company].hangboards[item.hangboard]
-                            .image
-                        )
-                      "
-                    />
-                  </div>
-                </div>
+                <v-container fluid class="py-0">
+                  <v-row>
+                    <v-col cols="12">
+                      <div class="hangboard mt-4">
+                        <div class="leftside">
+                          <v-img
+                            :src="
+                              getImg(
+                                companies[item.company].hangboards[
+                                  item.hangboard
+                                ].image
+                              )
+                            "
+                          />
+                        </div>
+                        <div class="rightside">
+                          <v-img
+                            :src="
+                              getImg(
+                                companies[item.company].hangboards[
+                                  item.hangboard
+                                ].image
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-container>
 
                 <v-card-title primary-title>
                   <div class="text-center">

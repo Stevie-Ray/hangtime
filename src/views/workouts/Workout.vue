@@ -114,10 +114,6 @@
             ></dialog-user-image>
 
             <v-speed-dial bottom right fixed>
-              <v-btn fab dark small color="indigo">
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-
               <v-btn
                 v-if="!editWorkout"
                 slot="activator"

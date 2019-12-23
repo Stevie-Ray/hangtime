@@ -88,11 +88,17 @@
               </v-flex>
 
               <v-flex class="Hangboard">
-                <hangboard
-                  v-if="currentStats"
-                  :data="currentStats[index]"
-                  :edit-workout="false"
-                ></hangboard>
+                <v-container fluid class="py-0">
+                  <v-row>
+                    <v-col cols="12" class="py-0">
+                      <hangboard
+                        v-if="currentStats"
+                        :data="currentStats[index]"
+                        :edit-workout="false"
+                      ></hangboard>
+                    </v-col>
+                  </v-row>
+                </v-container>
               </v-flex>
 
               <v-flex class="Title">
@@ -267,17 +273,22 @@ export default {
         .replace(/-*$/, '') // Remove trailing dashes
     },
     counter() {
-      this.totalTime = this.totalTime + 1
+      this.totalTime += 1
     },
-    startRecording() {
+    async startRecording() {
       this.running = true
-      this.noSleep.enable()
+      await this.requestWakeLock()
       this.timer = setInterval(() => this.counter(), 1000)
     },
     stopRecording() {
       clearInterval(this.timer)
       this.running = false
-      this.noSleep.disable()
+      if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
+        this.wakeLock.release()
+        this.wakeLock = null
+      } else {
+        this.noSleep.disable()
+      }
       this.dialog = true
     },
     saveRecording() {
@@ -299,6 +310,22 @@ export default {
           id: this.currentType.id
         }
       })
+    },
+    async requestWakeLock() {
+      try {
+        if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
+          this.wakeLock = await navigator.wakeLock.request('screen')
+          this.wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released')
+          })
+          console.log('Wake Lock is active')
+        } else {
+          console.log('noSleep')
+          this.noSleep.enable()
+        }
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`)
+      }
     }
   },
   head: {

@@ -22,25 +22,33 @@ const router = new Router({
     {
       path: '/',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-tabs" */ '@/views/tabs/Tabs.vue'),
+        import(
+          /* webpackChunkName: "client-chunk-tabs" */ '@/views/tabs/Tabs.vue'
+        ),
       children: [
         {
           path: '/',
           name: 'workouts',
           component: () =>
-            import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/tabs/Workouts.vue')
+            import(
+              /* webpackChunkName: "client-chunk-workouts" */ '@/views/tabs/Workouts.vue'
+            )
         },
         {
           path: '/community',
           name: 'community',
           component: () =>
-            import(/* webpackChunkName: "client-chunk-community" */ '@/views/tabs/Community.vue')
+            import(
+              /* webpackChunkName: "client-chunk-community" */ '@/views/tabs/Community.vue'
+            )
         },
         {
           path: '/progress',
           name: 'progress',
           component: () =>
-            import(/* webpackChunkName: "client-chunk-hangtime" */ '@/views/tabs/Progress.vue')
+            import(
+              /* webpackChunkName: "client-chunk-hangtime" */ '@/views/tabs/Progress.vue'
+            )
         }
       ]
     },
@@ -48,21 +56,27 @@ const router = new Router({
       path: '/:userId/workout/new',
       name: 'new-workout',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/New.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/New.vue'
+        )
     },
     {
       path: '/:userId/workout/:id',
       name: 'workout',
       props: true,
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue'
+        )
     },
     {
       path: '/:userId/workout/:id/run',
       name: 'run',
       props: true,
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Run.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Run.vue'
+        )
     },
     {
       path: '/:userId/workout/:id/:index',
@@ -73,21 +87,27 @@ const router = new Router({
         return props
       },
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Exercise.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Exercise.vue'
+        )
     },
     {
       path: '/:userId/community/:id',
       name: 'community-workout',
       props: true,
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue'
+        )
     },
     {
       path: '/profile/:userId/',
       name: 'user-profile',
       props: true,
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/user/Profile.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/user/Profile.vue'
+        )
     },
     {
       path: '/progress/:id/:type/record/:index',
@@ -99,7 +119,9 @@ const router = new Router({
         return props
       },
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Record.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Record.vue'
+        )
     },
     {
       path: '/progress/:id/:type/list/:index',
@@ -111,7 +133,9 @@ const router = new Router({
         return props
       },
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/List.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/List.vue'
+        )
     },
     {
       path: '/progress/:id/:type',
@@ -122,50 +146,66 @@ const router = new Router({
         return props
       },
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Type.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Type.vue'
+        )
     },
 
     {
       path: '/settings',
       name: 'settings',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Settings.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Settings.vue'
+        )
     },
     {
       path: '/settings/general',
       name: 'settings-general',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/General.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/General.vue'
+        )
     },
     {
       path: '/settings/hangboards',
       name: 'settings-hangboards',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Hangboards.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Hangboards.vue'
+        )
     },
     {
       path: '/settings/hangboards/add',
       name: 'settings-hangboards-add',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/AddHangboard.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/AddHangboard.vue'
+        )
     },
     {
       path: '/settings/profile',
       name: 'settings-profile',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Profile.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Profile.vue'
+        )
     },
     {
       path: '/settings/workouts',
       name: 'settings-workout',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Workouts.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Workouts.vue'
+        )
     },
     {
       path: '/settings/help',
       name: 'faq',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Help.vue')
+        import(
+          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Help.vue'
+        )
     },
     {
       path: '/check-login',
@@ -179,7 +219,9 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-login" */ '@/views/authentication/Login.vue'),
+        import(
+          /* webpackChunkName: "client-chunk-login" */ '@/views/authentication/Login.vue'
+        ),
       meta: {
         authNotRequired: true
       }

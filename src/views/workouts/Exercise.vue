@@ -13,14 +13,17 @@
       </v-avatar>
       <v-toolbar-title v-if="currentExercise">
         <!-- Exercise details -->
-
         <span v-if="currentExercise.repeat > 1"
-          >{{ currentExercise.repeat }}x</span
-        >
-        <span v-if="currentExercise.pullups > 1">
-          {{ currentExercise.pullups }}</span
-        >
-        <span> {{ options[currentExercise.exercise].name }}</span>
+          >{{ currentExercise.repeat }}x
+        </span>
+        <span v-if="currentExercise.pullups > 1"
+          >{{ currentExercise.pullups }}
+        </span>
+        <span
+          v-if="currentExercise.left === null || currentExercise.right === null"
+          >One-Arm
+        </span>
+        <span>{{ options[currentExercise.exercise].name }}</span>
         <span v-if="currentExercise.pullups > 0"> Pull-up</span>
         <span v-if="currentExercise.pullups > 1">s</span>
 

@@ -75,8 +75,8 @@
         <hangboard
           :data="currentExercise"
           :edit-workout="editWorkout"
-          @left="setData({ id: id, value: { left: $event }, index: index })"
-          @right="setData({ id: id, value: { right: $event }, index: index })"
+          @left="setLeft($event)"
+          @right="setRight($event)"
         ></hangboard>
       </v-col>
 
@@ -127,9 +127,7 @@
           persistent-hint
           label="Pull-ups"
         >
-          <template v-slot:thumb-label="props">
-            {{ props.value }}x
-          </template>
+          <template v-slot:thumb-label="props"> {{ props.value }}x </template>
           <template #append>
             <v-label>{{ dataPullups }}x</v-label>
           </template>
@@ -152,9 +150,7 @@
           persistent-hint
           label="Repeat"
         >
-          <template v-slot:thumb-label="props">
-            {{ props.value }}x
-          </template>
+          <template v-slot:thumb-label="props"> {{ props.value }}x </template>
           <template #append>
             <v-label>{{ dataRepeat }}x</v-label>
           </template>
@@ -313,7 +309,45 @@ export default {
   methods: {
     ...mapMutations('workouts', ['setTime', 'setData']),
     getImg,
-    count
+    count,
+    setLeft(event) {
+      if (this.currentExercise.left !== event) {
+        this.setData({
+          id: this.id,
+          value: { left: event },
+          // value,
+          // key: 'exercise',
+          index: this.index
+        })
+      } else if (this.currentExercise.right !== null) {
+        this.setData({
+          id: this.id,
+          value: { left: null },
+          // value,
+          // key: 'exercise',
+          index: this.index
+        })
+      }
+    },
+    setRight(event) {
+      if (this.currentExercise.right !== event) {
+        this.setData({
+          id: this.id,
+          value: { right: event },
+          // value,
+          // key: 'exercise',
+          index: this.index
+        })
+      } else if (this.currentExercise.left !== null) {
+        this.setData({
+          id: this.id,
+          value: { right: null },
+          // value,
+          // key: 'exercise',
+          index: this.index
+        })
+      }
+    }
   }
 }
 </script>

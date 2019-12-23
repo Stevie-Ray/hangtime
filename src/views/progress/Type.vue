@@ -22,6 +22,18 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex xs12 sm8 md6>
+            <v-speed-dial bottom right fixed>
+              <v-btn
+                slot="activator"
+                color="secondary"
+                dark
+                fab
+                @click="dialog = true"
+              >
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-speed-dial>
+
             <v-container v-if="currentStats && !currentStats.length" fluid>
               <v-row justify="center" align="center">
                 <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
@@ -41,56 +53,44 @@
               </v-row>
             </v-container>
 
-            <v-flex v-for="(data, index) in currentStats" :key="index">
-              <v-card flat>
-                <v-img class="" min-height="150px">
-                  <hangboard :data="data" :edit-workout="false"></hangboard>
-                </v-img>
-
-                <v-card-title v-if="data.recordings.length">
-                  <span v-if="!currentType.configurable">
-                    {{ count(bestStatsById(data.id)) }}
-                  </span>
-                  <span v-else> {{ bestStatsById(data.id) }}x </span>
-                </v-card-title>
-                <v-card-text>
-                  <div>
-                    <strong>{{ data.recordings.length }} Recordings</strong>
-                  </div>
-                  <div v-if="data.recordings.length">
-                    <i>Last recording: {{ shortDate(data.updateTimestamp) }}</i>
-                  </div>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn
-                    text
-                    @click="
-                      $router.push({
-                        name: 'progress-record',
-                        params: { data: data, index: index, id: currentType.id }
-                      })
-                    "
-                  >
-                    Start
-                  </v-btn>
-                  <v-btn
-                    v-if="data.recordings.length > 0"
-                    text
-                    color="primary"
-                    @click="
-                      $router.push({
-                        name: 'progress-list',
-                        params: { data: data, index: index, id: currentType.id }
-                      })
-                    "
-                  >
-                    Recordings
-                  </v-btn>
-                </v-card-actions>
+            <div v-for="(data, index) in currentStats" :key="index">
+              <v-card flat @click="goToRecordings(data, index)">
+                <v-container>
+                  <v-row>
+                    <v-col cols="8">
+                      <hangboard :data="data" :edit-workout="false"></hangboard>
+                    </v-col>
+                    <v-col cols="4" align-self="center">
+                      <div v-if="data.recordings.length">
+                        <div>
+                          <strong v-if="!currentType.configurable">
+                            <v-icon small class="mr-1">mdi-medal</v-icon
+                            >{{ count(bestStatsById(data.id)) }}
+                          </strong>
+                          <strong v-else>
+                            {{ bestStatsById(data.id) }}x
+                          </strong>
+                        </div>
+                        <div class="caption">
+                          <v-icon small>mdi-page-last</v-icon>
+                          {{ shortDate(data.updateTimestamp) }}
+                        </div>
+                        <div>
+                          <v-icon small class="mr-1">mdi-repeat</v-icon>
+                          <span>{{ data.recordings.length }}</span>
+                        </div>
+                      </div>
+                      <div v-else class="text-center">
+                        <v-btn fab small color="secondary">
+                          <v-icon dark>mdi-timer</v-icon>
+                        </v-btn>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-container>
               </v-card>
-
               <v-divider></v-divider>
-            </v-flex>
+            </div>
 
             <v-dialog v-model="dialog" width="500">
               <v-card>
@@ -98,14 +98,19 @@
                   Select Holds
                 </v-card-title>
 
+                <v-card-subtitle>
+                  Or go crazy with one hand!
+                </v-card-subtitle>
+
                 <v-card-text>
                   <hangboard
                     :data="hangboardData"
                     :edit-workout="true"
-                    @left="hangboardData.left = $event"
-                    @right="hangboardData.right = $event"
+                    @left="setLeft($event)"
+                    @right="setRight($event)"
                   ></hangboard>
                   <v-checkbox
+                    v-model="isConfigurable"
                     :label="`${currentType.name} Pull-ups`"
                   ></v-checkbox>
                 </v-card-text>
@@ -120,18 +125,6 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-
-            <v-speed-dial bottom right fixed>
-              <v-btn
-                slot="activator"
-                color="secondary"
-                dark
-                fab
-                @click="dialog = true"
-              >
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-            </v-speed-dial>
           </v-flex>
         </v-layout>
       </v-container>
@@ -195,7 +188,35 @@ export default {
       }
 
       this.dialog = false
-    }
+    },
+    goToRecordings(data, index) {
+      if (data.recordings.length > 0) {
+        this.$router.push({
+          name: 'progress-list',
+          params: { data, index, id: this.currentType.id }
+        })
+      } else {
+        this.$router.push({
+          name: 'progress-record',
+          params: { data, index, id: this.currentType.id }
+        })
+      }
+    },
+    setLeft(event) {
+      if (this.hangboardData.left !== event) {
+        this.hangboardData.left = event
+      } else if (this.hangboardData.right !== null) {
+        this.hangboardData.left = null
+      }
+    },
+    setRight(event) {
+      if (this.hangboardData.right !== event) {
+        this.hangboardData.right = event
+      } else if (this.hangboardData.left !== null) {
+        this.hangboardData.right = null
+      }
+    },
+    isConfigurable() {}
   },
   head: {
     title: {

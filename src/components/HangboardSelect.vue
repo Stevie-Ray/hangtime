@@ -42,46 +42,54 @@
       </v-list-item>
     </v-list>
 
-    <v-flex xs12>
-      <div
-        class="hangboard"
-        :class="
-          companies[hangboardToAdd.company].hangboards[hangboardToAdd.hangboard]
-            .name
-        "
-      >
-        <div class="leftside">
-          <img
-            :src="
-              getImg(
-                companies[hangboardToAdd.company].hangboards[
-                  hangboardToAdd.hangboard
-                ].image
-              )
+    <v-container fluid class="py-0">
+      <v-row>
+        <v-col cols="12">
+          <div
+            class="hangboard"
+            :class="
+              companies[hangboardToAdd.company].hangboards[
+                hangboardToAdd.hangboard
+              ].name
             "
-          />
-        </div>
-        <div class="rightside">
-          <img
-            :src="
-              getImg(
-                companies[hangboardToAdd.company].hangboards[
-                  hangboardToAdd.hangboard
-                ].image
-              )
-            "
-          />
-        </div>
-      </div>
-      <div class="text-center">
-        <p>
-          Hangboard by
-          <a :href="companies[hangboardToAdd.company].website" target="_blank">
-            {{ companies[hangboardToAdd.company].name }}
-          </a>
-        </p>
-      </div>
-    </v-flex>
+          >
+            <div class="leftside">
+              <img
+                :src="
+                  getImg(
+                    companies[hangboardToAdd.company].hangboards[
+                      hangboardToAdd.hangboard
+                    ].image
+                  )
+                "
+              />
+            </div>
+            <div class="rightside">
+              <img
+                :src="
+                  getImg(
+                    companies[hangboardToAdd.company].hangboards[
+                      hangboardToAdd.hangboard
+                    ].image
+                  )
+                "
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <p>
+              Hangboard by
+              <a
+                :href="companies[hangboardToAdd.company].website"
+                target="_blank"
+              >
+                {{ companies[hangboardToAdd.company].name }}
+              </a>
+            </p>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-flex>
 </template>
 

@@ -15,6 +15,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/require-default-prop': 'off',
     'import/no-unresolved': 'off',
+    'import/extensions': 0,
     'no-param-reassign': 'off',
     'no-return-assign': 'off',
     'no-var': 2,

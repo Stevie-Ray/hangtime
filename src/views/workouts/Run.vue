@@ -54,8 +54,14 @@
                       class="grey lighten-2 mb-3"
                     >
                       <img
+                        v-if="ExerciseStep !== 0 && ExerciseStep !== 2"
                         :alt="options[currentExercise.exercise].name"
                         :src="getImg(options[currentExercise.exercise].image)"
+                      />
+                      <img
+                        v-else
+                        src="@/assets/sloth/sleepy.svg"
+                        alt="sloth sleepy"
                       />
                     </v-avatar>
 
@@ -72,6 +78,7 @@
                         <div class="data">
                           <v-icon small>mdi-timer</v-icon>
                           <span
+                            v-if="currentWorkout && currentWorkout.exercises"
                             >{{ currentStep + 1 }}/{{
                               currentWorkout.exercises.length
                             }}</span
@@ -85,7 +92,7 @@
                         <div class="data">
                           <v-icon small>mdi-history</v-icon>
                           <span
-                            >{{ ExerciseRepeat }}/{{
+                            >{{ ExerciseRepeat - 1 }}/{{
                               currentExercise.repeat
                             }}</span
                           >
@@ -97,20 +104,35 @@
               </v-flex>
 
               <!-- hangboard -->
+
               <v-flex class="Hangboard">
-                <hangboard :data="currentExercise"></hangboard>
+                <v-container fluid class="py-0">
+                  <v-row>
+                    <v-col cols="12" class="py-0">
+                      <hangboard :data="currentExercise"></hangboard>
+                    </v-col>
+                  </v-row>
+                </v-container>
               </v-flex>
 
               <!-- title -->
               <v-flex class="Title">
                 <div class="title">
                   <span v-if="currentExercise.repeat > 1"
-                    >{{ currentExercise.repeat }}x</span
-                  >
-                  <span v-if="currentExercise.pullups > 1">
-                    {{ currentExercise.pullups }}</span
-                  >
-                  <span> {{ options[currentExercise.exercise].name }}</span>
+                    >{{ currentExercise.repeat }}x
+                  </span>
+                  <span v-if="currentExercise.pullups > 1"
+                    >{{ currentExercise.pullups }}
+                  </span>
+                  <span
+                    v-if="
+                      currentExercise.left === null ||
+                        currentExercise.right === null
+                    "
+                    >One-Arm
+                  </span>
+                  <span>{{ options[currentExercise.exercise].name }}</span>
+                  <span v-if="currentExercise.pullups > 0"> Pull-up</span>
                   <span v-if="currentExercise.pullups > 1">s</span>
                 </div>
                 <div class="subheading">
@@ -166,16 +188,18 @@ export default {
   },
   data: () => ({
     currentStep: 0,
-    ExerciseRepeat: 0,
+    ExerciseRepeat: 1,
     totalTime: 0,
     timer: null,
     paused: false,
     progressCircular: 0,
     progressText: 'Press Play',
     initialTime: 0,
+    ExerciseStep: 0,
     synth: window.speechSynthesis,
     voiceList: [],
-    noSleep: new NoSleep()
+    noSleep: new NoSleep(),
+    wakeLock: null
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
@@ -192,6 +216,8 @@ export default {
       return binding
     },
     currentExercise() {
+      if (!this.currentWorkout) return
+      // eslint-disable-next-line consistent-return
       return this.currentWorkout.exercises[this.currentStep]
     },
     currentWorkout() {
@@ -220,154 +246,204 @@ export default {
       if (this.initialTime === 0) {
         this.exerciseSetup()
       }
-      // check if there is time left
-      if (this.totalTime > 0) {
-        this.updateTime()
 
-        // check if not repeating
-        if (this.ExerciseRepeat !== 0) {
-          if (
-            this.currentExercise.rest > 0 &&
-            this.totalTime < this.currentExercise.rest
-          ) {
-            // STATE REST
-            this.exerciseRest()
+      // eslint-disable-next-line default-case
+      switch (this.ExerciseStep) {
+        // PAUSE
+        case 0:
+          if (this.totalTime > 0) {
+            this.exercisePause()
+            this.updateTime()
+            break
           }
-          // STATE HOLD
-          this.exerciseHold()
-        } else {
-          // STATE PAUSE
-          this.exercisePause()
-        }
-      }
-      // repeating exercise
-      else if (this.ExerciseRepeat !== this.currentExercise.repeat) {
-        this.repeatExercise()
-      }
-      // check if there a next exercise
-      else if (this.currentStep < this.currentWorkout.exercises.length - 1) {
-        this.nextExercise()
-      }
-      // all done!
-      else {
-        this.finishWorkout()
+          // set time for holding
+          // this.initialTime = this.totalTime
+          this.totalTime = this.currentExercise.hold
+          // reset clock
+          this.initialTime = this.totalTime
+          this.ExerciseStep += 1
+          break
+        // HOLD
+        case 1:
+          if (this.totalTime > 0) {
+            this.exerciseHold()
+            this.updateTime()
+            break
+          }
+          if (this.currentExercise.repeat > 0) {
+            this.totalTime = this.currentExercise.rest
+            this.initialTime = this.totalTime
+          }
+          this.ExerciseStep += 1
+          break
+        // REST
+        case 2:
+          if (this.totalTime > 0) {
+            this.exerciseRest()
+            this.updateTime()
+            break
+          }
+          if (this.currentExercise.repeat > 0) {
+            // set time for holding
+            this.totalTime = this.currentExercise.hold
+            // reset clock
+            this.initialTime = this.totalTime
+            this.ExerciseStep += 1
+            break
+          }
+          this.ExerciseStep = 4
+          break
+        // REPEAT
+        case 3:
+          if (this.totalTime > 0) {
+            this.exerciseHold()
+            this.updateTime()
+            break
+          }
+          if (this.ExerciseRepeat !== this.currentExercise.repeat + 1) {
+            this.totalTime = this.currentExercise.rest
+            // reset clock
+            this.initialTime = this.totalTime
+            this.ExerciseStep -= 1
+            break
+          }
+          this.ExerciseStep += 1
+          break
+        // NEXT / FINISH
+        case 4:
+          if (this.currentStep < this.currentWorkout.exercises.length - 1) {
+            // next exercise
+            this.currentStep += 1
+            // set time
+            this.exerciseSetup()
+            // resets
+            this.ExerciseRepeat = 1
+            this.ExerciseStep = 0
+            break
+          }
+          this.finishWorkout()
+          break
       }
     },
-    startWorkout() {
-      this.noSleep.enable()
+    async startWorkout() {
+      await this.requestWakeLock()
       this.timer = setInterval(() => {
         if (!this.paused) this.countdown()
       }, 1000)
     },
     exerciseSetup() {
       this.totalTime = this.currentExercise.pause
-      // set initialTime to totalTime to prevent next init
+      // finish Setup
       this.initialTime = this.totalTime
     },
     updateTime() {
-      this.totalTime = this.totalTime - 1
+      this.totalTime -= 1
 
       // update circle
       this.progressCircular =
         ((this.initialTime - this.totalTime) * 100) / this.initialTime
     },
     exerciseHold() {
-      if (
-        this.totalTime ===
-        this.currentExercise.hold + this.currentExercise.rest - 1
-      ) {
-        this.progressText = 'Hold'
-      }
+      this.progressText = 'Hold'
 
-      if (this.totalTime === 0 && this.currentExercise.repeat === 1) {
+      if (this.totalTime === 1) {
+        this.vibratePhone()
         this.playSound('stop.mp3')
-        if (this.currentStep + 1 !== this.currentWorkout.exercises.length) {
+
+        if (
+          this.currentStep + 1 !== this.currentWorkout.exercises.length ||
+          (this.currentExercise.repeat > 0 &&
+            this.ExerciseRepeat !== this.currentExercise.repeat)
+        ) {
           this.speakText('... and pause')
         }
       }
     },
     exerciseRest() {
-      this.progressText = 'Rest'
-
-      // this happens only once
-      if (this.totalTime === this.currentExercise.rest - 1) {
-        this.vibratePhone()
-        this.playSound('stop.mp3')
-        this.speakText('... and rest')
-      }
+      this.progressText = 'Pause'
       // rest: start counting down
-      if (
-        this.totalTime <= 3 &&
-        this.ExerciseRepeat !== this.currentExercise.repeat
-      ) {
-        // if 0
-        if (this.totalTime > 0) {
-          this.speakText(this.totalTime)
+      if (this.totalTime <= 4) {
+        if (this.totalTime > 1) {
+          this.speakText(this.totalTime - 1)
         } else {
           this.vibratePhone()
           this.playSound('start.mp3')
           this.speakText('Go!')
+          if (this.ExerciseRepeat !== this.currentExercise.repeat + 1) {
+            this.ExerciseRepeat += 1
+          }
         }
       }
     },
     exercisePause() {
       this.progressText = 'Pause'
-
       if (
-        this.ExerciseRepeat === 0 &&
+        this.ExerciseRepeat === 1 &&
         this.initialTime - 1 === this.totalTime
       ) {
-        this.speakText('Next exercise')
+        let textToSpeak = ''
+        textToSpeak += 'Next exercise: '
         if (this.currentExercise.pullups > 1) {
-          this.speakText(
-            `${this.currentExercise.pullups +
-              this.options[this.currentExercise.exercise].name}s`
-          )
-        } else {
-          this.speakText(this.options[this.currentExercise.exercise].name)
+          textToSpeak += `${this.currentExercise.pullups} `
         }
-        this.speakText(`for ${this.currentExercise.hold} seconds.`)
-        if (this.currentExercise.rest > 0 && this.currentExercise.repeat > 1) {
-          this.speakText(`Than rest for ${this.currentExercise.rest} seconds.`)
+        if (
+          this.currentExercise.left === null ||
+          this.currentExercise.right === null
+        ) {
+          textToSpeak += `One Arm `
         }
+        textToSpeak += `${this.options[this.currentExercise.exercise].name}`
+        if (this.currentExercise.pullups > 1) {
+          textToSpeak += ` Pullups`
+        } else if (this.currentExercise.pullups > 0) {
+          textToSpeak += ` Pullup`
+        }
+        textToSpeak += `. For ${this.currentExercise.hold} seconds. `
+        if (this.currentExercise.repeat > 1) {
+          textToSpeak += `Than rest for ${this.currentExercise.rest} seconds. `
+          textToSpeak += `Repeat ${this.currentExercise.repeat} times.`
+        }
+        this.speakText(textToSpeak)
       }
 
       // start count down
-      if (this.totalTime <= 3) {
+      if (this.totalTime <= 4) {
         // if 0
-        if (this.totalTime > 0) {
-          this.speakText(this.totalTime)
+        if (this.totalTime > 1) {
+          this.speakText(this.totalTime - 1)
         } else {
           this.vibratePhone()
           this.playSound('start.mp3')
           this.speakText('Go!')
+          if (this.ExerciseRepeat !== this.currentExercise.repeat + 1) {
+            this.ExerciseRepeat += 1
+          }
         }
       }
-    },
-    nextExercise() {
-      this.currentStep = this.currentStep + 1
-      this.ExerciseRepeat = 0
-
-      // set time
-      this.totalTime = this.currentExercise.pause
-      this.initialTime = this.totalTime
-    },
-    repeatExercise() {
-      this.ExerciseRepeat = this.ExerciseRepeat + 1
-
-      // set timers
-      this.totalTime = this.currentExercise.hold + this.currentExercise.rest
-      this.initialTime = this.totalTime
     },
     finishWorkout() {
       this.progressText = 'Done'
       this.speakText('Well done')
-      this.noSleep.disable()
+      if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
+        this.wakeLock.release()
+        this.wakeLock = null
+      } else {
+        this.noSleep.disable()
+      }
       this.paused = true
       clearInterval(this.timer)
     },
     pauseWorkout() {
-      this.noSleep.disable()
+      if (!this.paused) {
+        if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
+          this.wakeLock.release()
+          this.wakeLock = null
+        } else {
+          this.noSleep.disable()
+        }
+      } else {
+        this.requestWakeLock()
+      }
       this.paused = !this.paused
     },
     speakText(text) {
@@ -379,6 +455,22 @@ export default {
     vibratePhone() {
       if ('vibrate' in navigator) {
         if (this.user.settings.vibrate) navigator.vibrate([80, 40, 120])
+      }
+    },
+    async requestWakeLock() {
+      try {
+        if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
+          this.wakeLock = await navigator.wakeLock.request('screen')
+          this.wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released')
+          })
+          console.log('Wake Lock is active')
+        } else {
+          console.log('noSleep')
+          this.noSleep.enable()
+        }
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`)
       }
     }
   },

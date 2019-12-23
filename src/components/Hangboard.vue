@@ -1,27 +1,27 @@
 <template>
-  <v-container fill-height>
-    <v-layout align-center justify-center row>
-      <v-flex xs12 style="max-width: 500px;">
+  <v-container class="pa-0">
+    <v-row justify="center" align="center">
+      <v-col cols="12" style="max-width: 500px;">
         <div class="hangboard" :class="hangboard.name">
           <div class="leftside" @click="toggleLeft">
             <svg-inline
-              :class="hangboard.holds[data.left].id"
-              :custom-class-name="hangboard.holds[data.left].id"
+              :class="setLeftClass()"
+              :custom-class-name="setLeftClass()"
               :src="getImg(hangboard.image)"
               width="100%"
             />
           </div>
           <div class="rightside" @click="toggleRight">
             <svg-inline
-              :class="hangboard.holds[data.right].id"
-              :custom-class-name="hangboard.holds[data.right].id"
+              :class="setRightClass()"
+              :custom-class-name="setRightClass()"
               :src="getImg(hangboard.image)"
               width="100%"
             />
           </div>
         </div>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -69,6 +69,18 @@ export default {
           this.$emit('right', clicked.class)
         }
       }
+    },
+    setLeftClass() {
+      if (this.data.left || this.data.left === 0) {
+        return this.hangboard.holds[this.data.left].id
+      }
+      return ''
+    },
+    setRightClass() {
+      if (this.data.right || this.data.right === 0) {
+        return this.hangboard.holds[this.data.right].id
+      }
+      return ''
     }
   }
 }
