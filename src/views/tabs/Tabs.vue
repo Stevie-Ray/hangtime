@@ -83,7 +83,7 @@
           <v-flex xs12 sm8 md6>
             <v-tabs-items
               v-model="activeTab"
-              fill-height
+              class="fill-height"
               @change="updateRouter($event)"
             >
               <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.route">

@@ -20,9 +20,17 @@
         />
       </v-avatar>
       <v-toolbar-title v-if="currentType">
-        <span>Record your </span>
+        <span
+          v-if="
+            currentStats[index].left === null ||
+              currentStats[index].right === null
+          "
+        >
+          One-Arm
+        </span>
         <span>{{ currentType.name }}</span>
-        <span v-if="currentType.configurable">s</span>
+        <span v-if="this.configurable"> Pull-up</span>
+        <span> Strength</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -61,7 +69,16 @@
                     </v-avatar>
 
                     <div class="subtitle font-weight-bold text-uppercase">
+                      <span
+                        v-if="
+                          currentStats[index].left === null ||
+                            currentStats[index].right === null
+                        "
+                      >
+                        One-Arm
+                      </span>
                       <span>{{ currentType.name }}</span>
+                      <span v-if="this.configurable"> Pull-up</span>
                     </div>
 
                     <div id="timer" class="display-3 font-weight-bold">
@@ -76,7 +93,7 @@
                       class="text-uppercase font-weight-bold"
                     >
                       Best:
-                      <span v-if="!currentType.configurable">
+                      <span v-if="!this.configurable">
                         {{ count(bestStatsById(currentStats[index].id)) }}
                       </span>
                       <span v-else>
@@ -104,13 +121,20 @@
               <v-flex class="Title">
                 <div class="title text-uppercase mb-2">
                   <span v-if="!running">
-                    <span>Record your </span>
+                    <span
+                      v-if="
+                        currentStats[index].left === null ||
+                          currentStats[index].right === null
+                      "
+                    >
+                      One-Arm
+                    </span>
                     <span>{{ currentType.name }}</span>
-                    <span v-if="currentType.configurable">s</span>
+                    <span v-if="this.configurable"> Pull-up</span>
                   </span>
                   <span v-else>
-                    <span v-if="!currentType.configurable">Stay hanging</span>
-                    <span v-if="currentType.configurable">Keep doing them</span>
+                    <span v-if="!this.configurable">Stay hanging</span>
+                    <span v-if="this.configurable">Keep doing them</span>
                   </span>
                 </div>
                 <div class="subheading">
@@ -118,10 +142,10 @@
                     >Use the <v-icon small>mdi-timer</v-icon> to start</span
                   >
                   <span v-else>
-                    <span v-if="!currentType.configurable"
+                    <span v-if="!this.configurable"
                       >Hang as long as you can</span
                     >
-                    <span v-if="currentType.configurable"
+                    <span v-if="this.configurable"
                       >Do as many pull-ups as you can</span
                     >
                   </span>
@@ -137,7 +161,7 @@
           <v-card-title class="headline">Recording result</v-card-title>
 
           <v-card-text>
-            <div v-if="currentType.configurable">
+            <div v-if="this.configurable">
               How many pull-ups did you do?
               <v-container fluid grid-list-lg>
                 <v-layout wrap>
@@ -180,7 +204,19 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text @click="saveRecording">
+            <!-- TODO: add to btn when pull-ups are fixed @click="saveRecording"-->
+            <v-btn
+              text
+              @click="
+                $router.push({
+                  name: 'progress-type',
+                  params: {
+                    type: encodeUrl(currentType.name),
+                    id: currentType.id
+                  }
+                })
+              "
+            >
               save
             </v-btn>
           </v-card-actions>
@@ -224,7 +260,8 @@ export default {
   props: {
     id: Number,
     data: Object,
-    index: Number
+    index: Number,
+    configurable: Boolean
   },
   data: () => ({
     dialog: false,
@@ -292,7 +329,7 @@ export default {
       this.dialog = true
     },
     saveRecording() {
-      if (this.currentType.configurable) {
+      if (this.configurable) {
         this.AddRecording({
           data: this.currentStats[this.index],
           value: this.pullups

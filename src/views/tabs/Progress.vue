@@ -30,10 +30,7 @@
             </v-list-item-content>
             <v-list-item-action class="text-right">
               <v-list-item-action-text>
-                <v-chip v-if="option.configurable" class="mt-2" x-small>
-                  {{ bestStats(option.id) }}x
-                </v-chip>
-                <v-chip v-else x-small>
+                <v-chip x-small>
                   {{ count(bestStats(option.id)) }}
                 </v-chip>
               </v-list-item-action-text>

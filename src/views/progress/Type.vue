@@ -63,14 +63,17 @@
                     <v-col cols="4" align-self="center">
                       <div v-if="data.recordings.length">
                         <div>
-                          <strong v-if="!currentType.configurable">
-                            <v-icon small class="mr-1">mdi-medal</v-icon
-                            >{{ count(bestStatsById(data.id)) }}
-                          </strong>
-                          <strong v-else>
-                            {{ bestStatsById(data.id) }}x
+                          <strong>
+                            <v-icon small class="mr-1">mdi-medal</v-icon>
+                            {{ count(bestStatsById(data.id)) }}
                           </strong>
                         </div>
+                        <!--                        <div>-->
+                        <!--                          <strong>-->
+                        <!--                            <v-icon small class="mr-1">mdi-medal</v-icon>-->
+                        <!--                            {{ bestStatsById(data.id) }}x-->
+                        <!--                          </strong>-->
+                        <!--                        </div>-->
                         <div class="caption">
                           <v-icon small>mdi-page-last</v-icon>
                           {{ shortDate(data.updateTimestamp) }}
@@ -99,7 +102,7 @@
                 </v-card-title>
 
                 <v-card-subtitle>
-                  Or go crazy with one hand!
+                  Or deselect to use one hand
                 </v-card-subtitle>
 
                 <v-card-text>
@@ -109,10 +112,6 @@
                     @left="setLeft($event)"
                     @right="setRight($event)"
                   ></hangboard>
-                  <v-checkbox
-                    v-model="isConfigurable"
-                    :label="`${currentType.name} Pull-ups`"
-                  ></v-checkbox>
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -215,8 +214,7 @@ export default {
       } else if (this.hangboardData.left !== null) {
         this.hangboardData.right = null
       }
-    },
-    isConfigurable() {}
+    }
   },
   head: {
     title: {

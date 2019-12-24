@@ -28,6 +28,7 @@
           >One-Arm
         </span>
         <span>{{ currentType.name }}</span>
+        <span v-if="tab === 1"> Pull-up</span>
         <span> Strength</span>
       </v-toolbar-title>
 
@@ -35,107 +36,161 @@
     </v-app-bar>
     <v-content v-if="currentType">
       <v-container fluid fill-height>
-        <v-layout justify-center>
+        <v-layout class="justify-center">
           <v-flex xs12 sm8 md6>
-            <v-sheet
-              v-if="currentStats[index]"
-              class="mt-4 mb-2"
-              color="secondary"
-              max-width="calc(100% - 32px)"
-              style="margin: 0 auto"
-            >
-              <v-sparkline
-                :labels="currentStatsLabels"
-                :value="currentStatsValue"
-                color="white"
-                line-width="2"
-                padding="16"
-              ></v-sparkline>
-            </v-sheet>
+            <v-tabs-items v-model="tab" class="mt-4">
+              <v-tab-item key="0">
+                <v-sheet
+                  v-if="currentStats[index]"
+                  color="secondary"
+                  max-width="calc(100% - 32px)"
+                  style="margin: 0 auto"
+                >
+                  <v-sparkline
+                    :labels="currentStatsLabels"
+                    :value="currentStatsValue"
+                    color="white"
+                    line-width="2"
+                    padding="16"
+                  ></v-sparkline>
+                </v-sheet>
+              </v-tab-item>
+              <v-tab-item key="1"> </v-tab-item>
+            </v-tabs-items>
+            <v-container fluid fill-height class="py-0">
+              <v-row justify="center">
+                <v-col cols="12" class="pb-0">
+                  <hangboard
+                    :data="currentStats[index]"
+                    :edit-workout="false"
+                  ></hangboard>
+                </v-col>
+              </v-row>
+              <v-row class="fill-height">
+                <v-col cols="12" class="py-0">
+                  <v-tabs v-model="tab" background-color="transparent" grow>
+                    <v-tab key="0">
+                      Hangs
+                    </v-tab>
+                    <v-tab key="1">
+                      Pull-ups
+                    </v-tab>
+                  </v-tabs>
+                  <v-tabs-items class="fill-height" v-model="tab">
+                    <v-tab-item key="0"
+                      ><v-list
+                        v-if="currentStats[index]['recordings'].length > 0"
+                        two-line
+                      >
+                        <span
+                          v-for="(notUsed, item) in currentStats[index][
+                            'recordings'
+                          ].length"
+                          :key="item"
+                        >
+                          <v-list-item>
+                            <v-list-item-avatar>
+                              <v-img
+                                :src="getImg(currentType.image)"
+                                :alt="currentType.name"
+                                aspect-ratio="1"
+                                class="grey lighten-2"
+                              />
+                            </v-list-item-avatar>
 
-            <v-flex>
-              <v-container fluid class="py-0">
-                <v-row>
-                  <v-col cols="12" class="py-0">
-                    <hangboard
-                      :data="currentStats[index]"
-                      :edit-workout="false"
-                    ></hangboard>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-flex>
+                            <v-list-item-content>
+                              <v-list-item-title>
+                                <span
+                                  v-if="
+                                    currentStats[index].left === null ||
+                                      currentStats[index].right === null
+                                  "
+                                  >One-Arm
+                                </span>
+                                <span>{{ currentType.name }}</span>
+                              </v-list-item-title>
+                              <v-list-item-subtitle>
+                                {{
+                                  currentStats[index]['recordings'][item].label
+                                }}
+                              </v-list-item-subtitle>
+                            </v-list-item-content>
+                            <v-list-item-action>
+                              <v-list-item-action-text>
+                                <span>
+                                  {{
+                                    count(
+                                      currentStats[index]['recordings'][item]
+                                        .value
+                                    )
+                                  }}
+                                </span>
+                              </v-list-item-action-text>
+                            </v-list-item-action>
+                          </v-list-item>
+                          <v-divider inset></v-divider>
+                        </span>
+                      </v-list>
+                    </v-tab-item>
+                    <v-tab-item key="1">
+                      <v-list two-line>
+                        <v-list-item>
+                          <v-list-item-avatar>
+                            <v-img
+                              src="@/assets/exercises/pullup.svg"
+                              :alt="currentType.name"
+                              aspect-ratio="1"
+                              class="grey lighten-2"
+                            />
+                          </v-list-item-avatar>
 
-            <v-list
-              v-if="currentStats[index]['recordings'].length > 0"
-              two-line
-            >
-              <span
-                v-for="(notUsed, item) in currentStats[index]['recordings']
-                  .length"
-                :key="item"
-              >
-                <v-list-item>
-                  <v-list-item-avatar>
-                    <v-img
-                      :src="getImg(currentType.image)"
-                      :alt="currentType.name"
-                      aspect-ratio="1"
-                      class="grey lighten-2"
-                    />
-                  </v-list-item-avatar>
-
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      <span
-                        v-if="
-                          currentStats[index].left === null ||
-                            currentStats[index].right === null
-                        "
-                        >One-Arm
-                      </span>
-                      <span>{{ currentType.name }}</span>
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ currentStats[index]['recordings'][item].label }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                  <v-list-item-action>
-                    <v-list-item-action-text>
-                      <span v-if="currentType.configurable">
-                        {{ currentStats[index]['recordings'][item].value }}x
-                      </span>
-                      <span v-else>
-                        {{
-                          count(currentStats[index]['recordings'][item].value)
-                        }}
-                      </span>
-                    </v-list-item-action-text>
-                  </v-list-item-action>
-                </v-list-item>
-                <v-divider inset></v-divider>
-              </span>
-            </v-list>
+                          <v-list-item-content>
+                            <v-list-item-title>
+                              No pull-up data available
+                            </v-list-item-title>
+                            <v-list-item-subtitle>
+                              This feature is in development
+                            </v-list-item-subtitle>
+                          </v-list-item-content>
+                          <v-list-item-action>
+                            <v-list-item-action-text> </v-list-item-action-text>
+                          </v-list-item-action>
+                        </v-list-item>
+                      </v-list>
+                    </v-tab-item>
+                  </v-tabs-items>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-flex>
         </v-layout>
       </v-container>
 
-      <v-speed-dial bottom right fixed>
+      <v-fab-transition>
         <v-btn
           slot="activator"
           color="secondary"
           dark
           fab
+          bottom
+          right
+          fixed
+          :key="activeFab.icon"
           @click="
             $router.push({
               name: 'progress-record',
-              params: { data: data, index: index, id: currentType.id }
+              params: {
+                data: data,
+                index: index,
+                id: currentType.id,
+                configurable: tab === 1 ? true : false
+              }
             })
           "
         >
-          <v-icon>mdi-timer</v-icon>
+          <v-icon>{{ activeFab.icon }}</v-icon>
         </v-btn>
-      </v-speed-dial>
+      </v-fab-transition>
     </v-content>
   </v-layout>
 </template>
@@ -152,7 +207,9 @@ export default {
     data: Object,
     index: Number
   },
-  data: () => ({}),
+  data: () => ({
+    tab: null
+  }),
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('progress', ['statsById']),
@@ -192,6 +249,16 @@ export default {
     },
     currentType() {
       return this.typeById(this.id)
+    },
+    activeFab() {
+      switch (this.tab) {
+        case 0:
+          return { icon: 'mdi-timer' }
+        case 1:
+          return { icon: 'mdi-clock-alert' }
+        default:
+          return {}
+      }
     }
   },
   methods: {
@@ -210,39 +277,6 @@ export default {
         .replace(/-+/g, '-') // Remove duplicate dashes
         .replace(/^-*/, '') // Remove starting dashes
         .replace(/-*$/, '') // Remove trailing dashes
-    },
-    counter() {
-      this.totalTime += 1
-    },
-    startRecording() {
-      this.timer = setInterval(() => this.counter(), 1000)
-      this.running = true
-    },
-    stopRecording() {
-      this.running = false
-      if (this.currentType.configurable) {
-        this.dialog = true
-        return
-      }
-      // this.$store.dispatch('addRecording', [this.type, 'value', this.totalTime]);
-      this.$router.push({
-        name: 'progress-type',
-        params: {
-          type: this.encodeUrl(this.currentType.name),
-          id: this.currentType.id
-        }
-      })
-    },
-    savePullups() {
-      // const value = parseInt(this.pullups, 10);
-      // this.$store.dispatch('addRecording', [this.type, 'value', value]);
-      this.$router.push({
-        name: 'progress-type',
-        params: {
-          type: this.encodeUrl(this.currentType.name),
-          id: this.currentType.id
-        }
-      })
     }
   },
   head: {
