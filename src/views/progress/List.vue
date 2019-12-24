@@ -76,7 +76,7 @@
                       Pull-ups
                     </v-tab>
                   </v-tabs>
-                  <v-tabs-items class="fill-height" v-model="tab">
+                  <v-tabs-items v-model="tab" class="fill-height">
                     <v-tab-item key="0"
                       ><v-list
                         v-if="currentStats[index]['recordings'].length > 0"
@@ -169,13 +169,13 @@
       <v-fab-transition>
         <v-btn
           slot="activator"
+          :key="activeFab.icon"
           color="secondary"
           dark
           fab
           bottom
           right
           fixed
-          :key="activeFab.icon"
           @click="
             $router.push({
               name: 'progress-record',
