@@ -83,11 +83,11 @@
                           <span>{{ data.recordings.length }}</span>
                         </div>
                       </div>
-                      <div v-else class="text-center">
-                        <v-btn fab small color="secondary">
-                          <v-icon dark>mdi-timer</v-icon>
-                        </v-btn>
-                      </div>
+                      <!--                      <div v-else class="text-center">-->
+                      <!--                        <v-btn fab small color="secondary">-->
+                      <!--                          <v-icon dark>mdi-timer</v-icon>-->
+                      <!--                        </v-btn>-->
+                      <!--                      </div>-->
                     </v-col>
                   </v-row>
                 </v-container>
@@ -184,22 +184,20 @@ export default {
 
       if (!exists) {
         this.triggerAddHangboardAction(progress)
+
+        this.goToRecordings(
+          this.currentStats[this.currentStats.length],
+          this.currentStats.length
+        )
       }
 
       this.dialog = false
     },
     goToRecordings(data, index) {
-      if (data.recordings.length > 0) {
-        this.$router.push({
-          name: 'progress-list',
-          params: { data, index, id: this.currentType.id }
-        })
-      } else {
-        this.$router.push({
-          name: 'progress-record',
-          params: { data, index, id: this.currentType.id }
-        })
-      }
+      this.$router.push({
+        name: 'progress-list',
+        params: { data, index, id: this.currentType.id }
+      })
     },
     setLeft(event) {
       if (this.hangboardData.left !== event) {

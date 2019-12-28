@@ -19,7 +19,7 @@
           class="grey lighten-2"
         />
       </v-avatar>
-      <v-toolbar-title v-if="currentType">
+      <v-toolbar-title v-if="currentType && currentStats[index]">
         <span
           v-if="
             currentStats[index].left === null ||
@@ -61,6 +61,7 @@
               <v-row justify="center">
                 <v-col cols="12" class="pb-0">
                   <hangboard
+                    v-if="currentStats[index]"
                     :data="currentStats[index]"
                     :edit-workout="false"
                   ></hangboard>
@@ -79,7 +80,10 @@
                   <v-tabs-items v-model="tab" class="fill-height">
                     <v-tab-item key="0"
                       ><v-list
-                        v-if="currentStats[index]['recordings'].length > 0"
+                        v-if="
+                          currentStats[index] &&
+                            currentStats[index]['recordings'].length > 0
+                        "
                         two-line
                       >
                         <span
@@ -99,7 +103,7 @@
                             </v-list-item-avatar>
 
                             <v-list-item-content>
-                              <v-list-item-title>
+                              <v-list-item-title v-if="currentStats[index]">
                                 <span
                                   v-if="
                                     currentStats[index].left === null ||
@@ -131,6 +135,31 @@
                           <v-divider inset></v-divider>
                         </span>
                       </v-list>
+                      <div v-else>
+                        <v-list-item>
+                          <v-list-item-avatar>
+                            <v-img
+                              src="@/assets/exercises/deadhang.svg"
+                              :alt="currentType.name"
+                              aspect-ratio="1"
+                              class="grey lighten-2"
+                            />
+                          </v-list-item-avatar>
+
+                          <v-list-item-content>
+                            <v-list-item-title>
+                              No hang data available
+                            </v-list-item-title>
+                            <v-list-item-subtitle>
+                              Add your first recording using the
+                              <v-icon small>mdi-timer</v-icon> button
+                            </v-list-item-subtitle>
+                          </v-list-item-content>
+                          <v-list-item-action>
+                            <v-list-item-action-text> </v-list-item-action-text>
+                          </v-list-item-action>
+                        </v-list-item>
+                      </div>
                     </v-tab-item>
                     <v-tab-item key="1">
                       <v-list two-line>
@@ -149,7 +178,8 @@
                               No pull-up data available
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                              This feature is in development
+                              Add your first recording using the
+                              <v-icon small>mdi-clock-alert</v-icon> button
                             </v-list-item-subtitle>
                           </v-list-item-content>
                           <v-list-item-action>

@@ -728,8 +728,40 @@ export default {
       ]
     },
     {
-      name: 'Kraxlboard',
+      name: 'HOLDZ',
       id: 5,
+      website: 'https://www.holdz.co.uk/',
+      disabled: true,
+      hangboards: [
+        {
+          name: 'Fingerboard 1',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Fingerboard 2',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Kraxlboard',
+      id: 6,
       website: 'https://www.kraxl-board.net/',
       hangboards: [
         {
@@ -934,7 +966,7 @@ export default {
     },
     {
       name: 'Max Climbing',
-      id: 6,
+      id: 7,
       website: 'https://www.maxclimbing.com/',
       hangboards: [
         {
@@ -988,7 +1020,7 @@ export default {
     },
     {
       name: 'Mammut',
-      id: 7,
+      id: 8,
       website: 'https://www.mammut.com/',
       hangboards: [
         {
@@ -1042,7 +1074,7 @@ export default {
     },
     {
       name: 'Metolius',
-      id: 8,
+      id: 9,
       website: 'https://www.maxclimbing.com/',
       hangboards: [
         {
@@ -1506,7 +1538,7 @@ export default {
     },
     {
       name: 'Moon',
-      id: 9,
+      id: 10,
       website: 'https://moonclimbing.com/',
       hangboards: [
         {
@@ -1572,7 +1604,7 @@ export default {
     },
     {
       name: 'OCUN',
-      id: 10,
+      id: 11,
       website: 'http://www.ocun.com/',
       hangboards: [
         {
@@ -1626,7 +1658,7 @@ export default {
     },
     {
       name: 'Problemsolver',
-      id: 11,
+      id: 12,
       website: 'https://www.problemsolver.rocks/',
       hangboards: [
         {
@@ -1687,7 +1719,7 @@ export default {
     },
     {
       name: 'So iLL',
-      id: 12,
+      id: 13,
       website: 'https://soillholds.com/',
       hangboards: [
         {
@@ -2082,15 +2114,111 @@ export default {
       ]
     },
     {
-      name: 'Tension',
-      id: 13,
-      website: 'https://www.tensionclimbing.com/',
+      name: 'Target10a',
+      id: 14,
+      website: 'https://www.target10a.com/',
       disabled: true,
+      hangboards: [
+        {
+          name: 'Base',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Pro',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Air',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Tension',
+      id: 15,
+      website: 'https://www.tensionclimbing.com/',
       hangboards: [
         {
           name: 'Grindstone',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/TENSIONGRIND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Grindstone Pro',
+          id: 1,
+          disabled: true,
+          image: 'hangboards/TENSIONGRINDPRO.svg',
           holds: [
             {
               id: '',
@@ -2100,9 +2228,10 @@ export default {
           ]
         },
         {
-          name: 'Grindstone Pro',
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
+          name: 'Grindstone Mk2',
+          id: 2,
+          disabled: true,
+          image: 'hangboards/TENSIONGRINDMK2.svg',
           holds: [
             {
               id: '',
@@ -2115,7 +2244,7 @@ export default {
     },
     {
       name: 'Trango',
-      id: 14,
+      id: 16,
       website: 'http://www.trango.com/',
       hangboards: [
         {
@@ -2201,8 +2330,40 @@ export default {
       ]
     },
     {
+      name: 'Witchholds',
+      id: 17,
+      website: 'https://witchholds.com/',
+      disabled: true,
+      hangboards: [
+        {
+          name: 'Fingerboard Hard',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Fingerboard Easy',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            }
+          ]
+        }
+      ]
+    },
+    {
       name: 'Zlagboard',
-      id: 15,
+      id: 18,
       website: 'https://www.zlagboard.com/',
       hangboards: [
         {
