@@ -2608,12 +2608,77 @@ export default {
         {
           name: 'Fingerboard Hard',
           id: 1,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+
+          image: 'hangboards/WITCHHOLDSHARD.svg',
           holds: [
             {
               id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
               name: ''
             }
           ]
