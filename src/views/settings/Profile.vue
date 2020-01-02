@@ -21,46 +21,46 @@
 
     <v-content>
       <v-container fluid fill-height>
-        <v-layout justify-center>
+        <v-layout class="justify-center pa-4">
           <v-flex xs12 sm8 md6>
             <div class="text-center">
-              <v-badge overlap bottom class="pa-4">
-                <!--                <v-icon slot="badge" dark @click="captureFile"-->
-                <!--                  >mdi-camera</v-icon-->
-                <!--                >-->
+              <!--              <v-badge overlap bottom class="pa-4">-->
+              <!--                <v-icon slot="badge" dark @click="captureFile"-->
+              <!--                  >mdi-camera</v-icon-->
+              <!--                >-->
 
-                <!--             add: v-avatar @click="pickFile"-->
-                <v-avatar
-                  v-if="user"
-                  size="144"
-                  aspect-ratio="1"
-                  class="grey lighten-2"
-                >
-                  <img :src="user.photoURL" />
-                </v-avatar>
+              <!--             add: v-avatar @click="pickFile"-->
+              <v-avatar
+                v-if="user"
+                size="144"
+                aspect-ratio="1"
+                class="grey lighten-2"
+              >
+                <img :src="user.photoURL" />
+              </v-avatar>
 
-                <!--                <v-form-->
-                <!--                  enctype="multipart/form-data"-->
-                <!--                  @submit.prevent="onFilePicked"-->
-                <!--                >-->
-                <!--                  <input-->
-                <!--                    ref="image"-->
-                <!--                    type="file"-->
-                <!--                    style="display: none"-->
-                <!--                    accept="image/*"-->
-                <!--                    @change="onFilePicked"-->
-                <!--                  />-->
+              <!--                <v-form-->
+              <!--                  enctype="multipart/form-data"-->
+              <!--                  @submit.prevent="onFilePicked"-->
+              <!--                >-->
+              <!--                  <input-->
+              <!--                    ref="image"-->
+              <!--                    type="file"-->
+              <!--                    style="display: none"-->
+              <!--                    accept="image/*"-->
+              <!--                    @change="onFilePicked"-->
+              <!--                  />-->
 
-                <!--                  <input-->
-                <!--                    ref="capture"-->
-                <!--                    type="file"-->
-                <!--                    style="display: none"-->
-                <!--                    accept="image/*"-->
-                <!--                    capture="user"-->
-                <!--                    @change="onFilePicked"-->
-                <!--                  />-->
-                <!--                </v-form>-->
-              </v-badge>
+              <!--                  <input-->
+              <!--                    ref="capture"-->
+              <!--                    type="file"-->
+              <!--                    style="display: none"-->
+              <!--                    accept="image/*"-->
+              <!--                    capture="user"-->
+              <!--                    @change="onFilePicked"-->
+              <!--                  />-->
+              <!--                </v-form>-->
+              <!--              </v-badge>-->
             </div>
 
             <v-list two-line>
