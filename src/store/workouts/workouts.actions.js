@@ -34,6 +34,10 @@ export default {
     commit('setWorkoutCreationPending', true)
     const createdWorkout = await userWorkoutDb.create(workout)
     commit('addWorkout', createdWorkout)
+    // also add the workout as a community workout
+    if (createdWorkout.share === true) {
+      commit('addCommunityWorkout', createdWorkout)
+    }
     commit('setWorkoutCreationPending', false)
   },
 
@@ -52,6 +56,7 @@ export default {
       company: state.workoutToCreate.company,
       exercises: state.workoutToCreate.exercises,
       time: state.workoutToCreate.time,
+      share: state.workoutToCreate.share,
       subscribers: [state.workoutToCreate.user.id],
       user: {
         displayName: state.workoutToCreate.user.displayName,
@@ -173,7 +178,6 @@ export default {
   },
   shareWorkout: ({ state, commit, dispatch }, id) => {
     commit('shareWorkout', id)
-
     // eslint-disable-next-line no-shadow
     const workout = state.workouts.find(workout => workout.id === id)
 

@@ -14,27 +14,19 @@
       @close="closeAddToHomeScreenModalForApple(false)"
     >
     </dialog-apple-add-to-home-screen>
-    <dialog-walkthrough
-      v-if="user && !user.settings.walkthrough"
-      v-model="walkthroughDialog"
-    ></dialog-walkthrough>
   </v-app>
 </template>
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import NewContentAvailable from '@/components/NewContentAvailable'
 import DialogAppleAddToHomeScreen from '@/components/DialogAppleAddToHomeScreen'
-import DialogWalkthrough from '@/components/DialogWalkthrough'
 
 export default {
   components: {
     NewContentAvailable,
-    DialogAppleAddToHomeScreen,
-    DialogWalkthrough
+    DialogAppleAddToHomeScreen
   },
-  data: () => ({
-    walkthroughDialog: true
-  }),
+  data: () => ({}),
   computed: {
     ...mapGetters('app', ['newContentAvailable']),
     ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp']),

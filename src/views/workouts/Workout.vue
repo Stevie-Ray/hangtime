@@ -83,6 +83,26 @@
       <v-container fluid fill-height>
         <v-layout justify-center>
           <v-flex xs12 sm8 md6>
+            <v-dialog v-model="hasHangboard" persistent max-width="500">
+              <v-card>
+                <v-card-title class="headline"
+                  >You are not using this hangboard</v-card-title
+                >
+
+                <v-card-text>
+                  To view this workout we'll add this hangboard to your
+                  hangboards
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn color="green darken-1" text @click="addHangboard">
+                    Ok
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
             <!-- Get exercises list -->
             <exercise-list
               :id="id"
@@ -95,6 +115,7 @@
               v-if="currentWorkout"
               v-model="dialogs.general"
               :edit="edit"
+              @edit="edit = true"
               :edit-workout="editWorkout"
               :current-workout="currentWorkout"
               :user-workout="userWorkout"
@@ -143,7 +164,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
 import ExerciseList from '@/components/ExerciseList'
 import WorkoutSubscribe from '@/components/WorkoutSubscribe'
 import WorkoutShare from '@/components/WorkoutShare'
@@ -163,11 +184,16 @@ export default {
   },
   props: {
     id: String,
+    company: Number,
+    hangboard: Number,
     editingWorkout: Boolean,
     userId: String
   },
   data: () => ({
     edit: null,
+    meta: {
+      title: 'Workout'
+    },
     dialogs: {
       general: false,
       delete: false,
@@ -191,16 +217,39 @@ export default {
       if (!this.currentWorkout) return
       // eslint-disable-next-line consistent-return
       return this.currentWorkout.user.id === this.user.id
+    },
+    hasHangboard() {
+      const exists = this.user.settings.hangboards.some(
+        el => el.company === this.company && el.hangboard === this.hangboard
+      )
+      if (!exists) {
+        return true
+      }
+      return false
     }
   },
   mounted() {
     if (this.userWorkout && !this.currentWorkout.exercises.length) {
       this.edit = true
     }
+    if (this.currentWorkout) {
+      this.meta.title = `${this.currentWorkout.name} | Workout `
+      this.$emit('updateHead')
+    }
   },
   methods: {
     count,
     ...mapActions('workouts', ['triggerAddExerciseAction']),
+    ...mapActions('authentication', [
+      'triggerAddHangboardAction',
+      'triggerUpdateUser',
+      'triggerSwitchHangboard'
+    ]),
+    ...mapMutations('authentication', [
+      'setCompany',
+      'setHangboard',
+      'setSelected'
+    ]),
     addExercise() {
       this.triggerAddExerciseAction(this.id)
       this.$router.push({
@@ -211,11 +260,25 @@ export default {
           editingWorkout: true
         }
       })
+    },
+    /**
+     * If a climber goes to a workout with a hangboard he is not using
+     * this function will add the hangboard for the user and selects it.
+     */
+    addHangboard() {
+      this.setCompany(this.company)
+      this.setHangboard(this.hangboard)
+      this.triggerAddHangboardAction()
+      this.setSelected(this.user.settings.hangboards.length - 1)
+      this.triggerUpdateUser()
+      this.triggerSwitchHangboard()
     }
   },
   head: {
-    title: {
-      inner: 'Workout'
+    title() {
+      return {
+        inner: this.meta.title
+      }
     },
     meta: [
       {

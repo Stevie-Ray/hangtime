@@ -132,6 +132,10 @@ export default {
         name: 'exercise',
         params: {
           id: 'new',
+          company: this.user.settings.hangboards[this.user.settings.selected]
+            .company,
+          hangboard: this.user.settings.hangboards[this.user.settings.selected]
+            .hangboard,
           index: this.currentWorkout.exercises.length - 1,
           editingWorkout: true
         }
@@ -142,8 +146,10 @@ export default {
     }
   },
   head: {
-    title: {
-      inner: 'New Workout'
+    title() {
+      return {
+        inner: `${this.currentWorkout.name} | New workout `
+      }
     },
     meta: [
       {

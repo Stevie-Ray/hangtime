@@ -61,28 +61,41 @@ const router = new Router({
         )
     },
     {
-      path: '/:userId/workout/:id',
+      path: '/:userId/workout/:company/:hangboard/:id',
       name: 'workout',
-      props: true,
+      props(route) {
+        const props = { ...route.params }
+        props.company = +props.company
+        props.hangboard = +props.hangboard
+        return props
+      },
       component: () =>
         import(
           /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue'
         )
     },
     {
-      path: '/:userId/workout/:id/run',
+      path: '/:userId/workout/:company/:hangboard/:id/run',
       name: 'run',
-      props: true,
+      props(route) {
+        const props = { ...route.params }
+        props.company = +props.company
+        props.hangboard = +props.hangboard
+        props.index = +props.index
+        return props
+      },
       component: () =>
         import(
           /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Run.vue'
         )
     },
     {
-      path: '/:userId/workout/:id/:index',
+      path: '/:userId/workout/:company/:hangboard/:id/:index',
       name: 'exercise',
       props(route) {
         const props = { ...route.params }
+        props.company = +props.company
+        props.hangboard = +props.hangboard
         props.index = +props.index
         return props
       },
@@ -92,7 +105,7 @@ const router = new Router({
         )
     },
     {
-      path: '/:userId/community/:id',
+      path: '/:userId/community/:company/:hangboard/:id',
       name: 'community-workout',
       props: true,
       component: () =>

@@ -8,9 +8,6 @@
       <v-card-text>
         <div class="subtitle-2 mb-6">Name your workout and get going.</div>
         <v-form class="workout-action-bar">
-          <!--          <v-container>-->
-          <!--            <v-layout wrap>-->
-          <!--              <v-flex xs12>-->
           <v-text-field
             v-model="workoutToCreateName"
             placeholder="New workout"
@@ -20,9 +17,7 @@
             label="Workout name *"
           >
           </v-text-field>
-          <!--              </v-flex>-->
 
-          <!--              <v-flex xs12>-->
           <v-textarea
             v-model="workoutToCreateDescription"
             counter="140"
@@ -31,9 +26,7 @@
             placeholder="For example indicate when this training is suitable"
             label="Workout description *"
           ></v-textarea>
-          <!--              </v-flex>-->
 
-          <!--              <v-flex>-->
           <v-select
             v-model="workoutToCreateDifficulty"
             :items="levels"
@@ -49,9 +42,11 @@
             :rules="[rules.required]"
           >
           </v-select>
-          <!--              </v-flex>-->"
-          <!--            </v-layout>-->
-          <!--          </v-container>-->
+
+          <v-checkbox
+            v-model="workoutToCreateShare"
+            label="Share with the community"
+          ></v-checkbox>
         </v-form>
       </v-card-text>
 
@@ -128,6 +123,14 @@ export default {
       },
       set(input) {
         this.setWorkoutToCreate({ level: input })
+      }
+    },
+    workoutToCreateShare: {
+      get() {
+        return this.workoutToCreate.share
+      },
+      set(input) {
+        this.setWorkoutToCreate({ share: input })
       }
     },
     show: {

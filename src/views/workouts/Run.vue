@@ -475,8 +475,10 @@ export default {
     }
   },
   head: {
-    title: {
-      inner: 'Workout'
+    title() {
+      return {
+        inner: `${this.currentWorkout.name} | Workout `
+      }
     },
     meta: [
       {

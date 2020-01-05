@@ -61,11 +61,10 @@
               </v-select>
             </v-flex>
             <v-flex xs12>
-              <v-switch
-                v-model="currentWorkout.share"
+              <v-checkbox
                 label="Share with the community"
-                @change="shareWorkout(currentWorkout)"
-              ></v-switch>
+                @change="shareWorkout(currentWorkout.id)"
+              ></v-checkbox>
             </v-flex>
           </v-layout>
         </v-container>
@@ -186,7 +185,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('workouts', ['triggerUpdateWorkout']),
+    ...mapActions('workouts', ['triggerUpdateWorkout', 'shareWorkout']),
     ...mapMutations('workouts', [
       'setWorkoutName',
       'setWorkoutDescription',

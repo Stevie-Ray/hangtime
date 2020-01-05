@@ -39,6 +39,8 @@ export default {
     state.workouts[index].level = payload.value
   },
   addWorkout: (state, workout) => state.workouts.unshift(workout),
+  addCommunityWorkout: (state, workout) =>
+    state.communityWorkouts.unshift(workout),
   removeWorkoutById: (state, workoutId) => {
     const index = state.workouts.findIndex(workout => workout.id === workoutId)
     state.workouts.splice(index, 1)
