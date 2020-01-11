@@ -115,10 +115,10 @@
               v-if="currentWorkout"
               v-model="dialogs.general"
               :edit="edit"
-              @edit="edit = true"
               :edit-workout="editWorkout"
               :current-workout="currentWorkout"
               :user-workout="userWorkout"
+              @edit="edit = true"
             ></dialog-workout-general>
 
             <!-- Delete Dialog -->
