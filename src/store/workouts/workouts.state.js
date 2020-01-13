@@ -4,7 +4,8 @@ export default {
   subscribers: [],
   workoutToCreate: {
     exercises: [],
-    level: 2
+    level: 2,
+    share: false
   },
   workoutDeletionPending: [],
   workoutCreationPending: false,
