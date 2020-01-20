@@ -132,10 +132,10 @@
             </v-card-text>
           </v-card>
 
-          <v-btn color="primary" @click="finishWalkthrough">
+          <v-btn color="primary" @click="finishWalkthrough(true)">
             Add a workout
           </v-btn>
-          <v-btn text @click="$emit('input', false)">
+          <v-btn text @click="finishWalkthrough(false)">
             Close
           </v-btn>
         </v-stepper-content>
@@ -156,7 +156,7 @@ export default {
   },
   data: () => ({
     ircra: new IRCRA(),
-    e1: 0
+    e1: 1
   }),
   computed: {
     ...mapState('authentication', ['user', 'hangboardToAdd']),
@@ -210,12 +210,15 @@ export default {
       'triggerChangeHangboardAction',
       'triggerUpdateUser'
     ]),
-    finishWalkthrough() {
+    finishWalkthrough(addWorkout) {
+      this.setWalkthrough(true)
+      this.triggerUpdateUser()
       this.$emit('input', false)
-      this.$router.push(`/${this.user.id}/workout/new`)
+      if (addWorkout) {
+        this.$router.push(`/${this.user.id}/workout/new`)
+      }
     },
     saveWalkthrough() {
-      this.setWalkthrough(true)
       const exists = this.user.settings.hangboards.some(
         el =>
           el.company === this.hangboardToAdd.company &&
@@ -226,8 +229,6 @@ export default {
         this.triggerChangeHangboardAction(
           this.user.settings.hangboards.length - 1
         )
-      } else {
-        this.triggerUpdateUser()
       }
       this.e1 = 4
     }
