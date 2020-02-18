@@ -1,9 +1,9 @@
 <template>
   <v-content>
-    <v-container fluid fill-height>
-      <v-layout justify-center>
-        <v-flex text-center xs12 sm8 md6>
-          <v-flex class="mx-auto pa-4">
+    <v-container class="fill-height">
+      <v-row class="fill-height" no-gutters>
+        <v-col cols="12">
+          <div class="text-center pa-4">
             <div class="title ">{{ appTitle }}</div>
             <div class="subheading font-weight-light grey--text">
               Version {{ appVersion }}
@@ -33,7 +33,7 @@
               <p>{{ loginError }}</p>
             </div>
             <!-- Auth UI -->
-            <v-flex xs12 class="mb-4">
+            <div xs12 class="mb-4">
               <v-btn
                 v-show="user !== undefined && !user && networkOnLine"
                 data-test="login-btn"
@@ -43,8 +43,8 @@
               >
                 Login with Facebook
               </v-btn>
-            </v-flex>
-            <v-flex xs12 class="mb-4">
+            </div>
+            <div class="mb-4">
               <v-btn
                 v-show="user !== undefined && !user && networkOnLine"
                 data-test="login-btn"
@@ -54,14 +54,14 @@
               >
                 Login with Google
               </v-btn>
-            </v-flex>
+            </div>
 
-            <v-flex xs12 class="mt-5 caption grey--text font-weight-light">
-              &copy; 2019 HangTime.
-            </v-flex>
-          </v-flex>
-        </v-flex>
-      </v-layout>
+            <div class="mt-5 caption grey--text font-weight-light">
+              &copy; 2020 HangTime.
+            </div>
+          </div>
+        </v-col>
+      </v-row>
     </v-container>
   </v-content>
 </template>

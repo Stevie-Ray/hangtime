@@ -11,9 +11,9 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex sm8 md6>
+      <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
             <v-form>
               <v-list two-line>
                 <!--                <v-list-item>-->
@@ -130,8 +130,8 @@
                 </v-list-item>
               </v-list>
             </v-form>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

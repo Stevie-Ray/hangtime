@@ -12,17 +12,17 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 sm8 md6>
-            <v-flex
+      <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
+            <div
               v-for="(item, index) in user.settings['hangboards']"
               :key="index"
             >
               <v-card flat class="mb-2">
                 <v-container fluid class="py-0">
-                  <v-row justify="center">
-                    <v-col cols="12" sm="8" md="6">
+                  <v-row>
+                    <v-col cols="12">
                       <div class="hangboard mt-4">
                         <div class="leftside">
                           <v-img
@@ -86,7 +86,7 @@
               </v-card>
 
               <v-divider></v-divider>
-            </v-flex>
+            </div>
 
             <v-speed-dial bottom right fixed>
               <v-btn
@@ -99,8 +99,8 @@
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </v-speed-dial>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

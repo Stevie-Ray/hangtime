@@ -123,11 +123,10 @@ const router = new Router({
         )
     },
     {
-      path: '/progress/:id/:type/record/:index',
+      path: '/progress/record/:index',
       name: 'progress-record',
       props(route) {
         const props = { ...route.params }
-        props.id = +props.id
         props.index = +props.index
         return props
       },
@@ -137,11 +136,10 @@ const router = new Router({
         )
     },
     {
-      path: '/progress/:id/:type/list/:index',
+      path: '/progress/list/:index',
       name: 'progress-list',
       props(route) {
         const props = { ...route.params }
-        props.id = +props.id
         props.index = +props.index
         return props
       },
@@ -150,20 +148,6 @@ const router = new Router({
           /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/List.vue'
         )
     },
-    {
-      path: '/progress/:id/:type',
-      name: 'progress-type',
-      props(route) {
-        const props = { ...route.params }
-        props.id = +props.id
-        return props
-      },
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Type.vue'
-        )
-    },
-
     {
       path: '/settings',
       name: 'settings',

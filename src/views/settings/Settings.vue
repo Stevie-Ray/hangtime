@@ -11,11 +11,11 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 sm8 md6>
+      <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
             <v-list two-line>
-              <v-list-item class="big py-2" to="/settings/profile">
+              <v-list-item class="big py-2 pt-0" to="/settings/profile">
                 <v-list-item-avatar v-if="user" size="56">
                   <v-img
                     :src="user.photoURL"
@@ -127,8 +127,8 @@
                 </v-list-item-content>
               </v-list-item>
             </v-list>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

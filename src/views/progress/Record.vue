@@ -2,24 +2,23 @@
   <v-layout class="workout">
     <v-app-bar color="primary" app dark fixed>
       <v-icon
-        v-if="currentType"
         @click="
           $router.push({
-            name: 'progress-type',
-            params: { type: encodeUrl(currentType.name), id: currentType.id }
+            name: 'progress-list',
+            params: { data: data, index: index }
           })
         "
         >mdi-arrow-left</v-icon
       >
-      <v-avatar v-if="currentType" size="32px">
-        <v-img
-          :src="getImg(currentType.image)"
-          :alt="currentType.name"
-          aspect-ratio="1"
-          class="grey lighten-2"
-        />
+      <v-avatar size="32px">
+        <!--        <v-img-->
+        <!--          :src="getImg(currentType.image)"-->
+        <!--          :alt="currentType.name"-->
+        <!--          aspect-ratio="1"-->
+        <!--          class="grey lighten-2"-->
+        <!--        />-->
       </v-avatar>
-      <v-toolbar-title v-if="currentType">
+      <v-toolbar-title>
         <span
           v-if="
             currentStats[index].left === null ||
@@ -28,44 +27,41 @@
         >
           One-Arm
         </span>
-        <span>{{ currentType.name }}</span>
+        <!--        <span>{{ currentType.name }}</span>-->
         <span v-if="configurable"> Pull-up</span>
         <span> Strength</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-content v-if="currentType">
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 md8 lg6>
-            <v-layout
-              justify-space-around
-              align-center
-              fill-height
-              text-center
-              v-bind="binding"
-              class="canvas"
+    <v-content>
+      <v-container class="fill-height">
+        <v-row class="fill-height">
+          <v-col cols="12">
+            <v-row
+              justify="space-around"
+              align="center"
+              class="fill-height text-center canvas"
+              v-bind:class="binding"
             >
               <!-- circle -->
-              <v-flex class="Counter">
+              <div class="Counter">
                 <v-progress-circular
-                  class="mt-3 flex-column"
                   :rotate="270"
                   :size="300"
                   :width="5"
                   :value="100"
                 >
-                  <v-flex class="flex-column">
+                  <div class="d-flex align-center justify-center flex-column">
                     <v-avatar
                       size="80"
                       aspect-ratio="1"
                       class="grey lighten-2 mb-3"
                     >
-                      <img
-                        :alt="currentType.name"
-                        :src="getImg(currentType.image)"
-                      />
+                      <!--                      <img-->
+                      <!--                        :alt="currentType.name"-->
+                      <!--                        :src="getImg(currentType.image)"-->
+                      <!--                      />-->
                     </v-avatar>
 
                     <div class="subtitle font-weight-bold text-uppercase">
@@ -77,7 +73,7 @@
                       >
                         One-Arm
                       </span>
-                      <span>{{ currentType.name }}</span>
+                      <!--                      <span>{{ currentType.name }}</span>-->
                       <span v-if="configurable"> Pull-up</span>
                     </div>
 
@@ -100,11 +96,11 @@
                         {{ bestStatsById(currentStats[index].id) }}x
                       </span>
                     </div>
-                  </v-flex>
+                  </div>
                 </v-progress-circular>
-              </v-flex>
+              </div>
 
-              <v-flex class="Hangboard">
+              <div class="Hangboard">
                 <v-container fluid class="py-0">
                   <v-row>
                     <v-col cols="12" class="py-0">
@@ -116,9 +112,9 @@
                     </v-col>
                   </v-row>
                 </v-container>
-              </v-flex>
+              </div>
 
-              <v-flex class="Title">
+              <div class="Title">
                 <div class="title text-uppercase mb-2">
                   <span v-if="!running">
                     <span
@@ -129,7 +125,7 @@
                     >
                       One-Arm
                     </span>
-                    <span>{{ currentType.name }}</span>
+                    <!--                    <span>{{ currentType.name }}</span>-->
                     <span v-if="configurable"> Pull-up</span>
                   </span>
                   <span v-else>
@@ -148,10 +144,10 @@
                     >
                   </span>
                 </div>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+              </div>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
 
       <v-dialog v-model="dialog" persistent width="500">
@@ -163,7 +159,7 @@
               How many pull-ups did you do?
               <v-container fluid grid-list-lg>
                 <v-layout wrap>
-                  <v-flex shrink style="width: 45px">
+                  <div style="width: 45px">
                     <v-text-field
                       v-model="pullups"
                       class="mt-0"
@@ -172,20 +168,19 @@
                       type="number"
                     >
                     </v-text-field>
-                  </v-flex>
+                  </div>
 
-                  <v-flex>
+                  <div>
                     <v-subheader>
                       Pullups
                     </v-subheader>
-                  </v-flex>
+                  </div>
                 </v-layout>
               </v-container>
             </div>
             <div v-else>
               <span>
-                You did a <strong>{{ currentType.name }}</strong> for
-                {{ count(totalTime) }}.
+                You did a <strong>xxxxx</strong> for {{ count(totalTime) }}.
               </span>
               <br />
               <span v-if="bestStatsById(currentStats[index].id) > 0">
@@ -207,11 +202,11 @@
               text
               @click="
                 $router.push({
-                  name: 'progress-type',
-                  params: {
-                    type: encodeUrl(currentType.name),
-                    id: currentType.id
-                  }
+                  // name: 'progress-type',
+                  // params: {
+                  //   // type: encodeUrl(currentType.name),
+                  //   id: currentType.id
+                  // }
                 })
               "
             >
@@ -256,7 +251,6 @@ import { getImg, count } from '@/misc/helpers'
 export default {
   components: { Hangboard },
   props: {
-    id: Number,
     data: Object,
     index: Number,
     configurable: Boolean
@@ -282,13 +276,13 @@ export default {
     },
     currentStats() {
       return this.statsById({
-        type: this.currentType.id,
+        // type: this.currentType.id,
         settings: this.user.settings
       })
-    },
-    currentType() {
-      return this.typeById(this.id)
     }
+    // currentType() {
+    //   return this.typeById(this.id)
+    // }
   },
   methods: {
     ...mapActions('progress', ['AddRecording']),
@@ -340,10 +334,7 @@ export default {
       }
       this.$router.push({
         name: 'progress-list',
-        params: {
-          type: this.encodeUrl(this.currentType.name),
-          id: this.currentType.id
-        }
+        params: { data: this.data, index: this.index }
       })
     },
     async requestWakeLock() {

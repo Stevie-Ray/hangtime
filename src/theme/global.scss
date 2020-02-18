@@ -33,8 +33,14 @@
   }
 
   .v-content__wrap > .container {
-    height: 100%;
     padding: 0;
+    & > .row {
+      margin-right: 0;
+      margin-left: 0;
+      & > .col-12 {
+        padding: 0;
+      }
+    }
   }
 
   // divider color
@@ -44,6 +50,7 @@
 
   /* global hangboard css */
   .hangboard {
+    max-width: 500px;
     .leftside,
     .rightside {
       display: inline-block;
@@ -123,17 +130,16 @@
     // content full height
     &__content,
     &__extension {
-      flex: 0 0 auto;
-      flex-basis: 100%;
-      max-width: 100%;
-      // sm
-      @media (min-width: 600px) {
-        flex-basis: 66.6666666667%;
-        max-width: 66.6666666667%;
-      }
+      width: 100%;
+      //// sm
       @media (min-width: 960px) {
-        flex-basis: 50.1%;
-        max-width: 50.1%;
+        max-width: 900px;
+      }
+      @media (min-width: 1264px) {
+        max-width: 1185px;
+      }
+      @media (min-width: 1904px) {
+        max-width: 1785px;
       }
     }
   }
@@ -155,6 +161,7 @@
   }
   /* run + record templates */
   .canvas {
+    margin: 0;
     &:not(.column) {
       display: grid;
       grid-template-columns: 1fr 1fr;

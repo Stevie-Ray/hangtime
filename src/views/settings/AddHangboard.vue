@@ -12,9 +12,9 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid fill-height>
-        <v-row justify="center" align="start" class="fill-height">
-          <v-col cols="12" sm="8" md="6">
+      <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
             <hangboard-select></hangboard-select>
 
             <v-speed-dial bottom right fixed>

@@ -1,6 +1,5 @@
 <template>
   <v-layout class="tabs">
-    <!-- app: Designates the component as part of the application layout. Used for dynamically adjusting content sizing. Components using this prop should reside outside of v-content to function properly-->
     <v-app-bar
       app
       fixed
@@ -78,15 +77,20 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 sm8 md6>
+      <v-container class="fill-height">
+        <v-row justify="center" align="start" class="fill-height" no-gutters>
+          <v-col cols="12" class="fill-height">
             <v-tabs-items
               v-model="activeTab"
               class="fill-height"
               @change="updateRouter($event)"
             >
-              <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.route">
+              <v-tab-item
+                class="fill-height"
+                v-for="tab of tabs"
+                :key="tab.id"
+                :value="tab.route"
+              >
                 <router-view></router-view>
               </v-tab-item>
             </v-tabs-items>
@@ -102,7 +106,7 @@
                 color="secondary"
                 @click="
                   activeFab.click
-                    ? (dialog = true)
+                    ? (addProgressDialog = true)
                     : updateRouter(activeFab.route)
                 "
               >
@@ -120,8 +124,12 @@
               v-if="user && !user.settings.walkthrough"
               v-model="walkthroughDialog"
             ></dialog-walkthrough>
-          </v-flex>
-        </v-layout>
+
+            <dialog-add-progress
+              v-model="addProgressDialog"
+            ></dialog-add-progress>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>
@@ -132,14 +140,17 @@ import { mapGetters, mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
 import DialogHangboardSwitch from '@/components/DialogHangboardSwitch'
 import DialogWalkthrough from '@/components/DialogWalkthrough'
+import DialogAddProgress from '@/components/DialogAddProgress'
 
 export default {
   components: {
     DialogHangboardSwitch,
-    DialogWalkthrough
+    DialogWalkthrough,
+    DialogAddProgress
   },
   data: () => ({
     walkthroughDialog: true,
+    addProgressDialog: false,
     hangboardDialog: false,
     tabs: [
       { id: 0, name: 'workouts', route: `/` },
@@ -158,7 +169,7 @@ export default {
         case '/community':
           return { route: '/community', icon: '' }
         case '/progress':
-          return { route: '/progress', icon: '' }
+          return { click: true, icon: 'mdi-plus' }
         default:
           return {}
       }

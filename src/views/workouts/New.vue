@@ -36,16 +36,18 @@
 
       <v-spacer></v-spacer>
 
-      <v-icon
+      <v-btn
         v-if="currentWorkout.exercises && currentWorkout.exercises.length"
         @click="saveExercises"
-        >mdi-content-save</v-icon
+      >
+        <v-icon>mdi-content-save</v-icon>
+      </v-btn>
       >
     </v-app-bar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 sm8 md6>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
             <exercise-list
               :id="'new'"
               :edit-workout="true"
@@ -65,8 +67,8 @@
                 <v-icon>mdi-playlist-plus</v-icon>
               </v-btn>
             </v-speed-dial>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

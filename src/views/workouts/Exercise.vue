@@ -53,9 +53,9 @@
       </v-btn>
     </v-app-bar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex text-center xs12 sm8 md6>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
             <!-- Get exercises item -->
             <exercise-item
               v-if="currentExercise"
@@ -77,8 +77,8 @@
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
             </v-speed-dial>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

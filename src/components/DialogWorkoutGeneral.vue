@@ -19,8 +19,8 @@
         </div>
 
         <v-container v-if="editWorkout" grid-list-md>
-          <v-layout wrap>
-            <v-flex xs12>
+          <v-row wrap>
+            <v-col cols="12">
               <v-text-field
                 v-model="dataName"
                 placeholder="New workout"
@@ -30,9 +30,9 @@
                 required
               >
               </v-text-field>
-            </v-flex>
+            </v-col>
 
-            <v-flex xs12>
+            <v-col cols="12">
               <v-textarea
                 v-if="editWorkout"
                 v-model="dataDescription"
@@ -42,9 +42,9 @@
                 label="Workout description *"
               >
               </v-textarea>
-            </v-flex>
+            </v-col>
 
-            <v-flex xs12>
+            <v-col cols="12">
               <v-select
                 v-model="dataDifficulty"
                 :items="levels"
@@ -59,14 +59,14 @@
                 "
               >
               </v-select>
-            </v-flex>
-            <v-flex xs12>
+            </v-col>
+            <v-col cols="12">
               <v-checkbox
                 label="Share with the community"
                 @change="shareWorkout(currentWorkout.id)"
               ></v-checkbox>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card-text>
 

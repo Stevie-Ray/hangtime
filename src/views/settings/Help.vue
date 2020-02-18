@@ -12,9 +12,9 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 sm8 md6>
+      <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
             <v-subheader>Exercises</v-subheader>
 
             <v-expansion-panels>
@@ -41,8 +41,8 @@
                 <v-list-item-title>Terms and Privacy Policy</v-list-item-title>
               </v-list-item>
             </v-list>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

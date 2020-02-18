@@ -1,5 +1,5 @@
 <template>
-  <v-flex>
+  <div>
     <v-list two-line>
       <v-list-item>
         <v-list-item-avatar>
@@ -46,7 +46,7 @@
       <v-row justify="center">
         <v-col cols="12" md="10" lg="8">
           <div
-            class="hangboard"
+            class="hangboard mx-auto"
             :class="
               companies[hangboardToAdd.company].hangboards[
                 hangboardToAdd.hangboard
@@ -90,7 +90,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-flex>
+  </div>
 </template>
 
 <script>

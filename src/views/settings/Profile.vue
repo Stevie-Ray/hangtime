@@ -20,10 +20,10 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout class="justify-center pa-4">
-          <v-flex xs12 sm8 md6>
-            <div class="text-center">
+      <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
+            <div class="text-center pt-6">
               <!--              <v-badge overlap bottom class="pa-4">-->
               <!--                <v-icon slot="badge" dark @click="captureFile"-->
               <!--                  >mdi-camera</v-icon-->
@@ -127,8 +127,8 @@
                 </v-list-item-content>
               </v-list-item>
             </v-list>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

@@ -1,16 +1,16 @@
 <template>
   <v-content>
-    <v-container fluid fill-height>
-      <v-layout align-center justify-center>
-        <div class="loading">
+    <v-row align="center" justify="center" class="fill-height" no-gutters>
+      <v-col cols="12">
+        <div class="loading text-center">
           <v-progress-circular :size="60" color="primary" indeterminate>
           </v-progress-circular>
-          <div class="text-center">
+          <div class="pt-4">
             Loading...
           </div>
         </div>
-      </v-layout>
-    </v-container>
+      </v-col>
+    </v-row>
   </v-content>
 </template>
 

@@ -14,7 +14,7 @@
       v-if="(!user && !workouts) || (workouts && !workouts.length)"
       fluid
     >
-      <v-row justify="center" align="center">
+      <v-row>
         <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
           <img src="@/assets/sloth/baby.svg" alt="sloth baby" />
         </v-avatar>

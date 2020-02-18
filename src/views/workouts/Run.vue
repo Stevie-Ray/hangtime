@@ -27,27 +27,24 @@
     </v-app-bar>
 
     <v-content v-if="currentExercise">
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 md8 lg6>
-            <v-layout
-              justify-space-around
-              align-center
-              fill-height
-              text-center
-              v-bind="binding"
-              class="canvas"
+      <v-container class="fill-height">
+        <v-row class="fill-height">
+          <v-col cols="12">
+            <v-row
+              justify="space-around"
+              align="center"
+              class="fill-height text-center canvas"
+              v-bind:class="binding"
             >
               <!-- circle -->
-              <v-flex class="Counter">
+              <div class="Counter">
                 <v-progress-circular
-                  class="mt-3"
                   :rotate="270"
                   :size="300"
                   :width="5"
                   :value="progressCircular"
                 >
-                  <v-flex class="flex-column">
+                  <div class="d-flex align-center justify-center flex-column">
                     <v-avatar
                       size="80"
                       aspect-ratio="1"
@@ -99,13 +96,13 @@
                         </div>
                       </div>
                     </div>
-                  </v-flex>
+                  </div>
                 </v-progress-circular>
-              </v-flex>
+              </div>
 
               <!-- hangboard -->
 
-              <v-flex class="Hangboard">
+              <div class="Hangboard">
                 <v-container fluid class="py-0">
                   <v-row>
                     <v-col cols="12" class="py-0">
@@ -113,10 +110,10 @@
                     </v-col>
                   </v-row>
                 </v-container>
-              </v-flex>
+              </div>
 
               <!-- title -->
-              <v-flex class="Title">
+              <div class="Title">
                 <div class="title">
                   <span v-if="currentExercise.repeat > 1"
                     >{{ currentExercise.repeat }}x
@@ -141,10 +138,10 @@
                     Rest for {{ currentExercise.rest }} sec.</span
                   >
                 </div>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+              </div>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
 
       <v-speed-dial bottom right fixed>
@@ -519,26 +516,5 @@ export default {
   font-size: 1.8rem;
   font-weight: bold;
   padding: 0 8px;
-}
-
-#app .run {
-  .v-toolbar {
-    &__content,
-    &__extension {
-      // sm
-      @media (min-width: 600px) {
-        flex-basis: 100%;
-        max-width: 100%;
-      }
-      @media (min-width: 960px) {
-        flex-basis: 66.6666666667%;
-        max-width: 66.6666666667%;
-      }
-      @media (min-width: 1264px) {
-        flex-basis: 50%;
-        max-width: 50%;
-      }
-    }
-  }
 }
 </style>

@@ -80,9 +80,9 @@
       </v-menu>
     </v-app-bar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex xs12 sm8 md6>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
             <v-dialog v-model="hasHangboard" persistent max-width="500">
               <v-card>
                 <v-card-title class="headline"
@@ -156,8 +156,8 @@
                 <v-icon>mdi-playlist-plus</v-icon>
               </v-btn>
             </v-speed-dial>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

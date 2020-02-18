@@ -6,7 +6,6 @@ export default {
    */
   statsById: state => payload =>
     filter(state.progress, {
-      type: payload.type,
       company: payload.settings.hangboards[payload.settings.selected].company,
       hangboard:
         payload.settings.hangboards[payload.settings.selected].hangboard

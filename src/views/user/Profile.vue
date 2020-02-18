@@ -11,9 +11,9 @@
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
-          <v-flex text-center xs12 sm8 md6>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
             <v-card flat class="mx-auto" color="#26c6da" tile dark>
               <v-img
                 class="white--text justify-center align-center text-center"
@@ -69,7 +69,7 @@
                       lg="2"
                     >
                       <v-card color="primary" dark flat tile class="pl-4 pr-0">
-                        <v-flex
+                        <v-row
                           class="align-center"
                           style="display: flex; height: 100px"
                         >
@@ -83,7 +83,7 @@
                               )
                             "
                           />
-                        </v-flex>
+                        </v-row>
                       </v-card>
                       <div>{{ companies[item.company].name }}</div>
                       <div>
@@ -102,8 +102,8 @@
               <div class="title">This feature is in development.</div>
               <div class="subtitle-1">User ID: {{ userId }}</div>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-layout>

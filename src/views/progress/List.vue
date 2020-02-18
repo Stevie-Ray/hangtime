@@ -1,224 +1,154 @@
 <template>
   <v-layout class="progress-list">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon
-        v-if="currentType"
-        @click="
-          $router.push({
-            name: 'progress-type',
-            params: { type: encodeUrl(currentType.name), id: currentType.id }
-          })
-        "
+      <v-icon @click="$router.push({ path: currentTab })"
         >mdi-arrow-left</v-icon
       >
-      <v-avatar v-if="currentType" size="32px">
-        <v-img
-          :src="getImg(currentType.image)"
-          :alt="currentType.name"
-          aspect-ratio="1"
-          class="grey lighten-2"
-        />
-      </v-avatar>
-      <v-toolbar-title v-if="currentType && currentStats[index]">
-        <span
-          v-if="
-            currentStats[index].left === null ||
-              currentStats[index].right === null
-          "
-          >One-Arm
-        </span>
-        <span>{{ currentType.name }}</span>
-        <span v-if="tab === 1"> Pull-up</span>
-        <span> Strength</span>
+      <v-toolbar-title>
+        Record your progress
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-btn icon @click="filterDialog = true">
+        <v-icon>mdi-tune</v-icon>
+      </v-btn>
     </v-app-bar>
-    <v-content v-if="currentType">
-      <v-container fluid fill-height>
-        <v-layout class="justify-center">
-          <v-flex xs12 sm8 md6>
-            <v-tabs-items v-model="tab" class="mt-4">
-              <v-tab-item key="0">
-                <v-sheet
-                  v-if="currentStats[index]"
-                  color="secondary"
-                  max-width="calc(100% - 32px)"
-                  style="margin: 0 auto"
-                >
-                  <v-sparkline
-                    :labels="currentStatsLabels"
-                    :value="currentStatsValue"
-                    color="white"
-                    line-width="2"
-                    padding="16"
-                  ></v-sparkline>
-                </v-sheet>
-              </v-tab-item>
-              <v-tab-item key="1"> </v-tab-item>
-            </v-tabs-items>
-            <v-container fluid fill-height class="py-0">
-              <v-row justify="center">
-                <v-col cols="12" class="pb-0">
-                  <hangboard
-                    v-if="currentStats[index]"
-                    :data="currentStats[index]"
-                    :edit-workout="false"
-                  ></hangboard>
-                </v-col>
-              </v-row>
-              <v-row class="fill-height">
-                <v-col cols="12" class="py-0">
-                  <v-tabs v-model="tab" background-color="transparent" grow>
-                    <v-tab key="0">
-                      Hangs
-                    </v-tab>
-                    <v-tab key="1">
-                      Pull-ups
-                    </v-tab>
-                  </v-tabs>
-                  <v-tabs-items v-model="tab" class="fill-height">
-                    <v-tab-item key="0"
-                      ><v-list
+    <v-content>
+      <v-container>
+        <v-row justify="center" align="start" class="fill-height">
+          <v-col cols="12">
+            <line-chart :chart-data="chartData"></line-chart>
+
+            <hangboard
+              v-if="currentStats[index]"
+              :data="currentStats[index]"
+              :edit-workout="false"
+            ></hangboard>
+
+            <v-list
+              v-if="
+                currentStats[index] &&
+                  currentStats[index]['recordings'].length > 0
+              "
+              two-line
+            >
+              <span
+                v-for="(notUsed, item) in currentStats[index]['recordings']
+                  .length"
+                :key="item"
+              >
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <v-img
+                      :src="getImg(currentType.image)"
+                      :alt="currentType.name"
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                    />
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title v-if="currentStats[index]">
+                      <span
                         v-if="
-                          currentStats[index] &&
-                            currentStats[index]['recordings'].length > 0
+                          currentStats[index].left === null ||
+                            currentStats[index].right === null
                         "
-                        two-line
-                      >
-                        <span
-                          v-for="(notUsed, item) in currentStats[index][
-                            'recordings'
-                          ].length"
-                          :key="item"
-                        >
-                          <v-list-item>
-                            <v-list-item-avatar>
-                              <v-img
-                                :src="getImg(currentType.image)"
-                                :alt="currentType.name"
-                                aspect-ratio="1"
-                                class="grey lighten-2"
-                              />
-                            </v-list-item-avatar>
-
-                            <v-list-item-content>
-                              <v-list-item-title v-if="currentStats[index]">
-                                <span
-                                  v-if="
-                                    currentStats[index].left === null ||
-                                      currentStats[index].right === null
-                                  "
-                                  >One-Arm
-                                </span>
-                                <span>{{ currentType.name }}</span>
-                              </v-list-item-title>
-                              <v-list-item-subtitle>
-                                {{
-                                  currentStats[index]['recordings'][item].label
-                                }}
-                              </v-list-item-subtitle>
-                            </v-list-item-content>
-                            <v-list-item-action>
-                              <v-list-item-action-text>
-                                <span>
-                                  {{
-                                    count(
-                                      currentStats[index]['recordings'][item]
-                                        .value
-                                    )
-                                  }}
-                                </span>
-                              </v-list-item-action-text>
-                            </v-list-item-action>
-                          </v-list-item>
-                          <v-divider inset></v-divider>
-                        </span>
-                      </v-list>
-                      <div v-else>
-                        <v-list-item>
-                          <v-list-item-avatar>
-                            <v-img
-                              src="@/assets/exercises/deadhang.svg"
-                              :alt="currentType.name"
-                              aspect-ratio="1"
-                              class="grey lighten-2"
-                            />
-                          </v-list-item-avatar>
-
-                          <v-list-item-content>
-                            <v-list-item-title>
-                              No hang data available
-                            </v-list-item-title>
-                            <v-list-item-subtitle>
-                              Add your first recording using the
-                              <v-icon small>mdi-timer</v-icon> button
-                            </v-list-item-subtitle>
-                          </v-list-item-content>
-                          <v-list-item-action>
-                            <v-list-item-action-text> </v-list-item-action-text>
-                          </v-list-item-action>
-                        </v-list-item>
-                      </div>
-                    </v-tab-item>
-                    <v-tab-item key="1">
-                      <v-list two-line>
-                        <v-list-item>
-                          <v-list-item-avatar>
-                            <v-img
-                              src="@/assets/exercises/pullup.svg"
-                              :alt="currentType.name"
-                              aspect-ratio="1"
-                              class="grey lighten-2"
-                            />
-                          </v-list-item-avatar>
-
-                          <v-list-item-content>
-                            <v-list-item-title>
-                              No pull-up data available
-                            </v-list-item-title>
-                            <v-list-item-subtitle>
-                              Add your first recording using the
-                              <v-icon small>mdi-clock-alert</v-icon> button
-                            </v-list-item-subtitle>
-                          </v-list-item-content>
-                          <v-list-item-action>
-                            <v-list-item-action-text> </v-list-item-action-text>
-                          </v-list-item-action>
-                        </v-list-item>
-                      </v-list>
-                    </v-tab-item>
-                  </v-tabs-items>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-flex>
-        </v-layout>
+                        >One-Arm
+                      </span>
+                      <span>{{ currentType.name }}</span>
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ currentStats[index]['recordings'][item].label }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-list-item-action>
+                    <v-list-item-action-text>
+                      <span>
+                        {{
+                          count(currentStats[index]['recordings'][item].value)
+                        }}
+                      </span>
+                    </v-list-item-action-text>
+                  </v-list-item-action>
+                </v-list-item>
+                <v-divider inset></v-divider>
+              </span>
+            </v-list>
+          </v-col>
+        </v-row>
       </v-container>
+
+      <v-dialog v-model="filterDialog" max-width="500">
+        <v-card>
+          <v-card-title class="headline">Select workout types</v-card-title>
+
+          <v-card-text>
+            <v-container fluid>
+              <v-checkbox
+                v-model="selected"
+                v-for="option in options"
+                :key="option.id"
+                :label="option.name"
+                :value="option.id"
+              ></v-checkbox>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn text @click="filterDialog = false">
+              Close
+            </v-btn>
+
+            <v-btn color="primary" text @click="filterDialog = false">
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <v-dialog v-model="selectTypeDialog" max-width="500">
+        <v-card>
+          <v-card-title class="headline">Select workout types</v-card-title>
+          <v-card-text>
+            <v-container fluid>
+              <v-radio
+                v-for="option in options"
+                :key="option.id"
+                :label="option.name"
+                :value="option.id"
+              ></v-radio>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn text @click="filterDialog = false">
+              Close
+            </v-btn>
+
+            <v-btn color="primary" text @click="filterDialog = false">
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 
       <v-fab-transition>
         <v-btn
           slot="activator"
-          :key="activeFab.icon"
           color="secondary"
           dark
           fab
           bottom
           right
           fixed
-          @click="
-            $router.push({
-              name: 'progress-record',
-              params: {
-                data: data,
-                index: index,
-                id: currentType.id,
-                configurable: tab === 1 ? true : false
-              }
-            })
-          "
+          @click="selectTypeDialog = true"
         >
-          <v-icon>{{ activeFab.icon }}</v-icon>
+          <v-icon>mdi-timer</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-content>
@@ -228,20 +158,25 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
+import LineChart from '@/components/LineChart'
 import { getImg, count, shortDate } from '@/misc/helpers'
 
 export default {
-  components: { Hangboard },
+  components: { Hangboard, LineChart },
   props: {
-    id: Number,
     data: Object,
     index: Number
   },
   data: () => ({
-    tab: null
+    tab: null,
+    filterDialog: false,
+    selectTypeDialog: false,
+    selected: [0, 1, 2, 3]
   }),
   computed: {
     ...mapState('authentication', ['user']),
+    ...mapState('app', ['networkOnLine', 'currentTab']),
+    ...mapState('workouts', ['options']),
     ...mapGetters('progress', ['statsById']),
     ...mapGetters('workouts', ['typeById']),
     binding() {
@@ -253,9 +188,14 @@ export default {
     },
     currentStats() {
       return this.statsById({
-        type: this.currentType.id,
+        // type: this.currentType.id,
         settings: this.user.settings
       })
+    },
+    currentType() {
+      if (!this.currentStats) return
+      // eslint-disable-next-line consistent-return
+      return this.typeById(this.currentStats[this.index].type)
     },
     currentStatsLabels() {
       if (
@@ -277,17 +217,37 @@ export default {
       // eslint-disable-next-line consistent-return
       return this.currentStats[this.index].recordings.map(a => a.value)
     },
-    currentType() {
-      return this.typeById(this.id)
-    },
-    activeFab() {
-      switch (this.tab) {
-        case 0:
-          return { icon: 'mdi-timer' }
-        case 1:
-          return { icon: 'mdi-clock-alert' }
-        default:
-          return {}
+    chartData() {
+      if (!this.currentStatsValue && !this.currentStatsLabels) return
+      // eslint-disable-next-line consistent-return
+      return {
+        labels: this.currentStatsLabels,
+        datasets: [
+          {
+            label: 'Dead Hang',
+            backgroundColor: 'rgba(1, 46, 64, 0.2)',
+            borderColor: 'rgba(1, 46, 64, 0.5)',
+            data: this.currentStatsValue
+          },
+          {
+            label: 'Flexed Arm Hang',
+            backgroundColor: 'rgba(54, 109, 115, 0.2)',
+            borderColor: 'rgba(54, 109, 115, 0.5)',
+            data: [12, 54, 21]
+          },
+          {
+            label: 'L-Hang',
+            backgroundColor: 'rgba(90, 140, 140, 0.2)',
+            borderColor: 'rgba(90, 140, 140, 0.5)',
+            data: [18, 23, 28]
+          },
+          {
+            label: 'Front Lever',
+            backgroundColor: 'rgba(188, 191, 164, 0.2)',
+            borderColor: 'rgba(188, 191, 164, 0.5)',
+            data: [12, 14, 11]
+          }
+        ]
       }
     }
   },
@@ -307,6 +267,9 @@ export default {
         .replace(/-+/g, '-') // Remove duplicate dashes
         .replace(/^-*/, '') // Remove starting dashes
         .replace(/-*$/, '') // Remove trailing dashes
+    },
+    selectType() {
+      this.$router.push({ name: 'workouts' })
     }
   },
   head: {
