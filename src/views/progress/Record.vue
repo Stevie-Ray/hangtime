@@ -42,7 +42,7 @@
               justify="space-around"
               align="center"
               class="fill-height text-center canvas"
-              v-bind:class="binding"
+              :class="binding"
             >
               <!-- circle -->
               <div class="Counter">

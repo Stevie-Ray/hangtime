@@ -86,9 +86,9 @@
               @change="updateRouter($event)"
             >
               <v-tab-item
-                class="fill-height"
                 v-for="tab of tabs"
                 :key="tab.id"
+                class="fill-height"
                 :value="tab.route"
               >
                 <router-view></router-view>

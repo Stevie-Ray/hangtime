@@ -17,7 +17,13 @@ export default {
       legend: {
         // display: false
         position: 'bottom',
-        align: 'start'
+        align: 'start',
+        labels: {
+          // eslint-disable-next-line consistent-return
+          filter(label) {
+            if (label.text !== false) return true
+          }
+        }
       },
       tooltips: {
         enabled: false

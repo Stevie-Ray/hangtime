@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-0">
+  <v-container>
     <v-row justify="center" align="center">
       <v-col cols="12" style="max-width: 500px;">
         <div class="hangboard" :class="hangboard.name">

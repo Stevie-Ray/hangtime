@@ -16,9 +16,20 @@
     <v-content>
       <v-container>
         <v-row justify="center" align="start" class="fill-height">
+          <v-col cols="12" sm="8" md="6">
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <line-chart
+                          :chart-data="chartData"
+                          :height="300"
+                          class="justify-center d-flex"
+                  ></line-chart>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-col>
           <v-col cols="12">
-            <line-chart :chart-data="chartData"></line-chart>
-
             <hangboard
               v-if="currentStats[index]"
               :data="currentStats[index]"
@@ -28,7 +39,8 @@
             <v-list
               v-if="
                 currentStats[index] &&
-                  currentStats[index]['recordings'].length > 0
+                  currentStats[index]['recordings'].length > 0 &&
+                  selected.includes(currentType.id)
               "
               two-line
             >
@@ -86,9 +98,9 @@
           <v-card-text>
             <v-container fluid>
               <v-checkbox
-                v-model="selected"
                 v-for="option in options"
                 :key="option.id"
+                v-model="selected"
                 :label="option.name"
                 :value="option.id"
               ></v-checkbox>
@@ -171,7 +183,7 @@ export default {
     tab: null,
     filterDialog: false,
     selectTypeDialog: false,
-    selected: [0, 1, 2, 3]
+    selected: [0]
   }),
   computed: {
     ...mapState('authentication', ['user']),
@@ -217,37 +229,46 @@ export default {
       // eslint-disable-next-line consistent-return
       return this.currentStats[this.index].recordings.map(a => a.value)
     },
+    currentStatsValuePlus() {
+      if (
+              this.currentStats[this.index] &&
+              this.currentStats[this.index].recordings.length === 0
+      ) {
+        return
+      }
+      // eslint-disable-next-line consistent-return
+      return this.currentStats[this.index].recordings.map(a => {
+        const random = Math.floor(Math.random() * (40 - 20 + 1) + 20);
+        return a.value - random
+      })
+    },
     chartData() {
       if (!this.currentStatsValue && !this.currentStatsLabels) return
+      // eslint-disable-next-line func-names
+      const filtered = this.options.filter(function(e) {
+        return this.indexOf(e.id) >= 0
+      }, this.selected)
+
+      const datasets = []
+      const self = this
+      filtered.forEach(option => {
+        datasets.push({
+          label: option.name,
+          backgroundColor: option.color,
+          borderColor: option.border,
+          data: self.currentStatsValue
+        });
+      datasets.push({
+        label: `${option.name} Pull-ups`,
+        backgroundColor: option.color,
+        borderColor: option.border,
+        data: self.currentStatsValuePlus
+      });
+        })
       // eslint-disable-next-line consistent-return
       return {
         labels: this.currentStatsLabels,
-        datasets: [
-          {
-            label: 'Dead Hang',
-            backgroundColor: 'rgba(1, 46, 64, 0.2)',
-            borderColor: 'rgba(1, 46, 64, 0.5)',
-            data: this.currentStatsValue
-          },
-          {
-            label: 'Flexed Arm Hang',
-            backgroundColor: 'rgba(54, 109, 115, 0.2)',
-            borderColor: 'rgba(54, 109, 115, 0.5)',
-            data: [12, 54, 21]
-          },
-          {
-            label: 'L-Hang',
-            backgroundColor: 'rgba(90, 140, 140, 0.2)',
-            borderColor: 'rgba(90, 140, 140, 0.5)',
-            data: [18, 23, 28]
-          },
-          {
-            label: 'Front Lever',
-            backgroundColor: 'rgba(188, 191, 164, 0.2)',
-            borderColor: 'rgba(188, 191, 164, 0.5)',
-            data: [12, 14, 11]
-          }
-        ]
+        datasets
       }
     }
   },
