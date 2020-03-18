@@ -57,7 +57,7 @@
             </v-flex>
 
             <v-flex xs12 class="mt-5 caption grey--text font-weight-light">
-              &copy; 2019 HangTime.
+              &copy; 2020 HangTime.
             </v-flex>
           </v-flex>
         </v-flex>

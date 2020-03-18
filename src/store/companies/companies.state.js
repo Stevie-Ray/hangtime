@@ -1455,8 +1455,50 @@ export default {
           ]
         },
         {
-          name: 'Wood Grips - Compact II',
+          name: 'Wood Grips - Compact',
           id: 4,
+          image: 'hangboards/METOLIUSCOMPACT.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            }
+          ]
+        },
+        {
+          name: 'Wood Grips - Compact II',
+          id: 5,
           image: 'hangboards/METOLIUSCOMPACTII.svg',
           holds: [
             {
@@ -1517,8 +1559,65 @@ export default {
           ]
         },
         {
+          name: 'Wood Grips - Deluxe',
+          id: 6,
+          image: 'hangboards/METOLIUSDELUXE.svg',
+          holds: [
+            {
+              id: 'h1',
+              class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            }
+          ]
+        },
+        {
           name: 'Wood Grips - Deluxe II',
-          id: 5,
+          id: 7,
           image: 'hangboards/METOLIUSDELUXEII.svg',
           holds: [
             {
