@@ -47,7 +47,7 @@
 
               <v-list-item to="/settings/general">
                 <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-settings</v-icon>
+                  <v-icon color="primary lighten-1">mdi-cog</v-icon>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
