@@ -21,8 +21,7 @@
 - :white_check_mark: [Cypress](https://www.cypress.io/) : e2e testing
 - :mag: [Vue head](https://github.com/ktquez/vue-head) : meta description per page
 - :page_facing_up: [Optional][prerender spa plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering
-- :green_heart: [Optional][circleci](https://circleci.com/) : continuous integration/deployment
-- :package: [Optional][bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes
+- :package: [bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes
 
 **App embedded features :**
 
