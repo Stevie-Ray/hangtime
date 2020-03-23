@@ -42,6 +42,7 @@ export default {
         yAxes: [
           {
             ticks: {
+              precision: 0,
               callback(label) {
                 // if(label < 60){
                 //     return label
