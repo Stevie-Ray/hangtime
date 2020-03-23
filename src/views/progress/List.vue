@@ -21,9 +21,9 @@
               <v-row>
                 <v-col cols="12">
                   <line-chart
-                          :chart-data="chartData"
-                          :height="300"
-                          class="justify-center d-flex"
+                    :chart-data="chartData"
+                    :height="300"
+                    class="justify-center d-flex"
                   ></line-chart>
                 </v-col>
               </v-row>
@@ -35,30 +35,24 @@
               :data="currentStats[index]"
               :edit-workout="false"
             ></hangboard>
-
             <v-list
               v-if="
                 currentStats[index] &&
-                  currentStats[index]['recordings'].length > 0 &&
-                  selected.includes(currentType.id)
+                  currentStats[index]['recordings'].length > 0
               "
               two-line
             >
-              <span
-                v-for="(notUsed, item) in currentStats[index]['recordings']
-                  .length"
-                :key="item"
-              >
+              <span v-for="(recording, item) in filteredRecordings" :key="item">
                 <v-list-item>
                   <v-list-item-avatar>
                     <v-img
-                      :src="getImg(currentType.image)"
-                      :alt="currentType.name"
+                      v-if="recording.type !== null && options[recording.type]"
+                      :src="getImg(options[recording.type].image)"
+                      :alt="options[recording.type].name"
                       aspect-ratio="1"
                       class="grey lighten-2"
                     />
                   </v-list-item-avatar>
-
                   <v-list-item-content>
                     <v-list-item-title v-if="currentStats[index]">
                       <span
@@ -68,18 +62,22 @@
                         "
                         >One-Arm
                       </span>
-                      <span>{{ currentType.name }}</span>
+                      <span
+                        v-if="
+                          recording.type !== null && options[recording.type]
+                        "
+                      >
+                        {{ options[recording.type].name }}
+                      </span>
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                      {{ currentStats[index]['recordings'][item].label }}
+                      {{ recording.label }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                   <v-list-item-action>
                     <v-list-item-action-text>
                       <span>
-                        {{
-                          count(currentStats[index]['recordings'][item].value)
-                        }}
+                        {{ count(recording.value) }}
                       </span>
                     </v-list-item-action-text>
                   </v-list-item-action>
@@ -204,51 +202,17 @@ export default {
         settings: this.user.settings
       })
     },
-    currentType() {
-      if (!this.currentStats) return
-      // eslint-disable-next-line consistent-return
-      return this.typeById(this.currentStats[this.index].type)
-    },
-    currentStatsLabels() {
-      if (
-        this.currentStats[this.index] &&
-        this.currentStats[this.index].recordings.length === 0
-      ) {
-        return
-      }
-      // eslint-disable-next-line consistent-return
-      return this.currentStats[this.index].recordings.map(a => a.label)
-    },
-    currentStatsValue() {
-      if (
-        this.currentStats[this.index] &&
-        this.currentStats[this.index].recordings.length === 0
-      ) {
-        return
-      }
-      // eslint-disable-next-line consistent-return
-      return this.currentStats[this.index].recordings.map(a => a.value)
-    },
-    currentStatsValuePlus() {
-      if (
-              this.currentStats[this.index] &&
-              this.currentStats[this.index].recordings.length === 0
-      ) {
-        return
-      }
-      // eslint-disable-next-line consistent-return
-      return this.currentStats[this.index].recordings.map(a => {
-        const random = Math.floor(Math.random() * (40 - 20 + 1) + 20);
-        return a.value - random
+    filteredRecordings() {
+      return this.currentStats[this.index].recordings.filter(recording => {
+        return this.selected.includes(recording.type)
       })
     },
     chartData() {
-      if (!this.currentStatsValue && !this.currentStatsLabels) return
+      if (!this.currentStatsValue && !this.currentStatsLabels) return {}
       // eslint-disable-next-line func-names
       const filtered = this.options.filter(function(e) {
         return this.indexOf(e.id) >= 0
       }, this.selected)
-
       const datasets = []
       const self = this
       filtered.forEach(option => {
@@ -256,18 +220,11 @@ export default {
           label: option.name,
           backgroundColor: option.color,
           borderColor: option.border,
-          data: self.currentStatsValue
-        });
-      datasets.push({
-        label: `${option.name} Pull-ups`,
-        backgroundColor: option.color,
-        borderColor: option.border,
-        data: self.currentStatsValuePlus
-      });
+          data: self.currentStatsValue(option.id)
         })
+      })
       // eslint-disable-next-line consistent-return
       return {
-        labels: this.currentStatsLabels,
         datasets
       }
     }
@@ -276,6 +233,31 @@ export default {
     getImg,
     count,
     shortDate,
+    currentStatsValue(index) {
+      if (
+        !this.currentStats[this.index] ||
+        !this.currentStats[this.index].recordings.length
+      ) {
+        return
+      }
+      // eslint-disable-next-line consistent-return
+      return this.currentStats[this.index].recordings
+        .filter(recording => recording.type === index)
+        .map(obj => {
+          const date = new Date(obj.createTimestamp.seconds * 1000)
+          return { y: obj.value, t: date }
+        })
+    },
+    currentStatsLabels() {
+      if (
+        !this.currentStats[this.index] ||
+        !this.currentStats[this.index].recordings.length
+      ) {
+        return
+      }
+      // eslint-disable-next-line consistent-return
+      return this.currentStats[this.index].recordings.map(a => a.label)
+    },
     encodeUrl(url) {
       return url
         .toString() // Convert to string

@@ -136,7 +136,7 @@ const router = new Router({
         )
     },
     {
-      path: '/progress/list/:index',
+      path: '/:userId/progress/list/:index',
       name: 'progress-list',
       props(route) {
         const props = { ...route.params }

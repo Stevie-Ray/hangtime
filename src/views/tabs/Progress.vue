@@ -25,7 +25,7 @@
         @click="
           $router.push({
             name: 'progress-list',
-            params: { data, index }
+            params: { data, index, userId: user.id }
           })
         "
       >

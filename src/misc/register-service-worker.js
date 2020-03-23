@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
     offline() {
       // eslint-disable-next-line no-console
       console.info(
-          'No internet connection found. App is running in offline mode.'
+        'No internet connection found. App is running in offline mode.'
       )
     },
     error(error) {

@@ -1,5 +1,6 @@
 <script>
 import { Line, mixins } from 'vue-chartjs'
+import { count } from '@/misc/helpers'
 
 const { reactiveProp } = mixins
 
@@ -24,6 +25,32 @@ export default {
             if (label.text !== false) return true
           }
         }
+      },
+      scales: {
+        xAxes: [
+          {
+            type: 'time',
+            time: {
+              unit: 'month',
+              distribution: 'series',
+              displayFormats: {
+                quarter: 'MMM YYYY'
+              }
+            }
+          }
+        ],
+        yAxes: [
+          {
+            ticks: {
+              callback(label) {
+                // if(label < 60){
+                //     return label
+                // }
+                return count(label)
+              }
+            }
+          }
+        ]
       },
       tooltips: {
         enabled: false
