@@ -4,10 +4,11 @@
       <v-col cols="12">
         <!-- pause  -->
         <v-slider
+          class="mt-6"
           v-model="dataPause"
           :max="300"
-          :min="15"
-          step="15"
+          :min="5"
+          step="5"
           ticks
           always-dirty
           thumb-size="48"
@@ -86,10 +87,9 @@
         <!-- hold  -->
         <v-slider
           v-model="dataHold"
-          :max="60"
-          :min="5"
-          step="5"
-          ticks
+          :max="180"
+          :min="3"
+          step="1"
           always-dirty
           thumb-size="48"
           prepend-icon="mdi-clock"
@@ -173,9 +173,8 @@
           v-if="currentExercise.repeat > 1"
           v-model="dataRest"
           :max="300"
-          :min="15"
-          step="15"
-          ticks
+          :min="5"
+          step="1"
           always-dirty
           thumb-size="48"
           :disabled="!editWorkout"
