@@ -383,25 +383,30 @@ export default {
       ) {
         let textToSpeak = ''
         textToSpeak += 'Next exercise: '
-        if (this.currentExercise.pullups > 1) {
-          textToSpeak += `${this.currentExercise.pullups} `
+        if (this.currentExercise.pause >= 10) {
+          if (this.currentExercise.pullups > 1) {
+            textToSpeak += `${this.currentExercise.pullups} `
+          }
+          if (
+            this.currentExercise.left === null ||
+            this.currentExercise.right === null
+          ) {
+            textToSpeak += `One Arm `
+          }
+          textToSpeak += `${this.options[this.currentExercise.exercise].name}`
+          if (this.currentExercise.pullups > 1) {
+            textToSpeak += ` Pullups`
+          } else if (this.currentExercise.pullups > 0) {
+            textToSpeak += ` Pullup`
+          }
         }
-        if (
-          this.currentExercise.left === null ||
-          this.currentExercise.right === null
-        ) {
-          textToSpeak += `One Arm `
-        }
-        textToSpeak += `${this.options[this.currentExercise.exercise].name}`
-        if (this.currentExercise.pullups > 1) {
-          textToSpeak += ` Pullups`
-        } else if (this.currentExercise.pullups > 0) {
-          textToSpeak += ` Pullup`
-        }
-        textToSpeak += `. For ${this.currentExercise.hold} seconds. `
-        if (this.currentExercise.repeat > 1) {
-          textToSpeak += `Than rest for ${this.currentExercise.rest} seconds. `
-          textToSpeak += `Repeat ${this.currentExercise.repeat} times.`
+
+        if (this.currentExercise.pause >= 15) {
+          textToSpeak += `. For ${this.currentExercise.hold} seconds. `
+          if (this.currentExercise.repeat > 1) {
+            textToSpeak += `Than rest for ${this.currentExercise.rest} seconds. `
+            textToSpeak += `Repeat ${this.currentExercise.repeat} times.`
+          }
         }
         this.speakText(textToSpeak)
       }
