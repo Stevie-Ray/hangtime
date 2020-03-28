@@ -347,6 +347,7 @@ export default {
           this.noSleep.enable()
         }
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error(`${err.name}, ${err.message}`)
       }
     }
