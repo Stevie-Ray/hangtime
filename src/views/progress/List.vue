@@ -9,7 +9,11 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn icon @click="filterDialog = true">
+      <v-btn
+        v-if="currentStats[index] && currentStats[index].recordings.length"
+        icon
+        @click="filterDialog = true"
+      >
         <v-icon>mdi-tune</v-icon>
       </v-btn>
     </v-app-bar>
@@ -17,7 +21,33 @@
       <v-container>
         <v-row justify="center" align="start" class="fill-height">
           <v-col cols="12" sm="8" md="6">
-            <v-container>
+            <v-container
+              v-if="
+                currentStats[index] && !currentStats[index].recordings.length
+              "
+            >
+              <v-row justify="center" align="center">
+                <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+                  <img src="@/assets/sloth/sleepy.svg" alt="sloth sleepy" />
+                </v-avatar>
+              </v-row>
+              <v-row>
+                <v-card flat>
+                  <v-card-title>
+                    No recordings added yet
+                  </v-card-title>
+                  <v-card-subtitle>
+                    Start recording your progress using the
+                    <v-icon small>mdi-timer</v-icon> icon.
+                  </v-card-subtitle>
+                </v-card>
+              </v-row>
+            </v-container>
+            <v-container
+              v-if="
+                currentStats[index] && currentStats[index].recordings.length
+              "
+            >
               <v-row>
                 <v-col cols="12">
                   <line-chart
@@ -46,9 +76,9 @@
                 <v-list-item>
                   <v-list-item-avatar>
                     <v-img
-                      v-if="recording.type !== null && options[recording.type]"
-                      :src="getImg(options[recording.type].image)"
-                      :alt="options[recording.type].name"
+                      v-if="options[returnType(recording.type)]"
+                      :src="getImg(options[returnType(recording.type)].image)"
+                      :alt="options[returnType(recording.type)].name"
                       aspect-ratio="1"
                       class="grey lighten-2"
                     />
@@ -62,12 +92,8 @@
                         "
                         >One-Arm
                       </span>
-                      <span
-                        v-if="
-                          recording.type !== null && options[recording.type]
-                        "
-                      >
-                        {{ options[recording.type].name }}
+                      <span v-if="options[returnType(recording.type)]">
+                        {{ options[returnType(recording.type)].name }}
                       </span>
                     </v-list-item-title>
                     <v-list-item-subtitle>
@@ -91,7 +117,7 @@
 
       <v-dialog v-model="filterDialog" max-width="500">
         <v-card>
-          <v-card-title class="headline">Select workout types</v-card-title>
+          <v-card-title class="headline">Filter your recordings</v-card-title>
 
           <v-card-text>
             <v-container fluid>
@@ -101,6 +127,7 @@
                 v-model="selected"
                 :label="option.name"
                 :value="option.id"
+                hide-details="auto"
               ></v-checkbox>
             </v-container>
           </v-card-text>
@@ -121,27 +148,29 @@
 
       <v-dialog v-model="selectTypeDialog" max-width="500">
         <v-card>
-          <v-card-title class="headline">Select workout types</v-card-title>
+          <v-card-title class="headline">What do you want to do?</v-card-title>
           <v-card-text>
             <v-container fluid>
-              <v-radio
-                v-for="option in options"
-                :key="option.id"
-                :label="option.name"
-                :value="option.id"
-              ></v-radio>
+              <v-radio-group v-model="workoutType">
+                <v-radio
+                  v-for="option in options"
+                  :key="option.id"
+                  :label="`Max ${option.name}`"
+                  :value="option.id"
+                ></v-radio>
+              </v-radio-group>
             </v-container>
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn text @click="filterDialog = false">
+            <v-btn text @click="selectTypeDialog = false">
               Close
             </v-btn>
 
-            <v-btn color="primary" text @click="filterDialog = false">
-              Save
+            <v-btn color="primary" text @click="goToRecord">
+              Start
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -181,7 +210,8 @@ export default {
     tab: null,
     filterDialog: false,
     selectTypeDialog: false,
-    selected: [0]
+    selected: [0, 1, 2, 3],
+    workoutType: 0
   }),
   computed: {
     ...mapState('authentication', ['user']),
@@ -197,14 +227,15 @@ export default {
       return binding
     },
     currentStats() {
-      return this.statsById({
+      const data = this.statsById({
         // type: this.currentType.id,
         settings: this.user.settings
       })
+      return data
     },
     filteredRecordings() {
       return this.currentStats[this.index].recordings.filter(recording => {
-        return this.selected.includes(recording.type)
+        return this.selected.includes(this.returnType(recording.type))
       })
     },
     chartData() {
@@ -216,11 +247,12 @@ export default {
       const datasets = []
       const self = this
       filtered.forEach(option => {
+        const data = self.currentStatsValue(option.id)
         datasets.push({
           label: option.name,
           backgroundColor: option.color,
           borderColor: option.border,
-          data: self.currentStatsValue(option.id)
+          data
         })
       })
       // eslint-disable-next-line consistent-return
@@ -242,9 +274,12 @@ export default {
       }
       // eslint-disable-next-line consistent-return
       return this.currentStats[this.index].recordings
-        .filter(recording => recording.type === index)
+        .filter(recording => this.returnType(recording.type) === index)
         .map(obj => {
-          const date = new Date(obj.createTimestamp.seconds * 1000)
+          let date = obj.createTimestamp
+          if (obj.createTimestamp.seconds) {
+            date = new Date(obj.createTimestamp.seconds * 1000)
+          }
           return { y: obj.value, t: date }
         })
     },
@@ -271,8 +306,25 @@ export default {
         .replace(/^-*/, '') // Remove starting dashes
         .replace(/-*$/, '') // Remove trailing dashes
     },
-    selectType() {
-      this.$router.push({ name: 'workouts' })
+    /**
+     * Fallback for older versions @TODO: remove in the future
+     * @param type
+     * @returns {number|*}
+     */
+    returnType(type) {
+      if (type !== undefined) return type
+      return 0
+    },
+    goToRecord() {
+      this.selectTypeDialog = false
+      this.$router.push({
+        name: 'progress-record',
+        params: {
+          data: this.data,
+          index: this.index,
+          id: this.workoutType
+        }
+      })
     }
   },
   head: {

@@ -31,10 +31,14 @@ export default {
           {
             type: 'time',
             time: {
-              unit: 'month',
+              // unit: 'month',
               distribution: 'series',
               displayFormats: {
-                quarter: 'MMM YYYY'
+                quarter: 'MMM YYYY',
+                millisecond: 'HH:mm:ss.SSS',
+                second: 'HH:mm:ss',
+                minute: 'HH:mm',
+                hour: 'HH:mm'
               }
             }
           }

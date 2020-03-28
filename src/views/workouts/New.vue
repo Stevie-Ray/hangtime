@@ -38,11 +38,11 @@
 
       <v-btn
         v-if="currentWorkout.exercises && currentWorkout.exercises.length"
+        icon
         @click="saveExercises"
       >
         <v-icon>mdi-content-save</v-icon>
       </v-btn>
-      >
     </v-app-bar>
     <v-content>
       <v-container>

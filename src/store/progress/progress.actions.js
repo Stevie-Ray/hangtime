@@ -28,7 +28,8 @@ export default {
     const recording = {
       createTimestamp: date,
       label: shortDate(date),
-      value: payload.value
+      value: payload.value,
+      type: payload.type
     }
     commit('addRecording', { id: payload.data.id, data: recording })
 

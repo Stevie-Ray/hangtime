@@ -2,23 +2,24 @@
   <v-layout class="workout">
     <v-app-bar color="primary" app dark fixed>
       <v-icon
+        v-if="user"
         @click="
           $router.push({
             name: 'progress-list',
-            params: { data: data, index: index }
+            params: { data, index, userId: user.id }
           })
         "
         >mdi-arrow-left</v-icon
       >
-      <v-avatar size="32px">
-        <!--        <v-img-->
-        <!--          :src="getImg(currentType.image)"-->
-        <!--          :alt="currentType.name"-->
-        <!--          aspect-ratio="1"-->
-        <!--          class="grey lighten-2"-->
-        <!--        />-->
+      <v-avatar v-if="currentType" size="32px">
+        <v-img
+          :src="getImg(currentType.image)"
+          :alt="currentType.name"
+          aspect-ratio="1"
+          class="grey lighten-2"
+        />
       </v-avatar>
-      <v-toolbar-title>
+      <v-toolbar-title v-if="currentType">
         <span
           v-if="
             currentStats[index].left === null ||
@@ -27,14 +28,14 @@
         >
           One-Arm
         </span>
-        <!--        <span>{{ currentType.name }}</span>-->
+        <span>{{ currentType.name }}</span>
         <span v-if="configurable"> Pull-up</span>
         <span> Strength</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-content>
+    <v-content v-if="currentType">
       <v-container class="fill-height">
         <v-row class="fill-height">
           <v-col cols="12">
@@ -58,13 +59,14 @@
                       aspect-ratio="1"
                       class="grey lighten-2 mb-3"
                     >
-                      <!--                      <img-->
-                      <!--                        :alt="currentType.name"-->
-                      <!--                        :src="getImg(currentType.image)"-->
-                      <!--                      />-->
+                      <img
+                        :alt="currentType.name"
+                        :src="getImg(currentType.image)"
+                      />
                     </v-avatar>
 
                     <div class="subtitle font-weight-bold text-uppercase">
+                      Max
                       <span
                         v-if="
                           currentStats[index].left === null ||
@@ -73,7 +75,7 @@
                       >
                         One-Arm
                       </span>
-                      <!--                      <span>{{ currentType.name }}</span>-->
+                      <span>{{ currentType.name }}</span>
                       <span v-if="configurable"> Pull-up</span>
                     </div>
 
@@ -88,13 +90,13 @@
                       "
                       class="text-uppercase font-weight-bold"
                     >
-                      Best:
-                      <span v-if="!configurable">
-                        {{ count(bestStatsById(currentStats[index].id)) }}
-                      </span>
-                      <span v-else>
-                        {{ bestStatsById(currentStats[index].id) }}x
-                      </span>
+                      <!--                      Best:-->
+                      <!--                      <span v-if="!configurable">-->
+                      <!--                        {{ count(bestStatsById(currentStats[index].id)) }}-->
+                      <!--                      </span>-->
+                      <!--                      <span v-else>-->
+                      <!--                        {{ bestStatsById(currentStats[index].id) }}x-->
+                      <!--                      </span>-->
                     </div>
                   </div>
                 </v-progress-circular>
@@ -125,7 +127,7 @@
                     >
                       One-Arm
                     </span>
-                    <!--                    <span>{{ currentType.name }}</span>-->
+                    <span>{{ currentType.name }}</span>
                     <span v-if="configurable"> Pull-up</span>
                   </span>
                   <span v-else>
@@ -180,36 +182,25 @@
             </div>
             <div v-else>
               <span>
-                You did a <strong>xxxxx</strong> for {{ count(totalTime) }}.
+                You did a <strong>Max {{ currentType.name }}</strong> for
+                {{ count(totalTime) }}.
               </span>
               <br />
-              <span v-if="bestStatsById(currentStats[index].id) > 0">
-                Your best recording:
-                {{ count(bestStatsById(currentStats[index].id)) }}.
-                <br />
-              </span>
-              <br />
-              <span v-if="bestStatsById(currentStats[index].id) < totalTime">
-                This is a new record!
-              </span>
+              <!--              <span v-if="bestStatsById(currentStats[index].id) > 0">-->
+              <!--                Your best recording:-->
+              <!--                {{ count(bestStatsById(currentStats[index].id)) }}.-->
+              <!--                <br />-->
+              <!--              </span>-->
+              <!--              <br />-->
+              <!--              <span v-if="bestStatsById(currentStats[index].id) < totalTime">-->
+              <!--                This is a new record!-->
+              <!--              </span>-->
             </div>
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <!-- TODO: add to btn when pull-ups are fixed @click="saveRecording"-->
-            <v-btn
-              text
-              @click="
-                $router.push({
-                  // name: 'progress-type',
-                  // params: {
-                  //   // type: encodeUrl(currentType.name),
-                  //   id: currentType.id
-                  // }
-                })
-              "
-            >
+            <v-btn text @click="saveRecording">
               save
             </v-btn>
           </v-card-actions>
@@ -253,7 +244,7 @@ export default {
   props: {
     data: Object,
     index: Number,
-    configurable: Boolean
+    id: Number
   },
   data: () => ({
     dialog: false,
@@ -261,7 +252,8 @@ export default {
     pullups: 0,
     running: false,
     timer: null,
-    totalTime: 0
+    totalTime: 0,
+    configurable: false
   }),
   computed: {
     ...mapState('authentication', ['user']),
@@ -276,13 +268,13 @@ export default {
     },
     currentStats() {
       return this.statsById({
-        // type: this.currentType.id,
+        type: this.currentType.id,
         settings: this.user.settings
       })
+    },
+    currentType() {
+      return this.typeById(this.id)
     }
-    // currentType() {
-    //   return this.typeById(this.id)
-    // }
   },
   methods: {
     ...mapActions('progress', ['AddRecording']),
@@ -324,17 +316,19 @@ export default {
       if (this.configurable) {
         this.AddRecording({
           data: this.currentStats[this.index],
-          value: Number(this.pullups)
+          value: Number(this.pullups),
+          type: this.id
         })
       } else {
         this.AddRecording({
           data: this.currentStats[this.index],
-          value: this.totalTime
+          value: this.totalTime,
+          type: this.id
         })
       }
       this.$router.push({
         name: 'progress-list',
-        params: { data: this.data, index: this.index }
+        params: { data: this.data, index: this.index, userId: this.user.id }
       })
     },
     async requestWakeLock() {

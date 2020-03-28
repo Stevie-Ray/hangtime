@@ -4,8 +4,8 @@
       <v-col cols="12">
         <!-- pause  -->
         <v-slider
-          class="mt-6"
           v-model="dataPause"
+          class="mt-6"
           :max="300"
           :min="5"
           step="5"
