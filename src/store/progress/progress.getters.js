@@ -4,12 +4,15 @@ export default {
   /**
    * Get stats by id
    */
-  statsById: state => payload =>
-    filter(state.progress, {
+  statsById: state => payload => {
+    const data = filter(state.progress, {
       company: payload.settings.hangboards[payload.settings.selected].company,
       hangboard:
         payload.settings.hangboards[payload.settings.selected].hangboard
-    }),
+    })
+    return data
+  },
+
   /**
    * Get best stats by id
    */

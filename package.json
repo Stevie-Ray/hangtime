@@ -82,7 +82,7 @@
     },
     {
       "path": "./dist/js/client-chunk-*.js",
-      "maxSize": "100 kB"
+      "maxSize": "200 kB"
     }
   ],
   "eslintConfig": {

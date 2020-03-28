@@ -49,7 +49,27 @@ export default {
     commit('addProgress', createdProgress)
     // commit('setProgressCreationPending', false)
   },
-
+  /**
+   * Update workout
+   */
+  updateRecording: async ({ rootState }, payload) => {
+    // commit('setWorkoutCreationPending', true)
+    const UserProgressDb = new UserProgressDB(rootState.authentication.user.id)
+    await UserProgressDb.update(payload)
+    // commit('setWorkoutCreationPending', false)
+  },
+  /**
+   * Delete a user workout from its id
+   */
+  deleteUserProgress: async ({ commit, dispatch }, payload) => {
+    // if (getters.isWorkoutDeletionPending(workoutId)) return
+    // // commit('setProgressDeletionPending', true)
+    commit('removeRecordingByIndex', payload)
+    if (payload.recording) {
+      dispatch('updateRecording', payload.recording)
+    }
+    // commit('setProgressDeletionPending', false)
+  },
   /**
    * Check if hangboard has been added and add it to current logged in user
    */

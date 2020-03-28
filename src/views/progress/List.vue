@@ -5,10 +5,16 @@
         >mdi-arrow-left</v-icon
       >
       <v-toolbar-title>
-        Record your progress
+        Your progress
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-btn v-if="edit" icon @click="edit = false">
+        <v-icon>mdi-pencil-off</v-icon>
+      </v-btn>
+      <v-btn v-if="!edit" icon @click="edit = true">
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
       <v-btn
         v-if="currentStats[index] && currentStats[index].recordings.length"
         icon
@@ -84,7 +90,12 @@
                     />
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title v-if="currentStats[index]">
+                    <v-list-item-title
+                      v-if="
+                        currentStats[index] &&
+                          currentStats[index]['recordings'].length
+                      "
+                    >
                       <span
                         v-if="
                           currentStats[index].left === null ||
@@ -93,7 +104,7 @@
                         >One-Arm
                       </span>
                       <span v-if="options[returnType(recording.type)]">
-                        {{ options[returnType(recording.type)].name }}
+                        Max {{ options[returnType(recording.type)].name }}
                       </span>
                     </v-list-item-title>
                     <v-list-item-subtitle>
@@ -105,6 +116,9 @@
                       <span>
                         {{ count(recording.value) }}
                       </span>
+                      <v-icon v-if="edit" @click="deleteRecording(recording)">
+                        mdi-delete
+                      </v-icon>
                     </v-list-item-action-text>
                   </v-list-item-action>
                 </v-list-item>
@@ -176,6 +190,40 @@
         </v-card>
       </v-dialog>
 
+      <v-dialog v-if="deleteDialogItem" v-model="deleteDialog" max-width="500">
+        <v-card>
+          <v-card-title class="headline">Delete recording</v-card-title>
+
+          <v-card-text>
+            <v-container fluid>
+              Are you sure you want to delete this
+              <strong>
+                Max
+                {{ options[returnType(deleteDialogItem.type)].name }}</strong
+              >
+              recording of
+              <strong>{{ count(deleteDialogItem.value) }}</strong
+              >? This can not be undone.
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn text @click="deleteDialog = false">
+              Close
+            </v-btn>
+
+            <v-btn
+              color="primary"
+              text
+              @click="deteleRecordingAction(deleteDialogItem)"
+            >
+              Delete
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
       <v-fab-transition>
         <v-btn
           slot="activator"
@@ -195,7 +243,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import LineChart from '@/components/LineChart'
 import { getImg, count, shortDate } from '@/misc/helpers'
@@ -210,8 +258,11 @@ export default {
     tab: null,
     filterDialog: false,
     selectTypeDialog: false,
+    deleteDialog: false,
+    deleteDialogItem: null,
     selected: [0, 1, 2, 3],
-    workoutType: 0
+    workoutType: 0,
+    edit: false
   }),
   computed: {
     ...mapState('authentication', ['user']),
@@ -234,6 +285,12 @@ export default {
       return data
     },
     filteredRecordings() {
+      if (
+        !this.currentStats[this.index] &&
+        !this.currentStats[this.index].recordings.length
+      )
+        return
+      // eslint-disable-next-line consistent-return
       return this.currentStats[this.index].recordings.filter(recording => {
         return this.selected.includes(this.returnType(recording.type))
       })
@@ -265,9 +322,10 @@ export default {
     getImg,
     count,
     shortDate,
+    ...mapActions('progress', ['deleteUserProgress']),
     currentStatsValue(index) {
       if (
-        !this.currentStats[this.index] ||
+        !this.currentStats[this.index] &&
         !this.currentStats[this.index].recordings.length
       ) {
         return
@@ -314,6 +372,24 @@ export default {
     returnType(type) {
       if (type !== undefined) return type
       return 0
+    },
+    deleteRecording(recording) {
+      this.deleteDialogItem = recording
+      this.deleteDialog = true
+    },
+    deteleRecordingAction(recordingIndex) {
+      if (
+        !this.currentStats[this.index] &&
+        !this.currentStats[this.index].recordings.length
+      )
+        return
+      this.deleteUserProgress({
+        recordingIndex,
+        index: this.index,
+        item: this.deleteDialogItem,
+        recording: this.currentStats[this.index]
+      })
+      this.deleteDialog = false
     },
     goToRecord() {
       this.selectTypeDialog = false
