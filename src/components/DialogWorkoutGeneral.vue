@@ -203,9 +203,13 @@ export default {
           url: document.location.href
         })
         .then(() => {
+          // eslint-disable-next-line no-console
           console.log('Thanks for sharing!')
         })
-        .catch(console.error)
+        .catch(
+          // eslint-disable-next-line no-console
+          console.error
+        )
     }
   }
 }

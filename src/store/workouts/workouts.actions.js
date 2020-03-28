@@ -6,7 +6,6 @@ export default {
    * Fetch workouts of current logged in user
    */
   getUserWorkouts: async ({ rootState, commit }) => {
-    console.log('request UserWorkoutsDB')
     const usersDb = new UsersDB(rootState.authentication.user.id)
     const workouts = await usersDb.readAll([
       ['subscribers', 'array-contains', rootState.authentication.user.id]
@@ -14,7 +13,6 @@ export default {
     commit('setWorkouts', workouts)
   },
   getCommunityWorkouts: async ({ rootState, commit }) => {
-    console.log('request UsersDB')
     const usersDb = new UsersDB(rootState.authentication.user.id)
     const { selected } = rootState.authentication.user.settings
     const { hangboards } = rootState.authentication.user.settings

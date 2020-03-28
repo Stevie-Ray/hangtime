@@ -207,6 +207,7 @@ export default {
       try {
         this.synth.speak(this.greetingSpeech)
       } catch (ex) {
+        // eslint-disable-next-line no-console
         console.log('speechSynthesis not available', ex)
       }
     }

@@ -336,10 +336,13 @@ export default {
         if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
           this.wakeLock = await navigator.wakeLock.request('screen')
           this.wakeLock.addEventListener('release', () => {
+            // eslint-disable-next-line no-console
             console.log('Wake Lock was released')
           })
+          // eslint-disable-next-line no-console
           console.log('Wake Lock is active')
         } else {
+          // eslint-disable-next-line no-console
           console.log('noSleep')
           this.noSleep.enable()
         }

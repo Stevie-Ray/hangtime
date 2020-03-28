@@ -61,6 +61,7 @@ export function speak(text) {
   try {
     window.speechSynthesis.speak(utterance)
   } catch (ex) {
+    // eslint-disable-next-line no-console
     console.log('speechSynthesis not available', ex)
   }
 }

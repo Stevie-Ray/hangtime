@@ -11,7 +11,7 @@
       <div>Loading workouts...</div>
     </div>
     <v-container v-if="(!user && !workouts) || (workouts && !workouts.length)">
-      <v-row justify="center" align="start">
+      <v-row class="text-center" justify="center" align="start">
         <v-col cols="12" sm="8" md="6">
           <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
             <img src="@/assets/sloth/upside-down.svg" alt="sloth upside down" />

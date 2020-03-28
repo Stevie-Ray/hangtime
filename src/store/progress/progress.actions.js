@@ -6,7 +6,6 @@ export default {
    * Fetch workouts of current logged in user
    */
   getUserProgress: async ({ rootState, commit }) => {
-    console.log('request UserProgressDB')
     const userProgressDb = new UserProgressDB(rootState.authentication.user.id)
 
     const progress = await userProgressDb.readAll()
