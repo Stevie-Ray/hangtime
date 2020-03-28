@@ -9,9 +9,12 @@ export default {
     state.progress[index].recordings.push(payload.data)
   },
   removeRecordingByIndex: (state, payload) => {
-    const index = state.progress[payload.index].recordings.findIndex(
+    const progressIndex = state.progress.findIndex(
+      element => element.id === payload.id
+    )
+    const index = state.progress[progressIndex].recordings.findIndex(
       recording => recording.createTimestamp === payload.item.createTimestamp
     )
-    state.progress[payload.index].recordings.splice(index, 1)
+    state.progress[progressIndex].recordings.splice(index, 1)
   }
 }

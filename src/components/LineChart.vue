@@ -35,8 +35,8 @@ export default {
               distribution: 'series',
               displayFormats: {
                 quarter: 'MMM YYYY',
-                millisecond: 'HH:mm:ss.SSS',
-                second: 'HH:mm:ss',
+                millisecond: 'HH:mm',
+                second: 'HH:mm',
                 minute: 'HH:mm',
                 hour: 'HH:mm'
               }

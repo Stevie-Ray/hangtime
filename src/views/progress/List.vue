@@ -9,12 +9,16 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn v-if="edit" icon @click="edit = false">
-        <v-icon>mdi-pencil-off</v-icon>
-      </v-btn>
-      <v-btn v-if="!edit" icon @click="edit = true">
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
+
+      <span v-if="currentStats[index] && currentStats[index].recordings.length">
+        <v-btn v-if="edit" icon @click="edit = false">
+          <v-icon>mdi-pencil-off</v-icon>
+        </v-btn>
+        <v-btn v-if="!edit" icon @click="edit = true">
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+      </span>
+
       <v-btn
         v-if="currentStats[index] && currentStats[index].recordings.length"
         icon
@@ -335,8 +339,8 @@ export default {
         .filter(recording => this.returnType(recording.type) === index)
         .map(obj => {
           let date = obj.createTimestamp
-          if (obj.createTimestamp.seconds) {
-            date = new Date(obj.createTimestamp.seconds * 1000)
+          if (date && date.seconds) {
+            date = new Date(date.seconds * 1000)
           }
           return { y: obj.value, t: date }
         })
@@ -385,7 +389,7 @@ export default {
         return
       this.deleteUserProgress({
         recordingIndex,
-        index: this.index,
+        id: this.currentStats[this.index].id,
         item: this.deleteDialogItem,
         recording: this.currentStats[this.index]
       })
