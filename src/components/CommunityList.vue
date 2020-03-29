@@ -14,11 +14,14 @@
       v-if="(!user && !workouts) || (workouts && !workouts.length)"
       fluid
     >
-      <v-row>
-        <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
-          <img src="@/assets/sloth/baby.svg" alt="sloth baby" />
-        </v-avatar>
+      <v-row class="text-center" justify="center" align="start">
+        <v-col cols="12" sm="8" md="6">
+          <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+            <img src="@/assets/sloth/baby.svg" alt="sloth baby" />
+          </v-avatar>
+        </v-col>
       </v-row>
+
       <v-row>
         <v-card flat>
           <v-card-title>

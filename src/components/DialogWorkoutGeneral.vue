@@ -62,6 +62,7 @@
             </v-col>
             <v-col cols="12">
               <v-checkbox
+                v-model="currentWorkout.share"
                 label="Share with the community"
                 @change="shareWorkout(currentWorkout.id)"
               ></v-checkbox>
