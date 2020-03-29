@@ -11,7 +11,7 @@
           justify="space-between"
           class="fill-height flex-column flex-grow-0"
         >
-          <v-col class="pa-0">
+          <v-col class="pt-0">
             <v-list-item
               color="rgba(0, 0, 0, .4)"
               dark
