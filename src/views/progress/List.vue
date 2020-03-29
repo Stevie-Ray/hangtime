@@ -100,15 +100,17 @@
                           currentStats[index]['recordings'].length
                       "
                     >
+                      <span>Max </span>
                       <span
                         v-if="
-                          currentStats[index].left === null ||
+                          (currentStats[index] &&
+                            currentStats[index].left === null) ||
                             currentStats[index].right === null
                         "
                         >One-Arm
                       </span>
                       <span v-if="options[returnType(recording.type)]">
-                        Max {{ options[returnType(recording.type)].name }}
+                        {{ options[returnType(recording.type)].name }}
                       </span>
                     </v-list-item-title>
                     <v-list-item-subtitle>
@@ -169,15 +171,37 @@
           <v-card-title class="headline">What do you want to do?</v-card-title>
           <v-card-text>
             <v-container fluid>
-              <v-radio-group v-model="workoutType">
+              <v-radio-group v-if="currentStats[index]" v-model="workoutType">
                 <v-radio
                   v-for="option in options"
                   :key="option.id"
-                  :label="`Max ${option.name}`"
                   :value="option.id"
-                ></v-radio>
+                >
+                  <template v-slot:label>
+                    <div>
+                      <span>Max </span>
+                      <span
+                        v-if="
+                          currentStats[index].left === null ||
+                            currentStats[index].right === null
+                        "
+                        >One-Arm
+                      </span>
+                      <span>{{ option.name }}</span>
+                    </div>
+                  </template>
+                </v-radio>
               </v-radio-group>
             </v-container>
+            <div
+              v-if="
+                (currentStats[index] && currentStats[index].left === null) ||
+                  currentStats[index].right === null
+              "
+              class="subtitle-2"
+            >
+              Watch out! This is dangerous
+            </div>
           </v-card-text>
 
           <v-card-actions>
