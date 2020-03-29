@@ -40,7 +40,7 @@
             </v-col>
             <v-col cols="4" align-self="center">
               <div v-if="data.recordings.length">
-                <div class="flex">
+                <div class="d-flex">
                   <strong>
                     <v-icon small class="mr-1">mdi-medal</v-icon>
                     {{ count(bestStatsById(data.id)) }}
@@ -52,11 +52,11 @@
                 <!--                            {{ bestStatsById(data.id) }}x-->
                 <!--                          </strong>-->
                 <!--                        </div>-->
-                <div class="flex caption">
+                <div class="d-flex caption">
                   <v-icon small>mdi-page-last</v-icon>
                   {{ shortDate(data.updateTimestamp) }}
                 </div>
-                <div class="flex">
+                <div class="d-flex">
                   <v-icon small class="mr-1">mdi-repeat</v-icon>
                   <span>{{ data.recordings.length }}</span>
                 </div>
