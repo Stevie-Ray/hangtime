@@ -200,7 +200,8 @@
               "
               class="subtitle-2"
             >
-              Watch out! This is dangerous
+              <strong>Warning:</strong> Make sure you know what you are doing
+              and be properly warmed up before doing one-arm hangs.
             </div>
           </v-card-text>
 
