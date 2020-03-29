@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="workout">
+  <v-layout class="run">
     <v-app-bar color="primary" app dark fixed>
       <v-icon
         v-if="user"
@@ -20,6 +20,7 @@
         />
       </v-avatar>
       <v-toolbar-title v-if="currentType">
+        <span>Max </span>
         <span
           v-if="
             currentStats[index].left === null ||
@@ -30,7 +31,6 @@
         </span>
         <span>{{ currentType.name }}</span>
         <span v-if="configurable"> Pull-up</span>
-        <span> Strength</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -119,6 +119,7 @@
               <div class="Title">
                 <div class="title text-uppercase mb-2">
                   <span v-if="!running">
+                    Max
                     <span
                       v-if="
                         currentStats[index].left === null ||
@@ -136,9 +137,13 @@
                   </span>
                 </div>
                 <div class="subheading">
-                  <span v-if="!running"
-                    >Use the <v-icon small>mdi-timer</v-icon> to start</span
-                  >
+                  <span v-if="!running">
+                    <span v-if="!countingDown"
+                      >Press <v-icon small>mdi-timer</v-icon> to start counting
+                      down</span
+                    >
+                    <span v-else>Counting down.. Get in position!</span>
+                  </span>
                   <span v-else>
                     <span v-if="!configurable">Hang as long as you can</span>
                     <span v-if="configurable"
@@ -214,7 +219,7 @@
           color="secondary"
           dark
           fab
-          @click="startRecording"
+          @click="countDown"
         >
           <v-icon>mdi-timer</v-icon>
         </v-btn>
@@ -237,7 +242,7 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import * as NoSleep from 'nosleep.js/dist/NoSleep'
 import Hangboard from '@/components/Hangboard'
-import { getImg, count } from '@/misc/helpers'
+import { getImg, count, sound, speak } from '@/misc/helpers'
 
 export default {
   components: { Hangboard },
@@ -250,9 +255,10 @@ export default {
     dialog: false,
     noSleep: new NoSleep(),
     pullups: 0,
+    countingDown: false,
     running: false,
     timer: null,
-    totalTime: 0,
+    totalTime: 5,
     configurable: false
   }),
   computed: {
@@ -280,6 +286,8 @@ export default {
     ...mapActions('progress', ['AddRecording']),
     getImg,
     count,
+    speak,
+    sound,
     encodeUrl(url) {
       return url
         .toString() // Convert to string
@@ -295,6 +303,31 @@ export default {
     },
     counter() {
       this.totalTime += 1
+    },
+    speakText(text) {
+      if (this.user.settings.speak) this.speak(text)
+    },
+    playSound(path) {
+      if (this.user.settings.sound) this.sound(path)
+    },
+    vibratePhone() {
+      if ('vibrate' in navigator) {
+        if (this.user.settings.vibrate) navigator.vibrate([80, 40, 120])
+      }
+    },
+    countDown() {
+      this.countingDown = true
+      const countdownTimer = setInterval(() => {
+        if (this.totalTime <= 1) {
+          clearInterval(countdownTimer)
+          this.countingDown = false
+          this.startRecording()
+          this.vibratePhone()
+          this.playSound('start.mp3')
+          this.speakText('Go!')
+        }
+        this.totalTime -= 1
+      }, 1000)
     },
     async startRecording() {
       this.running = true

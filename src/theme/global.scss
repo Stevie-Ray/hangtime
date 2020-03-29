@@ -32,8 +32,8 @@
     margin-left: 0;
   }
 
-  .v-content__wrap > .container {
-    padding: 0;
+  .layout:not(.run) .v-content__wrap > .container {
+    padding: 0 0 5rem;
     & > .row {
       margin-right: 0;
       margin-left: 0;
@@ -48,6 +48,9 @@
     border-color: rgba(0, 0, 0, 0.08);
   }
 
+  .v-slider__thumb-label-container {
+    z-index: 1000;
+  }
   /* global hangboard css */
   .hangboard {
     max-width: 500px;

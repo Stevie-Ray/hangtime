@@ -5,7 +5,6 @@
         <!-- pause  -->
         <v-slider
           v-model="dataPause"
-          class="mt-6"
           :max="300"
           :min="5"
           step="5"
