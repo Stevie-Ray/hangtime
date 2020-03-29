@@ -24,8 +24,8 @@
               <v-text-field
                 v-model="dataName"
                 placeholder="New workout"
-                counter="24"
-                :rules="[rules.required, rules.length(24)]"
+                counter="36"
+                :rules="[rules.required, rules.length(36)]"
                 label="Workout name *"
                 required
               >
@@ -37,6 +37,7 @@
                 v-if="editWorkout"
                 v-model="dataDescription"
                 counter="140"
+                rows="3"
                 :rules="[rules.required, rules.length(140)]"
                 placeholder="For example indicate when this training is suitable"
                 label="Workout description *"
@@ -60,9 +61,21 @@
               >
               </v-select>
             </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                v-model="dataVideo"
+                placeholder="https://www.youtube.com/watch?v=xxxxxxxx"
+                class="workout-video-input"
+                label="Video (optional)"
+              >
+              </v-text-field>
+            </v-col>
+
             <v-col cols="12">
               <v-checkbox
                 v-model="currentWorkout.share"
+                hide-details="auto"
                 label="Share with the community"
                 @change="shareWorkout(currentWorkout.id)"
               ></v-checkbox>
@@ -176,6 +189,14 @@ export default {
         this.setWorkoutDescription({ id: this.currentWorkout.id, value })
       }
     },
+    dataVideo: {
+      get() {
+        return this.currentWorkout.video
+      },
+      set(value) {
+        this.setWorkoutVideo({ id: this.currentWorkout.id, value })
+      }
+    },
     dataDifficulty: {
       get() {
         return this.currentWorkout.level
@@ -190,6 +211,7 @@ export default {
     ...mapMutations('workouts', [
       'setWorkoutName',
       'setWorkoutDescription',
+      'setWorkoutVideo',
       'setWorkoutDifficulty'
     ]),
     UpdateWorkout() {

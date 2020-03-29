@@ -32,6 +32,12 @@ export default {
     )
     state.workouts[index].description = payload.value
   },
+  setWorkoutVideo: (state, payload) => {
+    const index = state.workouts.findIndex(
+      exercise => exercise.id === payload.id
+    )
+    state.workouts[index].video = payload.value
+  },
   setWorkoutDifficulty: (state, payload) => {
     const index = state.workouts.findIndex(
       exercise => exercise.id === payload.id

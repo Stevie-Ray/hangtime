@@ -83,6 +83,30 @@
       <v-container>
         <v-row>
           <v-col cols="12">
+            <v-responsive
+              v-if="
+                currentWorkout &&
+                  currentWorkout.video &&
+                  parseVideo(currentWorkout.video)
+              "
+              :aspect-ratio="16 / 9"
+            >
+              <iframe
+                width="100%"
+                height="100%"
+                :src="parseVideo(currentWorkout.video)"
+                frameborder="0"
+              ></iframe>
+            </v-responsive>
+
+            <!-- Get exercises list -->
+            <exercise-list
+              :id="id"
+              :edit-workout="editWorkout"
+              class="exercise-list"
+            ></exercise-list>
+
+            <!--  Check if user has current hangboard-->
             <v-dialog v-model="hasHangboard" persistent max-width="500">
               <v-card>
                 <v-card-title class="headline"
@@ -103,12 +127,6 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-            <!-- Get exercises list -->
-            <exercise-list
-              :id="id"
-              :edit-workout="editWorkout"
-              class="exercise-list"
-            ></exercise-list>
 
             <!-- General Dialog -->
             <dialog-workout-general
@@ -172,6 +190,7 @@ import DialogWorkoutGeneral from '@/components/DialogWorkoutGeneral'
 import DialogWorkoutDelete from '@/components/DialogWorkoutDelete'
 import DialogUserImage from '@/components/DialogUserImage'
 import { count } from '@/misc/helpers'
+import urlParser from 'js-video-url-parser'
 
 export default {
   components: {
@@ -272,6 +291,17 @@ export default {
       this.setSelected(this.user.settings.hangboards.length - 1)
       this.triggerUpdateUser()
       this.triggerSwitchHangboard()
+    },
+    parseVideo(video) {
+      const videoData = urlParser.parse(video)
+      if (!videoData) return
+      const videoEmbed = urlParser.create({
+        videoInfo: { ...videoData },
+        format: 'embed'
+      })
+
+      // eslint-disable-next-line consistent-return
+      return videoEmbed
     }
   },
   head: {

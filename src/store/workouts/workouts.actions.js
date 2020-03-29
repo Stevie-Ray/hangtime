@@ -55,6 +55,7 @@ export default {
       exercises: state.workoutToCreate.exercises,
       time: state.workoutToCreate.time,
       share: state.workoutToCreate.share,
+      video: state.workoutToCreate.video,
       subscribers: [state.workoutToCreate.user.id],
       user: {
         displayName: state.workoutToCreate.user.displayName,

@@ -5,7 +5,8 @@ export default {
   workoutToCreate: {
     exercises: [],
     level: 2,
-    share: false
+    share: false,
+    video: ''
   },
   workoutDeletionPending: [],
   workoutCreationPending: false,

@@ -2,7 +2,7 @@
   <v-dialog v-model="show" width="500">
     <v-card class="modal-wrapper mx-auto">
       <v-card-title primary-title class="pb-0">
-        <div>Your almost there!</div>
+        <div>You're almost there!</div>
       </v-card-title>
 
       <v-card-text>
@@ -12,8 +12,8 @@
             v-model="workoutToCreateName"
             placeholder="New workout"
             class="workout-name-input"
-            counter="24"
-            :rules="[rules.required, rules.length(24)]"
+            counter="36"
+            :rules="[rules.required, rules.length(36)]"
             label="Workout name *"
           >
           </v-text-field>
@@ -21,6 +21,7 @@
           <v-textarea
             v-model="workoutToCreateDescription"
             counter="140"
+            rows="3"
             :rules="[rules.required, rules.length(140)]"
             class="workout-description-input"
             placeholder="For example indicate when this training is suitable"
@@ -43,8 +44,17 @@
           >
           </v-select>
 
+          <v-text-field
+            v-model="workoutToCreateVideo"
+            placeholder="https://www.youtube.com/watch?v=xxxxxxxx"
+            class="workout-video-input"
+            label="Video (optional)"
+          >
+          </v-text-field>
+
           <v-checkbox
             v-model="workoutToCreateShare"
+            hide-details="auto"
             label="Share with the community"
           ></v-checkbox>
         </v-form>
@@ -115,6 +125,14 @@ export default {
       },
       set(input) {
         this.setWorkoutToCreate({ description: input })
+      }
+    },
+    workoutToCreateVideo: {
+      get() {
+        return this.workoutToCreate.video
+      },
+      set(input) {
+        this.setWorkoutToCreate({ video: input })
       }
     },
     workoutToCreateDifficulty: {

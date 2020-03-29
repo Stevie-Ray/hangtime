@@ -12,7 +12,10 @@
       </v-list-item-avatar>
 
       <v-list-item-content @click="$emit('goToWorkoutDetails', data.id)">
-        <v-list-item-title>{{ data.name }}</v-list-item-title>
+        <v-list-item-title>
+          <v-icon v-if="data.video">mdi-video</v-icon>
+          {{ data.name }}
+        </v-list-item-title>
         <v-list-item-subtitle
           >{{ count(data.time) }} - {{ data.description }}</v-list-item-subtitle
         >
