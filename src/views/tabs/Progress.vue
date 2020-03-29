@@ -31,8 +31,12 @@
       >
         <v-container>
           <v-row>
-            <v-col cols="8" class="d-flex align-center">
-              <hangboard :data="data" :edit-workout="false"></hangboard>
+            <v-col cols="8" class="d-flex align-center pt-0 pb-0">
+              <hangboard
+                class="pa-0"
+                :data="data"
+                :edit-workout="false"
+              ></hangboard>
             </v-col>
             <v-col cols="4" align-self="center">
               <div v-if="data.recordings.length">
@@ -57,11 +61,11 @@
                   <span>{{ data.recordings.length }}</span>
                 </div>
               </div>
-              <!--                      <div v-else class="text-center">-->
-              <!--                        <v-btn fab small color="secondary">-->
-              <!--                          <v-icon dark>mdi-timer</v-icon>-->
-              <!--                        </v-btn>-->
-              <!--                      </div>-->
+              <div v-else class="text-center">
+                <v-btn icon small>
+                  <v-icon dark>mdi-timer</v-icon>
+                </v-btn>
+              </div>
             </v-col>
           </v-row>
         </v-container>
