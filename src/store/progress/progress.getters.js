@@ -25,6 +25,20 @@ export default {
       })
     )
   },
+
+  bestStatsByType: state => payload => {
+    const progress = find(state.progress, { id: payload.id })
+    if (!progress.recordings || progress.recordings.length <= 0) return 0
+    const recordings = progress.recordings.filter(
+      recording => recording.type === payload.type
+    )
+    return Math.max(
+      ...recordings.map(function map(o) {
+        return o.value
+      })
+    )
+  },
+
   /**
    * Get total best stats by id
    */

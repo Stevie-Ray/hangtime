@@ -36,9 +36,9 @@
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-content v-if="currentType">
-      <v-container class="fill-height">
-        <v-row class="fill-height">
-          <v-col cols="12">
+      <v-container>
+        <v-row justify="center" align="start" class="fill-height">
+          <v-col cols="12" sm="8" md="6">
             <v-row
               justify="space-around"
               align="center"
@@ -90,13 +90,27 @@
                       "
                       class="text-uppercase font-weight-bold"
                     >
-                      <!--                      Best:-->
-                      <!--                      <span v-if="!configurable">-->
-                      <!--                        {{ count(bestStatsById(currentStats[index].id)) }}-->
-                      <!--                      </span>-->
-                      <!--                      <span v-else>-->
-                      <!--                        {{ bestStatsById(currentStats[index].id) }}x-->
-                      <!--                      </span>-->
+                      <span
+                        v-if="
+                          !configurable &&
+                            bestStatsByType({
+                              id: currentStats[index].id,
+                              type: currentType.id
+                            }) > 0
+                        "
+                      >
+                        Best:{{
+                          count(
+                            bestStatsByType({
+                              id: currentStats[index].id,
+                              type: currentType.id
+                            })
+                          )
+                        }}
+                      </span>
+                      <span v-if="configurable">
+                        Best:{{ bestStatsById(currentStats[index].id) }}x
+                      </span>
                     </div>
                   </div>
                 </v-progress-circular>
@@ -159,49 +173,105 @@
 
       <v-dialog v-model="dialog" persistent width="500">
         <v-card>
-          <v-card-title class="headline">Recording result</v-card-title>
+          <span v-if="!configurable">
+            <v-card-title class="headline"
+              >Max {{ currentType.name }}</v-card-title
+            >
 
-          <v-card-text>
-            <div v-if="configurable">
-              How many pull-ups did you do?
-              <v-container fluid grid-list-lg>
-                <v-layout wrap>
-                  <div style="width: 45px">
-                    <v-text-field
-                      v-model="pullups"
-                      class="mt-0"
-                      hide-details
-                      single-line
-                      type="number"
-                    >
-                    </v-text-field>
-                  </div>
+            <v-card-subtitle class="title">
+              Your time: <strong>{{ count(totalTime) }}</strong>
+            </v-card-subtitle>
 
-                  <div>
-                    <v-subheader>
-                      Pullups
-                    </v-subheader>
+            <v-card-text>
+              <div class="body-2">
+                If it took some time before you pressed stop please add a fair
+                correction:
+              </div>
+
+              <v-btn-toggle v-model="timeCorrection" class="py-4">
+                <v-btn v-show="finalTime - 3 >= 0" :value="3">-3 sec</v-btn>
+                <v-btn v-show="finalTime - 2 >= 0" :value="2">-2 sec</v-btn>
+                <v-btn v-show="finalTime - 1 >= 0" :value="1">-1 sec</v-btn>
+                <v-btn
+                  v-show="finalTime === 0 && totalTime > finalTime"
+                  :value="totalTime"
+                  >Reset</v-btn
+                >
+              </v-btn-toggle>
+
+              <v-row class="">
+                <v-col cols="6">
+                  <div class="subtitle-2">Final score</div>
+                  <div class="display-1">
+                    <strong>{{ count(finalTime) }}</strong>
                   </div>
-                </v-layout>
-              </v-container>
-            </div>
-            <div v-else>
-              <span>
-                You did a <strong>Max {{ currentType.name }}</strong> for
-                {{ count(totalTime) }}.
-              </span>
-              <br />
-              <!--              <span v-if="bestStatsById(currentStats[index].id) > 0">-->
-              <!--                Your best recording:-->
-              <!--                {{ count(bestStatsById(currentStats[index].id)) }}.-->
-              <!--                <br />-->
-              <!--              </span>-->
-              <!--              <br />-->
-              <!--              <span v-if="bestStatsById(currentStats[index].id) < totalTime">-->
-              <!--                This is a new record!-->
-              <!--              </span>-->
-            </div>
-          </v-card-text>
+                </v-col>
+                <v-col cols="6">
+                  <span
+                    v-if="
+                      bestStatsByType({
+                        id: currentStats[index].id,
+                        type: currentType.id
+                      }) > 0
+                    "
+                  >
+                    <div class="subtitle-2">Best {{ currentType.name }}</div>
+                    <div class="display-1">
+                      {{
+                        count(
+                          bestStatsByType({
+                            id: currentStats[index].id,
+                            type: currentType.id
+                          })
+                        )
+                      }}
+                    </div>
+                  </span>
+                </v-col>
+              </v-row>
+
+              <div
+                class="title"
+                v-if="
+                  bestStatsByType({
+                    id: currentStats[index].id,
+                    type: currentType.id
+                  }) < finalTime
+                "
+              >
+                This is a new record!
+              </div>
+            </v-card-text>
+          </span>
+          <span v-else>
+            <v-card-title class="headline">Recording result</v-card-title>
+
+            <v-card-text>
+              <div>
+                How many pull-ups did you do?
+                <v-container fluid grid-list-lg>
+                  <v-layout wrap>
+                    <div style="width: 45px">
+                      <v-text-field
+                        v-model="pullups"
+                        class="mt-0"
+                        hide-details
+                        single-line
+                        type="number"
+                      >
+                      </v-text-field>
+                    </div>
+
+                    <div>
+                      <v-subheader>
+                        Pullups
+                      </v-subheader>
+                    </div>
+                  </v-layout>
+                </v-container>
+              </div>
+            </v-card-text>
+          </span>
 
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -214,7 +284,7 @@
 
       <v-speed-dial bottom right fixed>
         <v-btn
-          v-if="!running"
+          v-if="!running && !countingDown"
           slot="activator"
           color="secondary"
           dark
@@ -259,11 +329,16 @@ export default {
     running: false,
     timer: null,
     totalTime: 5,
+    timeCorrection: 0,
     configurable: false
   }),
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapGetters('progress', ['statsById', 'bestStatsById']),
+    ...mapGetters('progress', [
+      'statsById',
+      'bestStatsById',
+      'bestStatsByType'
+    ]),
     ...mapGetters('workouts', ['typeById']),
     binding() {
       const binding = {}
@@ -280,6 +355,12 @@ export default {
     },
     currentType() {
       return this.typeById(this.id)
+    },
+    finalTime() {
+      if (!this.timeCorrection) {
+        return this.totalTime
+      }
+      return this.totalTime - this.timeCorrection
     }
   },
   methods: {
@@ -355,7 +436,7 @@ export default {
       } else {
         this.AddRecording({
           data: this.currentStats[this.index],
-          value: this.totalTime,
+          value: this.finalTime,
           type: this.id
         })
       }
