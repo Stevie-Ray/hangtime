@@ -231,13 +231,13 @@
               </v-row>
 
               <div
-                class="title"
                 v-if="
                   bestStatsByType({
                     id: currentStats[index].id,
                     type: currentType.id
                   }) < finalTime
                 "
+                class="title"
               >
                 This is a new record!
               </div>

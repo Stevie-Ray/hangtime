@@ -57,13 +57,15 @@
         <v-row>
           <v-col cols="12">
             <!-- Get exercises item -->
-            <exercise-item
-              v-if="currentExercise"
-              :id="id"
-              :index="index"
-              :data="currentExercise"
-              :edit-workout="editWorkout"
-            ></exercise-item>
+            <v-form ref="form" v-model="valid">
+              <exercise-item
+                v-if="currentExercise"
+                :id="id"
+                :index="index"
+                :data="currentExercise"
+                :edit-workout="editWorkout"
+              ></exercise-item>
+            </v-form>
 
             <v-speed-dial bottom right fixed>
               <v-btn
@@ -99,7 +101,8 @@ export default {
     isWorkoutDeletionPending: Boolean
   },
   data: () => ({
-    edit: null
+    edit: null,
+    valid: true
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
@@ -144,9 +147,11 @@ export default {
       })
     },
     clickUpdateExercise() {
-      this.triggerUpdateWorkout(this.workoutById(this.id))
-      this.edit = false
-      this.goBack()
+      if (this.$refs.form.validate()) {
+        this.triggerUpdateWorkout(this.workoutById(this.id))
+        this.edit = false
+        this.goBack()
+      }
     },
     goBack() {
       let name = 'workout'

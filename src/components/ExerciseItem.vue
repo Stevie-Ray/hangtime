@@ -21,7 +21,25 @@
             {{ count(props.value) }}
           </template>
           <template #append>
-            <v-label>{{ count(dataPause) }}</v-label>
+            <v-text-field
+              v-if="editWorkout"
+              v-model="dataPause"
+              class="mt-0 pt-0"
+              min="5"
+              max="300"
+              step="5"
+              hide-details
+              single-line
+              type="number"
+              style="width: 40px"
+              :rules="[
+                rules.required,
+                rules.number,
+                rules.min(5),
+                rules.max(300)
+              ]"
+            ></v-text-field>
+            <v-label v-else>{{ count(dataPause) }}</v-label>
           </template>
         </v-slider>
 
@@ -101,7 +119,25 @@
             {{ count(props.value) }}
           </template>
           <template #append>
-            <v-label>{{ count(dataHold) }}</v-label>
+            <v-text-field
+              v-if="editWorkout"
+              v-model="dataHold"
+              class="mt-0 pt-0"
+              min="3"
+              max="180"
+              step="1"
+              hide-details
+              single-line
+              type="number"
+              style="width: 40px"
+              :rules="[
+                rules.required,
+                rules.number,
+                rules.min(3),
+                rules.max(180)
+              ]"
+            ></v-text-field>
+            <v-label v-else>{{ count(dataHold) }}</v-label>
           </template>
         </v-slider>
 
@@ -173,7 +209,7 @@
           v-model="dataRest"
           :max="300"
           :min="5"
-          step="1"
+          step="5"
           always-dirty
           thumb-size="48"
           :disabled="!editWorkout"
@@ -186,7 +222,25 @@
             {{ count(props.value) }}
           </template>
           <template #append>
-            <v-label>{{ count(dataRest) }}</v-label>
+            <v-text-field
+              v-if="editWorkout"
+              v-model="dataRest"
+              class="mt-0 pt-0"
+              min="5"
+              max="300"
+              step="5"
+              hide-details
+              single-line
+              type="number"
+              style="width: 40px"
+              :rules="[
+                rules.required,
+                rules.number,
+                rules.min(5),
+                rules.max(300)
+              ]"
+            ></v-text-field>
+            <v-label v-else>{{ count(dataRest) }}</v-label>
           </template>
         </v-slider>
       </v-col>
@@ -206,6 +260,14 @@ export default {
     index: Number,
     editWorkout: Boolean
   },
+  data: () => ({
+    rules: {
+      number: v => !v.isNaN || 'NaN',
+      required: v => !!v || 'This field is required',
+      min: min => v => v >= min || `A minimun of  ${min} is allowed`,
+      max: max => v => v <= max || `A maximum of  ${max} is allowed`
+    }
+  }),
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('workouts', ['options']),

@@ -62,8 +62,25 @@
                       />
                     </v-avatar>
 
+                    <div
+                      v-if="currentStep > 0"
+                      class="progress-button progress-previous"
+                    >
+                      <v-btn icon @click="exercisePrevious">
+                        <v-icon>mdi-skip-previous</v-icon>
+                      </v-btn>
+                    </div>
                     <div class="subtitle font-weight-bold text-uppercase">
                       {{ progressText }}
+                    </div>
+
+                    <div
+                      v-if="currentStep < currentWorkout.exercises.length - 1"
+                      class="progress-button progress-next"
+                    >
+                      <v-btn icon @click="exerciseNext">
+                        <v-icon>mdi-skip-next</v-icon>
+                      </v-btn>
                     </div>
 
                     <div id="timer" class="display-3 font-weight-bold">
@@ -423,6 +440,20 @@ export default {
         }
       }
     },
+    exerciseNext() {
+      this.currentStep += 1
+      this.totalTime = this.currentExercise.pause
+      // resets
+      this.ExerciseRepeat = 1
+      this.ExerciseStep = 0
+    },
+    exercisePrevious() {
+      this.currentStep -= 1
+      this.totalTime = this.currentExercise.pause
+      // resets
+      this.ExerciseRepeat = 1
+      this.ExerciseStep = 0
+    },
     finishWorkout() {
       this.progressText = 'Done'
       this.speakText('Well done')
@@ -518,6 +549,16 @@ export default {
       display: inline-block;
       padding: 0 4px;
     }
+  }
+}
+
+.progress-button {
+  position: absolute;
+  &.progress-previous {
+    left: 32px;
+  }
+  &.progress-next {
+    right: 32px;
   }
 }
 
