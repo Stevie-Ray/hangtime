@@ -26,11 +26,28 @@ export default {
     NewContentAvailable,
     DialogAppleAddToHomeScreen
   },
-  data: () => ({}),
+  data: () => ({
+    mq: window.matchMedia('(prefers-color-scheme: dark)')
+  }),
   computed: {
     ...mapGetters('app', ['newContentAvailable']),
     ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp']),
-    ...mapState('authentication', ['user'])
+    ...mapState('authentication', ['user']),
+    // eslint-disable-next-line vue/return-in-computed-property
+    setTheme() {
+      if (this.user) {
+        if (this.user.settings.scheme) {
+          return this.mq.matches
+        }
+        if (this.user.settings.theme) {
+          return this.user.settings.theme
+        }
+      }
+      return false
+    }
+  },
+  updated() {
+    this.$vuetify.theme.dark = this.setTheme
   },
   methods: mapActions('app', [
     'closeAddToHomeScreenModalForApple',

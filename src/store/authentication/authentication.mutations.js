@@ -6,6 +6,8 @@ export default {
   setSound: (state, value) => (state.user.settings.sound = value),
   setSpeak: (state, value) => (state.user.settings.speak = value),
   setVibrate: (state, value) => (state.user.settings.vibrate = value),
+  setTheme: (state, value) => (state.user.settings.theme = value),
+  setScheme: (state, value) => (state.user.settings.scheme = value),
   setWalkthrough: (state, value) => (state.user.settings.walkthrough = value),
   setVoice: (state, value) => (state.user.settings.voice = value),
   setSelected: (state, value) => (state.user.settings.selected = value),

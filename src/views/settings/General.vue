@@ -40,15 +40,37 @@
                   >
                 </v-list-item-avatar>
 
-                <v-list-item-content
-                  @click="$vuetify.theme.dark = !$vuetify.theme.dark"
-                >
+                <v-list-item-content>
                   <v-list-item-title>Dark mode</v-list-item-title>
                   <v-list-item-subtitle>Enable dark mode</v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-action>
-                  <v-checkbox v-model="$vuetify.theme.dark"></v-checkbox>
+                  <v-checkbox
+                    v-model="settingsTheme"
+                    @change="triggerUpdateUser"
+                  ></v-checkbox>
+                </v-list-item-action>
+              </v-list-item>
+
+              <v-list-item three-line>
+                <v-list-item-avatar>
+                  <v-icon color="primary lighten-1">mdi-cellphone-link</v-icon>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>Use system mode</v-list-item-title>
+                  <v-list-item-subtitle
+                    >overwrites manual dark mode setting based on device
+                    settings</v-list-item-subtitle
+                  >
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-checkbox
+                    v-model="settingsScheme"
+                    @change="triggerUpdateUser"
+                  ></v-checkbox>
                 </v-list-item-action>
               </v-list-item>
             </v-list>
@@ -66,7 +88,8 @@ import { getImg } from '@/misc/helpers'
 
 export default {
   data: () => ({
-    scale: new IRCRA().scale()
+    scale: new IRCRA().scale(),
+    mq: window.matchMedia('(prefers-color-scheme: dark)')
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
@@ -79,12 +102,36 @@ export default {
         // this.scaleSelected = value
         this.setScale(value)
       }
+    },
+    settingsTheme: {
+      get() {
+        return this.user.settings.theme
+      },
+      set(value) {
+        if (!this.settingsScheme) {
+          this.$vuetify.theme.dark = value
+        }
+        this.setTheme(value)
+      }
+    },
+    settingsScheme: {
+      get() {
+        return this.user.settings.scheme
+      },
+      set(value) {
+        if (value === true) {
+          this.$vuetify.theme.dark = this.mq.matches
+        } else {
+          this.$vuetify.theme.dark = false
+        }
+        this.setScheme(value)
+      }
     }
   },
   methods: {
     getImg,
     ...mapActions('authentication', ['triggerUpdateUser']),
-    ...mapMutations('authentication', ['setScale'])
+    ...mapMutations('authentication', ['setScale', 'setTheme', 'setScheme'])
   },
   head: {
     title: {
