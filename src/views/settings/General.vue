@@ -89,7 +89,7 @@ import { getImg } from '@/misc/helpers'
 export default {
   data: () => ({
     scale: new IRCRA().scale(),
-    mq: window.matchMedia('(prefers-color-scheme: dark)')
+    mq: window.matchMedia
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
@@ -119,10 +119,15 @@ export default {
         return this.user.settings.scheme
       },
       set(value) {
-        if (value === true) {
-          this.$vuetify.theme.dark = this.mq.matches
+        if (value === true && this.mq) {
+          this.$vuetify.theme.dark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+          ).matches
         } else {
           this.$vuetify.theme.dark = false
+        }
+        if (value === false) {
+          this.$vuetify.theme.dark = this.settingsTheme
         }
         this.setScheme(value)
       }
