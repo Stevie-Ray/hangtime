@@ -2,6 +2,7 @@
   "name": "HangTime - Hangboard Training",
   "short_name": "HangTime",
   "description": "Fingerboard / Hangboard training for climbers.",
+  "categories": ["fitness","health","sports"],
   "lang": "en-US",
   "start_url": "/",
   "display": "standalone",
@@ -28,6 +29,44 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Workouts",
+      "description": "Create and customize your own workouts",
+      "url": "/",
+      "icons": [
+        {
+          "src": "./img/icons/plus.svg",
+          "type": "image/svg+xml",
+          "purpose": "any"
+        }
+      ]
+    },
+    {
+      "name": "Community",
+      "description": "Share and do workouts from the community",
+      "url": "/community",
+      "icons": [
+        {
+          "src": "./img/icons/plus.svg",
+          "type": "image/svg+xml",
+          "purpose": "any"
+        }
+      ]
+    },
+    {
+      "name": "Progress",
+      "description": "Track your progress over time",
+      "url": "/progress",
+      "icons": [
+        {
+          "src": "./img/icons/plus.svg",
+          "type": "image/svg+xml",
+          "purpose": "any"
+        }
+      ]
     }
   ],
   "background_color": "#fff",
