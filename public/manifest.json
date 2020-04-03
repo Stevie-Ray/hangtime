@@ -1,6 +1,11 @@
 {
-  "name": "HangTime",
+  "name": "HangTime - Hangboard Training",
   "short_name": "HangTime",
+  "description": "Fingerboard / Hangboard training for climbers.",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#012E40",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -11,10 +16,27 @@
       "src": "./img/icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "./img/icons/android-chrome-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./img/icons/android-chrome-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#012E40",
-  "theme_color": "#012E40"
+  "background_color": "#fff",
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "nl.stevie.ray.hangtime",
+      "url": "https://play.google.com/store/apps/details?id=nl.stevie.ray.hangtime"
+    }
+  ],
+  "prefer_related_applications": true
 }
