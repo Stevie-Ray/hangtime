@@ -39,7 +39,7 @@
       "url": "/",
       "icons": [
         {
-          "src": "./img/icons/plus.png",
+          "src": "./img/icons/android-shortcut-512x512.png",
           "type": "image/png",
           "purpose": "any"
         }
@@ -51,7 +51,7 @@
       "url": "/community",
       "icons": [
         {
-          "src": "./img/icons/plus.png",
+          "src": "./img/icons/android-shortcut-512x512.png",
           "type": "image/png",
           "purpose": "any"
         }
@@ -63,7 +63,7 @@
       "url": "/progress",
       "icons": [
         {
-          "src": "./img/icons/plus.png",
+          "src": "./img/icons/android-shortcut-512x512.png",
           "type": "image/png",
           "purpose": "any"
         }
