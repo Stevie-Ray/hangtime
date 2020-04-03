@@ -27,7 +27,7 @@ export default {
     DialogAppleAddToHomeScreen
   },
   data: () => ({
-    mq: window.matchMedia(('(prefers-color-scheme: dark)'))
+    mq: window.matchMedia('(prefers-color-scheme: dark)')
   }),
   computed: {
     ...mapGetters('app', ['newContentAvailable']),

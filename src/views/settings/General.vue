@@ -89,7 +89,7 @@ import { getImg } from '@/misc/helpers'
 export default {
   data: () => ({
     scale: new IRCRA().scale(),
-    mq: window.matchMedia(('(prefers-color-scheme: dark)'))
+    mq: window.matchMedia('(prefers-color-scheme: dark)')
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
