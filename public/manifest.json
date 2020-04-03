@@ -1,5 +1,5 @@
 {
-  "name": "HangTime - Hangboard Training",
+  "name": "HangTime",
   "short_name": "HangTime",
   "description": "Fingerboard / Hangboard training for climbers.",
   "categories": ["fitness","health","sports"],
@@ -7,6 +7,7 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#012E40",
+  "background_color": "#012E40",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -38,8 +39,8 @@
       "url": "/",
       "icons": [
         {
-          "src": "./img/icons/plus.svg",
-          "type": "image/svg+xml",
+          "src": "./img/icons/plus.png",
+          "type": "image/png",
           "purpose": "any"
         }
       ]
@@ -50,8 +51,8 @@
       "url": "/community",
       "icons": [
         {
-          "src": "./img/icons/plus.svg",
-          "type": "image/svg+xml",
+          "src": "./img/icons/plus.png",
+          "type": "image/png",
           "purpose": "any"
         }
       ]
@@ -62,14 +63,13 @@
       "url": "/progress",
       "icons": [
         {
-          "src": "./img/icons/plus.svg",
-          "type": "image/svg+xml",
+          "src": "./img/icons/plus.png",
+          "type": "image/png",
           "purpose": "any"
         }
       ]
     }
   ],
-  "background_color": "#fff",
   "related_applications": [
     {
       "platform": "play",
