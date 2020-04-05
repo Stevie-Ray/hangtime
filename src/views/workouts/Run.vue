@@ -100,14 +100,14 @@
                         </div>
                       </div>
                       <div
-                        v-if="currentExercise.repeat > 1"
+                        v-if="currentExercise.repeat > 0"
                         class="bottom-data__repeat"
                       >
                         <div class="data">
                           <v-icon small>mdi-history</v-icon>
                           <span
-                            >{{ ExerciseRepeat - 1 }}/{{
-                              currentExercise.repeat
+                            >{{ ExerciseRepeat }}/{{
+                              currentExercise.repeat + 1
                             }}</span
                           >
                         </div>
@@ -132,8 +132,8 @@
               <!-- title -->
               <div class="Title">
                 <div class="title">
-                  <span v-if="currentExercise.repeat > 1"
-                    >{{ currentExercise.repeat }}x
+                  <span v-if="currentExercise.repeat > 0"
+                    >{{ currentExercise.repeat + 1 }}x
                   </span>
                   <span v-if="currentExercise.pullups > 1"
                     >{{ currentExercise.pullups }}
@@ -151,7 +151,7 @@
                 </div>
                 <div class="subheading">
                   <span>Hold for {{ currentExercise.hold }} sec. </span>
-                  <span v-if="currentExercise.repeat > 1">
+                  <span v-if="currentExercise.repeat > 0">
                     Rest for {{ currentExercise.rest }} sec.</span
                   >
                 </div>
@@ -202,13 +202,18 @@ export default {
   },
   data: () => ({
     currentStep: 0,
-    ExerciseRepeat: 1,
+    ExerciseRepeat: 0,
     totalTime: 0,
     timer: null,
+    time: 0,
+    meta: {
+      title: 'Workout'
+    },
     paused: false,
     progressCircular: 0,
     progressText: 'Press Play',
     initialTime: 0,
+    initialStart: true,
     ExerciseStep: 0,
     synth: window.speechSynthesis,
     voiceList: [],
@@ -239,6 +244,10 @@ export default {
     }
   },
   mounted() {
+    if (this.currentWorkout) {
+      this.meta.title = `${this.currentWorkout.name} | Workout `
+      this.$emit('updateHead')
+    }
     // set timer
     // TODO: Why do I get the voice list here?
     this.voiceList = this.synth
@@ -260,7 +269,6 @@ export default {
       if (this.initialTime === 0) {
         this.exerciseSetup()
       }
-
       // eslint-disable-next-line default-case
       switch (this.ExerciseStep) {
         // PAUSE
@@ -271,11 +279,10 @@ export default {
             break
           }
           // set time for holding
-          // this.initialTime = this.totalTime
-          this.totalTime = this.currentExercise.hold
+          this.totalTime = this.currentExercise.hold - 1
           // reset clock
           this.initialTime = this.totalTime
-          this.ExerciseStep += 1
+          this.ExerciseStep = 1
           break
         // HOLD
         case 1:
@@ -284,13 +291,19 @@ export default {
             this.updateTime()
             break
           }
+          // check if exercise has to repeat
           if (this.currentExercise.repeat > 0) {
-            this.totalTime = this.currentExercise.rest
+            this.totalTime = this.currentExercise.rest - 1
             this.initialTime = this.totalTime
+            this.ExerciseStep = 2
+            break
           }
-          this.ExerciseStep += 1
+          if (this.hasNext()) {
+            break
+          }
+          this.ExerciseStep = 4
           break
-        // REST
+        // // REST
         case 2:
           if (this.totalTime > 0) {
             this.exerciseRest()
@@ -298,43 +311,33 @@ export default {
             break
           }
           if (this.currentExercise.repeat > 0) {
-            // set time for holding
-            this.totalTime = this.currentExercise.hold
-            // reset clock
+            this.totalTime = this.currentExercise.hold - 1
             this.initialTime = this.totalTime
-            this.ExerciseStep += 1
+            this.ExerciseStep = 3
+            break
+          }
+          if (this.hasNext()) {
             break
           }
           this.ExerciseStep = 4
           break
-        // REPEAT
+        // // REPEAT
         case 3:
           if (this.totalTime > 0) {
             this.exerciseHold()
             this.updateTime()
             break
           }
-          if (this.ExerciseRepeat !== this.currentExercise.repeat + 1) {
-            this.totalTime = this.currentExercise.rest
-            // reset clock
+          if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
+            this.totalTime = this.currentExercise.rest - 1
             this.initialTime = this.totalTime
-            this.ExerciseStep -= 1
+            this.ExerciseStep = 2
             break
           }
-          this.ExerciseStep += 1
+          this.ExerciseStep = 4
           break
-        // NEXT / FINISH
+        // // NEXT / FINISH
         case 4:
-          if (this.currentStep < this.currentWorkout.exercises.length - 1) {
-            // next exercise
-            this.currentStep += 1
-            // set time
-            this.exerciseSetup()
-            // resets
-            this.ExerciseRepeat = 1
-            this.ExerciseStep = 0
-            break
-          }
           this.finishWorkout()
           break
       }
@@ -346,7 +349,12 @@ export default {
       }, 1000)
     },
     exerciseSetup() {
-      this.totalTime = this.currentExercise.pause
+      this.totalTime = this.currentExercise.pause - 1
+      // don't remove 1 sec on start.
+      if (this.initialStart) {
+        this.totalTime = this.currentExercise.pause
+      }
+      this.initialStart = false
       // finish Setup
       this.initialTime = this.totalTime
     },
@@ -367,36 +375,24 @@ export default {
         if (
           this.currentStep + 1 !== this.currentWorkout.exercises.length ||
           (this.currentExercise.repeat > 0 &&
-            this.ExerciseRepeat !== this.currentExercise.repeat)
+            this.ExerciseRepeat - 1 !== this.currentExercise.repeat)
         ) {
           this.speakText('... and pause')
         }
       }
     },
-    exerciseRest() {
-      this.progressText = 'Pause'
-      // rest: start counting down
-      if (this.totalTime <= 4) {
-        if (this.totalTime > 1) {
-          this.speakText(this.totalTime - 1)
-        } else {
-          this.vibratePhone()
-          this.playSound('start.mp3')
-          this.speakText('Go!')
-          if (this.ExerciseRepeat !== this.currentExercise.repeat + 1) {
-            this.ExerciseRepeat += 1
-          }
-        }
-      }
-    },
     exercisePause() {
       this.progressText = 'Pause'
+
+      // only speak at the beginning of a pause
       if (
-        this.ExerciseRepeat === 1 &&
-        this.initialTime - 1 === this.totalTime
+        this.ExerciseRepeat === 0 &&
+        this.initialTime - 1 === this.totalTime &&
+        this.currentExercise.pause > 5
       ) {
         let textToSpeak = ''
         textToSpeak += 'Next exercise: '
+
         if (this.currentExercise.pause >= 10) {
           if (this.currentExercise.pullups > 1) {
             textToSpeak += `${this.currentExercise.pullups} `
@@ -417,11 +413,12 @@ export default {
 
         if (this.currentExercise.pause >= 15) {
           textToSpeak += `. For ${this.currentExercise.hold} seconds. `
-          if (this.currentExercise.repeat > 1) {
+          if (this.currentExercise.repeat > 0) {
             textToSpeak += `Than rest for ${this.currentExercise.rest} seconds. `
             textToSpeak += `Repeat ${this.currentExercise.repeat} times.`
           }
         }
+
         this.speakText(textToSpeak)
       }
 
@@ -429,30 +426,40 @@ export default {
       if (this.totalTime <= 4) {
         // if 0
         if (this.totalTime > 1) {
-          this.speakText(this.totalTime - 1)
+          if (this.user.settings.speak) {
+            this.speakText(this.totalTime - 1)
+          } else {
+            this.playSound('count.mp3')
+          }
         } else {
           this.vibratePhone()
           this.playSound('start.mp3')
           this.speakText('Go!')
-          if (this.ExerciseRepeat !== this.currentExercise.repeat + 1) {
+          if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
             this.ExerciseRepeat += 1
           }
         }
       }
     },
-    exerciseNext() {
-      this.currentStep += 1
-      this.totalTime = this.currentExercise.pause
-      // resets
-      this.ExerciseRepeat = 1
-      this.ExerciseStep = 0
-    },
-    exercisePrevious() {
-      this.currentStep -= 1
-      this.totalTime = this.currentExercise.pause
-      // resets
-      this.ExerciseRepeat = 1
-      this.ExerciseStep = 0
+    exerciseRest() {
+      this.progressText = 'Rest'
+      // rest: start counting down
+      if (this.totalTime <= 4) {
+        if (this.totalTime > 1) {
+          if (this.user.settings.speak) {
+            this.speakText(this.totalTime - 1)
+          } else {
+            this.playSound('count.mp3')
+          }
+        } else {
+          this.vibratePhone()
+          this.playSound('start.mp3')
+          this.speakText('Go!')
+          if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
+            this.ExerciseRepeat += 1
+          }
+        }
+      }
     },
     finishWorkout() {
       this.progressText = 'Done'
@@ -466,6 +473,31 @@ export default {
       this.paused = true
       clearInterval(this.timer)
     },
+    hasNext() {
+      if (this.currentStep < this.currentWorkout.exercises.length - 1) {
+        this.currentStep += 1 // next exercise
+        this.exerciseSetup() // set time
+        this.ExerciseRepeat = 0 // resets
+        this.ExerciseStep = 0 // pause
+        return true
+      }
+      return false
+    },
+    exerciseNext() {
+      this.currentStep += 1
+      this.totalTime = this.currentExercise.pause - 1
+      // resets
+      this.ExerciseRepeat = 0
+      this.ExerciseStep = 0
+    },
+    exercisePrevious() {
+      this.currentStep -= 1
+      this.totalTime = this.currentExercise.pause - 1
+      // resets
+      this.ExerciseRepeat = 0
+      this.ExerciseStep = 0
+    },
+
     pauseWorkout() {
       if (!this.paused) {
         if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
@@ -514,7 +546,8 @@ export default {
   head: {
     title() {
       return {
-        inner: `${this.currentWorkout.name} | Workout `
+        // inner: `${this.currentWorkout.name} | Workout `
+        inner: this.meta.title
       }
     },
     meta: [

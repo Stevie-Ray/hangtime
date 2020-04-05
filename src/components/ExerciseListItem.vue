@@ -17,7 +17,7 @@
         </v-list-item-subtitle>
 
         <v-list-item-title>
-          <span v-if="data.repeat > 1">{{ data.repeat }}x </span>
+          <span v-if="data.repeat > 0">{{ data.repeat + 1 }}x </span>
           <span v-if="data.pullups > 1">{{ data.pullups }} </span>
           <span v-if="data.left === null || data.right === null">One-Arm </span>
           <span>{{ options[data.exercise].name }}</span>
@@ -27,7 +27,7 @@
 
         <v-list-item-subtitle class="text--primary">
           <span>Hold: {{ data.hold }}s. </span>
-          <span v-if="data.repeat > 1">Rest: {{ data.rest }}s. </span>
+          <span v-if="data.repeat > 0">Rest: {{ data.rest }}s. </span>
         </v-list-item-subtitle>
       </v-list-item-content>
 

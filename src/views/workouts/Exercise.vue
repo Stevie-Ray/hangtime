@@ -13,8 +13,8 @@
       </v-avatar>
       <v-toolbar-title v-if="currentExercise">
         <!-- Exercise details -->
-        <span v-if="currentExercise.repeat > 1"
-          >{{ currentExercise.repeat }}x
+        <span v-if="currentExercise.repeat > 0"
+          >{{ currentExercise.repeat + 1 }}x
         </span>
         <span v-if="currentExercise.pullups > 1"
           >{{ currentExercise.pullups }}

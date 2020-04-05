@@ -399,13 +399,22 @@ export default {
     countDown() {
       this.countingDown = true
       const countdownTimer = setInterval(() => {
-        if (this.totalTime <= 1) {
-          clearInterval(countdownTimer)
-          this.countingDown = false
-          this.startRecording()
-          this.vibratePhone()
-          this.playSound('start.mp3')
-          this.speakText('Go!')
+        if (this.totalTime <= 4) {
+          // if 0
+          if (this.totalTime > 1) {
+            if (this.user.settings.speak) {
+              this.speakText(this.totalTime - 1)
+            } else {
+              this.playSound('count.mp3')
+            }
+          } else {
+            clearInterval(countdownTimer)
+            this.countingDown = false
+            this.startRecording()
+            this.vibratePhone()
+            this.playSound('start.mp3')
+            this.speakText('Go!')
+          }
         }
         this.totalTime -= 1
       }, 1000)
@@ -418,6 +427,8 @@ export default {
     stopRecording() {
       clearInterval(this.timer)
       this.running = false
+      this.vibratePhone()
+      this.playSound('stop.mp3')
       if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
         this.wakeLock.release()
         this.wakeLock = null

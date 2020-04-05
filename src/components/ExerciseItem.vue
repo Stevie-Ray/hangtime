@@ -182,10 +182,10 @@
 
         <!-- repeat  -->
         <v-slider
-          v-if="editWorkout || currentExercise.repeat > 1"
+          v-if="editWorkout || currentExercise.repeat > 0"
           v-model="dataRepeat"
-          :max="10"
-          :min="1"
+          :max="9"
+          :min="0"
           step="1"
           ticks
           thumb-size="48"
@@ -195,17 +195,19 @@
           persistent-hint
           label="Repeat"
         >
-          <template v-slot:thumb-label="props"> {{ props.value }}x </template>
+          <template v-slot:thumb-label="props"
+            >{{ props.value + 1 }}x
+          </template>
           <template #append>
-            <v-label>{{ dataRepeat }}x</v-label>
+            <v-label>{{ dataRepeat + 1 }}x</v-label>
           </template>
         </v-slider>
 
-        <v-divider v-if="currentExercise.repeat > 1" class="my-4"></v-divider>
+        <v-divider v-if="currentExercise.repeat > 0" class="my-4"></v-divider>
 
         <!-- rest  -->
         <v-slider
-          v-if="currentExercise.repeat > 1"
+          v-if="currentExercise.repeat > 0"
           v-model="dataRest"
           :max="300"
           :min="5"
@@ -355,7 +357,7 @@ export default {
         })
         this.setTime({ id: this.id, index: this.index })
         // reset Rest
-        if (value === 1) {
+        if (value === 0) {
           this.setData({
             id: this.id,
             // value: 0,

@@ -69,7 +69,7 @@ export function speak(text) {
 export function sound(audio) {
   if (audio) {
     // eslint-disable-next-line global-require
-    const file = require(`@/assets/${audio}`) // eslint-disable-line import/no-dynamic-require
+    const file = require(`@/assets/sound/${audio}`) // eslint-disable-line import/no-dynamic-require
     const audioPlayer = new Audio(file)
     audioPlayer.play()
   }

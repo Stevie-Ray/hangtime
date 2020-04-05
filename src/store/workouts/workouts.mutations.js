@@ -108,8 +108,11 @@ export default {
       item = state.workouts[index].exercises[payload.index]
     }
     let time = item.pause + item.hold
-    if (item.repeat > 1) {
-      time = item.pause + (item.hold + item.rest) * item.repeat
+    if (item.repeat > 0) {
+      // 13 = 5 + ((3 + 5) x 1)
+      // 40 = 10 + ((10 + 10) x (1 + 1) - 10)
+      time =
+        item.pause + ((item.hold + item.rest) * (item.repeat + 1) - item.rest)
     }
     if (payload.id === 'new') {
       Vue.set(state.workoutToCreate.exercises[payload.index], 'time', time)

@@ -18,7 +18,7 @@ export default {
     pause: 10,
     hold: 10,
     pullups: 0,
-    repeat: 1,
+    repeat: 0,
     rest: 0,
     time: 20
   },
