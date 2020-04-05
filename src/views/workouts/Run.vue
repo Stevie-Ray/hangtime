@@ -334,6 +334,9 @@ export default {
             this.ExerciseStep = 2
             break
           }
+          if (this.hasNext()) {
+            break
+          }
           this.ExerciseStep = 4
           break
         // // NEXT / FINISH
