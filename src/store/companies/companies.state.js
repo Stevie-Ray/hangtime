@@ -1077,6 +1077,36 @@ export default {
               id: 'h8',
               class: 7,
               name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
+              name: ''
             }
           ]
         }
