@@ -12,7 +12,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 3" step="3">Level</v-stepper-step>
+        <v-stepper-step :complete="e1 > 3" step="3">Grading</v-stepper-step>
 
         <v-divider></v-divider>
 
@@ -36,17 +36,17 @@
             <v-card-text>
               <span class="text--primary">
                 <span
-                  >HangTime lets you create your own training sequences, get and
-                  share workouts with our community and track your hangboarding
-                  progress.</span
+                  >HangTime lets you create your own training sequences, do
+                  community workouts and track your hangboarding progress.</span
                 >
               </span>
             </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" @click="gotoHangboard">
+                Select hangboard
+              </v-btn>
+            </v-card-actions>
           </v-card>
-
-          <v-btn color="primary" @click="gotoHangboard">
-            Get Started
-          </v-btn>
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -57,11 +57,12 @@
             <v-card-text>
               <hangboard-select></hangboard-select>
             </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" @click="e1 = 3">
+                Select grading
+              </v-btn>
+            </v-card-actions>
           </v-card>
-
-          <v-btn color="primary" @click="e1 = 3">
-            Continue
-          </v-btn>
         </v-stepper-content>
 
         <v-stepper-content step="3">
@@ -71,10 +72,6 @@
             </v-card-title>
             <v-list two-line>
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-chart-gantt</v-icon>
-                </v-list-item-avatar>
-
                 <v-list-item-content>
                   <v-select
                     v-model="settingsScale"
@@ -82,16 +79,14 @@
                     item-text="name"
                     item-value="value"
                     label="Grading scale"
-                  ></v-select>
+                  >
+                    <template v-slot:prepend>
+                      <v-icon color="primary lighten-1">mdi-chart-gantt</v-icon>
+                    </template>
+                  </v-select>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item v-if="user">
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1"
-                    >mdi-chart-timeline-variant</v-icon
-                  >
-                </v-list-item-avatar>
-
                 <v-list-item-content>
                   <v-select
                     v-model="settingsGrade"
@@ -99,14 +94,22 @@
                     :item-text="user.settings.scale"
                     item-value="ircra"
                     label="Grade"
-                  ></v-select>
+                  >
+                    <template v-slot:prepend>
+                      <v-icon color="primary lighten-1"
+                        >mdi-chart-timeline-variant</v-icon
+                      >
+                    </template>
+                  </v-select>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
+            <v-card-actions>
+              <v-btn color="primary" @click="saveWalkthrough">
+                Get ready
+              </v-btn>
+            </v-card-actions>
           </v-card>
-          <v-btn color="primary" @click="saveWalkthrough">
-            Finish
-          </v-btn>
         </v-stepper-content>
 
         <v-stepper-content step="4">
@@ -121,23 +124,28 @@
                 </v-avatar>
               </v-row>
             </v-container>
-            <v-card-title>Now start training!</v-card-title>
+            <v-card-title>And start hangboarding!</v-card-title>
             <v-card-text>
               <span class="text--primary">
                 <span
                   >Add your first workout, do a community workout or start
-                  recording your progress. It's up to you!</span
+                  recording your progress. It's up to you.
+                  <strong
+                    >Always make sure that you are warmed up and that you're
+                    training on your own level.</strong
+                  ></span
                 >
               </span>
             </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" @click="finishWalkthrough(true)">
+                Add a workout
+              </v-btn>
+              <v-btn text @click="finishWalkthrough(false)">
+                Close
+              </v-btn>
+            </v-card-actions>
           </v-card>
-
-          <v-btn color="primary" @click="finishWalkthrough(true)">
-            Add a workout
-          </v-btn>
-          <v-btn text @click="finishWalkthrough(false)">
-            Close
-          </v-btn>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -219,7 +227,7 @@ export default {
         this.$router.push(`/${this.user.id}/workout/new`)
       }
     },
-    gotoHangboard(){
+    gotoHangboard() {
       this.e1 = 2
       this.setCompany(1)
     },

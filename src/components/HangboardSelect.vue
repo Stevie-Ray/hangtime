@@ -2,10 +2,6 @@
   <div>
     <v-list two-line>
       <v-list-item>
-        <v-list-item-avatar>
-          <v-icon color="primary lighten-1">mdi-numeric-1-box</v-icon>
-        </v-list-item-avatar>
-
         <v-list-item-content>
           <v-select
             v-model="settingsCompany"
@@ -17,15 +13,14 @@
             style="width: calc(100% - 32px)"
             @change="resetHangboard"
           >
+            <template v-slot:prepend>
+              <v-icon color="primary lighten-1">mdi-numeric-1-box</v-icon>
+            </template>
           </v-select>
         </v-list-item-content>
       </v-list-item>
 
       <v-list-item>
-        <v-list-item-avatar>
-          <v-icon color="primary lighten-1">mdi-numeric-2-box</v-icon>
-        </v-list-item-avatar>
-
         <v-list-item-content>
           <!--                  @change="setSetting"-->
           <v-select
@@ -37,45 +32,47 @@
             required
             style="width: calc(100% - 32px)"
           >
+            <template v-slot:prepend>
+              <v-icon color="primary lighten-1">mdi-numeric-2-box</v-icon>
+            </template>
           </v-select>
         </v-list-item-content>
       </v-list-item>
     </v-list>
 
     <v-container fluid class="py-0">
-      <v-row justify="center">
-        <v-col cols="12" md="10" lg="8">
-          <div
-            class="hangboard mx-auto"
-            :class="
-              companies[hangboardToAdd.company].hangboards[
-                hangboardToAdd.hangboard
-              ].name
+      <div
+        class="hangboard mx-auto pa-0"
+        :class="
+          companies[hangboardToAdd.company].hangboards[hangboardToAdd.hangboard]
+            .name
+        "
+      >
+        <div class="leftside">
+          <img
+            :src="
+              getImg(
+                companies[hangboardToAdd.company].hangboards[
+                  hangboardToAdd.hangboard
+                ].image
+              )
             "
-          >
-            <div class="leftside">
-              <img
-                :src="
-                  getImg(
-                    companies[hangboardToAdd.company].hangboards[
-                      hangboardToAdd.hangboard
-                    ].image
-                  )
-                "
-              />
-            </div>
-            <div class="rightside">
-              <img
-                :src="
-                  getImg(
-                    companies[hangboardToAdd.company].hangboards[
-                      hangboardToAdd.hangboard
-                    ].image
-                  )
-                "
-              />
-            </div>
-          </div>
+          />
+        </div>
+        <div class="rightside">
+          <img
+            :src="
+              getImg(
+                companies[hangboardToAdd.company].hangboards[
+                  hangboardToAdd.hangboard
+                ].image
+              )
+            "
+          />
+        </div>
+      </div>
+      <v-row justify="center">
+        <v-col cols="12" md="10" lg="8" class="">
           <div class="text-center">
             <p>
               Hangboard by

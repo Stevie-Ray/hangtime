@@ -45,6 +45,10 @@
     }
   }
 
+  .v-stepper__content {
+    padding: 0;
+  }
+
   // divider color
   .v-content .theme--light.v-divider {
     border-color: rgba(0, 0, 0, 0.08);
