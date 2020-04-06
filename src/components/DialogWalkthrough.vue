@@ -44,7 +44,7 @@
             </v-card-text>
           </v-card>
 
-          <v-btn color="primary" @click="e1 = 2">
+          <v-btn color="primary" @click="gotoHangboard">
             Get Started
           </v-btn>
         </v-stepper-content>
@@ -203,6 +203,7 @@ export default {
     ...mapMutations('authentication', [
       'setScale',
       'setGrade',
+      'setCompany',
       'setWalkthrough'
     ]),
     ...mapActions('authentication', [
@@ -218,7 +219,12 @@ export default {
         this.$router.push(`/${this.user.id}/workout/new`)
       }
     },
+    gotoHangboard(){
+      this.e1 = 2
+      this.setCompany(1)
+    },
     saveWalkthrough() {
+      this.setCompany(0)
       const exists = this.user.settings.hangboards.some(
         el =>
           el.company === this.hangboardToAdd.company &&
