@@ -32,7 +32,7 @@
         <v-spacer></v-spacer>
 
         <v-btn text class="add-hangboard" to="/settings/hangboards">
-          hangboards
+          Hangboards
         </v-btn>
         <v-btn text color="primary" @click="$emit('input', false)">
           Save

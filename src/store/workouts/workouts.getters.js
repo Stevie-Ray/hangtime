@@ -1,4 +1,4 @@
-import { find, filter } from 'lodash'
+import { find, filter, orderBy } from 'lodash'
 
 export default {
   /**
@@ -10,19 +10,30 @@ export default {
   /**
    * Get workouts for the currently selected hangboard
    */
-  workoutsByHangboard: state => payload =>
-    filter(state.workouts, {
+  workoutsByHangboard: state => payload => {
+    let data = {}
+    data = filter(state.workouts, {
       company: payload.settings.hangboards[payload.settings.selected].company,
       hangboard:
         payload.settings.hangboards[payload.settings.selected].hangboard
-    }),
+    })
+    data = orderBy(data, ['updateTimestamp', 'createTimestamp'], 'desc')
+    return data
+  },
 
-  communityWorkoutsByHangboard: state => payload =>
-    filter(state.communityWorkouts, {
-      company: payload.settings.hangboards[payload.settings.selected].company,
+  communityWorkoutsByHangboard: state => payload => {
+    let data = {}
+    data = filter(state.communityWorkouts, {
+      company:
+        payload.user.settings.hangboards[payload.user.settings.selected]
+          .company,
       hangboard:
-        payload.settings.hangboards[payload.settings.selected].hangboard
-    }),
+        payload.user.settings.hangboards[payload.user.settings.selected]
+          .hangboard
+    })
+    data = orderBy(data, payload.filter, payload.order)
+    return data
+  },
 
   /**
    * Get a workout by id

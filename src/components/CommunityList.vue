@@ -90,10 +90,15 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
+    ...mapState('workouts', ['workoutFilter', 'sortOrder']),
     workouts() {
       if (!this.user) return
       // eslint-disable-next-line consistent-return
-      return this.communityWorkoutsByHangboard(this.user)
+      return this.communityWorkoutsByHangboard({
+        user: this.user,
+        filter: this.workoutFilter.value,
+        order: this.sortOrder
+      })
     }
   }
 }

@@ -97,18 +97,14 @@
 
             <v-fab-transition>
               <v-btn
-                v-if="networkOnLine && activeFab.icon !== ''"
+                v-if="networkOnLine && activeFab.click !== null"
                 :key="activeFab.icon"
                 fixed
                 fab
                 bottom
                 right
                 color="secondary"
-                @click="
-                  activeFab.click
-                    ? (addProgressDialog = true)
-                    : updateRouter(activeFab.route)
-                "
+                @click="fabResolver"
               >
                 <v-icon v-if="activeFab.icon != ''">{{
                   activeFab.icon
@@ -119,6 +115,9 @@
             <dialog-hangboard-switch
               v-model="hangboardDialog"
             ></dialog-hangboard-switch>
+
+            <dialog-community-filter v-model="filterDialog">
+            </dialog-community-filter>
 
             <dialog-walkthrough
               v-if="user && !user.settings.walkthrough"
@@ -139,6 +138,7 @@
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
 import DialogHangboardSwitch from '@/components/DialogHangboardSwitch'
+import DialogCommunityFilter from '@/components/DialogCommunityFilter'
 import DialogWalkthrough from '@/components/DialogWalkthrough'
 import DialogAddProgress from '@/components/DialogAddProgress'
 
@@ -146,10 +146,12 @@ export default {
   components: {
     DialogHangboardSwitch,
     DialogWalkthrough,
+    DialogCommunityFilter,
     DialogAddProgress
   },
   data: () => ({
     walkthroughDialog: true,
+    filterDialog: false,
     addProgressDialog: false,
     hangboardDialog: false,
     tabs: [
@@ -161,15 +163,20 @@ export default {
   computed: {
     ...mapGetters('authentication', ['isUserLoggedIn']),
     ...mapState('authentication', ['user']),
+    ...mapState('workouts', ['communityWorkouts']),
     ...mapState('app', ['networkOnLine', 'appTitle', 'currentTab']),
     activeFab() {
+      let data = 1
+      if (this.communityWorkouts && !this.communityWorkouts.length) {
+        data = null
+      }
       switch (this.activeTab) {
         case '/':
           return { route: `/${this.user.id}/workout/new`, icon: 'mdi-plus' }
         case '/community':
-          return { route: '/community', icon: '' }
+          return { click: data, icon: 'mdi-tune' }
         case '/progress':
-          return { click: true, icon: 'mdi-plus' }
+          return { click: 2, icon: 'mdi-plus' }
         default:
           return {}
       }
@@ -187,6 +194,15 @@ export default {
     ...mapMutations('app', ['setTab']),
     updateRouter(val) {
       this.$router.push(val)
+    },
+    fabResolver() {
+      if (this.activeFab.click === 2) {
+        this.addProgressDialog = true
+      } else if (this.activeFab.click === 1) {
+        this.filterDialog = true
+      } else {
+        this.updateRouter(this.activeFab.route)
+      }
     },
     getImg
   }

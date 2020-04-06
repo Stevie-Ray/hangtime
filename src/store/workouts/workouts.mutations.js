@@ -44,6 +44,8 @@ export default {
     )
     state.workouts[index].level = payload.value
   },
+  setOrder: (state, order) => (state.sortOrder = order),
+  setFilter: (state, filter) => (state.workoutFilter = filter),
   addWorkout: (state, workout) => state.workouts.unshift(workout),
   addCommunityWorkout: (state, workout) =>
     state.communityWorkouts.unshift(workout),
