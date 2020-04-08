@@ -27,7 +27,7 @@
                     :items="scale"
                     item-text="name"
                     item-value="value"
-                    label="Grading scale"
+                    label="Grading system"
                     @change="triggerUpdateUser"
                   ></v-select>
                 </v-list-item-content>

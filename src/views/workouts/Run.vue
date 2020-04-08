@@ -426,41 +426,40 @@ export default {
       }
 
       // start count down
-      if (this.totalTime <= 4) {
-        // if 0
-        if (this.totalTime > 1) {
-          if (this.user.settings.speak) {
-            this.speakText(this.totalTime - 1)
-          } else {
-            this.playSound('count.mp3')
-          }
+      if (this.initialTime >= 4 && this.totalTime <= 4 && this.totalTime > 1) {
+        if (this.user.settings.speak) {
+          this.speakText(this.totalTime - 1)
         } else {
-          this.vibratePhone()
-          this.playSound('start.mp3')
-          this.speakText('Go!')
-          if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
-            this.ExerciseRepeat += 1
-          }
+          this.playSound('count.mp3')
+        }
+      }
+
+      if (this.totalTime === 1) {
+        this.vibratePhone()
+        this.playSound('start.mp3')
+        this.speakText('Go!')
+        if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
+          this.ExerciseRepeat += 1
         }
       }
     },
     exerciseRest() {
       this.progressText = 'Rest'
       // rest: start counting down
-      if (this.totalTime <= 4) {
-        if (this.totalTime > 1) {
-          if (this.user.settings.speak) {
-            this.speakText(this.totalTime - 1)
-          } else {
-            this.playSound('count.mp3')
-          }
+      if (this.initialTime >= 4 && this.totalTime <= 4 && this.totalTime > 1) {
+        if (this.user.settings.speak) {
+          this.speakText(this.totalTime - 1)
         } else {
-          this.vibratePhone()
-          this.playSound('start.mp3')
-          this.speakText('Go!')
-          if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
-            this.ExerciseRepeat += 1
-          }
+          this.playSound('count.mp3')
+        }
+      }
+
+      if (this.totalTime === 1) {
+        this.vibratePhone()
+        this.playSound('start.mp3')
+        this.speakText('Go!')
+        if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
+          this.ExerciseRepeat += 1
         }
       }
     },

@@ -6,8 +6,8 @@
         <v-slider
           v-model="dataPause"
           :max="300"
-          :min="5"
-          step="5"
+          :min="2.5"
+          step="2.5"
           ticks
           always-dirty
           thumb-size="48"
@@ -18,16 +18,16 @@
           label="Pause"
         >
           <template v-slot:thumb-label="props">
-            {{ count(props.value) }}
+            {{ count(Math.round(props.value)) }}
           </template>
           <template #append>
             <v-text-field
               v-if="editWorkout"
               v-model="dataPause"
               class="mt-0 pt-0"
-              min="5"
+              min="2.5"
               max="300"
-              step="5"
+              step="2.5"
               hide-details
               single-line
               type="number"
@@ -35,11 +35,11 @@
               :rules="[
                 rules.required,
                 rules.number,
-                rules.min(5),
+                rules.min(2.5),
                 rules.max(300)
               ]"
             ></v-text-field>
-            <v-label v-else>{{ count(dataPause) }}</v-label>
+            <v-label v-else>{{ count(Math.round(dataPause)) }}</v-label>
           </template>
         </v-slider>
 
@@ -191,7 +191,7 @@
           thumb-size="48"
           :disabled="!editWorkout"
           prepend-icon="mdi-history"
-          hint="Easy way to repeat this exercise"
+          hint="Option to repeat current exercise"
           persistent-hint
           label="Repeat"
         >
@@ -210,27 +210,27 @@
           v-if="currentExercise.repeat > 0"
           v-model="dataRest"
           :max="300"
-          :min="5"
-          step="5"
+          :min="2.5"
+          step="2.5"
           always-dirty
           thumb-size="48"
           :disabled="!editWorkout"
           prepend-icon="mdi-progress-clock"
-          hint="Time to rest between repeating exercises"
+          hint="Time to rest between sets"
           persistent-hint
           label="Rest"
         >
           <template v-slot:thumb-label="props">
-            {{ count(props.value) }}
+            {{ count(Math.round(props.value)) }}
           </template>
           <template #append>
             <v-text-field
               v-if="editWorkout"
               v-model="dataRest"
               class="mt-0 pt-0"
-              min="5"
+              min="2.5"
               max="300"
-              step="5"
+              step="2.5"
               hide-details
               single-line
               type="number"
@@ -238,11 +238,11 @@
               :rules="[
                 rules.required,
                 rules.number,
-                rules.min(5),
+                rules.min(2.5),
                 rules.max(300)
               ]"
             ></v-text-field>
-            <v-label v-else>{{ count(dataRest) }}</v-label>
+            <v-label v-else>{{ count(Math.round(dataRest)) }}</v-label>
           </template>
         </v-slider>
       </v-col>
@@ -307,12 +307,12 @@ export default {
       set(value) {
         this.setData({
           id: this.id,
-          value: { pause: value },
+          value: { pause: Math.round(value) },
           // value,
           // key: 'pause',
           index: this.index
         })
-        this.setTime({ id: this.id, index: this.index })
+        this.setTime({ id: this.id, index: Math.round(this.index) })
       }
     },
     dataHold: {
@@ -370,11 +370,15 @@ export default {
     },
     dataRest: {
       get() {
-        return this.currentExercise.rest
+        return Math.round(this.currentExercise.rest)
       },
       set(value) {
-        this.setData({ id: this.id, value: { rest: value }, index: this.index })
-        this.setTime({ id: this.id, index: this.index })
+        this.setData({
+          id: this.id,
+          value: { rest: Math.round(value) },
+          index: this.index
+        })
+        this.setTime({ id: this.id, index: Math.round(this.index) })
       }
     }
   },

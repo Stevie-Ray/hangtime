@@ -24,7 +24,7 @@
             rows="3"
             :rules="[rules.required, rules.length(140)]"
             class="workout-description-input"
-            placeholder="For example indicate when this training is suitable"
+            placeholder="For example indicate when this workout is most beneficial"
             label="Workout description *"
           ></v-textarea>
 

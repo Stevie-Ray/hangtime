@@ -59,7 +59,7 @@
             </v-card-text>
             <v-card-actions>
               <v-btn color="primary" @click="e1 = 3">
-                Select grading
+                Select grade system
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -132,7 +132,7 @@
                   recording your progress. It's up to you.
                   <strong
                     >Always make sure that you are warmed up and that you're
-                    training on your own level.</strong
+                    training at your own level.</strong
                   ></span
                 >
               </span>
