@@ -60,12 +60,12 @@ export default {
   },
   head: {
     title: {
-      inner: 'Select Hangboard'
+      inner: 'Add Hangboard'
     },
     meta: [
       {
         name: 'description',
-        content: 'HangTime user',
+        content: 'Add a new hangboard to use',
         id: 'desc'
       }
     ]

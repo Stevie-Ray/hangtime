@@ -16,7 +16,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'HangTime home page',
+        content: 'Workouts tab',
         id: 'desc'
       }
     ]

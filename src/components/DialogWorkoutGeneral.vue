@@ -165,6 +165,7 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['levels']),
     ...mapGetters('workouts', ['difficultyById']),
+    ...mapState('app', ['appTitle']),
     show: {
       get() {
         return this.value
@@ -221,7 +222,7 @@ export default {
     shareExternal() {
       navigator
         .share({
-          title: `${this.currentWorkout.name} | Hangtime`,
+          title: `${this.currentWorkout.name} | ${this.appTitle}`,
           text: this.currentWorkout.description,
           url: document.location.href
         })

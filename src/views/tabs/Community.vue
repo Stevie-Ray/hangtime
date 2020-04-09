@@ -16,7 +16,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'HangTime community page',
+        content: 'Community',
         id: 'desc'
       }
     ]

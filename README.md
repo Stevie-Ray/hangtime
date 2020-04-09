@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Hangtime :wave:</h1>
+<h1 align="center">Welcome to HangTime :wave:</h1>
 
 <p align="center">Full-Stack Hangboarding PWA applications with Vue.js and Firebase</p>
 

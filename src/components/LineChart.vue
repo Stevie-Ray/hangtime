@@ -38,7 +38,7 @@ export default {
                 millisecond: 'HH:mm',
                 second: 'HH:mm',
                 minute: 'HH:mm',
-                hour: 'HH:mm'
+                hour: 'DD MMM'
               }
             }
           }

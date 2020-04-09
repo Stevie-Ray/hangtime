@@ -219,7 +219,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'HangTime settings',
+        content: 'Workout Settings',
         id: 'desc'
       }
     ]

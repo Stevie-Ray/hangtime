@@ -30,14 +30,13 @@
               </v-row>
             </v-container>
 
-            <v-card-title>
-              Welcome to HangTime
-            </v-card-title>
+            <v-card-title> Welcome to {{ appTitle }} </v-card-title>
             <v-card-text>
               <span class="text--primary">
                 <span
-                  >HangTime lets you create your own training sequences, do
-                  community workouts and track your hangboarding progress.</span
+                  >{{ appTitle }} lets you create your own training sequences,
+                  do community workouts and track your hangboarding
+                  progress.</span
                 >
               </span>
             </v-card-text>
@@ -169,6 +168,7 @@ export default {
   computed: {
     ...mapState('authentication', ['user', 'hangboardToAdd']),
     ...mapState('companies', ['companies']),
+    ...mapState('app', ['appTitle']),
     settingsScale: {
       get() {
         if (!this.user) return

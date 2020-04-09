@@ -10,7 +10,7 @@
           :src="getImg('logo.svg')"
         />
 
-        Install HangTime
+        Install {{ appTitle }}
       </v-card-title>
 
       <v-card-text>
@@ -38,12 +38,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { getImg } from '@/misc/helpers'
 
 export default {
   data: () => ({
     dialog: true
   }),
+  computed: {
+    ...mapState('app', ['appTitle'])
+  },
   methods: {
     getImg
   }

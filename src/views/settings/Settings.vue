@@ -150,7 +150,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'HangTime settings',
+        content: 'App Settings',
         id: 'desc'
       }
     ]

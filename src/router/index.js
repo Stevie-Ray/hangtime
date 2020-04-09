@@ -10,7 +10,7 @@ Vue.use(Router)
 /* If you don't know about VueHead, please refer to https://github.com/ktquez/vue-head */
 
 Vue.use(Head, {
-  complement: 'HangTime'
+  complement: process.env.VUE_APP_TITLE
 })
 
 /* If you don't know about VueRouter, please refer to https://router.vuejs.org/ */
@@ -31,7 +31,7 @@ const router = new Router({
           name: 'workouts',
           component: () =>
             import(
-              /* webpackChunkName: "client-chunk-workouts" */ '@/views/tabs/Workouts.vue'
+              /* webpackChunkName: "client-chunk-tab-workouts" */ '@/views/tabs/Workouts.vue'
             )
         },
         {
@@ -39,7 +39,7 @@ const router = new Router({
           name: 'community',
           component: () =>
             import(
-              /* webpackChunkName: "client-chunk-community" */ '@/views/tabs/Community.vue'
+              /* webpackChunkName: "client-chunk-tab-community" */ '@/views/tabs/Community.vue'
             )
         },
         {
@@ -47,7 +47,7 @@ const router = new Router({
           name: 'progress',
           component: () =>
             import(
-              /* webpackChunkName: "client-chunk-hangtime" */ '@/views/tabs/Progress.vue'
+              /* webpackChunkName: "client-chunk-tab-progress" */ '@/views/tabs/Progress.vue'
             )
         }
       ]
@@ -119,7 +119,7 @@ const router = new Router({
       props: true,
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/user/Profile.vue'
+          /* webpackChunkName: "client-chunk-profile" */ '@/views/user/Profile.vue'
         )
     },
     {
@@ -132,7 +132,7 @@ const router = new Router({
       },
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/Record.vue'
+          /* webpackChunkName: "client-chunk-progress" */ '@/views/progress/Record.vue'
         )
     },
     {
@@ -145,7 +145,7 @@ const router = new Router({
       },
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/progress/List.vue'
+          /* webpackChunkName: "client-chunk-progress" */ '@/views/progress/List.vue'
         )
     },
     {
@@ -153,7 +153,7 @@ const router = new Router({
       name: 'settings',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Settings.vue'
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Settings.vue'
         )
     },
     {
@@ -161,7 +161,7 @@ const router = new Router({
       name: 'settings-general',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/General.vue'
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/General.vue'
         )
     },
     {
@@ -169,7 +169,7 @@ const router = new Router({
       name: 'settings-hangboards',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Hangboards.vue'
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Hangboards.vue'
         )
     },
     {
@@ -177,7 +177,7 @@ const router = new Router({
       name: 'settings-hangboards-add',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/AddHangboard.vue'
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/AddHangboard.vue'
         )
     },
     {
@@ -185,7 +185,7 @@ const router = new Router({
       name: 'settings-profile',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Profile.vue'
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Profile.vue'
         )
     },
     {
@@ -193,7 +193,7 @@ const router = new Router({
       name: 'settings-workout',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Workouts.vue'
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Workouts.vue'
         )
     },
     {
@@ -201,7 +201,7 @@ const router = new Router({
       name: 'faq',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/settings/Help.vue'
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Help.vue'
         )
     },
     {

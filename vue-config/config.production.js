@@ -1,4 +1,6 @@
 const path = require('path')
+// eslint-disable-next-line import/no-extraneous-dependencies
+const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer') // eslint-disable-line
   .BundleAnalyzerPlugin
 const PrerenderSPAPlugin = require('prerender-spa-plugin') // eslint-disable-line
@@ -8,6 +10,8 @@ const prerenderedRoutesList = ['/login', '/']
 module.exports = {
   configureWebpack: {
     plugins: [
+      /* Refer to https://github.com/moment/moment/issues/2416 Removes locales of moment.js (chart.js) */
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       /* Refer to https://www.npmjs.com/package/webpack-bundle-analyzer for more details */
       new BundleAnalyzerPlugin({
         analyzerMode: 'disabled',

@@ -125,12 +125,12 @@ export default {
   },
   head: {
     title: {
-      inner: 'Select Hangboard'
+      inner: 'Your Hangboards'
     },
     meta: [
       {
         name: 'description',
-        content: 'HangTime user',
+        content: 'Manage your hangboards',
         id: 'desc'
       }
     ]

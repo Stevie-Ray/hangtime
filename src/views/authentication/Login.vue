@@ -4,7 +4,7 @@
       <v-row class="fill-height" no-gutters>
         <v-col cols="12">
           <div class="text-center pa-4">
-            <div class="title ">{{ appTitle }}</div>
+            <div class="display-1">{{ appTitle }}</div>
             <div class="subheading font-weight-light grey--text">
               Version {{ appVersion }}
             </div>
@@ -13,7 +13,7 @@
               height="144px"
               width="144px"
               :src="getImg('logo.svg')"
-              class="my-4"
+              class="mt-10 mb-10"
             />
 
             <!-- Loader -->
@@ -33,31 +33,35 @@
               <p>{{ loginError }}</p>
             </div>
             <!-- Auth UI -->
-            <div xs12 class="mb-4">
-              <v-btn
-                v-show="user !== undefined && !user && networkOnLine"
-                data-test="login-btn"
-                class="login-btn"
-                min-width="250"
-                @click="login('facebook')"
-              >
-                Login with Facebook
-              </v-btn>
-            </div>
-            <div class="mb-4">
-              <v-btn
-                v-show="user !== undefined && !user && networkOnLine"
-                data-test="login-btn"
-                class="login-btn"
-                min-width="250"
-                @click="login('google')"
-              >
-                Login with Google
-              </v-btn>
-            </div>
+            <v-row v-if="networkOnLine">
+              <v-col cols="12">
+                <v-btn
+                  v-show="user !== undefined && !user && networkOnLine"
+                  data-test="login-btn"
+                  class="login-btn mb-4"
+                  min-width="250"
+                  tile
+                  outlined
+                  @click="login('facebook')"
+                >
+                  <v-icon left>mdi-facebook</v-icon> Login with Facebook
+                </v-btn>
+                <v-btn
+                  v-show="user !== undefined && !user && networkOnLine"
+                  data-test="login-btn"
+                  class="login-btn mb-4"
+                  min-width="250"
+                  tile
+                  outlined
+                  @click="login('google')"
+                >
+                  <v-icon left>mdi-google</v-icon> Login with Google
+                </v-btn>
+              </v-col>
+            </v-row>
 
-            <div class="mt-5 caption grey--text font-weight-light">
-              &copy; 2020 HangTime.
+            <div class="caption grey--text font-weight-light">
+              &copy; 2020 {{ appTitle }}.
             </div>
           </div>
         </v-col>
@@ -74,7 +78,9 @@ import { desktop as isDekstop } from 'is_js'
 import { getImg } from '@/misc/helpers'
 
 export default {
-  data: () => ({ loginError: null }),
+  data: () => ({
+    loginError: null
+  }),
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'appTitle', 'appVersion'])
@@ -129,7 +135,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'Sign in or sign up to HangTime',
+        content: 'Sign in or sign up',
         id: 'desc'
       }
     ]

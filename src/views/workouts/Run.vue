@@ -190,7 +190,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import * as NoSleep from 'nosleep.js/dist/NoSleep'
+import NoSleep from 'nosleep.js'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count, speak, sound } from '@/misc/helpers'
 

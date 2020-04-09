@@ -137,7 +137,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'HangTime',
+        content: 'User profile page',
         id: 'desc'
       }
     ]
