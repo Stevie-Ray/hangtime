@@ -16,27 +16,6 @@
           <v-col cols="12">
             <v-form>
               <v-list two-line>
-                <!--                <v-list-item>-->
-                <!--                  <v-list-item-avatar>-->
-                <!--                    <v-icon color="primary lighten-1">mdi-ballot</v-icon>-->
-                <!--                  </v-list-item-avatar>-->
-
-                <!--                  <v-list-item-content-->
-                <!--                    @click="user.buildin = !user.buildin"-->
-                <!--                  >-->
-                <!--                    <v-list-item-title-->
-                <!--                      >Show build-in workouts</v-list-item-title-->
-                <!--                    >-->
-                <!--                    <v-list-item-subtitle-->
-                <!--                      >Use preset workouts to get started</v-list-item-subtitle-->
-                <!--                    >-->
-                <!--                  </v-list-item-content>-->
-
-                <!--                  <v-list-item-action>-->
-                <!--                    <v-checkbox v-model="user.buildin"></v-checkbox>-->
-                <!--                  </v-list-item-action>-->
-                <!--                </v-list-item>-->
-
                 <v-list-item>
                   <v-list-item-avatar>
                     <v-icon color="primary lighten-1">mdi-volume-high</v-icon>
@@ -57,7 +36,7 @@
                   </v-list-item-action>
                 </v-list-item>
 
-                <v-list-item>
+                <v-list-item v-if="synth && voiceList.length">
                   <v-list-item-avatar>
                     <v-icon color="primary lighten-1">mdi-voice</v-icon>
                   </v-list-item-avatar>
@@ -87,12 +66,11 @@
                   <v-list-item-content>
                     <v-select
                       id="voices"
+                      v-model="selectedVoice"
                       return-object
                       :items="voiceList"
                       placeholder="Tap to change"
                       label="Select voice"
-                      style="width: calc(100% - 32px)"
-                      @change="changeVoice($event)"
                     >
                       <!--  eslint-disable-next-line vue/no-unused-vars-->
                       <template v-slot:selection="data">
@@ -148,6 +126,16 @@ export default {
   }),
   computed: {
     ...mapState('authentication', ['user']),
+    selectedVoice: {
+      get() {
+        return this.voiceList[this.user.settings.voice]
+      },
+      set(value) {
+        this.setVoice(this.voiceList.indexOf(value))
+        this.greet(value)
+        this.triggerUpdateUser()
+      }
+    },
     settingsSound: {
       get() {
         return this.user.settings.sound
@@ -176,12 +164,12 @@ export default {
   mounted() {
     this.voiceList = this.synth
       .getVoices()
-      .filter(voice => /^(en|EN)/.test(voice.lang))
+      .filter(voice => /^(en|EN|US)/.test(voice.lang))
 
     this.synth.onvoiceschanged = () => {
       this.voiceList = this.synth
         .getVoices()
-        .filter(voice => /^(en|EN)/.test(voice.lang))
+        .filter(voice => /^(en|EN|US)/.test(voice.lang))
     }
 
     // this.listenForSpeechEvents();
@@ -194,16 +182,9 @@ export default {
       'setVibrate',
       'setVoice'
     ]),
-    changeVoice(event) {
-      this.setVoice(this.voiceList.indexOf(event))
-      this.greet(event)
-      this.triggerUpdateUser()
-    },
     greet(event) {
       this.greetingSpeech.text = `You choose ${event.name}, this is my new voice`
-
-      // this.greetingSpeech.voice = this.voiceList[this.settings.voice]
-
+      this.greetingSpeech.voice = event
       try {
         this.synth.speak(this.greetingSpeech)
       } catch (ex) {

@@ -386,7 +386,15 @@ export default {
       this.totalTime += 1
     },
     speakText(text) {
-      if (this.user.settings.speak) this.speak(text)
+      if (this.user.settings.speak && 'speechSynthesis' in window) {
+        this.voiceList = window.speechSynthesis
+          .getVoices()
+          .filter(voice => /^(en|EN|US)/.test(voice.lang))
+        const utterance = new window.SpeechSynthesisUtterance()
+        utterance.text = text
+        utterance.voice = this.voiceList[this.user.settings.voice]
+        this.speak(utterance)
+      }
     },
     playSound(path) {
       if (this.user.settings.sound) this.sound(path)

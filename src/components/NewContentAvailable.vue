@@ -6,7 +6,7 @@
     <template v-else>
       New content available
       <v-btn text @click="refesh">
-        refesh
+        refresh
       </v-btn>
     </template>
   </v-snackbar>

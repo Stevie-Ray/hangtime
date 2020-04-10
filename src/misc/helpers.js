@@ -56,10 +56,8 @@ export function count(item) {
 }
 
 export function speak(text) {
-  const utterance = new window.SpeechSynthesisUtterance(text)
-  // utterance.voice = this.voiceList[this.settings.voice];
   try {
-    window.speechSynthesis.speak(utterance)
+    window.speechSynthesis.speak(text)
   } catch (ex) {
     // eslint-disable-next-line no-console
     console.log('speechSynthesis not available', ex)
