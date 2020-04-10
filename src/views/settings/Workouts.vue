@@ -65,24 +65,15 @@
 
                   <v-list-item-content>
                     <v-select
+                      v-if="voiceList.length"
                       id="voices"
                       v-model="selectedVoice"
-                      return-object
                       :items="voiceList"
+                      :item-text="item => `${item.name} (${item.lang})`"
                       placeholder="Tap to change"
                       label="Select voice"
+                      return-object
                     >
-                      <!--  eslint-disable-next-line vue/no-unused-vars-->
-                      <template v-slot:selection="data">
-                        <span
-                          >{{ voiceList[user.settings.voice].name }} ({{
-                            voiceList[user.settings.voice].lang
-                          }})</span
-                        >
-                      </template>
-                      <template v-slot:item="data">
-                        <span>{{ data.item.name }} ({{ data.item.lang }})</span>
-                      </template>
                     </v-select>
                   </v-list-item-content>
                 </v-list-item>

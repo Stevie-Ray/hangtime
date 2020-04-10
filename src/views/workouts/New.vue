@@ -93,6 +93,9 @@ export default {
     ircra: new IRCRA(),
     edit: null,
     dialog: false,
+    meta: {
+      title: 'New workout'
+    },
     rules: {
       length: len => v =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
@@ -106,6 +109,12 @@ export default {
     ...mapGetters('workouts', ['workoutById']),
     currentWorkout() {
       return this.workoutById('new')
+    }
+  },
+  mounted() {
+    if (this.currentWorkout && this.currentWorkout.name) {
+      this.meta.title = `${this.currentWorkout.name} | New Workout `
+      this.$emit('updateHead')
     }
   },
   methods: {
@@ -150,7 +159,7 @@ export default {
   head: {
     title() {
       return {
-        inner: `${this.currentWorkout.name} | New workout `
+        inner: this.meta.title
       }
     },
     meta: [
