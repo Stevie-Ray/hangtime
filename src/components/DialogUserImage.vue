@@ -25,16 +25,16 @@
               </v-list-item-content>
 
               <v-list-item-action>
-                <v-btn
-                  icon
-                  @click="
-                    $router.push({
-                      path: `/profile/${data.user.id}`
-                    })
-                  "
-                >
-                  <v-icon>mdi-information-outline</v-icon>
-                </v-btn>
+                <!--                <v-btn-->
+                <!--                  icon-->
+                <!--                  @click="-->
+                <!--                    $router.push({-->
+                <!--                      path: `/profile/${data.user.id}`-->
+                <!--                    })-->
+                <!--                  "-->
+                <!--                >-->
+                <!--                  <v-icon>mdi-information-outline</v-icon>-->
+                <!--                </v-btn>-->
               </v-list-item-action>
             </v-list-item>
           </v-col>

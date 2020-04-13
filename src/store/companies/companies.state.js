@@ -3584,7 +3584,8 @@ export default {
     },
     {
       name: 'Simond (Decathlon)',
-      description: 'Decathlon\'s Mountaineering & Climbing brand based in Chamonix valley',
+      description:
+        "Decathlon's Mountaineering & Climbing brand based in Chamonix valley",
       id: 19,
       website: 'https://www.simond.com/',
       hangboards: [

@@ -141,44 +141,70 @@
           </template>
         </v-slider>
 
-        <div v-if="editWorkout">
+        <div>
           <v-divider class="mt-4"></v-divider>
 
-          <v-subheader><strong>Optional</strong></v-subheader>
+          <v-expansion-panels flat>
+            <v-expansion-panel>
+              <v-expansion-panel-header
+                ><strong>Optional</strong></v-expansion-panel-header
+              >
+              <v-expansion-panel-content>
+                <!-- pullups  -->
+                <v-slider
+                  v-if="editWorkout || currentExercise.pullups > 0"
+                  v-model="dataPullups"
+                  :max="20"
+                  :min="0"
+                  step="1"
+                  ticks
+                  always-dirty
+                  thumb-size="48"
+                  :disabled="!editWorkout || currentExercise.scappulls > 0"
+                  prepend-icon="mdi-clock-alert"
+                  hint="Number of pull ups you have to perform"
+                  persistent-hint
+                  label="Pull-ups"
+                >
+                  <template v-slot:thumb-label="props">
+                    {{ props.value }}x
+                  </template>
+                  <template #append>
+                    <v-label>{{ dataPullups }}x</v-label>
+                  </template>
+                </v-slider>
+
+                <v-divider class="my-4"></v-divider>
+
+                <!-- scapula/scap pulls/pull ups  -->
+                <v-slider
+                  v-if="editWorkout || currentExercise.scappulls > 0"
+                  v-model="dataScapPulls"
+                  :max="20"
+                  :min="0"
+                  step="1"
+                  ticks
+                  always-dirty
+                  thumb-size="48"
+                  :disabled="!editWorkout || currentExercise.pullups > 0"
+                  prepend-icon="mdi-clock-alert"
+                  hint="Number of scapular pull-up(s) you have to perform"
+                  persistent-hint
+                  label="Scap Pulls"
+                >
+                  <template v-slot:thumb-label="props">
+                    {{ props.value }}x
+                  </template>
+                  <template #append>
+                    <v-label>{{ dataScapPulls }}x</v-label>
+                  </template>
+                </v-slider>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
 
           <v-divider class="mb-4"></v-divider>
         </div>
-
-        <div v-else>
-          <v-divider class="my-4"></v-divider>
-        </div>
-
-        <!-- pullups  -->
-        <v-slider
-          v-if="editWorkout || currentExercise.pullups > 0"
-          v-model="dataPullups"
-          :max="20"
-          :min="0"
-          step="1"
-          ticks
-          always-dirty
-          thumb-size="48"
-          :disabled="!editWorkout"
-          prepend-icon="mdi-clock-alert"
-          hint="Number of pull ups you have to perform"
-          persistent-hint
-          label="Pull-ups"
-        >
-          <template v-slot:thumb-label="props"> {{ props.value }}x </template>
-          <template #append>
-            <v-label>{{ dataPullups }}x</v-label>
-          </template>
-        </v-slider>
-
-        <v-divider
-          v-if="editWorkout || currentExercise.pullups > 0"
-          class="my-4"
-        ></v-divider>
 
         <!-- repeat  -->
         <v-slider
@@ -191,7 +217,7 @@
           thumb-size="48"
           :disabled="!editWorkout"
           prepend-icon="mdi-history"
-          hint="Option to repeat current exercise"
+          hint="Repeat current exercise (1x = no repeat)"
           persistent-hint
           label="Repeat"
         >
@@ -203,48 +229,51 @@
           </template>
         </v-slider>
 
-        <v-divider v-if="currentExercise.repeat > 0" class="my-4"></v-divider>
-
         <!-- rest  -->
-        <v-slider
-          v-if="currentExercise.repeat > 0"
-          v-model="dataRest"
-          :max="300"
-          :min="2.5"
-          step="2.5"
-          always-dirty
-          thumb-size="48"
-          :disabled="!editWorkout"
-          prepend-icon="mdi-progress-clock"
-          hint="Time to rest between sets"
-          persistent-hint
-          label="Rest"
-        >
-          <template v-slot:thumb-label="props">
-            {{ count(Math.round(props.value)) }}
-          </template>
-          <template #append>
-            <v-text-field
-              v-if="editWorkout"
-              v-model="dataRest"
-              class="mt-0 pt-0"
-              min="2.5"
-              max="300"
-              step="2.5"
-              hide-details
-              single-line
-              type="number"
-              style="width: 40px"
-              :rules="[
-                rules.required,
-                rules.number,
-                rules.min(2.5),
-                rules.max(300)
-              ]"
-            ></v-text-field>
-            <v-label v-else>{{ count(Math.round(dataRest)) }}</v-label>
-          </template>
-        </v-slider>
+        <div style="min-height: 17px">
+          <v-divider v-if="currentExercise.repeat > 0" class="my-4"></v-divider>
+        </div>
+        <div style="min-height: 54px">
+          <v-slider
+            v-if="currentExercise.repeat > 0"
+            v-model="dataRest"
+            :max="300"
+            :min="2.5"
+            step="2.5"
+            always-dirty
+            thumb-size="48"
+            :disabled="!editWorkout"
+            prepend-icon="mdi-progress-clock"
+            hint="Time to rest between sets"
+            persistent-hint
+            label="Rest"
+          >
+            <template v-slot:thumb-label="props">
+              {{ count(Math.round(props.value)) }}
+            </template>
+            <template #append>
+              <v-text-field
+                v-if="editWorkout"
+                v-model="dataRest"
+                class="mt-0 pt-0"
+                min="2.5"
+                max="300"
+                step="2.5"
+                hide-details
+                single-line
+                type="number"
+                style="width: 40px"
+                :rules="[
+                  rules.required,
+                  rules.number,
+                  rules.min(2.5),
+                  rules.max(300)
+                ]"
+              ></v-text-field>
+              <v-label v-else>{{ count(Math.round(dataRest)) }}</v-label>
+            </template>
+          </v-slider>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -343,6 +372,20 @@ export default {
         })
       }
     },
+    dataScapPulls: {
+      get() {
+        return this.currentExercise.scappulls
+      },
+      set(value) {
+        this.setData({
+          id: this.id,
+          value: { scappulls: value },
+          // value,
+          // key: 'pullups',
+          index: this.index
+        })
+      }
+    },
     dataRepeat: {
       get() {
         return this.currentExercise.repeat
@@ -428,6 +471,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/theme/variables.scss';
+<style lang="scss">
+.exercise {
+  .v-expansion-panel-header,
+  .v-expansion-panel-content__wrap {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
 </style>
