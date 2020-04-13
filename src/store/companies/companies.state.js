@@ -3645,46 +3645,77 @@ export default {
     },
     {
       name: 'Crimptonite',
-      description: '',
+      description: 'We make training tools dedicated for the Climbing sport.',
       id: 20,
-      disabled: true,
       website: 'https://crimptonite.com/',
       hangboards: [
         {
           name: 'Fixed hangboard',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRIMPTONITEFIXED.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
               name: ''
             }
           ]
         },
         {
           name: 'Mobile hangboard',
-          disabled: true,
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRIMPTONITEMOB.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
               name: ''
             }
           ]
         },
         {
           name: 'Mobile hangboard UL',
-          disabled: true,
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRIMPTONITEMOBUL.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
               name: ''
             }
           ]
@@ -3848,14 +3879,12 @@ export default {
       name: 'CrimpMonster',
       description: '',
       id: 25,
-      disabled: true,
       website: 'https://crimpmonster.com/',
       hangboards: [
         {
           name: '3x4 small / 4x3 large',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CRIMPMOSTERL.svg',
           holds: [
             {
               id: '',
@@ -3870,18 +3899,81 @@ export default {
       name: 'Vola',
       description: '',
       id: 26,
-      disabled: true,
       website: 'https://www.thevola.com/',
       hangboards: [
         {
           name: 'Hangboard',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/VOLAHANGBOARD.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
               name: ''
             }
           ]
@@ -3892,18 +3984,66 @@ export default {
       name: 'Alpidex',
       description: '',
       id: 27,
-      disabled: true,
       website: 'https://www.alpidex.com/',
       hangboards: [
         {
           name: 'Training Board - Pro 2.0 (53x20)',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ALPIDEXTRAINING.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
               name: ''
             }
           ]
@@ -3962,18 +4102,86 @@ export default {
       name: 'Smartrock',
       description: '',
       id: 29,
-      disabled: true,
       website: 'https://smartrock.de/',
       hangboards: [
         {
           name: 'Griptonite',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/SMARTROCKGRIP.svg',
           holds: [
             {
-              id: '',
+              id: 'h1',
               class: 0,
+              name: ''
+            },
+            {
+              id: 'h2',
+              class: 1,
+              name: ''
+            },
+            {
+              id: 'h3',
+              class: 2,
+              name: ''
+            },
+            {
+              id: 'h4',
+              class: 3,
+              name: ''
+            },
+            {
+              id: 'h5',
+              class: 4,
+              name: ''
+            },
+            {
+              id: 'h6',
+              class: 5,
+              name: ''
+            },
+            {
+              id: 'h7',
+              class: 6,
+              name: ''
+            },
+            {
+              id: 'h8',
+              class: 7,
+              name: ''
+            },
+            {
+              id: 'h9',
+              class: 8,
+              name: ''
+            },
+            {
+              id: 'h10',
+              class: 9,
+              name: ''
+            },
+            {
+              id: 'h11',
+              class: 10,
+              name: ''
+            },
+            {
+              id: 'h12',
+              class: 11,
+              name: ''
+            },
+            {
+              id: 'h13',
+              class: 12,
+              name: ''
+            },
+            {
+              id: 'h14',
+              class: 13,
+              name: ''
+            },
+            {
+              id: 'h15',
+              class: 14,
               name: ''
             }
           ]

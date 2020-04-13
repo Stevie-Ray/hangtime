@@ -5,7 +5,13 @@
     <span v-if="data.scappulls > 1">{{ data.scappulls }} </span>
     <span v-if="data.scappulls > 0">Scap </span>
     <span v-if="data.left === null || data.right === null">One-Arm </span>
-    <span>{{ options[data.exercise].name }}</span>
+    <span
+      v-if="
+        (data.scappulls > 0 && data.exercise === 0) ||
+          (data.pullups > 0 && data.exercise === 0)
+      "
+    ></span>
+    <span v-else>{{ options[data.exercise].name }}</span>
     <span v-if="data.scappulls > 0"> Pull</span>
     <span v-if="data.pullups > 0"> Pull-up</span>
     <span v-if="data.pullups > 1 || data.scappulls > 1">s</span>

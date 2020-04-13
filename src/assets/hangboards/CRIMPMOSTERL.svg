@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="953px" height="334px" viewBox="0 0 953 334" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>Group 5</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-5" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M952,332 L32.4911243,332 C23.9356126,332 17,326.509286 17,319.736148 L17,12.2638522 C17,5.49071367 23.9356126,0 32.4911243,0 L952,0" id="hangboard"></path>
+            <path d="M952,106 L15.4976744,106 C6.93854518,106 0,100.369412 0,93.4237288 L0,12.5762712 C0,5.6305884 6.93854518,0 15.4976744,0 L952,0" id="h2"></path>
+            <path d="M952,332 L15.4976744,332 C6.93854518,332 0,326.369412 0,319.423729 L0,238.576271 C0,231.630588 6.93854518,226 15.4976744,226 L952,226" id="h4"></path>
+            <path d="M501,332 L15.4981317,332 C6.9387499,332 0,326.369412 0,319.423729 L0,238.576271 C0,231.630588 6.9387499,226 15.4981317,226 L501,226" id="h3"></path>
+        </g>
+    </g>
+</svg>
