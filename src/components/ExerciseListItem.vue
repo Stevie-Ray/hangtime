@@ -17,12 +17,7 @@
         </v-list-item-subtitle>
 
         <v-list-item-title>
-          <span v-if="data.repeat > 0">{{ data.repeat + 1 }}x </span>
-          <span v-if="data.pullups > 1">{{ data.pullups }} </span>
-          <span v-if="data.left === null || data.right === null">One-Arm </span>
-          <span>{{ options[data.exercise].name }}</span>
-          <span v-if="data.pullups > 0"> Pull-up</span>
-          <span v-if="data.pullups > 1">s</span>
+          <workout-item-name :data="data"></workout-item-name>
         </v-list-item-title>
 
         <v-list-item-subtitle class="text--primary">
@@ -44,8 +39,10 @@
 <script>
 import { mapState } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
+import WorkoutItemName from './WorkoutItemName'
 
 export default {
+  components: { WorkoutItemName },
   props: {
     data: Object,
     editWorkout: Boolean,

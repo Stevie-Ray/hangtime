@@ -5,7 +5,7 @@
         <v-list-item-content>
           <v-select
             v-model="settingsCompany"
-            :items="companies"
+            :items="sortedCompanies"
             item-text="name"
             item-value="id"
             label="Hangboard manufacturer"
@@ -25,7 +25,7 @@
           <!--                  @change="setSetting"-->
           <v-select
             v-model="settingsHangboard"
-            :items="companies[hangboardToAdd.company].hangboards"
+            :items="sortedHangboards"
             item-text="name"
             item-value="id"
             label="Select your model"
@@ -93,6 +93,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
+import { orderBy } from 'lodash'
 
 export default {
   computed: {
@@ -114,6 +115,15 @@ export default {
       set(value) {
         this.setHangboard(value)
       }
+    },
+    sortedCompanies() {
+      return orderBy(this.companies, 'name')
+    },
+    sortedHangboards() {
+      return orderBy(
+        this.companies[this.hangboardToAdd.company].hangboards,
+        'name'
+      )
     }
   },
   methods: {

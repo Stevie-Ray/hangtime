@@ -12,20 +12,7 @@
         />
       </v-avatar>
       <v-toolbar-title v-if="currentExercise">
-        <!-- Exercise details -->
-        <span v-if="currentExercise.repeat > 0"
-          >{{ currentExercise.repeat + 1 }}x
-        </span>
-        <span v-if="currentExercise.pullups > 1"
-          >{{ currentExercise.pullups }}
-        </span>
-        <span
-          v-if="currentExercise.left === null || currentExercise.right === null"
-          >One-Arm
-        </span>
-        <span>{{ options[currentExercise.exercise].name }}</span>
-        <span v-if="currentExercise.pullups > 0"> Pull-up</span>
-        <span v-if="currentExercise.pullups > 1">s</span>
+        <workout-item-name :data="currentExercise"></workout-item-name>
 
         <div v-if="currentExercise.time" class="subheading">
           {{ count(currentExercise.time) }}
@@ -90,9 +77,10 @@
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
 import ExerciseItem from '@/components/ExerciseItem'
 import { getImg, count } from '@/misc/helpers'
+import WorkoutItemName from '../../components/WorkoutItemName'
 
 export default {
-  components: { ExerciseItem },
+  components: { WorkoutItemName, ExerciseItem },
   props: {
     id: String,
     index: Number,

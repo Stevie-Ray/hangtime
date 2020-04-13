@@ -132,22 +132,9 @@
               <!-- title -->
               <div class="Title">
                 <div class="title">
-                  <span v-if="currentExercise.repeat > 0"
-                    >{{ currentExercise.repeat + 1 }}x
-                  </span>
-                  <span v-if="currentExercise.pullups > 1"
-                    >{{ currentExercise.pullups }}
-                  </span>
-                  <span
-                    v-if="
-                      currentExercise.left === null ||
-                        currentExercise.right === null
-                    "
-                    >One-Arm
-                  </span>
-                  <span>{{ options[currentExercise.exercise].name }}</span>
-                  <span v-if="currentExercise.pullups > 0"> Pull-up</span>
-                  <span v-if="currentExercise.pullups > 1">s</span>
+                  <workout-item-name
+                    :data="currentExercise"
+                  ></workout-item-name>
                 </div>
                 <div class="subheading">
                   <span>Hold for {{ currentExercise.hold }} sec. </span>
@@ -193,9 +180,10 @@ import { mapState, mapGetters } from 'vuex'
 import NoSleep from 'nosleep.js'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count, speak, sound } from '@/misc/helpers'
+import WorkoutItemName from '../../components/WorkoutItemName'
 
 export default {
-  components: { Hangboard },
+  components: { WorkoutItemName, Hangboard },
   props: {
     id: String,
     userId: String
