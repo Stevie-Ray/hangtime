@@ -105,7 +105,8 @@
                         v-if="
                           (currentStats[index] &&
                             currentStats[index].left === null) ||
-                            currentStats[index].right === null
+                            (currentStats[index] &&
+                              currentStats[index].right === null)
                         "
                         >One-Arm
                       </span>
@@ -182,8 +183,10 @@
                       <span>Max </span>
                       <span
                         v-if="
-                          currentStats[index].left === null ||
-                            currentStats[index].right === null
+                          (currentStats[index] &&
+                            currentStats[index].left === null) ||
+                            (currentStats[index] &&
+                              currentStats[index].right === null)
                         "
                         >One-Arm
                       </span>
@@ -196,7 +199,7 @@
             <div
               v-if="
                 (currentStats[index] && currentStats[index].left === null) ||
-                  currentStats[index].right === null
+                  (currentStats[index] && currentStats[index].right === null)
               "
               class="subtitle-2"
             >

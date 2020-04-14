@@ -52,33 +52,35 @@ export default {
     getImg,
     toggleLeft(e) {
       if (this.editWorkout) {
-        const clicked = this.hangboard.holds.find(
-          hold => hold.id === e.target.id
-        )
-        if (clicked) {
-          this.$emit('left', clicked.class)
+        const hold = e.target.id
+        const n = hold.startsWith('h')
+
+        if (n && hold.length <= 3) {
+          const number = parseInt(hold.substr(1), 10) - 1
+          this.$emit('left', number)
         }
       }
     },
     toggleRight(e) {
       if (this.editWorkout) {
-        const clicked = this.hangboard.holds.find(
-          hold => hold.id === e.target.id
-        )
-        if (clicked) {
-          this.$emit('right', clicked.class)
+        const hold = e.target.id
+        const n = hold.startsWith('h')
+
+        if (n && hold.length <= 3) {
+          const number = parseInt(hold.substr(1), 10) - 1
+          this.$emit('right', number)
         }
       }
     },
     setLeftClass() {
       if (this.data.left || this.data.left === 0) {
-        return this.hangboard.holds[this.data.left].id
+        return `h${(this.data.left + 1).toString()}`
       }
       return ''
     },
     setRightClass() {
       if (this.data.right || this.data.right === 0) {
-        return this.hangboard.holds[this.data.right].id
+        return `h${(this.data.right + 1).toString()}`
       }
       return ''
     }

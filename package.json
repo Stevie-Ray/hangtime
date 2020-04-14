@@ -66,7 +66,7 @@
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.4.3",
-    "webpack-bundle-analyzer": "^3.6.1",
+    "webpack-bundle-analyzer": "^3.7.0",
     "webpack-merge": "^4.2.2"
   },
   "bundlesize": [

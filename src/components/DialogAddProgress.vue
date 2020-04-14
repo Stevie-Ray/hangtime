@@ -98,7 +98,8 @@ export default {
           name: 'progress-list',
           params: {
             data: this.currentStats[this.currentStats.length],
-            index: this.currentStats.length
+            index: this.currentStats.length,
+            userId: this.user.id
           }
         })
       }
