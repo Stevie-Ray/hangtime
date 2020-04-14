@@ -576,25 +576,17 @@ export default {
       ]
     },
     {
-      name: 'Eva López',
+      name: 'Surfaces for Climbing (Eva López)',
       description: '',
       id: 22,
-      disabled: true,
-      website: 'https://transgressionusa.com/',
+      website: 'https://www.surfacesforclimbing.com/',
       hangboards: [
         {
-          name: 'Progression Hangboard',
-          disabled: true,
+          name: 'Progression / Transgression',
+
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
-          name: 'Transgression Hangboard',
-          disabled: true,
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/SURFACEGRESSION.svg',
+          holds: 8
         }
       ]
     },
@@ -602,22 +594,13 @@ export default {
       name: 'Wataaah',
       description: '',
       id: 23,
-      disabled: true,
       website: 'https://www.wataaah.de/',
       hangboards: [
         {
-          name: 'Kurt',
-          disabled: true,
+          name: 'Transformer board (inc. Kurt)',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
-          name: 'Transformer board',
-          disabled: true,
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WATAAAHTRANS.svg',
+          holds: 6
         }
       ]
     },
@@ -660,7 +643,7 @@ export default {
         {
           name: '3x4 small / 4x3 large',
           id: 0,
-          image: 'hangboards/CRIMPMOSTERL.svg',
+          image: 'hangboards/CRIMPMOSTER.svg',
           holds: 3
         }
       ]
@@ -686,17 +669,16 @@ export default {
       website: 'https://www.alpidex.com/',
       hangboards: [
         {
-          name: 'Training Board - Pro 2.0 (53x20)',
+          name: 'Training Board - Higher 2.0 (48x32)',
           id: 0,
-          image: 'hangboards/ALPIDEXTRAINING.svg',
-          holds: 10
+          image: 'hangboards/ALPIDEXHIGHER.svg',
+          holds: 8
         },
         {
-          name: 'Training Board - Higher 2.0 (48x32)',
-          disabled: true,
+          name: 'Training Board - Pro 2.0 (53x20)',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ALPIDEXTRAINING.svg',
+          holds: 10
         }
       ]
     },
@@ -812,7 +794,7 @@ export default {
       ]
     },
     {
-      name: 'Euroholds / Rokodromo',
+      name: 'Euroholds (Rokodromo)',
       description: '',
       id: 33,
       disabled: true,
@@ -861,6 +843,13 @@ export default {
           id: 2,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
+        },
+        {
+          name: 'The Black Peacemaker',
+          disabled: true,
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     },
@@ -898,14 +887,12 @@ export default {
       name: 'Escape Climbing',
       description: '',
       id: 36,
-      disabled: true,
       website: 'https://escapeclimbing.com/',
       hangboards: [
         {
           name: 'Unlimited Board',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/ESCAPEULTIMED.svg',
           holds: 0
         },
         {
@@ -926,6 +913,23 @@ export default {
       hangboards: [
         {
           name: 'Training Board',
+          disabled: true,
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Atomik Holds',
+      description:
+        'High quality climbing holds and Ninja Warrior products from Provo, Utah, USA',
+      id: 38,
+      disabled: true,
+      website: 'https://www.atomikclimbingholds.com',
+      hangboards: [
+        {
+          name: 'Yaniro Power Hang Board',
           disabled: true,
           id: 0,
           image: 'hangboards/NOTFOUND.svg',

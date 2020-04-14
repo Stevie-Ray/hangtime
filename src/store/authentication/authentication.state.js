@@ -1,7 +1,7 @@
 export default {
   user: undefined,
   hangboardToAdd: {
-    company: 0,
+    company: 27,
     hangboard: 0
   },
   settings: {
