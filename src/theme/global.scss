@@ -47,6 +47,9 @@
 
   .v-stepper__content {
     padding: 0;
+    .v-card__actions {
+      padding: 8px 16px;
+    }
   }
 
   // divider color

@@ -232,7 +232,6 @@ export default {
       this.setCompany(1)
     },
     saveWalkthrough() {
-      this.setCompany(0)
       const exists = this.user.settings.hangboards.some(
         el =>
           el.company === this.hangboardToAdd.company &&
@@ -244,6 +243,7 @@ export default {
           this.user.settings.hangboards.length - 1
         )
       }
+      this.setCompany(0)
       this.e1 = 4
     }
   }
