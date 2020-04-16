@@ -124,6 +124,12 @@
                   <v-row>
                     <v-col cols="12" class="py-0">
                       <hangboard :data="currentExercise"></hangboard>
+                      <hand
+                        v-if="
+                          currentExercise.leftHand || currentExercise.rightHand
+                        "
+                        :data="currentExercise"
+                      ></hand>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -179,11 +185,12 @@
 import { mapState, mapGetters } from 'vuex'
 import NoSleep from 'nosleep.js'
 import Hangboard from '@/components/Hangboard'
+import Hand from '@/components/Hand'
 import { getImg, count, speak, sound } from '@/misc/helpers'
 import WorkoutItemName from '../../components/WorkoutItemName'
 
 export default {
-  components: { WorkoutItemName, Hangboard },
+  components: { WorkoutItemName, Hangboard, Hand },
   props: {
     id: String,
     userId: String
@@ -406,7 +413,7 @@ export default {
           textToSpeak += `. For ${this.currentExercise.hold} seconds. `
           if (this.currentExercise.repeat > 0) {
             textToSpeak += `Than rest for ${this.currentExercise.rest} seconds. `
-            textToSpeak += `Repeat ${this.currentExercise.repeat} times.`
+            textToSpeak += `Repeat ${this.currentExercise.repeat + 1} times.`
           }
         }
 

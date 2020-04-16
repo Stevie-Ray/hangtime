@@ -45,6 +45,25 @@
     }
   }
 
+  .run {
+    .hand-container {
+      position: relative;
+    }
+    .hand-text {
+      display: none;
+    }
+    .hand {
+      top: -50px;
+      position: absolute;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .left-hand,
+    .right-hand {
+      max-width: 50px;
+    }
+  }
+
   .v-stepper__content {
     padding: 0;
     .v-card__actions {
@@ -94,6 +113,16 @@
     &.h17 #h17,
     &.h18 #h18 {
       fill: #366d73;
+    }
+  }
+
+  svg {
+    &.f1 #f1,
+    &.f2 #f2,
+    &.f3 #f3,
+    &.f4 #f4,
+    &.f5 #f5 {
+      visibility: hidden;
     }
   }
 

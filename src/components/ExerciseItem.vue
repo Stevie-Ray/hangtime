@@ -150,6 +150,13 @@
                 ><strong>Optional</strong></v-expansion-panel-header
               >
               <v-expansion-panel-content>
+                <hand
+                  :data="currentExercise"
+                  :edit-workout="editWorkout"
+                  @left="setLeftHand($event)"
+                  @right="setRightHand($event)"
+                ></hand>
+
                 <!-- pullups  -->
                 <v-slider
                   v-if="editWorkout || currentExercise.pullups > 0"
@@ -282,10 +289,11 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
+import Hand from '@/components/Hand'
 import { getImg, count } from '@/misc/helpers'
 
 export default {
-  components: { Hangboard },
+  components: { Hangboard, Hand },
   props: {
     id: String,
     index: Number,
@@ -309,6 +317,8 @@ export default {
     //   return this.workoutById(this.id)
     // },
     currentExercise() {
+      if (!this.workoutById(this.id)) return
+      // eslint-disable-next-line consistent-return
       return this.workoutById(this.id).exercises[this.index]
     },
     dataExercise: {
@@ -463,6 +473,24 @@ export default {
           value: { right: null },
           // value,
           // key: 'exercise',
+          index: this.index
+        })
+      }
+    },
+    setRightHand(event) {
+      if (this.currentExercise.rightHand !== event) {
+        this.setData({
+          id: this.id,
+          value: { rightHand: event },
+          index: this.index
+        })
+      }
+    },
+    setLeftHand(event) {
+      if (this.currentExercise.leftHand !== event) {
+        this.setData({
+          id: this.id,
+          value: { leftHand: event },
           index: this.index
         })
       }

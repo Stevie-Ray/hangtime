@@ -52,7 +52,13 @@
           @goToExerciseDetails="
             $router.push({
               name: 'exercise',
-              params: { id: id, index: $event, editingWorkout: editWorkout }
+              params: {
+                id: id,
+                company: currentWorkout.company,
+                hangboard: currentWorkout.hangboard,
+                index: $event,
+                editingWorkout: editWorkout
+              }
             })
           "
         ></exercise-list-item>

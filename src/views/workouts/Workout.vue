@@ -275,6 +275,8 @@ export default {
         name: 'exercise',
         params: {
           id: this.id,
+          company: this.currentWorkout.company,
+          hangboard: this.currentWorkout.hangboard,
           index: this.currentWorkout.exercises.length - 1,
           editingWorkout: true
         }
