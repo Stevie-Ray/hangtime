@@ -101,6 +101,8 @@ export default {
       return this.workoutById(this.id)
     },
     currentExercise() {
+      if (!this.currentWorkout) return
+      // eslint-disable-next-line consistent-return
       return this.currentWorkout.exercises[this.index]
     },
     userWorkout() {

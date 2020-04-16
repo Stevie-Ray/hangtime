@@ -144,13 +144,17 @@
         <div>
           <v-divider class="mt-4"></v-divider>
 
-          <v-expansion-panels flat>
+          <v-expansion-panels v-model="openAdvancedTab" flat>
             <v-expansion-panel>
               <v-expansion-panel-header
-                ><strong>Optional</strong></v-expansion-panel-header
+                ><div>
+                  <v-btn icon><v-icon>mdi-menu</v-icon></v-btn
+                  ><span>Advanced features</span>
+                </div></v-expansion-panel-header
               >
               <v-expansion-panel-content>
                 <hand
+                  class="mb-2"
                   :data="currentExercise"
                   :edit-workout="editWorkout"
                   @left="setLeftHand($event)"
@@ -181,7 +185,10 @@
                   </template>
                 </v-slider>
 
-                <v-divider class="my-4"></v-divider>
+                <v-divider
+                  v-if="editWorkout || currentExercise.pullups > 0"
+                  class="my-4"
+                ></v-divider>
 
                 <!-- scapula/scap pulls/pull ups  -->
                 <v-slider
@@ -206,80 +213,88 @@
                     <v-label>{{ dataScapPulls }}x</v-label>
                   </template>
                 </v-slider>
+
+                <v-divider
+                  v-if="editWorkout || currentExercise.scappulls > 0"
+                  class="my-4"
+                ></v-divider>
+
+                <!-- repeat  -->
+                <v-slider
+                  v-if="editWorkout || currentExercise.repeat > 0"
+                  v-model="dataRepeat"
+                  :max="9"
+                  :min="0"
+                  step="1"
+                  ticks
+                  thumb-size="48"
+                  :disabled="!editWorkout"
+                  prepend-icon="mdi-history"
+                  hint="Repeat current exercise (1x = no repeat)"
+                  persistent-hint
+                  label="Sets"
+                >
+                  <template v-slot:thumb-label="props"
+                    >{{ props.value + 1 }}x
+                  </template>
+                  <template #append>
+                    <v-label>{{ dataRepeat + 1 }}x</v-label>
+                  </template>
+                </v-slider>
+
+                <!-- rest  -->
+                <div style="min-height: 17px">
+                  <v-divider
+                    v-if="currentExercise.repeat > 0"
+                    class="my-4"
+                  ></v-divider>
+                </div>
+                <div style="min-height: 54px">
+                  <v-slider
+                    v-if="currentExercise.repeat > 0"
+                    v-model="dataRest"
+                    :max="300"
+                    :min="2.5"
+                    step="2.5"
+                    always-dirty
+                    thumb-size="48"
+                    :disabled="!editWorkout"
+                    prepend-icon="mdi-progress-clock"
+                    hint="Time to rest between sets"
+                    persistent-hint
+                    label="Rest"
+                  >
+                    <template v-slot:thumb-label="props">
+                      {{ count(Math.round(props.value)) }}
+                    </template>
+                    <template #append>
+                      <v-text-field
+                        v-if="editWorkout"
+                        v-model="dataRest"
+                        class="mt-0 pt-0"
+                        min="2.5"
+                        max="300"
+                        step="2.5"
+                        hide-details
+                        single-line
+                        type="number"
+                        style="width: 40px"
+                        :rules="[
+                          rules.required,
+                          rules.number,
+                          rules.min(2.5),
+                          rules.max(300)
+                        ]"
+                      ></v-text-field>
+                      <v-label v-else>{{
+                        count(Math.round(dataRest))
+                      }}</v-label>
+                    </template>
+                  </v-slider>
+                </div>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
-
-          <v-divider class="mb-4"></v-divider>
-        </div>
-
-        <!-- repeat  -->
-        <v-slider
-          v-if="editWorkout || currentExercise.repeat > 0"
-          v-model="dataRepeat"
-          :max="9"
-          :min="0"
-          step="1"
-          ticks
-          thumb-size="48"
-          :disabled="!editWorkout"
-          prepend-icon="mdi-history"
-          hint="Repeat current exercise (1x = no repeat)"
-          persistent-hint
-          label="Repeat"
-        >
-          <template v-slot:thumb-label="props"
-            >{{ props.value + 1 }}x
-          </template>
-          <template #append>
-            <v-label>{{ dataRepeat + 1 }}x</v-label>
-          </template>
-        </v-slider>
-
-        <!-- rest  -->
-        <div style="min-height: 17px">
-          <v-divider v-if="currentExercise.repeat > 0" class="my-4"></v-divider>
-        </div>
-        <div style="min-height: 54px">
-          <v-slider
-            v-if="currentExercise.repeat > 0"
-            v-model="dataRest"
-            :max="300"
-            :min="2.5"
-            step="2.5"
-            always-dirty
-            thumb-size="48"
-            :disabled="!editWorkout"
-            prepend-icon="mdi-progress-clock"
-            hint="Time to rest between sets"
-            persistent-hint
-            label="Rest"
-          >
-            <template v-slot:thumb-label="props">
-              {{ count(Math.round(props.value)) }}
-            </template>
-            <template #append>
-              <v-text-field
-                v-if="editWorkout"
-                v-model="dataRest"
-                class="mt-0 pt-0"
-                min="2.5"
-                max="300"
-                step="2.5"
-                hide-details
-                single-line
-                type="number"
-                style="width: 40px"
-                :rules="[
-                  rules.required,
-                  rules.number,
-                  rules.min(2.5),
-                  rules.max(300)
-                ]"
-              ></v-text-field>
-              <v-label v-else>{{ count(Math.round(dataRest)) }}</v-label>
-            </template>
-          </v-slider>
         </div>
       </v-col>
     </v-row>
@@ -313,9 +328,15 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
-    // currentWorkout() {
-    //   return this.workoutById(this.id)
-    // },
+    openAdvancedTab: {
+      get() {
+        if (!this.editWorkout) return 0
+        return false
+      },
+      set() {
+        return 0
+      }
+    },
     currentExercise() {
       if (!this.workoutById(this.id)) return
       // eslint-disable-next-line consistent-return
