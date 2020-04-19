@@ -936,6 +936,38 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Arête Climbing',
+      description: 'Solid Climbing',
+      id: 39,
+      disabled: true,
+      website: 'https://arête.com',
+      hangboards: [
+        {
+          name: 'Crag Stick',
+          disabled: true,
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Nature Climbing',
+      description: '',
+      id: 40,
+      disabled: true,
+      website: 'https://natureclimbing.com/',
+      hangboards: [
+        {
+          name: 'STOAK board',
+          disabled: true,
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
