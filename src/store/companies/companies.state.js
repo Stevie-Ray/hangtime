@@ -608,22 +608,19 @@ export default {
       name: 'Fingerschinder',
       description: '',
       id: 24,
-      disabled: true,
       website: 'https://www.fingerschinder.com/',
       hangboards: [
         {
           name: 'Fingerschinder Classic',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/FINGERSCHINDERCLASSIC.svg',
+          holds: 4
         },
         {
           name: 'Fingerschinder Plus',
-          disabled: true,
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/FINGERSCHINDERPLUS.svg',
+          holds: 2
         },
         {
           name: 'Fingerschinder Mini',
@@ -941,15 +938,13 @@ export default {
       name: 'Arête Climbing',
       description: 'Solid Climbing',
       id: 39,
-      disabled: true,
       website: 'https://arête.com',
       hangboards: [
         {
           name: 'Crag Stick',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ARETECRABSTICK.svg',
+          holds: 2
         }
       ]
     },

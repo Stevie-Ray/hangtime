@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="336px" height="135px" viewBox="0 0 336 135" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>ARETECRABSTICK</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ARETECRABSTICK" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <path d="M335,133 L17.908805,133 C8.01804512,133 0,122.173431 0,108.818182 L0,24.1818182 C0,10.8265688 8.01804512,0 17.908805,0 L335,0" id="hangboard"></path>
+            <path d="M335,97 L225.5375,97 C209.22439,97 196,90.2890853 196,82.0107527 L196,70.9892473 C196,62.7109146 209.22439,56 225.5375,56 L335,56" id="h1"></path>
+            <rect id="h2" x="16" y="56" width="166" height="38" rx="19"></rect>
+        </g>
+    </g>
+</svg>
