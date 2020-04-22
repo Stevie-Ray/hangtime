@@ -531,7 +531,7 @@ export default {
           name: 'Ballsy Board',
           id: 0,
           image: 'hangboards/SIMONDBALLSY.svg',
-          holds: 8
+          holds: 10
         }
       ]
     },
@@ -952,15 +952,13 @@ export default {
       name: 'Nature Climbing',
       description: '',
       id: 40,
-      disabled: true,
       website: 'https://natureclimbing.com/',
       hangboards: [
         {
           name: 'STOAK board',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/NATURESTOAK.svg',
+          holds: 3
         }
       ]
     }
