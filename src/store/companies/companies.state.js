@@ -854,15 +854,13 @@ export default {
       name: 'Lyons Edge',
       description: '',
       id: 35,
-      disabled: true,
       website: 'https://lyonsedge.com/',
       hangboards: [
         {
           name: 'The Explorer',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/LYONSEXPLORER.svg',
+          holds: 2
         },
         {
           name: 'The Base-Camp',
