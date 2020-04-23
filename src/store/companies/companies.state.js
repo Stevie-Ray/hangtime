@@ -32,11 +32,16 @@ export default {
           holds: 2
         },
         {
-          name: 'Revolverboard',
+          name: 'Power Ant Mini',
           id: 4,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ANTMINI.svg',
+          holds: 8
+        },
+        {
+          name: 'Revolverboard',
+          id: 5,
+          image: 'hangboards/ANTREVOLVER.svg',
+          holds: 5
         }
       ]
     },
@@ -857,24 +862,22 @@ export default {
       website: 'https://lyonsedge.com/',
       hangboards: [
         {
-          name: 'The Explorer',
+          name: 'The Base-Camp',
           id: 0,
+          image: 'hangboards/LYONSBASE.svg',
+          holds: 3
+        },
+        {
+          name: 'The Explorer',
+          id: 1,
           image: 'hangboards/LYONSEXPLORER.svg',
           holds: 2
         },
         {
-          name: 'The Base-Camp',
-          disabled: true,
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
           name: 'The Hideout',
-          disabled: true,
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/LYONSHIDEOUT.svg',
+          holds: 4
         }
       ]
     },

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="630px" height="338px" viewBox="0 0 630 338" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="588px" height="316px" viewBox="0 0 588 316" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
     <title>PROBLEMHANZO</title>
     <desc>Created with Sketch.</desc>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="PROBLEMHANZO" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
-            <path d="M628.004486,336 L94,336 C42.0852335,336 0,293.914766 0,242 L0,94 C0,42.0852335 42.0852335,0 94,0 L628.004486,0" id="hangboard"></path>
-            <path d="M628.004486,281 L93,281 C72.0131795,281 55,263.98682 55,243 L55,238 C55,217.01318 72.0131795,200 93,200 L628.004486,200" id="h2"></path>
-            <path d="M628,281 L441,281 C420.01318,281 403,263.98682 403,243 L403,238 C403,217.01318 420.01318,200 441,200 L627.892578,200" id="h3"></path>
-            <rect id="h1" x="55" y="46" width="369" height="81" rx="40.5"></rect>
+            <path d="M587,314 L87.8624297,314 C39.3373497,314 0,274.670347 0,226.154762 L0,87.8452381 C0,39.3296527 39.3373497,0 87.8624297,0 L587,0" id="hangboard"></path>
+            <path d="M587,263 L86.5459695,263 C66.9144726,263 51,247.037016 51,227.345679 L51,222.654321 C51,202.962984 66.9144726,187 86.5459695,187 L587,187" id="h2"></path>
+            <path d="M587,263 L412.466667,263 C392.878968,263 377,247.037016 377,227.345679 L377,222.654321 C377,202.962984 392.878968,187 412.466667,187 L586.899739,187" id="h3"></path>
+            <rect id="h1" x="51" y="43" width="345" height="76" rx="38"></rect>
         </g>
     </g>
 </svg>

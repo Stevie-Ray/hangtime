@@ -1,7 +1,7 @@
 <template>
   <div class="hand-container">
     <v-row class="hand-text">
-      <v-list two-line>
+      <v-list two-line width="100%">
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title
@@ -13,12 +13,20 @@
               style="font-size:12px"
             >
               Tab fingers that are <strong>not</strong> allowed
-              <strong>(Beta)</strong>
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action v-if="editWorkout" @click="resetHands">
-            <v-btn icon>
+            <v-btn
+              v-if="
+                (data.leftHand && data.leftHand.length) ||
+                  (data.rightHand && data.rightHand.length)
+              "
+              icon
+            >
               <v-icon>mdi-undo</v-icon>
+            </v-btn>
+            <v-btn v-else icon>
+              <v-icon>mdi-hand</v-icon>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
