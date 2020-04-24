@@ -35,6 +35,7 @@
     <div class="hand">
       <div class="left-hand" @click="toggleLeft">
         <svg-inline
+          v-if="data.left !== null"
           :class="setLeftClass()"
           :custom-class-name="setLeftClass()"
           :src="getImg('icons/hand.svg')"
@@ -43,6 +44,7 @@
       </div>
       <div class="right-hand" @click="toggleRight">
         <svg-inline
+          v-if="data.right !== null"
           :class="setRightClass()"
           :custom-class-name="setRightClass()"
           :src="getImg('icons/hand.svg')"

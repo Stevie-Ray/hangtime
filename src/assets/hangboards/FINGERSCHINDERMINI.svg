@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="337px" height="124px" viewBox="0 0 337 124" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>FINGERSCHINDERMINI</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FINGERSCHINDERMINI" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M336,122 L61,122 C27.3106303,122 0,94.6893697 0,61 C0,27.3106303 27.3106303,0 61,0 L336,0" id="h3"></path>
+            <path d="M336,87 L59.5,87 C45.4167389,87 34,75.5832611 34,61.5 C34,47.4167389 45.4167389,36 59.5,36 L336,36" id="h2"></path>
+            <path d="M336,84 L324.5,84 C312.625878,84 303,74.3741221 303,62.5 C303,50.6258779 312.625878,41 324.5,41 L336,41" id="hole"></path>
+            <rect id="h1" x="41" y="41" width="150" height="43" rx="21.5"></rect>
+        </g>
+    </g>
+</svg>

@@ -629,10 +629,9 @@ export default {
         },
         {
           name: 'Fingerschinder Mini',
-          disabled: true,
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/FINGERSCHINDERMINI.svg',
+          holds: 2
         }
       ]
     },
@@ -688,22 +687,26 @@ export default {
       name: 'Erzi',
       description: 'Quality products from wood GmbH',
       id: 28,
-      disabled: true,
       website: 'https://erzi.de/',
       hangboards: [
         {
+          name: 'Training board small',
+          id: 0,
+          image: 'hangboards/ERZISMALL.svg',
+          holds: 5
+        },
+        {
           name: 'Training board medium',
           disabled: true,
-          id: 0,
+          id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Training board large',
-          disabled: true,
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 2,
+          image: 'hangboards/ERZILARGE.svg',
+          holds: 21
         }
       ]
     },
