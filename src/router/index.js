@@ -217,7 +217,9 @@ const router = new Router({
       name: 'login',
       component: () =>
         import(
-          /* webpackChunkName: "client-chunk-login" */ '@/views/authentication/Login.vue'
+          /* webpackChunkName: "client-chunk-login" */
+          /* webpackPreload: true */
+          '@/views/authentication/Login.vue'
         ),
       meta: {
         authNotRequired: true

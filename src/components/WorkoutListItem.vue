@@ -87,7 +87,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/theme/variables.scss';
-</style>
