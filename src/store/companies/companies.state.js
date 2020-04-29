@@ -616,19 +616,19 @@ export default {
       website: 'https://www.fingerschinder.com/',
       hangboards: [
         {
-          name: 'Fingerschinder Classic',
+          name: 'Classic',
           id: 0,
           image: 'hangboards/FINGERSCHINDERCLASSIC.svg',
           holds: 4
         },
         {
-          name: 'Fingerschinder Plus',
+          name: 'Plus',
           id: 1,
           image: 'hangboards/FINGERSCHINDERPLUS.svg',
           holds: 2
         },
         {
-          name: 'Fingerschinder Mini',
+          name: 'Mini',
           id: 2,
           image: 'hangboards/FINGERSCHINDERMINI.svg',
           holds: 2
@@ -829,7 +829,7 @@ export default {
       website: 'https://blankslateclimbing.myshopify.com/',
       hangboards: [
         {
-          name: 'The Champion Hangboard',
+          name: 'Champion Hangboard',
           disabled: true,
           id: 0,
           image: 'hangboards/NOTFOUND.svg',
@@ -963,6 +963,112 @@ export default {
           id: 0,
           image: 'hangboards/NATURESTOAK.svg',
           holds: 3
+        }
+      ]
+    },
+    {
+      name: 'Digital Climbing Holds',
+      description: '',
+      id: 41,
+      disabled: true,
+      website: 'https://digital-climbing.com/',
+      hangboards: [
+        {
+          name: 'Small climbing beam',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Large climbing beam',
+          id: 1,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Taurine',
+          id: 2,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Volx Holds',
+      description: '',
+      id: 42,
+      disabled: true,
+      website: 'https://volxholds.com/',
+      hangboards: [
+        {
+          name: 'Froggy',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Dingo',
+          id: 1,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'AIX',
+      description: '',
+      id: 43,
+      disabled: true,
+      website: 'https://www.aix.cz/',
+      hangboards: [
+        {
+          name: 'Training board 1',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Training board 2',
+          id: 1,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Training board 3',
+          id: 2,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Woodboard',
+          id: 3,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: '360 Holds',
+      description: '',
+      id: 44,
+      disabled: true,
+      website: 'http://www.360holds.com/',
+      hangboards: [
+        {
+          name: '360 Rainbow Hangboard',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     }

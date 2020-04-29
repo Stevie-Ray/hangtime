@@ -37,6 +37,18 @@ export default {
       },
       immediate: true
     }
+  },
+  head: {
+    title: {
+      inner: 'Checking Login'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Check if user is logged in',
+        id: 'desc'
+      }
+    ]
   }
 }
 </script>

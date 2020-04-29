@@ -13,6 +13,7 @@
               height="144px"
               width="144px"
               :src="getImg('logo.svg')"
+              :alt="appTitle"
               class="mt-10 mb-10"
             />
 
@@ -20,7 +21,7 @@
             <div v-show="user === undefined" data-test="loader">
               <v-progress-circular :size="60" color="primary" indeterminate>
               </v-progress-circular>
-              <div class="text-center">Authenticating...</div>
+              <div class="text-center ">Authenticating...</div>
             </div>
 
             <!-- Offline instruction -->
@@ -60,7 +61,7 @@
               </v-col>
             </v-row>
 
-            <div class="caption grey--text font-weight-light">
+            <div class="caption grey--text darken-1 font-weight-light">
               &copy; 2020 {{ appTitle }}.
             </div>
           </div>
