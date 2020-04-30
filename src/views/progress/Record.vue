@@ -9,7 +9,7 @@
             params: { data, index, userId: user.id }
           })
         "
-        >mdi-arrow-left</v-icon
+        >{{ mdi.arrowLeft }}</v-icon
       >
       <v-avatar v-if="currentType" size="32px">
         <v-img
@@ -153,8 +153,8 @@
                 <div class="subheading">
                   <span v-if="!running">
                     <span v-if="!countingDown"
-                      >Press <v-icon small>mdi-timer</v-icon> to start counting
-                      down</span
+                      >Press <v-icon small>{{ mdi.timer }}</v-icon> to start
+                      counting down</span
                     >
                     <span v-else>Counting down.. Get in position!</span>
                   </span>
@@ -291,7 +291,7 @@
           fab
           @click="countDown"
         >
-          <v-icon>mdi-timer</v-icon>
+          <v-icon>{{ mdi.timer }}</v-icon>
         </v-btn>
         <v-btn
           v-if="running"
@@ -301,7 +301,7 @@
           fab
           @click="stopRecording"
         >
-          <v-icon>mdi-stop</v-icon>
+          <v-icon>{{ mdi.stop }}</v-icon>
         </v-btn>
       </v-speed-dial>
     </v-content>
@@ -313,6 +313,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import NoSleep from 'nosleep.js'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count, sound, speak } from '@/misc/helpers'
+import { mdiStop, mdiTimer, mdiArrowLeft } from '@mdi/js'
 
 export default {
   components: { Hangboard },
@@ -330,7 +331,12 @@ export default {
     timer: null,
     totalTime: 5,
     timeCorrection: 0,
-    configurable: false
+    configurable: false,
+    mdi: {
+      stop: mdiStop,
+      timer: mdiTimer,
+      arrowLeft: mdiArrowLeft
+    }
   }),
   computed: {
     ...mapState('authentication', ['user']),

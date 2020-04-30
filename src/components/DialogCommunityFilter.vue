@@ -15,14 +15,14 @@
             >
               <template v-slot:append-outer>
                 <v-btn v-if="sortOrder !== 'asc'" icon @click="setOrder('asc')">
-                  <v-icon>mdi-sort-ascending</v-icon>
+                  <v-icon>{{ mdi.sortAscending }}</v-icon>
                 </v-btn>
                 <v-btn
                   v-if="sortOrder !== 'desc'"
                   icon
                   @click="setOrder('desc')"
                 >
-                  <v-icon>mdi-sort-descending</v-icon>
+                  <v-icon>{{ mdi.sortDescending }}</v-icon>
                 </v-btn>
               </template>
             </v-select>
@@ -48,6 +48,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { mdiSortAscending, mdiSortDescending } from '@mdi/js'
 
 export default {
   props: {
@@ -71,7 +72,11 @@ export default {
         }
       },
       { filter: 'Level', value: ['level'] }
-    ]
+    ],
+    mdi: {
+      sortAscending: mdiSortAscending,
+      sortDescending: mdiSortDescending
+    }
   }),
   computed: {
     ...mapState('authentication', ['user']),

@@ -15,7 +15,7 @@
           </v-card-title>
           <v-card-subtitle>
             Start recording your progress using the
-            <v-icon small>mdi-plus</v-icon> icon.
+            <v-icon small>{{ mdi.plus }}</v-icon> icon.
           </v-card-subtitle>
         </v-card>
       </v-row>
@@ -44,28 +44,28 @@
               <div v-if="data.recordings.length">
                 <div class="d-flex">
                   <strong>
-                    <v-icon small class="mr-1">mdi-medal</v-icon>
+                    <v-icon small class="mr-1">{{ mdi.medal }}</v-icon>
                     {{ count(bestStatsById(data.id)) }}
                   </strong>
                 </div>
                 <!--                        <div>-->
                 <!--                          <strong>-->
-                <!--                            <v-icon small class="mr-1">mdi-medal</v-icon>-->
+                <!--                            <v-icon small class="mr-1">{{ mdi.medal }}</v-icon>-->
                 <!--                            {{ bestStatsById(data.id) }}x-->
                 <!--                          </strong>-->
                 <!--                        </div>-->
                 <div class="d-flex caption">
-                  <v-icon small>mdi-page-last</v-icon>
+                  <v-icon small>{{ mdi.pageLast }}</v-icon>
                   {{ shortDate(data.updateTimestamp) }}
                 </div>
                 <div class="d-flex">
-                  <v-icon small class="mr-1">mdi-repeat</v-icon>
+                  <v-icon small class="mr-1">{{ mdi.repeat }}</v-icon>
                   <span>{{ data.recordings.length }}</span>
                 </div>
               </div>
               <div v-else class="text-center">
                 <v-btn icon small>
-                  <v-icon dark>mdi-timer</v-icon>
+                  <v-icon dark>{{ mdi.timer }}</v-icon>
                 </v-btn>
               </div>
             </v-col>
@@ -81,9 +81,27 @@
 import { mapState, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import { getImg, count, shortDate } from '@/misc/helpers'
+import {
+  mdiArrowLeft,
+  mdiPlus,
+  mdiMedal,
+  mdiPageLast,
+  mdiTimer,
+  mdiRepeat
+} from '@mdi/js'
 
 export default {
   components: { Hangboard },
+  data: () => ({
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      plus: mdiPlus,
+      medal: mdiMedal,
+      pageLast: mdiPageLast,
+      timer: mdiTimer,
+      repeat: mdiRepeat
+    }
+  }),
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'currentTab']),

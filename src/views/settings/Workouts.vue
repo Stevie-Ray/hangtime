@@ -1,9 +1,9 @@
 <template>
   <v-layout class="workouts">
     <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ name: 'settings' })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         Workouts
       </v-toolbar-title>
@@ -17,9 +17,11 @@
             <v-form>
               <v-list two-line>
                 <v-list-item>
-                  <v-list-item-avatar>
-                    <v-icon color="primary lighten-1">mdi-volume-high</v-icon>
-                  </v-list-item-avatar>
+                  <v-list-item-icon>
+                    <v-icon color="primary lighten-1">{{
+                      mdi.volumeHigh
+                    }}</v-icon>
+                  </v-list-item-icon>
 
                   <v-list-item-content>
                     <v-list-item-title>Play sound</v-list-item-title>
@@ -37,9 +39,11 @@
                 </v-list-item>
 
                 <v-list-item v-if="synth && voiceList.length">
-                  <v-list-item-avatar>
-                    <v-icon color="primary lighten-1">mdi-voice</v-icon>
-                  </v-list-item-avatar>
+                  <v-list-item-icon>
+                    <v-icon color="primary lighten-1">{{
+                      mdi.accountVoice
+                    }}</v-icon>
+                  </v-list-item-icon>
 
                   <v-list-item-content>
                     <v-list-item-title>Speak instructions</v-list-item-title>
@@ -57,11 +61,11 @@
                 </v-list-item>
 
                 <v-list-item v-if="user.settings.speak">
-                  <v-list-item-avatar>
-                    <v-icon color="primary lighten-1"
-                      >mdi-account-multiple</v-icon
-                    >
-                  </v-list-item-avatar>
+                  <v-list-item-icon>
+                    <v-icon color="primary lighten-1">{{
+                      mdi.accountMultiple
+                    }}</v-icon>
+                  </v-list-item-icon>
 
                   <v-list-item-content>
                     <v-select
@@ -79,9 +83,9 @@
                 </v-list-item>
 
                 <v-list-item>
-                  <v-list-item-avatar>
-                    <v-icon color="primary lighten-1">mdi-vibrate</v-icon>
-                  </v-list-item-avatar>
+                  <v-list-item-icon>
+                    <v-icon color="primary lighten-1">{{ mdi.vibrate }}</v-icon>
+                  </v-list-item-icon>
 
                   <v-list-item-content>
                     <v-list-item-title>Vibration</v-list-item-title>
@@ -108,12 +112,26 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import {
+  mdiArrowLeft,
+  mdiVolumeHigh,
+  mdiVibrate,
+  mdiAccountVoice,
+  mdiAccountMultiple
+} from '@mdi/js'
 
 export default {
   data: () => ({
     synth: window.speechSynthesis,
     greetingSpeech: new window.SpeechSynthesisUtterance(),
-    voiceList: []
+    voiceList: [],
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      volumeHigh: mdiVolumeHigh,
+      vibrate: mdiVibrate,
+      accountVoice: mdiAccountVoice,
+      accountMultiple: mdiAccountMultiple
+    }
   }),
   computed: {
     ...mapState('authentication', ['user']),

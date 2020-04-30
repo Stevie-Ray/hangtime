@@ -1,9 +1,9 @@
 <template>
   <v-layout class="help">
     <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ name: 'settings' })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         Help
       </v-toolbar-title>
@@ -50,9 +50,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import { mdiArrowLeft } from '@mdi/js'
 
 export default {
-  data: () => ({}),
+  data: () => ({
+    mdi: {
+      arrowLeft: mdiArrowLeft
+    }
+  }),
   computed: {
     ...mapState('workouts', ['options'])
   },

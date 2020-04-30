@@ -1,7 +1,7 @@
 <template>
   <v-layout class="exercise">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="goBack">mdi-arrow-left </v-icon>
+      <v-icon @click="goBack">{{ mdi.arrowLeft }}</v-icon>
       <v-avatar v-if="currentWorkout && currentWorkout.user" size="32px">
         <v-img
           v-if="networkOnLine"
@@ -22,7 +22,7 @@
       <v-spacer></v-spacer>
 
       <v-btn v-if="!editWorkout && userWorkout" icon @click="edit = true">
-        <v-icon>mdi-pencil</v-icon>
+        <v-icon>{{ mdi.pencil }}</v-icon>
       </v-btn>
       <v-btn
         v-if="editWorkout"
@@ -33,8 +33,8 @@
         <v-icon
           >{{
             isExerciseDeletionPending(currentExercise.id)
-              ? 'mdi-autorenew'
-              : 'mdi-delete'
+              ? mdi.autorenew
+              : mdi.delete
           }}
         </v-icon>
       </v-btn>
@@ -63,7 +63,7 @@
                 fab
                 @click="clickUpdateExercise"
               >
-                <v-icon>mdi-content-save</v-icon>
+                <v-icon>{{ mdi.contentSave }}</v-icon>
               </v-btn>
             </v-speed-dial>
           </v-col>
@@ -77,6 +77,13 @@
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
 import ExerciseItem from '@/components/ExerciseItem'
 import { getImg, count } from '@/misc/helpers'
+import {
+  mdiArrowLeft,
+  mdiContentSave,
+  mdiPencil,
+  mdiAutorenew,
+  mdiDelete
+} from '@mdi/js'
 import WorkoutItemName from '../../components/WorkoutItemName'
 
 export default {
@@ -90,7 +97,14 @@ export default {
   },
   data: () => ({
     edit: null,
-    valid: true
+    valid: true,
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      contentSave: mdiContentSave,
+      pencil: mdiPencil,
+      autorenew: mdiAutorenew,
+      delete: mdiDelete
+    }
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),

@@ -14,7 +14,7 @@
           hint="Time to prepare / break before the exercise"
           persistent-hint
           :disabled="!editWorkout"
-          prepend-icon="mdi-clock-outline"
+          :prepend-icon="mdi.clockOutline"
           label="Pause"
         >
           <template v-slot:thumb-label="props">
@@ -109,7 +109,7 @@
           step="1"
           always-dirty
           thumb-size="48"
-          prepend-icon="mdi-clock"
+          :prepend-icon="mdi.clock"
           :disabled="!editWorkout"
           hint="Time to perform the exercise"
           persistent-hint
@@ -148,7 +148,8 @@
             <v-expansion-panel>
               <v-expansion-panel-header
                 ><div>
-                  <v-btn icon><v-icon>mdi-menu</v-icon></v-btn
+                  <v-btn icon
+                    ><v-icon>{{ mdi.menu }}</v-icon></v-btn
                   ><span>Advanced features</span>
                 </div></v-expansion-panel-header
               >
@@ -172,7 +173,7 @@
                   always-dirty
                   thumb-size="48"
                   :disabled="!editWorkout || currentExercise.scappulls > 0"
-                  prepend-icon="mdi-clock-alert"
+                  :prepend-icon="mdi.clockAlert"
                   hint="Number of pull ups you have to perform"
                   persistent-hint
                   label="Pull-ups"
@@ -201,7 +202,7 @@
                   always-dirty
                   thumb-size="48"
                   :disabled="!editWorkout || currentExercise.pullups > 0"
-                  prepend-icon="mdi-clock-alert"
+                  :prepend-icon="mdi.clockAlert"
                   hint="Number of scapular pull-up(s) you have to perform"
                   persistent-hint
                   label="Scap Pulls"
@@ -229,7 +230,7 @@
                   ticks
                   thumb-size="48"
                   :disabled="!editWorkout"
-                  prepend-icon="mdi-history"
+                  :prepend-icon="mdi.history"
                   hint="Repeat current exercise (1x = no repeat)"
                   persistent-hint
                   label="Sets"
@@ -259,7 +260,7 @@
                     always-dirty
                     thumb-size="48"
                     :disabled="!editWorkout"
-                    prepend-icon="mdi-progress-clock"
+                    :prepend-icon="mdi.progressClock"
                     hint="Time to rest between sets"
                     persistent-hint
                     label="Rest"
@@ -306,6 +307,15 @@ import { mapState, mapMutations, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import Hand from '@/components/Hand'
 import { getImg, count } from '@/misc/helpers'
+import {
+  mdiClockOutline,
+  mdiArrowLeft,
+  mdiClock,
+  mdiClockAlert,
+  mdiMenu,
+  mdiProgressClock,
+  mdiHistory
+} from '@mdi/js'
 
 export default {
   components: { Hangboard, Hand },
@@ -320,6 +330,15 @@ export default {
       required: v => !!v || 'This field is required',
       min: min => v => v >= min || `A minimun of  ${min} is allowed`,
       max: max => v => v <= max || `A maximum of  ${max} is allowed`
+    },
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      clockOutline: mdiClockOutline,
+      menu: mdiMenu,
+      clock: mdiClock,
+      progressClock: mdiProgressClock,
+      history: mdiHistory,
+      clockAlert: mdiClockAlert
     }
   }),
   computed: {

@@ -14,7 +14,7 @@
             @change="resetHangboard"
           >
             <template v-slot:prepend>
-              <v-icon color="primary lighten-1">mdi-numeric-1-box</v-icon>
+              <v-icon color="primary lighten-1">{{ mdi.numeric1Box }}</v-icon>
             </template>
           </v-select>
         </v-list-item-content>
@@ -22,7 +22,7 @@
 
       <v-list-item>
         <v-list-item-content>
-          <!--                  @change="setSetting"-->
+          <!-- @change="setSetting"-->
           <v-select
             v-model="settingsHangboard"
             :items="sortedHangboards"
@@ -33,7 +33,7 @@
             style="width: calc(100% - 32px)"
           >
             <template v-slot:prepend>
-              <v-icon color="primary lighten-1">mdi-numeric-2-box</v-icon>
+              <v-icon color="primary lighten-1">{{ mdi.numeric2Box }}</v-icon>
             </template>
           </v-select>
         </v-list-item-content>
@@ -94,8 +94,15 @@
 import { mapState, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
 import { orderBy } from 'lodash'
+import { mdiNumeric1Box, mdiNumeric2Box } from '@mdi/js'
 
 export default {
+  data: () => ({
+    mdi: {
+      numeric1Box: mdiNumeric1Box,
+      numeric2Box: mdiNumeric2Box
+    }
+  }),
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user', 'hangboardToAdd']),

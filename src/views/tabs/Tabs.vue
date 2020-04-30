@@ -19,7 +19,7 @@
       <v-spacer></v-spacer>
 
       <!--      <v-btn icon>-->
-      <!--      <v-icon>mdi-magnify</v-icon>-->
+      <!--      <v-icon>{{ mdi.magnify }}</v-icon>-->
       <!--      </v-btn>-->
       <v-chip
         v-if="!networkOnLine"
@@ -43,7 +43,7 @@
       <v-menu bottom left min-width="200">
         <template v-slot:activator="{ on }">
           <v-btn dark icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon>{{ mdi.dotsVertical }}</v-icon>
           </v-btn>
         </template>
 
@@ -141,6 +141,7 @@ import DialogHangboardSwitch from '@/components/DialogHangboardSwitch'
 import DialogCommunityFilter from '@/components/DialogCommunityFilter'
 import DialogWalkthrough from '@/components/DialogWalkthrough'
 import DialogAddProgress from '@/components/DialogAddProgress'
+import { mdiTune, mdiPlus, mdiDotsVertical } from '@mdi/js'
 
 export default {
   components: {
@@ -158,7 +159,12 @@ export default {
       { id: 0, name: 'workouts', route: `/` },
       { id: 1, name: 'community', route: `/community` },
       { id: 2, name: 'progress', route: `/progress` }
-    ]
+    ],
+    mdi: {
+      plus: mdiPlus,
+      tune: mdiTune,
+      dotsVertical: mdiDotsVertical
+    }
   }),
   computed: {
     ...mapGetters('authentication', ['isUserLoggedIn']),
@@ -172,11 +178,11 @@ export default {
       }
       switch (this.activeTab) {
         case '/':
-          return { route: `/${this.user.id}/workout/new`, icon: 'mdi-plus' }
+          return { route: `/${this.user.id}/workout/new`, icon: this.mdi.plus }
         case '/community':
-          return { click: data, icon: 'mdi-tune' }
+          return { click: data, icon: this.mdi.tune }
         case '/progress':
-          return { click: 2, icon: 'mdi-plus' }
+          return { click: 2, icon: this.mdi.plus }
         default:
           return {}
       }

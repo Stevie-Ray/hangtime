@@ -80,7 +80,9 @@
                     label="Grading scale"
                   >
                     <template v-slot:prepend>
-                      <v-icon color="primary lighten-1">mdi-chart-gantt</v-icon>
+                      <v-icon color="primary lighten-1">{{
+                        mdi.chartGantt
+                      }}</v-icon>
                     </template>
                   </v-select>
                 </v-list-item-content>
@@ -95,9 +97,9 @@
                     label="Grade"
                   >
                     <template v-slot:prepend>
-                      <v-icon color="primary lighten-1"
-                        >mdi-chart-timeline-variant</v-icon
-                      >
+                      <v-icon color="primary lighten-1">{{
+                        mdi.chartTimelineVariant
+                      }}</v-icon>
                     </template>
                   </v-select>
                 </v-list-item-content>
@@ -155,6 +157,7 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 import IRCRA from 'ircra'
 import HangboardSelect from '@/components/HangboardSelect'
+import { mdiChartGantt, mdiChartTimelineVariant } from '@mdi/js'
 
 export default {
   components: { HangboardSelect },
@@ -163,7 +166,11 @@ export default {
   },
   data: () => ({
     ircra: new IRCRA(),
-    e1: 1
+    e1: 1,
+    mdi: {
+      chartTimelineVariant: mdiChartTimelineVariant,
+      chartGantt: mdiChartGantt
+    }
   }),
   computed: {
     ...mapState('authentication', ['user', 'hangboardToAdd']),

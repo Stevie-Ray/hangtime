@@ -35,34 +35,38 @@
             </div>
             <!-- Auth UI -->
             <v-row v-if="networkOnLine">
-              <v-col cols="12">
+              <v-col cols="12" md="12">
                 <v-btn
                   v-show="user !== undefined && !user && networkOnLine"
                   data-test="login-btn"
-                  class="login-btn mb-4"
+                  class="login-btn"
                   min-width="250"
                   tile
                   outlined
                   @click="login('facebook')"
                 >
-                  <v-icon left>mdi-facebook</v-icon> Login with Facebook
+                  <v-icon left>{{ mdi.facebook }}</v-icon> Login with Facebook
                 </v-btn>
+              </v-col>
+              <v-col cols="12" md="12">
                 <v-btn
                   v-show="user !== undefined && !user && networkOnLine"
                   data-test="login-btn"
-                  class="login-btn mb-4"
+                  class="login-btn"
                   min-width="250"
                   tile
                   outlined
                   @click="login('google')"
                 >
-                  <v-icon left>mdi-google</v-icon> Login with Google
+                  <v-icon left>{{ mdi.google }}</v-icon> Login with Google
                 </v-btn>
               </v-col>
             </v-row>
 
-            <div class="caption grey--text darken-1 font-weight-light">
-              &copy; 2020 {{ appTitle }}.
+            <div
+              class="caption grey--text text--darken-2 font-weight-light mt-4"
+            >
+              &copy; 2019 - {{ year }} {{ appTitle }}.
             </div>
           </div>
         </v-col>
@@ -77,10 +81,16 @@ import { isNil } from 'lodash'
 import firebase from 'firebase/app'
 import { desktop as isDekstop } from 'is_js'
 import { getImg } from '@/misc/helpers'
+import { mdiGoogle, mdiFacebook } from '@mdi/js'
 
 export default {
   data: () => ({
-    loginError: null
+    loginError: null,
+    year: new Date().getFullYear(),
+    mdi: {
+      google: mdiGoogle,
+      facebook: mdiFacebook
+    }
   }),
   computed: {
     ...mapState('authentication', ['user']),

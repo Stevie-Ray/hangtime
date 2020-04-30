@@ -13,7 +13,7 @@
 
       <v-list-item-content @click="$emit('goToWorkoutDetails', data.id)">
         <v-list-item-title>
-          <v-icon v-if="data.video" small>mdi-video</v-icon>
+          <v-icon v-if="data.video" small>{{ mdi.video }}</v-icon>
           {{ data.name }}
         </v-list-item-title>
         <v-list-item-subtitle
@@ -58,6 +58,7 @@ import DialogUserImage from '@/components/DialogUserImage'
 import WorkoutSubscribe from '@/components/WorkoutSubscribe'
 import WorkoutShare from '@/components/WorkoutShare'
 import { count } from '@/misc/helpers'
+import { mdiVideo } from '@mdi/js'
 
 export default {
   name: 'WorkoutListItem',
@@ -71,7 +72,10 @@ export default {
     index: Number
   },
   data: () => ({
-    overlay: false
+    overlay: false,
+    mdi: {
+      video: mdiVideo
+    }
   }),
   computed: {
     ...mapState('authentication', ['user']),

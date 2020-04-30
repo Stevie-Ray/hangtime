@@ -1,9 +1,9 @@
 <template>
   <v-layout class="settings">
     <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'workouts' })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ name: 'workouts' })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         Settings
       </v-toolbar-title>
@@ -38,7 +38,7 @@
 
                 <!--<v-list-item-action>-->
                 <!--<v-btn icon ripple v-show="!$auth.check()" @click="showScheduleForm = !showScheduleForm">-->
-                <!--<v-icon>mdi-account-box</v-icon>-->
+                <!--<v-icon>{{ mdi.accountBox }}</v-icon>-->
                 <!--</v-btn>-->
                 <!--</v-list-item-action>-->
               </v-list-item>
@@ -46,9 +46,9 @@
               <v-divider></v-divider>
 
               <v-list-item to="/settings/general">
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-cog</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1" v-text="mdi.cog"></v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title>General</v-list-item-title>
@@ -64,15 +64,11 @@
                 <!--                <v-btn text icon to="settings/hangboard">-->
                 <!--                  <v-img :src="getImg('icons/hangboard-menu.svg')"/>-->
                 <!--                </v-btn>-->
-                <v-list-item-avatar>
-                  <v-img
-                    contain
-                    transition="false"
-                    max-height="32px"
-                    max-width="32px"
-                    :src="getImg('icons/hangboard-menu.svg')"
-                  />
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <span class="v-icon notranslate v-icon--svg">
+                    <svg-inline :src="getImg('icons/hangboard-menu.svg')" />
+                  </span>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title>Hangboards</v-list-item-title>
@@ -85,9 +81,9 @@
               <v-divider inset></v-divider>
 
               <v-list-item to="/settings/workouts">
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-timer</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.timer }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title>Workouts</v-list-item-title>
@@ -100,9 +96,9 @@
               <v-divider inset></v-divider>
 
               <v-list-item disabled>
-                <v-list-item-avatar>
-                  <v-icon color="grey lighten-1">mdi-bell-ring</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="grey lighten-1">{{ mdi.bellRing }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title>Notifications (soon)</v-list-item-title>
@@ -113,11 +109,11 @@
               <v-divider inset></v-divider>
 
               <v-list-item to="/settings/help">
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1"
-                    >mdi-help-circle-outline</v-icon
-                  >
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.helpCircleOutline
+                  }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title>Help</v-list-item-title>
@@ -137,8 +133,26 @@
 <script>
 import { mapState } from 'vuex'
 import { getImg } from '@/misc/helpers'
+import { SimpleSVG } from 'vue-simple-svg'
+import {
+  mdiArrowLeft,
+  mdiCog,
+  mdiTimer,
+  mdiBellRing,
+  mdiHelpCircleOutline
+} from '@mdi/js'
 
 export default {
+  components: { 'svg-inline': SimpleSVG },
+  data: () => ({
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      cog: mdiCog,
+      timer: mdiTimer,
+      bellRing: mdiBellRing,
+      helpCircleOutline: mdiHelpCircleOutline
+    }
+  }),
   computed: mapState('authentication', ['user']),
   methods: {
     getImg

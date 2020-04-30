@@ -1,4 +1,3 @@
-import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 
@@ -18,7 +17,7 @@ Vue.config.productionTip = false
 // https://color.adobe.com/_DS89712-color-theme-12679944
 const opts = {
   icons: {
-    iconfont: 'mdi'
+    iconfont: 'mdiSvg'
   },
   theme: {
     dark: false,

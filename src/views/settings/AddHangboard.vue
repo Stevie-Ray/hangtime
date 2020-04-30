@@ -1,9 +1,9 @@
 <template>
   <v-layout class="add-hangboard">
     <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings-hangboards' })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ name: 'settings-hangboards' })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         Add a hangboard
       </v-toolbar-title>
@@ -24,7 +24,7 @@
                 fab
                 @click="addHangboard"
               >
-                <v-icon>mdi-content-save</v-icon>
+                <v-icon>{{ mdi.contentSave }}</v-icon>
               </v-btn>
             </v-speed-dial>
           </v-col>
@@ -37,9 +37,16 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import HangboardSelect from '@/components/HangboardSelect'
+import { mdiArrowLeft, mdiContentSave } from '@mdi/js'
 
 export default {
   components: { HangboardSelect },
+  data: () => ({
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      contentSave: mdiContentSave
+    }
+  }),
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user', 'hangboardToAdd'])

@@ -26,7 +26,7 @@
           </v-card-title>
           <v-card-subtitle>
             Add multiple exercises using the
-            <v-icon small>mdi-playlist-plus</v-icon>
+            <v-icon small>{{ mdi.playlistPlus }}</v-icon>
             button.
           </v-card-subtitle>
         </v-card>
@@ -71,6 +71,7 @@
 import draggable from 'vuedraggable'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import ExerciseListItem from '@/components/ExerciseListItem'
+import { mdiPlaylistPlus } from '@mdi/js'
 
 export default {
   components: { ExerciseListItem, draggable },
@@ -78,6 +79,11 @@ export default {
     id: String,
     editWorkout: Boolean
   },
+  data: () => ({
+    mdi: {
+      playlistPlus: mdiPlaylistPlus
+    }
+  }),
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapGetters('workouts', ['workoutById']),

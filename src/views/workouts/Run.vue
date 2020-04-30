@@ -8,7 +8,7 @@
             params: { id: currentWorkout.id, userId: userId }
           })
         "
-        >mdi-arrow-left</v-icon
+        >{{ mdi.arrowLeft }}</v-icon
       >
       <v-avatar size="32px">
         <v-img
@@ -67,7 +67,7 @@
                       class="progress-button progress-previous"
                     >
                       <v-btn icon @click="exercisePrevious">
-                        <v-icon>mdi-skip-previous</v-icon>
+                        <v-icon>{{ mdi.skipPrevious }}</v-icon>
                       </v-btn>
                     </div>
                     <div class="subtitle font-weight-bold text-uppercase">
@@ -79,7 +79,7 @@
                       class="progress-button progress-next"
                     >
                       <v-btn icon @click="exerciseNext">
-                        <v-icon>mdi-skip-next</v-icon>
+                        <v-icon>{{ mdi.skipNext }}</v-icon>
                       </v-btn>
                     </div>
 
@@ -90,7 +90,7 @@
                     <div class="bottom-data">
                       <div class="bottom-data__exercise">
                         <div class="data">
-                          <v-icon small>mdi-timer</v-icon>
+                          <v-icon small>{{ mdi.timer }}</v-icon>
                           <span
                             v-if="currentWorkout && currentWorkout.exercises"
                             >{{ currentStep + 1 }}/{{
@@ -104,7 +104,7 @@
                         class="bottom-data__repeat"
                       >
                         <div class="data">
-                          <v-icon small>mdi-history</v-icon>
+                          <v-icon small>{{ mdi.history }}</v-icon>
                           <span
                             >{{ ExerciseRepeat }}/{{
                               currentExercise.repeat + 1
@@ -163,8 +163,8 @@
           fab
           @click="pauseWorkout"
         >
-          <v-icon v-if="!paused">mdi-pause</v-icon>
-          <v-icon v-else>mdi-play</v-icon>
+          <v-icon v-if="!paused">{{ mdi.pause }}</v-icon>
+          <v-icon v-else>{{ mdi.play }}</v-icon>
         </v-btn>
         <v-btn
           v-if="timer === null"
@@ -174,7 +174,7 @@
           fab
           @click="startWorkout"
         >
-          <v-icon>mdi-play</v-icon>
+          <v-icon>{{ mdi.play }}</v-icon>
         </v-btn>
       </v-speed-dial>
     </v-content>
@@ -187,6 +187,15 @@ import NoSleep from 'nosleep.js'
 import Hangboard from '@/components/Hangboard'
 import Hand from '@/components/Hand'
 import { getImg, count, speak, sound } from '@/misc/helpers'
+import {
+  mdiArrowLeft,
+  mdiTimer,
+  mdiSkipNext,
+  mdiSkipPrevious,
+  mdiPlay,
+  mdiPause,
+  mdiHistory
+} from '@mdi/js'
 import WorkoutItemName from '../../components/WorkoutItemName'
 
 export default {
@@ -201,6 +210,15 @@ export default {
     totalTime: 0,
     timer: null,
     time: 0,
+    mdi: {
+      timer: mdiTimer,
+      skipNext: mdiSkipNext,
+      skipPrevious: mdiSkipPrevious,
+      play: mdiPlay,
+      pause: mdiPause,
+      arrowLeft: mdiArrowLeft,
+      history: mdiHistory
+    },
     meta: {
       title: 'Workout'
     },

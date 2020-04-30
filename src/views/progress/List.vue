@@ -1,9 +1,9 @@
 <template>
   <v-layout class="progress-list">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ path: currentTab })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ path: currentTab })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         Your progress
       </v-toolbar-title>
@@ -12,10 +12,10 @@
 
       <span v-if="currentStats[index] && currentStats[index].recordings.length">
         <v-btn v-if="edit" icon @click="edit = false">
-          <v-icon>mdi-pencil-off</v-icon>
+          <v-icon>{{ mdi.pencilOff }}</v-icon>
         </v-btn>
         <v-btn v-if="!edit" icon @click="edit = true">
-          <v-icon>mdi-pencil</v-icon>
+          <v-icon>{{ mdi.pencil }}</v-icon>
         </v-btn>
       </span>
 
@@ -24,7 +24,7 @@
         icon
         @click="filterDialog = true"
       >
-        <v-icon>mdi-tune</v-icon>
+        <v-icon>{{ mdi.tune }}</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -48,7 +48,7 @@
                   </v-card-title>
                   <v-card-subtitle>
                     Start recording your progress using the
-                    <v-icon small>mdi-timer</v-icon> icon.
+                    <v-icon small>{{ mdi.timer }}</v-icon> icon.
                   </v-card-subtitle>
                 </v-card>
               </v-row>
@@ -124,7 +124,7 @@
                         {{ count(recording.value) }}
                       </span>
                       <v-icon v-if="edit" @click="deleteRecording(recording)">
-                        mdi-delete
+                        {{ mdi.delete }}
                       </v-icon>
                     </v-list-item-action-text>
                   </v-list-item-action>
@@ -267,7 +267,7 @@
           fixed
           @click="selectTypeDialog = true"
         >
-          <v-icon>mdi-timer</v-icon>
+          <v-icon>{{ mdi.timer }}</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-content>
@@ -279,6 +279,14 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import LineChart from '@/components/LineChart'
 import { getImg, count, shortDate } from '@/misc/helpers'
+import {
+  mdiPencil,
+  mdiPencilOff,
+  mdiArrowLeft,
+  mdiTimer,
+  mdiTune,
+  mdiDelete
+} from '@mdi/js'
 
 export default {
   components: { Hangboard, LineChart },
@@ -294,7 +302,15 @@ export default {
     deleteDialogItem: null,
     selected: [0, 1, 2, 3],
     workoutType: 0,
-    edit: false
+    edit: false,
+    mdi: {
+      pencil: mdiPencil,
+      pencilOff: mdiPencilOff,
+      arrowLeft: mdiArrowLeft,
+      timer: mdiTimer,
+      tune: mdiTune,
+      delete: mdiDelete
+    }
   }),
   computed: {
     ...mapState('authentication', ['user']),

@@ -1,9 +1,9 @@
 <template>
   <v-layout class="workout-list">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ path: currentTab })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ path: currentTab })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-avatar
         v-if="currentWorkout"
         size="32px"
@@ -53,19 +53,19 @@
 
       <!-- edit -->
       <v-btn v-if="!editWorkout && userWorkout" icon @click="edit = true">
-        <v-icon>mdi-pencil</v-icon>
+        <v-icon>{{ mdi.pencil }}</v-icon>
       </v-btn>
 
       <!-- save -->
       <v-btn v-if="editWorkout" icon @click="edit = false">
-        <v-icon>mdi-content-save</v-icon>
+        <v-icon>{{ mdi.contentSave }}</v-icon>
       </v-btn>
 
       <!-- menu -->
       <v-menu v-if="editWorkout" bottom left min-width="200">
         <template v-slot:activator="{ on }">
           <v-btn dark icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon>{{ mdi.dotsVertical }}</v-icon>
           </v-btn>
         </template>
 
@@ -161,7 +161,7 @@
                 fab
                 :to="{ name: 'run', params: { data: currentWorkout } }"
               >
-                <v-icon>mdi-play</v-icon>
+                <v-icon>{{ mdi.play }}</v-icon>
               </v-btn>
               <v-btn
                 v-if="editWorkout"
@@ -171,7 +171,7 @@
                 fab
                 @click="addExercise"
               >
-                <v-icon>mdi-playlist-plus</v-icon>
+                <v-icon>{{ mdi.playlistPlus }}</v-icon>
               </v-btn>
             </v-speed-dial>
           </v-col>
@@ -191,6 +191,14 @@ import DialogWorkoutDelete from '@/components/DialogWorkoutDelete'
 import DialogUserImage from '@/components/DialogUserImage'
 import { count } from '@/misc/helpers'
 import urlParser from 'js-video-url-parser'
+import {
+  mdiArrowLeft,
+  mdiDotsVertical,
+  mdiContentSave,
+  mdiPlay,
+  mdiPlaylistPlus,
+  mdiPencil
+} from '@mdi/js'
 
 export default {
   components: {
@@ -217,6 +225,14 @@ export default {
       general: false,
       delete: false,
       user: false
+    },
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      dotsVertical: mdiDotsVertical,
+      contentSave: mdiContentSave,
+      pencil: mdiPencil,
+      play: mdiPlay,
+      playlistPlus: mdiPlaylistPlus
     }
   }),
   computed: {

@@ -33,7 +33,7 @@
                 <!--                    })-->
                 <!--                  "-->
                 <!--                >-->
-                <!--                  <v-icon>mdi-information-outline</v-icon>-->
+                <!--                  <v-icon>{{ mdi.InformationOutline }}</v-icon>-->
                 <!--                </v-btn>-->
               </v-list-item-action>
             </v-list-item>

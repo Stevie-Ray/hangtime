@@ -1,9 +1,9 @@
 <template>
   <v-layout class="hangboards">
     <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ name: 'settings' })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ name: 'settings' })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         Your hangboards
       </v-toolbar-title>
@@ -96,7 +96,7 @@
                 fab
                 to="/settings/hangboards/add"
               >
-                <v-icon>mdi-plus</v-icon>
+                <v-icon>{{ mdi.plus }}</v-icon>
               </v-btn>
             </v-speed-dial>
           </v-col>
@@ -109,8 +109,15 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { getImg } from '@/misc/helpers'
+import { mdiArrowLeft, mdiPlus } from '@mdi/js'
 
 export default {
+  data: () => ({
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      plus: mdiPlus
+    }
+  }),
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),

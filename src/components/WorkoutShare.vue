@@ -1,10 +1,10 @@
 <template>
   <div v-if="currentWorkout">
     <v-btn :x-small="small" icon @click="dialogs.share = true">
-      <v-icon v-if="!currentWorkout.share" :small="small"
-        >mdi-star-outline</v-icon
-      >
-      <v-icon v-else :small="small">mdi-star-off</v-icon>
+      <v-icon v-if="!currentWorkout.share" :small="small">{{
+        mdi.starOutline
+      }}</v-icon>
+      <v-icon v-else :small="small">{{ mdi.starOff }}</v-icon>
       <span
         v-if="currentWorkout.share && currentWorkout.subscribers.length > 1"
         :class="{ 'subtitle-2 pr-1': small }"
@@ -24,6 +24,7 @@
 <script>
 import { mapState } from 'vuex'
 import DialogWorkoutShare from '@/components/DialogWorkoutShare'
+import { mdiStarOutline, mdiStarOff } from '@mdi/js'
 
 export default {
   name: 'WorkoutShare',
@@ -38,6 +39,10 @@ export default {
   data: () => ({
     dialogs: {
       share: false
+    },
+    mdi: {
+      starOutline: mdiStarOutline,
+      starOff: mdiStarOff
     }
   }),
   computed: {

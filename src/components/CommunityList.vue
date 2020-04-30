@@ -37,7 +37,7 @@
               ].name
             }}
             workout use the
-            <v-icon small>mdi-star-outline</v-icon> button to add it to the
+            <v-icon small>{{ mdi.starOutline }}</v-icon> button to add it to the
             community.
           </v-card-subtitle>
         </v-card>
@@ -81,10 +81,15 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import WorkoutListItem from '@/components/WorkoutListItem'
+import { mdiStarOutline } from '@mdi/js'
 
 export default {
   components: { WorkoutListItem },
-  data: () => ({}),
+  data: () => ({
+    mdi: {
+      starOutline: mdiStarOutline
+    }
+  }),
   computed: {
     ...mapGetters('workouts', ['communityWorkoutsByHangboard']),
     ...mapState('app', ['networkOnLine']),

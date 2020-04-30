@@ -1,9 +1,9 @@
 <template>
   <v-layout class="profile">
     <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ name: 'settings' })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         General
       </v-toolbar-title>
@@ -17,9 +17,11 @@
           <v-col cols="12">
             <v-list two-line>
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-chart-gantt</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.chartGantt
+                  }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-select
@@ -34,11 +36,11 @@
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1"
-                    >mdi-theme-light-dark</v-icon
-                  >
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.themeLightDark
+                  }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title>Dark mode</v-list-item-title>
@@ -54,9 +56,11 @@
               </v-list-item>
 
               <v-list-item three-line>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-cellphone-link</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.cellphoneLink
+                  }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title>Use system mode</v-list-item-title>
@@ -85,11 +89,23 @@
 import { mapState, mapActions, mapMutations } from 'vuex'
 import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
+import {
+  mdiArrowLeft,
+  mdiChartGantt,
+  mdiThemeLightDark,
+  mdiCellphoneLink
+} from '@mdi/js'
 
 export default {
   data: () => ({
     scale: new IRCRA().scale(),
-    mq: window.matchMedia('(prefers-color-scheme: dark)')
+    mq: window.matchMedia('(prefers-color-scheme: dark)'),
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      chartGantt: mdiChartGantt,
+      themeLightDark: mdiThemeLightDark,
+      cellphoneLink: mdiCellphoneLink
+    }
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
@@ -152,6 +168,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss"></style>

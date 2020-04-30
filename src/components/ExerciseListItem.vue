@@ -1,7 +1,7 @@
 <template>
   <div class="exercise-item" :class="{ active: editWorkout }">
     <v-list-item ripple @click="$emit('goToExerciseDetails', index)">
-      <v-icon v-if="editWorkout" class="handle">mdi-drag</v-icon>
+      <v-icon v-if="editWorkout" class="handle">{{ mdi.drag }}</v-icon>
       <v-list-item-avatar>
         <img
           :src="getImg(options[data.exercise].image)"
@@ -39,10 +39,12 @@
 <script>
 import { mapState } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
+import { mdiDrag } from '@mdi/js'
 import WorkoutItemName from './WorkoutItemName'
 
 export default {
   components: { WorkoutItemName },
+
   props: {
     data: Object,
     editWorkout: Boolean,
@@ -51,6 +53,11 @@ export default {
     // isWorkoutUpdatePending: Boolean,
     disableActions: Boolean
   },
+  data: () => ({
+    mdi: {
+      drag: mdiDrag
+    }
+  }),
   computed: {
     ...mapState('workouts', ['options'])
   },

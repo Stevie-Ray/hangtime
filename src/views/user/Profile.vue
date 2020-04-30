@@ -1,9 +1,9 @@
 <template>
   <v-layout class="profile">
     <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ path: currentTab })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ path: currentTab })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         {{ user.displayName }}
       </v-toolbar-title>
@@ -113,13 +113,17 @@
 import { mapState } from 'vuex'
 import IRCRA from 'ircra'
 import { getImg, shortDate } from '@/misc/helpers'
+import { mdiArrowLeft } from '@mdi/js'
 
 export default {
   props: {
     userId: String
   },
   data: () => ({
-    ircra: new IRCRA()
+    ircra: new IRCRA(),
+    mdi: {
+      arrowLeft: mdiArrowLeft
+    }
   }),
   computed: {
     ...mapState('app', ['networkOnLine', 'currentTab']),

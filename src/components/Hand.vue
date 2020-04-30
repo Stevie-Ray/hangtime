@@ -23,10 +23,10 @@
               "
               icon
             >
-              <v-icon>mdi-undo</v-icon>
+              <v-icon>{{ mdi.undo }}</v-icon>
             </v-btn>
             <v-btn v-else icon>
-              <v-icon>mdi-hand</v-icon>
+              <v-icon>{{ mdi.hand }}</v-icon>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
@@ -59,6 +59,7 @@
 import { mapState } from 'vuex'
 import { SimpleSVG } from 'vue-simple-svg'
 import { getImg } from '@/misc/helpers'
+import { mdiHand, mdiUndo } from '@mdi/js'
 
 export default {
   components: { 'svg-inline': SimpleSVG },
@@ -66,7 +67,12 @@ export default {
     editWorkout: Boolean,
     data: Object
   },
-  data: () => ({}),
+  data: () => ({
+    mdi: {
+      undo: mdiUndo,
+      hand: mdiHand
+    }
+  }),
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies'])

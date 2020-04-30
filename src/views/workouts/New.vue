@@ -2,7 +2,7 @@
   <v-layout class="workout-list">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="$router.push({ path: currentTab })"
-        >mdi-arrow-left
+        >{{ mdi.arrowLeft }}
       </v-icon>
       <v-avatar v-if="currentWorkout && user" size="32px">
         <v-img
@@ -41,7 +41,7 @@
         icon
         @click="saveExercises"
       >
-        <v-icon>mdi-content-save</v-icon>
+        <v-icon>{{ mdi.contentSave }}</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -64,7 +64,7 @@
                 fab
                 @click="addExercise"
               >
-                <v-icon>mdi-playlist-plus</v-icon>
+                <v-icon>{{ mdi.playlistPlus }}</v-icon>
               </v-btn>
             </v-speed-dial>
           </v-col>
@@ -80,6 +80,7 @@ import IRCRA from 'ircra'
 import ExerciseList from '@/components/ExerciseList'
 import DialogNewWorkoutAdd from '@/components/DialogNewWorkoutAdd'
 import { getImg, count } from '@/misc/helpers'
+import { mdiPlaylistPlus, mdiContentSave, mdiArrowLeft } from '@mdi/js'
 
 export default {
   components: {
@@ -93,6 +94,11 @@ export default {
     ircra: new IRCRA(),
     edit: null,
     dialog: false,
+    mdi: {
+      playlistPlus: mdiPlaylistPlus,
+      contentSave: mdiContentSave,
+      arrowLeft: mdiArrowLeft
+    },
     meta: {
       title: 'New workout'
     },

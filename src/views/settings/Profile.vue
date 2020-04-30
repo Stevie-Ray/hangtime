@@ -1,9 +1,9 @@
 <template>
   <v-layout class="profile">
     <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })"
-        >mdi-arrow-left</v-icon
-      >
+      <v-icon @click="$router.push({ name: 'settings' })">{{
+        mdi.arrowLeft
+      }}</v-icon>
       <v-toolbar-title>
         Profile
       </v-toolbar-title>
@@ -11,11 +11,11 @@
       <v-spacer></v-spacer>
 
       <!--      <v-btn v-if="!isUserLoggedIn && networkOnLine" to="/login">-->
-      <!--        <v-icon>mdi-account</v-icon>-->
+      <!--        <v-icon>{{ mdi.account }}</v-icon>-->
       <!--      </v-btn>-->
 
       <v-btn v-if="networkOnLine" icon @click="logout">
-        <v-icon>mdi-account-off</v-icon>
+        <v-icon>{{ mdi.accountOff }}</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -26,7 +26,7 @@
             <div class="text-center pt-6">
               <!--              <v-badge overlap bottom class="pa-4">-->
               <!--                <v-icon slot="badge" dark @click="captureFile"-->
-              <!--                  >mdi-camera</v-icon-->
+              <!--                  >{{ mdi.camera}}</v-icon-->
               <!--                >-->
 
               <!--             add: v-avatar @click="pickFile"-->
@@ -65,9 +65,9 @@
 
             <v-list two-line>
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-account</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.account }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content v-if="user">
                   <v-list-item-title>{{ user.displayName }}</v-list-item-title>
@@ -75,11 +75,11 @@
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1"
-                    >mdi-chart-timeline-variant</v-icon
-                  >
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.chartTimelineVariant
+                  }}</v-icon>
+                </v-list-item-icon>
                 <v-list-item-content>
                   <v-select
                     v-if="user"
@@ -96,9 +96,11 @@
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-information</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.information
+                  }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-text-field
@@ -116,9 +118,9 @@
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-icon color="primary lighten-1">mdi-email</v-icon>
-                </v-list-item-avatar>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.email }}</v-icon>
+                </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-title v-if="user">{{
@@ -139,6 +141,14 @@ import firebase from 'firebase/app'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
+import {
+  mdiArrowLeft,
+  mdiAccountOff,
+  mdiAccount,
+  mdiChartTimelineVariant,
+  mdiInformation,
+  mdiEmail
+} from '@mdi/js'
 
 export default {
   data: () => ({
@@ -147,6 +157,14 @@ export default {
       length: len => v =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
       required: v => !!v || 'This field is required'
+    },
+    mdi: {
+      arrowLeft: mdiArrowLeft,
+      accountOff: mdiAccountOff,
+      account: mdiAccount,
+      chartTimelineVariant: mdiChartTimelineVariant,
+      email: mdiEmail,
+      information: mdiInformation
     }
   }),
   computed: {

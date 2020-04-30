@@ -19,9 +19,8 @@
           access when you're on the go.
         </p>
         <p class="footer">
-          Just tap <v-icon class="mx-2">mdi-open-in-app</v-icon> then '<strong
-            >Add to Home Screen</strong
-          >'
+          Just tap <v-icon class="mx-2">{{ mdi.openInApp }}</v-icon> then
+          '<strong>Add to Home Screen</strong>'
         </p>
       </v-card-text>
 
@@ -40,10 +39,14 @@
 <script>
 import { mapState } from 'vuex'
 import { getImg } from '@/misc/helpers'
+import { mdiOpenInApp } from '@mdi/js'
 
 export default {
   data: () => ({
-    dialog: true
+    dialog: true,
+    mdi: {
+      openInApp: mdiOpenInApp
+    }
   }),
   computed: {
     ...mapState('app', ['appTitle'])

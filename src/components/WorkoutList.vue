@@ -37,8 +37,8 @@
                 user.settings.hangboards[user.settings.selected].hangboard
               ].name
             }}
-            workouts. Use the <v-icon small>mdi-plus</v-icon> button to get
-            started.
+            workouts. Use the <v-icon small>{{ mdi.plus }}</v-icon> button to
+            get started.
           </v-card-subtitle>
         </v-card>
       </v-row>
@@ -71,9 +71,15 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import WorkoutListItem from '@/components/WorkoutListItem'
+import { mdiPlus } from '@mdi/js'
 
 export default {
   components: { WorkoutListItem },
+  data: () => ({
+    mdi: {
+      plus: mdiPlus
+    }
+  }),
   computed: {
     ...mapGetters('workouts', ['workoutsByHangboard']),
     ...mapState('app', ['networkOnLine']),

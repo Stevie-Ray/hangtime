@@ -1,8 +1,8 @@
 <template>
   <div v-if="currentWorkout">
     <v-btn :x-small="small" icon @click="dialogs.subscribe = true">
-      <v-icon v-if="isSubscribed" :small="small">mdi-star</v-icon>
-      <v-icon v-else :small="small">mdi-star-outline</v-icon>
+      <v-icon v-if="isSubscribed" :small="small">{{ mdi.star }}</v-icon>
+      <v-icon v-else :small="small">{{ mdi.starOutline }}</v-icon>
       <span
         v-if="currentSubscribers && currentSubscribers.length > 1"
         :class="{ 'subtitle-2 pr-1': small }"
@@ -25,6 +25,7 @@
 <script>
 import { mapState } from 'vuex'
 import DialogWorkoutSubscribe from '@/components/DialogWorkoutSubscribe'
+import { mdiStar, mdiStarOutline } from '@mdi/js'
 
 export default {
   name: 'WorkoutSubscribe',
@@ -40,6 +41,10 @@ export default {
   data: () => ({
     dialogs: {
       subscribe: false
+    },
+    mdi: {
+      star: mdiStar,
+      starOutline: mdiStarOutline
     }
   }),
   computed: {
