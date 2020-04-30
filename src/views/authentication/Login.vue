@@ -5,7 +5,7 @@
         <v-col cols="12">
           <div class="text-center pa-4">
             <div class="display-1">{{ appTitle }}</div>
-            <div class="subheading font-weight-light grey--text">
+            <div class="subheading font-weight-light grey--text text--darken-2">
               Version {{ appVersion }}
             </div>
 
