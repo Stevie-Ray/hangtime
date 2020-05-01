@@ -762,16 +762,44 @@ export default {
           holds: 0
         },
         {
-          name: 'Solution #2.0',
+          name: 'Solution',
           disabled: true,
           id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
-          name: 'The Edge',
+          name: 'Solution #2.0',
           disabled: true,
           id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'The Edge',
+          disabled: true,
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Bantam Board',
+          disabled: true,
+          id: 4,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Crag Board',
+          disabled: true,
+          id: 5,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Concept Mini',
+          disabled: true,
+          id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1023,25 +1051,23 @@ export default {
       name: 'AIX',
       description: '',
       id: 43,
-      disabled: true,
       website: 'https://www.aix.cz/',
       hangboards: [
         {
-          name: 'Training board 1',
+          name: 'Training Board 1',
           id: 0,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/AIXTRAINING1.svg',
           holds: 0
         },
         {
-          name: 'Training board 2',
+          name: 'Training Board 2',
           id: 1,
           disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
-          name: 'Training board 3',
+          name: 'Training Board 3',
           id: 2,
           disabled: true,
           image: 'hangboards/NOTFOUND.svg',
@@ -1060,11 +1086,154 @@ export default {
       name: '360 Holds',
       description: '',
       id: 44,
-      disabled: true,
       website: 'http://www.360holds.com/',
       hangboards: [
         {
           name: '360 Rainbow Hangboard',
+          id: 0,
+          image: 'hangboards/360RAINBOW.svg',
+          holds: 4
+        }
+      ]
+    },
+    {
+      name: 'HRT Holds',
+      description: '',
+      disabled: true,
+      id: 45,
+      website: 'https://hrt-holds.com/',
+      hangboards: [
+        {
+          name: 'Classic',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'The Mask',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Twins',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Vario',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Butterfly',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Gecko Holds',
+      description: '',
+      disabled: true,
+      id: 46,
+      website: 'https://www.gecko-holds.com/',
+      hangboards: [
+        {
+          name: 'Movember',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Owl Climb',
+      description: '',
+      disabled: true,
+      id: 47,
+      website: 'https://owlclimb.com/',
+      hangboards: [
+        {
+          name: 'Circle',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Poker',
+          id: 1,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Square',
+          id: 2,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Portable',
+          id: 3,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Bäm!',
+      description: '',
+      disabled: true,
+      id: 48,
+      website: 'https://www.bam-products.com/',
+      hangboards: [
+        {
+          name: 'Hangboard',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Edgy Climbing Holds (Dave MacLeod)',
+      description: '',
+      disabled: true,
+      id: 49,
+      website: 'https://www.davemacleod.com/',
+      hangboards: [
+        {
+          name: 'Edge',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Expressions holds',
+      description: '',
+      disabled: true,
+      id: 50,
+      website: 'https://www.expression-holds.com/',
+      hangboards: [
+        {
+          name: 'ComiX Club',
           id: 0,
           disabled: true,
           image: 'hangboards/NOTFOUND.svg',
