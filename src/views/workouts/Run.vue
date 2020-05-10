@@ -434,8 +434,23 @@ export default {
             textToSpeak += `Repeat ${this.currentExercise.repeat + 1} times.`
           }
         }
-
         this.speakText(textToSpeak)
+      }
+
+      if (this.currentExercise.pause >= 135 && this.totalTime === 120) {
+        this.speakText('2 minutes left')
+      }
+
+      if (this.currentExercise.pause >= 75 && this.totalTime === 60) {
+        this.speakText('1 minute left')
+      }
+
+      if (this.currentExercise.pause >= 45 && this.totalTime === 30) {
+        this.speakText('30 seconds left')
+      }
+
+      if (this.currentExercise.pause >= 30 && this.totalTime === 15) {
+        this.speakText('15 seconds left.. Get ready!')
       }
 
       // start count down

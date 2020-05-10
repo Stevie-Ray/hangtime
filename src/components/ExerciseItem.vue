@@ -233,7 +233,7 @@
                   :prepend-icon="mdi.history"
                   hint="Repeat current exercise (1x = no repeat)"
                   persistent-hint
-                  label="Sets"
+                  label="Reps"
                 >
                   <template v-slot:thumb-label="props"
                     >{{ props.value + 1 }}x
@@ -261,7 +261,7 @@
                     thumb-size="48"
                     :disabled="!editWorkout"
                     :prepend-icon="mdi.progressClock"
-                    hint="Time to rest between sets"
+                    hint="Time to rest between repeating the exercise"
                     persistent-hint
                     label="Rest"
                   >

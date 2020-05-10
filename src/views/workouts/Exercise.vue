@@ -27,6 +27,14 @@
       <v-btn
         v-if="editWorkout"
         icon
+        class="copy-btn"
+        @click.stop="copyExercise"
+      >
+        <v-icon>{{ mdi.contentCopy }}</v-icon>
+      </v-btn>
+      <v-btn
+        v-if="editWorkout"
+        icon
         class="delete-btn"
         @click.stop="deleteExercise"
       >
@@ -80,6 +88,7 @@ import { getImg, count } from '@/misc/helpers'
 import {
   mdiArrowLeft,
   mdiContentSave,
+  mdiContentCopy,
   mdiPencil,
   mdiAutorenew,
   mdiDelete
@@ -101,6 +110,7 @@ export default {
     mdi: {
       arrowLeft: mdiArrowLeft,
       contentSave: mdiContentSave,
+      contentCopy: mdiContentCopy,
       pencil: mdiPencil,
       autorenew: mdiAutorenew,
       delete: mdiDelete
@@ -133,13 +143,27 @@ export default {
   methods: {
     count,
     getImg,
-    ...mapActions('workouts', ['deleteUserExercise', 'triggerUpdateWorkout']),
+    ...mapActions('workouts', [
+      'deleteUserExercise',
+      'copyUserExercise',
+      'triggerUpdateWorkout'
+    ]),
     ...mapMutations('workouts', ['setTotalTime']),
     deleteExercise() {
       this.deleteUserExercise({
         workout: this.workoutById(this.id),
         index: this.index
       })
+      this.updateExercise()
+    },
+    copyExercise() {
+      this.copyUserExercise({
+        workout: this.workoutById(this.id),
+        index: this.index
+      })
+      this.updateExercise()
+    },
+    updateExercise() {
       let name = 'workout'
       if (this.id === 'new') {
         name = 'new-workout'

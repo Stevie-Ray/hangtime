@@ -160,6 +160,24 @@ export default {
       state.workoutToCreate.exercises.splice(payload.index, 1)
     }
   },
+  copyExerciseByIndex: (state, payload) => {
+    const index = state.workouts.findIndex(
+      workout => workout.id === payload.workout.id
+    )
+    if (index >= 0) {
+      state.workouts[index].exercises.splice(
+        payload.index,
+        0,
+        state.workouts[index].exercises[payload.index]
+      )
+    } else {
+      state.workoutToCreate.exercises.splice(
+        payload.index,
+        0,
+        state.workoutToCreate.exercises[payload.index]
+      )
+    }
+  },
 
   /* Community */
   setCommunityWorkouts: (state, communityWorkouts) =>

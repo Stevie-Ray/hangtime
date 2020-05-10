@@ -175,6 +175,23 @@ export default {
     }
     // commit('removeExerciseDeletionPending', payload.exerciseId)
   },
+  /**
+   * Delete a user exercise from its id
+   */
+  copyUserExercise: ({ commit, dispatch }, payload) => {
+    // TODO: fix pending state
+    // if (getters.isExerciseDeletionPending({ workout: payload.workout.id, index: payload.index})) return
+
+    // commit('addExerciseDeletionPending', { workout: payload.workout.id, index: payload.index})
+    commit('copyExerciseByIndex', payload)
+    if (payload.workout.id) {
+      commit('setTotalTime', payload.workout.id)
+      dispatch('updateWorkout', payload.workout)
+    } else {
+      commit('setTotalTime', 'new')
+    }
+    // commit('removeExerciseDeletionPending', payload.exerciseId)
+  },
   shareWorkout: ({ state, commit, dispatch }, id) => {
     commit('shareWorkout', id)
     // eslint-disable-next-line no-shadow

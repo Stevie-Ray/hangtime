@@ -1240,6 +1240,22 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'DeWoodstok',
+      description: '',
+      disabled: true,
+      id: 51,
+      website: 'https://www.dewoodstok.nl/',
+      hangboards: [
+        {
+          name: 'Woodboard',
+          id: 0,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
