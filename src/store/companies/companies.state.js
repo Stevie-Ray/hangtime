@@ -697,10 +697,9 @@ export default {
         },
         {
           name: 'Training board medium',
-          disabled: true,
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ERZIMEDIUM.svg',
+          holds: 13
         },
         {
           name: 'Training board large',
@@ -728,22 +727,19 @@ export default {
       name: 'Nicros',
       description: '',
       id: 30,
-      disabled: true,
       website: 'https://nicros.com/',
       hangboards: [
         {
           name: 'Ultimate Board',
-          disabled: true,
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/NICROSULTIMATE.svg',
+          holds: 15
         },
         {
           name: 'Warrior Hangboard',
-          disabled: true,
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/NICROSWARRIOR.svg',
+          holds: 7
         }
       ]
     },
