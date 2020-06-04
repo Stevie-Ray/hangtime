@@ -443,12 +443,7 @@ export default {
       this.running = false
       this.vibratePhone()
       this.playSound('stop.mp3')
-      if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
-        this.wakeLock.release()
-        this.wakeLock = null
-      } else {
-        this.noSleep.disable()
-      }
+      this.noSleep.disable()
       this.dialog = true
     },
     saveRecording() {
@@ -472,19 +467,7 @@ export default {
     },
     async requestWakeLock() {
       try {
-        if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
-          this.wakeLock = await navigator.wakeLock.request('screen')
-          this.wakeLock.addEventListener('release', () => {
-            // eslint-disable-next-line no-console
-            console.log('Wake Lock was released')
-          })
-          // eslint-disable-next-line no-console
-          console.log('Wake Lock is active')
-        } else {
-          // eslint-disable-next-line no-console
-          console.log('noSleep')
-          this.noSleep.enable()
-        }
+        this.noSleep.enable()
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error(`${err.name}, ${err.message}`)
