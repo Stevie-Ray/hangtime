@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="headline">
+      <v-card-title class="text-h5">
         <span v-if="!isSubscribed">Subscribe to this workout</span>
         <span v-else>Unsubscribe from this workout</span>
       </v-card-title>

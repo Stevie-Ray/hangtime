@@ -11,7 +11,7 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container>
         <v-row justify="center" align="start">
           <v-col cols="12">
@@ -53,7 +53,7 @@
 
                 <v-card-title primary-title>
                   <div class="text-center">
-                    <h3 class="headline ">
+                    <h3 class="text-h5">
                       {{ companies[item.company].name }}
                       {{
                         companies[item.company].hangboards[item.hangboard].name
@@ -102,7 +102,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

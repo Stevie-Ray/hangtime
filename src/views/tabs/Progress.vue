@@ -54,7 +54,7 @@
                 <!--                            {{ bestStatsById(data.id) }}x-->
                 <!--                          </strong>-->
                 <!--                        </div>-->
-                <div class="d-flex caption">
+                <div class="d-flex text-caption">
                   <v-icon small>{{ mdi.pageLast }}</v-icon>
                   {{ shortDate(data.updateTimestamp) }}
                 </div>

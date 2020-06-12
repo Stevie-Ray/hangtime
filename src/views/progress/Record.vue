@@ -35,7 +35,7 @@
 
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-content v-if="currentType">
+    <v-main v-if="currentType">
       <v-container>
         <v-row justify="center" align="start" class="fill-height">
           <v-col cols="12" sm="8" md="6">
@@ -79,7 +79,7 @@
                       <span v-if="configurable"> Pull-up</span>
                     </div>
 
-                    <div id="timer" class="display-3 font-weight-bold">
+                    <div id="timer" class="text-h2 font-weight-bold">
                       {{ count(totalTime) }}
                     </div>
 
@@ -174,7 +174,7 @@
       <v-dialog v-model="dialog" persistent width="500">
         <v-card>
           <span v-if="!configurable">
-            <v-card-title class="headline"
+            <v-card-title class="text-h5"
               >Max {{ currentType.name }}</v-card-title
             >
 
@@ -183,7 +183,7 @@
             </v-card-subtitle>
 
             <v-card-text>
-              <div class="body-2">
+              <div class="text-body-2">
                 If it took some time before you pressed stop please add a fair
                 correction:
               </div>
@@ -201,8 +201,8 @@
 
               <v-row class="">
                 <v-col cols="6">
-                  <div class="subtitle-2">Final score</div>
-                  <div class="display-1">
+                  <div class="text-subtitle-2">Final score</div>
+                  <div class="text-h4">
                     <strong>{{ count(finalTime) }}</strong>
                   </div>
                 </v-col>
@@ -215,8 +215,10 @@
                       }) > 0
                     "
                   >
-                    <div class="subtitle-2">Best {{ currentType.name }}</div>
-                    <div class="display-1">
+                    <div class="text-subtitle-2">
+                      Best {{ currentType.name }}
+                    </div>
+                    <div class="text-h4">
                       {{
                         count(
                           bestStatsByType({
@@ -244,7 +246,7 @@
             </v-card-text>
           </span>
           <span v-else>
-            <v-card-title class="headline">Recording result</v-card-title>
+            <v-card-title class="text-h5">Recording result</v-card-title>
 
             <v-card-text>
               <div>
@@ -304,7 +306,7 @@
           <v-icon>{{ mdi.stop }}</v-icon>
         </v-btn>
       </v-speed-dial>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

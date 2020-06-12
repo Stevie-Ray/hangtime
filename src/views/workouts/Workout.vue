@@ -79,7 +79,7 @@
         </v-list>
       </v-menu>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container>
         <v-row>
           <v-col cols="12">
@@ -109,7 +109,7 @@
             <!--  Check if user has current hangboard-->
             <v-dialog v-model="hasHangboard" persistent max-width="500">
               <v-card>
-                <v-card-title class="headline"
+                <v-card-title class="text-h5"
                   >You are not using this hangboard</v-card-title
                 >
 
@@ -177,7 +177,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

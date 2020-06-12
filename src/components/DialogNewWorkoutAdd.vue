@@ -6,7 +6,7 @@
       </v-card-title>
 
       <v-card-text>
-        <div class="subtitle-2 mb-6">Name your workout and get going.</div>
+        <div class="text-subtitle-2 mb-6">Name your workout and get going.</div>
         <v-form class="workout-action-bar">
           <v-text-field
             v-model="workoutToCreateName"
@@ -173,7 +173,7 @@ export default {
 
 <style lang="scss" scoped>
 .modal-wrapper {
-  .headline {
+  .text-h5 {
     display: flex;
     /*justify-content: center;*/
     align-items: center;

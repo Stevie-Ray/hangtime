@@ -10,7 +10,7 @@
 
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container>
         <v-row>
           <v-col cols="12">
@@ -24,7 +24,7 @@
                 <v-card-title class="justify-center align-center">
                   <v-row>
                     <v-col class="text-right">
-                      <div class="overline">Grade</div>
+                      <div class="text-overline">Grade</div>
                       <div>
                         {{
                           ircra
@@ -39,7 +39,7 @@
                       </v-avatar>
                     </v-col>
                     <v-col class="text-left">
-                      <div class="overline">Workouts</div>
+                      <div class="text-overline">Workouts</div>
                       <div>0</div>
                     </v-col>
                   </v-row>
@@ -100,12 +100,12 @@
 
             <v-card v-if="userId" flat>
               <div class="title">This feature is in development.</div>
-              <div class="subtitle-1">User ID: {{ userId }}</div>
+              <div class="text-subtitle-1">User ID: {{ userId }}</div>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

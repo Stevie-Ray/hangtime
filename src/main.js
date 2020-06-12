@@ -34,7 +34,8 @@ const opts = {
         tertiary: '#5A8C8C',
         accent: '#BCBFA4'
       }
-    }
+    },
+    options: { variations: false }
   }
 }
 

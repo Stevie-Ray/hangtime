@@ -32,7 +32,7 @@
     margin-left: 0;
   }
 
-  .layout:not(.run) .v-content__wrap > .container {
+  .layout:not(.run) .v-main__wrap > .container {
     padding: 0 0 5rem;
     & > .row {
       margin-right: 0;
@@ -72,7 +72,7 @@
   }
 
   // divider color
-  .v-content .theme--light.v-divider {
+  .v-main .theme--light.v-divider {
     border-color: rgba(0, 0, 0, 0.08);
   }
 

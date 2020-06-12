@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" width="500">
     <v-card class="modal-wrapper">
-      <v-card-title class="headline" primary-title>
+      <v-card-title class="text-h5" primary-title>
         <v-img
           class="app-logo"
           contain
@@ -59,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .modal-wrapper {
-  .headline {
+  .text-h5 {
     display: flex;
     /*justify-content: center;*/
     align-items: center;

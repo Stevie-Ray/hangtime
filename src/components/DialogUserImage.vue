@@ -19,7 +19,7 @@
               style="background-color: rgba(0, 0, 0, .5)"
             >
               <v-list-item-content class="py-0">
-                <v-list-item-title class="subtitle-1">{{
+                <v-list-item-title class="text-subtitle-1">{{
                   data.user.displayName
                 }}</v-list-item-title>
               </v-list-item-content>

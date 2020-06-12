@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="headline">
+      <v-card-title class="text-h5">
         <span v-if="!currentWorkout.share">Share with the community</span>
         <span v-else>Remove from the community</span>
       </v-card-title>

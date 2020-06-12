@@ -44,7 +44,7 @@
         <v-icon>{{ mdi.contentSave }}</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container>
         <v-row>
           <v-col cols="12">
@@ -70,7 +70,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

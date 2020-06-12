@@ -7,7 +7,7 @@
       <v-icon v-else :small="small">{{ mdi.starOff }}</v-icon>
       <span
         v-if="currentWorkout.share && currentWorkout.subscribers.length > 1"
-        :class="{ 'subtitle-2 pr-1': small }"
+        :class="{ 'text-subtitle-2 pr-1': small }"
       >
         {{ currentWorkout.subscribers.length - 1 }}
       </span>

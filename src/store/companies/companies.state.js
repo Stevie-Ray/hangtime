@@ -1224,15 +1224,13 @@ export default {
     {
       name: 'Expressions holds',
       description: '',
-      disabled: true,
       id: 50,
       website: 'https://www.expression-holds.com/',
       hangboards: [
         {
           name: 'ComiX Club',
           id: 0,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/EXPRESSIONSCOMIX.svg',
           holds: 0
         }
       ]

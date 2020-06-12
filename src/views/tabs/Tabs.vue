@@ -76,7 +76,7 @@
       </v-tabs>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container class="fill-height">
         <v-row justify="center" align="start" class="fill-height" no-gutters>
           <v-col cols="12" class="fill-height">
@@ -130,7 +130,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

@@ -1,10 +1,10 @@
 <template>
-  <v-content>
+  <v-main>
     <v-container class="fill-height">
       <v-row class="fill-height" no-gutters>
         <v-col cols="12">
           <div class="text-center pa-4">
-            <div class="display-1">{{ appTitle }}</div>
+            <div class="text-h4">{{ appTitle }}</div>
             <div class="subheading font-weight-light grey--text text--darken-2">
               Version {{ appVersion }}
             </div>
@@ -64,7 +64,7 @@
             </v-row>
 
             <div
-              class="caption grey--text text--darken-2 font-weight-light mt-4"
+              class="text-caption grey--text text--darken-2 font-weight-light mt-4"
             >
               &copy; 2019 - {{ year }} {{ appTitle }}.
             </div>
@@ -72,7 +72,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script>

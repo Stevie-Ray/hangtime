@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <v-row align="center" justify="center" class="fill-height" no-gutters>
       <v-col cols="12">
         <div class="loading text-center">
@@ -11,7 +11,7 @@
         </div>
       </v-col>
     </v-row>
-  </v-content>
+  </v-main>
 </template>
 
 <script>

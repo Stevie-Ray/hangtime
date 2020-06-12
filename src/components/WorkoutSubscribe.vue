@@ -5,7 +5,7 @@
       <v-icon v-else :small="small">{{ mdi.starOutline }}</v-icon>
       <span
         v-if="currentSubscribers && currentSubscribers.length > 1"
-        :class="{ 'subtitle-2 pr-1': small }"
+        :class="{ 'text-subtitle-2 pr-1': small }"
       >
         {{ currentSubscribers.length - 1 }}
       </span>

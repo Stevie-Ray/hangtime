@@ -27,7 +27,7 @@
         <v-icon>{{ mdi.tune }}</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container>
         <v-row justify="center" align="start" class="fill-height">
           <v-col cols="12" sm="8" md="6">
@@ -138,7 +138,7 @@
 
       <v-dialog v-model="filterDialog" max-width="500">
         <v-card>
-          <v-card-title class="headline">Filter your recordings</v-card-title>
+          <v-card-title class="text-h5">Filter your recordings</v-card-title>
 
           <v-card-text>
             <v-container fluid>
@@ -169,7 +169,7 @@
 
       <v-dialog v-model="selectTypeDialog" max-width="500">
         <v-card>
-          <v-card-title class="headline">What do you want to do?</v-card-title>
+          <v-card-title class="text-h5">What do you want to do?</v-card-title>
           <v-card-text>
             <v-container fluid>
               <v-radio-group v-if="currentStats[index]" v-model="workoutType">
@@ -201,7 +201,7 @@
                 (currentStats[index] && currentStats[index].left === null) ||
                   (currentStats[index] && currentStats[index].right === null)
               "
-              class="subtitle-2"
+              class="text-subtitle-2"
             >
               <strong>Warning:</strong> Make sure you know what you are doing
               and be properly warmed up before doing one-arm hangs.
@@ -224,7 +224,7 @@
 
       <v-dialog v-if="deleteDialogItem" v-model="deleteDialog" max-width="500">
         <v-card>
-          <v-card-title class="headline">Delete recording</v-card-title>
+          <v-card-title class="text-h5">Delete recording</v-card-title>
 
           <v-card-text>
             <v-container fluid>
@@ -270,7 +270,7 @@
           <v-icon>{{ mdi.timer }}</v-icon>
         </v-btn>
       </v-fab-transition>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

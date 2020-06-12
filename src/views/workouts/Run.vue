@@ -26,7 +26,7 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-content v-if="currentExercise">
+    <v-main v-if="currentExercise">
       <v-container class="fill-height">
         <v-row class="fill-height">
           <v-col cols="12">
@@ -83,7 +83,7 @@
                       </v-btn>
                     </div>
 
-                    <div id="timer" class="display-3 font-weight-bold">
+                    <div id="timer" class="text-h2 font-weight-bold">
                       {{ count(totalTime) }}
                     </div>
 
@@ -177,7 +177,7 @@
           <v-icon>{{ mdi.play }}</v-icon>
         </v-btn>
       </v-speed-dial>
-    </v-content>
+    </v-main>
   </v-layout>
 </template>
 

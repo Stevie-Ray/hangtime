@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="headline">Delete workout</v-card-title>
+      <v-card-title class="text-h5">Delete workout</v-card-title>
 
       <v-card-text>
         Are you sure you want to delete

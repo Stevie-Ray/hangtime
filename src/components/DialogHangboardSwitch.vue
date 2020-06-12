@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="headline mb-0">Switch hangboard</v-card-title>
+      <v-card-title class="text-h5 mb-0">Switch hangboard</v-card-title>
 
       <v-card-text>
         <v-radio-group
