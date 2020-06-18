@@ -306,7 +306,7 @@ export default {
           name: 'Fingerboard',
           id: 0,
           image: 'hangboards/MOONFINGER.svg',
-          holds: 4
+          holds: 7
         },
         {
           name: 'Phat Boy',
