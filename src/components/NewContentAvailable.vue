@@ -1,12 +1,14 @@
 <template>
-  <v-snackbar v-model="snackbar" :timeout="0" bottom>
-    <template v-if="refreshingApp">
+  <v-snackbar v-model="snackbar" :timeout="-1" bottom>
+    <div v-if="refreshingApp">
       Loading new content...
-    </template>
-    <template v-else>
+    </div>
+    <div v-else>
       New content available
-      <v-btn text @click="refesh">
-        refresh
+    </div>
+    <template v-if="!refreshingApp" v-slot:action="{ attrs }">
+      <v-btn text v-bind="attrs" @click="refesh">
+        Refresh
       </v-btn>
     </template>
   </v-snackbar>

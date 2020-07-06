@@ -1192,16 +1192,14 @@ export default {
     {
       name: 'Bäm!',
       description: '',
-      disabled: true,
       id: 48,
       website: 'https://www.bam-products.com/',
       hangboards: [
         {
           name: 'Hangboard',
           id: 0,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/BAMHANGBOARD.svg',
+          holds: 6
         }
       ]
     },
