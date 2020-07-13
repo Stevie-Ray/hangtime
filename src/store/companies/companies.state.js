@@ -954,7 +954,7 @@ export default {
       hangboards: [
         {
           name: 'Yaniro Power Hang Board',
-          id  : 0,
+          id: 0,
           image: 'hangboards/YANIROPOWERBOARD.svg',
           holds: 18
         }
