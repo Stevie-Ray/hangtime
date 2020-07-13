@@ -950,15 +950,13 @@ export default {
       description:
         'High quality climbing holds and Ninja Warrior products from Provo, Utah, USA',
       id: 38,
-      disabled: true,
       website: 'https://www.atomikclimbingholds.com',
       hangboards: [
         {
           name: 'Yaniro Power Hang Board',
-          disabled: true,
-          id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id  : 0,
+          image: 'hangboards/YANIROPOWERBOARD.svg',
+          holds: 18
         }
       ]
     },
