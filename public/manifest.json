@@ -4,7 +4,7 @@
   "description": "Fingerboard / Hangboard training for climbers.",
   "categories": ["fitness","health","sports"],
   "lang": "en-US",
-  "start_url": "/",
+  "start_url": "/?utm_source=homescreen",
   "display": "standalone",
   "theme_color": "#012E40",
   "background_color": "#012E40",
@@ -35,11 +35,13 @@
   "shortcuts": [
     {
       "name": "Workouts",
+      "short_name": "Workouts",
       "description": "Create and customize your own workouts",
-      "url": "/",
+      "url": "/?utm_source=shortcut",
       "icons": [
         {
           "src": "./img/icons/android-shortcut-512x512.png",
+          "sizes": "512x512",
           "type": "image/png",
           "purpose": "any"
         }
@@ -47,11 +49,13 @@
     },
     {
       "name": "Community",
+      "short_name": "Community",
       "description": "Share and do workouts from the community",
-      "url": "/community",
+      "url": "/community?utm_source=shortcut",
       "icons": [
         {
           "src": "./img/icons/android-shortcut-512x512.png",
+          "sizes": "512x512",
           "type": "image/png",
           "purpose": "any"
         }
@@ -59,11 +63,13 @@
     },
     {
       "name": "Progress",
+      "short_name": "Progress",
       "description": "Track your progress over time",
-      "url": "/progress",
+      "url": "/progress?utm_source=shortcut",
       "icons": [
         {
           "src": "./img/icons/android-shortcut-512x512.png",
+          "sizes": "512x512",
           "type": "image/png",
           "purpose": "any"
         }
