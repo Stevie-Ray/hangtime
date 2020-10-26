@@ -58,10 +58,6 @@ export default {
       arrowLeft: mdiArrowLeft
     }
   }),
-  computed: {
-    ...mapState('workouts', ['options'])
-  },
-  methods: {},
   head: {
     title: {
       inner: 'Help'
@@ -73,7 +69,11 @@ export default {
         id: 'desc'
       }
     ]
-  }
+  },
+  computed: {
+    ...mapState('workouts', ['options'])
+  },
+  methods: {}
 }
 </script>
 

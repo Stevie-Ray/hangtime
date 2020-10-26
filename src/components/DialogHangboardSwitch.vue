@@ -16,7 +16,7 @@
             :value="index"
             @change="changeHangboard(index)"
           >
-            <template v-slot:label>
+            <template #label>
               <div>
                 {{ companies[item.company].name }} -
                 {{ companies[item.company].hangboards[item.hangboard].name }}

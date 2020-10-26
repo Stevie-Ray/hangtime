@@ -153,10 +153,6 @@ export default {
       helpCircleOutline: mdiHelpCircleOutline
     }
   }),
-  computed: mapState('authentication', ['user']),
-  methods: {
-    getImg
-  },
   head: {
     title: {
       inner: 'Settings'
@@ -168,6 +164,10 @@ export default {
         id: 'desc'
       }
     ]
+  },
+  computed: mapState('authentication', ['user']),
+  methods: {
+    getImg
   }
 }
 </script>

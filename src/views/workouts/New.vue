@@ -108,6 +108,20 @@ export default {
       required: v => !!v || 'This field is required'
     }
   }),
+  head: {
+    title() {
+      return {
+        inner: this.meta.title
+      }
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapState('authentication', ['user']),
@@ -120,6 +134,7 @@ export default {
   mounted() {
     if (this.currentWorkout && this.currentWorkout.name) {
       this.meta.title = `${this.currentWorkout.name} | New Workout `
+      // eslint-disable-next-line vue/custom-event-name-casing
       this.$emit('updateHead')
     }
   },
@@ -161,20 +176,6 @@ export default {
     saveExercises() {
       this.dialog = true
     }
-  },
-  head: {
-    title() {
-      return {
-        inner: this.meta.title
-      }
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

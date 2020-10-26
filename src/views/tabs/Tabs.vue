@@ -41,7 +41,7 @@
       <!--      </v-avatar>-->
 
       <v-menu bottom left min-width="200">
-        <template v-slot:activator="{ on }">
+        <template #activator="{ on }">
           <v-btn dark icon v-on="on">
             <v-icon>{{ mdi.dotsVertical }}</v-icon>
           </v-btn>

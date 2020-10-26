@@ -6,7 +6,7 @@
     <div v-else>
       New content available
     </div>
-    <template v-if="!refreshingApp" v-slot:action="{ attrs }">
+    <template v-if="!refreshingApp" #action="{ attrs }">
       <v-btn text v-bind="attrs" @click="refesh">
         Refresh
       </v-btn>

@@ -79,7 +79,7 @@
                     item-value="value"
                     label="Grading scale"
                   >
-                    <template v-slot:prepend>
+                    <template #prepend>
                       <v-icon color="primary lighten-1">{{
                         mdi.chartGantt
                       }}</v-icon>
@@ -96,7 +96,7 @@
                     item-value="ircra"
                     label="Grade"
                   >
-                    <template v-slot:prepend>
+                    <template #prepend>
                       <v-icon color="primary lighten-1">{{
                         mdi.chartTimelineVariant
                       }}</v-icon>

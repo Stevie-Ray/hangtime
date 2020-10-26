@@ -102,6 +102,18 @@ export default {
       repeat: mdiRepeat
     }
   }),
+  head: {
+    title: {
+      inner: 'Progress'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Measure strength and become a better climber',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'currentTab']),
@@ -121,18 +133,6 @@ export default {
     getImg,
     count,
     shortDate
-  },
-  head: {
-    title: {
-      inner: 'Progress'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Measure strength and become a better climber',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

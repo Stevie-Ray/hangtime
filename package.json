@@ -16,7 +16,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@mdi/js": "^5.7.55",
+    "@mdi/js": "^5.8.55",
     "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "firebase": "^7.24.0",
@@ -30,9 +30,9 @@
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
     "vue-head": "^2.2.0",
-    "vue-router": "^3.4.7",
+    "vue-router": "^3.4.8",
     "vue-simple-svg": "^2.0.2",
-    "vuedraggable": "^2.24.2",
+    "vuedraggable": "^2.24.3",
     "vuetify": "^2.3.15",
     "vuex": "^3.5.1",
     "vuex-persistedstate": "^3.1.0"
@@ -51,7 +51,7 @@
     "babel-jest": "^26.6.1",
     "babel-plugin-lodash": "^3.3.4",
     "bundlesize": "^0.18.0",
-    "eslint": "^7.11.0",
+    "eslint": "^7.12.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-google": "^0.14.0",

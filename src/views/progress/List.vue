@@ -178,7 +178,7 @@
                   :key="option.id"
                   :value="option.id"
                 >
-                  <template v-slot:label>
+                  <template #label>
                     <div>
                       <span>Max </span>
                       <span
@@ -312,6 +312,18 @@ export default {
       delete: mdiDelete
     }
   }),
+  head: {
+    title: {
+      inner: 'Record'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'currentTab']),
@@ -450,18 +462,6 @@ export default {
         }
       })
     }
-  },
-  head: {
-    title: {
-      inner: 'Record'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

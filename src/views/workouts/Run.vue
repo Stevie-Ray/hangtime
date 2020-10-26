@@ -200,6 +200,11 @@ import WorkoutItemName from '../../components/WorkoutItemName'
 
 export default {
   components: { WorkoutItemName, Hangboard, Hand },
+  beforeRouteLeave(to, from, next) {
+    // make sure timer is disabled on leave
+    if (this.timer !== null) clearInterval(this.timer)
+    next()
+  },
   props: {
     id: String,
     userId: String
@@ -232,6 +237,21 @@ export default {
     voiceList: [],
     noSleep: new NoSleep()
   }),
+  head: {
+    title() {
+      return {
+        // inner: `${this.currentWorkout.name} | Workout `
+        inner: this.meta.title
+      }
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
@@ -258,6 +278,7 @@ export default {
   mounted() {
     if (this.currentWorkout) {
       this.meta.title = `${this.currentWorkout.name} | Workout `
+      // eslint-disable-next-line vue/custom-event-name-casing
       this.$emit('updateHead')
     }
     // set timer
@@ -265,11 +286,6 @@ export default {
     this.voiceList = this.synth
       .getVoices()
       .filter(voice => /^(en|EN)/.test(voice.lang))
-  },
-  beforeRouteLeave(to, from, next) {
-    // make sure timer is disabled on leave
-    if (this.timer !== null) clearInterval(this.timer)
-    next()
   },
   methods: {
     getImg,
@@ -557,21 +573,6 @@ export default {
         console.error(`${err.name}, ${err.message}`)
       }
     }
-  },
-  head: {
-    title() {
-      return {
-        // inner: `${this.currentWorkout.name} | Workout `
-        inner: this.meta.title
-      }
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

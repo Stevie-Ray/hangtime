@@ -92,6 +92,18 @@ export default {
       facebook: mdiFacebook
     }
   }),
+  head: {
+    title: {
+      inner: 'Login'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Sign in or sign up',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'appTitle', 'appVersion'])
@@ -138,18 +150,6 @@ export default {
         this.setUser(null)
       }
     }
-  },
-  head: {
-    title: {
-      inner: 'Login'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Sign in or sign up',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

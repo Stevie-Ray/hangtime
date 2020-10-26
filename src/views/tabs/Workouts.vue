@@ -8,7 +8,6 @@ import WorkoutList from '@/components/WorkoutList'
 
 export default {
   components: { WorkoutList },
-  computed: mapState('app', ['networkOnLine']),
   head: {
     title: {
       inner: 'Workouts'
@@ -20,6 +19,7 @@ export default {
         id: 'desc'
       }
     ]
-  }
+  },
+  computed: mapState('app', ['networkOnLine'])
 }
 </script>

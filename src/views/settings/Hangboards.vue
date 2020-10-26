@@ -118,18 +118,6 @@ export default {
       plus: mdiPlus
     }
   }),
-  computed: {
-    ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies'])
-  },
-  methods: {
-    ...mapActions('authentication', [
-      'triggerChangeHangboardAction',
-      'triggerRemoveHangboardAction'
-    ]),
-    getImg
-  },
   head: {
     title: {
       inner: 'Your Hangboards'
@@ -141,6 +129,18 @@ export default {
         id: 'desc'
       }
     ]
+  },
+  computed: {
+    ...mapState('app', ['networkOnLine']),
+    ...mapState('authentication', ['user']),
+    ...mapState('companies', ['companies'])
+  },
+  methods: {
+    ...mapActions('authentication', [
+      'triggerChangeHangboardAction',
+      'triggerRemoveHangboardAction'
+    ]),
+    getImg
   }
 }
 </script>

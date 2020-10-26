@@ -167,6 +167,18 @@ export default {
       information: mdiInformation
     }
   }),
+  head: {
+    title: {
+      inner: 'Profile'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'User profile',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
@@ -250,18 +262,6 @@ export default {
         this.imageUrl = ''
       }
     }
-  },
-  head: {
-    title: {
-      inner: 'Profile'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'User profile',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

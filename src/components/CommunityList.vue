@@ -62,7 +62,7 @@
         :index="index"
         :disable-actions="!networkOnLine"
         :data="workout"
-        @goToWorkoutDetails="
+        @go-to-workout-details="
           $router.push({
             name: 'workout',
             params: {

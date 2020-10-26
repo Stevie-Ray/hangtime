@@ -116,6 +116,18 @@ export default {
       delete: mdiDelete
     }
   }),
+  head: {
+    title: {
+      inner: 'Exercise'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
@@ -196,18 +208,6 @@ export default {
         }
       })
     }
-  },
-  head: {
-    title: {
-      inner: 'Exercise'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

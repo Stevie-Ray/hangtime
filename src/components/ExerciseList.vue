@@ -49,7 +49,7 @@
           :disable-actions="!networkOnLine"
           :data="exercise"
           :edit-workout="editWorkout"
-          @goToExerciseDetails="
+          @go-to-exercise-details="
             $router.push({
               name: 'exercise',
               params: {

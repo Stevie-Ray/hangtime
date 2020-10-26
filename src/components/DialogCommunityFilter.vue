@@ -13,7 +13,7 @@
               label="Sort workouts by"
               return-object
             >
-              <template v-slot:append-outer>
+              <template #append-outer>
                 <v-btn v-if="sortOrder !== 'asc'" icon @click="setOrder('asc')">
                   <v-icon>{{ mdi.sortAscending }}</v-icon>
                 </v-btn>

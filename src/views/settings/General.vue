@@ -107,6 +107,18 @@ export default {
       cellphoneLink: mdiCellphoneLink
     }
   }),
+  head: {
+    title: {
+      inner: 'General'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'General Settings',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
@@ -153,18 +165,6 @@ export default {
     getImg,
     ...mapActions('authentication', ['triggerUpdateUser']),
     ...mapMutations('authentication', ['setScale', 'setTheme', 'setScheme'])
-  },
-  head: {
-    title: {
-      inner: 'General'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'General Settings',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

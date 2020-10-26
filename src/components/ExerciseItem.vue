@@ -17,7 +17,7 @@
           :prepend-icon="mdi.clockOutline"
           label="Pause"
         >
-          <template v-slot:thumb-label="props">
+          <template #thumb-label="props">
             {{ count(Math.round(props.value)) }}
           </template>
           <template #append>
@@ -70,10 +70,10 @@
           :disabled="!editWorkout"
           required
         >
-          <template v-slot:selection="data">
+          <template #selection="data">
             <span v-text="data.item.name"></span>
           </template>
-          <template v-slot:item="data">
+          <template #item="data">
             <v-list-item-avatar>
               <img :alt="data.item.name" :src="getImg(data.item.image)" />
             </v-list-item-avatar>
@@ -115,7 +115,7 @@
           persistent-hint
           label="Hold"
         >
-          <template v-slot:thumb-label="props">
+          <template #thumb-label="props">
             {{ count(props.value) }}
           </template>
           <template #append>
@@ -178,9 +178,7 @@
                   persistent-hint
                   label="Pull-ups"
                 >
-                  <template v-slot:thumb-label="props">
-                    {{ props.value }}x
-                  </template>
+                  <template #thumb-label="props"> {{ props.value }}x </template>
                   <template #append>
                     <v-label>{{ dataPullups }}x</v-label>
                   </template>
@@ -207,9 +205,7 @@
                   persistent-hint
                   label="Scap Pulls"
                 >
-                  <template v-slot:thumb-label="props">
-                    {{ props.value }}x
-                  </template>
+                  <template #thumb-label="props"> {{ props.value }}x </template>
                   <template #append>
                     <v-label>{{ dataScapPulls }}x</v-label>
                   </template>
@@ -235,7 +231,7 @@
                   persistent-hint
                   label="Reps"
                 >
-                  <template v-slot:thumb-label="props"
+                  <template #thumb-label="props"
                     >{{ props.value + 1 }}x
                   </template>
                   <template #append>
@@ -265,7 +261,7 @@
                     persistent-hint
                     label="Rest"
                   >
-                    <template v-slot:thumb-label="props">
+                    <template #thumb-label="props">
                       {{ count(Math.round(props.value)) }}
                     </template>
                     <template #append>

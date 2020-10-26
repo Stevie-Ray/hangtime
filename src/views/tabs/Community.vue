@@ -8,7 +8,6 @@ import CommunityList from '@/components/CommunityList'
 
 export default {
   components: { CommunityList },
-  computed: mapState('app', ['networkOnLine']),
   head: {
     title: {
       inner: 'Community'
@@ -20,6 +19,7 @@ export default {
         id: 'desc'
       }
     ]
-  }
+  },
+  computed: mapState('app', ['networkOnLine'])
 }
 </script>

@@ -340,6 +340,18 @@ export default {
       arrowLeft: mdiArrowLeft
     }
   }),
+  head: {
+    title: {
+      inner: 'Record'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('progress', [
@@ -475,18 +487,6 @@ export default {
         console.error(`${err.name}, ${err.message}`)
       }
     }
-  },
-  head: {
-    title: {
-      inner: 'Record'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

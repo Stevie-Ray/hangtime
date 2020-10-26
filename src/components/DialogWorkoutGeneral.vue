@@ -74,7 +74,7 @@
 
             <v-col cols="12">
               <v-checkbox
-                v-model="currentWorkout.share"
+                v-model="dataShare"
                 hide-details="auto"
                 label="Share with the community"
                 @change="shareWorkout(currentWorkout.id)"
@@ -204,6 +204,14 @@ export default {
       },
       set(value) {
         this.setWorkoutDifficulty({ id: this.currentWorkout.id, value })
+      }
+    },
+    dataShare: {
+      get() {
+        return this.currentWorkout.share
+      },
+      set(value) {
+        this.setWorkoutShare({ id: this.currentWorkout.id, value })
       }
     }
   },

@@ -19,6 +19,18 @@ import { mapState } from 'vuex'
 import isNil from 'lodash/isNil'
 
 export default {
+  head: {
+    title: {
+      inner: 'Checking Login'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Check if user is logged in',
+        id: 'desc'
+      }
+    ]
+  },
   computed: mapState('authentication', ['user']),
   watch: {
     user: {
@@ -37,18 +49,6 @@ export default {
       },
       immediate: true
     }
-  },
-  head: {
-    title: {
-      inner: 'Checking Login'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Check if user is logged in',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

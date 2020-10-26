@@ -63,7 +63,7 @@
 
       <!-- menu -->
       <v-menu v-if="editWorkout" bottom left min-width="200">
-        <template v-slot:activator="{ on }">
+        <template #activator="{ on }">
           <v-btn dark icon v-on="on">
             <v-icon>{{ mdi.dotsVertical }}</v-icon>
           </v-btn>
@@ -235,6 +235,20 @@ export default {
       playlistPlus: mdiPlaylistPlus
     }
   }),
+  head: {
+    title() {
+      return {
+        inner: this.meta.title
+      }
+    },
+    meta: [
+      {
+        name: 'description',
+        content: '',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('app', ['networkOnLine', 'currentTab']),
     ...mapState('authentication', ['user']),
@@ -269,6 +283,7 @@ export default {
     }
     if (this.currentWorkout) {
       this.meta.title = `${this.currentWorkout.name} | Workout `
+      // eslint-disable-next-line vue/custom-event-name-casing
       this.$emit('updateHead')
     }
   },
@@ -321,20 +336,6 @@ export default {
       // eslint-disable-next-line consistent-return
       return videoEmbed
     }
-  },
-  head: {
-    title() {
-      return {
-        inner: this.meta.title
-      }
-    },
-    meta: [
-      {
-        name: 'description',
-        content: '',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="exercise-item" :class="{ active: editWorkout }">
-    <v-list-item ripple @click="$emit('goToExerciseDetails', index)">
+    <v-list-item ripple @click="$emit('go-to-exercise-details', index)">
       <v-icon v-if="editWorkout" class="handle">{{ mdi.drag }}</v-icon>
       <v-list-item-avatar>
         <img

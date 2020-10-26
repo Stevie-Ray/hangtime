@@ -125,15 +125,6 @@ export default {
       arrowLeft: mdiArrowLeft
     }
   }),
-  computed: {
-    ...mapState('app', ['networkOnLine', 'currentTab']),
-    ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies'])
-  },
-  methods: {
-    getImg,
-    shortDate
-  },
   head: {
     title: {
       inner: 'Profile'
@@ -145,6 +136,15 @@ export default {
         id: 'desc'
       }
     ]
+  },
+  computed: {
+    ...mapState('app', ['networkOnLine', 'currentTab']),
+    ...mapState('authentication', ['user']),
+    ...mapState('companies', ['companies'])
+  },
+  methods: {
+    getImg,
+    shortDate
   }
 }
 </script>

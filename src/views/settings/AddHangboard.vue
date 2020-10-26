@@ -47,6 +47,18 @@ export default {
       contentSave: mdiContentSave
     }
   }),
+  head: {
+    title: {
+      inner: 'Add Hangboard'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Add a new hangboard to use',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user', 'hangboardToAdd'])
@@ -64,18 +76,6 @@ export default {
       }
       this.$router.push('/settings/hangboards/')
     }
-  },
-  head: {
-    title: {
-      inner: 'Add Hangboard'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Add a new hangboard to use',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

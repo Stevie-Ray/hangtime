@@ -133,6 +133,18 @@ export default {
       accountMultiple: mdiAccountMultiple
     }
   }),
+  head: {
+    title: {
+      inner: 'Workout Settings'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Workout Settings',
+        id: 'desc'
+      }
+    ]
+  },
   computed: {
     ...mapState('authentication', ['user']),
     selectedVoice: {
@@ -201,18 +213,6 @@ export default {
         console.log('speechSynthesis not available', ex)
       }
     }
-  },
-  head: {
-    title: {
-      inner: 'Workout Settings'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Workout Settings',
-        id: 'desc'
-      }
-    ]
   }
 }
 </script>

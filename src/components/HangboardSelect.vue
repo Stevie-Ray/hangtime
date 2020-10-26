@@ -13,7 +13,7 @@
             style="width: calc(100% - 32px)"
             @change="resetHangboard"
           >
-            <template v-slot:prepend>
+            <template #prepend>
               <v-icon color="primary lighten-1">{{ mdi.numeric1Box }}</v-icon>
             </template>
           </v-select>
@@ -32,7 +32,7 @@
             required
             style="width: calc(100% - 32px)"
           >
-            <template v-slot:prepend>
+            <template #prepend>
               <v-icon color="primary lighten-1">{{ mdi.numeric2Box }}</v-icon>
             </template>
           </v-select>

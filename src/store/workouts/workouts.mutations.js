@@ -44,6 +44,12 @@ export default {
     )
     state.workouts[index].level = payload.value
   },
+  setWorkoutShare: (state, payload) => {
+    const index = state.workouts.findIndex(
+      exercise => exercise.id === payload.id
+    )
+    state.workouts[index].share = payload.value
+  },
   setOrder: (state, order) => (state.sortOrder = order),
   setFilter: (state, filter) => (state.workoutFilter = filter),
   addWorkout: (state, workout) => state.workouts.unshift(workout),
