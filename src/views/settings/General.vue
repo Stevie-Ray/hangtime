@@ -37,6 +37,23 @@
 
               <v-list-item>
                 <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.weight }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-select
+                    v-model="settingsWeight"
+                    :items="settings.weight"
+                    item-text="name"
+                    item-value="value"
+                    label="Weight system"
+                    @change="triggerUpdateUser"
+                  ></v-select>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{
                     mdi.themeLightDark
                   }}</v-icon>
@@ -93,7 +110,8 @@ import {
   mdiArrowLeft,
   mdiChartGantt,
   mdiThemeLightDark,
-  mdiCellphoneLink
+  mdiCellphoneLink,
+  mdiWeight
 } from '@mdi/js'
 
 export default {
@@ -104,7 +122,8 @@ export default {
       arrowLeft: mdiArrowLeft,
       chartGantt: mdiChartGantt,
       themeLightDark: mdiThemeLightDark,
-      cellphoneLink: mdiCellphoneLink
+      cellphoneLink: mdiCellphoneLink,
+      weight: mdiWeight
     }
   }),
   head: {
@@ -121,7 +140,7 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user']),
+    ...mapState('authentication', ['user', 'settings']),
     settingsScale: {
       get() {
         return this.user.settings.scale
@@ -129,6 +148,14 @@ export default {
       set(value) {
         // this.scaleSelected = value
         this.setScale(value)
+      }
+    },
+    settingsWeight: {
+      get() {
+        return this.user.settings.weight
+      },
+      set(value) {
+        this.setWeight(value)
       }
     },
     settingsTheme: {
@@ -164,7 +191,12 @@ export default {
   methods: {
     getImg,
     ...mapActions('authentication', ['triggerUpdateUser']),
-    ...mapMutations('authentication', ['setScale', 'setTheme', 'setScheme'])
+    ...mapMutations('authentication', [
+      'setScale',
+      'setTheme',
+      'setScheme',
+      'setWeight'
+    ])
   }
 }
 </script>

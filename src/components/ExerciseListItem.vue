@@ -28,7 +28,12 @@
 
       <v-list-item-action v-if="!disableActions">
         <v-list-item-action-text>
-          {{ count(data.time) }}
+          <div>{{ count(data.time) }}</div>
+          <div v-if="data.weight && data.weight !== 0">
+            {{ weightConverter(data.weight, user) }}
+            {{ settings.weight[user.settings.weight].short }}
+            <v-icon x-small>{{ mdi.weight }}</v-icon>
+          </div>
         </v-list-item-action-text>
       </v-list-item-action>
     </v-list-item>
@@ -38,8 +43,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getImg, count } from '@/misc/helpers'
-import { mdiDrag } from '@mdi/js'
+import { getImg, count, weightConverter } from '@/misc/helpers'
+import { mdiDrag, mdiWeight } from '@mdi/js'
 import WorkoutItemName from './WorkoutItemName'
 
 export default {
@@ -55,15 +60,18 @@ export default {
   },
   data: () => ({
     mdi: {
-      drag: mdiDrag
+      drag: mdiDrag,
+      weight: mdiWeight
     }
   }),
   computed: {
-    ...mapState('workouts', ['options'])
+    ...mapState('workouts', ['options']),
+    ...mapState('authentication', ['user', 'settings'])
   },
   methods: {
     getImg,
-    count
+    count,
+    weightConverter
   }
 }
 </script>
@@ -87,5 +95,9 @@ export default {
     margin-left: 112px;
     max-width: calc(100% - 112px);
   }
+}
+
+.v-list-item__action-text {
+  text-align: right;
 }
 </style>

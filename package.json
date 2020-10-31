@@ -33,12 +33,12 @@
     "vue-router": "^3.4.8",
     "vue-simple-svg": "^2.0.2",
     "vuedraggable": "^2.24.3",
-    "vuetify": "^2.3.15",
+    "vuetify": "^2.3.16",
     "vuex": "^3.5.1",
     "vuex-persistedstate": "^3.1.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.162",
+    "@types/lodash": "^4.14.164",
     "@vue/cli-plugin-babel": "^4.5.8",
     "@vue/cli-plugin-e2e-cypress": "^4.5.8",
     "@vue/cli-plugin-eslint": "^4.5.8",
@@ -51,22 +51,22 @@
     "babel-jest": "^26.6.1",
     "babel-plugin-lodash": "^3.3.4",
     "bundlesize": "^0.18.0",
-    "eslint": "^7.12.0",
+    "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^7.1.0",
-    "firebase-tools": "^8.13.1",
+    "firebase-tools": "^8.14.1",
     "prerender-spa-plugin": "^3.4.0",
-    "sass": "^1.27.0",
+    "sass": "^1.28.0",
     "sass-loader": "^10.0.4",
     "vue-cli-plugin-vuetify": "^2.0.7",
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.6.0",
     "webpack-bundle-analyzer": "^3.9.0",
-    "webpack-merge": "^5.2.0"
+    "webpack-merge": "^5.3.0"
   },
   "bundlesize": [
     {

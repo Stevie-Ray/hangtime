@@ -216,6 +216,46 @@
                   class="my-4"
                 ></v-divider>
 
+                <!-- weight  -->
+                <v-slider
+                  v-if="
+                    editWorkout ||
+                      (currentExercise.weight && currentExercise.weight !== 0)
+                  "
+                  v-model="dataWeight"
+                  :max="50"
+                  :min="-50"
+                  step="1"
+                  ticks
+                  always-dirty
+                  thumb-size="48"
+                  :disabled="!editWorkout"
+                  :prepend-icon="mdi.weight"
+                  hint="Add/remove weight using a kettle/dumb-bells or pulley system"
+                  persistent-hint
+                  label="Weight"
+                >
+                  <template #thumb-label="props">
+                    {{ weightConverter(props.value, user)
+                    }}{{
+                      settings.weight[user.settings.weight].short
+                    }}</template
+                  >
+                  <template #append>
+                    <v-label
+                      >{{ weightConverter(dataWeight, user)
+                      }}{{
+                        settings.weight[user.settings.weight].short
+                      }}</v-label
+                    >
+                  </template>
+                </v-slider>
+
+                <v-divider
+                  v-if="editWorkout || currentExercise.weight !== 0"
+                  class="my-4"
+                ></v-divider>
+
                 <!-- repeat  -->
                 <v-slider
                   v-if="editWorkout || currentExercise.repeat > 0"
@@ -302,7 +342,7 @@
 import { mapState, mapMutations, mapGetters } from 'vuex'
 import Hangboard from '@/components/Hangboard'
 import Hand from '@/components/Hand'
-import { getImg, count } from '@/misc/helpers'
+import { getImg, count, weightConverter } from '@/misc/helpers'
 import {
   mdiClockOutline,
   mdiArrowLeft,
@@ -310,7 +350,8 @@ import {
   mdiClockAlert,
   mdiMenu,
   mdiProgressClock,
-  mdiHistory
+  mdiHistory,
+  mdiWeight
 } from '@mdi/js'
 
 export default {
@@ -334,13 +375,14 @@ export default {
       clock: mdiClock,
       progressClock: mdiProgressClock,
       history: mdiHistory,
-      clockAlert: mdiClockAlert
+      clockAlert: mdiClockAlert,
+      weight: mdiWeight
     }
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('workouts', ['options']),
-    ...mapState('authentication', ['user']),
+    ...mapState('authentication', ['user', 'settings']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
     openAdvancedTab: {
@@ -469,12 +511,28 @@ export default {
         })
         this.setTime({ id: this.id, index: Math.round(this.index) })
       }
+    },
+    dataWeight: {
+      get() {
+        if (this.currentExercise.weight) {
+          return this.currentExercise.weight
+        }
+        return 0
+      },
+      set(value) {
+        this.setData({
+          id: this.id,
+          value: { weight: Math.round(value) },
+          index: this.index
+        })
+      }
     }
   },
   methods: {
     ...mapMutations('workouts', ['setTime', 'setData']),
     getImg,
     count,
+    weightConverter,
     setLeft(event) {
       if (this.currentExercise.left !== event) {
         this.setData({

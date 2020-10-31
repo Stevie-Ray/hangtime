@@ -21,7 +21,8 @@ export default {
     scappulls: 0,
     repeat: 0,
     rest: 0,
-    time: 20
+    time: 20,
+    weight: 0
   },
   levels: [
     { name: 'easy', value: 1 },

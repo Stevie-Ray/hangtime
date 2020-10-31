@@ -61,12 +61,12 @@
               <v-divider inset></v-divider>
 
               <v-list-item to="/settings/hangboards">
-                <!--                <v-btn text icon to="settings/hangboard">-->
-                <!--                  <v-img :src="getImg('icons/hangboard-menu.svg')"/>-->
-                <!--                </v-btn>-->
                 <v-list-item-icon>
                   <span class="v-icon notranslate v-icon--svg">
-                    <svg-inline :src="getImg('icons/hangboard-menu.svg')" />
+                    <svg-inline
+                      :src="getImg('icons/hangboard-menu.svg')"
+                      width="24"
+                    />
                   </span>
                 </v-list-item-icon>
 

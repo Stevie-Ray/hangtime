@@ -15,6 +15,18 @@ export default {
     sound: true,
     speak: false,
     voice: 0,
-    vibrate: false
+    vibrate: false,
+    weight: [
+      {
+        name: 'Kilograms - Metric',
+        short: 'kg',
+        value: 0
+      },
+      {
+        name: 'Pounds - Imperial',
+        short: 'lb',
+        value: 1
+      }
+    ]
   }
 }

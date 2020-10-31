@@ -22,7 +22,8 @@ export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
     speak: false,
     voice: 0,
     vibrate: false,
-    walkthrough: false
+    walkthrough: false,
+    weight: 0
   }
 
   const user = {
@@ -83,4 +84,11 @@ export function shortDate(string) {
   const month = date.toLocaleString('default', { month: 'short' })
 
   return `${day} ${month}, ${year}`
+}
+
+export function weightConverter(weight, user) {
+  if (user.settings.weight === 1) {
+    return Math.round(weight * 2.2046)
+  }
+  return weight
 }

@@ -90,7 +90,7 @@
                     <div class="bottom-data">
                       <div class="bottom-data__exercise">
                         <div class="data">
-                          <v-icon small>{{ mdi.timer }}</v-icon>
+                          <v-icon>{{ mdi.timer }}</v-icon>
                           <span
                             v-if="currentWorkout && currentWorkout.exercises"
                             >{{ currentStep + 1 }}/{{
@@ -100,11 +100,29 @@
                         </div>
                       </div>
                       <div
+                        v-if="
+                          currentExercise.weight && currentExercise.weight !== 0
+                        "
+                        class="bottom-data__weight"
+                      >
+                        <div class="data">
+                          <v-icon>{{ mdi.weight }}</v-icon>
+                          <span
+                            >{{
+                              weightConverter(currentExercise.weight, user)
+                            }}
+                            {{
+                              settings.weight[user.settings.weight].short
+                            }}</span
+                          >
+                        </div>
+                      </div>
+                      <div
                         v-if="currentExercise.repeat > 0"
                         class="bottom-data__repeat"
                       >
                         <div class="data">
-                          <v-icon small>{{ mdi.history }}</v-icon>
+                          <v-icon>{{ mdi.history }}</v-icon>
                           <span
                             >{{ ExerciseRepeat }}/{{
                               currentExercise.repeat + 1
@@ -186,7 +204,7 @@ import { mapState, mapGetters } from 'vuex'
 import NoSleep from 'nosleep.js'
 import Hangboard from '@/components/Hangboard'
 import Hand from '@/components/Hand'
-import { getImg, count, speak, sound } from '@/misc/helpers'
+import { getImg, count, speak, sound, weightConverter } from '@/misc/helpers'
 import {
   mdiArrowLeft,
   mdiTimer,
@@ -194,7 +212,8 @@ import {
   mdiSkipPrevious,
   mdiPlay,
   mdiPause,
-  mdiHistory
+  mdiHistory,
+  mdiWeight
 } from '@mdi/js'
 import WorkoutItemName from '../../components/WorkoutItemName'
 
@@ -222,7 +241,8 @@ export default {
       play: mdiPlay,
       pause: mdiPause,
       arrowLeft: mdiArrowLeft,
-      history: mdiHistory
+      history: mdiHistory,
+      weight: mdiWeight
     },
     meta: {
       title: 'Workout'
@@ -254,7 +274,7 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user']),
+    ...mapState('authentication', ['user', 'settings']),
     ...mapState('workouts', ['options']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
@@ -292,6 +312,7 @@ export default {
     count,
     speak,
     sound,
+    weightConverter,
     countdown() {
       // set initial state before starting
       if (this.initialTime === 0) {
@@ -580,23 +601,27 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 .bottom-data {
-  position: relative;
-  display: inline-flex;
-  vertical-align: middle;
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: row;
-  > div > div {
-    position: relative;
-    display: inline-flex;
-    vertical-align: middle;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    padding: 0 12px;
-    span {
+  width: 100%;
+  > div {
+    flex: 1 1 auto;
+
+    span:last-child {
+      padding-right: 8px;
       display: inline-block;
-      padding: 0 4px;
+    }
+
+    &:last-child span:last-child {
+      padding-right: 0;
+      display: inline-block;
+    }
+
+    svg {
+      padding-right: 2px;
+      height: 20px;
+      width: 20px;
     }
   }
 }
