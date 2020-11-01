@@ -111,9 +111,7 @@
                             >{{
                               weightConverter(currentExercise.weight, user)
                             }}
-                            {{
-                              settings.weight[user.settings.weight].short
-                            }}</span
+                            {{ weightShort }}</span
                           >
                         </div>
                       </div>
@@ -274,10 +272,11 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user', 'settings']),
+    ...mapState('authentication', ['user']),
     ...mapState('workouts', ['options']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
+    ...mapGetters('authentication', ['weightShort']),
     // vuetify grid-system breakpoint binding
     binding() {
       const binding = {}

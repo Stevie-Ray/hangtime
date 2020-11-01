@@ -237,16 +237,12 @@
                 >
                   <template #thumb-label="props">
                     {{ weightConverter(props.value, user)
-                    }}{{
-                      settings.weight[user.settings.weight].short
-                    }}</template
+                    }}{{ weightShort }}</template
                   >
                   <template #append>
                     <v-label
                       >{{ weightConverter(dataWeight, user)
-                      }}{{
-                        settings.weight[user.settings.weight].short
-                      }}</v-label
+                      }}{{ weightShort }}</v-label
                     >
                   </template>
                 </v-slider>
@@ -382,9 +378,10 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('workouts', ['options']),
-    ...mapState('authentication', ['user', 'settings']),
+    ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById']),
+    ...mapGetters('authentication', ['weightShort']),
     openAdvancedTab: {
       get() {
         if (!this.editWorkout) return 0

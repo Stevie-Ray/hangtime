@@ -31,7 +31,7 @@
           <div>{{ count(data.time) }}</div>
           <div v-if="data.weight && data.weight !== 0">
             {{ weightConverter(data.weight, user) }}
-            {{ settings.weight[user.settings.weight].short }}
+            {{ weightShort }}
             <v-icon x-small>{{ mdi.weight }}</v-icon>
           </div>
         </v-list-item-action-text>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import { getImg, count, weightConverter } from '@/misc/helpers'
 import { mdiDrag, mdiWeight } from '@mdi/js'
 import WorkoutItemName from './WorkoutItemName'
@@ -66,7 +66,8 @@ export default {
   }),
   computed: {
     ...mapState('workouts', ['options']),
-    ...mapState('authentication', ['user', 'settings'])
+    ...mapState('authentication', ['user']),
+    ...mapGetters('authentication', ['weightShort'])
   },
   methods: {
     getImg,
