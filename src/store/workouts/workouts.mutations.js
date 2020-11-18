@@ -99,7 +99,7 @@ export default {
         ...payload.value
       }
       Vue.set(state.workoutToCreate.exercises, payload.index, data)
-    } else {
+    } else if (index) {
       const data = {
         ...state.workouts[index].exercises[payload.index],
         ...payload.value

@@ -58,10 +58,21 @@ export default {
   //   find(state.communityWorkouts, { id: workoutId }),
 
   /**
-   * Get an option by id
+   * Get grip by id
    */
 
-  typeById: state => typeId => find(state.options, { id: typeId }),
+  gripById: state => typeId => find(state.grip, { id: typeId }),
+
+  /**
+   * Get an exercise by it's type
+   */
+
+  exerciseByType: state => typeId => filter(state.exercises, { type: typeId }),
+
+  /**
+   * Get an exercise by it's Id
+   */
+  exerciseById: state => typeId => find(state.exercises, { id: typeId }),
 
   /**
    * Check if a exercise has deletion pending

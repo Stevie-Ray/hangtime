@@ -18,7 +18,7 @@
             <v-subheader>Exercises</v-subheader>
 
             <v-expansion-panels>
-              <v-expansion-panel v-for="option in options" :key="option.id">
+              <v-expansion-panel v-for="option in grip" :key="option.id">
                 <v-expansion-panel-header>
                   {{ option.name }}
                 </v-expansion-panel-header>
@@ -71,7 +71,7 @@ export default {
     ]
   },
   computed: {
-    ...mapState('workouts', ['options'])
+    ...mapState('workouts', ['grip'])
   },
   methods: {}
 }

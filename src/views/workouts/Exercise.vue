@@ -131,7 +131,7 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapState('workouts', ['options']),
+    ...mapState('workouts', ['grip']),
     ...mapGetters('workouts', ['workoutById', 'isExerciseDeletionPending']),
     currentWorkout() {
       return this.workoutById(this.id)

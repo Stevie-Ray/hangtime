@@ -1,20 +1,14 @@
 <template>
   <div class="hand-container">
     <v-row class="hand-text">
-      <v-list two-line width="100%">
+      <v-list width="100%">
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title
-              >Fingers allowed in this exercise
+            <v-list-item-title v-if="editWorkout"
+              >Tab fingers that are <strong>not</strong> allowed
             </v-list-item-title>
-            <v-list-item-subtitle
-              v-if="editWorkout"
-              class="my-2"
-              style="font-size:12px"
-            >
-              Tab fingers that are <strong>not</strong> allowed
-            </v-list-item-subtitle>
           </v-list-item-content>
+
           <v-list-item-action v-if="editWorkout" @click="resetHands">
             <v-btn
               v-if="

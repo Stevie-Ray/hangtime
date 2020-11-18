@@ -46,49 +46,9 @@
         <v-divider class="mt-4"></v-divider>
       </v-col>
     </v-row>
-    <v-row wrap>
-      <v-col cols="3">
-        <!-- exercise image  -->
-        <v-avatar>
-          <img
-            :alt="options[currentExercise.exercise].name"
-            :src="getImg(options[currentExercise.exercise].image)"
-            aspect-ratio="1"
-            class="grey lighten-2"
-          />
-        </v-avatar>
-      </v-col>
 
-      <v-col cols="9">
-        <!-- exercise  -->
-        <v-select
-          v-model="dataExercise"
-          :items="options"
-          item-text="name"
-          item-value="id"
-          label="Exercise"
-          :disabled="!editWorkout"
-          required
-        >
-          <template #selection="data">
-            <span v-text="data.item.name"></span>
-          </template>
-          <template #item="data">
-            <v-list-item-avatar>
-              <img :alt="data.item.name" :src="getImg(data.item.image)" />
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>{{ data.item.name }}</v-list-item-title>
-            </v-list-item-content>
-          </template>
-        </v-select>
-      </v-col>
-    </v-row>
-
-    <v-row wrap>
+    <v-row>
       <v-col cols="12">
-        <v-divider class="mb-4"></v-divider>
-
         <!-- hangboard -->
         <hangboard
           :data="currentExercise"
@@ -96,218 +56,192 @@
           @left="setLeft($event)"
           @right="setRight($event)"
         ></hangboard>
+
+        <v-divider class="mb-0"></v-divider>
       </v-col>
+    </v-row>
 
+    <v-row wrap>
       <v-col cols="12">
-        <v-divider class="mb-4"></v-divider>
-
-        <!-- hold  -->
-        <v-slider
-          v-model="dataHold"
-          :max="180"
-          :min="3"
-          step="1"
-          always-dirty
-          thumb-size="48"
-          :prepend-icon="mdi.clock"
-          :disabled="!editWorkout"
-          hint="Time to perform the exercise"
-          persistent-hint
-          label="Hold"
-        >
-          <template #thumb-label="props">
-            {{ count(props.value) }}
-          </template>
-          <template #append>
-            <v-text-field
-              v-if="editWorkout"
-              v-model="dataHold"
-              class="mt-0 pt-0"
-              min="3"
-              max="180"
-              step="1"
-              hide-details
-              single-line
-              type="number"
-              style="width: 40px"
-              :rules="[
-                rules.required,
-                rules.number,
-                rules.min(3),
-                rules.max(180)
-              ]"
-            ></v-text-field>
-            <v-label v-else>{{ count(dataHold) }}</v-label>
-          </template>
-        </v-slider>
-
-        <div>
-          <v-divider class="mt-4"></v-divider>
-
-          <v-expansion-panels v-model="openAdvancedTab" flat>
-            <v-expansion-panel>
-              <v-expansion-panel-header
-                ><div>
-                  <v-btn icon
-                    ><v-icon>{{ mdi.menu }}</v-icon></v-btn
-                  ><span>Advanced features</span>
-                </div></v-expansion-panel-header
-              >
-              <v-expansion-panel-content>
-                <hand
-                  class="mb-2"
-                  :data="currentExercise"
-                  :edit-workout="editWorkout"
-                  @left="setLeftHand($event)"
-                  @right="setRightHand($event)"
-                ></hand>
-
-                <!-- pullups  -->
-                <v-slider
-                  v-if="editWorkout || currentExercise.pullups > 0"
-                  v-model="dataPullups"
-                  :max="20"
-                  :min="0"
-                  step="1"
-                  ticks
-                  always-dirty
-                  thumb-size="48"
-                  :disabled="!editWorkout || currentExercise.scappulls > 0"
-                  :prepend-icon="mdi.clockAlert"
-                  hint="Number of pull ups you have to perform"
-                  persistent-hint
-                  label="Pull-ups"
-                >
-                  <template #thumb-label="props"> {{ props.value }}x </template>
-                  <template #append>
-                    <v-label>{{ dataPullups }}x</v-label>
-                  </template>
-                </v-slider>
-
-                <v-divider
-                  v-if="editWorkout || currentExercise.pullups > 0"
-                  class="my-4"
-                ></v-divider>
-
-                <!-- scapula/scap pulls/pull ups  -->
-                <v-slider
-                  v-if="editWorkout || currentExercise.scappulls > 0"
-                  v-model="dataScapPulls"
-                  :max="20"
-                  :min="0"
-                  step="1"
-                  ticks
-                  always-dirty
-                  thumb-size="48"
-                  :disabled="!editWorkout || currentExercise.pullups > 0"
-                  :prepend-icon="mdi.clockAlert"
-                  hint="Number of scapular pull-up(s) you have to perform"
-                  persistent-hint
-                  label="Scap Pulls"
-                >
-                  <template #thumb-label="props"> {{ props.value }}x </template>
-                  <template #append>
-                    <v-label>{{ dataScapPulls }}x</v-label>
-                  </template>
-                </v-slider>
-
-                <v-divider
-                  v-if="editWorkout || currentExercise.scappulls > 0"
-                  class="my-4"
-                ></v-divider>
-
-                <!-- weight  -->
-                <v-slider
-                  v-if="
-                    editWorkout ||
-                      (currentExercise.weight && currentExercise.weight !== 0)
-                  "
-                  v-model="dataWeight"
-                  :max="50"
-                  :min="-50"
-                  step="1"
-                  ticks
-                  always-dirty
-                  thumb-size="48"
-                  :disabled="!editWorkout"
-                  :prepend-icon="mdi.weight"
-                  hint="Add/remove weight using a kettle/dumb-bells or pulley system"
-                  persistent-hint
-                  label="Weight"
-                >
-                  <template #thumb-label="props">
-                    {{ weightConverter(props.value, user)
-                    }}{{ weightShort }}</template
+        <v-expansion-panels v-model="openAdvancedTab" accordion flat>
+          <!-- exercise -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              <div>
+                <v-btn icon>
+                  <v-icon>{{ mdi.menu }}</v-icon>
+                </v-btn>
+                <span>Exercise</span>
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-row align="center" justify="center">
+                <v-col cols="8">
+                  <!-- exercise  -->
+                  <v-select
+                    v-model="dataGrip"
+                    :items="grip"
+                    item-text="name"
+                    item-value="id"
+                    label="Hang / Lock off"
+                    :disabled="!editWorkout"
+                    required
                   >
-                  <template #append>
-                    <v-label
-                      >{{ weightConverter(dataWeight, user)
-                      }}{{ weightShort }}</v-label
-                    >
-                  </template>
-                </v-slider>
+                    <template #selection="data">
+                      <span v-text="data.item.name"></span>
+                    </template>
+                    <template #item="data">
+                      <v-list-item-avatar>
+                        <img
+                          :alt="data.item.name"
+                          :src="getImg(data.item.image)"
+                        />
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title>{{
+                          data.item.name
+                        }}</v-list-item-title>
+                      </v-list-item-content>
+                    </template>
+                    <template #append-outer>
+                      <v-tooltip bottom>
+                        <template #activator="{ on, attrs }">
+                          <v-icon v-bind="attrs" v-on="on">
+                            {{ mdi.help }}
+                          </v-icon>
+                        </template>
+                        <span v-if="dataGrip">{{
+                          grip[dataGrip].description
+                        }}</span>
+                      </v-tooltip>
+                    </template>
+                  </v-select>
+                </v-col>
 
-                <v-divider
-                  v-if="editWorkout || currentExercise.weight !== 0"
-                  class="my-4"
-                ></v-divider>
+                <v-col cols="4" class="text-center" align-self="center">
+                  <!-- exercise image  -->
+                  <v-avatar size="72px">
+                    <img
+                      v-if="currentExercise.grip"
+                      :alt="grip[currentExercise.grip].name"
+                      :src="getImg(grip[currentExercise.grip].image)"
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                    />
+                    <img
+                      v-else
+                      :src="getImg(grip[currentExercise.exercise].image)"
+                      alt=""
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                    />
+                  </v-avatar>
+                </v-col>
 
-                <!-- repeat  -->
-                <v-slider
-                  v-if="editWorkout || currentExercise.repeat > 0"
-                  v-model="dataRepeat"
-                  :max="9"
-                  :min="0"
-                  step="1"
-                  ticks
-                  thumb-size="48"
-                  :disabled="!editWorkout"
-                  :prepend-icon="mdi.history"
-                  hint="Repeat current exercise (1x = no repeat)"
-                  persistent-hint
-                  label="Reps"
-                >
-                  <template #thumb-label="props"
-                    >{{ props.value + 1 }}x
-                  </template>
-                  <template #append>
-                    <v-label>{{ dataRepeat + 1 }}x</v-label>
-                  </template>
-                </v-slider>
+                <v-col cols="6">
+                  <v-select
+                    v-model="dataExercise"
+                    label="Arms"
+                    :items="exerciseByType('arms')"
+                    item-text="name"
+                    item-value="id"
+                    :disabled="!editWorkout"
+                  >
+                    <template #append-outer>
+                      <v-row>
+                        <v-col cols="12" align="center" justify="center">
+                          or
+                        </v-col>
+                      </v-row>
+                    </template>
+                  </v-select>
+                </v-col>
 
-                <!-- rest  -->
-                <div style="min-height: 17px">
-                  <v-divider
-                    v-if="currentExercise.repeat > 0"
-                    class="my-4"
-                  ></v-divider>
-                </div>
-                <div style="min-height: 54px">
+                <v-col cols="6">
+                  <v-select
+                    v-model="dataExercise"
+                    label="Legs"
+                    :items="exerciseByType('legs')"
+                    item-text="name"
+                    item-value="id"
+                    :disabled="!editWorkout"
+                  >
+                    <template v-if="editWorkout" #append-outer>
+                      <v-tooltip v-if="dataExercise === 0" bottom>
+                        <template #activator="{ on, attrs }">
+                          <v-icon v-bind="attrs" v-on="on">
+                            {{ mdi.help }}
+                          </v-icon>
+                        </template>
+                        <span
+                          >Select an optional arm or leg exercise to
+                          perform.</span
+                        >
+                      </v-tooltip>
+                      <div v-else>
+                        <v-icon
+                          @click="
+                            dataExercise = 0
+                            dataPullups = 1
+                          "
+                        >
+                          {{ mdi.undo }}
+                        </v-icon>
+                      </div>
+                    </template>
+                  </v-select>
+                </v-col>
+
+                <v-col cols="12">
                   <v-slider
-                    v-if="currentExercise.repeat > 0"
-                    v-model="dataRest"
-                    :max="300"
-                    :min="2.5"
-                    step="2.5"
+                    v-if="editWorkout || currentExercise.pullups > 0"
+                    v-model="dataPullups"
+                    :max="20"
+                    :min="1"
+                    step="1"
+                    ticks
                     always-dirty
                     thumb-size="48"
-                    :disabled="!editWorkout"
-                    :prepend-icon="mdi.progressClock"
-                    hint="Time to rest between repeating the exercise"
-                    persistent-hint
-                    label="Rest"
+                    label="Amount"
+                    :prepend-icon="mdi.clockAlert"
+                    :disabled="!editWorkout || currentExercise.exercise === 0"
+                    hint="Number of pull ups you have to perform"
                   >
                     <template #thumb-label="props">
-                      {{ count(Math.round(props.value)) }}
+                      {{ props.value }}x</template
+                    >
+                    <template #append>
+                      <v-label>{{ dataPullups }}x</v-label>
+                    </template>
+                  </v-slider>
+                </v-col>
+
+                <v-col cols="12">
+                  <!-- hold  -->
+                  <v-slider
+                    v-model="dataHold"
+                    :max="180"
+                    :min="3"
+                    step="1"
+                    always-dirty
+                    thumb-size="48"
+                    :prepend-icon="mdi.clock"
+                    :disabled="!editWorkout"
+                    hint="Time to hold / perform the exercise"
+                    persistent-hint
+                    label="Time"
+                  >
+                    <template #thumb-label="props">
+                      {{ count(props.value) }}
                     </template>
                     <template #append>
                       <v-text-field
                         v-if="editWorkout"
-                        v-model="dataRest"
+                        v-model="dataHold"
                         class="mt-0 pt-0"
-                        min="2.5"
-                        max="300"
-                        step="2.5"
+                        min="3"
+                        max="180"
+                        step="1"
                         hide-details
                         single-line
                         type="number"
@@ -315,20 +249,210 @@
                         :rules="[
                           rules.required,
                           rules.number,
-                          rules.min(2.5),
-                          rules.max(300)
+                          rules.min(3),
+                          rules.max(180)
                         ]"
                       ></v-text-field>
-                      <v-label v-else>{{
-                        count(Math.round(dataRest))
-                      }}</v-label>
+                      <v-label v-else>{{ count(dataHold) }}</v-label>
                     </template>
                   </v-slider>
-                </div>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-        </div>
+                </v-col>
+              </v-row>
+
+              <v-divider></v-divider>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <!-- repeat  -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              <div>
+                <v-btn icon>
+                  <v-icon>{{ mdi.menu }}</v-icon>
+                </v-btn>
+                <span
+                  :class="{ 'text--secondary': currentExercise.repeat === 0 }"
+                  >Repeat</span
+                >
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <!-- repeat  -->
+              <v-slider
+                v-if="editWorkout || currentExercise.repeat > 0"
+                v-model="dataRepeat"
+                :max="9"
+                :min="0"
+                step="1"
+                ticks
+                thumb-size="48"
+                :disabled="!editWorkout"
+                :prepend-icon="mdi.history"
+                hint="Repeat current exercise (1x = no repeat)"
+                persistent-hint
+              >
+                <template #thumb-label="props"
+                  >{{ props.value + 1 }}x
+                </template>
+                <template #append>
+                  <v-label>{{ dataRepeat + 1 }}x</v-label>
+                </template>
+              </v-slider>
+
+              <!-- rest  -->
+              <v-divider
+                v-if="currentExercise.repeat > 0"
+                class="my-4"
+              ></v-divider>
+
+              <v-slider
+                v-model="dataRest"
+                :max="300"
+                :min="2.5"
+                step="2.5"
+                always-dirty
+                thumb-size="48"
+                :disabled="!editWorkout || currentExercise.repeat >= 0"
+                :prepend-icon="mdi.progressClock"
+                hint="Time to rest between repeating the exercise"
+                persistent-hint
+                label="Rest"
+              >
+                <template #thumb-label="props">
+                  {{ count(Math.round(props.value)) }}
+                </template>
+                <template #append>
+                  <v-text-field
+                    v-if="editWorkout"
+                    v-model="dataRest"
+                    class="mt-0 pt-0"
+                    min="2.5"
+                    max="300"
+                    step="2.5"
+                    hide-details
+                    single-line
+                    type="number"
+                    style="width: 40px"
+                    :rules="[
+                      rules.required,
+                      rules.number,
+                      rules.min(2.5),
+                      rules.max(300)
+                    ]"
+                  ></v-text-field>
+                  <v-label v-else>{{ count(Math.round(dataRest)) }} </v-label>
+                </template>
+              </v-slider>
+
+              <v-divider class="mt-4"></v-divider>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <!-- hand  -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              <div>
+                <v-btn icon>
+                  <v-icon>{{ mdi.menu }}</v-icon>
+                </v-btn>
+                <span
+                  :class="{
+                    'text--secondary':
+                      (currentExercise.leftHand &&
+                        currentExercise.rightHand &&
+                        !currentExercise.leftHand.length &&
+                        !currentExercise.rightHand.length) ||
+                      (!currentExercise.leftHand && !currentExercise.rightHand)
+                  }"
+                  >Fingers</span
+                >
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <hand
+                class="mb-2"
+                :data="currentExercise"
+                :edit-workout="editWorkout"
+                @left="setLeftHand($event)"
+                @right="setRightHand($event)"
+              ></hand>
+
+              <v-divider class="my-4"></v-divider>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <!-- weight  -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              <div>
+                <v-btn icon>
+                  <v-icon>{{ mdi.menu }}</v-icon>
+                </v-btn>
+                <span
+                  :class="{
+                    'text--secondary':
+                      currentExercise.weight === 0 || !currentExercise.weight
+                  }"
+                  >Weight</span
+                >
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-slider
+                v-model="dataWeight"
+                :max="50"
+                :min="-50"
+                step="1"
+                ticks
+                always-dirty
+                thumb-size="48"
+                :disabled="!editWorkout"
+                :prepend-icon="mdi.weight"
+                hint="Add/remove weight using a kettle/dumb-bells or pulley system"
+                persistent-hint
+              >
+                <template #thumb-label="props">
+                  {{ weightConverter(props.value, user) }}{{ weightShort }}
+                </template>
+                <template #append>
+                  <v-label
+                    >{{ weightConverter(dataWeight, user) }}{{ weightShort }}
+                  </v-label>
+                </template>
+              </v-slider>
+
+              <v-divider class="my-4"></v-divider>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <!-- notes  -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              <div>
+                <v-btn icon>
+                  <v-icon>{{ mdi.menu }}</v-icon>
+                </v-btn>
+                <span
+                  :class="{
+                    'text--secondary':
+                      currentExercise.notes === '' || !currentExercise.notes
+                  }"
+                  >Notes</span
+                >
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-textarea
+                v-model="dataNotes"
+                :rules="[rules.length(140)]"
+                counter="140"
+                filled
+                auto-grow
+                rows="2"
+                row-height="24"
+                :disabled="!editWorkout"
+              ></v-textarea>
+
+              <v-divider class="mt-4"></v-divider>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </v-col>
     </v-row>
   </v-container>
@@ -347,7 +471,9 @@ import {
   mdiMenu,
   mdiProgressClock,
   mdiHistory,
-  mdiWeight
+  mdiWeight,
+  mdiHelpCircleOutline,
+  mdiUndo
 } from '@mdi/js'
 
 export default {
@@ -361,6 +487,8 @@ export default {
     rules: {
       number: v => !v.isNaN || 'NaN',
       required: v => !!v || 'This field is required',
+      length: length => v =>
+        (v || '').length <= length || `Max ${length} characters`,
       min: min => v => v >= min || `A minimun of  ${min} is allowed`,
       max: max => v => v <= max || `A maximum of  ${max} is allowed`
     },
@@ -372,15 +500,17 @@ export default {
       progressClock: mdiProgressClock,
       history: mdiHistory,
       clockAlert: mdiClockAlert,
-      weight: mdiWeight
+      weight: mdiWeight,
+      help: mdiHelpCircleOutline,
+      undo: mdiUndo
     }
   }),
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('workouts', ['options']),
+    ...mapState('workouts', ['grip', 'exercises']),
     ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('workouts', ['workoutById']),
+    ...mapGetters('workouts', ['workoutById', 'exerciseByType']),
     ...mapGetters('authentication', ['weightShort']),
     openAdvancedTab: {
       get() {
@@ -395,6 +525,23 @@ export default {
       if (!this.workoutById(this.id)) return
       // eslint-disable-next-line consistent-return
       return this.workoutById(this.id).exercises[this.index]
+    },
+    dataGrip: {
+      get() {
+        if (!this.currentExercise.grip) {
+          return this.currentExercise.exercise
+        }
+        return this.currentExercise.grip
+      },
+      set(value) {
+        this.setData({
+          id: this.id,
+          value: { grip: value },
+          // value,
+          // key: 'exercise',
+          index: this.index
+        })
+      }
     },
     dataExercise: {
       get() {
@@ -457,20 +604,6 @@ export default {
         })
       }
     },
-    dataScapPulls: {
-      get() {
-        return this.currentExercise.scappulls
-      },
-      set(value) {
-        this.setData({
-          id: this.id,
-          value: { scappulls: value },
-          // value,
-          // key: 'pullups',
-          index: this.index
-        })
-      }
-    },
     dataRepeat: {
       get() {
         return this.currentExercise.repeat
@@ -520,6 +653,18 @@ export default {
         this.setData({
           id: this.id,
           value: { weight: Math.round(value) },
+          index: this.index
+        })
+      }
+    },
+    dataNotes: {
+      get() {
+        return this.currentExercise.notes
+      },
+      set(value) {
+        this.setData({
+          id: this.id,
+          value: { notes: value },
           index: this.index
         })
       }

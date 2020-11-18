@@ -86,9 +86,9 @@
                 <v-list-item>
                   <v-list-item-avatar>
                     <v-img
-                      v-if="options[returnType(recording.type)]"
-                      :src="getImg(options[returnType(recording.type)].image)"
-                      :alt="options[returnType(recording.type)].name"
+                      v-if="grip[returnType(recording.type)]"
+                      :src="getImg(grip[returnType(recording.type)].image)"
+                      :alt="grip[returnType(recording.type)].name"
                       aspect-ratio="1"
                       class="grey lighten-2"
                     />
@@ -110,8 +110,8 @@
                         "
                         >One-Arm
                       </span>
-                      <span v-if="options[returnType(recording.type)]">
-                        {{ options[returnType(recording.type)].name }}
+                      <span v-if="grip[returnType(recording.type)]">
+                        {{ grip[returnType(recording.type)].name }}
                       </span>
                     </v-list-item-title>
                     <v-list-item-subtitle>
@@ -143,7 +143,7 @@
           <v-card-text>
             <v-container fluid>
               <v-checkbox
-                v-for="option in options"
+                v-for="option in grip"
                 :key="option.id"
                 v-model="selected"
                 :label="option.name"
@@ -174,7 +174,7 @@
             <v-container fluid>
               <v-radio-group v-if="currentStats[index]" v-model="workoutType">
                 <v-radio
-                  v-for="option in options"
+                  v-for="option in grip"
                   :key="option.id"
                   :value="option.id"
                 >
@@ -231,7 +231,7 @@
               Are you sure you want to delete this
               <strong>
                 Max
-                {{ options[returnType(deleteDialogItem.type)].name }}</strong
+                {{ grio[returnType(deleteDialogItem.type)].name }}</strong
               >
               recording of
               <strong>{{ count(deleteDialogItem.value) }}</strong
@@ -327,9 +327,9 @@ export default {
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'currentTab']),
-    ...mapState('workouts', ['options']),
+    ...mapState('workouts', ['grip']),
     ...mapGetters('progress', ['statsById']),
-    ...mapGetters('workouts', ['typeById']),
+    ...mapGetters('workouts', ['gripById']),
     binding() {
       const binding = {}
 
@@ -358,7 +358,7 @@ export default {
     chartData() {
       if (!this.currentStatsValue && !this.currentStatsLabels) return {}
       // eslint-disable-next-line func-names
-      const filtered = this.options.filter(function(e) {
+      const filtered = this.grip.filter(function(e) {
         return this.indexOf(e.id) >= 0
       }, this.selected)
       const datasets = []

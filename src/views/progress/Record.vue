@@ -359,7 +359,7 @@ export default {
       'bestStatsById',
       'bestStatsByType'
     ]),
-    ...mapGetters('workouts', ['typeById']),
+    ...mapGetters('workouts', ['gripById']),
     binding() {
       const binding = {}
 
@@ -374,7 +374,7 @@ export default {
       })
     },
     currentType() {
-      return this.typeById(this.id)
+      return this.gripById(this.id)
     },
     finalTime() {
       if (!this.timeCorrection) {

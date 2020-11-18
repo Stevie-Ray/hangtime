@@ -4,7 +4,15 @@
       <v-icon v-if="editWorkout" class="handle">{{ mdi.drag }}</v-icon>
       <v-list-item-avatar>
         <img
-          :src="getImg(options[data.exercise].image)"
+          v-if="data.grip"
+          :src="getImg(grip[data.grip].image)"
+          alt=""
+          aspect-ratio="1"
+          class="grey lighten-2"
+        />
+        <img
+          v-else
+          :src="getImg(grip[data.exercise].image)"
           alt=""
           aspect-ratio="1"
           class="grey lighten-2"
@@ -65,7 +73,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState('workouts', ['options']),
+    ...mapState('workouts', ['grip']),
     ...mapState('authentication', ['user']),
     ...mapGetters('authentication', ['weightShort'])
   },

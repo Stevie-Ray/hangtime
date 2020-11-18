@@ -52,8 +52,8 @@
                     >
                       <img
                         v-if="ExerciseStep !== 0 && ExerciseStep !== 2"
-                        :alt="options[currentExercise.exercise].name"
-                        :src="getImg(options[currentExercise.exercise].image)"
+                        :alt="grip[currentExercise.exercise].name"
+                        :src="getImg(grip[currentExercise.grip].image)"
                       />
                       <img
                         v-else
@@ -164,6 +164,12 @@
                     Rest for {{ currentExercise.rest }} sec.</span
                   >
                 </div>
+                <div
+                  v-if="currentExercise.notes !== ''"
+                  class="text--secondary"
+                >
+                  {{ currentExercise.notes }}
+                </div>
               </div>
             </v-row>
           </v-col>
@@ -273,9 +279,9 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapState('workouts', ['options']),
+    ...mapState('workouts', ['grip', 'exercises']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('workouts', ['workoutById']),
+    ...mapGetters('workouts', ['workoutById', 'exerciseById']),
     ...mapGetters('authentication', ['weightShort']),
     // vuetify grid-system breakpoint binding
     binding() {
@@ -454,11 +460,25 @@ export default {
           ) {
             textToSpeak += `One Arm `
           }
-          textToSpeak += `${this.options[this.currentExercise.exercise].name}`
-          if (this.currentExercise.pullups > 1) {
-            textToSpeak += ` Pullups`
-          } else if (this.currentExercise.pullups > 0) {
-            textToSpeak += ` Pullup`
+          // fallback system
+          if (this.currentExercise.grip) {
+            textToSpeak += `${this.grip[this.currentExercise.grip].name}`
+            if (this.currentExercise.exercise !== 0) {
+              textToSpeak += `${
+                this.exerciseById(this.currentExercise.exercise).name
+              }`
+            }
+            if (this.currentExercise.pullups > 1) {
+              textToSpeak += `s`
+            }
+          } else {
+            textToSpeak += `${this.grip[this.currentExercise.exercise].name}`
+
+            if (this.currentExercise.pullups > 1) {
+              textToSpeak += ` Pullups`
+            } else if (this.currentExercise.pullups > 0) {
+              textToSpeak += ` Pullup`
+            }
           }
         }
 

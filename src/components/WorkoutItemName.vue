@@ -2,19 +2,24 @@
   <div class="workout-item-name">
     <span v-if="data.repeat > 0">{{ data.repeat + 1 }}x </span>
     <span v-if="data.pullups > 1">{{ data.pullups }} </span>
-    <span v-if="data.scappulls > 1">{{ data.scappulls }} </span>
-    <span v-if="data.scappulls > 0">Scap </span>
     <span v-if="data.left === null || data.right === null">One-Arm </span>
-    <span
-      v-if="
-        (data.scappulls > 0 && data.exercise === 0) ||
-          (data.pullups > 0 && data.exercise === 0)
-      "
-    ></span>
-    <span v-else>{{ options[data.exercise].name }}</span>
-    <span v-if="data.scappulls > 0"> Pull</span>
-    <span v-if="data.pullups > 0"> Pull-up</span>
-    <span v-if="data.pullups > 1 || data.scappulls > 1">s</span>
+    <span v-if="data.pullups > 1 && data.grip === 0"></span>
+    <span v-else>
+      <span v-if="data.exercise === 0">
+        <span v-if="data.grip">{{ grip[data.grip].name }}</span>
+        <!-- fallback-->
+        <span v-else>{{ grip[data.exercise].name }}</span>
+      </span>
+      <span v-else-if="data.grip !== 0">
+        <span v-if="data.grip">{{ grip[data.grip].short }}</span>
+        <!-- fallback-->
+        <span v-else>{{ grip[data.exercise].name }}</span>
+      </span>
+    </span>
+    <span v-if="data.pullups > 0 && data.exercise > 0">
+      {{ exercises[data.exercise - 1].name }}</span
+    >
+    <span v-if="data.pullups > 1 && data.exercise > 0">s</span>
   </div>
 </template>
 
@@ -29,7 +34,7 @@ export default {
   },
   data: () => ({}),
   computed: {
-    ...mapState('workouts', ['options'])
+    ...mapState('workouts', ['grip', 'exercises'])
   },
   methods: {
     count
