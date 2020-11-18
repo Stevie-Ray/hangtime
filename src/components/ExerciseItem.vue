@@ -110,9 +110,10 @@
                             {{ mdi.help }}
                           </v-icon>
                         </template>
-                        <span v-if="dataGrip && grip[dataGrip] !== null">{{
-                          grip[dataGrip].description
-                        }}</span>
+                        <span
+                          v-if="!isNaN(dataGrip) && grip[dataGrip] !== null"
+                          >{{ grip[dataGrip].description }}</span
+                        >
                       </v-tooltip>
                     </template>
                   </v-select>
