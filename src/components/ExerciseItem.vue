@@ -528,8 +528,13 @@ export default {
     },
     dataGrip: {
       get() {
+        // fallback for old workouts
         if (this.currentExercise.grip === undefined) {
-          return this.currentExercise.exercise
+          this.setData({
+            id: this.id,
+            value: { grip: this.currentExercise.exercise },
+            index: this.index
+          })
         }
         return this.currentExercise.grip
       },
