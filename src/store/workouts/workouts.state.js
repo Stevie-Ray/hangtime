@@ -74,7 +74,8 @@ export default {
       borderColor: 'rgba(188, 191, 164, 0.5)',
       image: 'exercises/pullup.svg',
       description:
-        'Work up to these by performing them first with both legs bent at the knees, and then with one leg straight and one bent. If you can do a good front lever, try it with one arm.'
+        'Work up to these by performing them first with both legs bent at the knees, and then with one leg straight and one bent. If you can do a good front lever, try it with one arm.',
+      disabledExercises: [1, 2, 4]
     },
     {
       name: 'Front Lever',

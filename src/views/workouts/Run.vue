@@ -50,11 +50,22 @@
                       aspect-ratio="1"
                       class="grey lighten-2 mb-3"
                     >
-                      <img
-                        v-if="ExerciseStep !== 0 && ExerciseStep !== 2"
-                        :alt="grip[currentExercise.exercise].name"
-                        :src="getImg(grip[currentExercise.grip].image)"
-                      />
+                      <span v-if="ExerciseStep !== 0 && ExerciseStep !== 2">
+                        <img
+                          v-if="!isNaN(currentExercise.grip)"
+                          :alt="grip[currentExercise.grip].name"
+                          :src="getImg(grip[currentExercise.grip].image)"
+                          class="grey lighten-2"
+                        />
+
+                        <img
+                          v-else-if="grip[currentExercise.exercise]"
+                          :src="getImg(grip[currentExercise.exercise].image)"
+                          alt=""
+                          aspect-ratio="1"
+                          class="grey lighten-2"
+                        />
+                      </span>
                       <img
                         v-else
                         src="@/assets/sloth/sleepy.svg"

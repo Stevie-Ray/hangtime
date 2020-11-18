@@ -142,7 +142,7 @@
                   <v-select
                     v-model="dataExercise"
                     label="Arms"
-                    :items="exerciseByType('arms')"
+                    :items="exercisesArm"
                     item-text="name"
                     item-value="id"
                     :disabled="!editWorkout"
@@ -161,7 +161,7 @@
                   <v-select
                     v-model="dataExercise"
                     label="Legs"
-                    :items="exerciseByType('legs')"
+                    :items="exercisesLegs"
                     item-text="name"
                     item-value="id"
                     :disabled="!editWorkout"
@@ -526,15 +526,45 @@ export default {
       // eslint-disable-next-line consistent-return
       return this.workoutById(this.id).exercises[this.index]
     },
+    exercisesArm() {
+      if (
+        this.currentExercise.grip &&
+        this.grip[this.currentExercise.grip].disabledExercises
+      ) {
+        return this.exerciseByType('arms').map(obj => ({
+          ...obj,
+          disabled: this.grip[
+            this.currentExercise.grip
+          ].disabledExercises.includes(obj.id)
+        }))
+      }
+      return this.exerciseByType('arms')
+    },
+    exercisesLegs() {
+      if (
+        this.currentExercise.grip &&
+        this.grip[this.currentExercise.grip].disabledExercises
+      ) {
+        return this.exerciseByType('legs').map(obj => ({
+          ...obj,
+          disabled: this.grip[
+            this.currentExercise.grip
+          ].disabledExercises.includes(obj.id)
+        }))
+      }
+      return this.exerciseByType('legs')
+    },
     dataGrip: {
       get() {
         // fallback for old workouts
         if (this.currentExercise.grip === undefined) {
+          // try to set data
           this.setData({
             id: this.id,
             value: { grip: this.currentExercise.exercise },
             index: this.index
           })
+          return this.currentExercise.exercise
         }
         return this.currentExercise.grip
       },
