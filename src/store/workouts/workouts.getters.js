@@ -72,7 +72,8 @@ export default {
   /**
    * Get an exercise by it's Id
    */
-  exerciseById: state => typeId => find(state.exercises, { id: typeId }),
+  exerciseById: state => exerciseId =>
+    find(state.exercises, { id: exerciseId }),
 
   /**
    * Check if a exercise has deletion pending
