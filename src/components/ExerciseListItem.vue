@@ -4,14 +4,14 @@
       <v-icon v-if="editWorkout" class="handle">{{ mdi.drag }}</v-icon>
       <v-list-item-avatar>
         <img
-          v-if="data.grip"
+          v-if="!isNaN(data.grip)"
           :src="getImg(grip[data.grip].image)"
           alt=""
           aspect-ratio="1"
           class="grey lighten-2"
         />
         <img
-          v-else
+          v-else-if="grip[data.exercise]"
           :src="getImg(grip[data.exercise].image)"
           alt=""
           aspect-ratio="1"

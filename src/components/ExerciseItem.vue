@@ -110,7 +110,7 @@
                             {{ mdi.help }}
                           </v-icon>
                         </template>
-                        <span v-if="dataGrip">{{
+                        <span v-if="dataGrip && grip[dataGrip] !== null">{{
                           grip[dataGrip].description
                         }}</span>
                       </v-tooltip>
@@ -122,14 +122,14 @@
                   <!-- exercise image  -->
                   <v-avatar size="72px">
                     <img
-                      v-if="currentExercise.grip"
+                      v-if="!isNaN(currentExercise.grip)"
                       :alt="grip[currentExercise.grip].name"
                       :src="getImg(grip[currentExercise.grip].image)"
                       aspect-ratio="1"
                       class="grey lighten-2"
                     />
                     <img
-                      v-else
+                      v-else-if="grip[currentExercise.exercise] !== null"
                       :src="getImg(grip[currentExercise.exercise].image)"
                       alt=""
                       aspect-ratio="1"
@@ -528,7 +528,7 @@ export default {
     },
     dataGrip: {
       get() {
-        if (!this.currentExercise.grip) {
+        if (this.currentExercise.grip === undefined) {
           return this.currentExercise.exercise
         }
         return this.currentExercise.grip

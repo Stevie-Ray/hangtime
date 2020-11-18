@@ -8,12 +8,16 @@
       <span v-if="data.exercise === 0">
         <span v-if="data.grip">{{ grip[data.grip].name }}</span>
         <!-- fallback-->
-        <span v-else>{{ grip[data.exercise].name }}</span>
+        <span v-else-if="grip[data.exercise]">{{
+          grip[data.exercise].name
+        }}</span>
       </span>
       <span v-else-if="data.grip !== 0">
         <span v-if="data.grip">{{ grip[data.grip].short }}</span>
         <!-- fallback-->
-        <span v-else>{{ grip[data.exercise].name }}</span>
+        <span v-else-if="grip[data.exercise]">{{
+          grip[data.exercise].name
+        }}</span>
       </span>
     </span>
     <span v-if="data.pullups > 0 && data.exercise > 0">
