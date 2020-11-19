@@ -53,6 +53,14 @@ const router = new Router({
       ]
     },
     {
+      path: '/grades',
+      name: 'grades',
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-grades" */ '@/views/grades/Index.vue'
+        )
+    },
+    {
       path: '/:userId/workout/new',
       name: 'new-workout',
       component: () =>

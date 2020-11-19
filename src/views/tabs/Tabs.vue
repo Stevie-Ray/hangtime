@@ -54,6 +54,12 @@
           >
             <v-list-item-title>Switch hangboard</v-list-item-title>
           </v-list-item>
+          <v-list-item disabled>
+            <v-list-item-title>Quick workout</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/grades">
+            <v-list-item-title>Grade conversion</v-list-item-title>
+          </v-list-item>
           <v-list-item to="/settings">
             <v-list-item-title>Settings</v-list-item-title>
           </v-list-item>
