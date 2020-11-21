@@ -288,8 +288,9 @@
                 thumb-size="48"
                 :disabled="!editWorkout"
                 :prepend-icon="mdi.history"
-                hint="Repeat current exercise (1x = no repeat)"
+                hint="Repeat the exercise (1x = no repeat)"
                 persistent-hint
+                label="Repeat"
               >
                 <template #thumb-label="props"
                   >{{ props.value + 1 }}x
@@ -299,12 +300,12 @@
                 </template>
               </v-slider>
 
-              <!-- rest  -->
+
               <v-divider
-                v-if="currentExercise.repeat > 0"
                 class="my-4"
               ></v-divider>
 
+              <!-- rest  -->
               <v-slider
                 v-model="dataRest"
                 :max="300"
@@ -312,7 +313,7 @@
                 step="2.5"
                 always-dirty
                 thumb-size="48"
-                :disabled="!editWorkout || currentExercise.repeat >= 0"
+                :disabled="!editWorkout || currentExercise.repeat <= 0"
                 :prepend-icon="mdi.progressClock"
                 hint="Time to rest between repeating the exercise"
                 persistent-hint
