@@ -483,7 +483,10 @@ export default {
               textToSpeak += `s`
             }
           } else {
-            textToSpeak += `${this.grip[this.currentExercise.exercise].name}`
+            // old way
+            if (this.grip[this.currentExercise.exercise]) {
+              textToSpeak += `${this.grip[this.currentExercise.exercise].name}`
+            }
 
             if (this.currentExercise.pullups > 1) {
               textToSpeak += ` Pullups`
