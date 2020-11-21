@@ -65,7 +65,6 @@
 <script>
 import { mapState } from 'vuex'
 import IRCRA from 'ircra'
-import { getImg } from '@/misc/helpers'
 import { mdiArrowLeft } from '@mdi/js'
 
 export default {
@@ -99,7 +98,6 @@ export default {
     }
   },
   methods: {
-    getImg,
     resetOptions() {
       this.grade = ''
       this.convert = ''

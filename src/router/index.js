@@ -61,6 +61,14 @@ const router = new Router({
         )
     },
     {
+      path: '/quick-workout',
+      name: 'quick-workout',
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-quick" */ '@/views/quick/Index.vue'
+        )
+    },
+    {
       path: '/:userId/workout/new',
       name: 'new-workout',
       component: () =>
