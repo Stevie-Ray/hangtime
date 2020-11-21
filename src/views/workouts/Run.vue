@@ -472,10 +472,11 @@ export default {
             textToSpeak += `One Arm `
           }
           // fallback system
-          if (this.currentExercise.grip) {
-            textToSpeak += `${this.grip[this.currentExercise.grip].name}`
+          // eslint-disable-next-line no-restricted-globals
+          if (!isNaN(this.currentExercise.grip)) {
+            textToSpeak += ` ${this.grip[this.currentExercise.grip].name}`
             if (this.currentExercise.exercise !== 0) {
-              textToSpeak += `${
+              textToSpeak += ` ${
                 this.exerciseById(this.currentExercise.exercise).name
               }`
             }
