@@ -105,3 +105,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.v-input__icon .v-icon {
+  touch-action: manipulation;
+}
+</style>

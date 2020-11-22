@@ -13,12 +13,13 @@
 
     <v-main>
       <v-container class="fill-height">
-        <v-row class="fill-height">
+        <v-row class="fill-height" no-gutters>
           <v-col cols="12">
             <v-row
               justify="space-around"
               align="center"
               class="fill-height text-center"
+              no-gutters
             >
               <v-progress-circular
                 :rotate="270"
@@ -35,7 +36,7 @@
                 </div>
               </v-progress-circular>
 
-              <v-row justify="center" align="start">
+              <v-row justify="center" align="start" no-gutters>
                 <v-col cols="6" justify="center">
                   <v-row justify="center" align="start">
                     <!-- Hold -->
