@@ -300,10 +300,7 @@
                 </template>
               </v-slider>
 
-
-              <v-divider
-                class="my-4"
-              ></v-divider>
+              <v-divider class="my-4"></v-divider>
 
               <!-- rest  -->
               <v-slider
