@@ -221,8 +221,19 @@ export default {
         {
           name: 'Spinchboard Solo',
           id: 0,
-          image: 'hangboards/MAXSPINCHSOLO.svg',
-          holds: 13
+          image: 'hangboards/MAXSPINCHSOLO-EASY.svg',
+          sides: [
+            {
+              name: 'Easy',
+              image: 'hangboards/MAXSPINCHSOLO-EASY.svg',
+              holds: 13
+            },
+            {
+              name: 'Hard',
+              image: 'hangboards/MAXSPINCHSOLO-HARD.svg',
+              holds: 13
+            }
+          ]
         }
       ]
     },

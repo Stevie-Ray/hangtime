@@ -9,6 +9,12 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+
+      <v-icon
+        v-if="(!initialStart && paused) || !defaultTime"
+        @click="resetTime"
+        >{{ mdi.undo }}</v-icon
+      >
     </v-app-bar>
 
     <v-main>
@@ -23,16 +29,29 @@
             >
               <v-progress-circular
                 :rotate="270"
-                :size="200"
+                :size="300"
                 :width="5"
-                :value="totalPercentage"
+                :value="progressCircular"
                 class="mt-4"
               >
                 <div class="d-flex align-center justify-center flex-column">
                   <div id="timer" class="text-h2 font-weight-bold">
-                    {{ count(totalTime) }}
+                    <span v-if="timer === null && initialStart">
+                      {{ count(totalTime) }}
+                    </span>
+                    <span v-else>
+                      {{ count(total) }}
+                    </span>
                   </div>
-                  <div class="text--secondary">in development</div>
+                  <div class="text--secondary">
+                    <span v-if="timer !== null && !initialStart">
+                      {{ count(totalTime) }}
+                    </span>
+                    <span v-else>
+                      Press Play
+                      <span class="text--primary">(beta)</span>
+                    </span>
+                  </div>
                 </div>
               </v-progress-circular>
 
@@ -43,6 +62,7 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="hold"
+                        :disabled="!initialStart"
                         hide-details
                         type="number"
                         label="Hold"
@@ -57,6 +77,7 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="pause"
+                        :disabled="!initialStart"
                         hide-details
                         type="number"
                         label="Pause"
@@ -71,6 +92,7 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="repeat"
+                        :disabled="!initialStart"
                         hide-details
                         type="number"
                         label="Repeat"
@@ -89,8 +111,31 @@
         </v-row>
       </v-container>
       <v-fab-transition>
-        <v-btn fixed fab bottom right disabled color="secondary">
+        <v-btn
+          v-if="timer === null"
+          slot="activator"
+          color="secondary"
+          disabled
+          fixed
+          bottom
+          right
+          fab
+          @click="startWorkout"
+        >
           <v-icon>{{ mdi.play }}</v-icon>
+        </v-btn>
+        <v-btn
+          v-if="timer !== null"
+          slot="activator"
+          color="secondary"
+          fixed
+          bottom
+          right
+          fab
+          @click="pauseWorkout"
+        >
+          <v-icon v-if="!paused">{{ mdi.pause }}</v-icon>
+          <v-icon v-else>{{ mdi.play }}</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-main>
@@ -99,20 +144,36 @@
 
 <script>
 import { mapState } from 'vuex'
-import { mdiArrowLeft, mdiPlay, mdiPlus, mdiMinus } from '@mdi/js'
+import {
+  mdiArrowLeft,
+  mdiPlay,
+  mdiPlus,
+  mdiMinus,
+  mdiPause,
+  mdiUndo
+} from '@mdi/js'
 import { count } from '@/misc/helpers'
+import NoSleep from 'nosleep.js'
 
 export default {
   data: () => ({
     holdInput: 15,
     pauseInput: 30,
     repeatInput: 0,
-    total: 20,
+    total: 0,
+    timer: null,
+    initialTime: 0,
+    initialStart: true,
+    progressCircular: 0,
+    paused: false,
+    noSleep: new NoSleep(),
     mdi: {
       arrowLeft: mdiArrowLeft,
       play: mdiPlay,
+      pause: mdiPause,
       plus: mdiPlus,
-      minus: mdiMinus
+      minus: mdiMinus,
+      undo: mdiUndo
     }
   }),
   head: {
@@ -133,8 +194,12 @@ export default {
     totalTime() {
       return (this.holdInput + this.pauseInput) * (this.repeatInput + 1)
     },
-    totalPercentage() {
-      return 100
+    defaultTime() {
+      return (
+        this.holdInput === 15 &&
+        this.pauseInput === 30 &&
+        this.repeatInput === 0
+      )
     },
     hold: {
       get() {
@@ -163,11 +228,78 @@ export default {
   },
   methods: {
     count,
+    async startWorkout() {
+      await this.requestWakeLock()
+      this.exerciseSetup()
+      this.timer = setInterval(() => {
+        if (!this.paused) this.countdown()
+      }, 1000)
+    },
+    async requestWakeLock() {
+      try {
+        this.noSleep.enable()
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error(`${err.name}, ${err.message}`)
+      }
+    },
+    countdown() {
+      if (this.total > 0) {
+        this.updateTime()
+      } else {
+        this.finishWorkout()
+      }
+    },
+    exerciseSetup() {
+      if (this.initialStart) {
+        this.total = this.totalTime
+        // finish Setup
+        this.initialTime = this.totalTime
+      }
+      this.initialStart = false
+    },
+    updateTime() {
+      this.total -= 1
+      // // update circle
+      this.progressCircular =
+        ((this.initialTime - this.total) * 100) / this.initialTime
+    },
+    pauseWorkout() {
+      if (!this.paused) {
+        this.noSleep.disable()
+      } else {
+        this.requestWakeLock()
+      }
+      this.paused = !this.paused
+    },
+    finishWorkout() {
+      this.noSleep.disable()
+      this.paused = true
+      clearInterval(this.timer)
+    },
+    resetTime() {
+      this.holdInput = 15
+      this.pauseInput = 30
+      this.repeatInput = 0
+      this.total = 0
+      if (this.timer !== null) {
+        clearInterval(this.timer)
+      }
+      this.timer = null
+      this.initialTime = 0
+      this.initialStart = true
+      this.progressCircular = 0
+      this.paused = false
+    },
     increment(element) {
-      this[element] = parseInt(this[element], 10) + 1
+      if (this.initialStart) {
+        this[element] = parseInt(this[element], 10) + 1
+      }
     },
     decrement(element) {
-      this[element] = parseInt(this[element], 10) - 1
+      if (this.initialStart) {
+        this[element] = parseInt(this[element], 10) - 1
+      }
     }
   }
 }

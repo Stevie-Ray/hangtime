@@ -15,6 +15,7 @@
           :edit-workout="true"
           @left="setLeft($event)"
           @right="setRight($event)"
+          @rotate="setRotate($event)"
         ></hangboard>
       </v-card-text>
 
@@ -42,7 +43,8 @@ export default {
   data: () => ({
     hangboardData: {
       left: 0,
-      right: 0
+      right: 0,
+      rotate: undefined
     }
   }),
   computed: {
@@ -76,6 +78,11 @@ export default {
         this.hangboardData.right = event
       } else if (this.hangboardData.left !== null) {
         this.hangboardData.right = null
+      }
+    },
+    setRotate(event) {
+      if (this.hangboardData.rotate !== event) {
+        this.hangboardData.rotate = event
       }
     },
     clickAddHangboard() {

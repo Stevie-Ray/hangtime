@@ -249,6 +249,15 @@ export default {
     totalTime: 0,
     timer: null,
     time: 0,
+    paused: false,
+    progressCircular: 0,
+    progressText: 'Press Play',
+    initialTime: 0,
+    initialStart: true,
+    ExerciseStep: 0,
+    synth: window.speechSynthesis,
+    voiceList: [],
+    noSleep: new NoSleep(),
     mdi: {
       timer: mdiTimer,
       skipNext: mdiSkipNext,
@@ -261,16 +270,7 @@ export default {
     },
     meta: {
       title: 'Workout'
-    },
-    paused: false,
-    progressCircular: 0,
-    progressText: 'Press Play',
-    initialTime: 0,
-    initialStart: true,
-    ExerciseStep: 0,
-    synth: window.speechSynthesis,
-    voiceList: [],
-    noSleep: new NoSleep()
+    }
   }),
   head: {
     title() {
@@ -329,6 +329,20 @@ export default {
     speak,
     sound,
     weightConverter,
+    async startWorkout() {
+      await this.requestWakeLock()
+      this.timer = setInterval(() => {
+        if (!this.paused) this.countdown()
+      }, 1000)
+    },
+    async requestWakeLock() {
+      try {
+        this.noSleep.enable()
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error(`${err.name}, ${err.message}`)
+      }
+    },
     countdown() {
       // set initial state before starting
       if (this.initialTime === 0) {
@@ -410,12 +424,6 @@ export default {
           break
       }
     },
-    async startWorkout() {
-      await this.requestWakeLock()
-      this.timer = setInterval(() => {
-        if (!this.paused) this.countdown()
-      }, 1000)
-    },
     exerciseSetup() {
       this.totalTime = this.currentExercise.pause - 1
       // don't remove 1 sec on start.
@@ -432,6 +440,14 @@ export default {
       // update circle
       this.progressCircular =
         ((this.initialTime - this.totalTime) * 100) / this.initialTime
+    },
+    pauseWorkout() {
+      if (!this.paused) {
+        this.noSleep.disable()
+      } else {
+        this.requestWakeLock()
+      }
+      this.paused = !this.paused
     },
     exerciseHold() {
       this.progressText = 'Hold'
@@ -592,15 +608,6 @@ export default {
       this.ExerciseRepeat = 0
       this.ExerciseStep = 0
     },
-
-    pauseWorkout() {
-      if (!this.paused) {
-        this.noSleep.disable()
-      } else {
-        this.requestWakeLock()
-      }
-      this.paused = !this.paused
-    },
     speakText(text) {
       if (this.user.settings.speak && 'speechSynthesis' in window) {
         this.voiceList = window.speechSynthesis
@@ -618,14 +625,6 @@ export default {
     vibratePhone() {
       if ('vibrate' in navigator) {
         if (this.user.settings.vibrate) navigator.vibrate([80, 40, 120])
-      }
-    },
-    async requestWakeLock() {
-      try {
-        this.noSleep.enable()
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(`${err.name}, ${err.message}`)
       }
     }
   }

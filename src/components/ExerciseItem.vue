@@ -55,6 +55,7 @@
           :edit-workout="editWorkout"
           @left="setLeft($event)"
           @right="setRight($event)"
+          @rotate="setRotate($event)"
         ></hangboard>
 
         <v-divider class="mb-0"></v-divider>
@@ -714,16 +715,12 @@ export default {
         this.setData({
           id: this.id,
           value: { left: event },
-          // value,
-          // key: 'exercise',
           index: this.index
         })
       } else if (this.currentExercise.right !== null) {
         this.setData({
           id: this.id,
           value: { left: null },
-          // value,
-          // key: 'exercise',
           index: this.index
         })
       }
@@ -733,19 +730,22 @@ export default {
         this.setData({
           id: this.id,
           value: { right: event },
-          // value,
-          // key: 'exercise',
           index: this.index
         })
       } else if (this.currentExercise.left !== null) {
         this.setData({
           id: this.id,
           value: { right: null },
-          // value,
-          // key: 'exercise',
           index: this.index
         })
       }
+    },
+    setRotate(event) {
+      this.setData({
+        id: this.id,
+        value: { rotate: event },
+        index: this.index
+      })
     },
     setRightHand(event) {
       if (this.currentExercise.rightHand !== event) {
