@@ -38,114 +38,16 @@
             >
               <!-- circle -->
               <div class="Counter">
-                <v-progress-circular
-                  :rotate="270"
-                  :size="300"
-                  :width="5"
-                  :value="progressCircular"
-                >
-                  <div class="d-flex align-center justify-center flex-column">
-                    <v-avatar
-                      size="80"
-                      aspect-ratio="1"
-                      class="grey lighten-2 mb-3"
-                    >
-                      <span v-if="ExerciseStep !== 0 && ExerciseStep !== 2">
-                        <img
-                          v-if="!isNaN(currentExercise.grip)"
-                          :alt="grip[currentExercise.grip].name"
-                          :src="getImg(grip[currentExercise.grip].image)"
-                          class="grey lighten-2"
-                        />
-
-                        <img
-                          v-else-if="grip[currentExercise.exercise]"
-                          :src="getImg(grip[currentExercise.exercise].image)"
-                          alt=""
-                          aspect-ratio="1"
-                          class="grey lighten-2"
-                        />
-                      </span>
-                      <img
-                        v-else
-                        src="@/assets/sloth/sleepy.svg"
-                        alt="sloth sleepy"
-                      />
-                    </v-avatar>
-
-                    <div
-                      v-if="currentStep > 0"
-                      class="progress-button progress-previous"
-                    >
-                      <v-btn icon @click="exercisePrevious">
-                        <v-icon>{{ mdi.skipPrevious }}</v-icon>
-                      </v-btn>
-                    </div>
-                    <div class="subtitle font-weight-bold text-uppercase">
-                      {{ progressText }}
-                    </div>
-
-                    <div
-                      v-if="currentStep < currentWorkout.exercises.length - 1"
-                      class="progress-button progress-next"
-                    >
-                      <v-btn icon @click="exerciseNext">
-                        <v-icon>{{ mdi.skipNext }}</v-icon>
-                      </v-btn>
-                    </div>
-
-                    <div id="timer" class="text-h2 font-weight-bold">
-                      {{ count(totalTime) }}
-                    </div>
-
-                    <div class="bottom-data">
-                      <div class="bottom-data__exercise">
-                        <div class="data">
-                          <v-icon>{{ mdi.timer }}</v-icon>
-                          <span
-                            v-if="currentWorkout && currentWorkout.exercises"
-                            >{{ currentStep + 1 }}/{{
-                              currentWorkout.exercises.length
-                            }}</span
-                          >
-                        </div>
-                      </div>
-                      <div
-                        v-if="
-                          currentExercise.weight && currentExercise.weight !== 0
-                        "
-                        class="bottom-data__weight"
-                      >
-                        <div class="data">
-                          <v-icon>{{ mdi.weight }}</v-icon>
-                          <span
-                            >{{
-                              weightConverter(currentExercise.weight, user)
-                            }}
-                            {{ weightShort }}</span
-                          >
-                        </div>
-                      </div>
-                      <div
-                        v-if="currentExercise.repeat > 0"
-                        class="bottom-data__repeat"
-                      >
-                        <div class="data">
-                          <v-icon>{{ mdi.history }}</v-icon>
-                          <span
-                            >{{ ExerciseRepeat }}/{{
-                              currentExercise.repeat + 1
-                            }}</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </v-progress-circular>
+                <circle-timer
+                  :current-exercise="currentExercise"
+                  :current-workout="currentWorkout"
+                  :start-button="startWorkout"
+                  :pause-button="pauseWorkout"
+                  @current-step="editCurrentStep"
+                ></circle-timer>
               </div>
 
               <!-- hangboard -->
-
               <div class="Hangboard">
                 <v-container fluid class="py-0">
                   <v-row>
@@ -187,86 +89,61 @@
         </v-row>
       </v-container>
 
-      <v-speed-dial bottom right fixed>
+      <v-fab-transition>
         <v-btn
-          v-if="timer !== null"
+          v-if="startWorkout"
           slot="activator"
           color="secondary"
-          dark
+          fixed
+          bottom
+          right
           fab
-          @click="pauseWorkout"
+          @click="pauseWorkout = !pauseWorkout"
         >
-          <v-icon v-if="!paused">{{ mdi.pause }}</v-icon>
+          <v-icon v-if="!pauseWorkout">{{ mdi.pause }}</v-icon>
           <v-icon v-else>{{ mdi.play }}</v-icon>
         </v-btn>
         <v-btn
-          v-if="timer === null"
+          v-else
           slot="activator"
           color="secondary"
-          dark
+          fixed
+          bottom
+          right
           fab
-          @click="startWorkout"
+          @click="startWorkout = !startWorkout"
         >
           <v-icon>{{ mdi.play }}</v-icon>
         </v-btn>
-      </v-speed-dial>
+      </v-fab-transition>
     </v-main>
   </v-layout>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import NoSleep from 'nosleep.js'
 import Hangboard from '@/components/Hangboard'
 import Hand from '@/components/Hand'
-import { getImg, count, speak, sound, weightConverter } from '@/misc/helpers'
-import {
-  mdiArrowLeft,
-  mdiTimer,
-  mdiSkipNext,
-  mdiSkipPrevious,
-  mdiPlay,
-  mdiPause,
-  mdiHistory,
-  mdiWeight
-} from '@mdi/js'
-import WorkoutItemName from '../../components/WorkoutItemName'
+import WorkoutItemName from '@/components/WorkoutItemName'
+import CircleTimer from '@/components/CircleTimer'
+
+import { mdiArrowLeft, mdiPlay, mdiPause } from '@mdi/js'
 
 export default {
-  components: { WorkoutItemName, Hangboard, Hand },
-  beforeRouteLeave(to, from, next) {
-    // make sure timer is disabled on leave
-    if (this.timer !== null) clearInterval(this.timer)
-    next()
-  },
+  components: { WorkoutItemName, Hangboard, Hand, CircleTimer },
   props: {
     id: String,
     userId: String
   },
   data: () => ({
     currentStep: 0,
-    ExerciseRepeat: 0,
-    totalTime: 0,
-    timer: null,
-    time: 0,
-    paused: false,
-    progressCircular: 0,
-    progressText: 'Press Play',
-    initialTime: 0,
     initialStart: true,
-    ExerciseStep: 0,
-    synth: window.speechSynthesis,
-    voiceList: [],
-    noSleep: new NoSleep(),
+    startWorkout: false,
+    pauseWorkout: false,
     mdi: {
-      timer: mdiTimer,
-      skipNext: mdiSkipNext,
-      skipPrevious: mdiSkipPrevious,
       play: mdiPlay,
       pause: mdiPause,
-      arrowLeft: mdiArrowLeft,
-      history: mdiHistory,
-      weight: mdiWeight
+      arrowLeft: mdiArrowLeft
     },
     meta: {
       title: 'Workout'
@@ -287,13 +164,16 @@ export default {
       }
     ]
   },
+  beforeDestroy() {
+    // make sure timer is disabled on leave
+    if (this.timer !== null) clearInterval(this.timer)
+  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
     ...mapState('workouts', ['grip', 'exercises']),
     ...mapState('companies', ['companies']),
-    ...mapGetters('workouts', ['workoutById', 'exerciseById']),
-    ...mapGetters('authentication', ['weightShort']),
+    ...mapGetters('workouts', ['workoutById']),
     // vuetify grid-system breakpoint binding
     binding() {
       const binding = {}
@@ -317,315 +197,10 @@ export default {
       // eslint-disable-next-line vue/custom-event-name-casing
       this.$emit('updateHead')
     }
-    // set timer
-    // TODO: Why do I get the voice list here?
-    this.voiceList = this.synth
-      .getVoices()
-      .filter(voice => /^(en|EN)/.test(voice.lang))
   },
   methods: {
-    getImg,
-    count,
-    speak,
-    sound,
-    weightConverter,
-    async startWorkout() {
-      await this.requestWakeLock()
-      this.timer = setInterval(() => {
-        if (!this.paused) this.countdown()
-      }, 1000)
-    },
-    async requestWakeLock() {
-      try {
-        this.noSleep.enable()
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(`${err.name}, ${err.message}`)
-      }
-    },
-    countdown() {
-      // set initial state before starting
-      if (this.initialTime === 0) {
-        this.exerciseSetup()
-      }
-      // eslint-disable-next-line default-case
-      switch (this.ExerciseStep) {
-        // PAUSE
-        case 0:
-          if (this.totalTime > 0) {
-            this.exercisePause()
-            this.updateTime()
-            break
-          }
-          // set time for holding
-          this.totalTime = this.currentExercise.hold - 1
-          // reset clock
-          this.initialTime = this.totalTime
-          this.ExerciseStep = 1
-          break
-        // HOLD
-        case 1:
-          if (this.totalTime > 0) {
-            this.exerciseHold()
-            this.updateTime()
-            break
-          }
-          // check if exercise has to repeat
-          if (this.currentExercise.repeat > 0) {
-            this.totalTime = this.currentExercise.rest - 1
-            this.initialTime = this.totalTime
-            this.ExerciseStep = 2
-            break
-          }
-          if (this.hasNext()) {
-            break
-          }
-          this.ExerciseStep = 4
-          break
-        // // REST
-        case 2:
-          if (this.totalTime > 0) {
-            this.exerciseRest()
-            this.updateTime()
-            break
-          }
-          if (this.currentExercise.repeat > 0) {
-            this.totalTime = this.currentExercise.hold - 1
-            this.initialTime = this.totalTime
-            this.ExerciseStep = 3
-            break
-          }
-          if (this.hasNext()) {
-            break
-          }
-          this.ExerciseStep = 4
-          break
-        // // REPEAT
-        case 3:
-          if (this.totalTime > 0) {
-            this.exerciseHold()
-            this.updateTime()
-            break
-          }
-          if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
-            this.totalTime = this.currentExercise.rest - 1
-            this.initialTime = this.totalTime
-            this.ExerciseStep = 2
-            break
-          }
-          if (this.hasNext()) {
-            break
-          }
-          this.ExerciseStep = 4
-          break
-        // // NEXT / FINISH
-        case 4:
-          this.finishWorkout()
-          break
-      }
-    },
-    exerciseSetup() {
-      this.totalTime = this.currentExercise.pause - 1
-      // don't remove 1 sec on start.
-      if (this.initialStart) {
-        this.totalTime = this.currentExercise.pause
-      }
-      this.initialStart = false
-      // finish Setup
-      this.initialTime = this.totalTime
-    },
-    updateTime() {
-      this.totalTime -= 1
-
-      // update circle
-      this.progressCircular =
-        ((this.initialTime - this.totalTime) * 100) / this.initialTime
-    },
-    pauseWorkout() {
-      if (!this.paused) {
-        this.noSleep.disable()
-      } else {
-        this.requestWakeLock()
-      }
-      this.paused = !this.paused
-    },
-    exerciseHold() {
-      this.progressText = 'Hold'
-
-      if (this.totalTime === 1) {
-        this.vibratePhone()
-        this.playSound('stop.mp3')
-
-        if (
-          this.currentStep + 1 !== this.currentWorkout.exercises.length ||
-          (this.currentExercise.repeat > 0 &&
-            this.ExerciseRepeat - 1 !== this.currentExercise.repeat)
-        ) {
-          this.speakText('... and pause')
-        }
-      }
-    },
-    exercisePause() {
-      this.progressText = 'Pause'
-
-      // only speak at the beginning of a pause
-      if (
-        this.ExerciseRepeat === 0 &&
-        this.initialTime - 1 === this.totalTime &&
-        this.currentExercise.pause > 5
-      ) {
-        let textToSpeak = ''
-        textToSpeak += 'Next exercise: '
-
-        if (this.currentExercise.pause >= 10) {
-          if (this.currentExercise.pullups > 1) {
-            textToSpeak += `${this.currentExercise.pullups} `
-          }
-          if (
-            this.currentExercise.left === null ||
-            this.currentExercise.right === null
-          ) {
-            textToSpeak += `One Arm `
-          }
-          // fallback system
-          // eslint-disable-next-line no-restricted-globals
-          if (!isNaN(this.currentExercise.grip)) {
-            textToSpeak += ` ${this.grip[this.currentExercise.grip].name}`
-            if (this.currentExercise.exercise !== 0) {
-              textToSpeak += ` ${
-                this.exerciseById(this.currentExercise.exercise).name
-              }`
-            }
-            if (this.currentExercise.pullups > 1) {
-              textToSpeak += `s`
-            }
-          } else {
-            // old way
-            if (this.grip[this.currentExercise.exercise]) {
-              textToSpeak += `${this.grip[this.currentExercise.exercise].name}`
-            }
-
-            if (this.currentExercise.pullups > 1) {
-              textToSpeak += ` Pullups`
-            } else if (this.currentExercise.pullups > 0) {
-              textToSpeak += ` Pullup`
-            }
-          }
-        }
-
-        if (this.currentExercise.pause >= 15) {
-          textToSpeak += `. For ${this.currentExercise.hold} seconds. `
-          if (this.currentExercise.repeat > 0) {
-            textToSpeak += `Than rest for ${this.currentExercise.rest} seconds. `
-            textToSpeak += `Repeat ${this.currentExercise.repeat + 1} times.`
-          }
-        }
-        this.speakText(textToSpeak)
-      }
-
-      if (this.currentExercise.pause >= 135 && this.totalTime === 120) {
-        this.speakText('2 minutes left')
-      }
-
-      if (this.currentExercise.pause >= 75 && this.totalTime === 60) {
-        this.speakText('1 minute left')
-      }
-
-      if (this.currentExercise.pause >= 45 && this.totalTime === 30) {
-        this.speakText('30 seconds left')
-      }
-
-      if (this.currentExercise.pause >= 30 && this.totalTime === 15) {
-        this.speakText('15 seconds left.. Get ready!')
-      }
-
-      // start count down
-      if (this.initialTime >= 4 && this.totalTime <= 4 && this.totalTime > 1) {
-        if (this.user.settings.speak) {
-          this.speakText(this.totalTime - 1)
-        } else {
-          this.playSound('count.mp3')
-        }
-      }
-
-      if (this.totalTime === 1) {
-        this.vibratePhone()
-        this.playSound('start.mp3')
-        this.speakText('Go!')
-        if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
-          this.ExerciseRepeat += 1
-        }
-      }
-    },
-    exerciseRest() {
-      this.progressText = 'Rest'
-      // rest: start counting down
-      if (this.initialTime >= 4 && this.totalTime <= 4 && this.totalTime > 1) {
-        if (this.user.settings.speak) {
-          this.speakText(this.totalTime - 1)
-        } else {
-          this.playSound('count.mp3')
-        }
-      }
-
-      if (this.totalTime === 1) {
-        this.vibratePhone()
-        this.playSound('start.mp3')
-        this.speakText('Go!')
-        if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
-          this.ExerciseRepeat += 1
-        }
-      }
-    },
-    finishWorkout() {
-      this.progressText = 'Done'
-      this.speakText('Well done')
-      this.noSleep.disable()
-      this.paused = true
-      clearInterval(this.timer)
-    },
-    hasNext() {
-      if (this.currentStep < this.currentWorkout.exercises.length - 1) {
-        this.currentStep += 1 // next exercise
-        this.exerciseSetup() // set time
-        this.ExerciseRepeat = 0 // resets
-        this.ExerciseStep = 0 // pause
-        return true
-      }
-      return false
-    },
-    exerciseNext() {
-      this.currentStep += 1
-      this.totalTime = this.currentExercise.pause - 1
-      // resets
-      this.ExerciseRepeat = 0
-      this.ExerciseStep = 0
-    },
-    exercisePrevious() {
-      this.currentStep -= 1
-      this.totalTime = this.currentExercise.pause - 1
-      // resets
-      this.ExerciseRepeat = 0
-      this.ExerciseStep = 0
-    },
-    speakText(text) {
-      if (this.user.settings.speak && 'speechSynthesis' in window) {
-        this.voiceList = window.speechSynthesis
-          .getVoices()
-          .filter(voice => /^(en|EN|US)/.test(voice.lang))
-        const utterance = new window.SpeechSynthesisUtterance()
-        utterance.text = text
-        utterance.voice = this.voiceList[this.user.settings.voice]
-        this.speak(utterance)
-      }
-    },
-    playSound(path) {
-      if (this.user.settings.sound) this.sound(path)
-    },
-    vibratePhone() {
-      if ('vibrate' in navigator) {
-        if (this.user.settings.vibrate) navigator.vibrate([80, 40, 120])
-      }
+    editCurrentStep(step) {
+      this.currentStep = step
     }
   }
 }

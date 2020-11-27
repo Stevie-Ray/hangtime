@@ -280,7 +280,6 @@
             <v-expansion-panel-content>
               <!-- repeat  -->
               <v-slider
-                v-if="editWorkout || currentExercise.repeat > 0"
                 v-model="dataRepeat"
                 :max="9"
                 :min="0"

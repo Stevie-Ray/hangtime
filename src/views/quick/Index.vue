@@ -10,11 +10,9 @@
 
       <v-spacer></v-spacer>
 
-      <v-icon
-        v-if="(!initialStart && paused) || !defaultTime"
-        @click="resetTime"
-        >{{ mdi.undo }}</v-icon
-      >
+      <!--      <v-icon v-if="startWorkout || !defaultTime" @click="resetTime">{{-->
+      <!--        mdi.undo-->
+      <!--      }}</v-icon>-->
     </v-app-bar>
 
     <v-main>
@@ -27,33 +25,13 @@
               class="fill-height text-center"
               no-gutters
             >
-              <v-progress-circular
-                :rotate="270"
-                :size="300"
-                :width="5"
-                :value="progressCircular"
-                class="mt-4"
-              >
-                <div class="d-flex align-center justify-center flex-column">
-                  <div id="timer" class="text-h2 font-weight-bold">
-                    <span v-if="timer === null && initialStart">
-                      {{ count(totalTime) }}
-                    </span>
-                    <span v-else>
-                      {{ count(total) }}
-                    </span>
-                  </div>
-                  <div class="text--secondary">
-                    <span v-if="timer !== null && !initialStart">
-                      {{ count(totalTime) }}
-                    </span>
-                    <span v-else>
-                      Press Play
-                      <span class="text--primary">(beta)</span>
-                    </span>
-                  </div>
-                </div>
-              </v-progress-circular>
+              <circle-timer
+                :total-time="totalTime"
+                :current-exercise="currentExercise"
+                :start-button="startWorkout"
+                :pause-button="pauseWorkout"
+                :reset-button="resetWorkout"
+              ></circle-timer>
 
               <v-row justify="center" align="start" no-gutters>
                 <v-col cols="6" justify="center">
@@ -62,14 +40,15 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="hold"
-                        :disabled="!initialStart"
+                        :disabled="startWorkout"
                         hide-details
+                        min="0"
                         type="number"
                         label="Hold"
                         :append-outer-icon="mdi.plus"
                         :prepend-icon="mdi.minus"
-                        @click:append-outer="increment('holdInput')"
-                        @click:prepend="decrement('holdInput')"
+                        @click:append-outer="increment('hold')"
+                        @click:prepend="decrement('hold')"
                       >
                       </v-text-field>
                     </v-col>
@@ -77,14 +56,15 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="pause"
-                        :disabled="!initialStart"
+                        :disabled="startWorkout"
+                        min="0"
                         hide-details
                         type="number"
                         label="Pause"
                         :append-outer-icon="mdi.plus"
                         :prepend-icon="mdi.minus"
-                        @click:append-outer="increment('pauseInput')"
-                        @click:prepend="decrement('pauseInput')"
+                        @click:append-outer="increment('pause')"
+                        @click:prepend="decrement('pause')"
                       >
                       </v-text-field>
                     </v-col>
@@ -92,14 +72,15 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="repeat"
-                        :disabled="!initialStart"
+                        :disabled="startWorkout"
                         hide-details
+                        min="0"
                         type="number"
                         label="Repeat"
                         :append-outer-icon="mdi.plus"
                         :prepend-icon="mdi.minus"
-                        @click:append-outer="increment('repeatInput')"
-                        @click:prepend="decrement('repeatInput')"
+                        @click:append-outer="increment('repeat')"
+                        @click:prepend="decrement('repeat')"
                       >
                       </v-text-field>
                     </v-col>
@@ -112,30 +93,29 @@
       </v-container>
       <v-fab-transition>
         <v-btn
-          v-if="timer === null"
+          v-if="startWorkout"
           slot="activator"
           color="secondary"
-          disabled
           fixed
           bottom
           right
           fab
-          @click="startWorkout"
+          @click="pauseWorkout = !pauseWorkout"
         >
-          <v-icon>{{ mdi.play }}</v-icon>
+          <v-icon v-if="!pauseWorkout">{{ mdi.pause }}</v-icon>
+          <v-icon v-else>{{ mdi.play }}</v-icon>
         </v-btn>
         <v-btn
-          v-if="timer !== null"
+          v-else
           slot="activator"
           color="secondary"
           fixed
           bottom
           right
           fab
-          @click="pauseWorkout"
+          @click="startWorkout = !startWorkout"
         >
-          <v-icon v-if="!paused">{{ mdi.pause }}</v-icon>
-          <v-icon v-else>{{ mdi.play }}</v-icon>
+          <v-icon>{{ mdi.play }}</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-main>
@@ -144,6 +124,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import CircleTimer from '@/components/CircleTimer'
 import {
   mdiArrowLeft,
   mdiPlay,
@@ -152,21 +133,23 @@ import {
   mdiPause,
   mdiUndo
 } from '@mdi/js'
-import { count } from '@/misc/helpers'
-import NoSleep from 'nosleep.js'
 
 export default {
+  components: {
+    CircleTimer
+  },
   data: () => ({
-    holdInput: 15,
-    pauseInput: 30,
-    repeatInput: 0,
-    total: 0,
-    timer: null,
-    initialTime: 0,
-    initialStart: true,
-    progressCircular: 0,
+    currentExercise: {
+      hold: 10,
+      pause: 5,
+      rest: 5,
+      repeat: 0
+    },
     paused: false,
-    noSleep: new NoSleep(),
+    initialStart: true,
+    startWorkout: false,
+    pauseWorkout: false,
+    resetWorkout: false,
     mdi: {
       arrowLeft: mdiArrowLeft,
       play: mdiPlay,
@@ -192,113 +175,85 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine']),
     totalTime() {
-      return (this.holdInput + this.pauseInput) * (this.repeatInput + 1)
+      return (
+        (this.currentExercise.hold + this.currentExercise.pause) *
+        (this.currentExercise.repeat + 1)
+      )
     },
     defaultTime() {
       return (
-        this.holdInput === 15 &&
-        this.pauseInput === 30 &&
-        this.repeatInput === 0
+        this.currentExercise ===
+        {
+          hold: 10,
+          pause: 5,
+          rest: 5,
+          repeat: 0
+        }
       )
     },
     hold: {
       get() {
-        return this.holdInput
+        return this.currentExercise.hold
       },
       set(value) {
-        this.holdInput = parseInt(value, 10)
+        this.currentExercise.hold = parseInt(value, 10)
+      }
+    },
+    rest: {
+      get() {
+        return this.currentExercise.rest
+      },
+      set(value) {
+        this.currentExercise.rest = parseInt(value, 10)
       }
     },
     pause: {
       get() {
-        return this.pauseInput
+        return this.currentExercise.pause
       },
       set(value) {
-        this.pauseInput = parseInt(value, 10)
+        this.currentExercise.rest = parseInt(value, 10)
+        this.currentExercise.pause = parseInt(value, 10)
       }
     },
     repeat: {
       get() {
-        return this.repeatInput
+        return this.currentExercise.repeat
       },
       set(value) {
-        this.repeatInput = parseInt(value, 10)
+        this.currentExercise.repeat = parseInt(value, 10)
       }
     }
   },
   methods: {
-    count,
-    async startWorkout() {
-      await this.requestWakeLock()
-      this.exerciseSetup()
-      this.timer = setInterval(() => {
-        if (!this.paused) this.countdown()
-      }, 1000)
-    },
-    async requestWakeLock() {
-      try {
-        this.noSleep.enable()
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(`${err.name}, ${err.message}`)
-      }
-    },
-    countdown() {
-      if (this.total > 0) {
-        this.updateTime()
-      } else {
-        this.finishWorkout()
-      }
-    },
-    exerciseSetup() {
-      if (this.initialStart) {
-        this.total = this.totalTime
-        // finish Setup
-        this.initialTime = this.totalTime
-      }
-      this.initialStart = false
-    },
-    updateTime() {
-      this.total -= 1
-      // // update circle
-      this.progressCircular =
-        ((this.initialTime - this.total) * 100) / this.initialTime
-    },
-    pauseWorkout() {
-      if (!this.paused) {
-        this.noSleep.disable()
-      } else {
-        this.requestWakeLock()
-      }
-      this.paused = !this.paused
-    },
-    finishWorkout() {
-      this.noSleep.disable()
-      this.paused = true
-      clearInterval(this.timer)
-    },
     resetTime() {
-      this.holdInput = 15
-      this.pauseInput = 30
-      this.repeatInput = 0
-      this.total = 0
-      if (this.timer !== null) {
-        clearInterval(this.timer)
+      this.currentExercise = {
+        hold: 10,
+        pause: 5,
+        rest: 5,
+        repeat: 0
       }
-      this.timer = null
-      this.initialTime = 0
-      this.initialStart = true
-      this.progressCircular = 0
-      this.paused = false
+      this.resetWorkout = !this.resetWorkout
     },
     increment(element) {
       if (this.initialStart) {
-        this[element] = parseInt(this[element], 10) + 1
+        this.currentExercise[element] =
+          parseInt(this.currentExercise[element], 10) + 1
+        // eslint-disable-next-line no-cond-assign
+        if (element === 'pause') {
+          this.currentExercise.rest =
+            parseInt(this.currentExercise.rest, 10) + 1
+        }
       }
     },
     decrement(element) {
-      if (this.initialStart) {
-        this[element] = parseInt(this[element], 10) - 1
+      if (this.initialStart && this.currentExercise[element] > 0) {
+        this.currentExercise[element] =
+          parseInt(this.currentExercise[element], 10) - 1
+        if (element === 'pause') {
+          this.currentExercise.rest =
+            parseInt(this.currentExercise.rest, 10) - 1
+        }
       }
     }
   }
