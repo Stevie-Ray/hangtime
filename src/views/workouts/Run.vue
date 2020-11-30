@@ -164,10 +164,6 @@ export default {
       }
     ]
   },
-  beforeDestroy() {
-    // make sure timer is disabled on leave
-    if (this.timer !== null) clearInterval(this.timer)
-  },
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
@@ -190,6 +186,10 @@ export default {
     currentWorkout() {
       return this.workoutById(this.id)
     }
+  },
+  beforeDestroy() {
+    // make sure timer is disabled on leave
+    if (this.timer !== null) clearInterval(this.timer)
   },
   mounted() {
     if (this.currentWorkout) {

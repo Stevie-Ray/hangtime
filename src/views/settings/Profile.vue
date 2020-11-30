@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Profile
+        {{ $t('Profile') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

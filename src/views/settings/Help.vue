@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Help
+        {{ $t('Help') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

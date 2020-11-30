@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Your hangboards
+        {{ $t('Hangboards') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

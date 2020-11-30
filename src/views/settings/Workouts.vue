@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Workouts
+        {{ $t('Workouts') }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>

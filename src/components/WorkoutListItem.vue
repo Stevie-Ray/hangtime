@@ -24,7 +24,7 @@
       <v-list-item-action class="text-right">
         <v-list-item-action-text>
           <v-chip v-if="difficultyById(data.level)" class="mt-2" x-small>
-            {{ difficultyById(data.level).name }}
+            {{ $t(difficultyById(data.level).name) }}
           </v-chip>
           <div class="mt-1">
             <workout-share

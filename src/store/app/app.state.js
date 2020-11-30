@@ -5,5 +5,50 @@ export default {
   SWRegistrationForNewContent: null,
   showAddToHomeScreenModalForApple: false,
   refreshingApp: false,
-  currentTab: '/'
+  currentTab: '/',
+  language: [
+    {
+      name: '简体中文',
+      value: 'zh-CN',
+      disabled: true
+    },
+    {
+      name: 'Deutsch',
+      value: 'de-DE'
+    },
+    {
+      name: 'Français',
+      value: 'fr-FR'
+    },
+    {
+      name: 'English',
+      value: 'en-US'
+    },
+    {
+      name: 'Español',
+      value: 'es-ES'
+    },
+    {
+      name: 'Español',
+      value: 'es-ES'
+    },
+    {
+      name: 'Italiano',
+      value: 'it-IT'
+    },
+    {
+      name: '日本語',
+      value: 'ja-JP',
+      disabled: true
+    },
+    {
+      name: 'Nederlands',
+      value: 'nl-NL'
+    },
+    {
+      name: 'Polski',
+      value: 'pl-PL',
+      disabled: true
+    }
+  ]
 }

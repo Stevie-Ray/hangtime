@@ -3,6 +3,7 @@ export default {
   setStatus: (state, value) => (state.user.status = value),
   setGrade: (state, value) => (state.user.settings.grade = value),
   setScale: (state, value) => (state.user.settings.scale = value),
+  setLocale: (state, value) => (state.user.settings.locale = value),
   setSound: (state, value) => (state.user.settings.sound = value),
   setSpeak: (state, value) => (state.user.settings.speak = value),
   setVibrate: (state, value) => (state.user.settings.vibrate = value),

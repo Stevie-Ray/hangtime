@@ -6,7 +6,7 @@
           <v-progress-circular :size="60" color="primary" indeterminate>
           </v-progress-circular>
           <div class="pt-4">
-            Loading...
+            {{ $t('Loading...') }}
           </div>
         </div>
       </v-col>
@@ -36,6 +36,10 @@ export default {
     user: {
       handler(user) {
         if (user === undefined) return
+
+        if (user.settings.locale) {
+          this.$i18n.locale = user.settings.locale
+        }
 
         if (this.$route.query.redirectUrl === this.$route.path) {
           this.$router.push('/')

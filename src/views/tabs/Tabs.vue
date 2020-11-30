@@ -52,16 +52,16 @@
             v-if="user && user.settings.hangboards.length > 1"
             @click="hangboardDialog = true"
           >
-            <v-list-item-title>Switch hangboard</v-list-item-title>
+            <v-list-item-title>{{ $t('Switch hangboard') }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/quick-workout">
-            <v-list-item-title>Quick workout</v-list-item-title>
+            <v-list-item-title>{{ $t('Quick workout') }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/grades">
-            <v-list-item-title>Grade conversion</v-list-item-title>
+            <v-list-item-title>{{ $t('Grade conversion') }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/settings">
-            <v-list-item-title>Settings</v-list-item-title>
+            <v-list-item-title>{{ $t('Settings') }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -77,7 +77,7 @@
         slider-color="white"
       >
         <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.route">
-          {{ tab.name }}
+          {{ $t(tab.name) }}
         </v-tab>
       </v-tabs>
     </v-app-bar>
@@ -162,7 +162,7 @@ export default {
     addProgressDialog: false,
     hangboardDialog: false,
     tabs: [
-      { id: 0, name: 'workouts', route: `/` },
+      { id: 0, name: 'workout', route: `/` },
       { id: 1, name: 'community', route: `/community` },
       { id: 2, name: 'progress', route: `/progress` }
     ],

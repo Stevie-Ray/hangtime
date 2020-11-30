@@ -301,18 +301,22 @@ export default {
     exerciseNext() {
       this.currentStep += 1
       this.$emit('current-step', this.currentStep)
-      this.totalTime = this.currentExercise.pause - 1
-      // resets
-      this.ExerciseRepeat = 0
-      this.ExerciseStep = 0
+      this.$nextTick(() => {
+        this.totalTime = this.currentExercise.pause - 1
+        // resets
+        this.ExerciseRepeat = 0
+        this.ExerciseStep = 0
+      })
     },
     exercisePrevious() {
       this.currentStep -= 1
       this.$emit('current-step', this.currentStep)
-      this.totalTime = this.currentExercise.pause - 1
-      // resets
-      this.ExerciseRepeat = 0
-      this.ExerciseStep = 0
+      this.$nextTick(() => {
+        this.totalTime = this.currentExercise.pause - 1
+        // resets
+        this.ExerciseRepeat = 0
+        this.ExerciseStep = 0
+      })
     },
     exerciseHold() {
       this.progressText = 'Hold'
@@ -338,10 +342,12 @@ export default {
       ) {
         this.currentStep += 1 // next exercise
         this.$emit('current-step', this.currentStep)
-        this.exerciseSetup() // set time
-        this.ExerciseRepeat = 0 // resets
-        this.ExerciseStep = 0 // pause
-        return true
+        this.$nextTick(() => {
+          this.exerciseSetup() // set time
+          this.ExerciseRepeat = 0 // resets
+          this.ExerciseStep = 0 // pause
+          return true
+        })
       }
       return false
     },

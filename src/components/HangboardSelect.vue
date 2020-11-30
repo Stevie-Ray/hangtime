@@ -8,7 +8,7 @@
             :items="sortedCompanies"
             item-text="name"
             item-value="id"
-            label="Hangboard manufacturer"
+            :label="$t('Hangboard manufacturer')"
             required
             style="width: calc(100% - 32px)"
             @change="resetHangboard"
@@ -28,7 +28,7 @@
             :items="sortedHangboards"
             item-text="name"
             item-value="id"
-            label="Select your model"
+            :label="$t('Select your model')"
             required
             style="width: calc(100% - 32px)"
           >
@@ -75,7 +75,7 @@
         <v-col cols="12" md="10" lg="8" class="">
           <div class="text-center">
             <p>
-              Hangboard by
+              {{ $t('Hangboard by') }}
               <a
                 :href="companies[hangboardToAdd.company].website"
                 target="_blank"

@@ -29,20 +29,28 @@
                 </v-avatar>
               </v-row>
             </v-container>
-
-            <v-card-title> Welcome to {{ appTitle }} </v-card-title>
+            <v-card-title>{{
+              $t('Welcome to {appTitle}', { appTitle })
+            }}</v-card-title>
             <v-card-text>
-              <span class="text--primary">
+              <p class="text--primary">
                 <span
                   >{{ appTitle }} lets you create your own training sequences,
                   do community workouts and track your hangboarding
                   progress.</span
                 >
-              </span>
+              </p>
+              <v-select
+                v-model="settingsLocale"
+                :items="language"
+                item-text="name"
+                item-value="value"
+                :label="$t('Language')"
+              ></v-select>
             </v-card-text>
             <v-card-actions>
               <v-btn color="primary" @click="gotoHangboard">
-                Select hangboard
+                {{ $t('Select hangboard') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -51,14 +59,14 @@
         <v-stepper-content step="2">
           <v-card flat class="mb-4">
             <v-card-title>
-              Select you hangboard
+              {{ $t('Select your hangboard') }}
             </v-card-title>
             <v-card-text>
               <hangboard-select></hangboard-select>
             </v-card-text>
             <v-card-actions>
               <v-btn color="primary" @click="e1 = 3">
-                Select grade system
+                {{ $t('Select grade system') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -67,7 +75,7 @@
         <v-stepper-content step="3">
           <v-card flat class="mb-4">
             <v-card-title>
-              What's your current grade?
+              {{ $t("What's your current grade?") }}
             </v-card-title>
             <v-list two-line>
               <v-list-item>
@@ -77,7 +85,7 @@
                     :items="ircra.scale()"
                     item-text="name"
                     item-value="value"
-                    label="Grading scale"
+                    :label="$t('Grading scale')"
                   >
                     <template #prepend>
                       <v-icon color="primary lighten-1">{{
@@ -94,7 +102,7 @@
                     :items="grades"
                     :item-text="user.settings.scale"
                     item-value="ircra"
-                    label="Grade"
+                    :label="$t('Grade')"
                   >
                     <template #prepend>
                       <v-icon color="primary lighten-1">{{
@@ -107,7 +115,7 @@
             </v-list>
             <v-card-actions>
               <v-btn color="primary" @click="saveWalkthrough">
-                Get ready
+                {{ $t('Get ready') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -125,7 +133,7 @@
                 </v-avatar>
               </v-row>
             </v-container>
-            <v-card-title>And start hangboarding!</v-card-title>
+            <v-card-title>{{ $t('And start hangboarding') }}</v-card-title>
             <v-card-text>
               <span class="text--primary">
                 <span
@@ -140,10 +148,10 @@
             </v-card-text>
             <v-card-actions>
               <v-btn color="primary" @click="finishWalkthrough(true)">
-                Add a workout
+                {{ $t('Add a workout') }}
               </v-btn>
               <v-btn text @click="finishWalkthrough(false)">
-                Close
+                {{ $t('Close') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -175,7 +183,7 @@ export default {
   computed: {
     ...mapState('authentication', ['user', 'hangboardToAdd']),
     ...mapState('companies', ['companies']),
-    ...mapState('app', ['appTitle']),
+    ...mapState('app', ['appTitle', 'language']),
     settingsScale: {
       get() {
         if (!this.user) return
@@ -184,6 +192,19 @@ export default {
       },
       set(value) {
         this.setScale(value)
+      }
+    },
+    settingsLocale: {
+      get() {
+        if (!this.user) return
+        // eslint-disable-next-line consistent-return
+        if (this.user.settings.locale) return this.user.settings.locale
+        // eslint-disable-next-line consistent-return
+        return this.$i18n.locale
+      },
+      set(value) {
+        this.$root.$i18n.locale = value
+        this.setLocale(value)
       }
     },
     settingsGrade: {
@@ -217,6 +238,7 @@ export default {
   methods: {
     ...mapMutations('authentication', [
       'setScale',
+      'setLocale',
       'setGrade',
       'setCompany',
       'setWalkthrough'

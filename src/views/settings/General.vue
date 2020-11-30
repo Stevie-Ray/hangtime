@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        General
+        {{ $t('General') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -30,6 +30,23 @@
                     item-text="name"
                     item-value="value"
                     label="Grading system"
+                    @change="triggerUpdateUser"
+                  ></v-select>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.translate }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-select
+                    v-model="settingsLocale"
+                    :items="language"
+                    item-text="name"
+                    item-value="value"
+                    :label="$t('Language')"
                     @change="triggerUpdateUser"
                   ></v-select>
                 </v-list-item-content>
@@ -111,7 +128,8 @@ import {
   mdiChartGantt,
   mdiThemeLightDark,
   mdiCellphoneLink,
-  mdiWeight
+  mdiWeight,
+  mdiTranslate
 } from '@mdi/js'
 
 export default {
@@ -123,7 +141,8 @@ export default {
       chartGantt: mdiChartGantt,
       themeLightDark: mdiThemeLightDark,
       cellphoneLink: mdiCellphoneLink,
-      weight: mdiWeight
+      weight: mdiWeight,
+      translate: mdiTranslate
     }
   }),
   head: {
@@ -139,8 +158,18 @@ export default {
     ]
   },
   computed: {
-    ...mapState('app', ['networkOnLine']),
+    ...mapState('app', ['networkOnLine', 'language']),
     ...mapState('authentication', ['user', 'settings']),
+    settingsLocale: {
+      get() {
+        if (this.user.settings.locale) return this.user.settings.locale
+        return this.$i18n.locale
+      },
+      set(value) {
+        this.$i18n.locale = value
+        this.setLocale(value)
+      }
+    },
     settingsScale: {
       get() {
         return this.user.settings.scale
@@ -195,6 +224,7 @@ export default {
       'setScale',
       'setTheme',
       'setScheme',
+      'setLocale',
       'setWeight'
     ])
   }

@@ -5,15 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "bundlesize": "bundlesize",
-    "webpack:analyze": "webpack-bundle-analyzer dist/stats.json",
     "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "prettier:check": "prettier \"**/*.{vue,scss,sass,js}\" --list-different",
     "prettier:format-all": "prettier --write \"**/*.{vue,scss,sass,js}\"",
-    "test:e2e": "vue-cli-service test:e2e",
     "test:e2e:headless": "vue-cli-service test:e2e --headless",
-    "test:unit": "vue-cli-service test:unit"
+    "webpack:analyze": "webpack-bundle-analyzer dist/stats.json"
   },
   "dependencies": {
     "@mdi/js": "^5.8.55",
@@ -30,6 +31,7 @@
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
     "vue-head": "^2.2.0",
+    "vue-i18n": "^8.22.2",
     "vue-router": "^3.4.9",
     "vue-simple-svg": "^2.0.2",
     "vuedraggable": "^2.24.3",
@@ -38,6 +40,7 @@
     "vuex-persistedstate": "^3.1.0"
   },
   "devDependencies": {
+    "@intlify/vue-i18n-loader": "^1.0.0",
     "@types/lodash": "^4.14.165",
     "@vue/cli-plugin-babel": "^4.5.9",
     "@vue/cli-plugin-e2e-cypress": "^4.5.9",
@@ -62,30 +65,13 @@
     "prerender-spa-plugin": "^3.4.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
+    "vue-cli-plugin-i18n": "^1.0.1",
     "vue-cli-plugin-vuetify": "^2.0.7",
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.6.0",
-    "webpack-bundle-analyzer": "^4.1.0",
+    "webpack-bundle-analyzer": "^4.2.0",
     "webpack-merge": "^5.4.0"
   },
-  "bundlesize": [
-    {
-      "path": "./dist/js/chunk-vendors*.js",
-      "maxSize": "160 kB"
-    },
-    {
-      "path": "./dist/js/chunk-firestore*.js",
-      "maxSize": "100 kB"
-    },
-    {
-      "path": "./dist/js/app*.js",
-      "maxSize": "45 kB"
-    },
-    {
-      "path": "./dist/js/client-chunk-*.js",
-      "maxSize": "100 kB"
-    }
-  ],
   "eslintConfig": {
     "root": true,
     "env": {
@@ -134,6 +120,24 @@
     "testURL": "http://localhost/",
     "setupTestFrameworkScriptFile": "<rootDir>/tests/unit/setup.js"
   },
-  "readme": "README.md",
-  "_id": "hangtime@1.0.0"
+  "_id": "hangtime@1.0.0",
+  "bundlesize": [
+    {
+      "path": "./dist/js/chunk-vendors*.js",
+      "maxSize": "160 kB"
+    },
+    {
+      "path": "./dist/js/chunk-firestore*.js",
+      "maxSize": "100 kB"
+    },
+    {
+      "path": "./dist/js/app*.js",
+      "maxSize": "45 kB"
+    },
+    {
+      "path": "./dist/js/client-chunk-*.js",
+      "maxSize": "100 kB"
+    }
+  ],
+  "readme": "README.md"
 }

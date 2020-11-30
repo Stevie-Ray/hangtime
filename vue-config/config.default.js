@@ -9,5 +9,13 @@ module.exports = {
     workboxOptions: {
       swSrc: path.join('public', 'service-worker.js')
     }
+  },
+  pluginOptions: {
+    i18n: {
+      locale: 'en-US',
+      fallbackLocale: 'en-US',
+      localeDir: 'locales',
+      enableInSFC: true
+    }
   }
 }

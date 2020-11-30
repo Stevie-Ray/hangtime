@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Settings
+        {{ $t('Settings') }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
@@ -51,10 +51,10 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>General</v-list-item-title>
-                  <v-list-item-subtitle
-                    >Grading scale, dark mode</v-list-item-subtitle
-                  >
+                  <v-list-item-title>{{ $t('General') }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $t('Language, grading scale, weight, dark mode') }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
@@ -71,10 +71,10 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Hangboards</v-list-item-title>
-                  <v-list-item-subtitle
-                    >Manage your hangboards</v-list-item-subtitle
-                  >
+                  <v-list-item-title>{{ $t('Hangboards') }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $t('Manage your hangboards') }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
@@ -86,10 +86,10 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Workouts</v-list-item-title>
-                  <v-list-item-subtitle
-                    >Sound, speak, vibrate</v-list-item-subtitle
-                  >
+                  <v-list-item-title>{{ $t('Workouts') }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $t('Sound, speech, vibrate') }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
@@ -101,8 +101,14 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Notifications (soon)</v-list-item-title>
-                  <v-list-item-subtitle>Workout reminders</v-list-item-subtitle>
+                  <v-list-item-title
+                    >{{ $t('Notifications') }} ({{
+                      $t('soon')
+                    }})</v-list-item-title
+                  >
+                  <v-list-item-subtitle>
+                    {{ $t('Workout reminders') }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
@@ -116,10 +122,10 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Help</v-list-item-title>
-                  <v-list-item-subtitle
-                    >FAQ, contact us, privacy policy</v-list-item-subtitle
-                  >
+                  <v-list-item-title>{{ $t('Help') }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $t('FAQ, exercises, privacy, contact') }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
