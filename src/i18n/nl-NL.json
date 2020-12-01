@@ -8,6 +8,14 @@
   "Settings": "Instellingen",
   "Profile": "Profiel",
   "General": "Algemeen",
+  "Dark mode": "Donkere modus",
+  "Enable dark mode": "Schakel de donkere modus in",
+  "Use system mode": "Gebruik de systeemmodus",
+  "overwrites manual dark mode setting based on device settings": "overschrijft de handmatige instelling van de donkere modus op basis van de apparaatinstellingen",
+  "Kilograms - Metric": "Kilogram - Metrisch",
+  "Pounds - Imperial": "Ponden - Imperiaal",
+  "Grading system": "Grading systeem",
+  "Weight system": "Maatsysteem",
   "Language, grading scale, weight, dark mode": "Taal, grading, gewicht, donkere modus",
   "Hangboards": "Hangboards",
   "Manage your hangboards": "Beheer je hangboarden",
@@ -37,5 +45,6 @@
   "Get ready": "Maak je klaar",
   "And start hangboarding": "En start met hangboarden",
   "Add a workout": "Voeg een training toe",
-  "Close": "Sluiten"
+  "Close": "Sluiten",
+  "Save": "Opslaan"
 }

@@ -4,10 +4,18 @@
   "progress": "le progrès",
   "Switch hangboard": "Changer le hangboard",
   "Quick workout": "Entraînement rapide",
-  "Grade conversion": "Conversion de grades",
+  "Grade conversion": "Conversion de notation",
   "Settings": "Paramètres",
   "Profile": "Profil",
   "General": "Général",
+  "Dark mode": "Mode sombre",
+  "Enable dark mode": "Activer le mode sombre",
+  "Use system mode": "Utiliser le mode système",
+  "overwrites manual dark mode setting based on device settings": "écrase le paramètre de mode sombre manuel en fonction des paramètres de l'appareil",
+  "Kilograms - Metric": "Kilogrammes - Métrique",
+  "Pounds - Imperial": "Livres - Impériales",
+  "Grading system": "Système de grade",
+  "Weight system": "Système de poids",
   "Language, grading scale, weight, dark mode": "Langue, échelle de notation, poids, mode sombre",
   "Hangboards": "Hangboards",
   "Manage your hangboards": "Gérez vos hangboards",
@@ -37,5 +45,6 @@
   "Get ready": "Préparez-vous",
   "And start hangboarding": "Et commencez le hangboard",
   "Add a workout": "Ajouter un entraînement",
-  "Close": "Close"
+  "Close": "Proche",
+  "Save": "Sauvegarder"
 }

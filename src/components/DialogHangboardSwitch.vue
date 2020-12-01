@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="text-h5 mb-0">Switch hangboard</v-card-title>
+      <v-card-title class="text-h5 mb-0">{{
+        $t('Switch hangboard')
+      }}</v-card-title>
 
       <v-card-text>
         <v-radio-group
@@ -32,10 +34,10 @@
         <v-spacer></v-spacer>
 
         <v-btn text class="add-hangboard" to="/settings/hangboards">
-          Hangboards
+          {{ $t('Hangboards') }}
         </v-btn>
         <v-btn text color="primary" @click="$emit('input', false)">
-          Save
+          {{ $t('Save') }}
         </v-btn>
       </v-card-actions>
     </v-card>

@@ -29,7 +29,7 @@
                     :items="scale"
                     item-text="name"
                     item-value="value"
-                    label="Grading system"
+                    :label="$t('Grading system')"
                     @change="triggerUpdateUser"
                   ></v-select>
                 </v-list-item-content>
@@ -61,29 +61,40 @@
                   <v-select
                     v-model="settingsWeight"
                     :items="settings.weight"
-                    item-text="name"
                     item-value="value"
-                    label="Weight system"
+                    :label="$t('Weight system')"
                     @change="triggerUpdateUser"
-                  ></v-select>
+                  >
+                    <template #selection="{ item }">
+                      {{ $t(item.name) }}
+                    </template>
+                    <template #item="{ item }">
+                      {{ $t(item.name) }}
+                    </template>
+                  </v-select>
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item>
+              <v-list-item :disabled="settingsScheme">
                 <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{
-                    mdi.themeLightDark
-                  }}</v-icon>
+                  <v-icon
+                    color="primary lighten-1"
+                    :disabled="settingsScheme"
+                    >{{ mdi.themeLightDark }}</v-icon
+                  >
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Dark mode</v-list-item-title>
-                  <v-list-item-subtitle>Enable dark mode</v-list-item-subtitle>
+                  <v-list-item-title>{{ $t('Dark mode') }}</v-list-item-title>
+                  <v-list-item-subtitle>{{
+                    $t('Enable dark mode')
+                  }}</v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-action>
                   <v-checkbox
                     v-model="settingsTheme"
+                    :disabled="settingsScheme"
                     @change="triggerUpdateUser"
                   ></v-checkbox>
                 </v-list-item-action>
@@ -97,11 +108,16 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Use system mode</v-list-item-title>
-                  <v-list-item-subtitle
-                    >overwrites manual dark mode setting based on device
-                    settings</v-list-item-subtitle
-                  >
+                  <v-list-item-title>{{
+                    $t('Use system mode')
+                  }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{
+                      $t(
+                        'overwrites manual dark mode setting based on device settings'
+                      )
+                    }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-action>
@@ -212,6 +228,8 @@ export default {
         }
         if (value === false) {
           this.$vuetify.theme.dark = this.settingsTheme
+        } else {
+          this.setTheme(false)
         }
         this.setScheme(value)
       }

@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Grade conversion
+        {{ $t('Grade conversion') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

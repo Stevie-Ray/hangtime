@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Quick Workout
+        {{ $t('Quick workout') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

@@ -8,6 +8,14 @@
   "Settings": "Impostazioni",
   "Profile": "Profilo",
   "General": "Generale",
+  "Dark mode": "Modalità scura",
+  "Enable dark mode": "Abilita la modalità oscura",
+  "Use system mode": "Usa la modalità di sistema",
+  "overwrites manual dark mode setting based on device settings": "sovrascrive l'impostazione della modalità oscura manuale in base alle impostazioni del dispositivo",
+  "Kilograms - Metric": "Chilogrammi - Metrico",
+  "Pounds - Imperial": "Libbre - Imperiale",
+  "Grading system": "Sistema di valutazione",
+  "Weight system": "Sistema di pesi",
   "Language, grading scale, weight, dark mode": "Lingua, scala di valutazione, peso, modalità oscura",
   "Hangboards": "Hangboards",
   "Manage your hangboards": "Gestisci i tuoi hangboard",
@@ -37,5 +45,6 @@
   "Get ready": "Preparati",
   "And start hangboarding": "E inizia l'hangboard",
   "Add a workout": "Aggiungi un allenamento",
-  "Close": "Chiudi"
+  "Close": "Chiudi",
+  "Save": "Salva"
 }
