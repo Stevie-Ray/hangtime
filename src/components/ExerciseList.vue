@@ -22,7 +22,7 @@
       <v-row>
         <v-card flat>
           <v-card-title>
-            Start adding exercises
+            {{ $t('Start adding exercises') }}
           </v-card-title>
           <v-card-subtitle>
             Add multiple exercises using the

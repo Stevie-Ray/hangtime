@@ -11,11 +11,11 @@
           ticks
           always-dirty
           thumb-size="48"
-          hint="Time to prepare / break before the exercise"
+          :hint="$t('Time to prepare / break before the exercise')"
           persistent-hint
           :disabled="!editWorkout"
           :prepend-icon="mdi.clockOutline"
-          label="Pause"
+          :label="$t('Pause')"
         >
           <template #thumb-label="props">
             {{ count(Math.round(props.value)) }}
@@ -72,7 +72,7 @@
                 <v-btn icon>
                   <v-icon>{{ mdi.menu }}</v-icon>
                 </v-btn>
-                <span>Exercise</span>
+                <span>{{ $t('Exercise') }}</span>
               </div>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
@@ -84,7 +84,7 @@
                     :items="grip"
                     item-text="name"
                     item-value="id"
-                    label="Hang / Lock off"
+                    :label="$t('Hang / Lock off')"
                     :disabled="!editWorkout"
                     required
                   >
@@ -143,7 +143,7 @@
                 <v-col cols="6">
                   <v-select
                     v-model="dataExercise"
-                    label="Arms"
+                    :label="$t('Arms')"
                     :items="exercisesArm"
                     item-text="name"
                     item-value="id"
@@ -152,7 +152,7 @@
                     <template #append-outer>
                       <v-row>
                         <v-col cols="12" align="center" justify="center">
-                          or
+                          {{ $t('or') }}
                         </v-col>
                       </v-row>
                     </template>
@@ -162,7 +162,7 @@
                 <v-col cols="6">
                   <v-select
                     v-model="dataExercise"
-                    label="Legs"
+                    :label="$t('Legs')"
                     :items="exercisesLegs"
                     item-text="name"
                     item-value="id"
@@ -175,10 +175,13 @@
                             {{ mdi.help }}
                           </v-icon>
                         </template>
-                        <span
-                          >Select an optional arm or leg exercise to
-                          perform.</span
-                        >
+                        <span>
+                          {{
+                            $t(
+                              'Select an optional arm or leg exercise to perform'
+                            )
+                          }}
+                        </span>
                       </v-tooltip>
                       <div v-else>
                         <v-icon
@@ -204,10 +207,10 @@
                     ticks
                     always-dirty
                     thumb-size="48"
-                    label="Amount"
+                    :label="$t('Amount')"
                     :prepend-icon="mdi.clockAlert"
                     :disabled="!editWorkout || currentExercise.exercise === 0"
-                    hint="Number of pull ups you have to perform"
+                    :hint="$t('Number of pull ups you have to perform')"
                   >
                     <template #thumb-label="props">
                       {{ props.value }}x</template
@@ -229,9 +232,9 @@
                     thumb-size="48"
                     :prepend-icon="mdi.clock"
                     :disabled="!editWorkout"
-                    hint="Time to hold / perform the exercise"
+                    :hint="$t('Time to hold / perform the exercise')"
                     persistent-hint
-                    label="Time"
+                    :label="$t('Time')"
                   >
                     <template #thumb-label="props">
                       {{ count(props.value) }}
@@ -273,7 +276,7 @@
                 </v-btn>
                 <span
                   :class="{ 'text--secondary': currentExercise.repeat === 0 }"
-                  >Repeat</span
+                  >{{ $t('Repeat') }}</span
                 >
               </div>
             </v-expansion-panel-header>
@@ -288,9 +291,9 @@
                 thumb-size="48"
                 :disabled="!editWorkout"
                 :prepend-icon="mdi.history"
-                hint="Repeat the exercise (1x = no repeat)"
+                :hint="$t('Repeat the exercise (1x = no repeat)')"
                 persistent-hint
-                label="Repeat"
+                :label="$t('Repeat')"
               >
                 <template #thumb-label="props"
                   >{{ props.value + 1 }}x
@@ -312,9 +315,9 @@
                 thumb-size="48"
                 :disabled="!editWorkout || currentExercise.repeat <= 0"
                 :prepend-icon="mdi.progressClock"
-                hint="Time to rest between repeating the exercise"
+                :hint="$t('Time to rest between repeating the exercise')"
                 persistent-hint
-                label="Rest"
+                :label="$t('Rest')"
               >
                 <template #thumb-label="props">
                   {{ count(Math.round(props.value)) }}
@@ -361,7 +364,7 @@
                         !currentExercise.rightHand.length) ||
                       (!currentExercise.leftHand && !currentExercise.rightHand)
                   }"
-                  >Fingers</span
+                  >{{ $t('Fingers') }}</span
                 >
               </div>
             </v-expansion-panel-header>
@@ -389,7 +392,7 @@
                     'text--secondary':
                       currentExercise.weight === 0 || !currentExercise.weight
                   }"
-                  >Weight</span
+                  >{{ $t('Weight') }}</span
                 >
               </div>
             </v-expansion-panel-header>
@@ -401,10 +404,15 @@
                 step="1"
                 ticks
                 always-dirty
+                :label="$t('Weight')"
                 thumb-size="48"
                 :disabled="!editWorkout"
                 :prepend-icon="mdi.weight"
-                hint="Add/remove weight using a kettle/dumb-bells or pulley system"
+                :hint="
+                  $t(
+                    'Add/remove weight using a kettle/dumb-bells or pulley system'
+                  )
+                "
                 persistent-hint
               >
                 <template #thumb-label="props">
@@ -432,7 +440,7 @@
                     'text--secondary':
                       currentExercise.notes === '' || !currentExercise.notes
                   }"
-                  >Notes</span
+                  >{{ $t('Notes') }}</span
                 >
               </div>
             </v-expansion-panel-header>

@@ -5,7 +5,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title v-if="editWorkout"
-              >Tab fingers that are <strong>not</strong> allowed
+              >{{ $t('Tap on fingers that are not allowed') }}
             </v-list-item-title>
           </v-list-item-content>
 

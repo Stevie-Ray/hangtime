@@ -24,9 +24,11 @@
                   </v-list-item-icon>
 
                   <v-list-item-content>
-                    <v-list-item-title>Play sound</v-list-item-title>
-                    <v-list-item-subtitle
-                      >Just two simple tones
+                    <v-list-item-title>{{
+                      $t('Play sound')
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ $t('Just two simple tones') }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
 
@@ -46,9 +48,11 @@
                   </v-list-item-icon>
 
                   <v-list-item-content>
-                    <v-list-item-title>Speak instructions</v-list-item-title>
-                    <v-list-item-subtitle
-                      >Spoken exercises
+                    <v-list-item-title>
+                      {{ $t('Speak instructions') }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ $t('Spoken exercises') }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
 
@@ -74,8 +78,8 @@
                       v-model="selectedVoice"
                       :items="voiceList"
                       :item-text="item => `${item.name} (${item.lang})`"
-                      placeholder="Tap to change"
-                      label="Select voice"
+                      :placeholder="$t('Tap to change')"
+                      :label="$t('Select voice')"
                       return-object
                     >
                     </v-select>
@@ -88,9 +92,9 @@
                   </v-list-item-icon>
 
                   <v-list-item-content>
-                    <v-list-item-title>Vibration</v-list-item-title>
+                    <v-list-item-title>{{ $t('Vibration') }}</v-list-item-title>
                     <v-list-item-subtitle
-                      >Vibrate when finishing a workout
+                      >{{ $t('Vibrate when finishing a workout') }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
 

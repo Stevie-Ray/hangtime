@@ -64,14 +64,14 @@
 
                 <v-card-actions>
                   <v-btn v-if="user.settings.selected === index" text disabled>
-                    Selected
+                    {{ $t('Selected') }}
                   </v-btn>
                   <v-btn
                     v-else
                     text
                     @click="triggerChangeHangboardAction(index)"
                   >
-                    Select
+                    {{ $t('Select') }}
                   </v-btn>
                   <v-btn
                     v-if="user.settings.selected !== index"
@@ -79,7 +79,7 @@
                     color="primary"
                     @click="triggerRemoveHangboardAction(index)"
                   >
-                    Delete
+                    {{ $t('Delete') }}
                   </v-btn>
                   <v-spacer></v-spacer>
                 </v-card-actions>

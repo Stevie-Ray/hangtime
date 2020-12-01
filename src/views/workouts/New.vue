@@ -17,7 +17,7 @@
         <!-- Workout details -->
         <span v-if="currentWorkout">
           <span v-if="currentWorkout.name">{{ currentWorkout.name }}</span>
-          <span v-else>New workout</span>
+          <span v-else>{{ $t('New workout') }}</span>
           <div class="subheading">
             <span
               v-if="currentWorkout.exercises && currentWorkout.exercises.length"
@@ -30,7 +30,7 @@
         </span>
         <!-- This will be display while loading workouts -->
         <span v-else>
-          New Workout
+          {{ $t('New workout') }}
         </span>
       </v-toolbar-title>
 

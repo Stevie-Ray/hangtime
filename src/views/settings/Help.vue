@@ -15,7 +15,7 @@
       <v-container>
         <v-row justify="center" align="start">
           <v-col cols="12">
-            <v-subheader>Grip</v-subheader>
+            <v-subheader>{{ $t('Grip') }}</v-subheader>
 
             <v-expansion-panels flat>
               <v-expansion-panel v-for="option in grip" :key="option.id">
@@ -28,7 +28,7 @@
               </v-expansion-panel>
             </v-expansion-panels>
 
-            <v-subheader>Exercises</v-subheader>
+            <v-subheader>{{ $t('Exercises') }}</v-subheader>
 
             <v-expansion-panels flat>
               <v-expansion-panel v-for="option in exercises" :key="option.id">
@@ -43,10 +43,14 @@
 
             <v-list>
               <v-list-item href="mailto:mail@stevie-ray.nl">
-                <v-list-item-title>Question? Need help?</v-list-item-title>
+                <v-list-item-title>{{
+                  $t('Questions? Need help?')
+                }}</v-list-item-title>
               </v-list-item>
               <v-list-item disabled>
-                <v-list-item-title>Terms and Privacy Policy</v-list-item-title>
+                <v-list-item-title>{{
+                  $t('Terms and Privacy Policy')
+                }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-col>

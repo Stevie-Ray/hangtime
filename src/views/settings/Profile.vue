@@ -24,43 +24,14 @@
         <v-row justify="center" align="start">
           <v-col cols="12">
             <div class="text-center pt-6">
-              <!--              <v-badge overlap bottom class="pa-4">-->
-              <!--                <v-icon slot="badge" dark @click="captureFile"-->
-              <!--                  >{{ mdi.camera}}</v-icon-->
-              <!--                >-->
-
-              <!--             add: v-avatar @click="pickFile"-->
               <v-avatar
                 v-if="user"
                 size="144"
                 aspect-ratio="1"
                 class="grey lighten-2"
               >
-                <img :src="user.photoURL" />
+                <img :src="user.photoURL" :alt="user.displayName" />
               </v-avatar>
-
-              <!--                <v-form-->
-              <!--                  enctype="multipart/form-data"-->
-              <!--                  @submit.prevent="onFilePicked"-->
-              <!--                >-->
-              <!--                  <input-->
-              <!--                    ref="image"-->
-              <!--                    type="file"-->
-              <!--                    style="display: none"-->
-              <!--                    accept="image/*"-->
-              <!--                    @change="onFilePicked"-->
-              <!--                  />-->
-
-              <!--                  <input-->
-              <!--                    ref="capture"-->
-              <!--                    type="file"-->
-              <!--                    style="display: none"-->
-              <!--                    accept="image/*"-->
-              <!--                    capture="user"-->
-              <!--                    @change="onFilePicked"-->
-              <!--                  />-->
-              <!--                </v-form>-->
-              <!--              </v-badge>-->
             </div>
 
             <v-list two-line>
@@ -87,9 +58,9 @@
                     :items="grades"
                     :item-text="user.settings.scale"
                     item-value="ircra"
-                    label="Grade"
+                    :label="$t('Grade')"
                     persistent-hint
-                    hint="What grade are you currently climbing?"
+                    :hint="$t('What grade are you currently climbing?')"
                     @change="triggerUpdateUser"
                   ></v-select>
                 </v-list-item-content>
@@ -106,11 +77,11 @@
                   <v-text-field
                     v-if="user"
                     v-model="userStatus"
-                    placeholder="At the gym"
+                    :placeholder="$t('In the climbing gym')"
                     :rules="[rules.required, rules.length(24)]"
                     counter="24"
                     required
-                    label="Status"
+                    :label="$t('Status')"
                     @change="triggerUpdateUser"
                   >
                   </v-text-field>
@@ -223,44 +194,6 @@ export default {
     ...mapMutations('authentication', ['setStatus', 'setGrade']),
     async logout() {
       await firebase.auth().signOut()
-    },
-    pickFile() {
-      this.$refs.image.click()
-    },
-    captureFile() {
-      this.$refs.capture.click()
-    },
-    onFilePicked(e) {
-      const { files } = e.target
-      if (files[0] !== undefined) {
-        // const $this = this,
-        //   file = (e.target.files || e.dataTransfer.files)[0],
-        //   reader = new FileReader();
-        //     reader.onload = (e) => {
-        //   $this.data.body.image = file;
-        //
-        //   this.updateUser();
-        // };
-
-        this.imageName = files[0].name
-        if (this.imageName.lastIndexOf('.') <= 0) {
-          return
-        }
-        const fr = new FileReader()
-        fr.readAsDataURL(files[0])
-        fr.addEventListener('load', () => {
-          this.imageUrl = fr.result
-          // eslint-disable-next-line prefer-destructuring
-          this.imageFile = files[0] // this is an image file that can be sent to server...
-          // this.data.body.avatar = this.imageFile;
-          // this.user.photoURL = this.imageUrl;
-          this.updateUser(files[0])
-        })
-      } else {
-        this.imageName = ''
-        this.imageFile = null
-        this.imageUrl = ''
-      }
     }
   }
 }
