@@ -327,7 +327,7 @@ export default {
           (this.currentExercise.repeat > 0 &&
             this.ExerciseRepeat - 1 !== this.currentExercise.repeat)
         ) {
-          this.speakText(` ...${this.$i18n.t('And pause')}!`)
+          this.speakText(`${this.$i18n.t('And pause')}!`)
         }
       }
     },
