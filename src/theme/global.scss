@@ -1,3 +1,5 @@
+@import '~vuetify/src/styles/styles.sass';
+
 // theme background
 .theme {
   &--light {
@@ -240,4 +242,9 @@
 .v-expansion-panel--active > .v-expansion-panel-header {
   min-height: 48px;
   padding: 6px 24px;
+}
+
+div.required.v-input .v-label::after {
+  content: ' *';
+  color: $code-color;
 }

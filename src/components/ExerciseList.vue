@@ -25,9 +25,7 @@
             {{ $t('Start adding exercises') }}
           </v-card-title>
           <v-card-subtitle>
-            Add multiple exercises using the
-            <v-icon small>{{ mdi.playlistPlus }}</v-icon>
-            button.
+            {{ $t('Add multiple exercises using the bottom below') }}
           </v-card-subtitle>
         </v-card>
       </v-row>

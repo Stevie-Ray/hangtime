@@ -72,10 +72,16 @@
                   ></workout-item-name>
                 </div>
                 <div class="subheading">
-                  <span>Hold for {{ currentExercise.hold }} sec. </span>
+                  <span
+                    >{{
+                      $t('Hold for {hold} sec.', { hold: currentExercise.hold })
+                    }}
+                  </span>
                   <span v-if="currentExercise.repeat > 0">
-                    Rest for {{ currentExercise.rest }} sec.</span
-                  >
+                    {{
+                      $t('Rest for {rest} sec.', { rest: currentExercise.rest })
+                    }}
+                  </span>
                 </div>
                 <div
                   v-if="currentExercise.notes !== ''"

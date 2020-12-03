@@ -2,19 +2,21 @@
   <v-dialog v-model="show" width="500">
     <v-card class="modal-wrapper mx-auto">
       <v-card-title primary-title class="pb-0">
-        <div>You're almost there!</div>
+        <div>{{ $t("You're almost there") }}!</div>
       </v-card-title>
 
       <v-card-text>
-        <div class="text-subtitle-2 mb-6">Name your workout and get going.</div>
+        <div class="text-subtitle-2 mb-6">
+          {{ $t('Name your workout and get going') }}.
+        </div>
         <v-form class="workout-action-bar">
           <v-text-field
             v-model="workoutToCreateName"
-            placeholder="New workout"
-            class="workout-name-input"
+            :placeholder="$t('New workout')"
+            class="workout-name-input required"
             counter="36"
             :rules="[rules.required, rules.length(36)]"
-            label="Workout name *"
+            :label="$t('Name')"
           >
           </v-text-field>
 
@@ -23,9 +25,11 @@
             counter="140"
             rows="3"
             :rules="[rules.required, rules.length(140)]"
-            class="workout-description-input"
-            placeholder="For example indicate when this workout is most beneficial"
-            label="Workout description *"
+            class="workout-description-input required"
+            :placeholder="
+              $t('For example indicate when this workout is most beneficial')
+            "
+            :label="$t('Description')"
           ></v-textarea>
 
           <v-select
@@ -33,29 +37,36 @@
             :items="levels"
             item-text="name"
             item-value="value"
+            class="workout-difficulty-input required"
             :label="
-              `Difficulty for a ${
-                ircra
+              $t('Difficulty for a {grade} climber', {
+                grade: ircra
                   .convert('ircra', user.settings.grade)
                   .to(user.settings.scale)[user.settings.scale]
-              } climber *`
+              })
             "
             :rules="[rules.required]"
           >
+            <template #selection="{ item }">
+              {{ $t(item.name) }}
+            </template>
+            <template #item="{ item }">
+              {{ $t(item.name) }}
+            </template>
           </v-select>
 
           <v-text-field
             v-model="workoutToCreateVideo"
             placeholder="https://www.youtube.com/watch?v=xxxxxxxx"
             class="workout-video-input"
-            label="Video (optional)"
+            :label="$t('Video')"
           >
           </v-text-field>
 
           <v-checkbox
             v-model="workoutToCreateShare"
             hide-details="auto"
-            label="Share with the community"
+            :label="$t('Share with the community')"
           ></v-checkbox>
         </v-form>
       </v-card-text>
@@ -65,7 +76,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text color="primary" @click="$emit('input', false)">
-          Close
+          {{ $t('Close') }}
         </v-btn>
         <v-btn
           text
@@ -79,7 +90,7 @@
           "
           @click="saveWorkout"
         >
-          Save
+          {{ $t('Save') }}
         </v-btn>
       </v-card-actions>
     </v-card>

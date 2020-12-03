@@ -22,8 +22,7 @@ export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
     speak: false,
     voice: 0,
     vibrate: false,
-    walkthrough: false,
-    weight: 0
+    walkthrough: false
   }
 
   const user = {

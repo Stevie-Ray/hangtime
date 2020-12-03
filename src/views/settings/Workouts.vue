@@ -187,17 +187,21 @@ export default {
     }
   },
   mounted() {
-    this.voiceList = this.synth
-      .getVoices()
-      .filter(voice => /^(en|EN|US)/.test(voice.lang))
-
-    this.synth.onvoiceschanged = () => {
-      this.voiceList = this.synth
-        .getVoices()
-        .filter(voice => /^(en|EN|US)/.test(voice.lang))
+    this.voiceList = this.synth.getVoices()
+    if (this.user.settings.locale) {
+      this.voiceList = this.voiceList.filter(voice => {
+        return voice.lang.includes(this.user.settings.locale.substring(0, 2))
+      })
     }
 
-    // this.listenForSpeechEvents();
+    this.synth.onvoiceschanged = () => {
+      this.voiceList = this.synth.getVoices()
+      if (this.user.settings.locale) {
+        this.voiceList = this.voiceList.filter(voice => {
+          return voice.lang.includes(this.user.settings.locale.substring(0, 2))
+        })
+      }
+    }
   },
   methods: {
     ...mapActions('authentication', ['triggerUpdateUser']),
@@ -208,7 +212,13 @@ export default {
       'setVoice'
     ]),
     greet(event) {
-      this.greetingSpeech.text = `You choose ${event.name}, this is my new voice`
+      this.greetingSpeech.text = `${this.$i18n.t(
+        'You chose {voice}, this is my new voice',
+        {
+          voice: event.name
+        }
+      )}
+      `
       this.greetingSpeech.voice = event
       try {
         this.synth.speak(this.greetingSpeech)

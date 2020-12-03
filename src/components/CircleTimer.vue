@@ -40,7 +40,7 @@
       </div>
       <!-- progress -->
       <div class="subtitle font-weight-bold text-uppercase">
-        {{ progressText }}
+        {{ $t(progressText) }}
       </div>
       <!-- next-->
       <div
@@ -301,22 +301,18 @@ export default {
     exerciseNext() {
       this.currentStep += 1
       this.$emit('current-step', this.currentStep)
-      this.$nextTick(() => {
-        this.totalTime = this.currentExercise.pause - 1
-        // resets
-        this.ExerciseRepeat = 0
-        this.ExerciseStep = 0
-      })
+      this.totalTime = this.currentExercise.pause - 1
+      // resets
+      this.ExerciseRepeat = 0
+      this.ExerciseStep = 0
     },
     exercisePrevious() {
       this.currentStep -= 1
       this.$emit('current-step', this.currentStep)
-      this.$nextTick(() => {
-        this.totalTime = this.currentExercise.pause - 1
-        // resets
-        this.ExerciseRepeat = 0
-        this.ExerciseStep = 0
-      })
+      this.totalTime = this.currentExercise.pause - 1
+      // resets
+      this.ExerciseRepeat = 0
+      this.ExerciseStep = 0
     },
     exerciseHold() {
       this.progressText = 'Hold'
@@ -331,7 +327,7 @@ export default {
           (this.currentExercise.repeat > 0 &&
             this.ExerciseRepeat - 1 !== this.currentExercise.repeat)
         ) {
-          this.speakText('... and pause')
+          this.speakText(` ...${this.$i18n.t('And pause')}!`)
         }
       }
     },
@@ -361,7 +357,7 @@ export default {
         this.currentExercise.pause > 5
       ) {
         let textToSpeak = ''
-        textToSpeak += 'Next exercise: '
+        textToSpeak += `${this.$i18n.t('Next exercise')}: `
 
         if (this.currentExercise.pause >= 10) {
           if (this.currentExercise.pullups > 1) {
@@ -371,7 +367,7 @@ export default {
             this.currentExercise.left === null ||
             this.currentExercise.right === null
           ) {
-            textToSpeak += `One Arm `
+            textToSpeak += `${this.$i18n.t('One Arm')} `
           }
           // fallback system
           // eslint-disable-next-line no-restricted-globals
@@ -400,29 +396,35 @@ export default {
         }
 
         if (this.currentExercise.pause >= 15) {
-          textToSpeak += `. For ${this.currentExercise.hold} seconds. `
+          textToSpeak += `. ${this.$i18n.t('For {hold} seconds', {
+            hold: this.currentExercise.hold
+          })}. `
           if (this.currentExercise.repeat > 0) {
-            textToSpeak += `Than rest for ${this.currentExercise.rest} seconds. `
-            textToSpeak += `Repeat ${this.currentExercise.repeat + 1} times.`
+            textToSpeak += `${this.$i18n.t('Than rest for {rest} seconds', {
+              rest: this.currentExercise.rest
+            })}. `
+            textToSpeak += `${this.$i18n.t('Repeat {repeat} times', {
+              repeat: this.currentExercise.repeat + 1
+            })}.`
           }
         }
         this.speakText(textToSpeak)
       }
 
       if (this.currentExercise.pause >= 135 && this.totalTime === 120) {
-        this.speakText('2 minutes left')
+        this.speakText(`${this.$i18n.t('2 minutes left')}`)
       }
 
       if (this.currentExercise.pause >= 75 && this.totalTime === 60) {
-        this.speakText('1 minute left')
+        this.speakText(`${this.$i18n.t('1 minute left')}`)
       }
 
       if (this.currentExercise.pause >= 45 && this.totalTime === 30) {
-        this.speakText('30 seconds left')
+        this.speakText(`${this.$i18n.t('30 seconds left')}`)
       }
 
       if (this.currentExercise.pause >= 30 && this.totalTime === 15) {
-        this.speakText('15 seconds left.. Get ready!')
+        this.speakText(`${this.$i18n.t('15 seconds left.. Get ready')}!`)
       }
 
       // start count down
@@ -437,7 +439,7 @@ export default {
       if (this.totalTime === 1) {
         this.vibratePhone()
         this.playSound('start.mp3')
-        this.speakText('Go!')
+        this.speakText(`${this.$i18n.t('Go')}!`)
         if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
           this.ExerciseRepeat += 1
         }
@@ -457,7 +459,7 @@ export default {
       if (this.totalTime === 1) {
         this.vibratePhone()
         this.playSound('start.mp3')
-        this.speakText('Go!')
+        this.speakText(`${this.$i18n.t('Go')}!`)
         if (this.ExerciseRepeat - 1 !== this.currentExercise.repeat) {
           this.ExerciseRepeat += 1
         }
@@ -470,9 +472,14 @@ export default {
     },
     speakText(text) {
       if (this.user.settings.speak && 'speechSynthesis' in window) {
-        this.voiceList = window.speechSynthesis
-          .getVoices()
-          .filter(voice => /^(en|EN|US)/.test(voice.lang))
+        this.voiceList = window.speechSynthesis.getVoices()
+        if (this.user.settings.locale) {
+          this.voiceList = this.voiceList.filter(voice => {
+            return voice.lang.includes(
+              this.user.settings.locale.substring(0, 2)
+            )
+          })
+        }
         const utterance = new window.SpeechSynthesisUtterance()
         utterance.text = text
         utterance.voice = this.voiceList[this.user.settings.voice]

@@ -34,11 +34,14 @@
             }}</v-card-title>
             <v-card-text>
               <p class="text--primary">
-                <span
-                  >{{ appTitle }} lets you create your own training sequences,
-                  do community workouts and track your hangboarding
-                  progress.</span
-                >
+                <span>
+                  {{
+                    $t(
+                      '{appTitle} lets you create your own training sequences, do community workouts and track your hangboarding progress',
+                      { appTitle: appTitle }
+                    )
+                  }}
+                </span>
               </p>
               <v-select
                 v-model="settingsLocale"
@@ -133,16 +136,20 @@
                 </v-avatar>
               </v-row>
             </v-container>
-            <v-card-title>{{ $t('And start hangboarding') }}</v-card-title>
+            <v-card-title>{{ $t(`And start hangboarding`) }}</v-card-title>
             <v-card-text>
               <span class="text--primary">
-                <span
-                  >Add your first workout, do a community workout or start
-                  recording your progress. It's up to you.
-                  <strong
-                    >Always make sure that you are warmed up and that you're
-                    training at your own level.</strong
-                  ></span
+                <span>
+                  {{
+                    $t(
+                      `Add your first workout, do a community workout or start recording your progress. It's up to you.`
+                    )
+                  }}
+                  <strong>{{
+                    $t(
+                      `Always make sure that you are warmed up and that you're training at your own level.`
+                    )
+                  }}</strong></span
                 >
               </span>
             </v-card-text>

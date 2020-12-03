@@ -12,9 +12,9 @@
 
         <div v-if="!editWorkout">
           <br />
-          Difficulty:
+          {{ $t('Difficulty') }}:
           <strong v-if="difficultyById(currentWorkout.level)">
-            {{ difficultyById(currentWorkout.level).name }}
+            {{ $t(difficultyById(currentWorkout.level).name) }}
           </strong>
         </div>
 
@@ -117,7 +117,7 @@
           text
           primary
           @click="shareExternal"
-          >Share
+          >{{ $t('Share') }}
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn
@@ -125,15 +125,17 @@
           text
           primary
           @click="$emit('edit', true)"
-          >Edit</v-btn
+          >{{ $t('Edit') }}</v-btn
         >
-        <v-btn text @click="$emit('input', false)">Close</v-btn>
+        <v-btn text @click="$emit('input', false)">
+          {{ $t('Close') }}
+        </v-btn>
         <v-btn
           v-if="editWorkout"
           text
           :disabled="currentWorkout.name === ''"
           @click="UpdateWorkout"
-          >Save
+          >{{ $t('Save') }}
         </v-btn>
       </v-card-actions>
     </v-card>
