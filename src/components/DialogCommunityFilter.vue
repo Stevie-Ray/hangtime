@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="text-h5 mb-0">Filters</v-card-title>
+      <v-card-title class="text-h5 mb-0">
+        {{ $t('Filters') }}
+      </v-card-title>
 
       <v-card-text>
         <v-row align="center" justify="center">
@@ -10,7 +12,7 @@
               v-model="communityFilter"
               :items="items"
               item-text="filter"
-              label="Sort workouts by"
+              :label="$t('Sort workouts by')"
               return-object
             >
               <template #append-outer>

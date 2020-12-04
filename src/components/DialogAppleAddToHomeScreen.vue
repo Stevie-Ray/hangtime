@@ -9,18 +9,21 @@
           max-width="40px"
           :src="getImg('logo.svg')"
         />
-
-        Install {{ appTitle }}
+        {{ $t('Install {appTitle}', { appTitle: appTitle }) }}
       </v-card-title>
 
       <v-card-text>
         <p class="description">
-          Install this application to your home screen for quickly and easy
-          access when you're on the go.
+          {{
+            $t(
+              "Install this application to your home screen for quickly and easy access when you're on the go"
+            )
+          }}
         </p>
         <p class="footer">
           Just tap <v-icon class="mx-2">{{ mdi.openInApp }}</v-icon> then
-          '<strong>Add to Home Screen</strong>'
+          '<strong>{{ $t('Add to Home Screen') }}</strong
+          >'
         </p>
       </v-card-text>
 

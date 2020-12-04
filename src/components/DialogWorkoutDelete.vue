@@ -1,20 +1,20 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="text-h5">Delete workout</v-card-title>
+      <v-card-title class="text-h5">{{ $t('Delete workout') }}</v-card-title>
 
       <v-card-text>
-        Are you sure you want to delete
-        <strong>{{ currentWorkout.name }}</strong> from your workouts?
+        {{ $t('Are you sure you want to delete {name} from your workouts?', {
+        name: currentWorkout.name })
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text color="primary" @click="$emit('input', false)">
-          Cancel
+          {{ $t('Cancel') }}
         </v-btn>
         <v-btn text @click="deleteWorkout(currentWorkout.id)">
-          Delete
+          {{ $t('Delete') }}
         </v-btn>
       </v-card-actions>
     </v-card>

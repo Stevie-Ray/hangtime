@@ -2,11 +2,11 @@
   <v-dialog v-model="show" width="500">
     <v-card>
       <v-card-title class="text-h5" primary-title>
-        Select Holds
+        {{ $t('Select Holds') }}
       </v-card-title>
 
       <v-card-subtitle>
-        Or deselect to use one hand
+        {{ $t('Or deselect to use one hand') }}
       </v-card-subtitle>
 
       <v-card-text>
@@ -24,7 +24,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="clickAddHangboard">
-          Track your progress
+          {{ $t('Track your progress') }}
         </v-btn>
       </v-card-actions>
     </v-card>

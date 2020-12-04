@@ -8,7 +8,7 @@
         class="my-4"
       >
       </v-progress-circular>
-      <div>Loading community workouts...</div>
+      <div>{{ $t('Loading community workouts...') }}</div>
     </div>
     <v-container
       v-if="(!user && !workouts) || (workouts && !workouts.length)"
@@ -25,20 +25,22 @@
       <v-row>
         <v-card flat>
           <v-card-title>
-            No community workouts found
+            {{ $t('No community workouts found') }}
           </v-card-title>
           <v-card-subtitle>
-            After creating a
             {{
-              companies[
-                user.settings.hangboards[user.settings.selected].company
-              ].hangboards[
-                user.settings.hangboards[user.settings.selected].hangboard
-              ].name
+              $t(
+                'After creating a {hangboard} workout use the below button to add it to the community',
+                {
+                  hangboard:
+                    companies[
+                      user.settings.hangboards[user.settings.selected].company
+                    ].hangboards[
+                      user.settings.hangboards[user.settings.selected].hangboard
+                    ].name
+                }
+              )
             }}
-            workout use the
-            <v-icon small>{{ mdi.starOutline }}</v-icon> button to add it to the
-            community.
           </v-card-subtitle>
         </v-card>
       </v-row>

@@ -122,5 +122,22 @@
   "And pause": "And pause",
   "Loading new content...": "Loading new content...",
   "New content available": "New content available",
-  "Refresh": "Refresh"
+  "Refresh": "Refresh",
+  "Loading community workouts...": "Loading community workouts...",
+  "No community workouts found": "No community workouts found",
+  "After creating a {hangboard} workout use the below button to add it to the community": "After creating a {hangboard} workout use the below button to add it to the community",
+  "Select Holds": "Select Holds",
+  "Or deselect to use one hand": "Or deselect to use one hand",
+  "Track your progress": "Track your progress",
+  "Install {appTitle}": "Install {appTitle}",
+  "Install this application to your home screen for quickly and easy access when you're on the go": "Install this application to your home screen for quickly and easy access when you're on the go",
+  "Add to Home Screen": "Add to Home Screen",
+  "Filters": "Filters",
+  "Sort workouts by": "Sort workouts by",
+  "Delete workout": "Delete workout",
+  "Are you sure you want to delete {name} from your workouts?": "Are you sure you want to delete {name} from your workouts?",
+  "Cancel": "Cancel",
+  "Remove from the community": "Remove from the community",
+  "Are you sure you want to share {name} with the community?": "Are you sure you want to share {name} with the community?",
+  "Are you sure you want to remove {name} from the community?": "Are you sure you want to remove {name} from the community?"
 }
