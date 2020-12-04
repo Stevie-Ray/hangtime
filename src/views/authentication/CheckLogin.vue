@@ -37,7 +37,7 @@ export default {
       handler(user) {
         if (user === undefined) return
 
-        if (user && user.settings && user.settings.locale) {
+        if (!isNil(user) && user.settings && user.settings.locale) {
           this.$i18n.locale = user.settings.locale
         }
 
