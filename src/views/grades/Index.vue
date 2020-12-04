@@ -21,7 +21,7 @@
                 :items="scale"
                 item-text="name"
                 item-value="value"
-                label="Grading system"
+                :label="$t('Grading system')"
                 @change="resetOptions"
               ></v-select>
             </v-col>
@@ -31,7 +31,7 @@
                 v-if="select && select !== 'french'"
                 v-model="grade"
                 :items="gradeList"
-                label="Select grade"
+                :label="$t('Select grade')"
               ></v-select>
             </v-col>
 
@@ -42,7 +42,7 @@
                 :items="scale"
                 item-text="name"
                 item-value="value"
-                label="Convert to"
+                :label="$t('Convert to')"
               ></v-select>
             </v-col>
 

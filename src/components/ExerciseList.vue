@@ -8,7 +8,7 @@
         class="my-4"
       >
       </v-progress-circular>
-      <div>Loading exercises...</div>
+      <div>{{ $t('Loading exercises...') }}</div>
     </div>
     <v-container
       v-if="currentWorkout && !currentWorkout.exercises.length"

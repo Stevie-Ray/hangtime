@@ -6,22 +6,20 @@
         <img
           v-if="!isNaN(data.grip)"
           :src="getImg(grip[data.grip].image)"
-          alt=""
-          aspect-ratio="1"
+          :alt="grip[data.grip].name"
           class="grey lighten-2"
         />
         <img
           v-else-if="grip[data.exercise]"
           :src="getImg(grip[data.exercise].image)"
-          alt=""
-          aspect-ratio="1"
+          :alt="grip[data.exercise].name"
           class="grey lighten-2"
         />
       </v-list-item-avatar>
 
       <v-list-item-content>
         <v-list-item-subtitle>
-          Pause for {{ data.pause }} sec.
+          {{ $t('Pause for {time} sec.', { time: data.pause }) }}
         </v-list-item-subtitle>
 
         <v-list-item-title>
@@ -29,8 +27,10 @@
         </v-list-item-title>
 
         <v-list-item-subtitle class="text--primary">
-          <span>Hold: {{ data.hold }}s. </span>
-          <span v-if="data.repeat > 0">Rest: {{ data.rest }}s. </span>
+          <span>{{ $t('Hold: {time}s.', { time: data.hold }) }} </span>
+          <span v-if="data.repeat > 0"
+            >{{ $t('Rest: {time}s.', { time: data.rest }) }}
+          </span>
         </v-list-item-subtitle>
       </v-list-item-content>
 

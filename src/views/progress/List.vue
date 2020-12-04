@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        Your progress
+        {{ $t('Your progress') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -44,11 +44,12 @@
               <v-row>
                 <v-card flat>
                   <v-card-title>
-                    No recordings added yet
+                    {{ $t('No recordings added yet') }}
                   </v-card-title>
                   <v-card-subtitle>
-                    Start recording your progress using the
-                    <v-icon small>{{ mdi.timer }}</v-icon> icon.
+                    {{
+                      $t('Start recording your progress using the below icon')
+                    }}
                   </v-card-subtitle>
                 </v-card>
               </v-row>
@@ -108,7 +109,7 @@
                             (currentStats[index] &&
                               currentStats[index].right === null)
                         "
-                        >One-Arm
+                        >{{ $t('One Arm') }}
                       </span>
                       <span v-if="grip[returnType(recording.type)]">
                         {{ grip[returnType(recording.type)].name }}
@@ -138,7 +139,9 @@
 
       <v-dialog v-model="filterDialog" max-width="500">
         <v-card>
-          <v-card-title class="text-h5">Filter your recordings</v-card-title>
+          <v-card-title class="text-h5">{{
+            $t('Filter your recordings')
+          }}</v-card-title>
 
           <v-card-text>
             <v-container fluid>
@@ -157,11 +160,11 @@
             <v-spacer></v-spacer>
 
             <v-btn text @click="filterDialog = false">
-              Close
+              {{ $t('Close') }}
             </v-btn>
 
             <v-btn color="primary" text @click="filterDialog = false">
-              Save
+              {{ $t('Save') }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -180,7 +183,7 @@
                 >
                   <template #label>
                     <div>
-                      <span>Max </span>
+                      <span>{{ $t('Max.') }} </span>
                       <span
                         v-if="
                           (currentStats[index] &&
@@ -188,7 +191,7 @@
                             (currentStats[index] &&
                               currentStats[index].right === null)
                         "
-                        >One-Arm
+                        >{{ $t('One Arm') }}
                       </span>
                       <span>{{ option.name }}</span>
                     </div>
@@ -203,8 +206,11 @@
               "
               class="text-subtitle-2"
             >
-              <strong>Warning:</strong> Make sure you know what you are doing
-              and be properly warmed up before doing one-arm hangs.
+              {{
+                $t(
+                  'Warning: Make sure you know what you are doing and be properly warmed up before doing one-arm hangs'
+                )
+              }}
             </div>
           </v-card-text>
 
@@ -212,11 +218,11 @@
             <v-spacer></v-spacer>
 
             <v-btn text @click="selectTypeDialog = false">
-              Close
+              {{ $t('Close') }}
             </v-btn>
 
             <v-btn color="primary" text @click="goToRecord">
-              Start
+              {{ $t('Start') }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -224,13 +230,15 @@
 
       <v-dialog v-if="deleteDialogItem" v-model="deleteDialog" max-width="500">
         <v-card>
-          <v-card-title class="text-h5">Delete recording</v-card-title>
+          <v-card-title class="text-h5">{{
+            $t('Delete recording')
+          }}</v-card-title>
 
           <v-card-text>
             <v-container fluid>
               Are you sure you want to delete this
               <strong>
-                Max
+                {{ $t('Max.') }}
                 {{ grio[returnType(deleteDialogItem.type)].name }}</strong
               >
               recording of
@@ -242,7 +250,7 @@
             <v-spacer></v-spacer>
 
             <v-btn text @click="deleteDialog = false">
-              Close
+              {{ $t('Close') }}
             </v-btn>
 
             <v-btn
@@ -250,7 +258,7 @@
               text
               @click="deteleRecordingAction(deleteDialogItem)"
             >
-              Delete
+              {{ $t('Delete') }}
             </v-btn>
           </v-card-actions>
         </v-card>

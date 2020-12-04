@@ -6,7 +6,7 @@
           <div class="text-center pa-4">
             <div class="text-h4">{{ appTitle }}</div>
             <div class="subheading font-weight-light grey--text text--darken-2">
-              Version {{ appVersion }}
+              {{ $t('Version {AppVersion}', { appVersion: appVersion }) }}
             </div>
 
             <img
@@ -21,7 +21,7 @@
             <div v-show="user === undefined" data-test="loader">
               <v-progress-circular :size="60" color="primary" indeterminate>
               </v-progress-circular>
-              <div class="text-center ">Authenticating...</div>
+              <div class="text-center ">{{ $t('Authenticating...') }}</div>
             </div>
 
             <!-- Offline instruction -->
@@ -45,7 +45,8 @@
                   outlined
                   @click="login('facebook')"
                 >
-                  <v-icon left>{{ mdi.facebook }}</v-icon> Login with Facebook
+                  <v-icon left>{{ mdi.facebook }}</v-icon>
+                  {{ $t('Login with {medium}', { medium: 'Facebook' }) }}
                 </v-btn>
               </v-col>
               <v-col cols="12" md="12">
@@ -58,7 +59,8 @@
                   outlined
                   @click="login('google')"
                 >
-                  <v-icon left>{{ mdi.google }}</v-icon> Login with Google
+                  <v-icon left>{{ mdi.google }}</v-icon>
+                  {{ $t('Login with {medium}', { medium: 'Google' }) }}
                 </v-btn>
               </v-col>
             </v-row>

@@ -2,31 +2,41 @@
   <v-dialog v-model="show" width="500">
     <v-card>
       <v-card-title class="text-h5">
-        <span v-if="!isSubscribed">Subscribe to this workout</span>
-        <span v-else>Unsubscribe from this workout</span>
+        <span v-if="!isSubscribed">
+          {{ $t('Subscribe to this workout') }}
+        </span>
+        <span v-else>
+          {{ $t('Unsubscribe from this workout') }}
+        </span>
       </v-card-title>
 
       <v-card-text>
         <span v-if="!isSubscribed">
-          When you subscribe to a
-          <strong>{{ currentWorkout.name }}</strong> this workout will be added
-          to your workouts.
+          {{
+            $t(
+              'When you subscribe to: {name}, this workout will be added to your workouts',
+              { name: currentWorkout.name }
+            )
+          }}
         </span>
         <span v-else>
-          When you unsubscribe from
-          <strong>{{ currentWorkout.name }}</strong> this workout will be
-          removed from your workouts.
+          {{
+            $t(
+              'When you unsubscribe from: {name}, this workout will be added to your workouts',
+              { name: currentWorkout.name }
+            )
+          }}
         </span>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text color="primary" @click="$emit('input', false)">
-          Cancel
+          {{ $t('Cancel') }}
         </v-btn>
         <v-btn text @click="clicksubscribeWorkout">
-          <span v-if="!isSubscribed">Subscribe</span>
-          <span v-else>Ubsubscribe</span>
+          <span v-if="!isSubscribed">{{ $t('Subscribe') }}</span>
+          <span v-else>{{ $t('Unsubscribe') }}</span>
         </v-btn>
       </v-card-actions>
     </v-card>

@@ -8,7 +8,7 @@
         class="my-4"
       >
       </v-progress-circular>
-      <div>Loading workouts...</div>
+      <div>{{ $t('Loading workouts...') }}</div>
     </div>
     <v-container v-if="(!user && !workouts) || (workouts && !workouts.length)">
       <v-row class="text-center" justify="center" align="start">
