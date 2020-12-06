@@ -44,7 +44,7 @@ export default {
     hangboardData: {
       left: 0,
       right: 0,
-      rotate: undefined
+      rotate: null
     }
   }),
   computed: {

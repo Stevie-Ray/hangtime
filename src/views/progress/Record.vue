@@ -27,7 +27,7 @@
               currentStats[index].right === null
           "
         >
-          One-Arm
+          {{ $t('One Arm') }}
         </span>
         <span>{{ currentType.name }}</span>
         <span v-if="configurable"> Pull-up</span>
@@ -66,14 +66,14 @@
                     </v-avatar>
 
                     <div class="subtitle font-weight-bold text-uppercase">
-                      Max
+                      {{ $t('Max.') }}
                       <span
                         v-if="
                           currentStats[index].left === null ||
                             currentStats[index].right === null
                         "
                       >
-                        One-Arm
+                        {{ $t('One Arm') }}
                       </span>
                       <span>{{ currentType.name }}</span>
                       <span v-if="configurable"> Pull-up</span>
@@ -99,7 +99,7 @@
                             }) > 0
                         "
                       >
-                        Best:{{
+                        {{ $t('Best') }}:{{
                           count(
                             bestStatsByType({
                               id: currentStats[index].id,
@@ -109,7 +109,8 @@
                         }}
                       </span>
                       <span v-if="configurable">
-                        Best:{{ bestStatsById(currentStats[index].id) }}x
+                        {{ $t('Best') }}:
+                        {{ bestStatsById(currentStats[index].id) }}x
                       </span>
                     </div>
                   </div>
@@ -133,36 +134,37 @@
               <div class="Title">
                 <div class="title text-uppercase mb-2">
                   <span v-if="!running">
-                    Max
+                    {{ $t('Max.') }}
                     <span
                       v-if="
                         currentStats[index].left === null ||
                           currentStats[index].right === null
                       "
                     >
-                      One-Arm
+                      {{ $t('One Arm') }}
                     </span>
                     <span>{{ currentType.name }}</span>
                     <span v-if="configurable"> Pull-up</span>
                   </span>
                   <span v-else>
-                    <span v-if="!configurable">Stay hanging</span>
-                    <span v-if="configurable">Keep doing them</span>
+                    <span v-if="!configurable">{{ $t('Stay hanging') }}</span>
+                    <span v-if="configurable">{{ $t('Keep doing them') }}</span>
                   </span>
                 </div>
                 <div class="subheading">
                   <span v-if="!running">
-                    <span v-if="!countingDown"
-                      >Press <v-icon small>{{ mdi.timer }}</v-icon> to start
-                      counting down</span
-                    >
-                    <span v-else>Counting down.. Get in position!</span>
+                    <span v-if="!countingDown">
+                      {{ $t('Press below button to start counting down') }}
+                    </span>
+                    <span v-else>{{ $t('Counting down.. Get ready') }}</span>
                   </span>
                   <span v-else>
-                    <span v-if="!configurable">Hang as long as you can</span>
-                    <span v-if="configurable"
-                      >Do as many pull-ups as you can</span
-                    >
+                    <span v-if="!configurable">
+                      {{ $t('Hang as long as you can') }}
+                    </span>
+                    <span v-if="configurable">
+                      {{ $t('Do as many pull-ups as you can') }}
+                    </span>
                   </span>
                 </div>
               </div>
@@ -175,33 +177,36 @@
         <v-card>
           <span v-if="!configurable">
             <v-card-title class="text-h5"
-              >Max {{ currentType.name }}</v-card-title
+              >{{ $t('Max.') }} {{ currentType.name }}</v-card-title
             >
 
             <v-card-subtitle class="title">
-              Your time: <strong>{{ count(totalTime) }}</strong>
+              {{ $t('Your time') }}: <strong>{{ count(totalTime) }}</strong>
             </v-card-subtitle>
 
             <v-card-text>
               <div class="text-body-2">
-                If it took some time before you pressed stop please add a fair
-                correction:
+                {{
+                  $t(
+                    'If it took some time before you pressed stop please add a fair correction'
+                  )
+                }}:
               </div>
 
               <v-btn-toggle v-model="timeCorrection" class="py-4">
-                <v-btn v-show="finalTime - 3 >= 0" :value="3">-3 sec</v-btn>
-                <v-btn v-show="finalTime - 2 >= 0" :value="2">-2 sec</v-btn>
-                <v-btn v-show="finalTime - 1 >= 0" :value="1">-1 sec</v-btn>
+                <v-btn v-show="finalTime - 3 >= 0" :value="3">-3 sec.</v-btn>
+                <v-btn v-show="finalTime - 2 >= 0" :value="2">-2 sec.</v-btn>
+                <v-btn v-show="finalTime - 1 >= 0" :value="1">-1 sec.</v-btn>
                 <v-btn
                   v-show="finalTime === 0 && totalTime > finalTime"
                   :value="totalTime"
-                  >Reset</v-btn
+                  >{{ $t('Reset') }}</v-btn
                 >
               </v-btn-toggle>
 
               <v-row class="">
                 <v-col cols="6">
-                  <div class="text-subtitle-2">Final score</div>
+                  <div class="text-subtitle-2">{{ $t('Final Score') }}</div>
                   <div class="text-h4">
                     <strong>{{ count(finalTime) }}</strong>
                   </div>
@@ -216,7 +221,7 @@
                     "
                   >
                     <div class="text-subtitle-2">
-                      Best {{ currentType.name }}
+                      {{ $t('Best') }}: {{ currentType.name }}
                     </div>
                     <div class="text-h4">
                       {{
@@ -241,16 +246,18 @@
                 "
                 class="title"
               >
-                This is a new record!
+                {{ $t('This is a new record') }}!
               </div>
             </v-card-text>
           </span>
           <span v-else>
-            <v-card-title class="text-h5">Recording result</v-card-title>
+            <v-card-title class="text-h5">{{
+              $t('Recording result')
+            }}</v-card-title>
 
             <v-card-text>
               <div>
-                How many pull-ups did you do?
+                {{ $t('How many pull-ups did you do?') }}
                 <v-container fluid grid-list-lg>
                   <v-layout wrap>
                     <div style="width: 45px">
@@ -266,7 +273,7 @@
 
                     <div>
                       <v-subheader>
-                        Pullups
+                        Pull-ups
                       </v-subheader>
                     </div>
                   </v-layout>
@@ -278,7 +285,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text @click="saveRecording">
-              save
+              {{ $t('Save') }}
             </v-btn>
           </v-card-actions>
         </v-card>

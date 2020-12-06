@@ -30,7 +30,7 @@
         </span>
         <!-- This will be display while loading workouts -->
         <span v-else>
-          Fetching workout...
+          {{ $t('Fetching workout...') }}
         </span>
       </v-toolbar-title>
 
@@ -71,10 +71,10 @@
 
         <v-list>
           <v-list-item @click.stop="dialogs.general = true">
-            <v-list-item-title>Rename Workout</v-list-item-title>
+            <v-list-item-title>{{ $t('Rename Workout') }}</v-list-item-title>
           </v-list-item>
           <v-list-item @click="dialogs.delete = true">
-            <v-list-item-title>Delete workout</v-list-item-title>
+            <v-list-item-title>{{ $t('Delete Workout') }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -95,7 +95,6 @@
                 width="100%"
                 height="100%"
                 :src="parseVideo(currentWorkout.video)"
-                frameborder="0"
               ></iframe>
             </v-responsive>
 
@@ -109,20 +108,23 @@
             <!--  Check if user has current hangboard-->
             <v-dialog v-model="hasHangboard" persistent max-width="500">
               <v-card>
-                <v-card-title class="text-h5"
-                  >You are not using this hangboard</v-card-title
-                >
+                <v-card-title class="text-h5">
+                  {{ $t('You are not using this hangboard') }}
+                </v-card-title>
 
                 <v-card-text>
-                  To view this workout we'll add this hangboard to your
-                  hangboards
+                  {{
+                    $t(
+                      "To view this workout we'll add this hangboard to your hangboards"
+                    )
+                  }}
                 </v-card-text>
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
                   <v-btn color="green darken-1" text @click="addHangboard">
-                    Ok
+                    {{ $t('Ok') }}
                   </v-btn>
                 </v-card-actions>
               </v-card>

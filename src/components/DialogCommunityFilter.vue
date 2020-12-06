@@ -11,10 +11,15 @@
             <v-select
               v-model="communityFilter"
               :items="items"
-              item-text="filter"
               :label="$t('Sort workouts by')"
               return-object
             >
+              <template #selection="{ item }">
+                {{ $t(item.filter) }}
+              </template>
+              <template #item="{ item }">
+                {{ $t(item.filter) }}
+              </template>
               <template #append-outer>
                 <v-btn v-if="sortOrder !== 'asc'" icon @click="setOrder('asc')">
                   <v-icon>{{ mdi.sortAscending }}</v-icon>
@@ -38,10 +43,10 @@
         <v-spacer></v-spacer>
 
         <v-btn text class="add-hangboard" @click="$emit('input', false)">
-          Cancel
+          {{ $t('Cancel') }}
         </v-btn>
         <v-btn text color="primary" @click="$emit('input', false)">
-          Filter
+          {{ $t('Filter') }}
         </v-btn>
       </v-card-actions>
     </v-card>

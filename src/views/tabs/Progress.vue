@@ -11,11 +11,10 @@
       <v-row>
         <v-card flat>
           <v-card-title>
-            No recordings added yet
+            {{ $t('No recordings added yet') }}
           </v-card-title>
           <v-card-subtitle>
-            Start recording your progress using the
-            <v-icon small>{{ mdi.plus }}</v-icon> icon.
+            {{ $t('Start recording your progress using the below button') }}
           </v-card-subtitle>
         </v-card>
       </v-row>

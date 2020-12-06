@@ -48,7 +48,7 @@
                   </v-card-title>
                   <v-card-subtitle>
                     {{
-                      $t('Start recording your progress using the below icon')
+                      $t('Start recording your progress using the below button')
                     }}
                   </v-card-subtitle>
                 </v-card>
@@ -172,7 +172,9 @@
 
       <v-dialog v-model="selectTypeDialog" max-width="500">
         <v-card>
-          <v-card-title class="text-h5">What do you want to do?</v-card-title>
+          <v-card-title class="text-h5">{{
+            $t('What do you want to do?')
+          }}</v-card-title>
           <v-card-text>
             <v-container fluid>
               <v-radio-group v-if="currentStats[index]" v-model="workoutType">

@@ -44,7 +44,7 @@
                         hide-details
                         min="0"
                         type="number"
-                        label="Hold"
+                        :label="$t('Hold')"
                         :append-outer-icon="mdi.plus"
                         :prepend-icon="mdi.minus"
                         @click:append-outer="increment('hold')"
@@ -60,7 +60,7 @@
                         min="0"
                         hide-details
                         type="number"
-                        label="Pause"
+                        :label="$t('Pause')"
                         :append-outer-icon="mdi.plus"
                         :prepend-icon="mdi.minus"
                         @click:append-outer="increment('pause')"
@@ -76,7 +76,7 @@
                         hide-details
                         min="0"
                         type="number"
-                        label="Repeat"
+                        :label="$t('Repeat')"
                         :append-outer-icon="mdi.plus"
                         :prepend-icon="mdi.minus"
                         @click:append-outer="increment('repeat')"

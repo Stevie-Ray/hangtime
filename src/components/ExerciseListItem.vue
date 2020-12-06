@@ -27,9 +27,9 @@
         </v-list-item-title>
 
         <v-list-item-subtitle class="text--primary">
-          <span>{{ $t('Hold: {time}s.', { time: data.hold }) }} </span>
-          <span v-if="data.repeat > 0"
-            >{{ $t('Rest: {time}s.', { time: data.rest }) }}
+          <span>{{ $t('Hold') }}: {{ data.hold }}s.</span>
+          <span v-if="data.repeat > 0">
+            {{ $t('Rest') }}: {{ data.rest }}s.
           </span>
         </v-list-item-subtitle>
       </v-list-item-content>
