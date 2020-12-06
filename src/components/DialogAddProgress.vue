@@ -2,7 +2,7 @@
   <v-dialog v-model="show" width="500">
     <v-card>
       <v-card-title class="text-h5" primary-title>
-        {{ $t('Select Holds') }}
+        {{ $t('Select holds') }}
       </v-card-title>
 
       <v-card-subtitle>
