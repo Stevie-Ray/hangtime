@@ -1255,6 +1255,80 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Awesome Woodys',
+      description: 'Handcrafted training tools for climbers',
+      id: 52,
+      disabled: true,
+      website: 'https://awesomewoodys.com/',
+      hangboards: [
+        {
+          name: 'The Home Boy',
+          id: 0,
+          image: '',
+          disabled: true,
+          holds: 0
+        },
+        {
+          name: 'Cliff Board',
+          id: 1,
+          image: '',
+          disabled: true,
+          holds: 0
+        },
+        {
+          name: 'Cliff Board Wide Boy',
+          id: 2,
+          image: '',
+          disabled: true,
+          holds: 0
+        },
+        {
+          name: 'Cliff Board Mini',
+          id: 3,
+          image: '',
+          disabled: true,
+          holds: 0
+        },
+        {
+          name: 'Cliff Board Micro',
+          id: 4,
+          image: '',
+          disabled: true,
+          holds: 0
+        },
+        {
+          name: 'Cliff Board Petite',
+          id: 5,
+          image: '',
+          disabled: true,
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'DefyTheCrux',
+      description: 'Train Hard, Climb Harder',
+      id: 53,
+      disabled: true,
+      website: 'https://defythecrux.com/',
+      hangboards: [
+        {
+          name: 'The Log',
+          id: 0,
+          image: '',
+          disabled: true,
+          holds: 0
+        },
+        {
+          name: 'The Stick',
+          id: 1,
+          image: '',
+          disabled: true,
+          holds: 0
+        }
+      ]
     }
   ]
 }
