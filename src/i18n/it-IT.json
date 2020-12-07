@@ -184,5 +184,7 @@
   "What do you want to do?": "Cosa vuoi fare?",
   "Last Modified": "Ultima modifica",
   "Stars": "Stelle",
-  "Level": "Livello"
+  "Level": "Livello",
+  "No personal workouts found": "Nessun allenamento personale trovato",
+  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "Non hai aggiunto alcun allenamento {company} {hangboard}. Usa il pulsante sotto per iniziare"
 }

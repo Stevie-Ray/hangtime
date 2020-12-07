@@ -21,24 +21,26 @@
       <v-row>
         <v-card flat>
           <v-card-title>
-            No personal workouts found
+            {{ $t('No personal workouts found') }}
           </v-card-title>
           <v-card-subtitle>
-            You haven't added any
             {{
-              companies[
-                user.settings.hangboards[user.settings.selected].company
-              ].name
+              $t(
+                "You haven't added any {company} {hangboard} workouts. Use the bellow button to get started.",
+                {
+                  company:
+                    companies[
+                      user.settings.hangboards[user.settings.selected].company
+                    ].name,
+                  hangboard:
+                    companies[
+                      user.settings.hangboards[user.settings.selected].company
+                    ].hangboards[
+                      user.settings.hangboards[user.settings.selected].hangboard
+                    ].name
+                }
+              )
             }}
-            {{
-              companies[
-                user.settings.hangboards[user.settings.selected].company
-              ].hangboards[
-                user.settings.hangboards[user.settings.selected].hangboard
-              ].name
-            }}
-            workouts. Use the <v-icon small>{{ mdi.plus }}</v-icon> button to
-            get started.
           </v-card-subtitle>
         </v-card>
       </v-row>

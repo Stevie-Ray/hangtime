@@ -4,8 +4,11 @@
       <v-card-title class="text-h5">{{ $t('Delete workout') }}</v-card-title>
 
       <v-card-text>
-        {{ $t('Are you sure you want to delete {name} from your workouts?', {
-        name: currentWorkout.name })
+        {{
+          $t('Are you sure you want to delete {name} from your workouts?', {
+            name: currentWorkout.name
+          })
+        }}
       </v-card-text>
 
       <v-card-actions>

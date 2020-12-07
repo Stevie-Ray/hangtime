@@ -23,10 +23,11 @@
             <v-col cols="12">
               <v-text-field
                 v-model="dataName"
-                placeholder="New workout"
+                :placeholder="$t('New workout')"
                 counter="36"
+                class="required"
                 :rules="[rules.required, rules.length(36)]"
-                label="Workout name *"
+                :label="$t('Name')"
                 required
               >
               </v-text-field>
@@ -38,9 +39,14 @@
                 v-model="dataDescription"
                 counter="140"
                 rows="3"
+                class="required"
                 :rules="[rules.required, rules.length(140)]"
-                placeholder="For example indicate when this workout is most beneficial"
-                label="Workout description *"
+                :placeholder="
+                  $t(
+                    'For example indicate when this workout is most beneficial'
+                  )
+                "
+                :label="$t('Description')"
               >
               </v-textarea>
             </v-col>
@@ -51,14 +57,22 @@
                 :items="levels"
                 item-text="name"
                 item-value="value"
+                :rules="[rules.required]"
+                class="required"
                 :label="
-                  `Difficulty for a ${
-                    ircra
+                  $t('Difficulty for a {grade} climber', {
+                    grade: ircra
                       .convert('ircra', user.settings.grade)
                       .to(user.settings.scale)[user.settings.scale]
-                  } climber *`
+                  })
                 "
               >
+                <template #selection="{ item }">
+                  {{ $t(item.name) }}
+                </template>
+                <template #item="{ item }">
+                  {{ $t(item.name) }}
+                </template>
               </v-select>
             </v-col>
 
@@ -67,7 +81,7 @@
                 v-model="dataVideo"
                 placeholder="https://www.youtube.com/watch?v=xxxxxxxx"
                 class="workout-video-input"
-                label="Video (optional)"
+                :label="$t('Video')"
               >
               </v-text-field>
             </v-col>
@@ -76,7 +90,7 @@
               <v-checkbox
                 v-model="dataShare"
                 hide-details="auto"
-                label="Share with the community"
+                :label="$t('Share with the community')"
                 @change="shareWorkout(currentWorkout.id)"
               ></v-checkbox>
             </v-col>

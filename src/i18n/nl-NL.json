@@ -32,7 +32,7 @@
   "normal": "normaal",
   "hard": "moeilijk",
   "Welcome to {appTitle}": "Welkom bij {appTitle}",
-  "{appTitle} lets you create your own training sequences, do community workouts and track your hangboarding progress": "Met {appTitle} kun je je eigen trainingsreeksen maken, community-workouts doen en je voortgang bijhouden",
+  "{appTitle} lets you create your own training sequences, do community workouts and track your hangboarding progress": "Met {appTitle} kun je je eigen trainingsreeksen maken, community-trainingen doen en je voortgang bijhouden",
   "Select hangboard": "Kies hangboard",
   "Select your hangboard": "Kies je hangboard",
   "Language": "Taal",
@@ -124,8 +124,8 @@
   "Loading new content...": "Nieuwe inhoud laden...",
   "New content available": "Nieuwe inhoud beschikbaar",
   "Refresh": "Vernieuwen",
-  "Loading community workouts...": "Community workouts laden...",
-  "No community workouts found": "Geen community-workouts gevonden",
+  "Loading community workouts...": "Community trainingen laden...",
+  "No community workouts found": "Geen community-trainingen gevonden",
   "After creating a {hangboard} workout use the below button to add it to the community": "Gebruik na het maken van een {hangboard} training de onderstaande knop om deze toe te voegen aan de community",
   "Select holds": "Selecteer holds",
   "Or deselect to use one hand": "Of deselecteer om één hand te gebruiken",
@@ -184,5 +184,7 @@
   "What do you want to do?": "Wat wil je doen?",
   "Last Modified": "Laatst bewerkt",
   "Stars": "Sterren",
-  "Level": "Niveau"
+  "Level": "Niveau",
+  "No personal workouts found": "Geen persoonlijke trainingen gevonden",
+  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "Je hebt geen {company} {hangboard} trainingen toegevoegd. Gebruik de onderstaande knop om aan de slag te gaan"
 }
