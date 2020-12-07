@@ -26,7 +26,7 @@
           <v-card-subtitle>
             {{
               $t(
-                "You haven't added any {company} {hangboard} workouts. Use the bellow button to get started.",
+                "You haven't added any {company} {hangboard} workouts. Use the below button to get started",
                 {
                   company:
                     companies[
