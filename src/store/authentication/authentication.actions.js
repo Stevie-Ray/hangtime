@@ -41,7 +41,17 @@ export default {
     await usersDb.update(user)
     commit('setUser', user)
   },
-
+  /**
+   * Callback fired when workout is done
+   */
+  triggerUpdateTimes: ({ commit, dispatch, state }, time) => {
+    if (!state.user) return
+    commit('setCompleted')
+    commit('setCompletedTime', time.total)
+    commit('setCompletedHold', time.hold)
+    commit('setCompletedAmount')
+    dispatch('updateUser', state.user)
+  },
   /**
    * Callback fired when changing a user setting
    */

@@ -21,19 +21,60 @@
 
     <v-main>
       <v-container>
+        <v-row>
+          <v-col cols="12">
+            <v-card flat class="mx-auto" tile dark>
+              <v-img
+                class="white--text justify-center align-center text-center"
+                height="200px"
+                gradient="to bottom, rgba(1,46,64,.66), rgba(0,0,0,.33)"
+              >
+                <v-card-title class="justify-center align-center">
+                  <v-row>
+                    <v-col class="text-right">
+                      <div class="text-overline">{{ $t('Grade') }}</div>
+                      <div>
+                        {{
+                          ircra
+                            .convert('ircra', user.settings.grade)
+                            .to(user.settings.scale)[user.settings.scale]
+                        }}
+                      </div>
+                    </v-col>
+                    <v-col cols="3">
+                      <v-avatar
+                        aspect-ratio="1"
+                        class="grey lighten-2"
+                        size="64"
+                      >
+                        <img :src="user.photoURL" :alt="user.displayName" />
+                      </v-avatar>
+                    </v-col>
+                    <v-col class="text-left">
+                      <div class="text-overline">{{ $t('Workouts') }}</div>
+                      <div
+                        v-if="user && user.completed && user.completed.amount"
+                      >
+                        {{ user.completed.amount }}
+                      </div>
+                      <div v-else>0</div>
+                    </v-col>
+                  </v-row>
+                </v-card-title>
+                <v-card-text class="pa-0">
+                  <div>{{ user.status }}</div>
+                </v-card-text>
+
+                <v-card-subtitle class="mt-0">
+                  {{ $t('Started') }}:
+                  {{ shortDate(user.createTimestamp.toDate()) }}
+                </v-card-subtitle>
+              </v-img>
+            </v-card>
+          </v-col>
+        </v-row>
         <v-row justify="center" align="start">
           <v-col cols="12">
-            <div class="text-center pt-6">
-              <v-avatar
-                v-if="user"
-                size="144"
-                aspect-ratio="1"
-                class="grey lighten-2"
-              >
-                <img :src="user.photoURL" :alt="user.displayName" />
-              </v-avatar>
-            </div>
-
             <v-list two-line>
               <v-list-item>
                 <v-list-item-icon>
@@ -42,6 +83,30 @@
 
                 <v-list-item-content v-if="user">
                   <v-list-item-title>{{ user.displayName }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">
+                    {{ mdi.timer }}
+                  </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title
+                    v-if="user && user.completed && user.completed.time"
+                    class="my-0"
+                  >
+                    <strong>{{ $t('Total time worked out') }}:</strong>
+                    {{ count(user.completed.time) }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle
+                    v-if="user && user.completed && user.completed.hold"
+                    class="my-0"
+                  >
+                    {{ $t('Total time hangboarding') }}:
+                    {{ count(user.completed.hold) }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
@@ -111,14 +176,15 @@
 import firebase from 'firebase/app'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import IRCRA from 'ircra'
-import { getImg } from '@/misc/helpers'
+import { count, getImg, shortDate } from '@/misc/helpers'
 import {
   mdiArrowLeft,
   mdiAccountOff,
   mdiAccount,
   mdiChartTimelineVariant,
   mdiInformation,
-  mdiEmail
+  mdiEmail,
+  mdiTimer
 } from '@mdi/js'
 
 export default {
@@ -135,7 +201,8 @@ export default {
       account: mdiAccount,
       chartTimelineVariant: mdiChartTimelineVariant,
       email: mdiEmail,
-      information: mdiInformation
+      information: mdiInformation,
+      timer: mdiTimer
     }
   }),
   head: {
@@ -189,6 +256,8 @@ export default {
     }
   },
   methods: {
+    count,
+    shortDate,
     getImg,
     ...mapActions('authentication', ['triggerUpdateUser']),
     ...mapMutations('authentication', ['setStatus', 'setGrade']),

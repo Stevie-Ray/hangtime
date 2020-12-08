@@ -186,5 +186,12 @@
   "Stars": "Estrellas",
   "Level": "Nivel",
   "No personal workouts found": "No se encontraron entrenamientos personales",
-  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "No agregaste ningún entrenamiento de {company} {hangboard}. Use el botón de abajo para comenzar"
+  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "No agregaste ningún entrenamiento de {company} {hangboard}. Use el botón de abajo para comenzar",
+  "Well done": "Bien hecho",
+  "You completed {name}": "Has completado {name}",
+  "Time worked out": "Tiempo entrenado",
+  "Total time hangboarding": "Tempo totale di hangboard",
+  "Total time worked out": "Tiempo total entrenado",
+  "Total workouts done": "Número total de entrenamientos realizados",
+  "Started": "Empezado"
 }

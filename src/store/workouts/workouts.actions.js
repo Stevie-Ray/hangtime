@@ -68,10 +68,6 @@ export default {
     dispatch('createUserWorkout', workout)
   },
   /**
-   * Update the total workout time
-   */
-  // updateUserWorkoutTime: ({ state, commit }) => {},
-  /**
    * Delete a user workout from its id
    */
   deleteUserWorkout: async ({ rootState, commit, getters }, workoutId) => {

@@ -1,6 +1,35 @@
 export default {
   setUser: (state, value) => (state.user = value),
   setStatus: (state, value) => (state.user.status = value),
+  setCompleted: state => {
+    if (!state.user.completed) {
+      state.user.completed = {}
+    }
+  },
+  setCompletedTime: (state, value) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(state.user.completed.time)) {
+      state.user.completed.time += value
+    } else {
+      state.user.completed.time = value
+    }
+  },
+  setCompletedHold: (state, value) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(state.user.completed.hold)) {
+      state.user.completed.hold += value
+    } else {
+      state.user.completed.hold = value
+    }
+  },
+  setCompletedAmount: state => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(state.user.completed.amount)) {
+      state.user.completed.amount += 1
+    } else {
+      state.user.completed.amount = 1
+    }
+  },
   setGrade: (state, value) => (state.user.settings.grade = value),
   setScale: (state, value) => (state.user.settings.scale = value),
   setLocale: (state, value) => (state.user.settings.locale = value),

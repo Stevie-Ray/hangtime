@@ -186,5 +186,12 @@
   "Stars": "Sterren",
   "Level": "Niveau",
   "No personal workouts found": "Geen persoonlijke trainingen gevonden",
-  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "Je hebt geen {company} {hangboard} trainingen toegevoegd. Gebruik de onderstaande knop om aan de slag te gaan"
+  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "Je hebt geen {company} {hangboard} trainingen toegevoegd. Gebruik de onderstaande knop om aan de slag te gaan",
+  "Well done": "Goed gedaan",
+  "You completed {name}": "Je hebt {name} voltooid",
+  "Time worked out": "Tijd getraind",
+  "Total time hangboarding": "Totale tijd hangboarding",
+  "Total time worked out": "Totale tijd getraind",
+  "Total workouts done": "Totaal aantal trainingen gedaan",
+  "Started": "Begonnen"
 }

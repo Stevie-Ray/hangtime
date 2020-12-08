@@ -1,102 +1,113 @@
 <template>
-  <v-progress-circular
-    :rotate="270"
-    :size="300"
-    :width="5"
-    :value="progressCircular"
-    class="mt-4"
-  >
-    <div class="d-flex align-center justify-center flex-column">
-      <!-- avatar-->
-      <v-avatar size="80" aspect-ratio="1" class="grey lighten-2 mb-3">
-        <span v-if="ExerciseStep !== 0 && ExerciseStep !== 2">
-          <img
-            v-if="!isNaN(currentExercise.grip)"
-            :alt="grip[currentExercise.grip].name"
-            :src="getImg(grip[currentExercise.grip].image)"
-            class="grey lighten-2"
-          />
+  <div class="progress-circular">
+    <v-progress-circular
+      :rotate="270"
+      :size="300"
+      :width="5"
+      :value="progressCircular"
+      class="mt-4"
+    >
+      <div class="d-flex align-center justify-center flex-column">
+        <!-- avatar-->
+        <v-avatar size="80" aspect-ratio="1" class="grey lighten-2 mb-3">
+          <span v-if="ExerciseStep !== 0 && ExerciseStep !== 2">
+            <img
+              v-if="!isNaN(currentExercise.grip)"
+              :alt="grip[currentExercise.grip].name"
+              :src="getImg(grip[currentExercise.grip].image)"
+              class="grey lighten-2"
+            />
 
-          <img
-            v-else-if="grip[currentExercise.exercise]"
-            :src="getImg(grip[currentExercise.exercise].image)"
-            :alt="grip[currentExercise.exercise].name"
-            class="grey lighten-2"
-          />
+            <img
+              v-else-if="grip[currentExercise.exercise]"
+              :src="getImg(grip[currentExercise.exercise].image)"
+              :alt="grip[currentExercise.exercise].name"
+              class="grey lighten-2"
+            />
 
-          <img
-            v-else
-            src="@/assets/exercises/deadhang.svg"
-            alt="sloth deadhang"
-          />
-        </span>
-        <img v-else src="@/assets/sloth/sleepy.svg" alt="sloth sleepy" />
-      </v-avatar>
-      <!-- previous -->
-      <div v-if="currentStep > 0" class="progress-button progress-previous">
-        <v-btn icon @click="exercisePrevious">
-          <v-icon>{{ mdi.skipPrevious }}</v-icon>
-        </v-btn>
-      </div>
-      <!-- progress -->
-      <div class="subtitle font-weight-bold text-uppercase">
-        {{ $t(progressText) }}
-      </div>
-      <!-- next-->
-      <div
-        v-if="
-          currentWorkout && currentStep < currentWorkout.exercises.length - 1
-        "
-        class="progress-button progress-next"
-      >
-        <v-btn icon @click="exerciseNext">
-          <v-icon>{{ mdi.skipNext }}</v-icon>
-        </v-btn>
-      </div>
-      <!-- time -->
-      <div id="timer" class="text-h2 font-weight-bold">
-        {{ count(totalTime) }}
-      </div>
-
-      <!-- bottom -->
-      <div class="bottom-data">
+            <img
+              v-else
+              src="@/assets/exercises/deadhang.svg"
+              alt="sloth deadhang"
+            />
+          </span>
+          <img v-else src="@/assets/sloth/sleepy.svg" alt="sloth sleepy" />
+        </v-avatar>
+        <!-- previous -->
+        <div v-if="currentStep > 0" class="progress-button progress-previous">
+          <v-btn icon @click="exercisePrevious">
+            <v-icon>{{ mdi.skipPrevious }}</v-icon>
+          </v-btn>
+        </div>
+        <!-- progress -->
+        <div class="subtitle font-weight-bold text-uppercase">
+          {{ $t(progressText) }}
+        </div>
+        <!-- next-->
         <div
-          v-if="currentWorkout && currentWorkout.exercises"
-          class="bottom-data__exercise"
+          v-if="
+            currentWorkout && currentStep < currentWorkout.exercises.length - 1
+          "
+          class="progress-button progress-next"
         >
-          <div class="data">
-            <v-icon>{{ mdi.timer }}</v-icon>
-            <span>
-              {{ currentStep + 1 }}/{{ currentWorkout.exercises.length }}
-            </span>
-          </div>
+          <v-btn icon @click="exerciseNext">
+            <v-icon>{{ mdi.skipNext }}</v-icon>
+          </v-btn>
         </div>
-        <div
-          v-if="currentExercise.weight && currentExercise.weight !== 0"
-          class="bottom-data__weight"
-        >
-          <div class="data">
-            <v-icon>{{ mdi.weight }}</v-icon>
-            <span
-              >{{ weightConverter(currentExercise.weight, user) }}
-              {{ weightShort }}</span
-            >
-          </div>
+        <!-- time -->
+        <div id="timer" class="text-h2 font-weight-bold">
+          {{ count(totalTime) }}
         </div>
-        <div v-if="currentExercise.repeat > 0" class="bottom-data__repeat">
-          <div class="data">
-            <v-icon>{{ mdi.history }}</v-icon>
-            <span>{{ ExerciseRepeat }}/{{ currentExercise.repeat + 1 }}</span>
+
+        <!-- bottom -->
+        <div class="bottom-data">
+          <div
+            v-if="currentWorkout && currentWorkout.exercises"
+            class="bottom-data__exercise"
+          >
+            <div class="data">
+              <v-icon>{{ mdi.timer }}</v-icon>
+              <span>
+                {{ currentStep + 1 }}/{{ currentWorkout.exercises.length }}
+              </span>
+            </div>
+          </div>
+          <div
+            v-if="currentExercise.weight && currentExercise.weight !== 0"
+            class="bottom-data__weight"
+          >
+            <div class="data">
+              <v-icon>{{ mdi.weight }}</v-icon>
+              <span
+                >{{ weightConverter(currentExercise.weight, user) }}
+                {{ weightShort }}</span
+              >
+            </div>
+          </div>
+          <div v-if="currentExercise.repeat > 0" class="bottom-data__repeat">
+            <div class="data">
+              <v-icon>{{ mdi.history }}</v-icon>
+              <span>{{ ExerciseRepeat }}/{{ currentExercise.repeat + 1 }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </v-progress-circular>
+    </v-progress-circular>
+
+    <!-- Complete Dialog -->
+    <dialog-workout-complete
+      v-model="dialogs.complete"
+      :current-workout="currentWorkout"
+      :time-in-workout="timeInWorkout"
+      :time-holding-on="timeHoldingOn"
+    ></dialog-workout-complete>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapState } from 'vuex'
 import NoSleep from 'nosleep.js'
+import DialogWorkoutComplete from '@/components/DialogWorkoutComplete'
 import { count, getImg, sound, speak, weightConverter } from '@/misc/helpers'
 import {
   mdiArrowLeft,
@@ -111,6 +122,9 @@ import {
 
 export default {
   name: 'CircleTimer',
+  components: {
+    DialogWorkoutComplete
+  },
   props: {
     startButton: Boolean,
     pauseButton: Boolean,
@@ -119,6 +133,9 @@ export default {
     currentWorkout: Object
   },
   data: () => ({
+    dialogs: {
+      complete: false
+    },
     currentStep: 0,
     progressText: 'Press Play',
     total: 0,
@@ -126,6 +143,8 @@ export default {
     ExerciseStep: 0,
     ExerciseRepeat: 0,
     totalTime: 0,
+    timeInWorkout: 0,
+    timeHoldingOn: 0,
     initialTime: 0,
     initialStart: true,
     progressCircular: 0,
@@ -204,6 +223,12 @@ export default {
       // set initial state before starting
       if (this.initialTime === 0) {
         this.exerciseSetup()
+      }
+
+      this.timeInWorkout += 1
+
+      if (this.ExerciseStep === 1 || this.ExerciseStep === 3) {
+        this.timeHoldingOn += 1
       }
       // eslint-disable-next-line default-case
       switch (this.ExerciseStep) {
@@ -301,7 +326,9 @@ export default {
     exerciseNext() {
       this.currentStep += 1
       this.$emit('current-step', this.currentStep)
-      this.totalTime = this.currentExercise.pause - 1
+      this.$nextTick(() => {
+        this.totalTime = this.currentExercise.pause
+      })
       // resets
       this.ExerciseRepeat = 0
       this.ExerciseStep = 0
@@ -309,7 +336,9 @@ export default {
     exercisePrevious() {
       this.currentStep -= 1
       this.$emit('current-step', this.currentStep)
-      this.totalTime = this.currentExercise.pause - 1
+      this.$nextTick(() => {
+        this.totalTime = this.currentExercise.pause
+      })
       // resets
       this.ExerciseRepeat = 0
       this.ExerciseStep = 0
@@ -468,6 +497,10 @@ export default {
     finishWorkout() {
       this.noSleep.disable()
       this.paused = true
+      if (this.timeInWorkout >= 2) {
+        this.timeInWorkout -= 2
+      }
+      this.dialogs.complete = true
       clearInterval(this.timer)
     },
     speakText(text) {

@@ -47,6 +47,7 @@ export default {
     ...mapActions('workouts', ['deleteUserWorkout']),
     deleteWorkout(id) {
       this.deleteUserWorkout(id)
+      this.$emit('input', false)
       this.$router.push({ name: 'workouts' })
     }
   }

@@ -186,5 +186,12 @@
   "Stars": "Stars",
   "Level": "Level",
   "No personal workouts found": "No personal workouts found",
-  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "You haven't added any {company} {hangboard} workouts. Use the below button to get started"
+  "You haven't added any {company} {hangboard} workouts. Use the below button to get started": "You haven't added any {company} {hangboard} workouts. Use the below button to get started",
+  "Well done": "Well done",
+  "You completed {name}": "You completed {name}",
+  "Time worked out": "Time worked out",
+  "Total time hangboarding": "Total time hangboarding",
+  "Total time worked out": "Total time worked out",
+  "Total workouts done": "Total workouts done",
+  "Started": "Started"
 }
