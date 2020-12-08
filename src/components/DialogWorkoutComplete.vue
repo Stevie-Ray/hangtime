@@ -12,35 +12,44 @@
           }}
         </p>
 
-        <div class="subtitle-1">{{ $t('Time worked out') }}</div>
-        <p class="text-h2 font-weight-bold">
+        <div class="subtitle-1">
+          {{ $t('Time worked out') }}
+        </div>
+        <div class="text-h2 font-weight-bold">
           {{ count(timeInWorkout) }}
-        </p>
+        </div>
+        <div>{{ $t('Hangboarding') }}: {{ count(timeHoldingOn) }}</div>
+
+        <v-divider class="my-4"></v-divider>
 
         <div
           v-if="user && user.completed && !isNaN(user.completed.time)"
           class="subtitle-2"
         >
           {{ $t('Total time worked out') }}:
-          {{ count(user.completed.time + timeInWorkout) }}
+          {{ count(user.completed.time) }}
         </div>
         <div
           v-if="user && user.completed && !isNaN(user.completed.hold)"
           class="subtitle-2"
         >
           {{ $t('Total time hangboarding') }}:
-          {{ count(user.completed.hold + timeHoldingOn) }}
+          {{ count(user.completed.hold) }}
         </div>
         <div
           v-if="user && user.completed && !isNaN(user.completed.amount)"
           class="subtitle-2"
         >
-          {{ $t('Total workouts done') }}: {{ user.completed.amount + 1 }}
+          {{ $t('Total workouts done') }}: {{ user.completed.amount }}
         </div>
+        <v-divider class="mt-4"></v-divider>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
+        <v-btn v-if="shareAPI" text primary @click="shareExternal"
+          >{{ $t('Share') }}
+        </v-btn>
         <v-btn text @click="completeAction()">
           {{ $t('Close') }}
         </v-btn>
@@ -50,7 +59,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import { count } from '@/misc/helpers'
 
 export default {
@@ -60,9 +69,12 @@ export default {
     timeHoldingOn: Number,
     timeInWorkout: Number
   },
-  data: () => ({}),
+  data: () => ({
+    shareAPI: navigator.share
+  }),
   computed: {
     ...mapState('authentication', ['user']),
+    ...mapState('app', ['networkOnLine', 'appTitle']),
     show: {
       get() {
         return this.value
@@ -74,14 +86,41 @@ export default {
   },
   methods: {
     count,
-    ...mapActions('authentication', ['triggerUpdateTimes']),
     completeAction() {
       this.$emit('input', false)
-      this.triggerUpdateTimes({
-        total: this.timeInWorkout,
-        hold: this.timeHoldingOn
-      })
       this.$router.push({ name: 'workouts' })
+    },
+    shareExternal() {
+      let title = this.$i18n.t('I just did a quick workout for {time}', {
+        time: count(this.timeInWorkout)
+      })
+      let text = `${title}. ${this.$i18n.t('Where I hung for {time}', {
+        time: count(this.timeHoldingOn)
+      })}. ${this.$i18n.t('Join {appTitle}', { appTitle: this.appTitle })}!`
+
+      if (this.currentWorkout) {
+        title = `${this.currentWorkout.name} | ${this.appTitle}`
+        text = `${this.$i18n.t('I just completed {name}', {
+          name: this.currentWorkout.name
+        })}. ${this.$i18n.t('Description')}: "${
+          this.currentWorkout.description
+        }". ${this.$i18n.t('Join {appTitle}', { appTitle: this.appTitle })}!`
+      }
+
+      navigator
+        .share({
+          title,
+          text,
+          url: document.location.href
+        })
+        .then(() => {
+          // eslint-disable-next-line no-console
+          console.log('Thanks for sharing!')
+        })
+        .catch(
+          // eslint-disable-next-line no-console
+          console.error
+        )
     }
   }
 }

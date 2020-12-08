@@ -190,8 +190,13 @@
   "Well done": "Gut gemacht",
   "You completed {name}": "Sie haben {name} abgeschlossen",
   "Time worked out": "Zeit trainiert",
+  "Hangboarding": "Hangboarding",
   "Total time hangboarding": "Gesamtzeit Hangboarding",
   "Total time worked out": "Gesamtzeit trainiert",
   "Total workouts done": "Gesamtzahl der durchgeführten Training",
-  "Started": "Gestartet"
+  "Started": "Gestartet",
+  "I just did a quick workout for {time}": "Ich habe gerade ein kurzes Training für {time} gemacht",
+  "Where I hung for {time}": "Wo ich für {time} hing",
+  "Join {appTitle}": "Treten Sie {appTitle} bei",
+  "I just completed {name}": "Ich habe gerade {name} abgeschlossen"
 }

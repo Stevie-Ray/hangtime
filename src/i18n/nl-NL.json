@@ -190,8 +190,13 @@
   "Well done": "Goed gedaan",
   "You completed {name}": "Je hebt {name} voltooid",
   "Time worked out": "Tijd getraind",
+  "Hangboarding": "Hangboarding",
   "Total time hangboarding": "Totale tijd hangboarding",
   "Total time worked out": "Totale tijd getraind",
   "Total workouts done": "Totaal aantal trainingen gedaan",
-  "Started": "Begonnen"
+  "Started": "Begonnen",
+  "I just did a quick workout for {time}": "Ik heb net een snelle training gedaan voor {time}",
+  "Where I hung for {time}": "Waarbij ik {time} heb gehangen",
+  "Join {appTitle}": "Doe mee met {appTitle}",
+  "I just completed {name}": "Ik heb zojuist {name} voltooid"
 }

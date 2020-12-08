@@ -190,8 +190,13 @@
   "Well done": "Well done",
   "You completed {name}": "You completed {name}",
   "Time worked out": "Time worked out",
+  "Hangboarding": "Hangboarding",
   "Total time hangboarding": "Total time hangboarding",
   "Total time worked out": "Total time worked out",
   "Total workouts done": "Total workouts done",
-  "Started": "Started"
+  "Started": "Started",
+  "I just did a quick workout for {time}": "I just did a quick workout for {time}",
+  "Where I hung for {time}": "Where I hung for {time}",
+  "Join {appTitle}": "Join {appTitle}",
+  "I just completed {name}": "I just completed {name}"
 }

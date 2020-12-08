@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 import NoSleep from 'nosleep.js'
 import DialogWorkoutComplete from '@/components/DialogWorkoutComplete'
 import { count, getImg, sound, speak, weightConverter } from '@/misc/helpers'
@@ -196,6 +196,7 @@ export default {
     speak,
     sound,
     weightConverter,
+    ...mapActions('authentication', ['triggerUpdateTimes']),
     async startWorkout() {
       await this.requestWakeLock()
       this.exerciseSetup()
@@ -500,6 +501,10 @@ export default {
       if (this.timeInWorkout >= 2) {
         this.timeInWorkout -= 2
       }
+      this.triggerUpdateTimes({
+        total: this.timeInWorkout,
+        hold: this.timeHoldingOn
+      })
       this.dialogs.complete = true
       clearInterval(this.timer)
     },

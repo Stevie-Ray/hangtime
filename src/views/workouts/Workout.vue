@@ -95,6 +95,7 @@
                 width="100%"
                 height="100%"
                 :src="parseVideo(currentWorkout.video)"
+                frameborder="0"
               ></iframe>
             </v-responsive>
 

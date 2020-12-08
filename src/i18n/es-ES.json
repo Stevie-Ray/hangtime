@@ -190,8 +190,13 @@
   "Well done": "Bien hecho",
   "You completed {name}": "Has completado {name}",
   "Time worked out": "Tiempo entrenado",
+  "Hangboarding": "Hangboarding",
   "Total time hangboarding": "Tempo totale di hangboard",
   "Total time worked out": "Tiempo total entrenado",
   "Total workouts done": "Número total de entrenamientos realizados",
-  "Started": "Empezado"
+  "Started": "Empezado",
+  "I just did a quick workout for {time}": "Acabo de hacer un entrenamiento rápido durante {time}",
+  "Where I hung for {time}": "Donde estuve colgado por {time}",
+  "Join {appTitle}": "Únete a {appTitle}",
+  "I just completed {name}": "Acabo de completar {nome}"
 }
