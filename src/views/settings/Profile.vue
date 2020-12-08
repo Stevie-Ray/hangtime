@@ -10,10 +10,6 @@
 
       <v-spacer></v-spacer>
 
-      <!--      <v-btn v-if="!isUserLoggedIn && networkOnLine" to="/login">-->
-      <!--        <v-icon>{{ mdi.account }}</v-icon>-->
-      <!--      </v-btn>-->
-
       <v-btn v-if="networkOnLine" icon @click="logout">
         <v-icon>{{ mdi.accountOff }}</v-icon>
       </v-btn>
@@ -86,7 +82,7 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item>
+              <v-list-item v-if="user && user.completed">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">
                     {{ mdi.timer }}
