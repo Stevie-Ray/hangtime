@@ -2,6 +2,7 @@ import { isNil } from 'lodash'
 import router from '@/router'
 import { createNewUserFromFirebaseAuthUser } from '@/misc/helpers'
 import UsersDB from '@/firebase/users-db'
+import i18n from '@/misc/i18n.js'
 
 export default {
   /**
@@ -15,6 +16,11 @@ export default {
       : userFromFirebase
 
     commit('setUser', user)
+
+    if (!isNil(user) && user.settings && user.settings.locale) {
+      i18n.locale = user.settings.locale
+    }
+
     dispatch('workouts/getUserWorkouts', null, { root: true })
     dispatch('workouts/getCommunityWorkouts', null, { root: true })
     dispatch('progress/getUserProgress', null, { root: true })

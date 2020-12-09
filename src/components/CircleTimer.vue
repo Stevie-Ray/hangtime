@@ -517,6 +517,10 @@ export default {
               this.user.settings.locale.substring(0, 2)
             )
           })
+        } else {
+          this.voiceList = this.voiceList.filter(voice =>
+            /^(en|EN|US)/.test(voice.lang)
+          )
         }
         const utterance = new window.SpeechSynthesisUtterance()
         utterance.text = text

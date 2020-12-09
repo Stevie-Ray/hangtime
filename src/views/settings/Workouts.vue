@@ -192,6 +192,10 @@ export default {
       this.voiceList = this.voiceList.filter(voice => {
         return voice.lang.includes(this.user.settings.locale.substring(0, 2))
       })
+    } else {
+      this.voiceList = this.voiceList.filter(voice =>
+        /^(en|EN|US)/.test(voice.lang)
+      )
     }
 
     this.synth.onvoiceschanged = () => {
@@ -200,6 +204,10 @@ export default {
         this.voiceList = this.voiceList.filter(voice => {
           return voice.lang.includes(this.user.settings.locale.substring(0, 2))
         })
+      } else {
+        this.voiceList = this.voiceList.filter(voice =>
+          /^(en|EN|US)/.test(voice.lang)
+        )
       }
     }
   },

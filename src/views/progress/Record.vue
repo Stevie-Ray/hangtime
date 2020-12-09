@@ -414,9 +414,18 @@ export default {
     },
     speakText(text) {
       if (this.user.settings.speak && 'speechSynthesis' in window) {
-        this.voiceList = window.speechSynthesis
-          .getVoices()
-          .filter(voice => /^(en|EN|US)/.test(voice.lang))
+        this.voiceList = window.speechSynthesis.getVoices()
+        if (this.user.settings.locale) {
+          this.voiceList = this.voiceList.filter(voice => {
+            return voice.lang.includes(
+              this.user.settings.locale.substring(0, 2)
+            )
+          })
+        } else {
+          this.voiceList = this.voiceList.filter(voice =>
+            /^(en|EN|US)/.test(voice.lang)
+          )
+        }
         const utterance = new window.SpeechSynthesisUtterance()
         utterance.text = text
         utterance.voice = this.voiceList[this.user.settings.voice]
