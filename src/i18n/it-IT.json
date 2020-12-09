@@ -150,7 +150,7 @@
   "Unsubscribe": "Annulla l'iscrizione",
   "Loading exercises...": "Caricamento esercizi...",
   "Loading workouts...": "Caricamento allenamenti ...",
-  "Version {AppVersion}": "Versione {AppVersion}",
+  "Version {appVersion}": "Versione {appVersion}",
   "Authenticating...": "Autenticazione...",
   "Login with {medium}": "Accedi con {medium}",
   "Select grade": "Seleziona grado",

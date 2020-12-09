@@ -6,7 +6,7 @@
           <div class="text-center pa-4">
             <div class="text-h4">{{ appTitle }}</div>
             <div class="subheading font-weight-light grey--text text--darken-2">
-              {{ $t('Version {AppVersion}', { appVersion: appVersion }) }}
+              {{ $t('Version {appVersion}', { appVersion: appVersion }) }}
             </div>
 
             <img

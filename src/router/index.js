@@ -69,6 +69,14 @@ const router = new Router({
         )
     },
     {
+      path: '/leaderboard',
+      name: 'leaderboard',
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-quick" */ '@/views/leaderboard/Index.vue'
+        )
+    },
+    {
       path: '/:userId/workout/new',
       name: 'new-workout',
       component: () =>

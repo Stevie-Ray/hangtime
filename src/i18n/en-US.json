@@ -150,7 +150,7 @@
   "Unsubscribe": "Unsubscribe",
   "Loading exercises...": "Loading exercises...",
   "Loading workouts...": "Loading workouts...",
-  "Version {AppVersion}": "Version {AppVersion}",
+  "Version {appVersion}": "Version {appVersion}",
   "Authenticating...": "Authenticating...",
   "Login with {medium}": "Login with {medium}",
   "Select grade": "Select grade",
