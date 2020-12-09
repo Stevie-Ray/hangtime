@@ -29,10 +29,6 @@ export default {
       value: 'es-ES'
     },
     {
-      name: 'Español',
-      value: 'es-ES'
-    },
-    {
       name: 'Italiano',
       value: 'it-IT'
     },
