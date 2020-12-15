@@ -104,13 +104,13 @@ export default {
           name: 'Crusher 3',
           id: 2,
           image: 'hangboards/CRUSHER3.svg',
-          holds: 12
+          holds: 13
         },
         {
           name: 'Crusher 4',
           id: 3,
           image: 'hangboards/CRUSHER4.svg',
-          holds: 13
+          holds: 14
         }
       ]
     },

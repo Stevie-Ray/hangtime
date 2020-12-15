@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="618px" height="312px" viewBox="0 0 618 312" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+<svg width="620px" height="314px" viewBox="0 0 620 314" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>CRUSHER3</title>
-    <desc>Created with Sketch.</desc>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="CRUSHER3" transform="translate(309.000000, 156.000000) scale(-1, 1) translate(-309.000000, -156.000000) " stroke="#292929">
-            <path d="M0,311.38 L612.19,311.38 C614.951424,311.38 617.19,309.141424 617.19,306.38 L617.19,5.74 C617.19,2.97857625 614.951424,0.74 612.19,0.74 L238.64,0.74 L231.21,7.74 L0,7.86" id="Path" fill="#FFFFFF"></path>
-            <polyline id="Path" points="0 40.43 238.64 40.43 238.64 0.74"></polyline>
-            <rect id="h3" stroke-width="0.999849989" transform="translate(352.087400, 112.335350) rotate(-30.668927) translate(-352.087400, -112.335350) " x="267.635071" y="91.8684207" width="168.904659" height="40.9338585" rx="20.4669293"></rect>
-            <rect id="h2" transform="translate(528.795743, 133.432986) rotate(51.300000) translate(-528.795743, -133.432986) " x="443.515743" y="111.367986" width="170.56" height="44.13" rx="22.065"></rect>
-            <rect id="h4" x="68.92" y="93.61" width="179.84" height="43.13" rx="21.565"></rect>
-            <path d="M0,93.61 L20,93.61 C31.9072592,93.61 41.56,103.262741 41.56,115.17 L41.56,115.17 C41.5600013,127.078878 31.9088766,136.734479 20,136.74 L0,136.74" id="h5"></path>
-            <rect id="h7" x="68.92" y="164.88" width="179.84" height="43.13" rx="21.565"></rect>
-            <path d="M0,164.88 L20,164.88 C31.9088766,164.885521 41.5600013,174.541122 41.56,186.45 L41.56,186.45 C41.554479,198.353354 31.9033551,208.000001 20,208 L0,208" id="h8"></path>
-            <rect id="h6" x="370.75" y="164.88" width="118.87" height="43.13" rx="21.565"></rect>
-            <rect id="h9" x="400.44" y="236.9" width="181.56" height="43.13" rx="21.565"></rect>
-            <rect id="h10" x="283.82" y="236.9" width="88.9" height="43.13" rx="21.565"></rect>
-            <rect id="h12" x="95.56" y="236.9" width="88.9" height="43.13" rx="21.565"></rect>
-            <circle id="h11" cx="233.6" cy="258.47" r="21.57"></circle>
-            <circle id="h13" cx="47.36" cy="258.47" r="21.57"></circle>
-            <polyline id="Path" points="2.84217094e-14 7.77 231.21 7.77 231.21 7.77 238.64 40.43 2.84217094e-14 40.43"></polyline>
+        <g id="CRUSHER3" transform="translate(1.000000, 1.000000)">
+            <g transform="translate(309.000000, 156.000000) scale(-1, 1) translate(-309.000000, -156.000000) ">
+                <path d="M0,311.38 L612.19,311.38 C614.951424,311.38 617.19,309.141424 617.19,306.38 L617.19,5.74 C617.19,2.97857625 614.951424,0.74 612.19,0.74 L238.64,0.74 L231.21,7.74 L0,7.86" id="Path" stroke="#292929" fill="#FFFFFF" fill-rule="nonzero"></path>
+                <polyline id="Path" stroke="#292929" points="0 40.43 238.64 40.43 238.64 0.74"></polyline>
+                <rect id="h3" stroke="#292929" stroke-width="0.999849989" fill="#FFFFFF" transform="translate(352.087400, 112.335350) rotate(-30.668927) translate(-352.087400, -112.335350) " x="267.635071" y="91.8684205" width="168.904659" height="40.9338585" rx="20.4669292"></rect>
+                <rect id="h2" stroke="#292929" fill="#FFFFFF" transform="translate(528.795743, 133.432986) rotate(51.300000) translate(-528.795743, -133.432986) " x="443.515743" y="111.367986" width="170.56" height="44.13" rx="22.065"></rect>
+                <rect id="h4" stroke="#292929" fill="#FFFFFF" x="68.92" y="93.61" width="179.84" height="43.13" rx="21.565"></rect>
+                <path d="M0,93.61 L20,93.61 C31.9072592,93.61 41.56,103.262741 41.56,115.17 L41.56,115.17 C41.56,127.078878 31.9088766,136.734479 20,136.74 L0,136.74" id="h5" stroke="#292929" fill="#FFFFFF"></path>
+                <rect id="h7" stroke="#292929" fill="#FFFFFF" x="68.92" y="164.88" width="179.84" height="43.13" rx="21.565"></rect>
+                <path d="M0,164.88 L20,164.88 C31.9088766,164.885521 41.56,174.541122 41.56,186.45 L41.56,186.45 C41.554479,198.353354 31.9033551,208 20,208 L0,208" id="h8" stroke="#292929" fill="#FFFFFF"></path>
+                <rect id="h6" stroke="#292929" fill="#FFFFFF" x="370.75" y="164.88" width="118.87" height="43.13" rx="21.565"></rect>
+                <rect id="h9" stroke="#292929" fill="#FFFFFF" x="400.44" y="236.9" width="181.56" height="43.13" rx="21.565"></rect>
+                <rect id="h10" stroke="#292929" fill="#FFFFFF" x="283.82" y="236.9" width="88.9" height="43.13" rx="21.565"></rect>
+                <rect id="h12" stroke="#292929" fill="#FFFFFF" x="95.56" y="236.9" width="88.9" height="43.13" rx="21.565"></rect>
+                <circle id="h11" stroke="#292929" fill="#FFFFFF" cx="233.6" cy="258.47" r="21.57"></circle>
+                <circle id="h13" stroke="#292929" fill="#FFFFFF" cx="47.36" cy="258.47" r="21.57"></circle>
+                <polyline id="h14" stroke="#292929" fill="#FFFFFF" points="2.84217094e-14 7.77 231.21 7.77 231.21 7.77 238.64 40.43 2.84217094e-14 40.43"></polyline>
+                <rect id="h1" fill="#FFFFFF" x="241" y="3" width="374" height="37"></rect>
+            </g>
         </g>
     </g>
 </svg>
