@@ -97,6 +97,7 @@ export default {
   triggerChangeHangboardAction: ({ commit, dispatch, state }, index) => {
     commit('setSelected', index)
     dispatch('updateUser', state.user)
+    dispatch('triggerSwitchHangboard')
   },
 
   triggerRemoveHangboardAction: ({ commit, dispatch, state }, index) => {
