@@ -275,8 +275,26 @@ export default {
         el => el.company === this.company && el.hangboard === this.hangboard
       )
       if (!exists) {
+        // show dialog to add new hangboard
         return true
       }
+      // if hangboard exists but is not selected, switch hangboard
+      if (
+        this.company !==
+          this.user.settings.hangboards[this.user.settings.selected].company ||
+        this.hangboard !==
+          this.user.settings.hangboards[this.user.settings.selected].hangboard
+      ) {
+        const index = this.user.settings.hangboards.findIndex(
+          list =>
+            list.company === this.company && list.hangboard === this.hangboard
+        )
+        this.setSelected(index)
+        this.triggerUpdateUser()
+        // get community workouts
+        this.triggerSwitchHangboard()
+      }
+      // do nothing
       return false
     }
   },
