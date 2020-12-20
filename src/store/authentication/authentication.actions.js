@@ -1,7 +1,7 @@
 import { isNil } from 'lodash'
 import router from '@/router'
 import { createNewUserFromFirebaseAuthUser } from '@/misc/helpers'
-import UsersDB from '@/firebase/users-db'
+import UsersWorkoutsDB from '@/firebase/users-workouts-db'
 import i18n from '@/misc/i18n.js'
 
 export default {
@@ -9,7 +9,9 @@ export default {
    * Callback fired when user login
    */
   login: async ({ commit, dispatch }, firebaseAuthUser) => {
-    const userFromFirebase = await new UsersDB().read(firebaseAuthUser.uid)
+    const userFromFirebase = await new UsersWorkoutsDB().read(
+      firebaseAuthUser.uid
+    )
 
     const user = isNil(userFromFirebase)
       ? await createNewUserFromFirebaseAuthUser(firebaseAuthUser)
@@ -43,7 +45,7 @@ export default {
    * Update user
    */
   updateUser: async ({ commit }, user) => {
-    const usersDb = new UsersDB()
+    const usersDb = new UsersWorkoutsDB()
     await usersDb.update(user)
     commit('setUser', user)
   },

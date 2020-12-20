@@ -193,10 +193,11 @@
   "Hangboarding": "Hangboarding",
   "Total time hangboarding": "Tempo totale di hangboard",
   "Total time worked out": "Tiempo total entrenado",
-  "Total workouts done": "Número total de entrenamientos realizados",
+  "Workouts done": "Entrenamientos realizados",
   "Started": "Empezado",
   "I just did a quick workout for {time}": "Acabo de hacer un entrenamiento rápido durante {time}",
   "Where I hung for {time}": "Donde estuve colgado por {time}",
   "Join {appTitle}": "Únete a {appTitle}",
-  "I just completed {name}": "Acabo de completar {nome}"
+  "I just completed {name}": "Acabo de completar {nome}",
+  "Leaderboard": "Tabla de clasificación"
 }

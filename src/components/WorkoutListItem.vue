@@ -46,7 +46,7 @@
       </v-list-item-action>
     </v-list-item>
 
-    <dialog-user-image v-model="overlay" :data="data"></dialog-user-image>
+    <dialog-user-image v-model="overlay" :data="data.user"></dialog-user-image>
 
     <v-divider inset></v-divider>
   </div>

@@ -215,5 +215,9 @@ export default {
     const { subscribers } = state.communityWorkouts[index]
     const userIndex = subscribers.indexOf(payload.user)
     subscribers.splice(userIndex, 1)
-  }
+  },
+
+  /* Leaderboard */
+  setLeaderboard: (state, leaderboard) =>
+    (state.leaderboard = leaderboard.reverse())
 }

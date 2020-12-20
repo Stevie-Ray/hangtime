@@ -57,6 +57,9 @@
           <v-list-item to="/quick-workout">
             <v-list-item-title>{{ $t('Quick workout') }}</v-list-item-title>
           </v-list-item>
+          <v-list-item to="/leaderboard">
+            <v-list-item-title>{{ $t('Leaderboard') }}</v-list-item-title>
+          </v-list-item>
           <v-list-item to="/grades">
             <v-list-item-title>{{ $t('Grade conversion') }}</v-list-item-title>
           </v-list-item>

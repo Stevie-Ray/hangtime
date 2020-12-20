@@ -1,4 +1,4 @@
-import UsersDB from '@/firebase/users-db'
+import UsersWorkoutsDB from '@/firebase/users-workouts-db'
 
 /**
  * Create new user from firebase auth user infos
@@ -7,7 +7,7 @@ import UsersDB from '@/firebase/users-db'
 export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
   const providerData = firebaseAuthUser.providerData[0]
   const { displayName, photoURL, email } = providerData
-  const userDb = new UsersDB()
+  const userDb = new UsersWorkoutsDB()
   const settings = {
     selected: 0,
     hangboards: [
@@ -44,12 +44,18 @@ function padTime(time) {
   return (time < 10 ? '0' : '') + time
 }
 export function count(item) {
+  let hours
   let minutes = '00'
   let seconds = '00'
 
   if (item) {
-    minutes = padTime(Math.floor(item / 60))
-    seconds = padTime(item - minutes * 60)
+    hours = padTime(Math.floor(item / 3600))
+    minutes = padTime(Math.floor((item % 3600) / 60))
+    seconds = padTime(item % 60)
+  }
+
+  if (hours > 0) {
+    return `${hours}:${minutes}:${seconds}`
   }
 
   return `${minutes}:${seconds}`

@@ -1,6 +1,7 @@
 export default {
   communityWorkouts: null,
   workouts: null,
+  leaderboard: null,
   subscribers: [],
   workoutToCreate: {
     exercises: [],

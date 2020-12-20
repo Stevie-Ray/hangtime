@@ -4,8 +4,8 @@
       <v-img
         height="250"
         width="250"
-        :src="data.user.photoURL"
-        :alt="data.user.displayName"
+        :src="data.photoURL"
+        :alt="data.displayName"
       >
         <v-row
           justify="space-between"
@@ -20,7 +20,7 @@
             >
               <v-list-item-content class="py-0">
                 <v-list-item-title class="text-subtitle-1">{{
-                  data.user.displayName
+                  data.displayName
                 }}</v-list-item-title>
               </v-list-item-content>
 

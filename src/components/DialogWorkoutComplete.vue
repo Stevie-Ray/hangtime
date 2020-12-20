@@ -40,7 +40,7 @@
           v-if="user && user.completed && !isNaN(user.completed.amount)"
           class="subtitle-2"
         >
-          {{ $t('Total workouts done') }}: {{ user.completed.amount }}
+          {{ $t('Workouts done') }}: {{ user.completed.amount }}
         </div>
         <v-divider class="mt-4"></v-divider>
       </v-card-text>

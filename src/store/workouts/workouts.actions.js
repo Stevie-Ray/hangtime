@@ -1,27 +1,33 @@
 import UserWorkoutsDB from '@/firebase/user-workouts-db'
 import UsersDB from '@/firebase/users-db'
+import UsersWorkoutsDB from '@/firebase/users-workouts-db'
 
 export default {
   /**
    * Fetch workouts of current logged in user
    */
   getUserWorkouts: async ({ rootState, commit }) => {
-    const usersDb = new UsersDB(rootState.authentication.user.id)
+    const usersDb = new UsersWorkoutsDB(rootState.authentication.user.id)
     const workouts = await usersDb.readAll([
       ['subscribers', 'array-contains', rootState.authentication.user.id]
     ])
     commit('setWorkouts', workouts)
   },
   getCommunityWorkouts: async ({ rootState, commit }) => {
-    const usersDb = new UsersDB(rootState.authentication.user.id)
+    const usersWorkoutDb = new UsersWorkoutsDB(rootState.authentication.user.id)
     const { selected } = rootState.authentication.user.settings
     const { hangboards } = rootState.authentication.user.settings
-    const communityWorkouts = await usersDb.readAll([
+    const communityWorkouts = await usersWorkoutDb.readAll([
       ['share', '==', true],
       ['company', '==', hangboards[selected].company],
       ['hangboard', '==', hangboards[selected].hangboard]
     ])
     commit('setCommunityWorkouts', communityWorkouts)
+  },
+  getLeaderboard: async ({ commit }) => {
+    const usersDb = new UsersDB()
+    const leaderboard = await usersDb.readAll()
+    commit('setLeaderboard', leaderboard)
   },
   /**
    * Create a workout for current logged in user

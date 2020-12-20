@@ -152,7 +152,7 @@
             <dialog-user-image
               v-if="currentWorkout"
               v-model="dialogs.user"
-              :data="currentWorkout"
+              :data="currentWorkout.user"
             ></dialog-user-image>
 
             <v-speed-dial bottom right fixed>

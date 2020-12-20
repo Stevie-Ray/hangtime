@@ -34,7 +34,6 @@ export default {
     data = orderBy(data, payload.filter, payload.order)
     return data
   },
-
   /**
    * Get a workout by id
    */
