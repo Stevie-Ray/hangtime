@@ -15,7 +15,7 @@
       <v-container>
         <v-row v-if="leaderboard" justify="center" align="start">
           <div class="text-center pa-4">
-            <v-btn-toggle v-model="sort">
+            <v-btn-toggle v-model="sort" mandatory>
               <v-btn value="completed.amount">
                 {{ $t('Amount') }}
               </v-btn>
@@ -33,7 +33,7 @@
           <v-col cols="12">
             <!-- data table -->
             <v-data-table
-              :headers="tableHeaders"
+              :headers="computedHeaders"
               :sort-by.sync="sort"
               sort-desc
               :items="leaderboard"
@@ -41,6 +41,7 @@
               :total-visible="5"
               class="elevation-1"
               :page.sync="page"
+              :options.sync="options"
               hide-default-header
               hide-default-footer
               mobile-breakpoint="0"
@@ -70,7 +71,10 @@
               <!-- eslint-disable-next-line vue/valid-v-slot -->
               <template #item.displayName="{ item }">
                 <v-row align="center" justify="center">
-                  <v-col cols="4">
+                  <v-col cols="2" style="display: none">
+                    {{ (options.page - 1) * options.itemsPerPage }}
+                  </v-col>
+                  <v-col cols="2">
                     <v-avatar
                       aspect-ratio="1"
                       class="grey lighten-2"
@@ -81,7 +85,7 @@
                       <img :src="item.photoURL" :alt="item.displayName" />
                     </v-avatar>
                   </v-col>
-                  <v-col cols="8">
+                  <v-col cols="10">
                     {{ item.displayName }}
                   </v-col>
                 </v-row>
@@ -133,8 +137,10 @@ export default {
   },
   data: () => ({
     page: 1,
+    index: 1,
     pageCount: 0,
     selectedItem: null,
+    options: {},
     sort: 'completed.amount',
     dialogs: {
       user: false
@@ -171,8 +177,13 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('workouts', ['leaderboard']),
     ...mapState('authentication', ['user']),
-    getData() {
-      return this.leaderboard
+    computedHeaders() {
+      if (this.$vuetify.breakpoint.name === 'xs') {
+        return this.tableHeaders.filter(
+          item => item.value === this.sort || item.value === 'displayName'
+        )
+      }
+      return this.tableHeaders
     }
   },
   mounted() {
@@ -191,14 +202,21 @@ export default {
 @import '~vuetify/src/styles/settings/_variables';
 
 @media #{map-get($display-breakpoints, 'xs-only')} {
-  .v-data-table-header {
-    th strong,
-    th span {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 50px;
-      display: block;
+  .v-data-table__wrapper {
+    .v-data-table-header {
+      th {
+        position: relative;
+        strong {
+          position: absolute;
+          white-space: nowrap;
+          right: 15px;
+          top: 5px;
+        }
+      }
+    }
+    tbody > tr > td:last-child {
+      text-align: right !important;
+      width: 100px;
     }
   }
 }
