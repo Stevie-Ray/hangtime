@@ -1,6 +1,6 @@
 {
   "name": "hangtime",
-  "version": "0.9.13",
+  "version": "0.9.15",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -35,7 +35,7 @@
     "vue-router": "^3.4.9",
     "vue-simple-svg": "^2.0.2",
     "vuedraggable": "^2.24.3",
-    "vuetify": "^2.3.21",
+    "vuetify": "^2.3.22",
     "vuex": "^3.6.0",
     "vuex-persistedstate": "^3.1.0"
   },
@@ -61,7 +61,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-vue": "^7.3.0",
-    "firebase-tools": "^9.0.1",
+    "firebase-tools": "^9.1.0",
     "prerender-spa-plugin": "^3.4.0",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
@@ -70,7 +70,7 @@
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.6.0",
     "webpack-bundle-analyzer": "^4.3.0",
-    "webpack-merge": "^5.7.2"
+    "webpack-merge": "^5.7.3"
   },
   "eslintConfig": {
     "root": true,

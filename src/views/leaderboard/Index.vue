@@ -15,7 +15,7 @@
       <v-container>
         <v-row v-if="leaderboard" justify="center" align="start">
           <div class="text-center pa-4">
-            <v-btn-toggle v-model="sort" mandatory>
+            <v-btn-toggle v-model="sort" mandatory @change="jumpToSelection">
               <v-btn value="completed.amount">
                 {{ $t('Amount') }}
               </v-btn>
@@ -33,11 +33,12 @@
           <v-col cols="12">
             <!-- data table -->
             <v-data-table
+              ref="Leaderboard"
               :headers="computedHeaders"
               :sort-by.sync="sort"
               sort-desc
               :items="leaderboard"
-              :items-per-page="10"
+              :items-per-page="itemsPerPage"
               :total-visible="5"
               class="elevation-1"
               :page.sync="page"
@@ -68,35 +69,41 @@
                   </tr>
                 </thead>
               </template>
-              <!-- eslint-disable-next-line vue/valid-v-slot -->
-              <template #item.displayName="{ item }">
-                <v-row align="center" justify="center">
-                  <v-col cols="2" style="display: none">
-                    {{ (options.page - 1) * options.itemsPerPage }}
-                  </v-col>
-                  <v-col cols="2">
-                    <v-avatar
-                      aspect-ratio="1"
-                      class="grey lighten-2"
-                      size="32"
-                      @click.stop="dialogs.user = true"
-                      @click="selectedItem = item"
-                    >
-                      <img :src="item.photoURL" :alt="item.displayName" />
-                    </v-avatar>
-                  </v-col>
-                  <v-col cols="10">
-                    {{ item.displayName }}
-                  </v-col>
-                </v-row>
-              </template>
-              <!-- eslint-disable-next-line vue/valid-v-slot -->
-              <template #item.completed.hold="{ item }">
-                {{ count(item.completed.hold) }}
-              </template>
-              <!-- eslint-disable-next-line vue/valid-v-slot -->
-              <template #item.completed.time="{ item }">
-                {{ count(item.completed.time) }}
+              <template #item="{ item, index }">
+                <tr>
+                  <td>
+                    <v-row align="center" justify="center">
+                      <v-col cols="2" class="text-right">
+                        {{
+                          (options.page - 1) * options.itemsPerPage + index + 1
+                        }}
+                      </v-col>
+                      <v-col cols="2">
+                        <v-avatar
+                          aspect-ratio="1"
+                          class="grey lighten-2"
+                          size="32"
+                          @click.stop="dialogs.user = true"
+                          @click="selectedItem = item"
+                        >
+                          <img :src="item.photoURL" :alt="item.displayName" />
+                        </v-avatar>
+                      </v-col>
+                      <v-col cols="8">
+                        {{ item.displayName }}
+                      </v-col>
+                    </v-row>
+                  </td>
+                  <td v-if="showData('completed.amount')">
+                    {{ item.completed.amount }}
+                  </td>
+                  <td v-if="showData('completed.hold')">
+                    {{ count(item.completed.hold) }}
+                  </td>
+                  <td v-if="showData('completed.time')">
+                    {{ count(item.completed.time) }}
+                  </td>
+                </tr>
               </template>
             </v-data-table>
 
@@ -137,8 +144,8 @@ export default {
   },
   data: () => ({
     page: 1,
-    index: 1,
     pageCount: 0,
+    itemsPerPage: 10,
     selectedItem: null,
     options: {},
     sort: 'completed.amount',
@@ -191,9 +198,19 @@ export default {
       // eslint-disable-next-line no-unused-expressions
       this.getLeaderboard
     }
+    this.jumpToSelection()
   },
   methods: {
-    count
+    count,
+    jumpToSelection() {
+      // const selected = this.leaderboard.find(user => user.id === this.user.id)
+      // this.page = Math.ceil(
+      //   (this.leaderboard.indexOf(selected) + 1) / this.itemsPerPage
+      // )
+    },
+    showData(element) {
+      return this.computedHeaders.some(e => e.value === element)
+    }
   }
 }
 </script>
