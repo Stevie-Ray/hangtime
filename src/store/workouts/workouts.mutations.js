@@ -219,5 +219,10 @@ export default {
 
   /* Leaderboard */
   setLeaderboard: (state, leaderboard) =>
-    (state.leaderboard = leaderboard.reverse())
+    (state.leaderboard = leaderboard.reverse()),
+  customSort: (state, index) => {
+    state.leaderboard.sort((a, b) => {
+      return b.completed[index] < a.completed[index] ? -1 : 1
+    })
+  }
 }

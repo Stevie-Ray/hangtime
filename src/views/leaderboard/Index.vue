@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="grades">
+  <v-layout v-resize="onResize" class="leaderboard">
     <v-app-bar color="primary" app fixed dark>
       <v-icon @click="$router.push({ name: 'workouts' })">{{
         mdi.arrowLeft
@@ -16,15 +16,15 @@
         <v-row v-if="leaderboard" justify="center" align="start">
           <div class="text-center pa-4">
             <v-btn-toggle v-model="sort" mandatory @change="jumpToSelection">
-              <v-btn value="completed.amount">
+              <v-btn value="amount">
                 {{ $t('Amount') }}
               </v-btn>
 
-              <v-btn value="completed.hold">
+              <v-btn value="hold">
                 {{ $t('Hangboarding') }}
               </v-btn>
 
-              <v-btn value="completed.time">
+              <v-btn value="time">
                 {{ $t('Time') }}
               </v-btn>
             </v-btn-toggle>
@@ -33,7 +33,7 @@
           <v-col cols="12">
             <!-- data table -->
             <v-data-table
-              ref="Leaderboard"
+              :height="windowSize.y - 220"
               :headers="computedHeaders"
               :sort-by.sync="sort"
               sort-desc
@@ -45,9 +45,6 @@
               :options.sync="options"
               hide-default-header
               hide-default-footer
-              mobile-breakpoint="0"
-              calculate-widths
-              dense
               @page-count="pageCount = $event"
             >
               <!-- eslint-disable-next-line vue/valid-v-slot -->
@@ -70,7 +67,12 @@
                 </thead>
               </template>
               <template #item="{ item, index }">
-                <tr>
+                <tr
+                  class="table-row"
+                  :class="{
+                    'grey lighten-3': selected && selected.id === item.id
+                  }"
+                >
                   <td>
                     <v-row align="center" justify="center">
                       <v-col cols="2" class="text-right">
@@ -94,13 +96,13 @@
                       </v-col>
                     </v-row>
                   </td>
-                  <td v-if="showData('completed.amount')">
+                  <td v-if="showData('amount')">
                     {{ item.completed.amount }}
                   </td>
-                  <td v-if="showData('completed.hold')">
+                  <td v-if="showData('hold')">
                     {{ count(item.completed.hold) }}
                   </td>
-                  <td v-if="showData('completed.time')">
+                  <td v-if="showData('time')">
                     {{ count(item.completed.time) }}
                   </td>
                 </tr>
@@ -133,7 +135,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 import { mdiArrowLeft } from '@mdi/js'
 import { count } from '@/misc/helpers'
 import DialogUserImage from '@/components/DialogUserImage'
@@ -148,9 +150,13 @@ export default {
     itemsPerPage: 10,
     selectedItem: null,
     options: {},
-    sort: 'completed.amount',
+    sort: 'amount',
     dialogs: {
       user: false
+    },
+    windowSize: {
+      x: 0,
+      y: 0
     },
     tableHeaders: [
       {
@@ -159,9 +165,9 @@ export default {
         sortable: false,
         value: 'displayName'
       },
-      { text: 'Workouts done', value: 'completed.amount' },
-      { text: 'Total time hangboarding', value: 'completed.hold' },
-      { text: 'Total time worked out', value: 'completed.time' }
+      { text: 'Workouts done', value: 'amount' },
+      { text: 'Total time hangboarding', value: 'hold' },
+      { text: 'Total time worked out', value: 'time' }
     ],
     mdi: {
       arrowLeft: mdiArrowLeft
@@ -191,6 +197,11 @@ export default {
         )
       }
       return this.tableHeaders
+    },
+    selected() {
+      if (!this.leaderboard) return
+      // eslint-disable-next-line consistent-return
+      return this.leaderboard.find(user => user.id === this.user.id)
     }
   },
   mounted() {
@@ -201,12 +212,18 @@ export default {
     this.jumpToSelection()
   },
   methods: {
+    ...mapMutations('workouts', ['customSort']),
     count,
+    onResize() {
+      this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+    },
     jumpToSelection() {
-      // const selected = this.leaderboard.find(user => user.id === this.user.id)
-      // this.page = Math.ceil(
-      //   (this.leaderboard.indexOf(selected) + 1) / this.itemsPerPage
-      // )
+      if (this.leaderboard) {
+        this.customSort(this.sort)
+        this.page = Math.ceil(
+          (this.leaderboard.indexOf(this.selected) + 1) / this.itemsPerPage
+        )
+      }
     },
     showData(element) {
       return this.computedHeaders.some(e => e.value === element)
@@ -218,6 +235,9 @@ export default {
 <style lang="scss">
 @import '~vuetify/src/styles/settings/_variables';
 
+.table-row:hover {
+  background: inherit !important;
+}
 @media #{map-get($display-breakpoints, 'xs-only')} {
   .v-data-table__wrapper {
     .v-data-table-header {

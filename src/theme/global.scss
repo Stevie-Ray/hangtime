@@ -34,14 +34,25 @@
     margin-left: 0;
   }
 
-  .layout:not(.run) .v-main__wrap > .container {
-    padding: 0 0 5rem;
-    & > .row {
-      margin-right: 0;
-      margin-left: 0;
-      max-width: 100%;
+  .layout {
+    &:not(.run) {
+      .v-main__wrap > .container {
+        padding: 0 0 5rem;
 
-      & > .col-12 {
+        & > .row {
+          margin-right: 0;
+          margin-left: 0;
+          max-width: 100%;
+
+          & > .col-12 {
+            padding: 0;
+          }
+        }
+      }
+    }
+    &.leaderboard,
+    &.grades {
+      .v-main__wrap > .container {
         padding: 0;
       }
     }
@@ -246,5 +257,5 @@
 
 div.required.v-input .v-label::after {
   content: ' *';
-  color: $code-color;
+  color: darkred;
 }
