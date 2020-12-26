@@ -241,7 +241,7 @@
               Are you sure you want to delete this
               <strong>
                 {{ $t('Max.') }}
-                {{ grio[returnType(deleteDialogItem.type)].name }}</strong
+                {{ grip[returnType(deleteDialogItem.type)].name }}</strong
               >
               recording of
               <strong>{{ count(deleteDialogItem.value) }}</strong
