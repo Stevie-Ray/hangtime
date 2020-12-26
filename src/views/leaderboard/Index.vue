@@ -204,6 +204,13 @@ export default {
       return this.leaderboard.find(user => user.id === this.user.id)
     }
   },
+  watch: {
+    selected(newObj, oldObj) {
+      if (newObj !== oldObj) {
+        this.jumpToSelection()
+      }
+    }
+  },
   mounted() {
     if (!this.leaderboard) {
       // eslint-disable-next-line no-unused-expressions

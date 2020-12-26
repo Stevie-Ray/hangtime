@@ -58,6 +58,7 @@ export default {
     commit('setCompletedTime', time.total)
     commit('setCompletedHold', time.hold)
     commit('setCompletedAmount')
+    commit('workouts/setUserLeaderboardScore', null, { root: true })
     dispatch('updateUser', state.user)
   },
   /**

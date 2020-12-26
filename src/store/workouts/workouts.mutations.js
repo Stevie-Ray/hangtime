@@ -224,5 +224,15 @@ export default {
     state.leaderboard.sort((a, b) => {
       return b.completed[index] < a.completed[index] ? -1 : 1
     })
+  },
+  setUserLeaderboardScore(state) {
+    if (state.leaderboard) {
+      const selected = state.leaderboard.find(
+        element => element.id === this.state.authentication.user.id
+      )
+      if (selected) {
+        selected.completed = this.state.authentication.user.completed
+      }
+    }
   }
 }
