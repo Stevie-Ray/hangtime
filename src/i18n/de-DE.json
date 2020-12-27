@@ -163,6 +163,7 @@
   "Warning: Make sure you know what you are doing and be properly warmed up before doing one-arm hangs": "Warnung: Stellen Sie sicher, dass Sie wissen, was Sie tun, und dass Sie richtig aufgewärmt sind, bevor Sie einarmige Hänge machen",
   "Start": "Start",
   "Delete recording": "Aufnahme löschen",
+  "Are you sure you want to delete this Max. {name} recording of {value}? This can not be undone.": "Sind Sie sicher, dass Sie diese max. {name} Aufnahme von {value}? Das kann nicht rückgängig gemacht werden.",
   "Best": "Beste",
   "Stay hanging": "Bleib hängen",
   "Keep doing them": "Mach weiter so",

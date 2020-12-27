@@ -238,14 +238,15 @@
 
           <v-card-text>
             <v-container fluid>
-              Are you sure you want to delete this
-              <strong>
-                {{ $t('Max.') }}
-                {{ grip[returnType(deleteDialogItem.type)].name }}</strong
-              >
-              recording of
-              <strong>{{ count(deleteDialogItem.value) }}</strong
-              >? This can not be undone.
+              {{
+                $t(
+                  'Are you sure you want to delete this Max. {name} recording of {value}? This can not be undone.',
+                  {
+                    name: grip[returnType(deleteDialogItem.type)].name,
+                    value: count(deleteDialogItem.value)
+                  }
+                )
+              }}
             </v-container>
           </v-card-text>
           <v-card-actions>
