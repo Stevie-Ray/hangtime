@@ -41,6 +41,8 @@ export default {
   setWeight: (state, value) => (state.user.settings.weight = value),
   setWalkthrough: (state, value) => (state.user.settings.walkthrough = value),
   setVoice: (state, value) => (state.user.settings.voice = value),
+  setUserNotificationToken: (state, value) =>
+    (state.user.settings.token = value),
   setSelected: (state, value) => (state.user.settings.selected = value),
   setCompany: (state, value) => (state.hangboardToAdd.company = value),
   setHangboard: (state, value) => (state.hangboardToAdd.hangboard = value),

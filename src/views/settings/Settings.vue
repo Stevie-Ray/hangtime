@@ -95,17 +95,15 @@
 
               <v-divider inset></v-divider>
 
-              <v-list-item disabled>
+              <v-list-item to="/settings/notifications">
                 <v-list-item-icon>
-                  <v-icon color="grey lighten-1">{{ mdi.bellRing }}</v-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.bellRing }}</v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title
-                    >{{ $t('Notifications') }} ({{
-                      $t('soon')
-                    }})</v-list-item-title
-                  >
+                  <v-list-item-title>{{
+                    $t('Notifications')
+                  }}</v-list-item-title>
                   <v-list-item-subtitle>
                     {{ $t('Workout reminders') }}
                   </v-list-item-subtitle>

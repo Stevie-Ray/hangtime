@@ -6,6 +6,8 @@ export default {
   showAddToHomeScreenModalForApple: false,
   refreshingApp: false,
   currentTab: '/',
+  vapidKey:
+    'BLYKE2FC7Wjeyz_6m_wOc7rLUdRf4XGmJUhoIBKS4pfxaA8GP5dT5XCOkqCdTiayKlv_U-WwiDmkVPOlqHgowPE',
   language: [
     {
       name: '简体中文',
