@@ -154,6 +154,7 @@
   "Version {appVersion}": "Version {appVersion}",
   "Authenticating...": "Authenticating...",
   "Login with {medium}": "Login with {medium}",
+  "Login with a password": "Login with a password",
   "Select grade": "Select grade",
   "Convert to": "Convert to",
   "Your progress": "Your progress",
@@ -201,5 +202,7 @@
   "Where I hung for {time}": "Where I hung for {time}",
   "Join {appTitle}": "Join {appTitle}",
   "I just completed {name}": "I just completed {name}",
-  "Leaderboard": "Leaderboard"
+  "Leaderboard": "Leaderboard",
+  "Continue as Guest": "Continue as Guest",
+  "Guest User": "Guest User"
 }

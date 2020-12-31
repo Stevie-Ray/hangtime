@@ -126,13 +126,15 @@ export default {
     ...mapState('authentication', ['user', 'settings'])
   },
   mounted() {
-    this.messaging.onMessage(payload => {
-      console.log('Message received. ', payload)
-      // [START_EXCLUDE]
-      // Update the UI to include the received message.
-      this.appendMessage(payload)
-      // [END_EXCLUDE]
-    })
+    if (this.messaging) {
+      this.messaging.onMessage(payload => {
+        console.log('Message received. ', payload)
+        // [START_EXCLUDE]
+        // Update the UI to include the received message.
+        this.appendMessage(payload)
+        // [END_EXCLUDE]
+      })
+    }
 
     this.resetUI()
   },
@@ -141,33 +143,35 @@ export default {
     ...mapActions('authentication', ['triggerUpdateUser']),
     ...mapMutations('authentication', ['setUserNotificationToken']),
     resetUI() {
-      this.clearMessages()
-      this.showToken('loading...')
-      // [START get_token]
-      // Get registration token. Initially this makes a network call, once retrieved
-      // subsequent calls to getToken will return from cache.
-      this.messaging
-        .getToken({ vapidKey: this.vapidKey })
-        .then(currentToken => {
-          if (currentToken) {
-            this.sendTokenToServer(currentToken)
-            this.updateUIForPushEnabled(currentToken)
-          } else {
-            // Show permission request.
-            console.log(
-              'No registration token available. Request permission to generate one.'
-            )
-            // Show permission UI.
-            this.updateUIForPushPermissionRequired()
+      if (this.messaging) {
+        this.clearMessages()
+        this.showToken('loading...')
+        // [START get_token]
+        // Get registration token. Initially this makes a network call, once retrieved
+        // subsequent calls to getToken will return from cache.
+        this.messaging
+          .getToken({ vapidKey: this.vapidKey })
+          .then(currentToken => {
+            if (currentToken) {
+              this.sendTokenToServer(currentToken)
+              this.updateUIForPushEnabled(currentToken)
+            } else {
+              // Show permission request.
+              console.log(
+                'No registration token available. Request permission to generate one.'
+              )
+              // Show permission UI.
+              this.updateUIForPushPermissionRequired()
+              this.setTokenSentToServer(false)
+            }
+          })
+          .catch(err => {
+            console.log('An error occurred while retrieving token. ', err)
+            this.showToken('Error retrieving registration token. ', err)
             this.setTokenSentToServer(false)
-          }
-        })
-        .catch(err => {
-          console.log('An error occurred while retrieving token. ', err)
-          this.showToken('Error retrieving registration token. ', err)
-          this.setTokenSentToServer(false)
-        })
-      // [END get_token]
+          })
+        // [END get_token]
+      }
     },
     /**
      * Show token in console and UI.
@@ -227,28 +231,30 @@ export default {
     deleteToken() {
       // Delete registraion token.
       // [START delete_token]
-      this.messaging
-        .getToken()
-        .then(currentToken => {
-          this.messaging
-            .deleteToken()
-            .then(() => {
-              console.log('Token deleted.', currentToken)
-              this.setTokenSentToServer(false)
-              // [START_EXCLUDE]
-              // Once token is deleted update UI.
-              this.resetUI()
-              // [END_EXCLUDE]
-            })
-            .catch(err => {
-              console.log('Unable to delete token. ', err)
-            })
-          // [END delete_token]
-        })
-        .catch(err => {
-          console.log('Error retrieving registration token. ', err)
-          this.showToken('Error retrieving registration token. ', err)
-        })
+      if (this.messaging) {
+        this.messaging
+          .getToken()
+          .then(currentToken => {
+            this.messaging
+              .deleteToken()
+              .then(() => {
+                console.log('Token deleted.', currentToken)
+                this.setTokenSentToServer(false)
+                // [START_EXCLUDE]
+                // Once token is deleted update UI.
+                this.resetUI()
+                // [END_EXCLUDE]
+              })
+              .catch(err => {
+                console.log('Unable to delete token. ', err)
+              })
+            // [END delete_token]
+          })
+          .catch(err => {
+            console.log('Error retrieving registration token. ', err)
+            this.showToken('Error retrieving registration token. ', err)
+          })
+      }
     },
     copyText() {
       if (this.copyAPI) {

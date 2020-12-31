@@ -154,6 +154,7 @@
   "Version {appVersion}": "Versie {appVersion}",
   "Authenticating...": "Authenticatie...",
   "Login with {medium}": "Inloggen met {medium}",
+  "Login with a password": "Inloggen met een wachtwoord",
   "Select grade": "Selecteer grade",
   "Convert to": "Omzetten naar",
   "Your progress": "Jouw vooruitgang",
@@ -201,5 +202,7 @@
   "Where I hung for {time}": "Waarbij ik {time} heb gehangen",
   "Join {appTitle}": "Doe mee met {appTitle}",
   "I just completed {name}": "Ik heb zojuist {name} voltooid",
-  "Leaderboard": "Ranglijst"
+  "Leaderboard": "Ranglijst",
+  "Continue as Guest": "Ga door als gast",
+  "Guest User": "Gast gebruiker"
 }

@@ -5,7 +5,11 @@ import UsersWorkoutsDB from '@/firebase/users-workouts-db'
  */
 // eslint-disable-next-line
 export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
-  const providerData = firebaseAuthUser.providerData[0]
+  let providerData = firebaseAuthUser
+  if (!firebaseAuthUser.isAnonymous) {
+    // eslint-disable-next-line prefer-destructuring
+    providerData = firebaseAuthUser.providerData[0]
+  }
   const { displayName, photoURL, email } = providerData
   const userDb = new UsersWorkoutsDB()
   const settings = {
@@ -32,9 +36,8 @@ export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
     settings
   }
 
-  const userData = await userDb.create(user, firebaseAuthUser.uid)
-
-  return userData
+  // eslint-disable-next-line no-return-await
+  return await userDb.create(user, firebaseAuthUser.uid)
 }
 export function getImg(path) {
   // eslint-disable-next-line global-require,import/no-dynamic-require

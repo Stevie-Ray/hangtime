@@ -43,7 +43,7 @@
                   min-width="250"
                   tile
                   outlined
-                  @click="login('facebook')"
+                  @click="connect('facebook')"
                 >
                   <v-icon left>{{ mdi.facebook }}</v-icon>
                   {{ $t('Login with {medium}', { medium: 'Facebook' }) }}
@@ -57,10 +57,40 @@
                   min-width="250"
                   tile
                   outlined
-                  @click="login('google')"
+                  @click="connect('google')"
                 >
                   <v-icon left>{{ mdi.google }}</v-icon>
                   {{ $t('Login with {medium}', { medium: 'Google' }) }}
+                </v-btn>
+              </v-col>
+              <v-col cols="12" md="12">
+                <v-btn
+                  v-show="user !== undefined && !user && networkOnLine"
+                  data-test="login-btn"
+                  class="login-btn"
+                  min-width="250"
+                  tile
+                  disabled
+                  outlined
+                  @click="connect('password')"
+                >
+                  <v-icon left>{{ mdi.key }}</v-icon>
+                  {{ $t('Login with a password') }}
+                </v-btn>
+              </v-col>
+              <v-col cols="12" md="12">
+                <v-btn
+                  v-show="user !== undefined && !user && networkOnLine"
+                  data-test="login-btn"
+                  class="login-btn"
+                  min-width="250"
+                  tile
+                  disabled
+                  outlined
+                  @click="connect('anonymous')"
+                >
+                  <v-icon left>{{ mdi.incognito }}</v-icon>
+                  {{ $t('Continue as Guest') }}
                 </v-btn>
               </v-col>
             </v-row>
@@ -78,12 +108,11 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/app'
-import { desktop as isDekstop } from 'is_js'
 import { getImg } from '@/misc/helpers'
-import { mdiGoogle, mdiFacebook } from '@mdi/js'
+import { mdiGoogle, mdiFacebook, mdiIncognito, mdiKey } from '@mdi/js'
 
 export default {
   data: () => ({
@@ -91,7 +120,9 @@ export default {
     year: new Date().getFullYear(),
     mdi: {
       google: mdiGoogle,
-      facebook: mdiFacebook
+      facebook: mdiFacebook,
+      incognito: mdiIncognito,
+      key: mdiKey
     }
   }),
   head: {
@@ -125,31 +156,54 @@ export default {
   },
   methods: {
     ...mapMutations('authentication', ['setUser']),
+    ...mapActions('authentication', ['login']),
     getImg,
-    async login(method) {
+    async connect(method) {
       this.loginError = null
       let provider = null
 
       if (method === 'google') {
         provider = new firebase.auth.GoogleAuthProvider()
+        // provider.addScope('profile')
+        // provider.addScope('email')
+        // provider.addScope('https://www.googleapis.com/auth/user.birthday.read')
+        // provider.addScope('https://www.googleapis.com/auth/user.gender.read')
       }
       if (method === 'facebook') {
         provider = new firebase.auth.FacebookAuthProvider()
       }
+      if (method === 'anonymous') {
+        firebase
+          .auth()
+          .signInAnonymously()
+          .then(result => {
+            console.log(result)
+            this.$router.push('/workouts')
+          })
+          .catch(err => {
+            this.loginError = err
+          })
+      }
 
-      this.setUser(undefined)
+      if (provider !== null) {
+        this.setUser(undefined)
 
-      try {
-        // Firebase signin with popup is faster than redirect
-        // but we can't use it on mobile because it's not well supported
-        // when app is running as standalone on ios & android
-        // eslint-disable-next-line no-unused-expressions
-        isDekstop()
-          ? await firebase.auth().signInWithPopup(provider)
-          : await firebase.auth().signInWithPopup(provider)
-      } catch (err) {
-        this.loginError = err
-        this.setUser(null)
+        try {
+          // Firebase signin with popup is faster than redirect
+          // but we can't use it on mobile because it's not well supported
+          // when app is running as standalone on ios & android
+          // eslint-disable-next-line no-unused-expressions
+          await firebase.auth().signInWithPopup(provider)
+          // Enable https://console.developers.google.com/apis/library/people.googleapis.com
+          // .then(res => {
+          //   fetch(
+          //     `https://people.googleapis.com/v1/people/${res.additionalUserInfo.profile.id}?personFields=birthdays,genders&access_token=${res.credential.accessToken}`
+          //   ).then(response => console.log(response))
+          // })
+        } catch (err) {
+          this.loginError = err
+          this.setUser(null)
+        }
       }
     }
   }

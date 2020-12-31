@@ -26,21 +26,16 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content v-if="user">
-                  <v-list-item-title>
+                  <v-list-item-title v-if="user.displayName">
                     {{ user.displayName }}
+                  </v-list-item-title>
+                  <v-list-item-title v-else>
+                    {{ $t('Guest User') }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     {{ user.status }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
-
-                <!--<Oauth :visible="showScheduleForm" @close="showScheduleForm=false"/>-->
-
-                <!--<v-list-item-action>-->
-                <!--<v-btn icon ripple v-show="!$auth.check()" @click="showScheduleForm = !showScheduleForm">-->
-                <!--<v-icon>{{ mdi.accountBox }}</v-icon>-->
-                <!--</v-btn>-->
-                <!--</v-list-item-action>-->
               </v-list-item>
 
               <v-divider></v-divider>

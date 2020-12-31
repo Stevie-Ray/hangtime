@@ -72,12 +72,12 @@
         <v-row justify="center" align="start">
           <v-col cols="12">
             <v-list two-line>
-              <v-list-item>
+              <v-list-item v-if="user && user.displayName">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{ mdi.account }}</v-icon>
                 </v-list-item-icon>
 
-                <v-list-item-content v-if="user">
+                <v-list-item-content>
                   <v-list-item-title>{{ user.displayName }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -149,16 +149,48 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item>
+              <v-list-item v-if="user && user.email">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{ mdi.email }}</v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title v-if="user">{{
-                    user.email
-                  }}</v-list-item-title>
+                  <v-list-item-title>
+                    {{ user.email }}
+                  </v-list-item-title>
                 </v-list-item-content>
+              </v-list-item>
+            </v-list>
+            <v-list two-line>
+              <v-list-item>
+                <v-list-item-title
+                  ><strong>Link Accounts (Beta)</strong></v-list-item-title
+                >
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>Google</v-list-item-title>
+                <v-list-item-action>
+                  <v-btn icon @click="login('google')">
+                    <v-icon small>
+                      {{ mdi.account }}
+                    </v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>Facebook</v-list-item-title>
+                <v-list-item-action>
+                  <v-btn icon @click="login('facebook')">
+                    <v-icon small>
+                      {{ mdi.account }}
+                    </v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+              <v-list-item v-if="linkError">
+                <v-list-item-title>
+                  {{ linkError }}
+                </v-list-item-title>
               </v-list-item>
             </v-list>
           </v-col>
@@ -173,6 +205,7 @@ import firebase from 'firebase/app'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import IRCRA from 'ircra'
 import { count, getImg, shortDate } from '@/misc/helpers'
+
 import {
   mdiArrowLeft,
   mdiAccountOff,
@@ -186,6 +219,7 @@ import {
 export default {
   data: () => ({
     ircra: new IRCRA(),
+    linkError: null,
     rules: {
       length: len => v =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
@@ -259,6 +293,39 @@ export default {
     ...mapMutations('authentication', ['setStatus', 'setGrade']),
     async logout() {
       await firebase.auth().signOut()
+    },
+    async login(method) {
+      let provider = null
+      console.log(firebase.auth().currentUser)
+
+      if (method === 'google') {
+        provider = new firebase.auth.GoogleAuthProvider()
+      }
+      if (method === 'facebook') {
+        provider = new firebase.auth.FacebookAuthProvider()
+      }
+
+      if (provider !== null) {
+        try {
+          await firebase
+            .auth()
+            .currentUser.linkWithPopup(provider)
+            .then(
+              result => {
+                const { credential } = result
+                const { user } = result
+                console.log(credential)
+                console.log(user)
+              },
+              error => {
+                console.log(error)
+                this.linkError = error
+              }
+            )
+        } catch (error) {
+          this.linkError = error
+        }
+      }
     }
   }
 }
