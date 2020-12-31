@@ -154,6 +154,7 @@
   "Version {appVersion}": "Versión {appVersion}",
   "Authenticating...": "Autenticando...",
   "Login with {medium}": "Iniciar sesión con {medium}",
+  "Login with a password": "Iniciar sesión con contraseña",
   "Select grade": "Seleccionar grado",
   "Convert to": "Convertir a",
   "Your progress": "Su progreso",
@@ -201,5 +202,7 @@
   "Where I hung for {time}": "Donde estuve colgado por {time}",
   "Join {appTitle}": "Únete a {appTitle}",
   "I just completed {name}": "Acabo de completar {nome}",
-  "Leaderboard": "Tabla de clasificación"
+  "Leaderboard": "Tabla de clasificación",
+  "Continue as Guest": "Continua como invitado",
+  "Guest User": "Usuario invitado"
 }
