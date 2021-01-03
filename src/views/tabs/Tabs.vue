@@ -10,7 +10,12 @@
       extended
       :class="{ offline: !networkOnLine }"
     >
-      <v-img class="app-logo mr-1" :src="getImg('icons/logo.svg')" contain />
+      <v-img
+        class="app-logo mr-1"
+        :src="getImg('icons/logo.svg')"
+        :alt="appTitle"
+        contain
+      />
 
       <v-toolbar-title to="/">
         {{ appTitle }}

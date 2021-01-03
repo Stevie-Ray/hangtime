@@ -1,25 +1,32 @@
 <template>
-  <v-main>
+  <v-main class="login-screen">
     <v-container class="fill-height">
       <v-row class="fill-height" no-gutters>
         <v-col cols="12">
-          <div class="text-center pa-4">
-            <div class="text-h4">{{ appTitle }}</div>
-            <div class="subheading font-weight-light grey--text text--darken-2">
-              {{ $t('Version {appVersion}', { appVersion: appVersion }) }}
-            </div>
-
-            <img
-              height="144px"
-              width="144px"
-              :src="getImg('logo.svg')"
-              :alt="appTitle"
-              class="mt-10 mb-10"
-            />
+          <div class="text-center">
+            <v-row
+              no-gutters
+              justify="center"
+              class="logo-container pt-8 pb-12"
+            >
+              <v-col class="flex-grow-0">
+                <v-img
+                  class="app-logo mr-1"
+                  height="36"
+                  width="36"
+                  :src="getImg('icons/logo.svg')"
+                  :alt="appTitle"
+                  contain
+                />
+              </v-col>
+              <v-col class="flex-grow-0">
+                <div class="white--text text-h4">{{ appTitle }}</div>
+              </v-col>
+            </v-row>
 
             <!-- Loader -->
             <div v-show="user === undefined" data-test="loader">
-              <v-progress-circular :size="60" color="primary" indeterminate>
+              <v-progress-circular :size="48" color="primary" indeterminate>
               </v-progress-circular>
               <div class="text-center ">{{ $t('Authenticating...') }}</div>
             </div>
@@ -30,74 +37,129 @@
               offline.
             </div>
 
-            <div v-if="loginError">
-              <p>{{ loginError }}</p>
-            </div>
-            <!-- Auth UI -->
-            <v-row v-if="networkOnLine">
-              <v-col cols="12" md="12">
-                <v-btn
-                  v-show="user !== undefined && !user && networkOnLine"
-                  data-test="login-btn"
-                  class="login-btn"
-                  min-width="250"
-                  tile
-                  outlined
-                  @click="connect('facebook')"
-                >
-                  <v-icon left>{{ mdi.facebook }}</v-icon>
-                  {{ $t('Login with {medium}', { medium: 'Facebook' }) }}
-                </v-btn>
-              </v-col>
-              <v-col cols="12" md="12">
-                <v-btn
-                  v-show="user !== undefined && !user && networkOnLine"
-                  data-test="login-btn"
-                  class="login-btn"
-                  min-width="250"
-                  tile
-                  outlined
-                  @click="connect('google')"
-                >
-                  <v-icon left>{{ mdi.google }}</v-icon>
-                  {{ $t('Login with {medium}', { medium: 'Google' }) }}
-                </v-btn>
-              </v-col>
-              <v-col cols="12" md="12">
-                <v-btn
-                  v-show="user !== undefined && !user && networkOnLine"
-                  data-test="login-btn"
-                  class="login-btn"
-                  min-width="250"
-                  tile
-                  disabled
-                  outlined
-                  @click="connect('password')"
-                >
-                  <v-icon left>{{ mdi.key }}</v-icon>
-                  {{ $t('Login with a password') }}
-                </v-btn>
-              </v-col>
-              <v-col cols="12" md="12">
-                <v-btn
-                  v-show="user !== undefined && !user && networkOnLine"
-                  data-test="login-btn"
-                  class="login-btn"
-                  min-width="250"
-                  tile
-                  disabled
-                  outlined
-                  @click="connect('anonymous')"
-                >
-                  <v-icon left>{{ mdi.incognito }}</v-icon>
-                  {{ $t('Continue as Guest') }}
-                </v-btn>
-              </v-col>
-            </v-row>
+            <v-card elevation="2" max-width="500" style="margin: 0 auto">
+              <v-card-title class="justify-center">
+                {{ $t('Welcome') }}
+              </v-card-title>
+              <v-card-subtitle class="text-center">
+                {{ $t('Continue with') }}
+              </v-card-subtitle>
+              <v-card-text>
+                <!-- Auth UI -->
+                <v-row v-if="networkOnLine">
+                  <v-col cols="6">
+                    <div class="text-center">
+                      <v-btn
+                        v-show="user !== undefined && !user && networkOnLine"
+                        elevation="1"
+                        dark
+                        large
+                        block
+                        color="#1877F2"
+                        @click="connect('facebook')"
+                      >
+                        <v-icon dark left>
+                          {{ mdi.facebook }}
+                        </v-icon>
+                        <span class="social-login-text">
+                          Facebook
+                        </span>
+                      </v-btn>
+                    </div>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn
+                      v-show="user !== undefined && !user && networkOnLine"
+                      elevation="1"
+                      block
+                      dark
+                      large
+                      color="#DB4437"
+                      @click="connect('google')"
+                    >
+                      <v-icon dark left>{{ mdi.google }}</v-icon>
+                      <span class="social-login-text">
+                        Google
+                      </span>
+                    </v-btn>
+                  </v-col>
+                </v-row>
 
+                <v-row>
+                  <v-col cols="12">
+                    <div
+                      class="text-center subtitle-2 text-uppercase side-lines"
+                    >
+                      {{ $t('Or') }}
+                      <span class="grey--text lighten-5">
+                        ({{ $t('soon') }})
+                      </span>
+                    </div>
+                    <v-form
+                      ref="form"
+                      v-model="valid"
+                      :disabled="formDisabled"
+                      lazy-validation
+                    >
+                      <v-text-field
+                        v-model="email"
+                        label="Username"
+                        autocomplete="username"
+                        :rules="[rules.requiredRule]"
+                        required
+                      ></v-text-field>
+                      <v-text-field
+                        v-model="password"
+                        autocomplete="current-password"
+                        :rules="[rules.requiredRule]"
+                        label="Password"
+                        type="password"
+                        required
+                      ></v-text-field>
+
+                      <v-btn
+                        v-show="user !== undefined && !user && networkOnLine"
+                        block
+                        color="primary"
+                        large
+                        class="mt-2 mb-4"
+                        @click="validate"
+                      >
+                        <v-icon left>{{ mdi.key }}</v-icon>
+                        {{ $t('Login') }}
+                      </v-btn>
+                      <v-btn text x-small to="sign-up">
+                        {{ $t("Don't have an account?") }} {{ $t('Sign up') }}
+                      </v-btn>
+                    </v-form>
+
+                    <div v-if="loginError">
+                      <v-divider class="mt-2 mb-4"></v-divider>
+                      <div>{{ loginError }}</div>
+                    </div>
+                  </v-col>
+                </v-row>
+
+                <v-row class="hidden-lg-and-down">
+                  <v-col cols="12" md="12">
+                    <v-btn
+                      v-show="user !== undefined && !user && networkOnLine"
+                      text
+                      disabled
+                      x-small
+                      @click="connect('anonymous')"
+                    >
+                      <v-icon left>{{ mdi.incognito }}</v-icon>
+                      {{ $t('Continue as Guest') }}
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
             <div
               class="text-caption grey--text text--darken-2 font-weight-light mt-4"
             >
+              {{ $t('Version {appVersion}', { appVersion: appVersion }) }} |
               &copy; 2019 - {{ year }} {{ appTitle }}.
             </div>
           </div>
@@ -118,6 +180,27 @@ export default {
   data: () => ({
     loginError: null,
     year: new Date().getFullYear(),
+    formDisabled: false,
+    valid: true,
+    rules: {
+      lengthRule: len => v =>
+        (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
+      requiredRule: v => !!v || 'This field is required',
+      emailRule: v =>
+        !v ||
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+        'E-mail must be valid',
+      passwordRule: value => {
+        // eslint-disable-next-line
+        const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+        return (
+          pattern.test(value) ||
+          'Min. 8 characters with at least one capital letter, a number and a special character.'
+        )
+      }
+    },
+    email: '',
+    password: '',
     mdi: {
       google: mdiGoogle,
       facebook: mdiFacebook,
@@ -158,6 +241,12 @@ export default {
     ...mapMutations('authentication', ['setUser']),
     ...mapActions('authentication', ['login']),
     getImg,
+    validate() {
+      this.$refs.form.validate()
+      if (this.valid) {
+        this.connect('password')
+      }
+    },
     async connect(method) {
       this.loginError = null
       let provider = null
@@ -171,6 +260,19 @@ export default {
       }
       if (method === 'facebook') {
         provider = new firebase.auth.FacebookAuthProvider()
+      }
+      if (method === 'password') {
+        const self = this
+
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          // eslint-disable-next-line func-names
+          .catch(function(error) {
+            // Handle Errors here.
+            self.loginError = error.message
+            self.valid = false
+          })
       }
       if (method === 'anonymous') {
         firebase
@@ -186,6 +288,7 @@ export default {
       }
 
       if (provider !== null) {
+        console.log('exec')
         this.setUser(undefined)
 
         try {
@@ -209,3 +312,48 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~vuetify/src/styles/settings/_variables';
+
+@media only screen and (max-width: 360px) {
+  .social-login-text {
+    text-indent: -9999px;
+  }
+  .logo-container {
+    padding-top: 0 !important;
+    padding-bottom: 16px !important;
+  }
+}
+
+.login-screen {
+  background: linear-gradient(
+    to bottom,
+    #012f40 0%,
+    #012f40 50%,
+    white 50%,
+    white 100%
+  ); /* W3C */
+}
+
+.side-lines {
+  display: flex;
+  flex-direction: row;
+  > span {
+    margin-left: 4px;
+  }
+  &:before,
+  &:after {
+    content: '';
+    flex: 1 1;
+    border-bottom: 1px solid lightgray;
+    margin: auto;
+  }
+  &:before {
+    margin-right: 8px;
+  }
+  &:after {
+    margin-left: 8px;
+  }
+}
+</style>

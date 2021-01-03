@@ -204,5 +204,11 @@
   "I just completed {name}": "I just completed {name}",
   "Leaderboard": "Leaderboard",
   "Continue as Guest": "Continue as Guest",
-  "Guest User": "Guest User"
+  "Guest User": "Guest User",
+  "Welcome": "Welcome",
+  "Continue with": "Continue with",
+  "Sign up": "Sign up",
+  "Login": "Login",
+  "Or": "Or",
+  "Don't have an account?": "Don't have an account?"
 }
