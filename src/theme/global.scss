@@ -34,6 +34,11 @@
     margin-left: 0;
   }
 
+  // vuetify 2.4.x fix
+  .row {
+    margin: 0 -12px;
+  }
+
   .layout {
     &:not(.run) {
       .v-main__wrap > .container {
@@ -50,6 +55,7 @@
         }
       }
     }
+    &.tabs,
     &.leaderboard,
     &.grades {
       .v-main__wrap > .container {
@@ -197,7 +203,6 @@
       }
     }
   }
-
   // fix three-line height
   .v-list-item .v-list-item__subtitle {
     .v-icon {
