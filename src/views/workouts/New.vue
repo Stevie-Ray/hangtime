@@ -4,13 +4,15 @@
       <v-icon @click="$router.push({ path: currentTab })"
         >{{ mdi.arrowLeft }}
       </v-icon>
-      <v-avatar v-if="currentWorkout && user" size="32px">
+      <v-avatar
+        v-if="currentWorkout && user"
+        class="grey lighten-2"
+        size="32px"
+      >
         <v-img
-          v-if="networkOnLine"
+          v-if="networkOnLine && user.photoURL"
           :src="user.photoURL"
           :alt="user.displayName"
-          aspect-ratio="1"
-          class="grey lighten-2"
         />
       </v-avatar>
       <v-toolbar-title>

@@ -10,13 +10,11 @@
         "
         >{{ mdi.arrowLeft }}</v-icon
       >
-      <v-avatar size="32px">
+      <v-avatar size="32px" class="grey lighten-2">
         <v-img
-          v-if="networkOnLine"
+          v-if="networkOnLine && currentWorkout.user.photoURL"
           :src="currentWorkout.user.photoURL"
           :alt="currentWorkout.user.displayName"
-          aspect-ratio="1"
-          class="grey lighten-2"
         />
       </v-avatar>
       <v-toolbar-title>

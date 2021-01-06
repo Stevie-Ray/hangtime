@@ -35,7 +35,11 @@
                     </v-col>
                     <v-col cols="3">
                       <v-avatar>
-                        <img :src="user.photoURL" :alt="user.displayName" />
+                        <img
+                          v-if="user.photoURL"
+                          :src="user.photoURL"
+                          :alt="user.displayName"
+                        />
                       </v-avatar>
                     </v-col>
                     <v-col class="text-left">

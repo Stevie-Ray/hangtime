@@ -91,9 +91,6 @@
                       class="text-center subtitle-2 text-uppercase side-lines"
                     >
                       {{ $t('Or') }}
-                      <span class="grey--text lighten-5">
-                        ({{ $t('soon') }})
-                      </span>
                     </div>
                     <!-- Login -->
                     <v-form
@@ -171,7 +168,6 @@
                         color="primary"
                         large
                         class="mt-2 mb-4"
-                        disabled
                         @click="validateRegister"
                       >
                         <v-icon left>{{ mdi.key }}</v-icon>
@@ -278,11 +274,15 @@ export default {
   watch: {
     user: {
       handler(user) {
+        const self = this
         if (!isNil(user)) {
           const redirectUrl = isNil(this.$route.query.redirectUrl)
             ? '/workouts'
             : this.$route.query.redirectUrl
-          this.$router.push(redirectUrl)
+          // eslint-disable-next-line func-names
+          setTimeout(function() {
+            self.$router.push(redirectUrl)
+          }, 1000)
         }
       },
       immediate: true
@@ -339,6 +339,14 @@ export default {
           await firebase
             .auth()
             .createUserWithEmailAndPassword(self.email, self.password)
+            .then(userData => {
+              // show loader
+              this.setUser(undefined)
+              console.log('test')
+              userData.user.updateProfile({
+                displayName: self.displayName
+              })
+            })
         } catch (error) {
           // Handle Errors here.
           self.loginError = error.message

@@ -43,7 +43,11 @@
                         class="grey lighten-2"
                         size="64"
                       >
-                        <img :src="user.photoURL" :alt="user.displayName" />
+                        <img
+                          v-if="user.photoURL"
+                          :src="user.photoURL"
+                          :alt="user.displayName"
+                        />
                       </v-avatar>
                     </v-col>
                     <v-col class="text-left">

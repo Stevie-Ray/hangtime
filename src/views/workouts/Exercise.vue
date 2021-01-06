@@ -2,13 +2,15 @@
   <v-layout class="exercise">
     <v-app-bar color="primary" app dark fixed>
       <v-icon @click="goBack">{{ mdi.arrowLeft }}</v-icon>
-      <v-avatar v-if="currentWorkout && currentWorkout.user" size="32px">
+      <v-avatar
+        v-if="currentWorkout && currentWorkout.user"
+        class="grey lighten-2"
+        size="32px"
+      >
         <v-img
-          v-if="networkOnLine"
+          v-if="networkOnLine && currentWorkout.user.photoURL"
           :src="currentWorkout.user.photoURL"
           :alt="currentWorkout.user.displayName"
-          aspect-ratio="1"
-          class="grey lighten-2"
         />
       </v-avatar>
       <v-toolbar-title v-if="currentExercise">

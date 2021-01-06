@@ -99,13 +99,16 @@
       </v-card-text>
 
       <v-list-item v-if="!editWorkout && currentWorkout" class="grow my-2">
-        <v-list-item-avatar size="32" style="margin-right: 12px;">
+        <v-list-item-avatar
+          size="32"
+          class="grey lighten-2"
+          style="margin-right: 12px;"
+        >
           <v-img
+            v-if="currentWorkout.user.photoURL"
             :src="currentWorkout.user.photoURL"
             :alt="currentWorkout.user.displayName"
             width="32px"
-            class="grey lighten-2"
-            aspect-ratio="1"
           />
         </v-list-item-avatar>
 

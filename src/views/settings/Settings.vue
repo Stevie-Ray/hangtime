@@ -16,12 +16,15 @@
           <v-col cols="12">
             <v-list two-line>
               <v-list-item class="big py-2 pt-0" to="/settings/profile">
-                <v-list-item-avatar v-if="user" size="56">
+                <v-list-item-avatar
+                  v-if="user"
+                  size="56"
+                  class="grey lighten-2"
+                >
                   <v-img
+                    v-if="user.photoURL"
                     :src="user.photoURL"
                     :alt="user.displayName"
-                    aspect-ratio="1"
-                    class="grey lighten-2"
                   />
                 </v-list-item-avatar>
 

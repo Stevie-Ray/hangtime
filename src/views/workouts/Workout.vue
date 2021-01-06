@@ -7,14 +7,13 @@
       <v-avatar
         v-if="currentWorkout"
         size="32px"
+        class="grey lighten-2"
         @click.stop="dialogs.user = true"
       >
         <v-img
-          v-if="networkOnLine"
+          v-if="networkOnLine && currentWorkout.user.photoURL"
           :src="currentWorkout.user.photoURL"
           :alt="currentWorkout.user.displayName"
-          aspect-ratio="1"
-          class="grey lighten-2"
         />
       </v-avatar>
       <v-toolbar-title @click="dialogs.general = true">

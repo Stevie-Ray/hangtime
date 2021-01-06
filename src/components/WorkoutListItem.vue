@@ -1,13 +1,11 @@
 <template>
   <div class="workout-item">
     <v-list-item ripple>
-      <v-list-item-avatar @click.stop="overlay = true">
+      <v-list-item-avatar class="grey lighten-2" @click.stop="overlay = true">
         <v-img
-          v-if="data && data.user"
+          v-if="data && data.user && data.user.photoURL"
           :src="data.user.photoURL"
           :alt="data.user.displayName"
-          aspect-ratio="1"
-          class="grey lighten-2"
         />
       </v-list-item-avatar>
 

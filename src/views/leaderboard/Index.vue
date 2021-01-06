@@ -88,7 +88,11 @@
                           @click.stop="dialogs.user = true"
                           @click="selectedItem = item"
                         >
-                          <img :src="item.photoURL" :alt="item.displayName" />
+                          <img
+                            v-if="item.photoURL"
+                            :src="item.photoURL"
+                            :alt="item.displayName"
+                          />
                         </v-avatar>
                       </v-col>
                       <v-col cols="8">
