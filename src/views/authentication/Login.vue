@@ -95,16 +95,18 @@
                         ({{ $t('soon') }})
                       </span>
                     </div>
+                    <!-- Login -->
                     <v-form
-                      ref="form"
+                      v-if="!switchForm"
+                      ref="login"
                       v-model="valid"
                       :disabled="formDisabled"
                       lazy-validation
                     >
                       <v-text-field
                         v-model="email"
-                        label="Username"
-                        autocomplete="username"
+                        label="E-mail"
+                        autocomplete="email"
                         :rules="[rules.requiredRule]"
                         required
                       ></v-text-field>
@@ -123,13 +125,60 @@
                         color="primary"
                         large
                         class="mt-2 mb-4"
-                        @click="validate"
+                        @click="validateLogin"
                       >
                         <v-icon left>{{ mdi.key }}</v-icon>
                         {{ $t('Login') }}
                       </v-btn>
-                      <v-btn text x-small to="sign-up">
+                      <v-btn text x-small @click="switchForm = !switchForm">
                         {{ $t("Don't have an account?") }} {{ $t('Sign up') }}
+                      </v-btn>
+                    </v-form>
+                    <!-- Register -->
+                    <v-form
+                      v-if="switchForm"
+                      ref="register"
+                      v-model="valid"
+                      :disabled="formDisabled"
+                      lazy-validation
+                    >
+                      <v-text-field
+                        v-model="displayName"
+                        label="Name"
+                        placeholder="John Doe"
+                        autocomplete="name"
+                        :rules="[rules.requiredRule]"
+                        required
+                      ></v-text-field>
+                      <v-text-field
+                        v-model="email"
+                        label="E-mail"
+                        autocomplete="email"
+                        :rules="[rules.requiredRule]"
+                        required
+                      ></v-text-field>
+                      <v-text-field
+                        v-model="password"
+                        autocomplete="new-password"
+                        :rules="[rules.requiredRule]"
+                        label="Password"
+                        type="password"
+                        required
+                      ></v-text-field>
+                      <v-btn
+                        v-show="user !== undefined && !user && networkOnLine"
+                        block
+                        color="primary"
+                        large
+                        class="mt-2 mb-4"
+                        disabled
+                        @click="validateRegister"
+                      >
+                        <v-icon left>{{ mdi.key }}</v-icon>
+                        {{ $t('Register') }}
+                      </v-btn>
+                      <v-btn text x-small @click="switchForm = !switchForm">
+                        {{ $t('Back') }}
                       </v-btn>
                     </v-form>
 
@@ -181,6 +230,7 @@ export default {
     loginError: null,
     year: new Date().getFullYear(),
     formDisabled: false,
+    switchForm: false,
     valid: true,
     rules: {
       lengthRule: len => v =>
@@ -199,6 +249,7 @@ export default {
         )
       }
     },
+    displayName: '',
     email: '',
     password: '',
     mdi: {
@@ -239,12 +290,18 @@ export default {
   },
   methods: {
     ...mapMutations('authentication', ['setUser']),
-    ...mapActions('authentication', ['login']),
+    ...mapActions('authentication', ['login', 'triggerUpdateUser']),
     getImg,
-    validate() {
-      this.$refs.form.validate()
+    validateLogin() {
+      this.$refs.login.validate()
       if (this.valid) {
-        this.connect('password')
+        this.connect('login')
+      }
+    },
+    validateRegister() {
+      this.$refs.register.validate()
+      if (this.valid) {
+        this.connect('register')
       }
     },
     async connect(method) {
@@ -261,7 +318,7 @@ export default {
       if (method === 'facebook') {
         provider = new firebase.auth.FacebookAuthProvider()
       }
-      if (method === 'password') {
+      if (method === 'login') {
         const self = this
 
         firebase
@@ -274,6 +331,21 @@ export default {
             self.valid = false
           })
       }
+
+      if (method === 'register') {
+        const self = this
+
+        try {
+          await firebase
+            .auth()
+            .createUserWithEmailAndPassword(self.email, self.password)
+        } catch (error) {
+          // Handle Errors here.
+          self.loginError = error.message
+          self.valid = false
+        }
+      }
+
       if (method === 'anonymous') {
         firebase
           .auth()
@@ -288,7 +360,6 @@ export default {
       }
 
       if (provider !== null) {
-        console.log('exec')
         this.setUser(undefined)
 
         try {
