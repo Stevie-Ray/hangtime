@@ -1,14 +1,10 @@
 <template>
   <v-main class="login-screen">
     <v-container class="fill-height">
-      <v-row class="fill-height" no-gutters>
+      <v-row class="fill-height">
         <v-col cols="12">
           <div class="text-center">
-            <v-row
-              no-gutters
-              justify="center"
-              class="logo-container pt-8 pb-12"
-            >
+            <v-row no-gutters justify="center" class="logo-container">
               <v-col class="flex-grow-0">
                 <v-img
                   class="app-logo mr-1"
@@ -24,182 +20,196 @@
               </v-col>
             </v-row>
 
-            <!-- Loader -->
-            <div v-show="user === undefined" data-test="loader">
-              <v-progress-circular :size="48" color="primary" indeterminate>
-              </v-progress-circular>
-              <div class="text-center ">{{ $t('Authenticating...') }}</div>
-            </div>
+            <v-card
+              elevation="2"
+              class="d-flex justify-center align-center"
+              max-width="500"
+              min-height="250"
+              style="margin: 0 auto"
+            >
+              <!-- Loader -->
+              <div v-show="user === undefined" data-test="loader">
+                <v-progress-circular :size="48" color="primary" indeterminate>
+                </v-progress-circular>
+                <div class="text-center ">{{ $t('Authenticating...') }}</div>
+              </div>
 
-            <!-- Offline instruction -->
-            <div v-show="!networkOnLine" data-test="offline-instruction">
-              Please check your connection, login feature is not available
-              offline.
-            </div>
+              <!-- Offline instruction -->
+              <div v-show="!networkOnLine" data-test="offline-instruction">
+                Please check your connection, login feature is not available
+                offline.
+              </div>
 
-            <v-card elevation="2" max-width="500" style="margin: 0 auto">
-              <v-card-title class="justify-center">
-                {{ $t('Welcome') }}
-              </v-card-title>
-              <v-card-subtitle class="text-center">
-                {{ $t('Continue with') }}
-              </v-card-subtitle>
-              <v-card-text>
-                <!-- Auth UI -->
-                <v-row v-if="networkOnLine">
-                  <v-col cols="6">
-                    <div class="text-center">
+              <!-- Forms -->
+              <div v-show="user !== undefined && !user && networkOnLine">
+                <v-card-title class="justify-center">
+                  {{ $t('Welcome') }}
+                </v-card-title>
+                <v-card-subtitle class="text-center">
+                  {{ $t('Continue with') }}
+                </v-card-subtitle>
+                <v-card-text>
+                  <!-- Auth UI -->
+                  <v-row v-if="networkOnLine">
+                    <v-col cols="6">
+                      <div class="text-center">
+                        <v-btn
+                          v-show="user !== undefined && !user && networkOnLine"
+                          elevation="1"
+                          dark
+                          large
+                          block
+                          color="#1877F2"
+                          @click="connect('facebook')"
+                        >
+                          <v-icon dark left>
+                            {{ mdi.facebook }}
+                          </v-icon>
+                          <span class="social-login-text">
+                            Facebook
+                          </span>
+                        </v-btn>
+                      </div>
+                    </v-col>
+                    <v-col cols="6">
                       <v-btn
                         v-show="user !== undefined && !user && networkOnLine"
                         elevation="1"
+                        block
                         dark
                         large
-                        block
-                        color="#1877F2"
-                        @click="connect('facebook')"
+                        color="#DB4437"
+                        @click="connect('google')"
                       >
-                        <v-icon dark left>
-                          {{ mdi.facebook }}
-                        </v-icon>
+                        <v-icon dark left>{{ mdi.google }}</v-icon>
                         <span class="social-login-text">
-                          Facebook
+                          Google
                         </span>
                       </v-btn>
-                    </div>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-btn
-                      v-show="user !== undefined && !user && networkOnLine"
-                      elevation="1"
-                      block
-                      dark
-                      large
-                      color="#DB4437"
-                      @click="connect('google')"
-                    >
-                      <v-icon dark left>{{ mdi.google }}</v-icon>
-                      <span class="social-login-text">
-                        Google
-                      </span>
-                    </v-btn>
-                  </v-col>
-                </v-row>
+                    </v-col>
+                  </v-row>
 
-                <v-row>
-                  <v-col cols="12">
-                    <div
-                      class="text-center subtitle-2 text-uppercase side-lines"
-                    >
-                      {{ $t('Or') }}
-                    </div>
-                    <!-- Login -->
-                    <v-form
-                      v-if="!switchForm"
-                      ref="login"
-                      v-model="valid"
-                      :disabled="formDisabled"
-                      lazy-validation
-                    >
-                      <v-text-field
-                        v-model="email"
-                        label="E-mail"
-                        autocomplete="email"
-                        :rules="[rules.requiredRule]"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="password"
-                        autocomplete="current-password"
-                        :rules="[rules.requiredRule]"
-                        label="Password"
-                        type="password"
-                        required
-                      ></v-text-field>
+                  <v-row>
+                    <v-col cols="12">
+                      <div
+                        class="text-center subtitle-2 text-uppercase side-lines"
+                      >
+                        {{ $t('Or') }}
+                      </div>
+                      <!-- Login -->
+                      <v-form
+                        v-if="!switchForm"
+                        ref="login"
+                        v-model="valid"
+                        :disabled="formDisabled"
+                        lazy-validation
+                      >
+                        <v-text-field
+                          v-model="email"
+                          label="E-mail"
+                          autocomplete="email"
+                          :rules="[rules.requiredRule]"
+                          required
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="password"
+                          autocomplete="current-password"
+                          :rules="[rules.requiredRule]"
+                          label="Password"
+                          type="password"
+                          required
+                        ></v-text-field>
 
+                        <v-btn
+                          v-show="user !== undefined && !user && networkOnLine"
+                          block
+                          color="primary"
+                          large
+                          class="mt-2 mb-4"
+                          @click="validateLogin"
+                        >
+                          <v-icon left>{{ mdi.key }}</v-icon>
+                          {{ $t('Login') }}
+                        </v-btn>
+                        <v-btn text x-small @click="switchForm = !switchForm">
+                          {{ $t("Don't have an account?") }} {{ $t('Sign up') }}
+                        </v-btn>
+                      </v-form>
+                      <!-- Register -->
+                      <v-form
+                        v-if="switchForm"
+                        ref="register"
+                        v-model="valid"
+                        :disabled="formDisabled"
+                        lazy-validation
+                      >
+                        <v-text-field
+                          v-model="displayName"
+                          label="Name"
+                          placeholder="John Doe"
+                          autocomplete="name"
+                          :rules="[rules.requiredRule]"
+                          required
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="email"
+                          label="E-mail"
+                          autocomplete="email"
+                          :rules="[rules.requiredRule]"
+                          :hint="
+                            $t(
+                              'A verification link will be sent to your email account'
+                            )
+                          "
+                          required
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="password"
+                          autocomplete="new-password"
+                          :rules="[rules.requiredRule]"
+                          label="Password"
+                          type="password"
+                          required
+                        ></v-text-field>
+                        <v-btn
+                          v-show="user !== undefined && !user && networkOnLine"
+                          block
+                          color="primary"
+                          large
+                          class="mt-2 mb-4"
+                          @click="validateRegister"
+                        >
+                          <v-icon left>{{ mdi.key }}</v-icon>
+                          {{ $t('Register') }}
+                        </v-btn>
+                        <v-btn text x-small @click="switchForm = !switchForm">
+                          {{ $t('Back') }}
+                        </v-btn>
+                      </v-form>
+
+                      <div v-if="loginError">
+                        <v-divider class="mt-2 mb-4"></v-divider>
+                        <div>{{ loginError }}</div>
+                      </div>
+                    </v-col>
+                  </v-row>
+
+                  <v-row class="hidden-lg-and-down">
+                    <v-col cols="12" md="12">
                       <v-btn
                         v-show="user !== undefined && !user && networkOnLine"
-                        block
-                        color="primary"
-                        large
-                        class="mt-2 mb-4"
-                        @click="validateLogin"
+                        text
+                        disabled
+                        x-small
+                        @click="connect('anonymous')"
                       >
-                        <v-icon left>{{ mdi.key }}</v-icon>
-                        {{ $t('Login') }}
+                        <v-icon left>{{ mdi.incognito }}</v-icon>
+                        {{ $t('Continue as Guest') }}
                       </v-btn>
-                      <v-btn text x-small @click="switchForm = !switchForm">
-                        {{ $t("Don't have an account?") }} {{ $t('Sign up') }}
-                      </v-btn>
-                    </v-form>
-                    <!-- Register -->
-                    <v-form
-                      v-if="switchForm"
-                      ref="register"
-                      v-model="valid"
-                      :disabled="formDisabled"
-                      lazy-validation
-                    >
-                      <v-text-field
-                        v-model="displayName"
-                        label="Name"
-                        placeholder="John Doe"
-                        autocomplete="name"
-                        :rules="[rules.requiredRule]"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="email"
-                        label="E-mail"
-                        autocomplete="email"
-                        :rules="[rules.requiredRule]"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="password"
-                        autocomplete="new-password"
-                        :rules="[rules.requiredRule]"
-                        label="Password"
-                        type="password"
-                        required
-                      ></v-text-field>
-                      <v-btn
-                        v-show="user !== undefined && !user && networkOnLine"
-                        block
-                        color="primary"
-                        large
-                        class="mt-2 mb-4"
-                        @click="validateRegister"
-                      >
-                        <v-icon left>{{ mdi.key }}</v-icon>
-                        {{ $t('Register') }}
-                      </v-btn>
-                      <v-btn text x-small @click="switchForm = !switchForm">
-                        {{ $t('Back') }}
-                      </v-btn>
-                    </v-form>
-
-                    <div v-if="loginError">
-                      <v-divider class="mt-2 mb-4"></v-divider>
-                      <div>{{ loginError }}</div>
-                    </div>
-                  </v-col>
-                </v-row>
-
-                <v-row class="hidden-lg-and-down">
-                  <v-col cols="12" md="12">
-                    <v-btn
-                      v-show="user !== undefined && !user && networkOnLine"
-                      text
-                      disabled
-                      x-small
-                      @click="connect('anonymous')"
-                    >
-                      <v-icon left>{{ mdi.incognito }}</v-icon>
-                      {{ $t('Continue as Guest') }}
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </div>
             </v-card>
             <div
               class="text-caption grey--text text--darken-2 font-weight-light mt-4"
@@ -342,7 +352,7 @@ export default {
             .then(userData => {
               // show loader
               this.setUser(undefined)
-              console.log('test')
+              userData.user.sendEmailVerification()
               userData.user.updateProfile({
                 displayName: self.displayName
               })
@@ -358,8 +368,7 @@ export default {
         firebase
           .auth()
           .signInAnonymously()
-          .then(result => {
-            console.log(result)
+          .then(() => {
             this.$router.push('/workouts')
           })
           .catch(err => {
@@ -403,6 +412,11 @@ export default {
     padding-top: 0 !important;
     padding-bottom: 16px !important;
   }
+}
+
+.logo-container {
+  padding-top: 7.5vh;
+  padding-bottom: 7.5vh;
 }
 
 .login-screen {
