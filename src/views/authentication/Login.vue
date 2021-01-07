@@ -161,6 +161,7 @@
                               'A verification link will be sent to your email account'
                             )
                           "
+                          persistent-hint
                           required
                         ></v-text-field>
                         <v-text-field
@@ -190,6 +191,11 @@
                       <div v-if="loginError">
                         <v-divider class="mt-2 mb-4"></v-divider>
                         <div>{{ loginError }}</div>
+                      </div>
+                      <div v-if="resetPassword">
+                        <v-divider class="mt-2 mb-4"></v-divider>
+                        <div class="mb-2">Forgot your password?</div>
+                        <v-btn @click="connect('reset')">Reset password</v-btn>
                       </div>
                     </v-col>
                   </v-row>
@@ -234,6 +240,7 @@ import { mdiGoogle, mdiFacebook, mdiIncognito, mdiKey } from '@mdi/js'
 export default {
   data: () => ({
     loginError: null,
+    resetPassword: false,
     year: new Date().getFullYear(),
     formDisabled: false,
     switchForm: false,
@@ -316,6 +323,7 @@ export default {
     },
     async connect(method) {
       this.loginError = null
+      this.resetPassword = false
       let provider = null
 
       if (method === 'google') {
@@ -337,7 +345,12 @@ export default {
           // eslint-disable-next-line func-names
           .catch(function(error) {
             // Handle Errors here.
-            self.loginError = error.message
+            self.errorCode = error.code
+            if (self.errorCode === 'auth/wrong-password') {
+              self.resetPassword = true
+            } else {
+              self.loginError = error.message
+            }
             self.valid = false
             self.setUser(null)
           })
@@ -361,6 +374,20 @@ export default {
             self.loginError = error.message
             self.valid = false
             self.setUser(null)
+          })
+      }
+
+      if (method === 'reset') {
+        const self = this
+        firebase
+          .auth()
+          .sendPasswordResetEmail(self.email)
+          .then(() => {
+            self.resetPassword = false
+            self.loginError = this.$i18n.t('Password reset email link sent!')
+          })
+          .catch(err => {
+            this.loginError = err
           })
       }
 

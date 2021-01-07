@@ -22,6 +22,7 @@
         </v-col>
       </v-row>
 
+      <!-- No community workouts for this hangboard  -->
       <v-row>
         <v-card flat>
           <v-card-title>
@@ -45,17 +46,7 @@
         </v-card>
       </v-row>
     </v-container>
-    <v-list
-      v-if="(!user && !workouts) || (workouts && !workouts.length)"
-      three-line
-    >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title></v-list-item-title>
-          <v-list-item-subtitle> </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+    <!-- Render comunity workouts  -->
     <v-list two-line>
       <workout-list-item
         v-for="(workout, index) in workouts"

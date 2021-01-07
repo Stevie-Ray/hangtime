@@ -16,7 +16,7 @@
         <p class="description">
           {{
             $t(
-              "Install this application to your home screen for quickly and easy access when you're on the go"
+              "Install this application to your home screen for quick and easy access when you're on the go"
             )
           }}
         </p>
