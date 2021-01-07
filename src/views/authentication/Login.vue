@@ -330,7 +330,7 @@ export default {
       }
       if (method === 'login') {
         const self = this
-
+        this.setUser(undefined)
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
@@ -339,29 +339,29 @@ export default {
             // Handle Errors here.
             self.loginError = error.message
             self.valid = false
+            self.setUser(null)
           })
       }
 
       if (method === 'register') {
         const self = this
-
-        try {
-          await firebase
-            .auth()
-            .createUserWithEmailAndPassword(self.email, self.password)
-            .then(userData => {
-              // show loader
-              this.setUser(undefined)
-              userData.user.sendEmailVerification()
-              userData.user.updateProfile({
-                displayName: self.displayName
-              })
+        this.setUser(undefined)
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(self.email, self.password)
+          .then(userData => {
+            userData.user.sendEmailVerification()
+            userData.user.updateProfile({
+              displayName: self.displayName
             })
-        } catch (error) {
-          // Handle Errors here.
-          self.loginError = error.message
-          self.valid = false
-        }
+          })
+          // eslint-disable-next-line func-names
+          .catch(function(error) {
+            // Handle Errors here.
+            self.loginError = error.message
+            self.valid = false
+            self.setUser(null)
+          })
       }
 
       if (method === 'anonymous') {
@@ -373,6 +373,7 @@ export default {
           })
           .catch(err => {
             this.loginError = err
+            this.setUser(null)
           })
       }
 
