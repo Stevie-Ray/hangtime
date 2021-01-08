@@ -10,8 +10,8 @@
       </v-list-item-avatar>
 
       <v-list-item-content
-        @click="$emit('go-to-workout-details', data.id)"
         class="workout-item-text"
+        @click="$emit('go-to-workout-details', data.id)"
       >
         <v-list-item-title>
           <v-icon v-if="data.video" small>{{ mdi.video }}</v-icon>
