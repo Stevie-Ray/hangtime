@@ -250,17 +250,13 @@ export default {
       navigator
         .share({
           title: `${this.currentWorkout.name} | ${this.appTitle}`,
-          text: this.currentWorkout.description,
+          text: `${this.data.name} | ${this.appTitle} - ${this.data.description}`,
           url: document.location.href
         })
         .then(() => {
           // eslint-disable-next-line no-console
           console.log('Thanks for sharing!')
         })
-        .catch(
-          // eslint-disable-next-line no-console
-          console.error
-        )
     }
   }
 }

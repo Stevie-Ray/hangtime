@@ -1,6 +1,6 @@
 <template>
   <div class="workout-item">
-    <v-list-item ripple>
+    <v-list-item v-focus="showOptions" ripple>
       <v-list-item-avatar class="grey lighten-2" @click.stop="overlay = true">
         <v-img
           v-if="data && data.user && data.user.photoURL"
@@ -65,12 +65,49 @@ export default {
     'workout-subscribe': WorkoutSubscribe,
     'workout-share': WorkoutShare
   },
+  directives: {
+    focus: {
+      // directive definition
+      // eslint-disable-next-line no-unused-vars
+      bind(el, { value }) {
+        if (typeof value !== 'function') {
+          console.warn(`Expect a function, got ${value}`)
+          return
+        }
+
+        let pressTimer = null
+
+        const start = e => {
+          if (e.type === 'click' && e.button !== 0) {
+            return
+          }
+
+          if (pressTimer === null) {
+            pressTimer = setTimeout(() => value(e), 1000)
+          }
+        }
+
+        const cancel = () => {
+          if (pressTimer !== null) {
+            clearTimeout(pressTimer)
+            pressTimer = null
+          }
+        }
+
+        ;['mousedown', 'touchstart'].forEach(e => el.addEventListener(e, start))
+        ;['click', 'mouseout', 'touchend', 'touchcancel'].forEach(e =>
+          el.addEventListener(e, cancel)
+        )
+      }
+    }
+  },
   props: {
     data: Object,
     index: Number
   },
   data: () => ({
     overlay: false,
+    shareAPI: navigator.share,
     mdi: {
       video: mdiVideo
     }
@@ -78,6 +115,7 @@ export default {
   computed: {
     ...mapState('authentication', ['user']),
     ...mapGetters('workouts', ['difficultyById']),
+    ...mapState('app', ['appTitle']),
     userWorkout() {
       if (!this.data) return
       // eslint-disable-next-line consistent-return
@@ -85,7 +123,32 @@ export default {
     }
   },
   methods: {
-    count
+    count,
+    showOptions() {
+      const path =
+        window.location.origin +
+        this.$router.resolve({
+          name: 'workout',
+          params: {
+            id: this.data.id,
+            company: this.data.company,
+            hangboard: this.data.hangboard,
+            userId: this.data.user.id
+          }
+        }).href
+      if (this.shareAPI && this.data && this.data.share) {
+        navigator
+          .share({
+            title: `${this.data.name} | ${this.appTitle}`,
+            text: `${this.data.name} | ${this.appTitle} - ${this.data.description}`,
+            url: `${path}`
+          })
+          .then(() => {
+            // eslint-disable-next-line no-console
+            console.log('Thanks for sharing!')
+          })
+      }
+    }
   }
 }
 </script>
