@@ -31,7 +31,7 @@
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
     "vue-head": "^2.2.0",
-    "vue-i18n": "^8.22.2",
+    "vue-i18n": "^8.22.3",
     "vue-router": "^3.4.9",
     "vue-simple-svg": "^2.0.2",
     "vuedraggable": "^2.24.3",
