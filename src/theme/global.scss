@@ -64,6 +64,15 @@
     }
   }
 
+  .v-virtual-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-bottom: 5rem;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   .run {
     .hand-container {
       position: relative;

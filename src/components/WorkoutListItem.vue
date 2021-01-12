@@ -85,7 +85,7 @@ export default {
           }
 
           if (pressTimer === null) {
-            pressTimer = setTimeout(() => value(e), 400)
+            pressTimer = setTimeout(() => value(e), 1000)
           }
         }
 
