@@ -48,25 +48,33 @@
     </v-container>
     <!-- Render comunity workouts  -->
     <v-list two-line>
-      <workout-list-item
-        v-for="(workout, index) in workouts"
-        :key="workout.id"
-        class="community-workout-row"
-        :index="index"
-        :disable-actions="!networkOnLine"
-        :data="workout"
-        @go-to-workout-details="
-          $router.push({
-            name: 'workout',
-            params: {
-              id: $event,
-              company: workout.company,
-              hangboard: workout.hangboard,
-              userId: workout.user.id
-            }
-          })
-        "
-      ></workout-list-item>
+      <v-virtual-scroll
+        :items="workouts"
+        item-height="72"
+        bench="2"
+        :height="windowHeight"
+      >
+        <template #default="{ item, index }">
+          <workout-list-item
+            :key="item.id"
+            class="community-workout-row"
+            :index="index"
+            :disable-actions="!networkOnLine"
+            :data="item"
+            @go-to-workout-details="
+              $router.push({
+                name: 'workout',
+                params: {
+                  id: $event,
+                  company: item.company,
+                  hangboard: item.hangboard,
+                  userId: item.user.id
+                }
+              })
+            "
+          ></workout-list-item>
+        </template>
+      </v-virtual-scroll>
     </v-list>
   </div>
 </template>
@@ -79,6 +87,7 @@ import { mdiStarOutline } from '@mdi/js'
 export default {
   components: { WorkoutListItem },
   data: () => ({
+    windowHeight: window.innerHeight,
     mdi: {
       starOutline: mdiStarOutline
     }

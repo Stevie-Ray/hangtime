@@ -70,7 +70,6 @@ export default {
   },
   directives: {
     focus: {
-      // directive definition
       // eslint-disable-next-line no-unused-vars
       bind(el, { value }) {
         if (typeof value !== 'function') {
@@ -86,7 +85,7 @@ export default {
           }
 
           if (pressTimer === null) {
-            pressTimer = setTimeout(() => value(e), 1000)
+            pressTimer = setTimeout(() => value(e), 2000)
           }
         }
 
