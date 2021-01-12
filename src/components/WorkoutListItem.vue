@@ -85,7 +85,7 @@ export default {
           }
 
           if (pressTimer === null) {
-            pressTimer = setTimeout(() => value(e), 2000)
+            pressTimer = setTimeout(() => value(e), 400)
           }
         }
 
@@ -96,10 +96,8 @@ export default {
           }
         }
 
-        ;['mousedown', 'touchstart'].forEach(e => el.addEventListener(e, start))
-        ;['click', 'mouseout', 'touchend', 'touchcancel'].forEach(e =>
-          el.addEventListener(e, cancel)
-        )
+        ;['pointerdown'].forEach(e => el.addEventListener(e, start))
+        ;['pointerup'].forEach(e => el.addEventListener(e, cancel))
       }
     }
   },
