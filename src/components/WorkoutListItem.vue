@@ -1,6 +1,6 @@
 <template>
   <div class="workout-item">
-    <v-list-item v-focus="showOptions" ripple>
+    <v-list-item v-focus="showOptions" data-long-press-delay="1600" ripple>
       <v-list-item-avatar class="grey lighten-2" @click.stop="overlay = true">
         <v-img
           v-if="data && data.user && data.user.photoURL"
@@ -60,6 +60,7 @@ import WorkoutSubscribe from '@/components/WorkoutSubscribe'
 import WorkoutShare from '@/components/WorkoutShare'
 import { count } from '@/misc/helpers'
 import { mdiVideo } from '@mdi/js'
+import 'long-press-event/dist/long-press-event.min'
 
 export default {
   name: 'WorkoutListItem',
@@ -70,34 +71,9 @@ export default {
   },
   directives: {
     focus: {
-      // eslint-disable-next-line no-unused-vars
       bind(el, { value }) {
-        if (typeof value !== 'function') {
-          console.warn(`Expect a function, got ${value}`)
-          return
-        }
-
-        let pressTimer = null
-
-        const start = e => {
-          if (e.type === 'click' && e.button !== 0) {
-            return
-          }
-
-          if (pressTimer === null) {
-            pressTimer = setTimeout(() => value(e), 400 * 4)
-          }
-        }
-
-        const cancel = () => {
-          if (pressTimer !== null) {
-            clearTimeout(pressTimer)
-            pressTimer = null
-          }
-        }
-
-        ;['pointerdown'].forEach(e => el.addEventListener(e, start))
-        ;['pointerup'].forEach(e => el.addEventListener(e, cancel))
+        if (typeof value !== 'function') return
+        el.addEventListener('long-press', e => value(e))
       }
     }
   },
