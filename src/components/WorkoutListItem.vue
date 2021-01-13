@@ -1,6 +1,10 @@
 <template>
   <div class="workout-item">
-    <v-list-item v-focus="showOptions" data-long-press-delay="1600" ripple>
+    <v-list-item
+      v-focus="showOptions"
+      :data-long-press-delay="longPressTime"
+      ripple
+    >
       <v-list-item-avatar class="grey lighten-2" @click.stop="overlay = true">
         <v-img
           v-if="data && data.user && data.user.photoURL"
@@ -83,6 +87,7 @@ export default {
   },
   data: () => ({
     overlay: false,
+    longPressTime: 800,
     shareAPI: navigator.share,
     mdi: {
       video: mdiVideo
