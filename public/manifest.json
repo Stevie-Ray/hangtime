@@ -2,7 +2,7 @@
   "name": "HangTime",
   "short_name": "HangTime",
   "description": "Fingerboard / Hangboard training for climbers.",
-  "categories": ["fitness","health","sports"],
+  "categories": ["fitness", "health", "sports"],
   "lang": "en-US",
   "start_url": "/?utm_source=homescreen",
   "display": "standalone",

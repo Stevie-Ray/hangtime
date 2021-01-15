@@ -45,10 +45,10 @@
       <!--        <img :src="user.photoURL" :alt="user.displayName" />-->
       <!--      </v-avatar>-->
 
-      <v-menu bottom left min-width="200">
+      <v-menu bottom left min-width="200" class="menu-hangburger">
         <template #activator="{ on }">
-          <v-btn dark icon v-on="on">
-            <v-icon>{{ mdi.dotsVertical }}</v-icon>
+          <v-btn dark icon v-on="on" class="menu-hamburger--button">
+            <v-icon class="enu-hamburger--icon">{{ mdi.dotsVertical }}</v-icon>
           </v-btn>
         </template>
 
@@ -83,8 +83,14 @@
         color="white"
         exact
         slider-color="white"
+        class="hello"
       >
-        <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.route">
+        <v-tab
+          v-for="tab of tabs"
+          :key="tab.id"
+          :class="tab.class"
+          :to="tab.route"
+        >
           {{ $t(tab.name) }}
         </v-tab>
       </v-tabs>
@@ -113,6 +119,7 @@
               <v-btn
                 v-if="networkOnLine && activeFab.click !== null"
                 :key="activeFab.icon"
+                :class="activeFab.class"
                 fixed
                 fab
                 bottom
@@ -170,9 +177,9 @@ export default {
     addProgressDialog: false,
     hangboardDialog: false,
     tabs: [
-      { id: 0, name: 'workout', route: `/` },
-      { id: 1, name: 'community', route: `/community` },
-      { id: 2, name: 'progress', route: `/progress` }
+      { id: 0, name: 'workout', route: '/', class: 'tab-workout' },
+      { id: 1, name: 'community', route: '/community', class: 'tab-community' },
+      { id: 2, name: 'progress', route: '/progress', class: 'tab-progress' }
     ],
     mdi: {
       plus: mdiPlus,
@@ -192,11 +199,19 @@ export default {
       }
       switch (this.activeTab) {
         case '/':
-          return { route: `/${this.user.id}/workout/new`, icon: this.mdi.plus }
+          return {
+            route: `/${this.user.id}/workout/new`,
+            icon: this.mdi.plus,
+            class: 'button-workout-new'
+          }
         case '/community':
-          return { click: data, icon: this.mdi.tune }
+          return {
+            click: data,
+            icon: this.mdi.tune,
+            class: 'button-community-filter'
+          }
         case '/progress':
-          return { click: 2, icon: this.mdi.plus }
+          return { click: 2, icon: this.mdi.plus, class: 'button-progress-new' }
         default:
           return {}
       }

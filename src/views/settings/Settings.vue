@@ -15,7 +15,10 @@
         <v-row justify="center" align="start">
           <v-col cols="12">
             <v-list two-line>
-              <v-list-item class="big py-2 pt-0" to="/settings/profile">
+              <v-list-item
+                class="item-profile big py-2 pt-0"
+                to="/settings/profile"
+              >
                 <v-list-item-avatar
                   v-if="user"
                   size="56"
@@ -43,7 +46,7 @@
 
               <v-divider></v-divider>
 
-              <v-list-item to="/settings/general">
+              <v-list-item class="item-general" to="/settings/general">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1" v-text="mdi.cog"></v-icon>
                 </v-list-item-icon>
@@ -58,7 +61,7 @@
 
               <v-divider inset></v-divider>
 
-              <v-list-item to="/settings/hangboards">
+              <v-list-item class="item-hangboards" to="/settings/hangboards">
                 <v-list-item-icon>
                   <span class="v-icon notranslate v-icon--svg">
                     <svg-inline
@@ -78,7 +81,7 @@
 
               <v-divider inset></v-divider>
 
-              <v-list-item to="/settings/workouts">
+              <v-list-item class="item-workouts" to="/settings/workouts">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{ mdi.timer }}</v-icon>
                 </v-list-item-icon>
@@ -93,7 +96,10 @@
 
               <v-divider inset></v-divider>
 
-              <v-list-item to="/settings/notifications">
+              <v-list-item
+                class="item-notifications"
+                to="/settings/notifications"
+              >
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{ mdi.bellRing }}</v-icon>
                 </v-list-item-icon>
@@ -110,7 +116,7 @@
 
               <v-divider inset></v-divider>
 
-              <v-list-item to="/settings/help">
+              <v-list-item class="item-help" to="/settings/help">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{
                     mdi.helpCircleOutline

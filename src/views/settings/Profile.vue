@@ -10,7 +10,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn v-if="networkOnLine" icon @click="logout">
+      <v-btn v-if="networkOnLine" class="button-logout" icon @click="logout">
         <v-icon>{{ mdi.accountOff }}</v-icon>
       </v-btn>
     </v-app-bar>

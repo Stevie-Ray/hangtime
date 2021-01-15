@@ -107,12 +107,14 @@
                         <v-text-field
                           v-model="email"
                           label="E-mail"
+                          class="input-email"
                           autocomplete="email"
                           :rules="[rules.requiredRule]"
                           required
                         ></v-text-field>
                         <v-text-field
                           v-model="password"
+                          class="input-password"
                           autocomplete="current-password"
                           :rules="[rules.requiredRule]"
                           label="Password"
@@ -146,6 +148,7 @@
                         <v-text-field
                           v-model="displayName"
                           label="Name"
+                          class="input-name"
                           placeholder="John Doe"
                           autocomplete="name"
                           :rules="[rules.requiredRule]"
@@ -154,6 +157,7 @@
                         <v-text-field
                           v-model="email"
                           label="E-mail"
+                          class="input-email"
                           autocomplete="email"
                           :rules="[rules.requiredRule]"
                           :hint="
@@ -167,6 +171,7 @@
                         <v-text-field
                           v-model="password"
                           autocomplete="new-password"
+                          class="input-password"
                           :rules="[rules.requiredRule]"
                           label="Password"
                           type="password"

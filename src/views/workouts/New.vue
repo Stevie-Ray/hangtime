@@ -41,6 +41,7 @@
       <v-btn
         v-if="currentWorkout.exercises && currentWorkout.exercises.length"
         icon
+        class="button-workout-save"
         @click="saveExercises"
       >
         <v-icon>{{ mdi.contentSave }}</v-icon>
@@ -62,6 +63,7 @@
               <v-btn
                 slot="activator"
                 color="secondary"
+                class="button-workout-add"
                 dark
                 fab
                 @click="addExercise"

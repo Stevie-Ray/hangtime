@@ -13,7 +13,7 @@
           <v-text-field
             v-model="workoutToCreateName"
             :placeholder="$t('New workout')"
-            class="workout-name-input required"
+            class="input-workout-name required"
             counter="36"
             :rules="[rules.required, rules.length(36)]"
             :label="$t('Name')"
@@ -25,7 +25,7 @@
             counter="140"
             rows="3"
             :rules="[rules.required, rules.length(140)]"
-            class="workout-description-input required"
+            class="input-workout-description required"
             :placeholder="
               $t('For example indicate when this workout is most beneficial')
             "
@@ -37,7 +37,7 @@
             :items="levels"
             item-text="name"
             item-value="value"
-            class="workout-difficulty-input required"
+            class="input-workout-difficulty required"
             :label="
               $t('Difficulty for a {grade} climber', {
                 grade: ircra
@@ -58,13 +58,14 @@
           <v-text-field
             v-model="workoutToCreateVideo"
             placeholder="https://www.youtube.com/watch?v=xxxxxxxx"
-            class="workout-video-input"
+            class="input-workout-video"
             :label="$t('Video')"
           >
           </v-text-field>
 
           <v-checkbox
             v-model="workoutToCreateShare"
+            class="checkbox-share"
             hide-details="auto"
             :label="$t('Share with the community')"
           ></v-checkbox>
@@ -75,12 +76,17 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text color="primary" @click="$emit('input', false)">
+        <v-btn
+          class="button-workout-close"
+          text
+          color="primary"
+          @click="$emit('input', false)"
+        >
           {{ $t('Close') }}
         </v-btn>
         <v-btn
           text
-          class="add-exersice-btn"
+          class="button-workout-save"
           :disabled="
             workoutToCreateName === '' ||
               typeof workoutToCreateName === 'undefined' ||
