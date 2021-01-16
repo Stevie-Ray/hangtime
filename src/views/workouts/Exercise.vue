@@ -67,8 +67,8 @@
             <v-speed-dial bottom right fixed>
               <v-btn
                 v-if="editWorkout"
-                class="button-exercise-add"
                 slot="activator"
+                class="button-exercise-add"
                 color="secondary"
                 dark
                 fab

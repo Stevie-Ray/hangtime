@@ -47,7 +47,7 @@
 
       <v-menu bottom left min-width="200" class="menu-hangburger">
         <template #activator="{ on }">
-          <v-btn dark icon v-on="on" class="menu-hamburger--button">
+          <v-btn dark icon class="menu-hamburger--button" v-on="on">
             <v-icon class="enu-hamburger--icon">{{ mdi.dotsVertical }}</v-icon>
           </v-btn>
         </template>

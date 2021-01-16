@@ -55,6 +55,7 @@
                       <div class="text-center">
                         <v-btn
                           v-show="user !== undefined && !user && networkOnLine"
+                          data-test="login-btn"
                           elevation="1"
                           dark
                           large
@@ -74,6 +75,7 @@
                     <v-col cols="6">
                       <v-btn
                         v-show="user !== undefined && !user && networkOnLine"
+                        data-test="login-btn"
                         elevation="1"
                         block
                         dark
@@ -127,6 +129,7 @@
                           block
                           color="primary"
                           large
+                          data-test="login-btn"
                           class="mt-2 mb-4"
                           @click="validateLogin"
                         >
