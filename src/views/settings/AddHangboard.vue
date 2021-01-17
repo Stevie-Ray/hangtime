@@ -36,7 +36,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import HangboardSelect from '@/components/HangboardSelect'
+import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect'
 import { mdiArrowLeft, mdiContentSave } from '@mdi/js'
 
 export default {

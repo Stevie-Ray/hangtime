@@ -81,7 +81,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import WorkoutListItem from '@/components/WorkoutListItem'
+import WorkoutListItem from '@/components/molecules/WorkoutListItem/WorkoutListItem'
 import { mdiStarOutline } from '@mdi/js'
 
 export default {

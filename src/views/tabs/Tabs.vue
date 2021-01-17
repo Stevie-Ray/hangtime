@@ -135,6 +135,7 @@
 
             <dialog-hangboard-switch
               v-model="hangboardDialog"
+              :user="user"
             ></dialog-hangboard-switch>
 
             <dialog-community-filter v-model="filterDialog">
@@ -147,6 +148,7 @@
 
             <dialog-add-progress
               v-model="addProgressDialog"
+              :user="user"
             ></dialog-add-progress>
           </v-col>
         </v-row>

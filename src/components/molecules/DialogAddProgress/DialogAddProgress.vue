@@ -11,6 +11,7 @@
 
       <v-card-text>
         <hangboard
+          :user="user"
           :data="hangboardData"
           :edit-workout="true"
           @left="setLeft($event)"
@@ -32,14 +33,15 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 
 export default {
   name: 'DialogAddProgress',
   components: { Hangboard },
   props: {
-    value: Boolean
+    value: Boolean,
+    user: Object
   },
   data: () => ({
     hangboardData: {
@@ -49,7 +51,6 @@ export default {
     }
   }),
   computed: {
-    ...mapState('authentication', ['user']),
     ...mapGetters('progress', ['statsById', 'bestStatsById']),
     currentStats() {
       if (!this.user) return

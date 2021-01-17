@@ -43,7 +43,7 @@ export default makeDecorator({
       vuetify,
       components: { WrappedComponent },
       template: `
-        <v-app>
+        <v-app id="app">
           <v-container fluid>
             <wrapped-component />
           </v-container>

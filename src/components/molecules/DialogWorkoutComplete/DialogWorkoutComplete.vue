@@ -20,7 +20,7 @@
         </div>
         <div>{{ $t('Hangboarding') }}: {{ count(timeHoldingOn) }}</div>
 
-        <v-divider class="my-4"></v-divider>
+        <v-divider v-if="user && user.completed" class="my-4"></v-divider>
 
         <div
           v-if="user && user.completed && !isNaN(user.completed.time)"
@@ -42,7 +42,7 @@
         >
           {{ $t('Workouts done') }}: {{ user.completed.amount }}
         </div>
-        <v-divider class="mt-4"></v-divider>
+        <v-divider v-if="user && user.completed" class="my-4"></v-divider>
       </v-card-text>
 
       <v-card-actions>
@@ -64,6 +64,7 @@ import { count } from '@/misc/helpers'
 
 export default {
   props: {
+    user: Object,
     value: Boolean,
     currentWorkout: Object,
     timeHoldingOn: Number,
@@ -73,7 +74,6 @@ export default {
     shareAPI: navigator.share
   }),
   computed: {
-    ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine', 'appTitle']),
     show: {
       get() {

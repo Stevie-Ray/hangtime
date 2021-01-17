@@ -97,6 +97,7 @@
     <!-- Complete Dialog -->
     <dialog-workout-complete
       v-model="dialogs.complete"
+      :user="user"
       :current-workout="currentWorkout"
       :time-in-workout="timeInWorkout"
       :time-holding-on="timeHoldingOn"

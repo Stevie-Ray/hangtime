@@ -73,6 +73,7 @@
           <v-col cols="12">
             <hangboard
               v-if="currentStats[index]"
+              :user="user"
               :data="currentStats[index]"
               :edit-workout="false"
             ></hangboard>

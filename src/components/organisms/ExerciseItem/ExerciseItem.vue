@@ -51,6 +51,7 @@
       <v-col cols="12">
         <!-- hangboard -->
         <hangboard
+          :user="user"
           :data="currentExercise"
           :edit-workout="editWorkout"
           @left="setLeft($event)"

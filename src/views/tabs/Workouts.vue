@@ -4,7 +4,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import WorkoutList from '@/components/WorkoutList'
+import WorkoutList from '@/components/organisms/WorkoutList/WorkoutList'
 
 export default {
   components: { WorkoutList },

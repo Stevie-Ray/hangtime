@@ -123,6 +123,7 @@
                     <v-col cols="12" class="py-0">
                       <hangboard
                         v-if="currentStats"
+                        :user="user"
                         :data="currentStats[index]"
                         :edit-workout="false"
                       ></hangboard>

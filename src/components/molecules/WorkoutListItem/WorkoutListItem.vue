@@ -51,7 +51,11 @@
       </v-list-item-action>
     </v-list-item>
 
-    <dialog-user-image v-model="overlay" :data="data.user"></dialog-user-image>
+    <dialog-user-image
+      v-if="data"
+      v-model="overlay"
+      :data="data.user"
+    ></dialog-user-image>
 
     <v-divider inset></v-divider>
   </div>
@@ -98,7 +102,7 @@ export default {
     ...mapGetters('workouts', ['difficultyById']),
     ...mapState('app', ['appTitle']),
     userWorkout() {
-      if (!this.data) return
+      if (!this.data || !this.user) return
       // eslint-disable-next-line consistent-return
       return this.data.user.id === this.user.id
     }

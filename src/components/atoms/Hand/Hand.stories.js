@@ -18,7 +18,7 @@ export const Default = () => ({
     },
     currentExercise: {
       type: Object,
-      default: object('currentExercise:', {
+      default: object('currentExercise', {
         exercise: 0,
         hold: 20,
         left: 1,

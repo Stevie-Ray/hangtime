@@ -23,7 +23,7 @@
           <v-card-title>
             {{ $t('No personal workouts found') }}
           </v-card-title>
-          <v-card-subtitle>
+          <v-card-subtitle v-if="user">
             {{
               $t(
                 "You haven't added any {company} {hangboard} workouts. Use the below button to get started",
@@ -80,7 +80,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import WorkoutListItem from '@/components/WorkoutListItem'
+import WorkoutListItem from '@/components/molecules/WorkoutListItem/WorkoutListItem'
 import { mdiPlus } from '@mdi/js'
 
 export default {

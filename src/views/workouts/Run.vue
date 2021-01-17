@@ -50,7 +50,10 @@
                 <v-container fluid class="py-0">
                   <v-row>
                     <v-col cols="12" class="py-0">
-                      <hangboard :data="currentExercise"></hangboard>
+                      <hangboard
+                        :user="user"
+                        :data="currentExercise"
+                      ></hangboard>
                       <hand
                         v-if="
                           currentExercise.leftHand || currentExercise.rightHand

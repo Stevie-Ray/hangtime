@@ -12,6 +12,29 @@ export default {
 
 export const Default = () => ({
   props: {
+    user: {
+      type: Object,
+      default: object('user', {
+        completed: {
+          amount: 10,
+          hold: 200,
+          time: 300
+        },
+        settings: {
+          selected: 1,
+          hangboards: [
+            {
+              company: 1,
+              hangboard: 0
+            },
+            {
+              company: 1,
+              hangboard: 1
+            }
+          ]
+        }
+      })
+    },
     dialog: {
       type: Boolean,
       default: boolean('dialog', true)
@@ -59,12 +82,14 @@ export const Default = () => ({
   methods: {
     input: action('input')
   },
-  template: `<dialog-workout-complete
-:value="dialog" 
-@input="input"
-:current-workout="currentWorkout"
-:time-in-workout="timeInWorkout"
-:time-holding-on="timeHoldingOn"
-  >
-  </dialog-workout-complete>`
+  template: `
+      <dialog-workout-complete
+          :user="user"
+          :value="dialog"
+          @input="input"
+          :current-workout="currentWorkout"
+          :time-in-workout="timeInWorkout"
+          :time-holding-on="timeHoldingOn"
+      >
+      </dialog-workout-complete>`
 })

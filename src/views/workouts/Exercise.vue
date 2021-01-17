@@ -86,7 +86,7 @@
 
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
-import ExerciseItem from '@/components/ExerciseItem'
+import ExerciseItem from '@/components/organisms/ExerciseItem/ExerciseItem'
 import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
 import { getImg, count } from '@/misc/helpers'
 import {

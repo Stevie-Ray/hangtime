@@ -51,6 +51,7 @@ import { getImg } from '@/misc/helpers'
 export default {
   components: { 'svg-inline': SimpleSVG },
   props: {
+    user: Object,
     data: Object,
     editWorkout: Boolean
   },
@@ -60,7 +61,6 @@ export default {
     }
   }),
   computed: {
-    ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
     hangboard() {
       if (!this.user) return
@@ -130,4 +130,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

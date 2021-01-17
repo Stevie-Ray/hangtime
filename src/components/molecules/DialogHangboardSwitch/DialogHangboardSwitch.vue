@@ -51,11 +51,11 @@ import { getImg } from '@/misc/helpers'
 export default {
   name: 'DialogHangboardSwitch',
   props: {
-    value: Boolean
+    value: Boolean,
+    user: Object
   },
   data: () => ({}),
   computed: {
-    ...mapState('authentication', ['user']),
     ...mapState('companies', ['companies']),
     show: {
       get() {

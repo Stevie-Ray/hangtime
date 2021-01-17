@@ -18,6 +18,7 @@ export const Default = () => ({
     },
     user: {
       default: object('user', {
+        id: 'xxxxx',
         photoURL: 'https://thispersondoesnotexist.com/image',
         displayName: 'Person Does Not Exist'
       })

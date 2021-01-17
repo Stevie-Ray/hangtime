@@ -35,6 +35,7 @@
             <v-col cols="8" class="d-flex align-center pt-0 pb-0">
               <hangboard
                 class="pa-0"
+                :user="user"
                 :data="data"
                 :edit-workout="false"
               ></hangboard>
