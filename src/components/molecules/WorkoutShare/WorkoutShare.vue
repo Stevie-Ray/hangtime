@@ -23,7 +23,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import DialogWorkoutShare from '@/components/DialogWorkoutShare'
+import DialogWorkoutShare from '@/components/molecules/DialogWorkoutShare/DialogWorkoutShare'
 import { mdiStarOutline, mdiStarOff } from '@mdi/js'
 
 export default {

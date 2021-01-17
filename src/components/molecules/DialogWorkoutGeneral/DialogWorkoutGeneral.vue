@@ -60,11 +60,13 @@
                 :rules="[rules.required]"
                 class="required"
                 :label="
-                  $t('Difficulty for a {grade} climber', {
-                    grade: ircra
-                      .convert('ircra', user.settings.grade)
-                      .to(user.settings.scale)[user.settings.scale]
-                  })
+                  user
+                    ? $t('Difficulty for a {grade} climber', {
+                        grade: ircra
+                          .convert('ircra', user.settings.grade)
+                          .to(user.settings.scale)[user.settings.scale]
+                      })
+                    : $t('Difficulty for a {grade} climber', { grade: 'new' })
                 "
               >
                 <template #selection="{ item }">
@@ -105,7 +107,7 @@
           style="margin-right: 12px;"
         >
           <v-img
-            v-if="currentWorkout.user.photoURL"
+            v-if="currentWorkout.user && currentWorkout.user.photoURL"
             :src="currentWorkout.user.photoURL"
             :alt="currentWorkout.user.displayName"
             width="32px"
@@ -113,10 +115,10 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>{{
+          <v-list-item-title v-if="currentWorkout.user">{{
             currentWorkout.user.displayName
           }}</v-list-item-title>
-          <v-list-item-subtitle>
+          <v-list-item-subtitle v-if="user">
             {{
               ircra
                 .convert('ircra', currentWorkout.user.grade)

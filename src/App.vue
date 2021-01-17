@@ -18,7 +18,7 @@
 </template>
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-import NewContentAvailable from '@/components/NewContentAvailable'
+import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable'
 import DialogAppleAddToHomeScreen from '@/components/molecules/DialogAppleAddToHomeScreen/DialogAppleAddToHomeScreen'
 
 export default {
