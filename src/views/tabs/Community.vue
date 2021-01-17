@@ -4,7 +4,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import CommunityList from '@/components/CommunityList'
+import CommunityList from '@/components/organisms/CommunityList/CommunityList'
 
 export default {
   components: { CommunityList },

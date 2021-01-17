@@ -287,8 +287,8 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import Hangboard from '@/components/Hangboard'
-import LineChart from '@/components/LineChart'
+import Hangboard from '@/components/atoms/Hangboard/Hangboard'
+import LineChart from '@/components/atoms/LineChart/LineChart'
 import { getImg, count, shortDate } from '@/misc/helpers'
 import {
   mdiPencil,

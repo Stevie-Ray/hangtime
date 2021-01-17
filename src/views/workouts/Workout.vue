@@ -185,12 +185,12 @@
 
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
-import ExerciseList from '@/components/ExerciseList'
-import WorkoutSubscribe from '@/components/WorkoutSubscribe'
-import WorkoutShare from '@/components/WorkoutShare'
+import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList'
+import WorkoutSubscribe from '@/components/molecules/WorkoutSubscribe/WorkoutSubscribe'
+import WorkoutShare from '@/components/molecules/WorkoutShare/WorkoutShare'
 import DialogWorkoutGeneral from '@/components/DialogWorkoutGeneral'
 import DialogWorkoutDelete from '@/components/DialogWorkoutDelete'
-import DialogUserImage from '@/components/DialogUserImage'
+import DialogUserImage from '@/components/molecules/DialogUserImage/DialogUserImage'
 import { count } from '@/misc/helpers'
 import urlParser from 'js-video-url-parser'
 import {

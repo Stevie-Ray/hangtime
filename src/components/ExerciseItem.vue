@@ -467,8 +467,8 @@
 
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import Hangboard from '@/components/Hangboard'
-import Hand from '@/components/Hand'
+import Hangboard from '@/components/atoms/Hangboard/Hangboard'
+import Hand from '@/components/atoms/Hand/Hand'
 import { getImg, count, weightConverter } from '@/misc/helpers'
 import {
   mdiClockOutline,

@@ -81,8 +81,8 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import IRCRA from 'ircra'
-import ExerciseList from '@/components/ExerciseList'
-import DialogNewWorkoutAdd from '@/components/DialogNewWorkoutAdd'
+import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList'
+import DialogNewWorkoutAdd from '@/components/molecules/DialogNewWorkoutAdd/DialogNewWorkoutAdd'
 import { getImg, count } from '@/misc/helpers'
 import { mdiPlaylistPlus, mdiContentSave, mdiArrowLeft } from '@mdi/js'
 

@@ -320,7 +320,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import NoSleep from 'nosleep.js'
-import Hangboard from '@/components/Hangboard'
+import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import { getImg, count, sound, speak } from '@/misc/helpers'
 import { mdiStop, mdiTimer, mdiArrowLeft } from '@mdi/js'
 

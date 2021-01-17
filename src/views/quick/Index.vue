@@ -124,7 +124,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import CircleTimer from '@/components/CircleTimer'
+import CircleTimer from '@/components/molecules/CircleTimer/CircleTimer'
 import {
   mdiArrowLeft,
   mdiPlay,

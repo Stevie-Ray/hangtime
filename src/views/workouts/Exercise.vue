@@ -87,6 +87,7 @@
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
 import ExerciseItem from '@/components/ExerciseItem'
+import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
 import { getImg, count } from '@/misc/helpers'
 import {
   mdiArrowLeft,
@@ -96,7 +97,6 @@ import {
   mdiAutorenew,
   mdiDelete
 } from '@mdi/js'
-import WorkoutItemName from '../../components/WorkoutItemName'
 
 export default {
   components: { WorkoutItemName, ExerciseItem },

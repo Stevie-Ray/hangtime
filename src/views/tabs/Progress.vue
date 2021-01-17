@@ -78,7 +78,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import Hangboard from '@/components/Hangboard'
+import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import { getImg, count, shortDate } from '@/misc/helpers'
 import {
   mdiArrowLeft,

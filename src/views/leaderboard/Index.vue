@@ -142,7 +142,7 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { mdiArrowLeft } from '@mdi/js'
 import { count } from '@/misc/helpers'
-import DialogUserImage from '@/components/DialogUserImage'
+import DialogUserImage from '@/components/molecules/DialogUserImage/DialogUserImage'
 
 export default {
   components: {

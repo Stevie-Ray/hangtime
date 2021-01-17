@@ -126,10 +126,10 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import Hangboard from '@/components/Hangboard'
-import Hand from '@/components/Hand'
-import WorkoutItemName from '@/components/WorkoutItemName'
-import CircleTimer from '@/components/CircleTimer'
+import Hangboard from '@/components/atoms/Hangboard/Hangboard'
+import Hand from '@/components/atoms/Hand/Hand'
+import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
+import CircleTimer from '@/components/molecules/CircleTimer/CircleTimer'
 
 import { mdiArrowLeft, mdiPlay, mdiPause } from '@mdi/js'
 
@@ -211,46 +211,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-.bottom-data {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  > div {
-    flex: 1 1 auto;
-
-    span:last-child {
-      padding-right: 8px;
-      display: inline-block;
-    }
-
-    &:last-child span:last-child {
-      padding-right: 0;
-      display: inline-block;
-    }
-
-    svg {
-      padding-right: 2px;
-      height: 20px;
-      width: 20px;
-    }
-  }
-}
-
-.progress-button {
-  position: absolute;
-  &.progress-previous {
-    left: 32px;
-  }
-  &.progress-next {
-    right: 32px;
-  }
-}
-
-.lap .data {
-  font-size: 1.8rem;
-  font-weight: bold;
-  padding: 0 8px;
-}
-</style>
+<style lang="scss"></style>
