@@ -1329,6 +1329,26 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'WhiteOak',
+      description: 'Wooden climbing equipment',
+      id: 54,
+      website: 'https://whiteoak.com.pl/',
+      hangboards: [
+        {
+          name: 'Standard hangboard',
+          id: 0,
+          image: 'hangboards/WHITEOAKSTAND.svg',
+          holds: 7
+        },
+        {
+          name: 'Mobile hangboard',
+          id: 1,
+          image: 'hangboards/WHITEOAKMOBI.svg',
+          holds: 2
+        }
+      ]
     }
   ]
 }
