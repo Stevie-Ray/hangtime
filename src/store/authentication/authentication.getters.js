@@ -7,7 +7,7 @@ export default {
     if (state.user) {
       weight = state.user.settings.weight
     }
-    if (!weight.length) {
+    if (!weight) {
       return state.settings.weight[0].short
     }
     return state.settings.weight[weight].short

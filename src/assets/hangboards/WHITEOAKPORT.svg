@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="587px" height="111px" viewBox="0 0 587 111" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>WHITEOAKPORT</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="WHITEOAKPORT" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M585.057655,109 L8,109 C3.581722,109 0,105.418278 0,101 L0,23 C0,18.581722 3.581722,15 8,15 L585.031993,15" id="hangboard" fill-rule="nonzero"></path>
+            <path d="M584.986222,92 L426,92 C409.431458,92 396,78.5685425 396,62 C396,45.4314575 409.431458,32 426,32 L585.060689,32" id="h4" fill-rule="nonzero"></path>
+            <circle id="h3" fill-rule="nonzero" cx="314" cy="62" r="30"></circle>
+            <rect id="h2" fill-rule="nonzero" x="75" y="32" width="158" height="60" rx="30"></rect>
+            <path d="M585.031993,15 L7.49092846,15 C3.39389949,15.4437974 0.974587175,17.5193744 0.23299152,21.2267309 C-0.508604135,24.9340873 0.610570932,19.144451 3.59051672,3.85782188 C4.64606548,1.98758576 6.39749232,1.0524677 8.84479726,1.0524677 C11.2921022,1.0524677 203.363055,0.755314245 585.057655,0.161007343" id="h1"></path>
+        </g>
+    </g>
+</svg>

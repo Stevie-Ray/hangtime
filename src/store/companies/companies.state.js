@@ -1340,13 +1340,28 @@ export default {
           name: 'Standard hangboard',
           id: 0,
           image: 'hangboards/WHITEOAKSTAND.svg',
-          holds: 7
+          holds: 8
         },
         {
-          name: 'Mobile hangboard',
+          name: 'Portable hangboard',
           id: 1,
-          image: 'hangboards/WHITEOAKMOBI.svg',
-          holds: 2
+          image: 'hangboards/WHITEOAKPORT.svg',
+          holds: 3
+        }
+      ]
+    },
+    {
+      name: 'Acron Climbing',
+      description: 'Sustainably crafted Hangboards',
+      id: 55,
+      disabled: true,
+      website: 'https://www.acornclimbing.com/',
+      hangboards: [
+        {
+          name: 'Midnight Hangboard',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     }
