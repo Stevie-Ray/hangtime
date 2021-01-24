@@ -221,6 +221,14 @@ const router = new Router({
         )
     },
     {
+      path: '/settings/subscription',
+      name: 'settings-subscription',
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Subscription.vue'
+        )
+    },
+    {
       path: '/settings/notifications',
       name: 'settings-notifications',
       component: () =>

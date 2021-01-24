@@ -97,6 +97,28 @@
               <v-divider inset></v-divider>
 
               <v-list-item
+                class="item-subscription"
+                to="/settings/subscription"
+              >
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.cashMultiple
+                  }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{
+                    $t('Subscription')
+                  }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $t('Unlimited workouts') }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider inset></v-divider>
+
+              <v-list-item
                 class="item-notifications"
                 to="/settings/notifications"
               >
@@ -147,7 +169,8 @@ import {
   mdiCog,
   mdiTimer,
   mdiBellRing,
-  mdiHelpCircleOutline
+  mdiHelpCircleOutline,
+  mdiCashMultiple
 } from '@mdi/js'
 
 export default {
@@ -158,7 +181,8 @@ export default {
       cog: mdiCog,
       timer: mdiTimer,
       bellRing: mdiBellRing,
-      helpCircleOutline: mdiHelpCircleOutline
+      helpCircleOutline: mdiHelpCircleOutline,
+      cashMultiple: mdiCashMultiple
     }
   }),
   head: {

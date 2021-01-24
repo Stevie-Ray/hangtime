@@ -1364,6 +1364,21 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'ArtLine Climbing Holds',
+      description: 'Climbing holds and volumes',
+      id: 56,
+      disabled: true,
+      website: 'https://www.artline-holds.com/',
+      hangboards: [
+        {
+          name: 'ArtBoard',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
