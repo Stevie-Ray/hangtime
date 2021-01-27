@@ -94,9 +94,7 @@ describe('Test the login page', () => {
   })
 
   it('Click save workout button', () => {
-    cy.get('.button-workout-save')
-      .last()
-      .click()
+    cy.get('.button-workout-save').last().click()
   })
 
   it('Go to workout tab', () => {

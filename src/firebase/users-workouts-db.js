@@ -13,11 +13,11 @@ export default class UsersWorkoutsDB extends GenericDB {
     let query = collectionRef
 
     if (constraints) {
-      constraints.forEach(constraint => (query = query.where(...constraint)))
+      constraints.forEach((constraint) => (query = query.where(...constraint)))
     }
 
-    const formatResult = result =>
-      result.docs.map(ref => {
+    const formatResult = (result) =>
+      result.docs.map((ref) => {
         // const userRef = ref.ref.parent.parent;
         // userRef.get().then(parentSnap => {
         //   const user = parentSnap.data();

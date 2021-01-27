@@ -77,7 +77,7 @@
                       id="voices"
                       v-model="selectedVoice"
                       :items="voiceList"
-                      :item-text="item => `${item.name} (${item.lang})`"
+                      :item-text="(item) => `${item.name} (${item.lang})`"
                       :placeholder="$t('Tap to change')"
                       :label="$t('Select voice')"
                       return-object
@@ -189,11 +189,11 @@ export default {
   mounted() {
     this.voiceList = this.synth.getVoices()
     if (this.user.settings.locale) {
-      this.voiceList = this.voiceList.filter(voice => {
+      this.voiceList = this.voiceList.filter((voice) => {
         return voice.lang.includes(this.user.settings.locale.substring(0, 2))
       })
     } else {
-      this.voiceList = this.voiceList.filter(voice =>
+      this.voiceList = this.voiceList.filter((voice) =>
         /^(en|EN|US)/.test(voice.lang)
       )
     }
@@ -201,11 +201,11 @@ export default {
     this.synth.onvoiceschanged = () => {
       this.voiceList = this.synth.getVoices()
       if (this.user.settings.locale) {
-        this.voiceList = this.voiceList.filter(voice => {
+        this.voiceList = this.voiceList.filter((voice) => {
           return voice.lang.includes(this.user.settings.locale.substring(0, 2))
         })
       } else {
-        this.voiceList = this.voiceList.filter(voice =>
+        this.voiceList = this.voiceList.filter((voice) =>
           /^(en|EN|US)/.test(voice.lang)
         )
       }

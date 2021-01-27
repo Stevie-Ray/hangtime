@@ -1,25 +1,30 @@
-import './ExerciseList.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, boolean, text } from '@storybook/addon-knobs'
 import ExerciseList from './ExerciseList'
 
 export default {
-  title: 'Organisms|ExerciseList',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Organisms/ExerciseList',
+  component: ExerciseList,
+  argTypes: {
     id: {
-      type: String,
-      default: text('id', 'XXXX-00-XXXX-0')
+      control: 'text',
+      table: { category: 'Attributes' },
+      description: 'id',
+      type: 'string'
     },
     editWorkout: {
-      type: Boolean,
-      default: boolean('editWorkout', true)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'editWorkout',
+      type: 'boolean'
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { ExerciseList },
-  methods: {},
-  template: `<exercise-list :id="id" :edit-workout="editWorkout" class="exercise-list"></exercise-list>`
+  props: Object.keys(argTypes),
+  template: `<exercise-list :id="id" :edit-workout="editWorkout" class="exercise-list"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { editWorkout: true }

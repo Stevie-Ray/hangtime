@@ -85,8 +85,8 @@
             <v-responsive
               v-if="
                 currentWorkout &&
-                  currentWorkout.video &&
-                  parseVideo(currentWorkout.video)
+                currentWorkout.video &&
+                parseVideo(currentWorkout.video)
               "
               :aspect-ratio="16 / 9"
             >
@@ -271,7 +271,7 @@ export default {
     },
     hasHangboard() {
       const exists = this.user.settings.hangboards.some(
-        el => el.company === this.company && el.hangboard === this.hangboard
+        (el) => el.company === this.company && el.hangboard === this.hangboard
       )
       if (!exists) {
         // show dialog to add new hangboard
@@ -285,7 +285,7 @@ export default {
           this.user.settings.hangboards[this.user.settings.selected].hangboard
       ) {
         const index = this.user.settings.hangboards.findIndex(
-          list =>
+          (list) =>
             list.company === this.company && list.hangboard === this.hangboard
         )
         this.setSelected(index)

@@ -81,7 +81,7 @@ export default {
     focus: {
       bind(el, { value }) {
         if (typeof value !== 'function') return
-        el.addEventListener('long-press', e => value(e))
+        el.addEventListener('long-press', (e) => value(e))
       }
     }
   },

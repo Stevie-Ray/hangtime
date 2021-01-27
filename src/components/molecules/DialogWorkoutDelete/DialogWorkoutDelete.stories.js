@@ -1,23 +1,15 @@
-import './DialogWorkoutDelete.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, object, boolean } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import DialogWorkoutDelete from './DialogWorkoutDelete'
 
 export default {
-  title: 'Molecules|DialogWorkoutDelete',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
-    dialog: {
-      type: Boolean,
-      default: boolean('dialog', true)
-    },
+  title: 'Components/Molecules/DialogWorkoutDelete',
+  component: DialogWorkoutDelete,
+  argTypes: {
     currentWorkout: {
-      default: object('currentWorkout', {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         company: 1,
         description: 'Storybook',
         exercises: [
@@ -44,13 +36,27 @@ export const Default = () => ({
         name: 'Storybook',
         share: false,
         time: 100
-      })
+      }
+    },
+    dialog: {
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'dialog',
+      type: 'boolean'
+    },
+    input: {
+      action: 'input',
+      table: { category: 'Events' }
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { DialogWorkoutDelete },
-  methods: {
-    input: action('input')
-  },
-  template: `<dialog-workout-delete :current-workout="currentWorkout" :value="dialog" @input="input">
-  </dialog-workout-delete>`
+  props: Object.keys(argTypes),
+  template: `<dialog-workout-delete :current-workout="currentWorkout" :value="dialog" @input="input"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { dialog: true }

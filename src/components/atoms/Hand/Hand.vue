@@ -13,7 +13,7 @@
             <v-btn
               v-if="
                 (data.leftHand && data.leftHand.length) ||
-                  (data.rightHand && data.rightHand.length)
+                (data.rightHand && data.rightHand.length)
               "
               icon
             >
@@ -111,7 +111,7 @@ export default {
       if (this.data.leftHand) {
         if (this.data.leftHand.length) {
           const left = this.data.leftHand
-            .map(finger => {
+            .map((finger) => {
               return `f${finger}`
             })
             .join(' ')
@@ -125,7 +125,7 @@ export default {
       if (this.data.rightHand) {
         if (this.data.rightHand.length) {
           const right = this.data.rightHand
-            .map(finger => {
+            .map((finger) => {
               return `f${finger}`
             })
             .join(' ')

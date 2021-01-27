@@ -4,7 +4,7 @@ import UsersWorkoutsDB from '@/firebase/users-workouts-db'
  * Create new user from firebase auth user infos
  */
 // eslint-disable-next-line
-export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
+export const createNewUserFromFirebaseAuthUser = async (firebaseAuthUser) => {
   let providerData = firebaseAuthUser
   if (!firebaseAuthUser.isAnonymous) {
     // eslint-disable-next-line prefer-destructuring
@@ -85,17 +85,14 @@ export function sound(audio) {
 export function shortDate(string) {
   const date = new Date(string)
   const day = date.getDate()
-  const year = date
-    .getFullYear()
-    .toString()
-    .substr(-2)
+  const year = date.getFullYear().toString().substr(-2)
   const month = date.toLocaleString('default', { month: 'short' })
 
   return `${day} ${month}, ${year}`
 }
 
 export function weightConverter(weight, user) {
-  if (user.settings.weight === 1) {
+  if (user && user.settings.weight === 1) {
     return Math.round(weight * 2.2046)
   }
   return weight

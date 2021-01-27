@@ -1,18 +1,30 @@
-import './Hangboard.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { object, withKnobs } from '@storybook/addon-knobs'
 import Hangboard from './Hangboard'
 
 export default {
-  title: 'Atoms|Hangboard',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Atoms/Hangboard',
+  components: Hangboard,
+  argTypes: {
+    classes: {
+      control: {
+        type: 'select',
+        options: ['']
+      },
+      table: {
+        category: 'CSS Modifiers'
+      }
+    },
+    editWorkout: {
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'editWorkout',
+      type: 'boolean'
+    },
     user: {
-      type: Object,
-      default: object('user', {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         settings: {
           selected: 1,
           hangboards: [
@@ -26,17 +38,27 @@ export const Default = () => ({
             }
           ]
         }
-      })
+      }
     },
-    data: {
-      type: Object,
-      default: object('data', {
+    selected: {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         left: 0,
         right: 0
-      })
+      }
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { Hangboard },
-  methods: {},
-  template: `<hangboard :user="user" :data="data"></hangboard>`
+  props: Object.keys(argTypes),
+  template: `<hangboard :class="classes" :edit-workout="editWorkout" :user="user" :data="selected"></hangboard>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = {}

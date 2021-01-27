@@ -91,10 +91,10 @@
           class="button-workout-save"
           :disabled="
             workoutToCreateName === '' ||
-              typeof workoutToCreateName === 'undefined' ||
-              workoutToCreateDescription === '' ||
-              typeof workoutToCreateDescription === 'undefined' ||
-              typeof workoutToCreateDifficulty === 'undefined'
+            typeof workoutToCreateName === 'undefined' ||
+            workoutToCreateDescription === '' ||
+            typeof workoutToCreateDescription === 'undefined' ||
+            typeof workoutToCreateDifficulty === 'undefined'
           "
           @click="saveWorkout"
         >
@@ -115,12 +115,11 @@ export default {
     value: Boolean
   },
   data: () => ({
-    dialog: true,
     ircra: new IRCRA(),
     rules: {
-      length: len => v =>
+      length: (len) => (v) =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
-      required: v => !!v || 'This field is required'
+      required: (v) => !!v || 'This field is required'
     }
   }),
   computed: {

@@ -1,26 +1,28 @@
-import './DialogNewWorkoutAdd.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, boolean } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import DialogNewWorkoutAdd from './DialogNewWorkoutAdd'
 
 export default {
-  title: 'Molecules|DialogNewWorkoutAdd',
-  decorators: [withKnobs]
+  title: 'Components/Molecules/DialogNewWorkoutAdd',
+  component: DialogNewWorkoutAdd,
+  argTypes: {
+    dialog: {
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'dialog',
+      type: 'boolean'
+    },
+    input: {
+      action: 'input',
+      table: { category: 'Events' }
+    }
+  }
 }
 
-export const Default = () => ({
-  props: {
-    dialog: {
-      type: Boolean,
-      default: boolean('dialog', true)
-    }
-  },
+const Template = (args, { argTypes }) => ({
   components: { DialogNewWorkoutAdd },
-  methods: {
-    input: action('input')
-  },
-  template: `<dialog-new-workout-add  :value="dialog" @input="input">
-  </dialog-new-workout-add>`
+  props: Object.keys(argTypes),
+  template: `<dialog-new-workout-add :value="dialog" @input="input"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { dialog: true }

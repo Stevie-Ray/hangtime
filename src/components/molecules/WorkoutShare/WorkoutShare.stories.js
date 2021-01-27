@@ -1,18 +1,15 @@
-import './WorkoutShare.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, object, boolean } from '@storybook/addon-knobs'
-import WorkoutShare from '@/components/molecules/WorkoutShare/WorkoutShare'
+import WorkoutShare from './WorkoutShare'
 
 export default {
-  title: 'Molecules|WorkoutShare',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Molecules/WorkoutShare',
+  component: WorkoutShare,
+  argTypes: {
     currentWorkout: {
-      type: Object,
-      default: object('currentWorkout', {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         company: 1,
         description: 'Storybook',
         exercises: [
@@ -38,18 +35,65 @@ export const Default = () => ({
         level: 1,
         name: 'Storybook',
         share: false,
-        time: 100
-      })
+        time: 100,
+        user: {
+          id: 'xxxxx',
+          photoURL: 'https://thispersondoesnotexist.com/image',
+          displayName: 'Person Does Not Exist'
+        }
+      }
     },
     small: {
-      type: Boolean,
-      default: boolean('small', false)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'small',
+      type: 'boolean'
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { WorkoutShare },
-  methods: {},
-  template: `<workout-share 
-      :current-workout="currentWorkout"
-      :small="small"
-  ></workout-share>`
+  props: Object.keys(argTypes),
+  template: `<workout-share :current-workout="currentWorkout" :small="small"/>`
 })
+
+export const Common = Template.bind({})
+
+export const Shared = Template.bind({})
+
+Shared.args = {
+  currentWorkout: {
+    company: 1,
+    description: 'Storybook',
+    exercises: [
+      {
+        exercise: 0,
+        hold: 20,
+        left: 1,
+        level: 0,
+        pause: 10,
+        pullups: 0,
+        repeat: 2,
+        rest: 3,
+        right: 1,
+        time: 80
+      }
+    ],
+    hangboard: 0,
+    subscribers: [
+      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+    ],
+    level: 1,
+    name: 'Storybook',
+    share: true,
+    time: 100,
+    user: {
+      id: 'xxxxx',
+      photoURL: 'https://thispersondoesnotexist.com/image',
+      displayName: 'Person Does Not Exist'
+    }
+  }
+}

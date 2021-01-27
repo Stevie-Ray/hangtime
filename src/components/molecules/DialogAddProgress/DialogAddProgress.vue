@@ -99,7 +99,7 @@ export default {
       progress.company = this.user.settings.hangboards[selected].company
 
       const exists = this.currentStats.some(
-        el =>
+        (el) =>
           el.right === this.hangboardData.right &&
           el.left === this.hangboardData.left
       )

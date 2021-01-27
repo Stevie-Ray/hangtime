@@ -31,7 +31,7 @@
               hide-details
               single-line
               type="number"
-              style="width: 40px"
+              style="width: 40px;"
               :rules="[
                 rules.required,
                 rules.number,
@@ -251,7 +251,7 @@
                         hide-details
                         single-line
                         type="number"
-                        style="width: 40px"
+                        style="width: 40px;"
                         :rules="[
                           rules.required,
                           rules.number,
@@ -334,7 +334,7 @@
                     hide-details
                     single-line
                     type="number"
-                    style="width: 40px"
+                    style="width: 40px;"
                     :rules="[
                       rules.required,
                       rules.number,
@@ -493,12 +493,12 @@ export default {
   },
   data: () => ({
     rules: {
-      number: v => !v.isNaN || 'NaN',
-      required: v => !!v || 'This field is required',
-      length: length => v =>
+      number: (v) => !v.isNaN || 'NaN',
+      required: (v) => !!v || 'This field is required',
+      length: (length) => (v) =>
         (v || '').length <= length || `Max ${length} characters`,
-      min: min => v => v >= min || `A minimun of  ${min} is allowed`,
-      max: max => v => v <= max || `A maximum of  ${max} is allowed`
+      min: (min) => (v) => v >= min || `A minimun of  ${min} is allowed`,
+      max: (max) => (v) => v <= max || `A maximum of  ${max} is allowed`
     },
     mdi: {
       arrowLeft: mdiArrowLeft,
@@ -539,7 +539,7 @@ export default {
         this.currentExercise.grip &&
         this.grip[this.currentExercise.grip].disabledExercises
       ) {
-        return this.exerciseByType('arms').map(obj => ({
+        return this.exerciseByType('arms').map((obj) => ({
           ...obj,
           disabled: this.grip[
             this.currentExercise.grip
@@ -553,7 +553,7 @@ export default {
         this.currentExercise.grip &&
         this.grip[this.currentExercise.grip].disabledExercises
       ) {
-        return this.exerciseByType('legs').map(obj => ({
+        return this.exerciseByType('legs').map((obj) => ({
           ...obj,
           disabled: this.grip[
             this.currentExercise.grip

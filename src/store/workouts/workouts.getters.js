@@ -4,13 +4,13 @@ export default {
   /**
    * Check if a workout has deletion pending
    */
-  isWorkoutDeletionPending: state => workoutId =>
+  isWorkoutDeletionPending: (state) => (workoutId) =>
     state.workoutDeletionPending.includes(workoutId),
 
   /**
    * Get workouts for the currently selected hangboard
    */
-  workoutsByHangboard: state => payload => {
+  workoutsByHangboard: (state) => (payload) => {
     let data = {}
     data = filter(state.workouts, {
       company: payload.settings.hangboards[payload.settings.selected].company,
@@ -21,7 +21,7 @@ export default {
     return data
   },
 
-  communityWorkoutsByHangboard: state => payload => {
+  communityWorkoutsByHangboard: (state) => (payload) => {
     let data = {}
     data = filter(state.communityWorkouts, {
       company:
@@ -37,7 +37,7 @@ export default {
   /**
    * Get a workout by id
    */
-  workoutById: state => workoutId => {
+  workoutById: (state) => (workoutId) => {
     let data = find(state.workouts, { id: workoutId })
     if (!data) data = find(state.communityWorkouts, { id: workoutId })
     if (workoutId === 'new') return state.workoutToCreate
@@ -60,29 +60,30 @@ export default {
    * Get grip by id
    */
 
-  gripById: state => typeId => find(state.grip, { id: typeId }),
+  gripById: (state) => (typeId) => find(state.grip, { id: typeId }),
 
   /**
    * Get an exercise by it's type
    */
 
-  exerciseByType: state => typeId => filter(state.exercises, { type: typeId }),
+  exerciseByType: (state) => (typeId) =>
+    filter(state.exercises, { type: typeId }),
 
   /**
    * Get an exercise by it's Id
    */
-  exerciseById: state => exerciseId =>
+  exerciseById: (state) => (exerciseId) =>
     find(state.exercises, { id: exerciseId }),
 
   /**
    * Check if a exercise has deletion pending
    */
-  isExerciseDeletionPending: state => exerciseId =>
+  isExerciseDeletionPending: (state) => (exerciseId) =>
     state.exerciseDeletionPending.includes(exerciseId),
 
   /**
    * Get a workouts difficulty by value
    */
-  difficultyById: state => levelValue =>
+  difficultyById: (state) => (levelValue) =>
     find(state.levels, { value: levelValue })
 }

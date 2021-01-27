@@ -1,34 +1,38 @@
-import './NewContentAvailable.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { boolean, withKnobs } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import NewContentAvailable from './NewContentAvailable'
 
 export default {
-  title: 'Molecules|NewContentAvailable',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Molecules/NewContentAvailable',
+  component: NewContentAvailable,
+  argTypes: {
     newContentAvailable: {
-      type: Boolean,
-      default: boolean('newContentAvailable', true)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'newContentAvailable',
+      type: 'boolean'
     },
     refreshingApp: {
-      type: Boolean,
-      default: boolean('refreshingApp', false)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'refreshingApp',
+      type: 'boolean'
+    },
+    serviceWorkerSkipWaiting: {
+      action: 'service-worker-skip-waiting',
+      table: { category: 'Events' }
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { NewContentAvailable },
-  methods: {
-    serviceWorkerSkipWaiting: action('serviceWorkerSkipWaiting')
-  },
+  props: Object.keys(argTypes),
   template: `<new-content-available
-      v-if="newContentAvailable"
-      class="new-content-available"
-      :refreshing-app="refreshingApp"
-      @refresh="serviceWorkerSkipWaiting">
-  </new-content-available>`
+        v-if="newContentAvailable"
+        class="new-content-available"
+        :refreshing-app="refreshingApp"
+        @refresh="serviceWorkerSkipWaiting"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { newContentAvailable: true }

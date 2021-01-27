@@ -177,9 +177,9 @@ export default {
     ircra: new IRCRA(),
     shareAPI: navigator.share,
     rules: {
-      length: len => v =>
+      length: (len) => (v) =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
-      required: v => !!v || 'This field is required'
+      required: (v) => !!v || 'This field is required'
     }
   }),
   computed: {

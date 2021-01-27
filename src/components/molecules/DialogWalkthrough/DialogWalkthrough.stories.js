@@ -1,26 +1,28 @@
-import './DialogWalkthrough.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, boolean } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import DialogWalkthrough from './DialogWalkthrough'
 
 export default {
-  title: 'Molecules|DialogWalkthrough',
-  decorators: [withKnobs]
+  title: 'Components/Molecules/DialogWalkthrough',
+  component: DialogWalkthrough,
+  argTypes: {
+    dialog: {
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'dialog',
+      type: 'boolean'
+    },
+    input: {
+      action: 'input',
+      table: { category: 'Events' }
+    }
+  }
 }
 
-export const Default = () => ({
-  props: {
-    dialog: {
-      type: Boolean,
-      default: boolean('dialog', true)
-    }
-  },
+const Template = (args, { argTypes }) => ({
   components: { DialogWalkthrough },
-  methods: {
-    input: action('input')
-  },
-  template: `<dialog-walkthrough :value="dialog" @input="input">
-  </dialog-walkthrough>`
+  props: Object.keys(argTypes),
+  template: `<dialog-walkthrough :value="dialog" @input="input"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { dialog: true }

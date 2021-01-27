@@ -1,18 +1,15 @@
-import './WorkoutSubscribe.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, object, boolean, text } from '@storybook/addon-knobs'
 import WorkoutSubscribe from './WorkoutSubscribe'
 
 export default {
-  title: 'Molecules|WorkoutSubscribe',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Molecules/WorkoutSubscribe',
+  component: WorkoutSubscribe,
+  argTypes: {
     currentWorkout: {
-      type: Object,
-      default: object('currentWorkout', {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         company: 1,
         description: 'Storybook',
         exercises: [
@@ -37,34 +34,49 @@ export const Default = () => ({
         ],
         level: 1,
         name: 'Storybook',
-        share: true,
-        time: 100
-      })
-    },
-    id: {
-      type: String,
-      default: text('id', 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+        share: false,
+        time: 100,
+        user: {
+          id: 'xxxxx',
+          photoURL: 'https://thispersondoesnotexist.com/image',
+          displayName: 'Person Does Not Exist'
+        }
+      }
     },
     userId: {
-      type: String,
-      default: text(
-        'userId',
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-      )
+      control: 'text',
+      table: { category: 'Attributes' },
+      description: 'userId',
+      type: 'string'
+    },
+    isSubscribed: {},
+    id: {
+      control: 'text',
+      table: { category: 'Attributes' },
+      description: 'id',
+      type: 'string'
     },
     small: {
-      type: Boolean,
-      default: boolean('small', false)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'small',
+      type: 'boolean'
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { WorkoutSubscribe },
-  methods: {},
+  props: Object.keys(argTypes),
   template: `<workout-subscribe
-      :id="id"
-      :value="true"
-      :current-workout="currentWorkout"
-      :is-subscribed="isSubscribed"
-      :user-id="userId"
-      :small="small"
-  ></workout-subscribe>`
+        :id="id"
+        :value="true"
+        :current-workout="currentWorkout"
+        :user-id="userId"
+        :small="small"
+    />`
 })
+
+export const Common = Template.bind({})
+
+Common.args = {}

@@ -57,11 +57,10 @@ export default {
     isSubscribed() {
       if (!this.currentSubscribers || !this.user) return
       if (!this.currentSubscribers.length > 0) return
-      const subscribed = this.currentSubscribers.some(
-        subscriber => subscriber === this.user.id
-      )
       // eslint-disable-next-line consistent-return
-      return subscribed
+      return this.currentSubscribers.some(
+        (subscriber) => subscriber === this.user.id
+      )
     }
   },
   methods: {}

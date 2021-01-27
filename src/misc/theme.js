@@ -1,6 +1,6 @@
 // https://color.adobe.com/_DS89712-color-theme-12679944
 // eslint-disable-next-line no-unused-vars
-const opts = {
+const options = {
   icons: {
     iconfont: 'mdiSvg'
   },
@@ -24,4 +24,4 @@ const opts = {
   }
 }
 
-export default opts
+export default options

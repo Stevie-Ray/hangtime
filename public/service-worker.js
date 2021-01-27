@@ -27,6 +27,6 @@ workbox.routing.registerRoute(
   'GET'
 )
 
-addEventListener('message', messageEvent => {
+addEventListener('message', (messageEvent) => {
   if (messageEvent.data === 'skipWaiting') return self.skipWaiting()
 })

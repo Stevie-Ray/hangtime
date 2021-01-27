@@ -34,7 +34,7 @@ export default {
 
     const progress = state.progress.find(
       // eslint-disable-next-line no-shadow
-      progress => progress.id === payload.data.id
+      (progress) => progress.id === payload.data.id
     )
 
     dispatch('addUserRecording', progress)

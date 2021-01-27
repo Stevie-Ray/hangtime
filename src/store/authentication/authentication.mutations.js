@@ -1,7 +1,7 @@
 export default {
   setUser: (state, value) => (state.user = value),
   setStatus: (state, value) => (state.user.status = value),
-  setCompleted: state => {
+  setCompleted: (state) => {
     if (!state.user.completed) {
       state.user.completed = {}
     }
@@ -22,7 +22,7 @@ export default {
       state.user.completed.hold = value
     }
   },
-  setCompletedAmount: state => {
+  setCompletedAmount: (state) => {
     // eslint-disable-next-line no-restricted-globals
     if (!isNaN(state.user.completed.amount)) {
       state.user.completed.amount += 1
@@ -47,7 +47,7 @@ export default {
   setCompany: (state, value) => (state.hangboardToAdd.company = value),
   setHangboard: (state, value) => (state.hangboardToAdd.hangboard = value),
   addHangboard: (state, value) => state.user.settings.hangboards.push(value),
-  resetHangboard: state => (state.hangboardToAdd.hangboard = 0),
+  resetHangboard: (state) => (state.hangboardToAdd.hangboard = 0),
   removeHangboard: (state, index) =>
     state.user.settings.hangboards.splice(index, 1)
 }

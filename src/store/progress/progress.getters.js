@@ -4,7 +4,7 @@ export default {
   /**
    * Get stats by id
    */
-  statsById: state => payload => {
+  statsById: (state) => (payload) => {
     const data = filter(state.progress, {
       company: payload.settings.hangboards[payload.settings.selected].company,
       hangboard:
@@ -16,7 +16,7 @@ export default {
   /**
    * Get best stats by id
    */
-  bestStatsById: state => progressId => {
+  bestStatsById: (state) => (progressId) => {
     const progress = find(state.progress, { id: progressId })
     if (!progress.recordings || progress.recordings.length <= 0) return 0
     return Math.max(
@@ -26,11 +26,11 @@ export default {
     )
   },
 
-  bestStatsByType: state => payload => {
+  bestStatsByType: (state) => (payload) => {
     const progress = find(state.progress, { id: payload.id })
     if (!progress.recordings || progress.recordings.length <= 0) return 0
     const recordings = progress.recordings.filter(
-      recording => recording.type === payload.type
+      (recording) => recording.type === payload.type
     )
     return Math.max(
       ...recordings.map(function map(o) {
@@ -42,7 +42,7 @@ export default {
   /**
    * Get total best stats by id
    */
-  totalBestStatsById: (state, getters) => payload => {
+  totalBestStatsById: (state, getters) => (payload) => {
     const progress = getters.statsById(payload)
     if (!progress || progress.length <= 0) return 0
     return Math.max(
@@ -54,7 +54,7 @@ export default {
   /**
    * Get total best stats by id
    */
-  lastStatsById: (state, getters) => payload => {
+  lastStatsById: (state, getters) => (payload) => {
     const progress = getters.statsById(payload)
     // if (!progress.recordings || progress.recordings.length <= 0) return 0
     if (!progress || progress.length <= 0) return

@@ -58,7 +58,7 @@
             </v-list>
 
             <v-snackbar
-              v-for="(message, index) in messages.filter(m => m.show)"
+              v-for="(message, index) in messages.filter((m) => m.show)"
               :key="message.collapse_key"
               v-model="message.show"
               :timeout="-1"
@@ -127,7 +127,7 @@ export default {
   },
   mounted() {
     if (this.messaging) {
-      this.messaging.onMessage(payload => {
+      this.messaging.onMessage((payload) => {
         console.log('Message received. ', payload)
         // [START_EXCLUDE]
         // Update the UI to include the received message.
@@ -151,7 +151,7 @@ export default {
         // subsequent calls to getToken will return from cache.
         this.messaging
           .getToken({ vapidKey: this.vapidKey })
-          .then(currentToken => {
+          .then((currentToken) => {
             if (currentToken) {
               this.sendTokenToServer(currentToken)
               this.updateUIForPushEnabled(currentToken)
@@ -165,7 +165,7 @@ export default {
               this.setTokenSentToServer(false)
             }
           })
-          .catch(err => {
+          .catch((err) => {
             console.log('An error occurred while retrieving token. ', err)
             this.showToken('Error retrieving registration token. ', err)
             this.setTokenSentToServer(false)
@@ -209,7 +209,7 @@ export default {
     requestPermission() {
       console.log('Requesting permission...')
       // [START request_permission]
-      Notification.requestPermission().then(permission => {
+      Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
           console.log('Notification permission granted.')
           // Retrieve a registration token for use with FCM.
@@ -234,7 +234,7 @@ export default {
       if (this.messaging) {
         this.messaging
           .getToken()
-          .then(currentToken => {
+          .then((currentToken) => {
             this.messaging
               .deleteToken()
               .then(() => {
@@ -245,12 +245,12 @@ export default {
                 this.resetUI()
                 // [END_EXCLUDE]
               })
-              .catch(err => {
+              .catch((err) => {
                 console.log('Unable to delete token. ', err)
               })
             // [END delete_token]
           })
-          .catch(err => {
+          .catch((err) => {
             console.log('Error retrieving registration token. ', err)
             this.showToken('Error retrieving registration token. ', err)
           })

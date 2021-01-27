@@ -225,9 +225,9 @@ export default {
     ircra: new IRCRA(),
     linkError: null,
     rules: {
-      length: len => v =>
+      length: (len) => (v) =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
-      required: v => !!v || 'This field is required'
+      required: (v) => !!v || 'This field is required'
     },
     mdi: {
       arrowLeft: mdiArrowLeft,
@@ -286,7 +286,7 @@ export default {
       }
     },
     grades() {
-      return this.ircra.get(this.user.settings.scale).filter(n => n)
+      return this.ircra.get(this.user.settings.scale).filter((n) => n)
     }
   },
   methods: {
@@ -315,13 +315,13 @@ export default {
             .auth()
             .currentUser.linkWithPopup(provider)
             .then(
-              result => {
+              (result) => {
                 const { credential } = result
                 const { user } = result
                 console.log(credential)
                 console.log(user)
               },
-              error => {
+              (error) => {
                 console.log(error)
                 this.linkError = error
               }

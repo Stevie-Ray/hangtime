@@ -1,16 +1,15 @@
-import './WorkoutList.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs } from '@storybook/addon-knobs'
 import WorkoutList from './WorkoutList'
 
 export default {
-  title: 'Organisms|WorkoutList',
-  decorators: [withKnobs]
+  title: 'Components/Organisms/WorkoutList',
+  component: WorkoutList,
+  argTypes: {}
 }
 
-export const Default = () => ({
-  props: {},
+const Template = (args, { argTypes }) => ({
   components: { WorkoutList },
-  methods: {},
+  props: Object.keys(argTypes),
   template: `<workout-list class="workout-list"></workout-list>`
 })
+
+export const Common = Template.bind({})

@@ -10,7 +10,7 @@
             item-value="id"
             :label="$t('Hangboard manufacturer')"
             required
-            style="width: calc(100% - 32px)"
+            style="width: calc(100% - 32px);"
             @change="resetHangboard"
           >
             <template #prepend>
@@ -30,7 +30,7 @@
             item-value="id"
             :label="$t('Select your model')"
             required
-            style="width: calc(100% - 32px)"
+            style="width: calc(100% - 32px);"
           >
             <template #prepend>
               <v-icon color="primary lighten-1">{{ mdi.numeric2Box }}</v-icon>

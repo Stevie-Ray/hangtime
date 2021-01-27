@@ -239,7 +239,7 @@ export default {
     grades() {
       if (!this.user) return
       // eslint-disable-next-line consistent-return
-      return this.ircra.get(this.user.settings.scale).filter(n => n)
+      return this.ircra.get(this.user.settings.scale).filter((n) => n)
     }
   },
   methods: {
@@ -272,7 +272,7 @@ export default {
     saveWalkthrough() {
       if (this.user) {
         const exists = this.user.settings.hangboards.some(
-          el =>
+          (el) =>
             el.company === this.hangboardToAdd.company &&
             el.hangboard === this.hangboardToAdd.hangboard
         )

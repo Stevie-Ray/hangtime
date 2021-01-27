@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export default {
-  resetWorkoutToCreate: state => {
+  resetWorkoutToCreate: (state) => {
     state.workoutToCreate = {
       exercises: []
     }
@@ -22,31 +22,31 @@ export default {
   // setWorkout: (state, workout) => (state.workout = workout),
   setWorkoutName: (state, payload) => {
     const index = state.workouts.findIndex(
-      exercise => exercise.id === payload.id
+      (exercise) => exercise.id === payload.id
     )
     state.workouts[index].name = payload.value
   },
   setWorkoutDescription: (state, payload) => {
     const index = state.workouts.findIndex(
-      exercise => exercise.id === payload.id
+      (exercise) => exercise.id === payload.id
     )
     state.workouts[index].description = payload.value
   },
   setWorkoutVideo: (state, payload) => {
     const index = state.workouts.findIndex(
-      exercise => exercise.id === payload.id
+      (exercise) => exercise.id === payload.id
     )
     state.workouts[index].video = payload.value
   },
   setWorkoutDifficulty: (state, payload) => {
     const index = state.workouts.findIndex(
-      exercise => exercise.id === payload.id
+      (exercise) => exercise.id === payload.id
     )
     state.workouts[index].level = payload.value
   },
   setWorkoutShare: (state, payload) => {
     const index = state.workouts.findIndex(
-      exercise => exercise.id === payload.id
+      (exercise) => exercise.id === payload.id
     )
     state.workouts[index].share = payload.value
   },
@@ -56,7 +56,9 @@ export default {
   addCommunityWorkout: (state, workout) =>
     state.communityWorkouts.unshift(workout),
   removeWorkoutById: (state, workoutId) => {
-    const index = state.workouts.findIndex(workout => workout.id === workoutId)
+    const index = state.workouts.findIndex(
+      (workout) => workout.id === workoutId
+    )
     state.workouts.splice(index, 1)
   },
 
@@ -64,11 +66,15 @@ export default {
   addWorkoutDeletionPending: (state, workoutId) =>
     state.workoutDeletionPending.push(workoutId),
   removeWorkoutDeletionPending: (state, workoutId) => {
-    const index = state.workouts.findIndex(workout => workout.id === workoutId)
+    const index = state.workouts.findIndex(
+      (workout) => workout.id === workoutId
+    )
     state.workoutDeletionPending.splice(index, 1)
   },
   setExercises: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    const index = state.workouts.findIndex(
+      (workout) => workout.id === payload.id
+    )
     if (index >= 0) {
       state.workouts[index].exercises = payload.data
     } else {
@@ -80,7 +86,9 @@ export default {
     (state.workoutCreationPending = value),
 
   addExercise: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    const index = state.workouts.findIndex(
+      (workout) => workout.id === payload.id
+    )
     if (payload.id === 'new') {
       state.workoutToCreate.exercises.push(payload.data)
       // state.workoutToCreate.exercises = {
@@ -92,7 +100,9 @@ export default {
     }
   },
   setData: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    const index = state.workouts.findIndex(
+      (workout) => workout.id === payload.id
+    )
     if (payload.id === 'new') {
       const data = {
         ...state.workoutToCreate.exercises[payload.index],
@@ -108,7 +118,9 @@ export default {
     }
   },
   setTime: (state, payload) => {
-    const index = state.workouts.findIndex(workout => workout.id === payload.id)
+    const index = state.workouts.findIndex(
+      (workout) => workout.id === payload.id
+    )
     let item
     if (payload.id === 'new') {
       item = state.workoutToCreate.exercises[payload.index]
@@ -129,7 +141,9 @@ export default {
     }
   },
   setTotalTime: (state, workoutId) => {
-    const index = state.workouts.findIndex(workout => workout.id === workoutId)
+    const index = state.workouts.findIndex(
+      (workout) => workout.id === workoutId
+    )
     let item
     if (workoutId === 'new') {
       item = state.workoutToCreate.exercises
@@ -158,7 +172,7 @@ export default {
   /* Exercises */
   removeExerciseByIndex: (state, payload) => {
     const index = state.workouts.findIndex(
-      workout => workout.id === payload.workout.id
+      (workout) => workout.id === payload.workout.id
     )
     if (index >= 0) {
       state.workouts[index].exercises.splice(payload.index, 1)
@@ -168,7 +182,7 @@ export default {
   },
   copyExerciseByIndex: (state, payload) => {
     const index = state.workouts.findIndex(
-      workout => workout.id === payload.workout.id
+      (workout) => workout.id === payload.workout.id
     )
     if (index >= 0) {
       state.workouts[index].exercises.splice(
@@ -190,27 +204,27 @@ export default {
     (state.communityWorkouts = communityWorkouts.reverse()),
 
   shareWorkout: (state, workoutId) => {
-    let index = state.workouts.findIndex(workout => workout.id === workoutId)
+    let index = state.workouts.findIndex((workout) => workout.id === workoutId)
     state.workouts[index].share = !state.workouts[index].share
     if (state.workouts[index].share)
       state.communityWorkouts.unshift(state.workouts[index])
     else {
       index = state.communityWorkouts.findIndex(
-        workout => workout.id === workoutId
+        (workout) => workout.id === workoutId
       )
       state.communityWorkouts.splice(index, 1)
     }
   },
   addSubscriber: (state, payload) => {
     const index = state.communityWorkouts.findIndex(
-      workout => workout.id === payload.id
+      (workout) => workout.id === payload.id
     )
     const { subscribers } = state.communityWorkouts[index]
     subscribers.unshift(payload.user)
   },
   removeSubscriber: (state, payload) => {
     const index = state.communityWorkouts.findIndex(
-      workout => workout.id === payload.id
+      (workout) => workout.id === payload.id
     )
     const { subscribers } = state.communityWorkouts[index]
     const userIndex = subscribers.indexOf(payload.user)
@@ -228,7 +242,7 @@ export default {
   setUserLeaderboardScore(state) {
     if (state.leaderboard) {
       const selected = state.leaderboard.find(
-        element => element.id === this.state.authentication.user.id
+        (element) => element.id === this.state.authentication.user.id
       )
       if (selected) {
         selected.completed = this.state.authentication.user.completed

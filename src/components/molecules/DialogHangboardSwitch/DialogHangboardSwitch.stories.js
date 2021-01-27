@@ -1,20 +1,15 @@
-import './DialogHangboardSwitch.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, boolean, object } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import DialogHangboardSwitch from './DialogHangboardSwitch'
 
 export default {
-  title: 'Molecules|DialogHangboardSwitch',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Molecules/DialogHangboardSwitch',
+  component: DialogHangboardSwitch,
+  argTypes: {
     user: {
-      type: Object,
-      default: object('user', {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         settings: {
           selected: 1,
           hangboards: [
@@ -28,17 +23,27 @@ export const Default = () => ({
             }
           ]
         }
-      })
+      }
     },
     hangboardDialog: {
-      type: Boolean,
-      default: boolean('hangboardDialog', true)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'hangboardDialog',
+      type: 'boolean'
+    },
+    input: {
+      action: 'input',
+      table: { category: 'Events' }
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { DialogHangboardSwitch },
-  methods: {
-    input: action('input')
-  },
-  template: `<dialog-hangboard-switch :user="user" :value="hangboardDialog" @input="input">
-  </dialog-hangboard-switch>`
+  props: Object.keys(argTypes),
+  template: `<dialog-hangboard-switch :user="user" :value="hangboardDialog" @input="input"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { hangboardDialog: true }

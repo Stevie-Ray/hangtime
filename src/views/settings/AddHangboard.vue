@@ -67,7 +67,7 @@ export default {
     ...mapActions('authentication', ['triggerAddHangboardAction']),
     addHangboard() {
       const exists = this.user.settings.hangboards.some(
-        el =>
+        (el) =>
           el.company === this.hangboardToAdd.company &&
           el.hangboard === this.hangboardToAdd.hangboard
       )

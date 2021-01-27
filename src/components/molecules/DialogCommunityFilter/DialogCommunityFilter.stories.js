@@ -1,26 +1,49 @@
-import './DialogCommunityFilter.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, boolean } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import DialogCommunityFilter from './DialogCommunityFilter'
 
 export default {
-  title: 'Molecules|DialogCommunityFilter',
-  decorators: [withKnobs]
+  title: 'Components/Molecules/DialogCommunityFilter',
+  component: DialogCommunityFilter,
+  argTypes: {
+    user: {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
+        settings: {
+          selected: 1,
+          hangboards: [
+            {
+              company: 1,
+              hangboard: 0
+            },
+            {
+              company: 1,
+              hangboard: 1
+            }
+          ]
+        }
+      }
+    },
+    filterDialog: {
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'filterDialog',
+      type: 'boolean'
+    },
+    input: {
+      action: 'input',
+      table: { category: 'Events' }
+    }
+  }
 }
 
-export const Default = () => ({
-  props: {
-    filterDialog: {
-      type: Boolean,
-      default: boolean('filterDialog', true)
-    }
-  },
+const Template = (args, { argTypes }) => ({
   components: { DialogCommunityFilter },
-  methods: {
-    input: action('input')
-  },
-  template: `<dialog-community-filter :value="filterDialog" @input="input">
-  </dialog-community-filter>`
+  props: Object.keys(argTypes),
+  template: `<dialog-community-filter :value="filterDialog" @input="input"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { filterDialog: true }

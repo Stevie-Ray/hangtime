@@ -1,29 +1,15 @@
-import './HangboardSelect.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { boolean, withKnobs } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import HangboardSelect from './HangboardSelect'
 
 export default {
-  title: 'Molecules|HangboardSelect',
-  decorators: [withKnobs]
+  title: 'Components/Molecules/HangboardSelect',
+  component: HangboardSelect,
+  argTypes: {}
 }
 
-export const Default = () => ({
-  props: {
-    newContentAvailable: {
-      type: Boolean,
-      default: boolean('newContentAvailable', true)
-    },
-    refreshingApp: {
-      type: Boolean,
-      default: boolean('refreshingApp', false)
-    }
-  },
+const Template = (args, { argTypes }) => ({
   components: { HangboardSelect },
-  methods: {
-    serviceWorkerSkipWaiting: action('serviceWorkerSkipWaiting')
-  },
+  props: Object.keys(argTypes),
   template: `<hangboard-select/>`
 })
+
+export const Common = Template.bind({})

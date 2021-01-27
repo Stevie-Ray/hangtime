@@ -25,7 +25,7 @@ export default class GenericDB {
 
     const createPromise = isNil(id)
       ? // Create doc with generated id
-        collectionRef.add(dataToCreate).then(doc => doc.id)
+        collectionRef.add(dataToCreate).then((doc) => doc.id)
       : // Create doc with custom id
         collectionRef
           .doc(id)
@@ -69,13 +69,13 @@ export default class GenericDB {
     let query = collectionRef
 
     if (constraints) {
-      constraints.forEach(constraint => {
+      constraints.forEach((constraint) => {
         query = query.where(...constraint)
       })
     }
 
-    const formatResult = result =>
-      result.docs.map(ref =>
+    const formatResult = (result) =>
+      result.docs.map((ref) =>
         this.convertObjectTimestampPropertiesToDate({
           id: ref.id,
           ...ref.data()
@@ -110,10 +110,7 @@ export default class GenericDB {
    * @param id
    */
   async delete(id) {
-    return (await firestore())
-      .collection(this.collectionPath)
-      .doc(id)
-      .delete()
+    return (await firestore()).collection(this.collectionPath).doc(id).delete()
   }
 
   /**
@@ -124,8 +121,8 @@ export default class GenericDB {
     const newObj = {}
 
     keys(obj)
-      .filter(prop => obj[prop] instanceof Object)
-      .forEach(prop => {
+      .filter((prop) => obj[prop] instanceof Object)
+      .forEach((prop) => {
         if (obj[prop] instanceof firebase.firestore.Timestamp) {
           newObj[prop] = obj[prop].toDate()
         } else {

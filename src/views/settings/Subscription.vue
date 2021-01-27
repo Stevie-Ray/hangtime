@@ -166,7 +166,7 @@ export default {
       return false
     },
     // eslint-disable-next-line no-unused-vars
-    trigger(sku, onToken = token => {}) {
+    trigger(sku, onToken = (token) => {}) {
       if (!window.PaymentRequest) {
         this.log('No PaymentRequest object.')
         return
@@ -195,7 +195,7 @@ export default {
           response
             .complete('success')
             // eslint-disable-next-line func-names
-            .then(function() {
+            .then(function () {
               this.log(
                 `Payment done: ${JSON.stringify(response, undefined, 2)}`
               )
@@ -206,7 +206,7 @@ export default {
               }
             })
             // eslint-disable-next-line func-names
-            .catch(function(e) {
+            .catch(function (e) {
               this.log(e.message)
               this.log(JSON.stringify(response, undefined, 2))
             })
@@ -218,11 +218,11 @@ export default {
         request
           .canMakePayment()
           // eslint-disable-next-line func-names
-          .then(function(result) {
+          .then(function (result) {
             this.log(result ? 'Can make payment' : 'Cannot make payment')
           })
           // eslint-disable-next-line func-names
-          .catch(function(e) {
+          .catch(function (e) {
             this.log(e.message)
           })
       }
@@ -231,7 +231,7 @@ export default {
         request
           .hasEnrolledInstrument()
           // eslint-disable-next-line func-names
-          .then(function(result) {
+          .then(function (result) {
             if (result) {
               this.log('Has enrolled instrument')
             } else {
@@ -243,7 +243,7 @@ export default {
               .show()
               .then(handlePaymentResponse)
               // eslint-disable-next-line func-names
-              .catch(function(e) {
+              .catch(function (e) {
                 // log(JSON.stringify(e, undefined, 2));
                 this.log(e)
                 this.log(
@@ -252,7 +252,7 @@ export default {
               })
           })
           // eslint-disable-next-line func-names
-          .catch(function(e) {
+          .catch(function (e) {
             this.log(e.message)
 
             // Also call show if hasEnrolledInstrument throws.
@@ -260,7 +260,7 @@ export default {
               .show()
               .then(handlePaymentResponse)
               // eslint-disable-next-line no-shadow,func-names
-              .catch(function(e) {
+              .catch(function (e) {
                 this.log(JSON.stringify(e, undefined, 2))
                 this.log(e)
               })

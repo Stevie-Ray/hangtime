@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 
 import i18n from '@/misc/i18n'
-import opts from '@/misc/theme'
+import options from '@/misc/theme'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -21,7 +21,7 @@ Vue.use(Vuetify)
 new Vue({
   router,
   store,
-  vuetify: new Vuetify(opts),
+  vuetify: new Vuetify(options),
   i18n,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')

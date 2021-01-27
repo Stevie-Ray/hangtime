@@ -14,13 +14,13 @@ export default class UsersDB extends GenericDB {
     let query = collectionRef
 
     if (constraints) {
-      constraints.forEach(constraint => {
+      constraints.forEach((constraint) => {
         query = query.where(...constraint)
       })
     }
 
-    const formatResult = result =>
-      result.docs.map(ref => {
+    const formatResult = (result) =>
+      result.docs.map((ref) => {
         const data = this.convertObjectTimestampPropertiesToDate({
           id: ref.id,
           ...ref.data()

@@ -16,12 +16,15 @@
               color="rgba(0, 0, 0, .4)"
               dark
               dense
-              style="background-color: rgba(0, 0, 0, .5)"
+              style="background-color: rgba(0, 0, 0, 0.5);"
             >
               <v-list-item-content class="py-0">
                 <v-list-item-title class="text-subtitle-1">{{
                   data.displayName
                 }}</v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ $t('') }}
+                </v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>

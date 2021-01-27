@@ -197,7 +197,7 @@ export default {
     computedHeaders() {
       if (this.$vuetify.breakpoint.name === 'xs') {
         return this.tableHeaders.filter(
-          item => item.value === this.sort || item.value === 'displayName'
+          (item) => item.value === this.sort || item.value === 'displayName'
         )
       }
       return this.tableHeaders
@@ -205,7 +205,7 @@ export default {
     selected() {
       if (!this.leaderboard) return
       // eslint-disable-next-line consistent-return
-      return this.leaderboard.find(user => user.id === this.user.id)
+      return this.leaderboard.find((user) => user.id === this.user.id)
     }
   },
   watch: {
@@ -237,7 +237,7 @@ export default {
       }
     },
     showData(element) {
-      return this.computedHeaders.some(e => e.value === element)
+      return this.computedHeaders.some((e) => e.value === element)
     }
   }
 }

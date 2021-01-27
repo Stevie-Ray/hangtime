@@ -1,46 +1,15 @@
-import './DialogWorkoutComplete.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, object, boolean, number } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import DialogWorkoutComplete from './DialogWorkoutComplete'
 
 export default {
-  title: 'Molecules|DialogWorkoutComplete',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Molecules/DialogWorkoutComplete',
+  component: DialogWorkoutComplete,
+  argTypes: {
     user: {
-      type: Object,
-      default: object('user', {
-        completed: {
-          amount: 10,
-          hold: 200,
-          time: 300
-        },
-        settings: {
-          selected: 1,
-          hangboards: [
-            {
-              company: 1,
-              hangboard: 0
-            },
-            {
-              company: 1,
-              hangboard: 1
-            }
-          ]
-        }
-      })
-    },
-    dialog: {
-      type: Boolean,
-      default: boolean('dialog', true)
-    },
-    currentWorkout: {
-      default: object('currentWorkout', {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         company: 1,
         description: 'Storybook',
         exercises: [
@@ -58,38 +27,71 @@ export const Default = () => ({
           }
         ],
         hangboard: 0,
-        subscribers: [
-          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-        ],
         level: 1,
         name: 'Storybook',
-        share: false,
+        share: true,
         time: 100
-      })
+      }
+    },
+    dialog: {
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'dialog',
+      type: 'boolean'
+    },
+    input: {
+      action: 'input',
+      table: { category: 'Events' }
+    },
+    currentWorkout: {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
+        settings: {
+          selected: 1,
+          hangboards: [
+            {
+              company: 1,
+              hangboard: 0
+            },
+            {
+              company: 1,
+              hangboard: 1
+            }
+          ]
+        }
+      }
     },
     timeInWorkout: {
-      type: Number,
-      default: number('timeInWorkout', 123)
+      control: 'number',
+      table: { category: 'Attributes' },
+      description: 'timeInWorkout',
+      type: 'number'
     },
     timeHoldingOn: {
-      type: Number,
-      default: number('timeHoldingOn', 96)
+      control: 'number',
+      table: { category: 'Attributes' },
+      description: 'timeHoldingOn',
+      type: 'number'
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { DialogWorkoutComplete },
-  methods: {
-    input: action('input')
-  },
-  template: `
-      <dialog-workout-complete
-          :user="user"
-          :value="dialog"
-          @input="input"
-          :current-workout="currentWorkout"
-          :time-in-workout="timeInWorkout"
-          :time-holding-on="timeHoldingOn"
-      >
-      </dialog-workout-complete>`
+  props: Object.keys(argTypes),
+  template: `<dialog-workout-complete
+        :user="user"
+        :value="dialog"
+        @input="input"
+        :current-workout="currentWorkout"
+        :time-in-workout="timeInWorkout"
+        :time-holding-on="timeHoldingOn"
+    />`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { dialog: true, timeInWorkout: 123, timeHoldingOn: 96 }

@@ -80,7 +80,7 @@
             <v-list
               v-if="
                 currentStats[index] &&
-                  currentStats[index]['recordings'].length > 0
+                currentStats[index]['recordings'].length > 0
               "
               two-line
             >
@@ -99,7 +99,7 @@
                     <v-list-item-title
                       v-if="
                         currentStats[index] &&
-                          currentStats[index]['recordings'].length
+                        currentStats[index]['recordings'].length
                       "
                     >
                       <span>Max </span>
@@ -107,8 +107,8 @@
                         v-if="
                           (currentStats[index] &&
                             currentStats[index].left === null) ||
-                            (currentStats[index] &&
-                              currentStats[index].right === null)
+                          (currentStats[index] &&
+                            currentStats[index].right === null)
                         "
                         >{{ $t('One Arm') }}
                       </span>
@@ -191,8 +191,8 @@
                         v-if="
                           (currentStats[index] &&
                             currentStats[index].left === null) ||
-                            (currentStats[index] &&
-                              currentStats[index].right === null)
+                          (currentStats[index] &&
+                            currentStats[index].right === null)
                         "
                         >{{ $t('One Arm') }}
                       </span>
@@ -205,7 +205,7 @@
             <div
               v-if="
                 (currentStats[index] && currentStats[index].left === null) ||
-                  (currentStats[index] && currentStats[index].right === null)
+                (currentStats[index] && currentStats[index].right === null)
               "
               class="text-subtitle-2"
             >
@@ -363,19 +363,19 @@ export default {
       )
         return
       // eslint-disable-next-line consistent-return
-      return this.currentStats[this.index].recordings.filter(recording => {
+      return this.currentStats[this.index].recordings.filter((recording) => {
         return this.selected.includes(this.returnType(recording.type))
       })
     },
     chartData() {
       if (!this.currentStatsValue && !this.currentStatsLabels) return {}
       // eslint-disable-next-line func-names
-      const filtered = this.grip.filter(function(e) {
+      const filtered = this.grip.filter(function (e) {
         return this.indexOf(e.id) >= 0
       }, this.selected)
       const datasets = []
       const self = this
-      filtered.forEach(option => {
+      filtered.forEach((option) => {
         const data = self.currentStatsValue(option.id)
         datasets.push({
           label: option.name,
@@ -404,8 +404,8 @@ export default {
       }
       // eslint-disable-next-line consistent-return
       return this.currentStats[this.index].recordings
-        .filter(recording => this.returnType(recording.type) === index)
-        .map(obj => {
+        .filter((recording) => this.returnType(recording.type) === index)
+        .map((obj) => {
           let date = obj.createTimestamp
           if (date && date.seconds) {
             date = new Date(date.seconds * 1000)
@@ -421,7 +421,7 @@ export default {
         return
       }
       // eslint-disable-next-line consistent-return
-      return this.currentStats[this.index].recordings.map(a => a.label)
+      return this.currentStats[this.index].recordings.map((a) => a.label)
     },
     encodeUrl(url) {
       return url

@@ -1,20 +1,15 @@
-import './WorkoutListItem.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, boolean, number, object } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import WorkoutListItem from './WorkoutListItem'
 
 export default {
-  title: 'Molecules|WorkoutListItem',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
-    data: {
-      type: Object,
-      default: object('data', {
+  title: 'Components/Molecules/WorkoutListItem',
+  component: WorkoutListItem,
+  argTypes: {
+    workout: {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         company: 1,
         description: 'Storybook',
         exercises: [
@@ -32,37 +27,54 @@ export const Default = () => ({
           }
         ],
         hangboard: 0,
-        id: 'xxxxx',
+        subscribers: [
+          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        ],
         level: 1,
         name: 'Storybook',
-        share: true,
+        share: false,
         time: 100,
         user: {
           id: 'xxxxx',
           photoURL: 'https://thispersondoesnotexist.com/image',
           displayName: 'Person Does Not Exist'
         }
-      })
+      }
     },
     index: {
-      type: Number,
-      default: number('index', 1)
+      control: 'number',
+      table: { category: 'Attributes' },
+      description: 'index',
+      type: 'number'
     },
     disableActions: {
-      type: Boolean,
-      default: boolean('disableAction', false)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'disableActions',
+      type: 'boolean'
+    },
+    input: {
+      action: 'input',
+      table: { category: 'Events' }
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { WorkoutListItem },
-  methods: {
-    input: action('input')
-  },
+  props: Object.keys(argTypes),
   template: `<workout-list-item
-      :key="data.id"
-      class="community-workout-row"
-      :index="index"
-      :disable-actions="disableActions"
-      :data="data"
-      @go-to-workout-details="">
-  </workout-list-item>`
+        :key="workout.id"
+        class="community-workout-row"
+        :index="index"
+        :disable-actions="disableActions"
+        :data="workout"
+        @go-to-workout-details=""/>
+    `
 })
+
+export const Common = Template.bind({})
+
+Common.args = { WorkoutListItem: true }

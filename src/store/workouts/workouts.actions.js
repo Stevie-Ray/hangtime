@@ -121,7 +121,7 @@ export default {
     commit('setTotalTime', id)
 
     // eslint-disable-next-line no-shadow
-    const workout = state.workouts.find(workout => workout.id === id)
+    const workout = state.workouts.find((workout) => workout.id === id)
 
     commit('setExerciseToCreate', {
       exercise: 0,
@@ -150,7 +150,7 @@ export default {
 
       const workout = state.workouts.find(
         // eslint-disable-next-line no-shadow
-        workout => workout.id === payload.workout.id
+        (workout) => workout.id === payload.workout.id
       )
 
       dispatch('updateWorkout', workout)
@@ -197,7 +197,7 @@ export default {
   shareWorkout: ({ state, commit, dispatch }, id) => {
     commit('shareWorkout', id)
     // eslint-disable-next-line no-shadow
-    const workout = state.workouts.find(workout => workout.id === id)
+    const workout = state.workouts.find((workout) => workout.id === id)
 
     dispatch('updateWorkout', workout)
   },
@@ -206,7 +206,7 @@ export default {
 
     const workout = state.communityWorkouts.find(
       // eslint-disable-next-line no-shadow
-      workout => workout.id === payload.id
+      (workout) => workout.id === payload.id
     )
 
     const userWorkoutsDb = new UserWorkoutsDB(payload.userId)
@@ -218,7 +218,7 @@ export default {
 
     const workout = state.communityWorkouts.find(
       // eslint-disable-next-line no-shadow
-      workout => workout.id === payload.id
+      (workout) => workout.id === payload.id
     )
     commit('removeWorkoutById', workout.id)
     const userWorkoutsDb = new UserWorkoutsDB(payload.userId)

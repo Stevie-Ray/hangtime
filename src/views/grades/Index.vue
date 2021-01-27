@@ -94,7 +94,7 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine']),
     gradeList() {
-      return this.ircra.get(this.select).filter(element => element != null)
+      return this.ircra.get(this.select).filter((element) => element != null)
     }
   },
   methods: {

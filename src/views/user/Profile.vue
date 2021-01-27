@@ -75,7 +75,7 @@
                       <v-card color="primary" dark flat tile class="pl-4 pr-0">
                         <v-row
                           class="align-center"
-                          style="display: flex; height: 100px"
+                          style="display: flex; height: 100px;"
                         >
                           <v-img
                             class="my-2"

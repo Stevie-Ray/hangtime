@@ -25,13 +25,13 @@
               class="d-flex justify-center align-center"
               max-width="500"
               min-height="250"
-              style="margin: 0 auto"
+              style="margin: 0 auto;"
             >
               <!-- Loader -->
               <div v-show="user === undefined" data-test="loader">
                 <v-progress-circular :size="48" color="primary" indeterminate>
                 </v-progress-circular>
-                <div class="text-center ">{{ $t('Authenticating...') }}</div>
+                <div class="text-center">{{ $t('Authenticating...') }}</div>
               </div>
 
               <!-- Offline instruction -->
@@ -254,14 +254,14 @@ export default {
     switchForm: false,
     valid: true,
     rules: {
-      lengthRule: len => v =>
+      lengthRule: (len) => (v) =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
-      requiredRule: v => !!v || 'This field is required',
-      emailRule: v =>
+      requiredRule: (v) => !!v || 'This field is required',
+      emailRule: (v) =>
         !v ||
         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
         'E-mail must be valid',
-      passwordRule: value => {
+      passwordRule: (value) => {
         // eslint-disable-next-line
         const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
         return (
@@ -305,7 +305,7 @@ export default {
             ? '/workouts'
             : this.$route.query.redirectUrl
           // eslint-disable-next-line func-names
-          setTimeout(function() {
+          setTimeout(function () {
             self.$router.push(redirectUrl)
           }, 1000)
         }
@@ -351,7 +351,7 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           // eslint-disable-next-line func-names
-          .catch(function(error) {
+          .catch(function (error) {
             // Handle Errors here.
             self.errorCode = error.code
             if (self.errorCode === 'auth/wrong-password') {
@@ -370,14 +370,14 @@ export default {
         firebase
           .auth()
           .createUserWithEmailAndPassword(self.email, self.password)
-          .then(userData => {
+          .then((userData) => {
             userData.user.sendEmailVerification()
             userData.user.updateProfile({
               displayName: self.displayName
             })
           })
           // eslint-disable-next-line func-names
-          .catch(function(error) {
+          .catch(function (error) {
             // Handle Errors here.
             self.loginError = error.message
             self.valid = false
@@ -394,7 +394,7 @@ export default {
             self.resetPassword = false
             self.loginError = this.$i18n.t('Password reset email link sent!')
           })
-          .catch(err => {
+          .catch((err) => {
             this.loginError = err
           })
       }
@@ -406,7 +406,7 @@ export default {
           .then(() => {
             this.$router.push('/workouts')
           })
-          .catch(err => {
+          .catch((err) => {
             this.loginError = err
             this.setUser(null)
           })

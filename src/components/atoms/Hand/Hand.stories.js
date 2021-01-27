@@ -1,24 +1,21 @@
-import './Hand.stories.scss'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, boolean, object } from '@storybook/addon-knobs'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'
 import Hand from './Hand'
 
 export default {
-  title: 'Atoms|Hand',
-  decorators: [withKnobs]
-}
-
-export const Default = () => ({
-  props: {
+  title: 'Components/Atoms/Hand',
+  components: Hand,
+  argTypes: {
     editWorkout: {
-      type: Boolean,
-      default: boolean('editWorkout', true)
+      control: 'boolean',
+      table: { category: 'Attributes' },
+      description: 'editWorkout',
+      type: 'boolean'
     },
     currentExercise: {
-      type: Object,
-      default: object('currentExercise', {
+      control: 'object',
+      table: {
+        category: 'Attributes'
+      },
+      defaultValue: {
         exercise: 0,
         hold: 20,
         left: 1,
@@ -29,17 +26,32 @@ export const Default = () => ({
         rest: 3,
         right: 1,
         time: 80
-      })
+      }
+    },
+    setLeftHand: { action: 'set-left-hand', table: { category: 'Events' } },
+    setRightHand: { action: 'set-right-hand', table: { category: 'Events' } },
+    classes: {
+      control: {
+        type: 'select',
+        options: ['', 'mb2']
+      },
+      table: {
+        category: 'Modifier classes'
+      }
     }
-  },
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { Hand },
-  methods: {
-    setLeftHand: action('set-left-hand'),
-    setRightHand: action('set-right-hand')
-  },
-  template: `<hand class="mb-2"
-  :data="currentExercise"
-  :edit-workout="editWorkout"
-  @left="setLeftHand($event)"
-  @right="setRightHand($event)"></hand>`
+  props: Object.keys(argTypes),
+  template: `<hand :class="classes" :data="currentExercise" :edit-workout="editWorkout" @left="setLeftHand($event)" @right="setRightHand($event)"/>`
 })
+
+export const Common = Template.bind({})
+
+Common.args = { editWorkout: false }
+
+export const EditWorkout = Template.bind({})
+
+EditWorkout.args = { editWorkout: true }

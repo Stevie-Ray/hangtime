@@ -24,7 +24,7 @@
         <span
           v-if="
             currentStats[index].left === null ||
-              currentStats[index].right === null
+            currentStats[index].right === null
           "
         >
           {{ $t('One Arm') }}
@@ -70,7 +70,7 @@
                       <span
                         v-if="
                           currentStats[index].left === null ||
-                            currentStats[index].right === null
+                          currentStats[index].right === null
                         "
                       >
                         {{ $t('One Arm') }}
@@ -86,17 +86,17 @@
                     <div
                       v-if="
                         currentStats[index] &&
-                          currentStats[index].recordings.length > 0
+                        currentStats[index].recordings.length > 0
                       "
                       class="text-uppercase font-weight-bold"
                     >
                       <span
                         v-if="
                           !configurable &&
-                            bestStatsByType({
-                              id: currentStats[index].id,
-                              type: currentType.id
-                            }) > 0
+                          bestStatsByType({
+                            id: currentStats[index].id,
+                            type: currentType.id
+                          }) > 0
                         "
                       >
                         {{ $t('Best') }}:{{
@@ -139,7 +139,7 @@
                     <span
                       v-if="
                         currentStats[index].left === null ||
-                          currentStats[index].right === null
+                        currentStats[index].right === null
                       "
                     >
                       {{ $t('One Arm') }}
@@ -261,7 +261,7 @@
                 {{ $t('How many pull-ups did you do?') }}
                 <v-container fluid grid-list-lg>
                   <v-layout wrap>
-                    <div style="width: 45px">
+                    <div style="width: 45px;">
                       <v-text-field
                         v-model="pullups"
                         class="mt-0"
@@ -417,13 +417,13 @@ export default {
       if (this.user.settings.speak && 'speechSynthesis' in window) {
         this.voiceList = window.speechSynthesis.getVoices()
         if (this.user.settings.locale) {
-          this.voiceList = this.voiceList.filter(voice => {
+          this.voiceList = this.voiceList.filter((voice) => {
             return voice.lang.includes(
               this.user.settings.locale.substring(0, 2)
             )
           })
         } else {
-          this.voiceList = this.voiceList.filter(voice =>
+          this.voiceList = this.voiceList.filter((voice) =>
             /^(en|EN|US)/.test(voice.lang)
           )
         }

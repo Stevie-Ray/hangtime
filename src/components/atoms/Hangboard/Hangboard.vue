@@ -6,11 +6,11 @@
           v-if="hangboard"
           class="hangboard"
           :class="hangboard.name"
-          style="position: relative"
+          style="position: relative;"
         >
           <v-btn
             v-if="editWorkout && hangboard.sides && hangboard.sides.length"
-            style="position: absolute; right: -15px; top: -15px; z-index: 10"
+            style="position: absolute; right: -15px; top: -15px; z-index: 10;"
             fab
             color="primary"
             x-small

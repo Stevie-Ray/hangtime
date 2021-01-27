@@ -129,7 +129,6 @@ export default {
   props: {
     startButton: Boolean,
     pauseButton: Boolean,
-    resetButton: Boolean,
     currentExercise: Object,
     currentWorkout: Object
   },
@@ -460,7 +459,7 @@ export default {
 
       // start count down
       if (this.initialTime >= 4 && this.totalTime <= 4 && this.totalTime > 1) {
-        if (this.user.settings.speak) {
+        if (this.user && this.user.settings.speak) {
           this.speakText(this.totalTime - 1)
         } else {
           this.playSound('count.mp3')
@@ -480,7 +479,7 @@ export default {
       this.progressText = 'Rest'
       // rest: start counting down
       if (this.initialTime >= 4 && this.totalTime <= 4 && this.totalTime > 1) {
-        if (this.user.settings.speak) {
+        if (this.user && this.user.settings.speak) {
           this.speakText(this.totalTime - 1)
         } else {
           this.playSound('count.mp3')
@@ -510,16 +509,20 @@ export default {
       clearInterval(this.timer)
     },
     speakText(text) {
-      if (this.user.settings.speak && 'speechSynthesis' in window) {
+      if (
+        this.user &&
+        this.user.settings.speak &&
+        'speechSynthesis' in window
+      ) {
         this.voiceList = window.speechSynthesis.getVoices()
         if (this.user.settings.locale) {
-          this.voiceList = this.voiceList.filter(voice => {
+          this.voiceList = this.voiceList.filter((voice) => {
             return voice.lang.includes(
               this.user.settings.locale.substring(0, 2)
             )
           })
         } else {
-          this.voiceList = this.voiceList.filter(voice =>
+          this.voiceList = this.voiceList.filter((voice) =>
             /^(en|EN|US)/.test(voice.lang)
           )
         }
@@ -530,11 +533,12 @@ export default {
       }
     },
     playSound(path) {
-      if (this.user.settings.sound) this.sound(path)
+      if (this.user && this.user.settings.sound) this.sound(path)
     },
     vibratePhone() {
       if ('vibrate' in navigator) {
-        if (this.user.settings.vibrate) navigator.vibrate([80, 40, 120])
+        if (this.user && this.user.settings.vibrate)
+          navigator.vibrate([80, 40, 120])
       }
     }
   }
