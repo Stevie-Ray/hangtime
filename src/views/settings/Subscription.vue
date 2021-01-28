@@ -17,14 +17,40 @@
           <v-col cols="12">
             <v-card>
               <v-card-text>
-                <v-btn @click="getDetails('subscription')">get Details</v-btn>
-                <v-btn @click="populatePrice('subscription')"
-                  >Populate Price</v-btn
-                >
+                <v-btn @click="getDetails('subscription')">
+                  get Details
+                </v-btn>
+                <v-btn @click="populatePrice('subscription')">
+                  Populate Price
+                </v-btn>
+                <v-btn @click="trigger('android.test.purchased')">
+                  Buy
+                </v-btn>
+                <v-btn @click="trigger('android.test.canceled')">
+                  Buy Cancel
+                </v-btn>
+                <v-btn @click="acknowledge(tokenPurchased)">
+                  Consume Test
+                </v-btn>
+                <v-btn @click="acknowledge(tokenCancelled)"
+                  >Consume Cancel
+                </v-btn>
                 <div>Price: {{ price }}</div>
               </v-card-text>
             </v-card>
-
+            <v-card>
+              <v-card-title>
+                Purchases
+              </v-card-title>
+              <v-card-text>
+                <span style="white-space: pre;">
+                  {{ purchasesField }}
+                </span>
+                <button @click="listPurchases">
+                  List Purchases
+                </button>
+              </v-card-text>
+            </v-card>
             <v-card>
               <v-card-title>
                 Log
@@ -55,6 +81,9 @@ export default {
     },
     price: 0,
     logField: '',
+    purchasesField: '',
+    tokenPurchased: '',
+    tokenCancelled: '',
     PAYMENT_METHOD: 'https://play.google.com/billing'
   }),
   head: {
@@ -81,9 +110,18 @@ export default {
     async loadSkus() {
       this.checkSupport()
       const playStoreBuild = await this.populatePrice('subscription')
+      const LOCAL_BUILD_PACKAGE = 'nl.stevie-ray.hangtime'
+      const PLAY_BUILD_PACKAGE = 'hangtime.stevie-ray.nl'
+      let pack
+
       if (playStoreBuild) {
-        this.log('ok')
+        pack = PLAY_BUILD_PACKAGE
+      } else {
+        pack = LOCAL_BUILD_PACKAGE
       }
+
+      this.tokenPurchased = `inapp:${pack}:android.test.purchased`
+      this.tokenCancelled = `inapp:${pack}:android.test.canceled`
     },
     async getDetails(sku) {
       try {
@@ -116,7 +154,7 @@ export default {
         this.log(error)
       }
     },
-    async listPurchases(output) {
+    async listPurchases() {
       try {
         if (window.getDigitalGoodsService) {
           const service = await window.getDigitalGoodsService(
@@ -124,7 +162,7 @@ export default {
           )
           const purchases = await service.listPurchases()
           this.log('Got purchases list.')
-          output.innerText = JSON.stringify(purchases, null, 2)
+          this.purchasesField = JSON.stringify(purchases, null, 2)
         } else {
           this.log("window doesn't have getDigitalGoodsService.")
         }
@@ -165,6 +203,7 @@ export default {
       }
       return false
     },
+
     // eslint-disable-next-line no-unused-vars
     trigger(sku, onToken = (token) => {}) {
       if (!window.PaymentRequest) {
