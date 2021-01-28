@@ -17,24 +17,13 @@
           <v-col cols="12">
             <v-card>
               <v-card-text>
-                <v-btn @click="getDetails('subscription')">
-                  get Details
+                <v-btn :disabled="disabled" @click="buySubscription">
+                  {{ $t('Buy') }}
                 </v-btn>
-                <v-btn @click="populatePrice('subscription')">
-                  Populate Price
+                <v-btn v-if="acknowledgeable" @click="acknowledgeSubscription">
+                  {{ $t('Acknowledge') }}
                 </v-btn>
-                <v-btn @click="trigger('android.test.purchased')">
-                  Buy
-                </v-btn>
-                <v-btn @click="trigger('android.test.canceled')">
-                  Buy Cancel
-                </v-btn>
-                <v-btn @click="acknowledge(tokenPurchased)">
-                  Consume Test
-                </v-btn>
-                <v-btn @click="acknowledge(tokenCancelled)"
-                  >Consume Cancel
-                </v-btn>
+                <p>{{ buyStatus }}</p>
                 <div>Price: {{ price }}</div>
               </v-card-text>
             </v-card>
@@ -43,12 +32,12 @@
                 Purchases
               </v-card-title>
               <v-card-text>
-                <span style="white-space: pre;">
-                  {{ purchasesField }}
-                </span>
-                <button @click="listPurchases">
+                <div v-for="(item, index) in purchasesField" :key="index">
+                  {{ item }}
+                </div>
+                <v-btn @click="listPurchases">
                   List Purchases
-                </button>
+                </v-btn>
               </v-card-text>
             </v-card>
             <v-card>
@@ -80,10 +69,12 @@ export default {
       arrowLeft: mdiArrowLeft
     },
     price: 0,
+    disabled: true,
+    acknowledgeable: false,
+    token: null,
+    buyStatus: '',
     logField: '',
-    purchasesField: '',
-    tokenPurchased: '',
-    tokenCancelled: '',
+    purchasesList: [],
     PAYMENT_METHOD: 'https://play.google.com/billing'
   }),
   head: {
@@ -109,33 +100,11 @@ export default {
     getImg,
     async loadSkus() {
       this.checkSupport()
+      // get price
       const playStoreBuild = await this.populatePrice('subscription')
-      const LOCAL_BUILD_PACKAGE = 'nl.stevie-ray.hangtime'
-      const PLAY_BUILD_PACKAGE = 'hangtime.stevie-ray.nl'
-      let pack
-
+      // enable button
       if (playStoreBuild) {
-        pack = PLAY_BUILD_PACKAGE
-      } else {
-        pack = LOCAL_BUILD_PACKAGE
-      }
-
-      this.tokenPurchased = `inapp:${pack}:android.test.purchased`
-      this.tokenCancelled = `inapp:${pack}:android.test.canceled`
-    },
-    async getDetails(sku) {
-      try {
-        if (window.getDigitalGoodsService) {
-          const service = await window.getDigitalGoodsService(
-            this.PAYMENT_METHOD
-          )
-          const details = await service.getDetails([sku])
-          this.log(JSON.stringify(details, null, 2))
-        } else {
-          this.log("window doesn't have getDigitalGoodsService.")
-        }
-      } catch (error) {
-        this.log(error)
+        this.disabled = false
       }
     },
     async acknowledge(token, type = 'repeatable', onComplete = () => {}) {
@@ -162,7 +131,7 @@ export default {
           )
           const purchases = await service.listPurchases()
           this.log('Got purchases list.')
-          this.purchasesField = JSON.stringify(purchases, null, 2)
+          this.purchasesList = JSON.stringify(purchases, null, 2)
         } else {
           this.log("window doesn't have getDigitalGoodsService.")
         }
@@ -203,7 +172,19 @@ export default {
       }
       return false
     },
-
+    buySubscription() {
+      this.trigger('subscription', (token) => {
+        this.buyStatus = 'subscription purchased! Thank you!'
+        this.token = token
+        this.acknowledgeable = true
+      })
+    },
+    acknowledgeSubscription() {
+      this.acknowledge(this.token, 'onetime', () => {
+        this.acknowledgeable = false
+        this.buyStatus = 'Subscription acknowledged!'
+      })
+    },
     // eslint-disable-next-line no-unused-vars
     trigger(sku, onToken = (token) => {}) {
       const self = this
@@ -225,7 +206,7 @@ export default {
       const details = {
         total: {
           label: 'Total',
-          amount: { currency: 'GBP', value: '0' }
+          amount: { currency: 'USD', value: '0' }
         }
       }
 
