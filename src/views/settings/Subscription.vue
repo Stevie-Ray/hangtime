@@ -206,6 +206,8 @@ export default {
 
     // eslint-disable-next-line no-unused-vars
     trigger(sku, onToken = (token) => {}) {
+      const self = this
+
       if (!window.PaymentRequest) {
         this.log('No PaymentRequest object.')
         return
@@ -235,19 +237,19 @@ export default {
             .complete('success')
             // eslint-disable-next-line func-names
             .then(function () {
-              this.log(
+              self.log(
                 `Payment done: ${JSON.stringify(response, undefined, 2)}`
               )
               if (response.details && response.details.token) {
                 const { token } = response.details
-                this.log(`Read Token: ${token.substring(0, 6)}...`)
+                self.log(`Read Token: ${token.substring(0, 6)}...`)
                 onToken(token)
               }
             })
             // eslint-disable-next-line func-names
             .catch(function (e) {
-              this.log(e.message)
-              this.log(JSON.stringify(response, undefined, 2))
+              self.log(e.message)
+              self.log(JSON.stringify(response, undefined, 2))
             })
           // request = buildPaymentRequest();
         }, 500)
@@ -258,11 +260,11 @@ export default {
           .canMakePayment()
           // eslint-disable-next-line func-names
           .then(function (result) {
-            this.log(result ? 'Can make payment' : 'Cannot make payment')
+            self.log(result ? 'Can make payment' : 'Cannot make payment')
           })
           // eslint-disable-next-line func-names
           .catch(function (e) {
-            this.log(e.message)
+            self.log(e.message)
           })
       }
 
@@ -272,9 +274,9 @@ export default {
           // eslint-disable-next-line func-names
           .then(function (result) {
             if (result) {
-              this.log('Has enrolled instrument')
+              self.log('Has enrolled instrument')
             } else {
-              this.log('No enrolled instrument')
+              self.log('No enrolled instrument')
             }
 
             // Call show even if we don't have any enrolled instruments.
@@ -284,15 +286,15 @@ export default {
               // eslint-disable-next-line func-names
               .catch(function (e) {
                 // log(JSON.stringify(e, undefined, 2));
-                this.log(e)
-                this.log(
+                self.log(e)
+                self.log(
                   "Maybe you've already purchased the item (try acknowledging first)."
                 )
               })
           })
           // eslint-disable-next-line func-names
           .catch(function (e) {
-            this.log(e.message)
+            self.log(e.message)
 
             // Also call show if hasEnrolledInstrument throws.
             request
@@ -300,8 +302,8 @@ export default {
               .then(handlePaymentResponse)
               // eslint-disable-next-line no-shadow,func-names
               .catch(function (e) {
-                this.log(JSON.stringify(e, undefined, 2))
-                this.log(e)
+                self.log(JSON.stringify(e, undefined, 2))
+                self.log(e)
               })
           })
       }
