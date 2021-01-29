@@ -55,7 +55,12 @@
               </v-card-title>
               <v-card-text>
                 <div v-for="(item, index) in purchasesList" :key="index">
-                  {{ item }}
+                  <div>Acknowledged: {{ item.acknowledged }}</div>
+                  <div>ItemId: {{ item.itemId }}</div>
+                  <div>purchaseState: {{ item.purchaseState }}</div>
+                  <div>purchaseTime: {{ item.purchaseTime }}</div>
+                  <div>purchaseToken: {{ item.purchaseToken }}</div>
+                  <div>willAutoRenew: {{ item.willAutoRenew }}</div>
                 </div>
                 <v-btn @click="listPurchases">
                   {{ $t('List purchases') }}
@@ -141,7 +146,9 @@ export default {
           )
           const purchases = await service.listPurchases()
           this.log('Got purchases list.')
-          this.purchasesList = JSON.stringify(purchases, null, 2)
+          console.log(purchases)
+          console.log(JSON.stringify(purchases, null, 2))
+          this.purchasesList = purchases
         } else {
           this.log("window doesn't have getDigitalGoodsService.")
         }
