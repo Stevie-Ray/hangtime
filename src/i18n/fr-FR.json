@@ -205,5 +205,11 @@
   "Leaderboard": "Classement",
   "Continue as Guest": "Continuer en tant qu'invité",
   "Guest User": "Utilisateur invité",
-  "Ok": "D'accord"
+  "Ok": "D'accord",
+  "Acknowledge purchase": "Confirmer l'achat",
+  "Buy": "Acheter",
+  "Price": "Prix",
+  "Purchases": "Achats",
+  "List purchases": "Liste des achats",
+  "Log": "Journal"
 }

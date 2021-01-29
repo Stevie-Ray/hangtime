@@ -5,7 +5,7 @@
         mdi.arrowLeft
       }}</v-icon>
       <v-toolbar-title>
-        {{ $t('Subscription') }} ({{ $t('soon') }})
+        {{ $t('Subscription') }}
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -15,39 +15,59 @@
       <v-container>
         <v-row>
           <v-col cols="12">
-            <v-card>
+            <v-card flat>
+              <v-card-title>
+                {{ appTitle }} {{ $t('Subscription') }} - ({{ $t('soon') }})
+              </v-card-title>
+              <v-card-subtitle>
+                {{ appTitle }} will soon switch to a paid service after
+                hangboarding for more than an hour!
+              </v-card-subtitle>
               <v-card-text>
-                <v-btn :disabled="disabled" @click="buySubscription">
-                  {{ $t('Buy') }}
-                </v-btn>
+                <div>
+                  <ul>
+                    <li>
+                      You must have Chrome 88+ and it should be your default
+                      browser
+                    </li>
+                    <li>
+                      You must use the Google Play Store version of the app
+                    </li>
+                  </ul>
+                  <p>&nbsp;</p>
+                </div>
+                <div>
+                  <v-btn :disabled="disabled" @click="buySubscription">
+                    {{ $t('Buy') }}
+                  </v-btn>
+                </div>
+
                 <v-btn v-if="acknowledgeable" @click="acknowledgeSubscription">
-                  {{ $t('Acknowledge') }}
+                  {{ $t('Acknowledge purchase') }}
                 </v-btn>
                 <p>{{ buyStatus }}</p>
-                <div>Price: {{ price }}</div>
+                <div>{{ $t('Price') }}: {{ price }}</div>
               </v-card-text>
             </v-card>
-            <v-card>
+            <v-card flat>
               <v-card-title>
-                Purchases
+                {{ $t('Purchases') }}
               </v-card-title>
               <v-card-text>
-                <div v-for="(item, index) in purchasesField" :key="index">
+                <div v-for="(item, index) in purchasesList" :key="index">
                   {{ item }}
                 </div>
                 <v-btn @click="listPurchases">
-                  List Purchases
+                  {{ $t('List purchases') }}
                 </v-btn>
               </v-card-text>
             </v-card>
-            <v-card>
+            <v-card flat>
               <v-card-title>
-                Log
+                {{ $t('Log') }}
               </v-card-title>
               <v-card-text>
-                <span style="white-space: pre;">
-                  {{ logField }}
-                </span>
+                <span style="white-space: pre;">{{ logField }}</span>
               </v-card-text>
             </v-card>
           </v-col>
@@ -91,7 +111,8 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user'])
+    ...mapState('authentication', ['user']),
+    ...mapState('app', ['appTitle'])
   },
   mounted() {
     this.loadSkus()
