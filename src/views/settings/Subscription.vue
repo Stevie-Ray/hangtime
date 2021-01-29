@@ -53,19 +53,29 @@
               <v-card-title>
                 {{ $t('Purchases') }}
               </v-card-title>
-              <v-card-text>
-                <div v-for="(item, index) in purchasesList" :key="index">
-                  <div>Acknowledged: {{ item.acknowledged }}</div>
-                  <div>ItemId: {{ item.itemId }}</div>
-                  <div>purchaseState: {{ item.purchaseState }}</div>
-                  <div>purchaseTime: {{ item.purchaseTime }}</div>
-                  <div>purchaseToken: {{ item.purchaseToken }}</div>
-                  <div>willAutoRenew: {{ item.willAutoRenew }}</div>
-                </div>
-                <v-btn @click="listPurchases">
-                  {{ $t('List purchases') }}
-                </v-btn>
-              </v-card-text>
+              <v-list-item
+                v-for="(item, index) in purchasesList"
+                :key="index"
+                three-line
+              >
+                <v-list-item-content>
+                  <v-list-item-title
+                    >ItemId: {{ item.itemId }}</v-list-item-title
+                  >
+                  <v-list-item-subtitle>
+                    Acknowledged: {{ item.acknowledged }}, willAutoRenew:
+                    {{ item.willAutoRenew }}
+                  </v-list-item-subtitle>
+                  <v-list-item-subtitle>
+                    purchaseState: {{ item.purchaseState }}, purchaseTime:
+                    {{ item.purchaseTime }}, purchaseToken:
+                    {{ item.purchaseToken }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-btn v-if="purchasesList.length === 0" @click="listPurchases">
+                {{ $t('List purchases') }}
+              </v-btn>
             </v-card>
             <v-expansion-panels flat>
               <v-expansion-panel>
