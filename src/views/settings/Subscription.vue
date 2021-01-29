@@ -62,14 +62,19 @@
                 </v-btn>
               </v-card-text>
             </v-card>
-            <v-card flat>
-              <v-card-title>
-                {{ $t('Log') }}
-              </v-card-title>
-              <v-card-text>
-                <span style="white-space: pre;">{{ logField }}</span>
-              </v-card-text>
-            </v-card>
+            <v-expansion-panels flat>
+              <v-expansion-panel>
+                <v-expansion-panel-header
+                  class="title"
+                  style="padding-left: 16px; padding-right: 16px;"
+                >
+                  {{ $t('Log') }}
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <span style="white-space: pre;">{{ logField }}</span>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-col>
         </v-row>
       </v-container>
@@ -128,22 +133,6 @@ export default {
         this.disabled = false
       }
     },
-    async acknowledge(token, type = 'repeatable', onComplete = () => {}) {
-      try {
-        if (window.getDigitalGoodsService) {
-          const service = await window.getDigitalGoodsService(
-            this.PAYMENT_METHOD
-          )
-          await service.acknowledge(token, type)
-          this.log('Purchase acknowledged.')
-          onComplete()
-        } else {
-          this.log("window doesn't have getDigitalGoodsService.")
-        }
-      } catch (error) {
-        this.log(error)
-      }
-    },
     async listPurchases() {
       try {
         if (window.getDigitalGoodsService) {
@@ -193,18 +182,21 @@ export default {
       }
       return false
     },
-    buySubscription() {
-      this.trigger('subscription', (token) => {
-        this.buyStatus = 'subscription purchased! Thank you!'
-        this.token = token
-        this.acknowledgeable = true
-      })
-    },
-    acknowledgeSubscription() {
-      this.acknowledge(this.token, 'onetime', () => {
-        this.acknowledgeable = false
-        this.buyStatus = 'Subscription acknowledged!'
-      })
+    async acknowledge(token, type = 'repeatable', onComplete = () => {}) {
+      try {
+        if (window.getDigitalGoodsService) {
+          const service = await window.getDigitalGoodsService(
+            this.PAYMENT_METHOD
+          )
+          await service.acknowledge(token, type)
+          this.log('Purchase acknowledged.')
+          onComplete()
+        } else {
+          this.log("window doesn't have getDigitalGoodsService.")
+        }
+      } catch (error) {
+        this.log(error)
+      }
     },
     // eslint-disable-next-line no-unused-vars
     trigger(sku, onToken = (token) => {}) {
@@ -310,7 +302,19 @@ export default {
           })
       }
     },
-    // https://stackoverflow.com/a/4900484
+    buySubscription() {
+      this.trigger('subscription', (token) => {
+        this.buyStatus = 'subscription purchased! Thank you!'
+        this.token = token
+        this.acknowledgeable = true
+      })
+    },
+    acknowledgeSubscription() {
+      this.acknowledge(this.token, 'onetime', () => {
+        this.acknowledgeable = false
+        this.buyStatus = 'Subscription acknowledged!'
+      })
+    },
     log(contents) {
       this.logField += `${contents}\n`
     },
