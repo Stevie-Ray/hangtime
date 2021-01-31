@@ -97,6 +97,7 @@
               <v-divider inset></v-divider>
 
               <v-list-item
+                v-if="canSubscribe"
                 class="item-subscription"
                 to="/settings/subscription"
               >
@@ -116,7 +117,7 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-divider inset></v-divider>
+              <v-divider v-if="canSubscribe" inset></v-divider>
 
               <v-list-item
                 class="item-notifications"
@@ -176,6 +177,7 @@ import {
 export default {
   components: { 'svg-inline': SimpleSVG },
   data: () => ({
+    canSubscribe: window.getDigitalGoodsService,
     mdi: {
       arrowLeft: mdiArrowLeft,
       cog: mdiCog,

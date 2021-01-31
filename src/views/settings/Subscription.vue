@@ -16,40 +16,56 @@
         <v-row>
           <v-col cols="12">
             <v-card flat>
-              <v-card-title>
-                {{ appTitle }} {{ $t('Subscription') }} - ({{ $t('soon') }})
-              </v-card-title>
+              <v-card-title> Enjoying {{ appTitle }}? </v-card-title>
               <v-card-subtitle>
-                {{ appTitle }} will soon switch to a paid service after
-                hangboarding for more than an hour!
+                {{ appTitle }} gives you
+                <span style="text-decoration: line-through;">60 minutes</span>
+                <strong> 100 minutes</strong> of free usage. If you want to
+                hangboard unlimited with {{ appTitle }} you have to pay once.
+                After that you can continue to use the app unlimited, promise.
               </v-card-subtitle>
               <v-card-text>
-                <div>
-                  <ul>
-                    <li>
-                      You must have Chrome 88+ and it should be your default
-                      browser
-                    </li>
-                    <li>
-                      You must use the Google Play Store version of the app
-                    </li>
-                  </ul>
-                  <p>&nbsp;</p>
-                </div>
-                <div>
-                  <v-btn :disabled="disabled" @click="buySubscription">
-                    {{ $t('Buy') }}
-                  </v-btn>
-                </div>
-
-                <v-btn v-if="acknowledgeable" @click="acknowledgeSubscription">
-                  {{ $t('Acknowledge purchase') }}
-                </v-btn>
-                <p>{{ buyStatus }}</p>
-                <div>{{ $t('Price') }}: {{ price }}</div>
+                <div class="text-h6 mb-1">Current usage</div>
+                <v-progress-linear
+                  v-if="user && user.completed"
+                  :value="user.completed.time / 60"
+                  color="primary"
+                  height="25"
+                >
+                  <template #default="{ value }">
+                    <strong style="color: white;"
+                      >{{ Math.ceil(value) }}%</strong
+                    >
+                  </template>
+                </v-progress-linear>
+                <p>{{ count(user.completed.time) }} minutes.</p>
+                <v-row>
+                  <v-col cols="12" class="text-center">
+                    <div v-if="canSubscribe">
+                      <div class="text-h5 mb-6">{{ price }}&euro;2,99</div>
+                      <v-btn
+                        color="primary"
+                        x-large
+                        :disabled="disabled"
+                        @click="buySubscription"
+                      >
+                        <v-icon left>
+                          {{ mdi.cashMultiple }}
+                        </v-icon>
+                        {{ $t('Buy') }}
+                      </v-btn>
+                    </div>
+                    <div v-else>
+                      <strong>
+                        {{ $t("It's currently not possible to pay.") }}
+                      </strong>
+                    </div>
+                    <p class="mt-2">{{ buyStatus }}</p>
+                  </v-col>
+                </v-row>
               </v-card-text>
             </v-card>
-            <v-card flat>
+            <v-card v-if="canSubscribe" flat>
               <v-card-title>
                 {{ $t('Purchases') }}
               </v-card-title>
@@ -76,7 +92,9 @@
                       icon
                       @click="acknowledge(purchase.purchaseToken, 'repeatable')"
                     >
-                      {{ mdi.delete }}
+                      <v-icon>
+                        {{ mdi.delete }}
+                      </v-icon>
                     </v-btn>
                   </v-list-item-action>
                 </v-list-item-content>
@@ -85,7 +103,7 @@
                 {{ $t('List purchases') }}
               </v-btn>
             </v-card>
-            <v-expansion-panels flat>
+            <v-expansion-panels flat style="display: none;">
               <v-expansion-panel>
                 <v-expansion-panel-header
                   class="title"
@@ -108,24 +126,25 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { getImg } from '@/misc/helpers'
+import {mapActions, mapMutations, mapState} from 'vuex'
+import { getImg, count } from '@/misc/helpers'
 
-import { mdiArrowLeft, mdiDelete } from '@mdi/js'
+import { mdiArrowLeft, mdiDelete, mdiCashMultiple } from '@mdi/js'
 
 export default {
   data: () => ({
     mdi: {
       arrowLeft: mdiArrowLeft,
-      delete: mdiDelete
+      delete: mdiDelete,
+      cashMultiple: mdiCashMultiple
     },
+    canSubscribe: window.getDigitalGoodsService,
     price: '',
     item: {
-      currency: 'USD',
+      currency: 'EUR',
       value: 0
     },
     disabled: true,
-    acknowledgeable: false,
     token: null,
     buyStatus: '',
     logField: '',
@@ -154,6 +173,11 @@ export default {
   },
   methods: {
     getImg,
+    count,
+    ...mapActions('authentication', ['triggerUpdateUser']),
+    ...mapMutations('authentication', [
+      'setSubscription',
+    ]),
     async loadSkus() {
       this.checkSupport()
       // get price
@@ -165,14 +189,12 @@ export default {
     },
     async listPurchases() {
       try {
-        if (window.getDigitalGoodsService) {
+        if (this.canSubscribe) {
           const service = await window.getDigitalGoodsService(
             this.PAYMENT_METHOD
           )
           const purchases = await service.listPurchases()
           this.log('Got purchases list.')
-          console.log(purchases)
-          console.log(JSON.stringify(purchases, null, 2))
           this.purchasesList = purchases
         } else {
           this.log("window doesn't have getDigitalGoodsService.")
@@ -183,7 +205,7 @@ export default {
     },
     async populatePrice(sku) {
       try {
-        if (window.getDigitalGoodsService) {
+        if (this.canSubscribe) {
           const service = await window.getDigitalGoodsService(
             this.PAYMENT_METHOD
           )
@@ -210,7 +232,6 @@ export default {
 
           return true
         }
-        this.log(`Could not get price for "${sku}".`)
       } catch (error) {
         this.log(error)
       }
@@ -218,7 +239,7 @@ export default {
     },
     async acknowledge(token, type = 'repeatable', onComplete = () => {}) {
       try {
-        if (window.getDigitalGoodsService) {
+        if (this.canSubscribe) {
           const service = await window.getDigitalGoodsService(
             this.PAYMENT_METHOD
           )
@@ -345,15 +366,13 @@ export default {
     },
     buySubscription() {
       this.trigger('subscription', (token) => {
-        this.buyStatus = 'subscription purchased! Thank you!'
+        this.buyStatus = 'Purchase processing..'
         this.token = token
-        this.acknowledgeable = true
+        this.setSubscription(true)
+        this.triggerUpdateUser()
       })
-    },
-    acknowledgeSubscription() {
       this.acknowledge(this.token, 'onetime', () => {
-        this.acknowledgeable = false
-        this.buyStatus = 'Subscription acknowledged!'
+        this.buyStatus = 'Purchase successful! Thank you!'
       })
     },
     log(contents) {
@@ -364,7 +383,7 @@ export default {
       return raw ? parseInt(raw[2], 10) : false
     },
     checkSupport() {
-      if (window.getDigitalGoodsService) {
+      if (this.canSubscribe) {
         this.log('Digital Goods Service is available.')
         return
       }
