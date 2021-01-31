@@ -149,7 +149,6 @@ export default {
       value: 0
     },
     disabled: true,
-    token: null,
     buyStatus: '',
     logField: '',
     purchasesList: [],
@@ -368,14 +367,11 @@ export default {
     buySubscription() {
       this.trigger('subscription', (token) => {
         this.buyStatus = 'Purchase processing..'
-        this.token = token
         this.setSubscription(true)
         this.triggerUpdateUser()
-      })
-      console.log('fire')
-      this.acknowledge(this.token, 'onetime', () => {
-        console.log('fire2')
-        this.buyStatus = 'Purchase successful, thank you!'
+        this.acknowledge(token, 'onetime', () => {
+          this.buyStatus = 'Purchase successful, thank you!'
+        })
       })
     },
     log(contents) {
