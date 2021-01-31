@@ -61,11 +61,14 @@
                       </strong>
                     </div>
                     <p class="mt-2">{{ buyStatus }}</p>
+                    <p v-if="user && user.subscribed">
+                      <strong>Subscription is valid</strong>
+                    </p>
                   </v-col>
                 </v-row>
               </v-card-text>
             </v-card>
-            <v-card v-if="canSubscribe" flat>
+            <v-card v-if="canSubscribe" flat style="display: none;">
               <v-card-title>
                 {{ $t('Purchases') }}
               </v-card-title>
@@ -126,7 +129,7 @@
 </template>
 
 <script>
-import {mapActions, mapMutations, mapState} from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
 
 import { mdiArrowLeft, mdiDelete, mdiCashMultiple } from '@mdi/js'
@@ -175,9 +178,7 @@ export default {
     getImg,
     count,
     ...mapActions('authentication', ['triggerUpdateUser']),
-    ...mapMutations('authentication', [
-      'setSubscription',
-    ]),
+    ...mapMutations('authentication', ['setSubscription']),
     async loadSkus() {
       this.checkSupport()
       // get price
@@ -372,7 +373,7 @@ export default {
         this.triggerUpdateUser()
       })
       this.acknowledge(this.token, 'onetime', () => {
-        this.buyStatus = 'Purchase successful! Thank you!'
+        this.buyStatus = 'Purchase successful, thank you!'
       })
     },
     log(contents) {
