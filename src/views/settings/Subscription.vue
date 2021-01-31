@@ -68,7 +68,7 @@
                 </v-row>
               </v-card-text>
             </v-card>
-            <v-card v-if="canSubscribe" flat style="display: none;">
+            <v-card v-if="debug" flat>
               <v-card-title>
                 {{ $t('Purchases') }}
               </v-card-title>
@@ -106,7 +106,7 @@
                 {{ $t('List purchases') }}
               </v-btn>
             </v-card>
-            <v-expansion-panels flat style="display: none;">
+            <v-expansion-panels v-if="debug" flat>
               <v-expansion-panel>
                 <v-expansion-panel-header
                   class="title"
@@ -141,6 +141,7 @@ export default {
       delete: mdiDelete,
       cashMultiple: mdiCashMultiple
     },
+    debug: false,
     canSubscribe: window.getDigitalGoodsService,
     price: '',
     item: {
