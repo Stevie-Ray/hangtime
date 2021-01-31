@@ -42,7 +42,7 @@
                 <v-row>
                   <v-col cols="12" class="text-center">
                     <div v-if="canSubscribe">
-                      <div class="text-h5 mb-6">{{ price }}&euro;2,99</div>
+                      <div class="text-h5 mb-6">{{ price }}</div>
                       <v-btn
                         color="primary"
                         x-large
@@ -255,8 +255,7 @@ export default {
         this.log(error)
       }
     },
-    // eslint-disable-next-line no-unused-vars
-    trigger(sku, onToken = (token) => {}) {
+    trigger(sku, onToken = () => {}) {
       const self = this
 
       // The PaymentRequest() constructor creates a new PaymentRequest object which will be used to handle the process of generating, validating, and submitting a payment request.
@@ -373,6 +372,7 @@ export default {
         this.setSubscription(true)
         this.triggerUpdateUser()
       })
+      console.log('fire');
       this.acknowledge(this.token, 'onetime', () => {
         this.buyStatus = 'Purchase successful, thank you!'
       })
