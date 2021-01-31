@@ -372,8 +372,9 @@ export default {
         this.setSubscription(true)
         this.triggerUpdateUser()
       })
-      console.log('fire');
+      console.log('fire')
       this.acknowledge(this.token, 'onetime', () => {
+        console.log('fire2')
         this.buyStatus = 'Purchase successful, thank you!'
       })
     },
