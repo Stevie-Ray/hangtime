@@ -54,23 +54,31 @@
                 {{ $t('Purchases') }}
               </v-card-title>
               <v-list-item
-                v-for="(item, index) in purchasesList"
+                v-for="(purchase, index) in purchasesList"
                 :key="index"
                 three-line
               >
                 <v-list-item-content>
                   <v-list-item-title
-                    >ItemId: {{ item.itemId }}</v-list-item-title
+                    >ItemId: {{ purchase.itemId }}</v-list-item-title
                   >
                   <v-list-item-subtitle>
-                    Acknowledged: {{ item.acknowledged }}, willAutoRenew:
-                    {{ item.willAutoRenew }}
+                    Acknowledged: {{ purchase.acknowledged }}, willAutoRenew:
+                    {{ purchase.willAutoRenew }}
                   </v-list-item-subtitle>
                   <v-list-item-subtitle>
-                    purchaseState: {{ item.purchaseState }}, purchaseTime:
-                    {{ item.purchaseTime }}, purchaseToken:
-                    {{ item.purchaseToken }}
+                    purchaseState: {{ purchase.purchaseState }}, purchaseTime:
+                    {{ purchase.purchaseTime }}, purchaseToken:
+                    {{ purchase.purchaseToken }}
                   </v-list-item-subtitle>
+                  <v-list-item-action>
+                    <v-btn
+                      icon
+                      @click="acknowledge(purchase.purchaseToken, 'repeatable')"
+                    >
+                      {{ mdi.delete }}
+                    </v-btn>
+                  </v-list-item-action>
                 </v-list-item-content>
               </v-list-item>
               <v-btn v-if="purchasesList.length === 0" @click="listPurchases">
@@ -86,7 +94,9 @@
                   {{ $t('Log') }}
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <span style="white-space: pre;">{{ logField }}</span>
+                  <span style="white-space: pre-wrap; word-break: break-all;">
+                    {{ logField }}
+                  </span>
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
@@ -101,14 +111,19 @@
 import { mapState } from 'vuex'
 import { getImg } from '@/misc/helpers'
 
-import { mdiArrowLeft } from '@mdi/js'
+import { mdiArrowLeft, mdiDelete } from '@mdi/js'
 
 export default {
   data: () => ({
     mdi: {
-      arrowLeft: mdiArrowLeft
+      arrowLeft: mdiArrowLeft,
+      delete: mdiDelete
     },
-    price: 0,
+    price: '',
+    item: {
+      currency: 'USD',
+      value: 0
+    },
     disabled: true,
     acknowledgeable: false,
     token: null,
@@ -186,6 +201,8 @@ export default {
           const { value } = item.price
           const { currency } = item.price
 
+          this.item.value = item.price.value
+          this.item.currency = item.price.currency
           this.price = new Intl.NumberFormat(navigator.language, {
             style: 'currency',
             currency
@@ -219,24 +236,30 @@ export default {
     trigger(sku, onToken = (token) => {}) {
       const self = this
 
+      // The PaymentRequest() constructor creates a new PaymentRequest object which will be used to handle the process of generating, validating, and submitting a payment request.
       if (!window.PaymentRequest) {
         this.log('No PaymentRequest object.')
         return
       }
 
+      // Contains an array of identifiers for the payment methods the merchant web site accepts and any associated payment method specific data.
       const supportedInstruments = [
         {
+          // For example, the basic card payment method is selected by specifying the string basic-card here.
           supportedMethods: this.PAYMENT_METHOD,
+          // A JSON-serializable object that provides optional information that might be needed by the supported payment methods.
           data: {
             sku
           }
         }
       ]
 
+      // Provides information about the requested transaction.
       const details = {
+        // The total amount of the payment request.
         total: {
-          label: 'Total',
-          amount: { currency: 'USD', value: '0' }
+          label: 'Subscription',
+          amount: { currency: self.item.currency, value: self.item.value }
         }
       }
 
@@ -279,6 +302,7 @@ export default {
           })
       }
 
+      // Checking for instrument presence.
       if (request.hasEnrolledInstrument) {
         request
           .hasEnrolledInstrument()
