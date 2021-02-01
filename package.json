@@ -145,7 +145,7 @@
     },
     {
       "path": "./dist/js/app*.js",
-      "maxSize": "45 kB"
+      "maxSize": "100 kB"
     },
     {
       "path": "./dist/js/client-chunk-*.js",
