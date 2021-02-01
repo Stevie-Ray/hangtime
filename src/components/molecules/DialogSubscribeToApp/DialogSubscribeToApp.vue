@@ -164,6 +164,9 @@ export default {
       return ((this.user.completed.time / time) * 100) / this.limit
     }
   },
+  mounted() {
+    this.loadSkus()
+  },
   methods: {
     getImg,
     count,
