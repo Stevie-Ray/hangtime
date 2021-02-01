@@ -1,145 +1,140 @@
 <template>
-  <v-layout class="subscription">
-    <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('Subscription') }}
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-    </v-app-bar>
-
-    <v-main>
-      <v-container>
+  <v-dialog
+    v-model="show"
+    width="500"
+    :persistent="user && user.completed && user.completed.time / 60 >= limit"
+  >
+    <v-card flat>
+      <v-card-title> Enjoying {{ appTitle }}? </v-card-title>
+      <v-card-text>
+        <p>
+          {{ appTitle }} gives you
+          <span style="text-decoration: line-through;">60 minutes</span>
+          <strong> {{ limit }} minutes</strong> of free usage. If you want to
+          hangboard unlimited with {{ appTitle }} you have to pay once. After
+          that you can continue to use the app unlimited, promise.
+        </p>
+        <div class="text-h6 mb-1">Current usage</div>
+        <v-progress-linear
+          v-if="user && user.completed"
+          :value="porgressValue"
+          color="primary"
+          height="25"
+        >
+          <template #default="{ value }">
+            <strong v-if="user && !user.subscribed" style="color: white;">
+              {{ Math.ceil(value) }}
+              <span v-if="isFinite(value)">%</span>
+            </strong>
+          </template>
+        </v-progress-linear>
+        <p>{{ count(user.completed.time) }} minutes.</p>
         <v-row>
-          <v-col cols="12">
-            <v-card flat>
-              <v-card-title> Enjoying {{ appTitle }}? </v-card-title>
-              <v-card-subtitle>
-                {{ appTitle }} gives you
-                <span style="text-decoration: line-through;">60 minutes</span>
-                <strong> 100 minutes</strong> of free usage. If you want to
-                hangboard unlimited with {{ appTitle }} you have to pay once.
-                After that you can continue to use the app unlimited, promise.
-              </v-card-subtitle>
-              <v-card-text>
-                <div class="text-h6 mb-1">Current usage</div>
-                <v-progress-linear
-                  v-if="user && user.completed"
-                  :value="porgressValue"
-                  color="primary"
-                  height="25"
-                >
-                  <template #default="{ value }">
-                    <strong
-                      v-if="user && !user.subscribed"
-                      style="color: white;"
-                    >
-                      {{ Math.ceil(value)
-                      }}<span v-if="isFinite(value)">%</span>
-                    </strong>
-                  </template>
-                </v-progress-linear>
-                <p>{{ count(user.completed.time) }} minutes.</p>
-                <v-row>
-                  <v-col cols="12" class="text-center">
-                    <div v-if="canSubscribe">
-                      <div class="text-h5 mb-6">{{ price }}</div>
-                      <v-btn
-                        color="primary"
-                        x-large
-                        :disabled="disabled || (user && user.subscribed)"
-                        @click="buySubscription"
-                      >
-                        <v-icon left>
-                          {{ mdi.cashMultiple }}
-                        </v-icon>
-                        {{ $t('Buy') }}
-                      </v-btn>
-                    </div>
-                    <div v-else>
-                      <strong>
-                        {{ $t("It's currently not possible to pay.") }}
-                      </strong>
-                    </div>
-                    <p class="mt-2">{{ buyStatus }}</p>
-                    <p v-if="user && user.subscribed">
-                      <strong>Subscription is valid</strong>
-                    </p>
-                  </v-col>
-                </v-row>
-              </v-card-text>
-            </v-card>
-            <v-card v-if="debug" flat>
-              <v-card-title>
-                {{ $t('Purchases') }}
-              </v-card-title>
-              <v-list-item
-                v-for="(purchase, index) in purchasesList"
-                :key="index"
-                three-line
-              >
-                <v-list-item-content>
-                  <v-list-item-title
-                    >ItemId: {{ purchase.itemId }}</v-list-item-title
-                  >
-                  <v-list-item-subtitle>
-                    Acknowledged: {{ purchase.acknowledged }}, willAutoRenew:
-                    {{ purchase.willAutoRenew }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    purchaseState: {{ purchase.purchaseState }}, purchaseTime:
-                    {{ purchase.purchaseTime }}, purchaseToken:
-                    {{ purchase.purchaseToken }}
-                  </v-list-item-subtitle>
-                  <v-list-item-action>
-                    <v-btn
-                      icon
-                      @click="acknowledge(purchase.purchaseToken, 'repeatable')"
-                    >
-                      <v-icon>
-                        {{ mdi.delete }}
-                      </v-icon>
-                    </v-btn>
-                  </v-list-item-action>
-                </v-list-item-content>
-              </v-list-item>
-              <v-btn v-if="purchasesList.length === 0" @click="listPurchases">
-                {{ $t('List purchases') }}
-              </v-btn>
-            </v-card>
-            <v-expansion-panels v-if="debug" flat>
-              <v-expansion-panel>
-                <v-expansion-panel-header
-                  class="title"
-                  style="padding-left: 16px; padding-right: 16px;"
-                >
-                  {{ $t('Log') }}
-                </v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <span style="white-space: pre-wrap; word-break: break-all;">
-                    {{ logField }}
-                  </span>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
+          <v-col cols="12" class="text-center">
+            <div v-if="canSubscribe">
+              <div class="text-h5 mb-6">{{ price }}</div>
+            </div>
+            <div v-else>
+              <strong>
+                {{ $t("It's currently not possible to pay.") }}
+              </strong>
+            </div>
+            <p class="mt-2">{{ buyStatus }}</p>
+            <p v-if="user && user.subscribed">
+              <strong>Subscription is valid</strong>
+            </p>
           </v-col>
         </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <div v-if="debug" flat>
+        <v-card-title>
+          {{ $t('Purchases') }}
+        </v-card-title>
+        <v-list-item
+          v-for="(purchase, index) in purchasesList"
+          :key="index"
+          three-line
+        >
+          <v-list-item-content>
+            <v-list-item-title>ItemId: {{ purchase.itemId }}</v-list-item-title>
+            <v-list-item-subtitle>
+              Acknowledged: {{ purchase.acknowledged }}, willAutoRenew:
+              {{ purchase.willAutoRenew }}
+            </v-list-item-subtitle>
+            <v-list-item-subtitle>
+              purchaseState: {{ purchase.purchaseState }}, purchaseTime:
+              {{ purchase.purchaseTime }}, purchaseToken:
+              {{ purchase.purchaseToken }}
+            </v-list-item-subtitle>
+            <v-list-item-action>
+              <v-btn
+                icon
+                @click="acknowledge(purchase.purchaseToken, 'repeatable')"
+              >
+                <v-icon>
+                  {{ mdi.delete }}
+                </v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item-content>
+        </v-list-item>
+        <v-btn v-if="purchasesList.length === 0" @click="listPurchases">
+          {{ $t('List purchases') }}
+        </v-btn>
+      </div>
+      <v-expansion-panels v-if="debug" flat>
+        <v-expansion-panel>
+          <v-expansion-panel-header
+            class="title"
+            style="padding-left: 16px; padding-right: 16px;"
+          >
+            {{ $t('Log') }}
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <span style="white-space: pre-wrap; word-break: break-all;">
+              {{ logField }}
+            </span>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+
+      <v-card-actions>
+        <div v-if="canSubscribe">
+          <div class="text-h5">{{ price }}</div>
+        </div>
+        <v-spacer></v-spacer>
+        <v-btn
+          text
+          color="primary"
+          :disabled="disabled || (user && user.subscribed)"
+          @click="buySubscription"
+        >
+          <v-icon left>
+            {{ mdi.cashMultiple }}
+          </v-icon>
+          {{ $t('Buy') }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
-
-import { mdiArrowLeft, mdiDelete, mdiCashMultiple } from '@mdi/js'
+import { mdiArrowLeft, mdiCashMultiple, mdiDelete } from '@mdi/js'
 
 export default {
+  props: {
+    value: Boolean,
+    user: Object,
+    limit: Number
+  },
   data: () => ({
+    show: true,
     mdi: {
       arrowLeft: mdiArrowLeft,
       delete: mdiDelete,
@@ -158,30 +153,15 @@ export default {
     purchasesList: [],
     PAYMENT_METHOD: 'https://play.google.com/billing'
   }),
-  head: {
-    title: {
-      inner: 'Subscription'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'User subscription',
-        id: 'desc'
-      }
-    ]
-  },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user']),
+    // ...mapState('authentication', ['user']),
     ...mapState('app', ['appTitle']),
     porgressValue() {
       let time = 60
       if (!this.user || (this.user && this.user.subscribed)) time = 0
-      return ((this.user.completed.time / time) * 100) / 100
+      return ((this.user.completed.time / time) * 100) / this.limit
     }
-  },
-  mounted() {
-    this.loadSkus()
   },
   methods: {
     getImg,
@@ -405,5 +385,4 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss"></style>
+<style lang="scss" scoped></style>

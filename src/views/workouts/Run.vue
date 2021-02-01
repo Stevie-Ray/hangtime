@@ -96,6 +96,21 @@
         </v-row>
       </v-container>
 
+      <!-- Show pay wall if device can pay, has user, didn't pay before, had completed 100 minutes -->
+      <dialog-subscribe-to-app
+        v-if="
+          canSubscribe &&
+          user &&
+          !user.subscribed &&
+          user.completed &&
+          user.completed.time / 60 > (subscribeLimit / 4) * 3
+        "
+        :limit="subscribeLimit"
+        :user="user"
+        class="dialog-subscribe-to-app"
+      >
+      </dialog-subscribe-to-app>
+
       <v-fab-transition>
         <v-btn
           v-if="startWorkout"
@@ -133,11 +148,18 @@ import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import Hand from '@/components/atoms/Hand/Hand'
 import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
 import CircleTimer from '@/components/molecules/CircleTimer/CircleTimer'
+import DialogSubscribeToApp from '@/components/molecules/DialogSubscribeToApp/DialogSubscribeToApp'
 
 import { mdiArrowLeft, mdiPlay, mdiPause } from '@mdi/js'
 
 export default {
-  components: { WorkoutItemName, Hangboard, Hand, CircleTimer },
+  components: {
+    WorkoutItemName,
+    Hangboard,
+    Hand,
+    CircleTimer,
+    DialogSubscribeToApp
+  },
   props: {
     id: String,
     userId: String
@@ -147,6 +169,8 @@ export default {
     initialStart: true,
     startWorkout: false,
     pauseWorkout: false,
+    canSubscribe: window.getDigitalGoodsService,
+    subscribeLimit: 100,
     mdi: {
       play: mdiPlay,
       pause: mdiPause,

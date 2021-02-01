@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" width="500">
     <v-card class="modal-wrapper">
-      <v-card-title class="text-h5" primary-title>
+      <v-card-title>
         <v-img
           class="app-logo"
           contain
@@ -32,7 +32,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="$emit('close')">
-          Close
+          {{ $t('Close') }}
         </v-btn>
       </v-card-actions>
     </v-card>

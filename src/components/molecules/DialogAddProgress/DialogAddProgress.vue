@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title class="text-h5" primary-title>
+      <v-card-title>
         {{ $t('Select holds') }}
       </v-card-title>
 
