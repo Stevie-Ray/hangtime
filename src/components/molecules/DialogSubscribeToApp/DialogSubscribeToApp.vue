@@ -21,6 +21,7 @@
           color="primary"
           height="25"
         >
+          <!-- eslint-disable-next-line vue/no-template-shadow -->
           <template #default="{ value }">
             <strong v-if="user && !user.subscribed" style="color: white;">
               {{ Math.ceil(value) }}

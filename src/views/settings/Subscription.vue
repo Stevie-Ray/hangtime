@@ -9,6 +9,15 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+
+      <v-btn
+        v-if="purchasesList.length === 0"
+        :disabled="!canSubscribe"
+        icon
+        @click="listPurchases"
+      >
+        <v-icon>{{ mdi.reload }}</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -20,8 +29,8 @@
               <v-card-subtitle>
                 {{ appTitle }} gives you
                 <span style="text-decoration: line-through;">60 minutes</span>
-                <strong> 100 minutes</strong> of free usage. If you want to
-                hangboard unlimited with {{ appTitle }} you have to pay once.
+                <strong> {{ limit }} minutes</strong> of free usage. If you want
+                to hangboard unlimited with {{ appTitle }} you have to pay once.
                 After that you can continue to use the app unlimited, promise.
               </v-card-subtitle>
               <v-card-text>
@@ -72,7 +81,7 @@
                 </v-row>
               </v-card-text>
             </v-card>
-            <v-card v-if="debug" flat>
+            <v-card v-if="purchasesList.length > 0" flat>
               <v-card-title>
                 {{ $t('Purchases') }}
               </v-card-title>
@@ -106,9 +115,6 @@
                   </v-list-item-action>
                 </v-list-item-content>
               </v-list-item>
-              <v-btn v-if="purchasesList.length === 0" @click="listPurchases">
-                {{ $t('List purchases') }}
-              </v-btn>
             </v-card>
             <v-expansion-panels v-if="debug" flat>
               <v-expansion-panel>
@@ -136,14 +142,15 @@
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
 
-import { mdiArrowLeft, mdiDelete, mdiCashMultiple } from '@mdi/js'
+import { mdiArrowLeft, mdiDelete, mdiCashMultiple, mdiReload } from '@mdi/js'
 
 export default {
   data: () => ({
     mdi: {
       arrowLeft: mdiArrowLeft,
       delete: mdiDelete,
-      cashMultiple: mdiCashMultiple
+      cashMultiple: mdiCashMultiple,
+      reload: mdiReload
     },
     debug: false,
     canSubscribe: window.getDigitalGoodsService,
@@ -152,6 +159,7 @@ export default {
       currency: 'EUR',
       value: 0
     },
+    limit: 100,
     disabled: true,
     buyStatus: '',
     logField: '',
@@ -177,7 +185,7 @@ export default {
     porgressValue() {
       let time = 60
       if (!this.user || (this.user && this.user.subscribed)) time = 0
-      return ((this.user.completed.time / time) * 100) / 100
+      return ((this.user.completed.time / time) * 100) / this.limit
     }
   },
   mounted() {
