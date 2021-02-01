@@ -25,16 +25,18 @@
         <v-row>
           <v-col cols="12">
             <v-card flat>
-              <v-card-title> Enjoying {{ appTitle }}? </v-card-title>
+              <v-card-title>
+                {{ $t('Enjoying {appTitle}?', { appTitle: appTitle }) }}
+              </v-card-title>
               <v-card-subtitle>
-                {{ appTitle }} gives you
+                <span>{{ appTitle }} gives you </span>
                 <span style="text-decoration: line-through;">60 minutes</span>
-                <strong> {{ limit }} minutes</strong> of free usage. If you want
-                to hangboard unlimited with {{ appTitle }} you have to pay once.
-                After that you can continue to use the app unlimited, promise.
+                <strong> {{ limit }} minutes</strong> of free usage.
+                <span>Want to do more? </span>
+                <span>Buy a subscription! After that it's free forever.</span>
               </v-card-subtitle>
               <v-card-text>
-                <div class="text-h6 mb-1">Current usage</div>
+                <div class="text-h6 mb-1">{{ $t('Current usage') }}</div>
                 <v-progress-linear
                   v-if="user && user.completed"
                   :value="porgressValue"

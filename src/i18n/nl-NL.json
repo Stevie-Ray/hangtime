@@ -208,10 +208,10 @@
   "Ok": "Ok",
   "Subscription": "Abonnement",
   "Unlimited workouts": "Onbeperkte trainingen",
-  "Acknowledge purchase": "Aankoop erkennen",
   "Buy": "Kopen",
-  "Price": "Prijs",
   "Purchases": "Aankopen",
-  "List purchases": "Lijst met aankopen",
-  "Log": "Logboek"
+  "Log": "Logboek",
+  "Enjoying {appTitle}?": "Geniet je van {appTitle}?",
+  "Current usage": "Huidig gebruik",
+  "It's currently not possible to pay.": "Het is momenteel niet mogelijk om te betalen."
 }

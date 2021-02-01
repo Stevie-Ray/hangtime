@@ -5,14 +5,16 @@
     :persistent="user && user.completed && user.completed.time / 60 >= limit"
   >
     <v-card flat>
-      <v-card-title> Enjoying {{ appTitle }}? </v-card-title>
+      <v-card-title>
+        {{ $t('Enjoying {appTitle}?', { appTitle: appTitle }) }}
+      </v-card-title>
       <v-card-text>
         <p>
-          {{ appTitle }} gives you
+          <span>{{ appTitle }} gives you </span>
           <span style="text-decoration: line-through;">60 minutes</span>
-          <strong> {{ limit }} minutes</strong> of free usage. If you want to
-          hangboard unlimited with {{ appTitle }} you have to pay once. After
-          that you can continue to use the app unlimited, promise.
+          <strong> {{ limit }} minutes</strong> of free usage.
+          <span>Want to do more? </span>
+          <span>Buy a subscription! After that it's free forever.</span>
         </p>
         <div class="text-h6 mb-1">Current usage</div>
         <v-progress-linear
@@ -32,15 +34,12 @@
         <p>{{ count(user.completed.time) }} minutes.</p>
         <v-row>
           <v-col cols="12" class="text-center">
-            <div v-if="canSubscribe">
-              <div class="text-h5 mb-6">{{ price }}</div>
-            </div>
-            <div v-else>
+            <div v-if="!canSubscribe">
               <strong>
                 {{ $t("It's currently not possible to pay.") }}
               </strong>
             </div>
-            <p class="mt-2">{{ buyStatus }}</p>
+            <p v-if="buyStatus !== ''" class="mt-2">{{ buyStatus }}</p>
             <p v-if="user && user.subscribed">
               <strong>Subscription is valid</strong>
             </p>

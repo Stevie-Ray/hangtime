@@ -45,8 +45,7 @@ export default {
     },
     {
       name: 'Polski',
-      value: 'pl-PL',
-      disabled: true
+      value: 'pl-PL'
     }
   ]
 }

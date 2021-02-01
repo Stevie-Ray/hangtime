@@ -206,10 +206,10 @@
   "Continue as Guest": "Als Gast fortfahren",
   "Guest User": "Gastbenutzer",
   "Ok": "in Ordnung",
-  "Acknowledge purchase": "Kauf bestätigen",
   "Buy": "Kaufen",
-  "Price": "Preis",
   "Purchases": "Einkäufe",
-  "List purchases": "Einkäufe auflisten",
-  "Log": "Log"
+  "Log": "Log",
+  "Enjoying {appTitle}?": "{appTitle} genießen?",
+  "Current usage": "Aktuelle Verwendung",
+  "It's currently not possible to pay.": "Es ist derzeit nicht möglich zu bezahlen."
 }
