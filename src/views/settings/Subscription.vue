@@ -68,7 +68,7 @@
                 </v-row>
               </v-card-text>
             </v-card>
-            <v-card v-if="debug" flat>
+            <v-card flat>
               <v-card-title>
                 {{ $t('Purchases') }}
               </v-card-title>
