@@ -28,14 +28,18 @@
                 <div class="text-h6 mb-1">Current usage</div>
                 <v-progress-linear
                   v-if="user && user.completed"
-                  :value="user.completed.time / 60"
+                  :value="porgressValue"
                   color="primary"
                   height="25"
                 >
                   <template #default="{ value }">
-                    <strong style="color: white;"
-                      >{{ Math.ceil(value) }}%</strong
+                    <strong
+                      v-if="user && !user.subscribed"
+                      style="color: white;"
                     >
+                      {{ Math.ceil(value)
+                      }}<span v-if="isFinite(value)">%</span>
+                    </strong>
                   </template>
                 </v-progress-linear>
                 <p>{{ count(user.completed.time) }} minutes.</p>
@@ -46,7 +50,7 @@
                       <v-btn
                         color="primary"
                         x-large
-                        :disabled="disabled"
+                        :disabled="disabled || (user && user.subscribed)"
                         @click="buySubscription"
                       >
                         <v-icon left>
@@ -68,7 +72,7 @@
                 </v-row>
               </v-card-text>
             </v-card>
-            <v-card flat>
+            <v-card v-if="debug" flat>
               <v-card-title>
                 {{ $t('Purchases') }}
               </v-card-title>
@@ -169,7 +173,12 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapState('app', ['appTitle'])
+    ...mapState('app', ['appTitle']),
+    porgressValue() {
+      let time = 60
+      if (!this.user || (this.user && this.user.subscribed)) time = 0
+      return this.user.completed.time / time
+    }
   },
   mounted() {
     this.loadSkus()
