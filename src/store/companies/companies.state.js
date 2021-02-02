@@ -481,6 +481,34 @@ export default {
           id: 1,
           image: 'hangboards/TRANGOROCKFORGE.svg',
           holds: 11
+        },
+        {
+          name: 'Rock Prodigy Pivot',
+          id: 2,
+          image: 'hangboards/TRANGOROCKPIVOT.svg',
+          sides: [
+            {
+              name: 'Rock Prodigy Pivot',
+              image: 'hangboards/TRANGOROCKPIVOT.svg',
+              holds: 12
+            },
+            {
+              name: 'Rock Prodigy Pivot 90',
+              image: 'hangboards/TRANGOROCKPIVOT-90.svg',
+              holds: 12
+            },
+            {
+              name: 'Rock Prodigy Pivot 180',
+              image: 'hangboards/TRANGOROCKPIVOT-180.svg',
+              holds: 12
+            },
+            {
+              name: 'Rock Prodigy Pivot 270',
+              image: 'hangboards/TRANGOROCKPIVOT-270.svg',
+              holds: 12
+            }
+          ],
+          holds: 12
         }
       ]
     },
