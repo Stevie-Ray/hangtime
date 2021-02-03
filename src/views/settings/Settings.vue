@@ -54,7 +54,7 @@
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('General') }}</v-list-item-title>
                   <v-list-item-subtitle>
-                    {{ $t('Language, grading scale, weight, dark mode') }}
+                    {{ $t('Language, grading, weight, dark mode') }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -139,6 +139,27 @@
 
               <v-divider inset></v-divider>
 
+              <v-list-item
+                class="item-workouts"
+                href="https://www.facebook.com/hangtime.hangboarding"
+                target="_blank"
+              >
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.facebook }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ $t('Follow {appTitle}', { appTitle: appTitle }) }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $t('App and hangboard updates') }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider inset></v-divider>
+
               <v-list-item class="item-help" to="/settings/help">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{
@@ -171,7 +192,8 @@ import {
   mdiTimer,
   mdiBellRing,
   mdiHelpCircleOutline,
-  mdiCashMultiple
+  mdiCashMultiple,
+  mdiFacebook
 } from '@mdi/js'
 
 export default {
@@ -184,7 +206,8 @@ export default {
       timer: mdiTimer,
       bellRing: mdiBellRing,
       helpCircleOutline: mdiHelpCircleOutline,
-      cashMultiple: mdiCashMultiple
+      cashMultiple: mdiCashMultiple,
+      facebook: mdiFacebook
     }
   }),
   head: {
@@ -199,7 +222,10 @@ export default {
       }
     ]
   },
-  computed: mapState('authentication', ['user']),
+  computed: {
+    ...mapState('authentication', ['user']),
+    ...mapState('app', ['appTitle'])
+  },
   methods: {
     getImg
   }

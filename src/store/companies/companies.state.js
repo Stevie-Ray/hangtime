@@ -1407,6 +1407,91 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Butterfinger Sports',
+      description: 'Out of love for climbing and devotion to innovative design',
+      id: 57,
+      disabled: true,
+      website: 'http://butterfingersports.com/',
+      hangboards: [
+        {
+          name: 'JP-1 Hangboard',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'WOOD BOARD',
+      description: 'Quality wooden booster boards, designed for all climbers',
+      id: 58,
+      disabled: true,
+      website: 'https://www.wood-board.cz',
+      hangboards: [
+        {
+          name: 'WOOD BOARD hobby',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'WOOD BOARD',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'WOOD BOARD profi',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Workshop 19/50',
+      description: 'Tailor-made training gear and climbing gym accessories',
+      id: 59,
+      disabled: true,
+      website: 'https://workshop1950.ru/',
+      hangboards: [
+        {
+          name: 'Ergo',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: '2Climb',
+      description: '',
+      id: 60,
+
+      website: 'https://www.2climb.cz/',
+      hangboards: [
+        {
+          name: 'Gamechanger',
+          id: 0,
+          image: 'hangboards/2CLIMBGAMECHANGER.svg',
+          holds: 9
+        },
+        {
+          name: 'Onsight',
+          id: 1,
+          image: 'hangboards/2CLIMBINSIGHT.svg',
+          holds: 10
+        },
+        {
+          name: 'Crux',
+          id: 2,
+          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }

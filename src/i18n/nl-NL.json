@@ -16,7 +16,7 @@
   "Pounds - Imperial": "Ponden - Imperiaal",
   "Grading system": "Grading systeem",
   "Weight system": "Maatsysteem",
-  "Language, grading scale, weight, dark mode": "Taal, grading, gewicht, donkere modus",
+  "Language, grading, weight, dark mode": "Taal, grading, gewicht, donkere modus",
   "Hangboards": "Hangboards",
   "Manage your hangboards": "Beheer je hangboards",
   "Add a hangboard": "Voeg een hangboard toe",
@@ -213,5 +213,6 @@
   "Log": "Logboek",
   "Enjoying {appTitle}?": "Geniet je van {appTitle}?",
   "Current usage": "Huidig gebruik",
-  "It's currently not possible to pay.": "Het is momenteel niet mogelijk om te betalen."
+  "It's currently not possible to pay.": "Het is momenteel niet mogelijk om te betalen.",
+  "Follow {appTitle}": "Volg {appTitle}"
 }
