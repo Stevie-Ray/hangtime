@@ -42,6 +42,7 @@
 
     <v-container fluid class="py-0">
       <div
+        v-if="hasImage"
         class="hangboard mx-auto pa-0"
         :class="
           companies[hangboardToAdd.company].hangboards[hangboardToAdd.hangboard]
@@ -71,19 +72,23 @@
           />
         </div>
       </div>
-      <v-row justify="center">
-        <v-col cols="12" md="10" lg="8" class="">
-          <div class="text-center">
-            <p>
-              {{ $t('Hangboard by') }}
-              <a
-                :href="companies[hangboardToAdd.company].website"
-                target="_blank"
-              >
-                {{ companies[hangboardToAdd.company].name }}
-              </a>
-            </p>
-          </div>
+      <v-row justify="center" align="center">
+        <v-col cols="12" md="10" lg="8" class="text-center">
+          <p v-if="!hasImage">
+            <!--eslint-disable-next-line vue/no-parsing-error-->
+            <v-btn :href="`mailto:${email}?subject=${subject}&body=${body}`">
+              {{ $t('Request Hangboard') }}
+            </v-btn>
+          </p>
+          <p>
+            {{ $t('Hangboard by') }}
+            <a
+              :href="companies[hangboardToAdd.company].website"
+              target="_blank"
+            >
+              {{ companies[hangboardToAdd.company].name }}
+            </a>
+          </p>
         </v-col>
       </v-row>
     </v-container>
@@ -98,6 +103,8 @@ import { mdiNumeric1Box, mdiNumeric2Box } from '@mdi/js'
 
 export default {
   data: () => ({
+    email: 'mail@stevie-ray.nl',
+    body: encodeURIComponent('Hello HangTime,\n\n...'),
     mdi: {
       numeric1Box: mdiNumeric1Box,
       numeric2Box: mdiNumeric2Box
@@ -107,6 +114,17 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user', 'hangboardToAdd']),
     ...mapState('companies', ['companies']),
+    subject() {
+      return encodeURIComponent(
+        `Hangboard Request: ${
+          this.companies[this.hangboardToAdd.company].name
+        } - ${
+          this.companies[this.hangboardToAdd.company].hangboards[
+            this.hangboardToAdd.hangboard
+          ].name
+        }`
+      )
+    },
     settingsCompany: {
       get() {
         return this.hangboardToAdd.company
@@ -131,6 +149,14 @@ export default {
         this.companies[this.hangboardToAdd.company].hangboards,
         'name'
       )
+    },
+    hasImage() {
+      const image =
+        this.companies[this.hangboardToAdd.company].hangboards[
+          this.hangboardToAdd.hangboard
+        ].image !== 'hangboards/NOTFOUND.svg'
+      this.$emit('image', image)
+      return image
     }
   },
   methods: {

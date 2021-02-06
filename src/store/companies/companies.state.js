@@ -565,7 +565,7 @@ export default {
       ]
     },
     {
-      name: 'Simond (Decathlon)',
+      name: 'Simond / Decathlon',
       description:
         "Decathlon's Mountaineering & Climbing brand based in Chamonix valley",
       id: 19,
@@ -620,14 +620,13 @@ export default {
       ]
     },
     {
-      name: 'Surfaces for Climbing (Eva López)',
-      description: '',
+      name: 'Surfaces for Climbing ',
+      description: 'Eva López',
       id: 22,
       website: 'https://www.surfacesforclimbing.com/',
       hangboards: [
         {
           name: 'Progression / Transgression',
-
           id: 0,
           image: 'hangboards/SURFACEGRESSION.svg',
           holds: 8
@@ -786,54 +785,46 @@ export default {
       name: 'Concept Climbing',
       description: '',
       id: 31,
-      disabled: true,
       website: 'https://www.conceptclimbing.com/',
       hangboards: [
         {
           name: 'Quarantine Board',
-          disabled: true,
           id: 0,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Solution',
-          disabled: true,
           id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Solution #2.0',
-          disabled: true,
           id: 2,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'The Edge',
-          disabled: true,
           id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Bantam Board',
-          disabled: true,
           id: 4,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Crag Board',
-          disabled: true,
           id: 5,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Concept Mini',
-          disabled: true,
           id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
@@ -855,29 +846,25 @@ export default {
         {
           name: 'Compact Training Board',
           id: 1,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
       ]
     },
     {
-      name: 'Euroholds (Rokodromo)',
+      name: 'Euroholds / Rokodromo',
       description: '',
       id: 33,
-      disabled: true,
       website: 'https://www.euroholds.com/',
       hangboards: [
         {
           name: 'Basic Wood Board',
-          disabled: true,
           id: 0,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Asymmetric Board v2',
-          disabled: true,
           id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
@@ -888,33 +875,28 @@ export default {
       name: 'Blank Slate Climbing',
       description: '',
       id: 34,
-      disabled: true,
       website: 'https://blankslateclimbing.myshopify.com/',
       hangboards: [
         {
           name: 'Champion Hangboard',
-          disabled: true,
           id: 0,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Monkey Board',
-          disabled: true,
           id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'The Ninja Challenge',
-          disabled: true,
           id: 2,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'The Black Peacemaker',
-          disabled: true,
           id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
@@ -961,7 +943,6 @@ export default {
         },
         {
           name: 'Beta Board',
-          disabled: true,
           id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
@@ -972,12 +953,10 @@ export default {
       name: 'Lapis Holds',
       description: '',
       id: 37,
-      disabled: true,
       website: 'https://www.lapisholds.com/',
       hangboards: [
         {
           name: 'Training Board',
-          disabled: true,
           id: 0,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
@@ -1031,27 +1010,23 @@ export default {
       name: 'Digital Climbing Holds',
       description: '',
       id: 41,
-      disabled: true,
       website: 'https://digital-climbing.com/',
       hangboards: [
         {
           name: 'Small climbing beam',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Large climbing beam',
           id: 1,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Taurine',
           id: 2,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1061,20 +1036,17 @@ export default {
       name: 'Volx Holds',
       description: '',
       id: 42,
-      disabled: true,
       website: 'https://volxholds.com/',
       hangboards: [
         {
           name: 'Froggy',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Dingo',
           id: 1,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1095,21 +1067,18 @@ export default {
         {
           name: 'Training Board 2',
           id: 1,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Training Board 3',
           id: 2,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Woodboard',
           id: 3,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1132,42 +1101,36 @@ export default {
     {
       name: 'HRT Holds',
       description: '',
-      disabled: true,
       id: 45,
       website: 'https://hrt-holds.com/',
       hangboards: [
         {
           name: 'Classic',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'The Mask',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Twins',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Vario',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Butterfly',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1176,14 +1139,12 @@ export default {
     {
       name: 'Gecko Holds',
       description: '',
-      disabled: true,
       id: 46,
       website: 'https://www.gecko-holds.com/',
       hangboards: [
         {
           name: 'Movember',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1192,35 +1153,30 @@ export default {
     {
       name: 'Owl Climb',
       description: '',
-      disabled: true,
       id: 47,
       website: 'https://owlclimb.com/',
       hangboards: [
         {
           name: 'Circle',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Poker',
           id: 1,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Square',
           id: 2,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Portable',
           id: 3,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1241,16 +1197,14 @@ export default {
       ]
     },
     {
-      name: 'Edgy Climbing Holds (Dave MacLeod)',
-      description: '',
-      disabled: true,
+      name: 'Edgy Climbing Holds',
+      description: '(Dave MacLeod)',
       id: 49,
       website: 'https://www.davemacleod.com/',
       hangboards: [
         {
           name: 'Edge',
           id: 0,
-          disabled: true,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1288,49 +1242,42 @@ export default {
       name: 'Awesome Woodys',
       description: 'Handcrafted training tools for climbers',
       id: 52,
-      disabled: true,
       website: 'https://awesomewoodys.com/',
       hangboards: [
         {
           name: 'The Home Boy',
           id: 0,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Cliff Board',
           id: 1,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Cliff Board Wide Boy',
           id: 2,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Cliff Board Mini',
           id: 3,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Cliff Board Micro',
           id: 4,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Cliff Board Petite',
           id: 5,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
       ]
@@ -1339,21 +1286,18 @@ export default {
       name: 'DefyTheCrux',
       description: 'Train Hard, Climb Harder',
       id: 53,
-      disabled: true,
       website: 'https://defythecrux.com/',
       hangboards: [
         {
           name: 'The Log',
           id: 0,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'The Stick',
           id: 1,
-          image: '',
-          disabled: true,
+          image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
       ]
@@ -1382,7 +1326,6 @@ export default {
       name: 'Acron Climbing',
       description: 'Sustainably crafted Hangboards',
       id: 55,
-      disabled: true,
       website: 'https://www.acornclimbing.com/',
       hangboards: [
         {
@@ -1397,7 +1340,6 @@ export default {
       name: 'ArtLine Climbing Holds',
       description: 'Climbing holds and volumes',
       id: 56,
-      disabled: true,
       website: 'https://www.artline-holds.com/',
       hangboards: [
         {
@@ -1412,7 +1354,6 @@ export default {
       name: 'Butterfinger Sports',
       description: 'Out of love for climbing and devotion to innovative design',
       id: 57,
-      disabled: true,
       website: 'http://butterfingersports.com/',
       hangboards: [
         {
@@ -1427,7 +1368,6 @@ export default {
       name: 'WOOD BOARD',
       description: 'Quality wooden booster boards, designed for all climbers',
       id: 58,
-      disabled: true,
       website: 'https://www.wood-board.cz',
       hangboards: [
         {
@@ -1454,7 +1394,6 @@ export default {
       name: 'Workshop 19/50',
       description: 'Tailor-made training gear and climbing gym accessories',
       id: 59,
-      disabled: true,
       website: 'https://workshop1950.ru/',
       hangboards: [
         {
@@ -1469,27 +1408,25 @@ export default {
       name: '2Climb',
       description: '',
       id: 60,
-
       website: 'https://www.2climb.cz/',
       hangboards: [
         {
-          name: 'Gamechanger',
+          name: 'Crux',
           id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Gamechanger',
+          id: 1,
           image: 'hangboards/2CLIMBGAMECHANGER.svg',
           holds: 9
         },
         {
           name: 'Onsight',
-          id: 1,
+          id: 2,
           image: 'hangboards/2CLIMBINSIGHT.svg',
           holds: 10
-        },
-        {
-          name: 'Crux',
-          id: 2,
-          disabled: true,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
         }
       ]
     },

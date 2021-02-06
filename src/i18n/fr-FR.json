@@ -211,5 +211,10 @@
   "Log": "Journal",
   "Enjoying {appTitle}?": "Vous aimez {appTitle}?",
   "Current usage": "Utilisation actuelle",
-  "It's currently not possible to pay.": "Il n'est actuellement pas possible de payer."
+  "It's currently not possible to pay.": "Il n'est actuellement pas possible de payer.",
+  "Follow {appTitle}": "Suivez {appTitle}",
+  "App and hangboard updates": "Mises à jour de l'application et du hangboard",
+  "Request Hangboard": "Demander un Hangboard",
+  "Is your hangboard missing?": "Votre hangboard est-il manquant?",
+  "Get in touch": "Entrer en contact"
 }

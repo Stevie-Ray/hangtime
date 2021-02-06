@@ -65,10 +65,16 @@
               {{ $t('Select your hangboard') }}
             </v-card-title>
             <v-card-text>
-              <hangboard-select></hangboard-select>
+              <span>
+                {{ $t('Is your hangboard missing?') }}
+                <a href="mailto:mail@stevie-ray.nl?subject=Hangboard%20Request">
+                  {{ $t('Get in touch') }}
+                </a>
+              </span>
+              <hangboard-select @image="hangboardImage"></hangboard-select>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="primary" @click="e1 = 3">
+              <v-btn color="primary" :disabled="disableButton" @click="e1 = 3">
                 {{ $t('Select grade system') }}
               </v-btn>
             </v-card-actions>
@@ -182,6 +188,7 @@ export default {
   data: () => ({
     ircra: new IRCRA(),
     e1: 1,
+    disableButton: false,
     mdi: {
       chartTimelineVariant: mdiChartTimelineVariant,
       chartGantt: mdiChartGantt
@@ -285,6 +292,9 @@ export default {
       }
       this.setCompany(0)
       this.e1 = 4
+    },
+    hangboardImage(value) {
+      this.disableButton = value === false
     }
   }
 }

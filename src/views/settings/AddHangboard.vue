@@ -14,12 +14,22 @@
     <v-main>
       <v-container>
         <v-row justify="center" align="start">
-          <v-col cols="12">
-            <hangboard-select></hangboard-select>
+          <v-col cols="12" class="text-center">
+            <hangboard-select @image="hangboardImage"></hangboard-select>
+
+            <v-divider class="mb-4" />
+
+            <div class="mt-8">
+              {{ $t('Is your hangboard missing?') }}
+              <a href="mailto:mail@stevie-ray.nl?subject=Hangboard%20Request">
+                {{ $t('Get in touch') }}
+              </a>
+            </div>
 
             <v-speed-dial bottom right fixed>
               <v-btn
                 slot="activator"
+                :disabled="disableButton"
                 color="secondary"
                 fab
                 @click="addHangboard"
@@ -42,6 +52,7 @@ import { mdiArrowLeft, mdiContentSave } from '@mdi/js'
 export default {
   components: { HangboardSelect },
   data: () => ({
+    disableButton: false,
     mdi: {
       arrowLeft: mdiArrowLeft,
       contentSave: mdiContentSave
@@ -75,6 +86,9 @@ export default {
         this.triggerAddHangboardAction()
       }
       this.$router.push('/settings/hangboards/')
+    },
+    hangboardImage(value) {
+      this.disableButton = value === false
     }
   }
 }

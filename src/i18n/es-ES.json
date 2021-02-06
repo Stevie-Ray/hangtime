@@ -211,5 +211,10 @@
   "Log": "Iniciar sesión",
   "Enjoying {appTitle}?": "¿Disfrutas de {appTitle}?",
   "Current usage": "Uso actual",
-  "It's currently not possible to pay.": "Actualmente no es posible pagar."
+  "It's currently not possible to pay.": "Actualmente no es posible pagar.",
+  "Follow {appTitle}": "Sigue a {appTitle}",
+  "App and hangboard updates": "Actualizaciones de aplicaciones y hangboard",
+  "Request Hangboard": "Solicitar Hangboard",
+  "Is your hangboard missing?": "¿Falta su hangboard?",
+  "Get in touch": "Ponerse en contacto"
 }
