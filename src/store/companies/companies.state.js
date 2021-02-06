@@ -1503,7 +1503,7 @@ export default {
           name: 'Project Board',
           id: 0,
           image: 'hangboards/TOPOUTPROJECT.svg',
-          holds: 8
+          holds: 10
         },
         {
           name: 'Tarry',
