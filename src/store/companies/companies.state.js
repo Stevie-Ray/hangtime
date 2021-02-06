@@ -1492,6 +1492,26 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Top Out Climbing',
+      description: 'Hangboards and Rock Climbing training equipment',
+      id: 61,
+      website: 'https://www.topoutclimbing.co.uk/',
+      hangboards: [
+        {
+          name: 'Project Board',
+          id: 0,
+          image: 'hangboards/TOPOUTPROJECT.svg',
+          holds: 8
+        },
+        {
+          name: 'Tarry',
+          id: 1,
+          image: 'hangboards/TOPOUTTARRY.svg',
+          holds: 3
+        }
+      ]
     }
   ]
 }
