@@ -218,10 +218,6 @@ export default {
       return this.workoutById(this.id)
     }
   },
-  beforeDestroy() {
-    // make sure timer is disabled on leave
-    if (this.timer !== null) clearInterval(this.timer)
-  },
   mounted() {
     if (this.currentWorkout) {
       this.meta.title = `${this.currentWorkout.name} | Workout `

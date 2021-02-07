@@ -190,6 +190,11 @@ export default {
       clearInterval(this.timer)
     }
   },
+  beforeDestroy() {
+    // make sure timer is disabled and speech is stopped
+    if (this.timer !== null) clearInterval(this.timer)
+    if (window.speechSynthesis) window.speechSynthesis.cancel()
+  },
   methods: {
     getImg,
     count,
