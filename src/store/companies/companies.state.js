@@ -1449,6 +1449,32 @@ export default {
           holds: 3
         }
       ]
+    },
+    {
+      name: 'TriPoint Holds',
+      description: 'designed, made and tested by climbers for climbers.',
+      id: 62,
+      website: 'https://tripoint-holds.com/',
+      hangboards: [
+        {
+          name: 'Anthidotum',
+          id: 0,
+          image: 'hangboards/TRIPOINTANTHI.svg',
+          holds: 10
+        },
+        {
+          name: 'Mc Fat',
+          id: 1,
+          image: 'hangboards/TRIPOINTMCFAT.svg',
+          holds: 14
+        },
+        {
+          name: 'Woodoo Hard',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
