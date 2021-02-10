@@ -790,44 +790,32 @@ export default {
         {
           name: 'Quarantine Board',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/CONCEPTQUARATINE.svg',
+          holds: 4
         },
         {
           name: 'Solution',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/CONCEPTSOL.svg',
+          holds: 14
         },
         {
           name: 'Solution #2.0',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/CONCEPTSOL2.svg',
+          holds: 11
         },
         {
           name: 'The Edge',
           id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
-          name: 'Bantam Board',
-          id: 4,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/CONCEPTEDGE.svg',
+          holds: 11
         },
         {
           name: 'Crag Board',
-          id: 5,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
-          name: 'Concept Mini',
-          id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 4,
+          image: 'hangboards/CONCEPTCRAG.svg',
+          holds: 4
         }
       ]
     },
