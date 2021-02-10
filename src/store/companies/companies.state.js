@@ -834,7 +834,7 @@ export default {
         {
           name: 'Compact Training Board',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/BLEAUSTONECOMP.svg',
           holds: 0
         }
       ]
@@ -846,16 +846,10 @@ export default {
       website: 'https://www.euroholds.com/',
       hangboards: [
         {
-          name: 'Basic Wood Board',
+          name: 'Asymmetric Board v3',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
-          name: 'Asymmetric Board v2',
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/EUROHOLDSASYM.svg',
+          holds: 9
         }
       ]
     },
@@ -868,26 +862,20 @@ export default {
         {
           name: 'Champion Hangboard',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
-          name: 'Monkey Board',
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/BLANKSLATECHAMP.svg',
+          holds: 14
         },
         {
           name: 'The Ninja Challenge',
-          id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 1,
+          image: 'hangboards/BLANKSLATENINJA.svg',
+          holds: 7
         },
         {
           name: 'The Black Peacemaker',
-          id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 2,
+          image: 'hangboards/BLANKSLATEPEACE.svg',
+          holds: 16
         }
       ]
     },
@@ -932,8 +920,8 @@ export default {
         {
           name: 'Beta Board',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ESCAPEBETA.svg',
+          holds: 10
         }
       ]
     },
@@ -946,8 +934,8 @@ export default {
         {
           name: 'Training Board',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/LAPISTRAIN.svg',
+          holds: 10
         }
       ]
     },
