@@ -412,11 +412,7 @@
                 thumb-size="48"
                 :disabled="!editWorkout"
                 :prepend-icon="mdi.weight"
-                :hint="
-                  $t(
-                    'Add/remove weight using a kettle/dumb-bells or pulley system'
-                  )
-                "
+                :hint="dynamicHint"
                 persistent-hint
               >
                 <template #thumb-label="props">
@@ -428,7 +424,6 @@
                   </v-label>
                 </template>
               </v-slider>
-
               <v-divider class="my-4"></v-divider>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -612,7 +607,6 @@ export default {
         // return this.$store.state.workoutToCreate.exercises[this.index].pause
       },
       set(value) {
-        console.log(value)
         this.setData({
           id: this.id,
           value: { pause: Math.round(value) },
@@ -715,6 +709,18 @@ export default {
           index: this.index
         })
       }
+    },
+    dynamicHint() {
+      if (this.user && this.user.weight && this.dataWeight !== 0) {
+        return `Your weight: ${this.user.weight}${
+          this.weightShort
+        } Training weight: ${this.user.weight + this.dataWeight}${
+          this.weightShort
+        }`
+      }
+      return this.$i18n.t(
+        'Add/remove weight using a kettle/dumb-bells or pulley system'
+      )
     }
   },
   methods: {

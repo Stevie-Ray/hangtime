@@ -1,6 +1,9 @@
+import Vue from 'vue'
+
 export default {
   setUser: (state, value) => (state.user = value),
-  setStatus: (state, value) => (state.user.status = value),
+  setUserWeight: (state, value) => (state.user.weight = value),
+  setUserStatus: (state, value) => (state.user.status = value),
   setCompleted: (state) => {
     if (!state.user.completed) {
       state.user.completed = {}
@@ -39,7 +42,7 @@ export default {
   setVibrate: (state, value) => (state.user.settings.vibrate = value),
   setTheme: (state, value) => (state.user.settings.theme = value),
   setScheme: (state, value) => (state.user.settings.scheme = value),
-  setWeight: (state, value) => (state.user.settings.weight = value),
+  setWeight: (state, value) => Vue.set(state.user.settings, 'weight', value),
   setWalkthrough: (state, value) => (state.user.settings.walkthrough = value),
   setVoice: (state, value) => (state.user.settings.voice = value),
   setUserNotificationToken: (state, value) =>

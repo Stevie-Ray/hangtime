@@ -75,7 +75,7 @@
         </v-row>
         <v-row justify="center" align="start">
           <v-col cols="12">
-            <v-list two-line>
+            <v-list one-line>
               <v-list-item v-if="user && user.displayName">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{ mdi.account }}</v-icon>
@@ -85,28 +85,46 @@
                   <v-list-item-title>{{ user.displayName }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-
-              <v-list-item v-if="user && user.completed">
+            </v-list>
+            <v-list two-line>
+              <v-list-item v-if="user && user.settings.scale">
                 <v-list-item-icon>
-                  <v-icon color="primary lighten-1">
-                    {{ mdi.timer }}
-                  </v-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.scaleBathroom
+                  }}</v-icon>
                 </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title
-                    v-if="user && user.completed && user.completed.time"
-                    class="my-0"
+
+                <v-list-item-content style="overflow: visible;">
+                  <v-slider
+                    v-model="userWeight"
+                    :max="150"
+                    :min="50"
+                    step="1"
+                    ticks
+                    always-dirty
+                    persistent-hint
+                    :label="$t('Weight')"
+                    thumb-size="48"
+                    :hint="
+                      $t(
+                        'Set your weight to use with a kettle/dumb-bells or pulley system'
+                      )
+                    "
+                    @end="triggerUpdateUser"
                   >
-                    <strong>{{ $t('Total time worked out') }}:</strong>
-                    {{ count(user.completed.time) }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle
-                    v-if="user && user.completed && user.completed.hold"
-                    class="my-0"
-                  >
-                    {{ $t('Total time hangboarding') }}:
-                    {{ count(user.completed.hold) }}
-                  </v-list-item-subtitle>
+                    <template #thumb-label="props">
+                      {{ weightConverter(props.value, user) }}{{ weightShort }}
+                    </template>
+                    <template #append>
+                      <v-label v-if="user && user.weight">
+                        {{ weightConverter(user.weight, user)
+                        }}{{ weightShort }}
+                      </v-label>
+                      <v-label v-else>
+                        {{ weightConverter(userWeight, user) }}{{ weightShort }}
+                      </v-label>
+                    </template>
+                  </v-slider>
                 </v-list-item-content>
               </v-list-item>
 
@@ -206,9 +224,9 @@
 
 <script>
 import firebase from 'firebase/app'
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions, mapMutations, mapGetters } from 'vuex'
 import IRCRA from 'ircra'
-import { count, getImg, shortDate } from '@/misc/helpers'
+import { count, getImg, shortDate, weightConverter } from '@/misc/helpers'
 
 import {
   mdiArrowLeft,
@@ -217,7 +235,7 @@ import {
   mdiChartTimelineVariant,
   mdiInformation,
   mdiEmail,
-  mdiTimer
+  mdiScaleBathroom
 } from '@mdi/js'
 
 export default {
@@ -236,7 +254,7 @@ export default {
       chartTimelineVariant: mdiChartTimelineVariant,
       email: mdiEmail,
       information: mdiInformation,
-      timer: mdiTimer
+      scaleBathroom: mdiScaleBathroom
     }
   }),
   head: {
@@ -254,6 +272,7 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
+    ...mapGetters('authentication', ['weightShort']),
     settingsScale: {
       get() {
         return this.user.settings.scale
@@ -282,7 +301,18 @@ export default {
         return this.user.status
       },
       set(value) {
-        this.setStatus(value)
+        this.setUserStatus(value)
+      }
+    },
+    userWeight: {
+      get() {
+        if (this.user.weight) {
+          return this.user.weight
+        }
+        return 65
+      },
+      set(value) {
+        this.setUserWeight(value)
       }
     },
     grades() {
@@ -293,8 +323,13 @@ export default {
     count,
     shortDate,
     getImg,
+    weightConverter,
     ...mapActions('authentication', ['triggerUpdateUser']),
-    ...mapMutations('authentication', ['setStatus', 'setGrade']),
+    ...mapMutations('authentication', [
+      'setUserStatus',
+      'setUserWeight',
+      'setGrade'
+    ]),
     async logout() {
       await firebase.auth().signOut()
     },

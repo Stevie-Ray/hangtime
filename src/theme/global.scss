@@ -221,12 +221,13 @@
     }
   }
   // fix three-line height
-  .v-list-item .v-list-item__subtitle {
-    .v-icon {
-      line-height: 1.2;
+  .v-list-item {
+    .v-list-item__subtitle {
+      .v-icon {
+        line-height: 1.2;
+      }
+      max-width: 375px;
     }
-
-    max-width: 375px;
   }
 
   .tabs {
