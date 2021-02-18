@@ -5,8 +5,8 @@
         <!-- pause  -->
         <v-slider
           v-model="dataPause"
-          :max="300"
-          :min="2.5"
+          max="300"
+          min="2.5"
           step="2.5"
           ticks
           always-dirty
@@ -23,21 +23,22 @@
           <template #append>
             <v-text-field
               v-if="editWorkout"
-              v-model="dataPause"
+              :value="dataPause"
               class="mt-0 pt-0"
-              min="2.5"
-              max="300"
-              step="2.5"
               hide-details
               single-line
+              max="300"
+              min="2.5"
+              step="2.5"
               type="number"
-              style="width: 40px;"
+              style="width: 45px;"
               :rules="[
                 rules.required,
                 rules.number,
                 rules.min(2.5),
                 rules.max(300)
               ]"
+              @change="updatePause"
             ></v-text-field>
             <v-label v-else>{{ count(Math.round(dataPause)) }}</v-label>
           </template>
@@ -226,8 +227,8 @@
                   <!-- hold  -->
                   <v-slider
                     v-model="dataHold"
-                    :max="180"
-                    :min="3"
+                    max="180"
+                    min="3"
                     step="1"
                     always-dirty
                     thumb-size="48"
@@ -243,21 +244,22 @@
                     <template #append>
                       <v-text-field
                         v-if="editWorkout"
-                        v-model="dataHold"
-                        class="mt-0 pt-0"
-                        min="3"
+                        :value="dataHold"
                         max="180"
+                        min="3"
                         step="1"
+                        class="mt-0 pt-0"
                         hide-details
                         single-line
                         type="number"
-                        style="width: 40px;"
+                        style="width: 45px;"
                         :rules="[
                           rules.required,
                           rules.number,
                           rules.min(3),
                           rules.max(180)
                         ]"
+                        @change="updateHold"
                       ></v-text-field>
                       <v-label v-else>{{ count(dataHold) }}</v-label>
                     </template>
@@ -309,8 +311,8 @@
               <!-- rest  -->
               <v-slider
                 v-model="dataRest"
-                :max="300"
-                :min="2.5"
+                max="300"
+                min="2.5"
                 step="2.5"
                 always-dirty
                 thumb-size="48"
@@ -326,21 +328,22 @@
                 <template #append>
                   <v-text-field
                     v-if="editWorkout"
-                    v-model="dataRest"
-                    class="mt-0 pt-0"
-                    min="2.5"
+                    :value="dataRest"
                     max="300"
+                    min="2.5"
                     step="2.5"
+                    class="mt-0 pt-0"
                     hide-details
                     single-line
                     type="number"
-                    style="width: 40px;"
+                    style="width: 45px;"
                     :rules="[
                       rules.required,
                       rules.number,
                       rules.min(2.5),
                       rules.max(300)
                     ]"
+                    @change="updateRest"
                   ></v-text-field>
                   <v-label v-else>{{ count(Math.round(dataRest)) }} </v-label>
                 </template>
@@ -609,6 +612,7 @@ export default {
         // return this.$store.state.workoutToCreate.exercises[this.index].pause
       },
       set(value) {
+        console.log(value)
         this.setData({
           id: this.id,
           value: { pause: Math.round(value) },
@@ -771,6 +775,21 @@ export default {
           value: { leftHand: event },
           index: this.index
         })
+      }
+    },
+    updateHold(event) {
+      if (!Number.isNaN(event)) {
+        this.dataHold = event
+      }
+    },
+    updateRest(event) {
+      if (!Number.isNaN(event)) {
+        this.dataRest = event
+      }
+    },
+    updatePause(event) {
+      if (!Number.isNaN(event)) {
+        this.dataPause = event
       }
     }
   }

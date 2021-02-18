@@ -145,8 +145,12 @@ export default {
       return this.currentWorkout.exercises[this.index]
     },
     userWorkout() {
-      if (!this.currentWorkout.user) return false
-      return this.currentWorkout.user.id === this.user.id
+      if (this.user && this.currentWorkout) {
+        if (this.currentWorkout.user) {
+          return this.currentWorkout.user.id === this.user.id
+        }
+      }
+      return false
     },
     editWorkout() {
       if (this.editingWorkout && this.edit === null) {

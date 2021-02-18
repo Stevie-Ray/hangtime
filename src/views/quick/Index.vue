@@ -26,11 +26,9 @@
               no-gutters
             >
               <circle-timer
-                :total-time="totalTime"
                 :current-exercise="currentExercise"
                 :start-button="startWorkout"
                 :pause-button="pauseWorkout"
-                :reset-button="resetWorkout"
               ></circle-timer>
 
               <v-row justify="center" align="start" no-gutters>
@@ -149,7 +147,6 @@ export default {
     initialStart: true,
     startWorkout: false,
     pauseWorkout: false,
-    resetWorkout: false,
     mdi: {
       arrowLeft: mdiArrowLeft,
       play: mdiPlay,
@@ -174,12 +171,6 @@ export default {
   computed: {
     ...mapState('authentication', ['user']),
     ...mapState('app', ['networkOnLine']),
-    totalTime() {
-      return (
-        (this.currentExercise.hold + this.currentExercise.pause) *
-        (this.currentExercise.repeat + 1)
-      )
-    },
     defaultTime() {
       return (
         this.currentExercise ===
@@ -233,7 +224,6 @@ export default {
         rest: 5,
         repeat: 0
       }
-      this.resetWorkout = !this.resetWorkout
     },
     increment(element) {
       if (this.initialStart) {
