@@ -224,5 +224,9 @@
   "App and hangboard updates": "Aktualizacje aplikacji i tablicy",
   "Request Hangboard": "Poproś o Hangboard",
   "Is your hangboard missing?": "Brakuje twojej tablicy?",
-  "Get in touch": "Skontaktuj się"
+  "Get in touch": "Skontaktuj się",
+  "Male": "Mężczyzna",
+  "Female": "Kobieta",
+  "Other": "Inny",
+  "Country": "Kraj"
 }

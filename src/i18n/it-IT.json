@@ -215,5 +215,9 @@
   "App and hangboard updates": "Aggiornamenti di app e hangboard",
   "Request Hangboard": "Richiedi Hangboard",
   "Is your hangboard missing?": "Manca il tuo hangboard?",
-  "Get in touch": "Mettiti in contatto"
+  "Get in touch": "Mettiti in contatto",
+  "Male": "Maschio",
+  "Female": "Femmina",
+  "Other": "Altro",
+  "Country": "Paese"
 }

@@ -4,6 +4,8 @@ export default {
   setUser: (state, value) => (state.user = value),
   setUserWeight: (state, value) => (state.user.weight = value),
   setUserStatus: (state, value) => (state.user.status = value),
+  setUserGender: (state, value) => (state.user.gender = value),
+  setUserCountry: (state, value) => (state.user.country = value),
   setCompleted: (state) => {
     if (!state.user.completed) {
       state.user.completed = {}

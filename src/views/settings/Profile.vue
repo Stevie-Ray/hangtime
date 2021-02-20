@@ -16,63 +16,53 @@
     </v-app-bar>
 
     <v-main>
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <v-card flat class="mx-auto" tile dark>
-              <v-img
-                class="white--text justify-center align-center text-center"
-                height="200px"
-                gradient="to bottom, rgba(1,46,64,.66), rgba(0,0,0,.33)"
-              >
-                <v-card-title class="justify-center align-center">
-                  <v-row>
-                    <v-col class="text-right">
-                      <div class="text-overline">{{ $t('Grade') }}</div>
-                      <div>
-                        {{
-                          ircra
-                            .convert('ircra', user.settings.grade)
-                            .to(user.settings.scale)[user.settings.scale]
-                        }}
-                      </div>
-                    </v-col>
-                    <v-col cols="3">
-                      <v-avatar
-                        aspect-ratio="1"
-                        class="grey lighten-2"
-                        size="64"
-                      >
-                        <img
-                          v-if="user.photoURL"
-                          :src="user.photoURL"
-                          :alt="user.displayName"
-                        />
-                      </v-avatar>
-                    </v-col>
-                    <v-col class="text-left">
-                      <div class="text-overline">{{ $t('Workouts') }}</div>
-                      <div
-                        v-if="user && user.completed && user.completed.amount"
-                      >
-                        {{ user.completed.amount }}
-                      </div>
-                      <div v-else>0</div>
-                    </v-col>
-                  </v-row>
-                </v-card-title>
-                <v-card-text class="pa-0">
-                  <div>{{ user.status }}</div>
-                </v-card-text>
+      <v-card flat class="mx-auto" tile dark>
+        <v-img
+          class="white--text justify-center align-center text-center"
+          height="200px"
+          gradient="to bottom, rgba(1,46,64,.66), rgba(0,0,0,.33)"
+        >
+          <v-card-title class="justify-center align-center">
+            <v-row>
+              <v-col class="text-right">
+                <div class="text-overline">{{ $t('Grade') }}</div>
+                <div>
+                  {{
+                    ircra
+                      .convert('ircra', user.settings.grade)
+                      .to(user.settings.scale)[user.settings.scale]
+                  }}
+                </div>
+              </v-col>
+              <v-col cols="3">
+                <v-avatar aspect-ratio="1" class="grey lighten-2" size="64">
+                  <img
+                    v-if="user.photoURL"
+                    :src="user.photoURL"
+                    :alt="user.displayName"
+                  />
+                </v-avatar>
+              </v-col>
+              <v-col class="text-left">
+                <div class="text-overline">{{ $t('Workouts') }}</div>
+                <div v-if="user && user.completed && user.completed.amount">
+                  {{ user.completed.amount }}
+                </div>
+                <div v-else>0</div>
+              </v-col>
+            </v-row>
+          </v-card-title>
+          <v-card-text class="pa-0">
+            <div>{{ user.status }}</div>
+          </v-card-text>
 
-                <v-card-subtitle class="mt-0">
-                  {{ $t('Started') }}:
-                  {{ shortDate(user.createTimestamp.toDate()) }}
-                </v-card-subtitle>
-              </v-img>
-            </v-card>
-          </v-col>
-        </v-row>
+          <v-card-subtitle class="mt-0">
+            {{ $t('Started') }}:
+            {{ shortDate(user.createTimestamp.toDate()) }}
+          </v-card-subtitle>
+        </v-img>
+      </v-card>
+      <v-container>
         <v-row justify="center" align="start">
           <v-col cols="12">
             <v-list one-line>
@@ -85,8 +75,59 @@
                   <v-list-item-title>{{ user.displayName }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+              <v-list-item v-if="user && user.email">
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.email }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ user.email }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
             <v-list two-line>
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{
+                    mdi.genderMaleFemale
+                  }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content style="overflow: visible;">
+                  <v-radio-group
+                    v-model="userGender"
+                    row
+                    class="mt-1"
+                    @change="triggerUpdateUser"
+                  >
+                    <v-radio :label="$t('Male')" value="male"></v-radio>
+                    <v-radio :label="$t('Female')" value="female"></v-radio>
+                    <v-radio :label="$t('Other')" value="other"></v-radio>
+                  </v-radio-group>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon color="primary lighten-1">{{ mdi.mapMarker }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-autocomplete
+                    v-model="userCountry"
+                    class="mt-1 pt-0"
+                    :label="$t('Country')"
+                    :items="countries"
+                    item-text="name"
+                    item-value="alpha2"
+                    return-object
+                    @change="triggerUpdateUser"
+                  ></v-autocomplete>
+                </v-list-item-content>
+              </v-list-item>
+
               <v-list-item v-if="user && user.settings.scale">
                 <v-list-item-icon>
                   <v-icon color="primary lighten-1">{{
@@ -170,18 +211,6 @@
                   </v-text-field>
                 </v-list-item-content>
               </v-list-item>
-
-              <v-list-item v-if="user && user.email">
-                <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{ mdi.email }}</v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ user.email }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
             </v-list>
             <v-list two-line>
               <v-list-item>
@@ -227,6 +256,7 @@ import firebase from 'firebase/app'
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex'
 import IRCRA from 'ircra'
 import { count, getImg, shortDate, weightConverter } from '@/misc/helpers'
+import countries from '@/misc/countries'
 
 import {
   mdiArrowLeft,
@@ -235,13 +265,16 @@ import {
   mdiChartTimelineVariant,
   mdiInformation,
   mdiEmail,
-  mdiScaleBathroom
+  mdiScaleBathroom,
+  mdiGenderMaleFemale,
+  mdiMapMarker
 } from '@mdi/js'
 
 export default {
   data: () => ({
     ircra: new IRCRA(),
     linkError: null,
+    countries,
     rules: {
       length: (len) => (v) =>
         (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
@@ -254,7 +287,9 @@ export default {
       chartTimelineVariant: mdiChartTimelineVariant,
       email: mdiEmail,
       information: mdiInformation,
-      scaleBathroom: mdiScaleBathroom
+      scaleBathroom: mdiScaleBathroom,
+      genderMaleFemale: mdiGenderMaleFemale,
+      mapMarker: mdiMapMarker
     }
   }),
   head: {
@@ -296,6 +331,22 @@ export default {
         this.setGrade(ircraGrade)
       }
     },
+    userCountry: {
+      get() {
+        return this.user.country
+      },
+      set(value) {
+        this.setUserCountry(value)
+      }
+    },
+    userGender: {
+      get() {
+        return this.user.gender
+      },
+      set(value) {
+        this.setUserGender(value)
+      }
+    },
     userStatus: {
       get() {
         return this.user.status
@@ -328,6 +379,8 @@ export default {
     ...mapMutations('authentication', [
       'setUserStatus',
       'setUserWeight',
+      'setUserGender',
+      'setUserCountry',
       'setGrade'
     ]),
     async logout() {

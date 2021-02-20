@@ -219,5 +219,9 @@
   "App and hangboard updates": "App en hangboard updates",
   "Request Hangboard": "Hangboard aanvragen",
   "Is your hangboard missing?": "Ontbreekt je hangboard?",
-  "Get in touch": "Neem contact op"
+  "Get in touch": "Neem contact op",
+  "Male": "Man",
+  "Female": "Vrouw",
+  "Other": "Overig",
+  "Country": "Land"
 }

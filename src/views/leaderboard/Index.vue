@@ -97,6 +97,7 @@
                       </v-col>
                       <v-col cols="8">
                         {{ item.displayName }}
+                        <!-- <span v-if="!item.subscribed">{{ item.id }}</span>-->
                       </v-col>
                     </v-row>
                   </td>
