@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="637px" height="189px" viewBox="0 0 637 189" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>CRIMPTONITEMOBUL</title>
+    <title>CRIMPTONITEMOBUL1</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-3" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+        <g id="CRIMPTONITEMOBUL1" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
             <path d="M636,187 L34,187 C15.2223185,187 0,171.777681 0,153 L0,34 C0,15.2223185 15.2223185,0 34,0 L636,0" id="hangboard"></path>
-            <path d="M636,133 L516.3,133 C498.461203,133 484,120.232894 484,104.483871 L484,83.516129 C484,67.7671058 498.461203,55 516.3,55 L636,55" id="h1"></path>
-            <rect id="h2" x="63" y="58" width="348" height="71" rx="34"></rect>
+            <rect id="h1" x="63" y="58" width="348" height="71" rx="34"></rect>
         </g>
     </g>
 </svg>

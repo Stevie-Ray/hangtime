@@ -36,6 +36,17 @@
               width="100%"
             />
           </div>
+          <v-row
+            v-if="
+              hangboard.sides &&
+              hangboard.sides.length &&
+              data.rotate
+            "
+          >
+            <v-col cols="12" class="text-center pa-0">
+              {{ hangboard.sides[data.rotate].name }}
+            </v-col>
+          </v-row>
         </div>
       </v-col>
     </v-row>

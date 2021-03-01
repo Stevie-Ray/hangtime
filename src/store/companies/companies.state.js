@@ -488,22 +488,22 @@ export default {
           image: 'hangboards/TRANGOROCKPIVOT.svg',
           sides: [
             {
-              name: 'Rock Prodigy Pivot',
+              name: '0°',
               image: 'hangboards/TRANGOROCKPIVOT.svg',
               holds: 12
             },
             {
-              name: 'Rock Prodigy Pivot 90',
+              name: '90°',
               image: 'hangboards/TRANGOROCKPIVOT-90.svg',
               holds: 12
             },
             {
-              name: 'Rock Prodigy Pivot 180',
+              name: '180°',
               image: 'hangboards/TRANGOROCKPIVOT-180.svg',
               holds: 12
             },
             {
-              name: 'Rock Prodigy Pivot 270',
+              name: '270°',
               image: 'hangboards/TRANGOROCKPIVOT-270.svg',
               holds: 12
             }
@@ -601,7 +601,35 @@ export default {
           name: 'Mobile hangboard UL',
           id: 2,
           image: 'hangboards/CRIMPTONITEMOBUL.svg',
+          sides: [
+            {
+              name: '22mm + 30mm + 22mm',
+              image: 'hangboards/CRIMPTONITEMOBUL.svg',
+              holds: 2
+            },
+            {
+              name: '10mm + 10mm',
+              image: 'hangboards/CRIMPTONITEMOBUL1.svg',
+              holds: 1
+            },
+            {
+              name: '18mm + 20mm + 18mm',
+              image: 'hangboards/CRIMPTONITEMOBUL2.svg',
+              holds: 2
+            },
+            {
+              name: '14mm + 14mm',
+              image: 'hangboards/CRIMPTONITEMOBUL3.svg',
+              holds: 1
+            }
+          ],
           holds: 1
+        },
+        {
+          name: 'Fixed hangboard V2',
+          id: 3,
+          image: 'hangboards/CRIMPTONITEFIXED2.svg',
+          holds: 5
         }
       ]
     },
