@@ -3,7 +3,10 @@ import Vue from 'vue'
 export default {
   resetWorkoutToCreate: (state) => {
     state.workoutToCreate = {
-      exercises: []
+      exercises: [],
+      level: 2,
+      share: false,
+      video: ''
     }
   },
   /* Workout inputs */
