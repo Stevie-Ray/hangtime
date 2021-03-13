@@ -1156,27 +1156,27 @@ export default {
     },
     {
       name: 'Owl Climb',
-      description: '',
+      description: 'Hangboards made in italy',
       id: 47,
       website: 'https://owlclimb.com/',
       hangboards: [
         {
           name: 'Circle',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/OWLCIRCLE.svg',
+          holds: 13
         },
         {
           name: 'Poker',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/OWLPOKER.svg',
+          holds: 6
         },
         {
           name: 'Square',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/OWLSQUARE.svg',
+          holds: 12
         },
         {
           name: 'Portable',
@@ -1377,20 +1377,20 @@ export default {
         {
           name: 'WOOD BOARD hobby',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WOODHOBBY.svg',
+          holds: 14
         },
         {
           name: 'WOOD BOARD',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WOODBOARD.svg',
+          holds: 14
         },
         {
           name: 'WOOD BOARD profi',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WOODPROFI.svg',
+          holds: 15
         }
       ]
     },
