@@ -1479,6 +1479,45 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Canigó',
+      description:
+        'Natural wood climbing Hangboards. Train at home with chemical-free dams!',
+      id: 63,
+      website: 'https://canigo.eu/',
+      hangboards: [
+        {
+          name: 'Black Dot',
+          id: 0,
+          image: 'hangboards/CANIGOBLACK.svg',
+          holds: 17
+        },
+        {
+          name: 'Blue Dot',
+          id: 1,
+          image: 'hangboards/CANIGOBLUE.svg',
+          holds: 5
+        },
+        {
+          name: 'Red Dot',
+          id: 2,
+          image: 'hangboards/CANIGORED.svg',
+          holds: 10
+        },
+        {
+          name: 'Resurrection',
+          id: 3,
+          image: 'hangboards/CANIGORESURRECTION.svg',
+          holds: 3
+        },
+        {
+          name: 'Valhalla Hybrid',
+          id: 4,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
