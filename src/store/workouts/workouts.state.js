@@ -38,84 +38,81 @@ export default {
       name: 'Dead Hang',
       short: 'Dead Hang',
       id: 0,
-      background: 'rgba(1, 46, 64, 0.2)',
-      border: 'rgba(1, 46, 64, 0.5)',
       image: 'exercises/deadhang.svg',
-      description: '...'
+      description: 'Arms are fully extended'
     },
     {
       name: 'Lock off - 45°',
       short: '45°',
       id: 1,
-      background: 'rgba(54, 109, 115, 0.2)',
-      border: 'rgba(54, 109, 115, 0.5)',
-
       image: 'exercises/bentarmhang.svg',
-      description: '...'
+      description: 'Arms in a 45° bent position'
     },
     {
       name: 'Lock off - 90°',
       short: '90°',
       id: 2,
-      background: 'rgba(90, 140, 140, 0.2)',
-      border: 'rgba(90, 140, 140, 0.5)',
       image: 'exercises/lhang.svg',
-      description: '...'
+      description: 'Arms in a 90° bent position'
     },
     {
       name: 'Lock off - Full',
       short: 'Full',
       id: 3,
-      background: 'rgba(188, 191, 164, 0.2)',
-      borderColor: 'rgba(188, 191, 164, 0.5)',
       image: 'exercises/pullup.svg',
-      description: '...',
+      description: 'Arms in a full bent position',
       disabledExercises: [1, 2, 4]
     },
     {
       name: 'Front Lever',
       short: 'Front Lever',
       id: 4,
-      background: 'rgba(188, 191, 164, 0.2)',
-      borderColor: 'rgba(188, 191, 164, 0.5)',
       image: 'exercises/frontlever.svg',
-      description: '...'
+      description: 'Body completely horizontal, facing upwards'
+    },
+    {
+      name: 'No Hang',
+      short: 'No Hang',
+      id: 5,
+      image: 'exercises/nohang.svg',
+      description: 'Feet on the ground, pull with your fingers',
+      disabledExercises: [1, 2, 3, 4, 5, 6]
     }
   ],
   exercises: [
     {
       name: 'Pull-up',
-      description: '...',
+      description: 'Pull yourself up towards the hangboard',
       id: 1,
       type: 'arms'
     },
     {
       name: 'Scrap Pull',
-      description: '...',
+      description: 'Pull up with shoulders only, without bending arms',
       id: 2,
       type: 'arms'
     },
     {
       name: 'Negative Pull',
-      description: '...',
+      description: 'Downward section of a Pull-up',
       id: 3,
       type: 'arms'
     },
     {
       name: 'Typewriter',
-      description: '...',
+      description: 'Full lock off, go from side to side',
       id: 4,
       type: 'arms'
     },
     {
       name: 'L-Hang',
-      description: '...',
+      description: 'Legs are in a 90° bent position',
       id: 5,
       type: 'legs'
     },
     {
       name: 'Knee raise',
-      description: '...',
+      description: 'Raise your knee upwards ',
       id: 6,
       type: 'legs'
     }

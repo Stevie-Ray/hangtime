@@ -104,6 +104,9 @@
                         <v-list-item-title>{{
                           data.item.name
                         }}</v-list-item-title>
+                        <v-list-item-subtitle>{{
+                          data.item.description
+                        }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </template>
                     <template #append-outer>
@@ -151,6 +154,16 @@
                     item-value="id"
                     :disabled="!editWorkout"
                   >
+                    <template #item="data">
+                      <v-list-item-content>
+                        <v-list-item-title>{{
+                          data.item.name
+                        }}</v-list-item-title>
+                        <v-list-item-subtitle>{{
+                          data.item.description
+                        }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </template>
                     <template #append-outer>
                       <v-row>
                         <v-col cols="12" align="center" justify="center">
@@ -170,6 +183,16 @@
                     item-value="id"
                     :disabled="!editWorkout"
                   >
+                    <template #item="data">
+                      <v-list-item-content>
+                        <v-list-item-title>{{
+                          data.item.name
+                        }}</v-list-item-title>
+                        <v-list-item-subtitle>{{
+                          data.item.description
+                        }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </template>
                     <template v-if="editWorkout" #append-outer>
                       <v-tooltip v-if="dataExercise === 0" bottom>
                         <template #activator="{ on, attrs }">
