@@ -1518,6 +1518,26 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Climbnboulder',
+      description: '',
+      id: 64,
+      website: 'https://www.etsy.com/shop/climbnboulder',
+      hangboards: [
+        {
+          name: 'Das Board',
+          id: 0,
+          image: 'hangboards/CLIMBNBOULDERBOARD.svg',
+          holds: 13
+        },
+        {
+          name: 'Maxi-board',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 17
+        }
+      ]
     }
   ]
 }
