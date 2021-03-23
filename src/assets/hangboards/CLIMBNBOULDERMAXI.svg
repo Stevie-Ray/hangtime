@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="588px" height="345px" viewBox="0 0 588 345" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>CLIMBNBOULDERMAXI</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CLIMBNBOULDERMAXI" transform="translate(0.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M588,343 L11,343 C5.4771525,343 1,338.522847 1,333 L1,19 C1,13.4771525 5.4771525,9 11,9 L588,9" id="board"></path>
+            <path d="M588,261 C574.192881,261 563,272.192881 563,286 C563,299.807119 574.192881,311 588,311" id="h18"></path>
+            <rect id="h17" x="283" y="256" width="253" height="40" rx="10"></rect>
+            <circle id="h16" cx="226" cy="286" r="25"></circle>
+            <rect id="h15" x="115" y="256" width="52" height="40" rx="10"></rect>
+            <circle id="h14" cx="58" cy="287" r="37"></circle>
+            <path d="M588,233 L511,233 C505.477153,233 501,228.522847 501,223 L501,203 C501,197.477153 505.477153,193 511,193 L588,193" id="h13"></path>
+            <circle id="h12" cx="442" cy="208" r="37"></circle>
+            <rect id="h11" x="198" y="191" width="188" height="40" rx="10"></rect>
+            <rect id="h10" x="31" y="191" width="136" height="40" rx="10"></rect>
+            <path d="M588,166 L496,166 C490.477153,166 486,161.522847 486,156 L486,136 C486,130.477153 490.477153,126 496,126 L588,126" id="h9"></path>
+            <rect id="h8" x="317" y="126" width="102" height="40" rx="10"></rect>
+            <rect id="h7" x="31" y="123" width="253" height="40" rx="10"></rect>
+            <path d="M588,43 C574.192881,43 563,54.1928813 563,68 C563,81.8071187 574.192881,93 588,93" id="h6"></path>
+            <rect id="h5" x="285" y="58" width="253" height="40" rx="10"></rect>
+            <circle id="h4" cx="226" cy="68" r="25"></circle>
+            <rect id="h3" x="99" y="58" width="68" height="37" rx="10"></rect>
+            <circle id="h2" cx="58" cy="70" r="25"></circle>
+            <path d="M588,0 C210.358314,0.644710346 18.0722081,0.96706552 11.1416822,0.96706552 C4.21115627,0.96706552 0.830595533,7.19157496 1,19.6405938 C1.65241699,12.5468646 5.03297773,9 11.1416822,9 C17.2503867,9 209.536493,9 588,9" id="h1"></path>
+        </g>
+    </g>
+</svg>

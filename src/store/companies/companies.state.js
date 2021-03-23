@@ -1534,7 +1534,7 @@ export default {
         {
           name: 'Maxi-board',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/CLIMBNBOULDERMAXI.svg',
           holds: 17
         }
       ]
