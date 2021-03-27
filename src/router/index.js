@@ -77,6 +77,17 @@ const router = new Router({
         )
     },
     {
+      path: '/privacy',
+      name: 'privacy',
+      component: () =>
+        import(
+          /* webpackChunkName: "client-chunk-quick" */ '@/views/settings/Privacy.vue'
+        ),
+      meta: {
+        authNotRequired: true
+      }
+    },
+    {
       path: '/:userId/workout/new',
       name: 'new-workout',
       component: () =>

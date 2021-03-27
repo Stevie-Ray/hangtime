@@ -1,6 +1,6 @@
 {
   "name": "hangtime",
-  "version": "0.9.17",
+  "version": "0.9.18",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -40,7 +40,7 @@
     "vuex-persistedstate": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.12.13",
+    "@babel/preset-react": "^7.13.13",
     "@intlify/vue-i18n-loader": "^1.1.0",
     "@storybook/addon-a11y": "^6.1.21",
     "@storybook/addon-essentials": "^6.1.21",
@@ -63,14 +63,14 @@
     "babel-plugin-transform-require-context": "^0.1.1",
     "babel-preset-vue": "^2.0.2",
     "bundlesize": "^0.18.1",
-    "eslint": "^7.22.0",
+    "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.8.0",
-    "firebase-tools": "^9.6.1",
+    "firebase-tools": "^9.8.0",
     "prerender-spa-plugin": "^3.4.0",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",

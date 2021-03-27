@@ -56,7 +56,7 @@
             <div>{{ user.status }}</div>
           </v-card-text>
 
-          <v-card-subtitle class="mt-0">
+          <v-card-subtitle v-if="user.createTimestamp" class="mt-0">
             {{ $t('Started') }}:
             {{ shortDate(user.createTimestamp.toDate()) }}
           </v-card-subtitle>
@@ -243,6 +243,22 @@
                   {{ linkError }}
                 </v-list-item-title>
               </v-list-item>
+              <v-row align="center" justify="center">
+                <v-col cols="12">
+                  <v-card flat>
+                    <v-card-title>Delete account</v-card-title>
+                    <v-card-text>
+                      Once you delete your account, there is no going back.
+                      Please be certain.
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-btn color="error" @click="deleteAccount"
+                        >Delete your account</v-btn
+                      >
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
             </v-list>
           </v-col>
         </v-row>
@@ -418,6 +434,17 @@ export default {
           this.linkError = error
         }
       }
+    },
+    async deleteAccount() {
+      await firebase
+        .auth()
+        .currentUser.delete()
+        .then(() => {
+          this.$router.push('/')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
