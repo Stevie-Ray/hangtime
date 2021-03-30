@@ -30,7 +30,7 @@
               </v-card-title>
               <v-card-subtitle>
                 <span>{{ appTitle }} gives you </span>
-                <span style="text-decoration: line-through;">60 minutes</span>
+                <span style="text-decoration: line-through">60 minutes</span>
                 <strong> {{ limit }} minutes</strong> of free usage.
                 <span>Want to do more? </span>
                 <span>Buy a subscription! After that it's free forever.</span>
@@ -46,7 +46,7 @@
                   <template #default="{ value }">
                     <strong
                       v-if="user && !user.subscribed"
-                      style="color: white;"
+                      style="color: white"
                     >
                       {{ Math.ceil(value)
                       }}<span v-if="isFinite(value)">%</span>
@@ -122,12 +122,12 @@
               <v-expansion-panel>
                 <v-expansion-panel-header
                   class="title"
-                  style="padding-left: 16px; padding-right: 16px;"
+                  style="padding-left: 16px; padding-right: 16px"
                 >
                   {{ $t('Log') }}
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <span style="white-space: pre-wrap; word-break: break-all;">
+                  <span style="white-space: pre-wrap; word-break: break-all">
                     {{ logField }}
                   </span>
                 </v-expansion-panel-content>

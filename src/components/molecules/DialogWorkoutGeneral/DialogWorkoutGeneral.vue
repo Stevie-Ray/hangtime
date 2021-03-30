@@ -104,7 +104,7 @@
         <v-list-item-avatar
           size="32"
           class="grey lighten-2"
-          style="margin-right: 12px;"
+          style="margin-right: 12px"
         >
           <v-img
             v-if="currentWorkout.user && currentWorkout.user.photoURL"

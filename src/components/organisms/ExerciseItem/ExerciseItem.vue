@@ -31,7 +31,7 @@
               min="2.5"
               step="2.5"
               type="number"
-              style="width: 45px;"
+              style="width: 45px"
               :rules="[
                 rules.required,
                 rules.number,
@@ -275,7 +275,7 @@
                         hide-details
                         single-line
                         type="number"
-                        style="width: 45px;"
+                        style="width: 45px"
                         :rules="[
                           rules.required,
                           rules.number,
@@ -359,7 +359,7 @@
                     hide-details
                     single-line
                     type="number"
-                    style="width: 45px;"
+                    style="width: 45px"
                     :rules="[
                       rules.required,
                       rules.number,

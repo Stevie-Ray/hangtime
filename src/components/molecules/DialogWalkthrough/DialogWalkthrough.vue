@@ -6,9 +6,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 2" step="2">
-          Hangboard
-        </v-stepper-step>
+        <v-stepper-step :complete="e1 > 2" step="2"> Hangboard </v-stepper-step>
 
         <v-divider></v-divider>
 

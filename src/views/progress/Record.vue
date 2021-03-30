@@ -261,7 +261,7 @@
                 {{ $t('How many pull-ups did you do?') }}
                 <v-container fluid grid-list-lg>
                   <v-layout wrap>
-                    <div style="width: 45px;">
+                    <div style="width: 45px">
                       <v-text-field
                         v-model="pullups"
                         class="mt-0"
@@ -273,9 +273,7 @@
                     </div>
 
                     <div>
-                      <v-subheader>
-                        Pull-ups
-                      </v-subheader>
+                      <v-subheader> Pull-ups </v-subheader>
                     </div>
                   </v-layout>
                 </v-container>

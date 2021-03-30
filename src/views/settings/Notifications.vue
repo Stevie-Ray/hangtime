@@ -50,9 +50,7 @@
                 </v-list-item-content>
 
                 <v-list-item-action>
-                  <v-btn @click="requestPermission">
-                    Request Permission
-                  </v-btn>
+                  <v-btn @click="requestPermission"> Request Permission </v-btn>
                 </v-list-item-action>
               </v-list-item>
             </v-list>

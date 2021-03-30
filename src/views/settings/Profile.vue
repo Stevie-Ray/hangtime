@@ -95,7 +95,7 @@
                   }}</v-icon>
                 </v-list-item-icon>
 
-                <v-list-item-content style="overflow: visible;">
+                <v-list-item-content style="overflow: visible">
                   <v-radio-group
                     v-model="userGender"
                     row
@@ -135,7 +135,7 @@
                   }}</v-icon>
                 </v-list-item-icon>
 
-                <v-list-item-content style="overflow: visible;">
+                <v-list-item-content style="overflow: visible">
                   <v-slider
                     v-model="userWeight"
                     :max="150"

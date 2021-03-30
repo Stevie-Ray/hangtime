@@ -25,7 +25,7 @@
               class="d-flex justify-center align-center"
               max-width="500"
               min-height="250"
-              style="margin: 0 auto;"
+              style="margin: 0 auto"
             >
               <!-- Loader -->
               <div v-show="user === undefined" data-test="loader">
@@ -66,9 +66,7 @@
                           <v-icon dark left>
                             {{ mdi.facebook }}
                           </v-icon>
-                          <span class="social-login-text">
-                            Facebook
-                          </span>
+                          <span class="social-login-text"> Facebook </span>
                         </v-btn>
                       </div>
                     </v-col>
@@ -84,9 +82,7 @@
                         @click="connect('google')"
                       >
                         <v-icon dark left>{{ mdi.google }}</v-icon>
-                        <span class="social-login-text">
-                          Google
-                        </span>
+                        <span class="social-login-text"> Google </span>
                       </v-btn>
                     </v-col>
                   </v-row>
