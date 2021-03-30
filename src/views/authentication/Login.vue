@@ -230,7 +230,12 @@
             >
               {{ $t('Version {appVersion}', { appVersion: appVersion }) }} |
               &copy; 2019 - {{ year }} {{ appTitle }} |
-              <router-link to="/privacy">Privacy Policy</router-link>
+              <router-link
+                class="grey--text text--darken-2 font-weight-light"
+                to="/privacy"
+              >
+                Privacy Policy
+              </router-link>
             </div>
           </div>
         </v-col>

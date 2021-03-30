@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="589px" height="228px" viewBox="0 0 589 228" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>PROBLEMMOTION</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PROBLEMMOTION" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M586.76228,226 L75,226 C33.5786438,226 0,192.421356 0,151 L0,75 C0,33.5786438 33.5786438,0 75,0 L587.086643,0" id="h1"></path>
+            <path d="M587.145855,168 L587.145855,168 L107,168 C90.9837423,168 78,155.016258 78,139 L78,88 C78,71.9837423 90.9837423,59 107,59 L587.086643,59 L587.086643,59" id="h2"></path>
+            <path d="M587,168 L587,168 L107,168 C90.9837423,168 78,155.016258 78,139 L78,134 C78,117.983742 90.9837423,105 107,105 L587.135751,105 L587.135751,105" id="h3"></path>
+            <rect id="h4" opacity="0.400000006" x="78" y="105" width="279" height="63" rx="29"></rect>
+        </g>
+    </g>
+</svg>

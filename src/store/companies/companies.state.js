@@ -359,6 +359,24 @@ export default {
           id: 1,
           image: 'hangboards/PROBLEMTRAINING.svg',
           holds: 4
+        },
+        {
+          name: 'Motion',
+          id: 2,
+          image: 'hangboards/PROBLEMMOTION.svg',
+          sides: [
+            {
+              name: 'Default',
+              image: 'hangboards/PROBLEMMOTION.svg',
+              holds: 3
+            },
+            {
+              name: 'Rotated',
+              image: 'hangboards/PROBLEMMOTION-180.svg',
+              holds: 3
+            }
+          ],
+          holds: 3
         }
       ]
     },
