@@ -1556,6 +1556,20 @@ export default {
           holds: 17
         }
       ]
+    },
+    {
+      name: 'Danger Buddies',
+      description: 'Innovative outdoor gear for your adventures',
+      id: 65,
+      website: 'https://www.dangerbuddies.com/',
+      hangboards: [
+        {
+          name: 'BuddyBoard',
+          id: 0,
+          image: 'hangboards/DANGERBUDDYBOARD.svg',
+          holds: 8
+        }
+      ]
     }
   ]
 }
