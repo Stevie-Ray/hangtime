@@ -1568,6 +1568,12 @@ export default {
           id: 0,
           image: 'hangboards/DANGERBUDDYBOARD.svg',
           holds: 8
+        },
+        {
+          name: 'BuddyBoard+',
+          id: 1,
+          image: 'hangboards/DANGERBUDDYBOARDPLUS.svg',
+          holds: 10
         }
       ]
     }
