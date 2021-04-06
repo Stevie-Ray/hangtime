@@ -1419,8 +1419,38 @@ export default {
       website: 'https://workshop1950.ru/',
       hangboards: [
         {
-          name: 'Ergo',
+          name: 'Campboard',
           id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Cascade +',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Ergo',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Papijo',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Portable Fingerboard No.3',
+          id: 4,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'SimpleBoard',
+          id: 5,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -1449,6 +1479,18 @@ export default {
           id: 2,
           image: 'hangboards/2CLIMBINSIGHT.svg',
           holds: 10
+        },
+        {
+          name: 'Approach',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Crimp Travel',
+          id: 4,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     },
@@ -1612,6 +1654,104 @@ export default {
           id: 4,
           image: 'hangboards/MAKAKBOARD5.svg',
           holds: 7
+        }
+      ]
+    },
+    {
+      name: 'Egurre Holds',
+      description: 'High quality beech wood hangboards',
+      id: 67,
+      website: 'https://www.instagram.com/egurreholds/',
+      hangboards: [
+        {
+          name: 'Basati',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Deabru',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Mountain Rocks',
+      description: 'For adventure lovers',
+      id: 68,
+      website: 'http://www.mountainrocks.online/',
+      hangboards: [
+        {
+          name: 'Wildwood 1001',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Wildwood 2001',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Wildwood 2002',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Wildwood 2003',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Crafty Climbing',
+      description: 'Cute and Furry climbing chalk bags and more',
+      id: 69,
+      website: 'https://craftyclimbing.com/',
+      hangboards: [
+        {
+          name: 'Ruby',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Sapphire',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Custom Climbs',
+      description: 'Engineering the Send',
+      id: 70,
+      website: 'https://customclimbsofficial.com/',
+      hangboards: [
+        {
+          name: 'Compact2',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Redpoint',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Slimboard',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     }
