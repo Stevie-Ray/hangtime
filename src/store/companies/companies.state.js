@@ -1576,6 +1576,44 @@ export default {
           holds: 10
         }
       ]
+    },
+    {
+      name: 'Makak',
+      description: 'Climbing holds and walls production',
+      id: 66,
+      website: 'http://www.makak.cz/',
+      hangboards: [
+        {
+          name: 'Board 1',
+          id: 0,
+          image: 'hangboards/MAKAKBOARD1.svg',
+          holds: 9
+        },
+        {
+          name: 'Board 2',
+          id: 1,
+          image: 'hangboards/MAKAKBOARD2.svg',
+          holds: 13
+        },
+        {
+          name: 'Board 3',
+          id: 2,
+          image: 'hangboards/MAKAKBOARD3.svg',
+          holds: 5
+        },
+        {
+          name: 'Board 4',
+          id: 3,
+          image: 'hangboards/MAKAKBOARD4.svg',
+          holds: 12
+        },
+        {
+          name: 'Board 5',
+          id: 4,
+          image: 'hangboards/MAKAKBOARD5.svg',
+          holds: 7
+        }
+      ]
     }
   ]
 }
