@@ -1754,6 +1754,130 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Didak',
+      description: 'Climbing Holds',
+      id: 71,
+      website: 'http://www.didaks.com/',
+      hangboards: [
+        {
+          name: 'Xylon',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Chronos',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Stratos',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Paraboltheworld',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Explore Climbing',
+      description: 'Handmade in Italy',
+      id: 72,
+      website: 'https://www.exploreclimbing.it/',
+      hangboards: [
+        {
+          name: 'XC Classic',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'XC Evo-X',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'XC ProEvo',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'XC Tsaranoro',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'IseClimb Factory',
+      description: 'Wooden articles for training climbers',
+      id: 73,
+      website: 'https://www.facebook.com/iseclimbfactory/',
+      hangboards: [
+        {
+          name: 'Orbit',
+          id: 0,
+          image: 'hangboards/ISECLIMBORBIT.svg',
+          holds: 13
+        },
+        {
+          name: 'TrLux',
+          id: 1,
+          image: 'hangboards/ISECLIMBTRLUX.svg',
+          holds: 9
+        }
+      ]
+    },
+    {
+      name: 'Woodoclimb',
+      description: '',
+      id: 74,
+      website: 'http://www.woodoclimb.com/',
+      hangboards: [
+        {
+          name: 'Change V2',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Tricky V2',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Rustam Climbing',
+      description: 'High quality wooden training devices',
+      id: 75,
+      website: 'https://rustamclimbing.com/',
+      hangboards: [
+        {
+          name: 'Bombita',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Pinchette',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
