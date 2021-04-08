@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="599px" height="165px" viewBox="0 0 599 165" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>TENSIONFLASHFRONT</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="TENSIONFLASHFRONT" transform="translate(1.000000, 0.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <path d="M598,0.90978 L24.5171934,0.90978 C8.23684582,22.8317378 0.096672,47.8618112 0.096672,76.0000001 C0.096672,104.138189 8.23684582,133.618283 24.5171934,164.440281 L598,164.440281" id="board"></path>
+            <rect id="board" stroke-opacity="0.502558355" x="118" y="23.0000001" width="343" height="117"></rect>
+            <path d="M598,19.4317308 L502.510709,19.4317308 C484.582052,19.6650838 470.709641,13.4911002 460.893475,0.90978 C460.893475,0.90978 506.59565,0.90978 598,0.90978" id="h3"></path>
+            <path d="M425,97.0000001 C425,118.539105 407.539105,136 386,136 L197,136 C175.460895,136 158,118.539105 158,97.0000001 L158,84.0000001 L425,81.5000001 L425,97.0000001 Z" id="h2"></path>
+            <rect id="h1" x="158" y="45.0000001" width="267" height="78" rx="39"></rect>
+        </g>
+    </g>
+</svg>

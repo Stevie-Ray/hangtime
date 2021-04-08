@@ -479,6 +479,24 @@ export default {
           id: 2,
           image: 'hangboards/TENSIONGRINDMK2.svg',
           holds: 7
+        },
+        {
+          name: 'Flash Board',
+          id: 3,
+          image: 'hangboards/TENSIONFLASHFRONT.svg',
+          sides: [
+            {
+              name: 'Front',
+              image: 'hangboards/TENSIONFLASHFRONT.svg',
+              holds: 3
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/TENSIONFLASHBACK.svg',
+              holds: 4
+            }
+          ],
+          holds: 7
         }
       ]
     },
