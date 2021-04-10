@@ -1966,6 +1966,6 @@ export default {
           holds: 0
         }
       ]
-    },
+    }
   ]
 }
