@@ -1896,6 +1896,76 @@ export default {
           holds: 0
         }
       ]
-    }
+    },
+    {
+      name: 'DUDES vs. GRAVITY',
+      description: 'Group of climbers from Slovenia.',
+      id: 76,
+      website: 'https://dudesvsgravity.com/',
+      hangboards: [
+        {
+          name: 'GRAVITYBOARD',
+          id: 0,
+          image: 'hangboards/DUDESVSGRAVITYBOARD.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Lattice',
+      description: 'Coaching & Training',
+      id: 77,
+      website: 'https://latticetraining.com/',
+      hangboards: [
+        {
+          name: 'Testing and Training Rung',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Triple Rung',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'Puc Series',
+      description: 'Patxi Usobiaga Climbing',
+      id: 78,
+      website: 'https://pucseries.com/',
+      hangboards: [
+        {
+          name: 'il Domani',
+          id: 0,
+          image: 'hangboards/PUCILLDOMANI.svg',
+          sides: [
+            {
+              name: 'Front (Default)',
+              image: 'hangboards/PUCILLDOMANI.svg',
+              holds: 0
+            },
+            {
+              name: 'Back (Hard)',
+              image: 'hangboards/PUCILLDOMANI.svg',
+              holds: 0
+            },
+            {
+              name: 'Bottom',
+              image: 'hangboards/PUCILLDOMANIBOTTOM.svg',
+              holds: 0
+            },
+            {
+              name: 'Rotated',
+              image: 'hangboards/PUCILLDOMANIROTATED.svg',
+              holds: 0
+            }
+          ],
+          holds: 0
+        }
+      ]
+    },
   ]
 }
