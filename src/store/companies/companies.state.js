@@ -1553,8 +1553,8 @@ export default {
         {
           name: 'Woodoo Hard',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/TRIPOINTWOODOO.svg',
+          holds: 14
         }
       ]
     },
