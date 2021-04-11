@@ -1555,6 +1555,12 @@ export default {
           id: 2,
           image: 'hangboards/TRIPOINTWOODOO.svg',
           holds: 14
+        },
+        {
+          name: 'Woodoo Medium',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     },
