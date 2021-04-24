@@ -44,6 +44,8 @@ describe('Test the login page', () => {
 
   it('Go to workout tab', () => {
     cy.location('pathname', { timeout: 1000 }).should('be', '/')
+    // wait before checking tabs
+    cy.wait(1000)
     // cy.contains('Start adding exercises')
     cy.get('.tab-workout').click()
     // cy.contains('No personal workouts found')
