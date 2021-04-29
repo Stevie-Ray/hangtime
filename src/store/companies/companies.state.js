@@ -111,6 +111,12 @@ export default {
           id: 3,
           image: 'hangboards/CRUSHER4.svg',
           holds: 14
+        },
+        {
+          name: 'MegaRail',
+          id: 4,
+          image: 'hangboards/CRUSHERMEGA.svg',
+          holds: 7
         }
       ]
     },
