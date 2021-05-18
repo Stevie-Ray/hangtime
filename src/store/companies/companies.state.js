@@ -1978,6 +1978,32 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Woodrock',
+      description: '100% Made in France',
+      id: 79,
+      website: 'https://www.woodrock.fr/',
+      hangboards: [
+        {
+          name: 'Original V2',
+          id: 0,
+          image: 'hangboards/WOODROCKORIGINAL2.svg',
+          holds: 9
+        },
+        {
+          name: 'Nomad',
+          id: 1,
+          image: 'hangboards/WOODROCKNOMAD.svg',
+          holds: 4
+        },
+        {
+          name: 'Varappe',
+          id: 2,
+          image: 'hangboards/WOODROCKVARAPPE.svg',
+          holds: 16
+        }
+      ]
     }
   ]
 }
