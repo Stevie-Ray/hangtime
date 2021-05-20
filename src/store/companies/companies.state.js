@@ -2004,6 +2004,38 @@ export default {
           holds: 16
         }
       ]
+    },
+    {
+      name: 'Northeast Climb (NEC)',
+      description: '',
+      id: 80,
+      website: '#',
+      hangboards: [
+        {
+          name: 'FLASH',
+          id: 0,
+          image: 'hangboards/NECFLASH.svg',
+          holds: 3
+        },
+        {
+          name: 'Hangboard',
+          id: 1,
+          image: 'hangboards/NECHANGBOARD.svg',
+          holds: 13
+        },
+        {
+          name: 'Onsight',
+          id: 2,
+          image: 'hangboards/NECONSIGHT.svg',
+          holds: 4
+        },
+        {
+          name: 'Portable',
+          id: 3,
+          image: 'hangboards/NECPORTABLE.svg',
+          holds: 6
+        }
+      ]
     }
   ]
 }

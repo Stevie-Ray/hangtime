@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="589px" height="251px" viewBox="0 0 589 251" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>NECFLASH</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="NECFLASH" fill="#FFFFFF" stroke="#000000">
+            <path d="M588,250 L71,250 C32.3400675,250 1,218.659932 1,180 L1,95 C1,56.3400675 32.3400675,25 71,25 L588,25" id="board"></path>
+            <path d="M1,95 C1,56.3400675 32.3400675,25 71,25 L588,25 L588,0.783674835 C243.333333,0.783674835 71,0.783674835 71,0.783674835 C23.6666667,4.81559956 0.333333333,36.2210413 1,95 Z" id="h1"></path>
+            <rect id="h2" x="114" y="69" width="265" height="141" rx="40"></rect>
+            <rect id="h3" x="114" y="135" width="265" height="75" rx="37.5"></rect>
+            <path d="M588,147 L496.5,147 C475.789322,147 459,130.210678 459,109.5 C459,88.7893219 475.789322,72 496.5,72 L588,72" id="h4"></path>
+        </g>
+    </g>
+</svg>
