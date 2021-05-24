@@ -2027,6 +2027,18 @@ export default {
           name: 'Onsight',
           id: 2,
           image: 'hangboards/NECONSIGHT.svg',
+          sides: [
+            {
+              name: 'Default',
+              image: 'hangboards/NECONSIGHT.svg',
+              holds: 4
+            },
+            {
+              name: 'Rotated',
+              image: 'hangboards/NECONSIGHT-180.svg',
+              holds: 4
+            }
+          ],
           holds: 4
         },
         {

@@ -2,12 +2,13 @@
 <svg width="588px" height="309px" viewBox="0 0 588 309" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>NECONSIGHT</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="NECONSIGHT" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
-            <path d="M587,194 L17.5085547,194 C0.387727444,194 0,180.120827 0,163 L0,31 C0,13.8791728 0.387727444,0 17.5085547,0 L587,0" id="Path"></path>
+        <g id="NECONSIGHT" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <path d="M587,194 L17.5085547,194 C0.387727444,194 0,180.120827 0,163 L0,31 C0,13.8791728 0.387727444,0 17.5085547,0 L587,0" id="board"></path>
+            <path d="M587,31 L0,31 C0,13.8791728 0.387727444,0 17.5085547,0 L587,0" id="h1"></path>
             <rect id="h3" x="154" y="52" width="326" height="59" rx="29.5"></rect>
             <rect id="h2" x="154" y="52" width="194" height="59" rx="29.5"></rect>
-            <path d="M587,307 C218.638655,307 28.7510399,307 17.3371551,307 C0.216327841,307 0,293.120827 0,276 L0,252 C0,234.879173 0.216327841,221 17.3371551,221 L587,221" id="Path"></path>
-            <polyline id="Path" points="587 221 17.5085547 221 17.5085547 194 587 194"></polyline>
+            <path d="M587,307 C218.638655,307 28.7510399,307 17.3371551,307 C0.216327841,307 0,293.120827 0,276 L0,252 C0,234.879173 0.216327841,221 17.3371551,221 L587,221" id="h4"></path>
+            <polyline id="board" points="587 221 17.5085547 221 17.5085547 194 587 194"></polyline>
         </g>
     </g>
 </svg>
