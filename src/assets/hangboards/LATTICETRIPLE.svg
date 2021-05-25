@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="586px" height="266px" viewBox="0 0 586 266" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>LATTICETRIPLE</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="LATTICETRIPLE" transform="translate(0.528845, 1.083059)" fill="#FFFFFF" stroke="#000000">
+            <polyline id="board" points="584.471155 142.704797 13.5339958 142.704797 8.01640257 177.841364 584.471155 177.841364"></polyline>
+            <polyline id="board" points="584.471155 51.2228315 8.01640257 51.2228315 2.70242546 74.6714144 584.471155 78.1985467"></polyline>
+            <polyline id="h3" points="584.471155 263.175217 35.7146512 263.175217 13.0606533 244.077773 0.672597898 193.474103 8.01640257 177.841364 584.471155 177.841364"></polyline>
+            <polyline id="h2" points="584.971155 142.704797 13.5339958 142.704797 -1.24308491e-14 81.9537682 2.70242546 74.6714144 584.471155 78.1985467"></polyline>
+            <polyline id="h1" points="584.471155 51.2228315 7.78334954 51.2228315 0.217076571 21.4984288 0.217076571 3.97229331 3.70668246 -3.19744231e-14 584.471155 1.59147072"></polyline>
+        </g>
+    </g>
+</svg>

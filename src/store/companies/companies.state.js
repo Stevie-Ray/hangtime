@@ -1932,14 +1932,14 @@ export default {
         {
           name: 'Testing and Training Rung',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/LATTICETEST.svg',
+          holds: 1
         },
         {
           name: 'Triple Rung',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/LATTICETRIPLE.svg',
+          holds: 2
         }
       ]
     },
