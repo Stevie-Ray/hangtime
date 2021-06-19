@@ -1,12 +1,7 @@
 <template>
   <v-dialog v-model="show" height="250" width="250">
     <v-card>
-      <v-img
-        height="250"
-        width="250"
-        :src="data.photoURL"
-        :alt="data.displayName"
-      >
+      <v-img height="250" width="250" :src="dataPhoto" :alt="data.displayName">
         <v-row
           justify="space-between"
           class="fill-height flex-column flex-grow-0"
@@ -61,6 +56,12 @@ export default {
   }),
   computed: {
     ...mapState('authentication', ['user']),
+    dataPhoto() {
+      if (this.data.pictureURL) {
+        return this.data.pictureURL
+      }
+      return this.data.photoURL
+    },
     show: {
       get() {
         return this.value

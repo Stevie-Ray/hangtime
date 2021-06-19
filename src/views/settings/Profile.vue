@@ -35,13 +35,18 @@
                 </div>
               </v-col>
               <v-col cols="3">
-                <v-avatar aspect-ratio="1" class="grey lighten-2" size="64">
-                  <img
-                    v-if="user.photoURL"
-                    :src="user.photoURL"
-                    :alt="user.displayName"
-                  />
-                </v-avatar>
+                <v-badge bottom overlap offset-x="24" offset-y="24">
+                  <v-btn icon slot="badge" @click="selectFile('camera')">
+                    <v-icon>{{ mdi.camera }}</v-icon>
+                  </v-btn>
+                  <v-avatar size="72" @click="selectFile">
+                    <img
+                      v-if="user.photoURL || user.pictureURL"
+                      :src="userPhoto"
+                      :alt="user.displayName"
+                    />
+                  </v-avatar>
+                </v-badge>
               </v-col>
               <v-col class="text-left">
                 <div class="text-overline">{{ $t('Workouts') }}</div>
@@ -269,6 +274,7 @@
 
 <script>
 import firebase from 'firebase/app'
+import 'firebase/storage'
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex'
 import IRCRA from 'ircra'
 import { count, getImg, shortDate, weightConverter } from '@/misc/helpers'
@@ -283,13 +289,16 @@ import {
   mdiEmail,
   mdiScaleBathroom,
   mdiGenderMaleFemale,
-  mdiMapMarker
+  mdiMapMarker,
+  mdiCamera
 } from '@mdi/js'
 
 export default {
   data: () => ({
     ircra: new IRCRA(),
     linkError: null,
+    uploadValue: 0,
+    pictureURL: '',
     countries,
     rules: {
       length: (len) => (v) =>
@@ -305,7 +314,8 @@ export default {
       information: mdiInformation,
       scaleBathroom: mdiScaleBathroom,
       genderMaleFemale: mdiGenderMaleFemale,
-      mapMarker: mdiMapMarker
+      mapMarker: mdiMapMarker,
+      camera: mdiCamera
     }
   }),
   head: {
@@ -382,6 +392,15 @@ export default {
         this.setUserWeight(value)
       }
     },
+    userPhoto() {
+      if (this.user.pictureURL) {
+        return this.user.pictureURL
+      }
+      if (this.pictureURL !== '') {
+        return this.pictureURL
+      }
+      return this.user.photoURL
+    },
     grades() {
       return this.ircra.get(this.user.settings.scale).filter((n) => n)
     }
@@ -397,6 +416,7 @@ export default {
       'setUserWeight',
       'setUserGender',
       'setUserCountry',
+      'setUserPicture',
       'setGrade'
     ]),
     async logout() {
@@ -445,6 +465,44 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    selectFile(caputre) {
+      const input = document.createElement('input')
+      input.type = 'file'
+      input.accept = 'image/*'
+      input.capture = caputre
+
+      input.onchange = (e) => {
+        this.uploadValue = 0
+        const file = e.target.files[0]
+        if (file.size > 2 * 1024 * 1024) {
+          alert('File is too big, max. 2MB allowed')
+          return
+        }
+        const storageRef = firebase.storage().ref()
+        const userImagesRef = storageRef
+          .child(`profile/${this.user.id}`)
+          .put(file)
+        userImagesRef.on(
+          `state_changed`,
+          (snapshot) => {
+            this.uploadValue =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          },
+          (error) => {
+            console.log(error.message)
+          },
+          () => {
+            this.uploadValue = 100
+            userImagesRef.snapshot.ref.getDownloadURL().then((url) => {
+              this.setUserPicture(url)
+              this.pictureURL = url
+              this.triggerUpdateUser()
+            })
+          }
+        )
+      }
+      input.click()
     }
   }
 }
@@ -454,25 +512,14 @@ export default {
 <style lang="scss">
 .profile {
   .v-badge__badge {
-    width: 48px;
-    height: 48px;
-
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    padding: 0;
     .v-icon {
-      font-size: 24px;
-    }
-  }
-
-  .v-badge--overlap.v-badge--bottom .v-badge__badge {
-    bottom: 16px;
-    right: 16px;
-  }
-
-  .v-avatar {
-    overflow: hidden;
-
-    img {
-      height: auto;
-      min-height: 100%;
+      height: 18px;
+      width: 18px;
+      font-size: 18px;
     }
   }
 }

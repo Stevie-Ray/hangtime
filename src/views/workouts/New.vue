@@ -11,7 +11,7 @@
       >
         <v-img
           v-if="networkOnLine && user.photoURL"
-          :src="user.photoURL"
+          :src="userPhoto"
           :alt="user.displayName"
         />
       </v-avatar>
@@ -133,6 +133,12 @@ export default {
     ...mapGetters('workouts', ['workoutById']),
     currentWorkout() {
       return this.workoutById('new')
+    },
+    userPhoto() {
+      if (this.user.pictureURL) {
+        return this.user.pictureURL
+      }
+      return this.user.photoURL
     }
   },
   mounted() {
@@ -161,7 +167,8 @@ export default {
           displayName: this.user.displayName,
           grade: this.user.settings.grade,
           id: this.user.id,
-          photoURL: this.user.photoURL
+          photoURL: this.user.photoURL,
+          pictureURL: this.user.pictureURL
         }
       })
       this.$router.push({

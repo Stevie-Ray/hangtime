@@ -12,7 +12,7 @@
       >
         <v-img
           v-if="networkOnLine && currentWorkout.user.photoURL"
-          :src="currentWorkout.user.photoURL"
+          :src="userPhoto"
           :alt="currentWorkout.user.displayName"
         />
       </v-avatar>
@@ -295,6 +295,12 @@ export default {
       }
       // do nothing
       return false
+    },
+    userPhoto() {
+      if (this.currentWorkout.user.pictureURL) {
+        return this.currentWorkout.user.pictureURL
+      }
+      return this.currentWorkout.user.photoURL
     }
   },
   mounted() {

@@ -26,7 +26,7 @@
                 >
                   <v-img
                     v-if="user.photoURL"
-                    :src="user.photoURL"
+                    :src="userPhoto"
                     :alt="user.displayName"
                   />
                 </v-list-item-avatar>
@@ -224,7 +224,13 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapState('app', ['appTitle'])
+    ...mapState('app', ['appTitle']),
+    userPhoto() {
+      if (this.user.pictureURL) {
+        return this.user.pictureURL
+      }
+      return this.user.photoURL
+    }
   },
   methods: {
     getImg

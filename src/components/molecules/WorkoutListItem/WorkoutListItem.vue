@@ -8,7 +8,7 @@
       <v-list-item-avatar class="grey lighten-2" @click.stop="overlay = true">
         <v-img
           v-if="data && data.user && data.user.photoURL"
-          :src="data.user.photoURL"
+          :src="dataPhoto"
           :alt="data.user.displayName"
         />
       </v-list-item-avatar>
@@ -101,6 +101,12 @@ export default {
     ...mapState('authentication', ['user']),
     ...mapGetters('workouts', ['difficultyById']),
     ...mapState('app', ['appTitle']),
+    dataPhoto() {
+      if (this.data.user.pictureURL) {
+        return this.data.user.pictureURL
+      }
+      return this.data.user.photoURL
+    },
     userWorkout() {
       if (!this.data || !this.user) return
       // eslint-disable-next-line consistent-return

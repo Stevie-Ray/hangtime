@@ -67,7 +67,8 @@ export default {
         displayName: state.workoutToCreate.user.displayName,
         grade: state.workoutToCreate.user.grade,
         id: state.workoutToCreate.user.id,
-        photoURL: state.workoutToCreate.user.photoURL
+        photoURL: state.workoutToCreate.user.photoURL,
+        pictureURL: state.workoutToCreate.user.pictureURL
       }
     }
     commit('resetWorkoutToCreate')

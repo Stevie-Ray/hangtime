@@ -6,6 +6,7 @@ export default {
   setUserStatus: (state, value) => (state.user.status = value),
   setUserGender: (state, value) => (state.user.gender = value),
   setUserCountry: (state, value) => (state.user.country = value),
+  setUserPicture: (state, value) => (state.user.pictureURL = value),
   setCompleted: (state) => {
     if (!state.user.completed) {
       state.user.completed = {}
