@@ -36,10 +36,10 @@
               </v-col>
               <v-col cols="3">
                 <v-badge bottom overlap offset-x="24" offset-y="24">
-                  <v-btn icon slot="badge" @click="selectFile('camera')">
+                  <v-btn icon slot="badge" @click="selectFile('user')">
                     <v-icon>{{ mdi.camera }}</v-icon>
                   </v-btn>
-                  <v-avatar size="72" @click="selectFile">
+                  <v-avatar size="72" @click="selectFile(false)">
                     <img
                       v-if="user.photoURL || user.pictureURL"
                       :src="userPhoto"
@@ -466,12 +466,13 @@ export default {
           console.log(error)
         })
     },
-    selectFile(caputre) {
+    selectFile(capture) {
       const input = document.createElement('input')
       input.type = 'file'
       input.accept = 'image/*'
-      input.capture = caputre
-
+      if (capture) {
+        input.capture = capture
+      }
       input.onchange = (e) => {
         this.uploadValue = 0
         const file = e.target.files[0]
