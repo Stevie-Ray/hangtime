@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="588px" height="366px" viewBox="0 0 588 366" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>HOLDEMPORIUMMONSTER</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HOLDEMPORIUMMONSTER" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M587,364 L60.3901193,364 C46.3675436,364 35,351.911688 35,337 L35,193 C35,178.088312 46.3675436,166 60.3901193,166 L587,166" id="board"></path>
+            <path d="M587,286 L43.2180579,286 C28.7382244,286 17,273.911688 17,259 L17,115 C17,100.088312 28.7382244,88 43.2180579,88 L587,88" id="board"></path>
+            <path d="M587,198 L27,198 C12.0883118,198 0,185.911688 0,171 L0,27 C0,12.0883118 12.0883118,0 27,0 L587,0" id="board"></path>
+            <path d="M587,27 C195.666667,27 0,27 0,27 C0,12.0883118 12.0883118,0 27,0 L587,0" id="h1"></path>
+            <rect id="h2" x="71" y="60" width="148" height="51" rx="25.5"></rect>
+            <rect id="h4" x="22" y="136" width="148" height="51" rx="25.5"></rect>
+            <rect id="h8" x="40" y="226" width="137" height="41" rx="20.5"></rect>
+            <rect id="h9" x="198" y="226" width="137" height="41" rx="20.5"></rect>
+            <rect id="h10" x="356" y="226" width="137" height="41" rx="20.5"></rect>
+            <path d="M587,265 L534.5,265 C523.178163,265 514,255.821837 514,244.5 C514,233.178163 523.178163,224 534.5,224 L587,224" id="h11"></path>
+            <rect id="h12" x="56" y="308" width="130" height="41" rx="20.5"></rect>
+            <rect id="h13" x="210" y="308" width="130" height="41" rx="20.5"></rect>
+            <rect id="h14" x="364" y="308" width="130" height="41" rx="20.5"></rect>
+            <path d="M587,349 L538.5,349 C527.178163,349 518,339.821837 518,328.5 C518,317.178163 527.178163,308 538.5,308 L587,308" id="h15"></path>
+            <rect id="h5" x="186" y="136" width="148" height="51" rx="25.5"></rect>
+            <rect id="h6" x="350" y="136" width="148" height="51" rx="25.5"></rect>
+            <path d="M587,187 L539.5,187 C525.416739,187 514,175.583261 514,161.5 C514,147.416739 525.416739,136 539.5,136 L587,136" id="h7"></path>
+            <rect id="h3" x="260" y="60" width="148" height="51" rx="25.5"></rect>
+        </g>
+    </g>
+</svg>

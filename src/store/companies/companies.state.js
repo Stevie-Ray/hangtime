@@ -2048,6 +2048,26 @@ export default {
           holds: 6
         }
       ]
+    },
+    {
+      name: 'Hold Emporium',
+      description: 'Climb stronger, train smarter.',
+      id: 81,
+      website: 'https://holdemporium.com/',
+      hangboards: [
+        {
+          name: 'Mönster Board',
+          id: 0,
+          image: 'hangboards/HOLDEMPORIUMMONSTER.svg',
+          holds: 14
+        },
+        {
+          name: 'Mönster Board Mini',
+          id: 1,
+          image: 'hangboards/HOLDEMPORIUMMONSTERMINI.svg',
+          holds: 10
+        }
+      ]
     }
   ]
 }

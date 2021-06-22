@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="588px" height="289px" viewBox="0 0 588 289" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>HOLDEMPORIUMMONSTERMINI</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HOLDEMPORIUMMONSTERMINI" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M587,287 L32.7331731,287 C21.2825578,287 12,273.568542 12,257 L12,116 C12,99.4314575 21.2825578,86 32.7331731,86 L587,86" id="board"></path>
+            <path d="M587,201 L21.1658654,201 C9.47628072,201 0,187.568542 0,171 L0,30 C0,13.4314575 9.47628072,0 21.1658654,0 L587,0" id="board"></path>
+            <path d="M587,270 L536.5,270 C525.178163,270 516,260.821837 516,249.5 C516,238.178163 525.178163,229 536.5,229 L587,229" id="h11"></path>
+            <rect id="h10" x="356" y="229" width="139" height="41" rx="20.5"></rect>
+            <rect id="h9" x="196" y="229" width="139" height="41" rx="20.5"></rect>
+            <rect id="h8" x="36" y="229" width="139" height="41" rx="20.5"></rect>
+            <path d="M587,186 L532,186 C519.849736,186 510,176.150264 510,164 C510,151.849736 519.849736,142 532,142 L587,142" id="h7"></path>
+            <rect id="h6" x="346" y="142" width="146" height="44" rx="22"></rect>
+            <rect id="h5" x="182" y="142" width="146" height="44" rx="22"></rect>
+            <rect id="h4" x="18" y="142" width="146" height="44" rx="22"></rect>
+            <rect id="h3" x="262" y="66" width="146" height="44" rx="22"></rect>
+            <rect id="h2" x="71" y="66" width="146" height="44" rx="22"></rect>
+            <path d="M587,30 L0,30 C0,13.4314575 9.47628072,0 21.1658654,0 L587,0" id="h1"></path>
+        </g>
+    </g>
+</svg>
