@@ -13,6 +13,10 @@ export default {
     ])
     commit('setWorkouts', workouts)
   },
+  updateUserWorkouts: async ({ rootState }) => {
+    const usersDb = new UserWorkoutsDB(rootState.authentication.user.id)
+    await usersDb.updateAll()
+  },
   getCommunityWorkouts: async ({ rootState, commit }) => {
     const usersWorkoutDb = new UsersWorkoutsDB(rootState.authentication.user.id)
     const { selected } = rootState.authentication.user.settings

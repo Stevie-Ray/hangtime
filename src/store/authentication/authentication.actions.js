@@ -24,6 +24,7 @@ export default {
     }
 
     dispatch('workouts/getUserWorkouts', null, { root: true })
+    // dispatch('workouts/updateUserWorkouts', null, { root: true })
     dispatch('workouts/getCommunityWorkouts', null, { root: true })
     dispatch('progress/getUserProgress', null, { root: true })
   },

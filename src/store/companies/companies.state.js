@@ -2068,6 +2068,34 @@ export default {
           holds: 10
         }
       ]
+    },
+    {
+      name: 'Manuva Climbing',
+      description: 'First of its kind, fixture free hangboard',
+      id: 82,
+      website: 'https://manuvaclimbing.com/',
+      hangboards: [
+        {
+          name: 'Manuva Board',
+          id: 0,
+          image: 'hangboards/MANUVABOARD.svg',
+          holds: 4
+        }
+      ]
+    },
+    {
+      name: 'Affenholz',
+      description: 'Better bouldering.',
+      id: 83,
+      website: 'https://affenholz.com',
+      hangboards: [
+        {
+          name: 'Affenbrett (Monkey Board)',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }

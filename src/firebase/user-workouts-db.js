@@ -27,4 +27,22 @@ export default class UserWorkoutDB extends GenericDB {
 
     return query.get().then(formatResult)
   }
+
+  /**
+   * Update all document in the collection
+   */
+  async updateAll() {
+    await (await firestore()).collection(this.collectionPath).get()
+    // .then((querySnapshot) => querySnapshot.forEach(function (doc) {
+    //   // console.log(doc)
+    //       doc.ref.update({
+    //         user: {
+    //           id: 'EwEMPFmYJ7OpA5y1hkcf2mFz8fA2',
+    //           grade: 3,
+    //           displayName: "Stevie-Ray Hartog",
+    //           photoURL: "https://graph.facebook.com/10206876973741829/picture"
+    //         }
+    //       })
+    //     }));
+  }
 }

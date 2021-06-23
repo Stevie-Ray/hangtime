@@ -36,7 +36,7 @@
               </v-col>
               <v-col cols="3">
                 <v-badge bottom overlap offset-x="24" offset-y="24">
-                  <v-btn icon slot="badge" @click="selectFile('user')">
+                  <v-btn slot="badge" icon @click="selectFile('user')">
                     <v-icon>{{ mdi.camera }}</v-icon>
                   </v-btn>
                   <v-avatar size="72" @click="selectFile(false)">
@@ -477,6 +477,7 @@ export default {
         this.uploadValue = 0
         const file = e.target.files[0]
         if (file.size > 2 * 1024 * 1024) {
+          // eslint-disable-next-line no-alert
           alert('File is too big, max. 2MB allowed')
           return
         }
