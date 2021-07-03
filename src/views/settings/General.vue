@@ -1,146 +1,118 @@
 <template>
-  <v-layout class="profile">
-    <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('General') }}
-      </v-toolbar-title>
+  <app-container name="General" :back-link="{ path: '/settings' }">
+    <v-list two-line>
+      <v-list-item>
+        <v-list-item-icon>
+          <v-icon color="primary lighten-1">{{ mdi.chartGantt }}</v-icon>
+        </v-list-item-icon>
 
-      <v-spacer></v-spacer>
-    </v-app-bar>
+        <v-list-item-content>
+          <v-select
+            v-model="settingsScale"
+            :items="scale"
+            item-text="name"
+            item-value="value"
+            :label="$t('Grading system')"
+            @change="triggerUpdateUser"
+          ></v-select>
+        </v-list-item-content>
+      </v-list-item>
 
-    <v-main>
-      <v-container>
-        <v-row justify="center" align="start">
-          <v-col cols="12">
-            <v-list two-line>
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{
-                    mdi.chartGantt
-                  }}</v-icon>
-                </v-list-item-icon>
+      <v-list-item>
+        <v-list-item-icon>
+          <v-icon color="primary lighten-1">{{ mdi.translate }}</v-icon>
+        </v-list-item-icon>
 
-                <v-list-item-content>
-                  <v-select
-                    v-model="settingsScale"
-                    :items="scale"
-                    item-text="name"
-                    item-value="value"
-                    :label="$t('Grading system')"
-                    @change="triggerUpdateUser"
-                  ></v-select>
-                </v-list-item-content>
-              </v-list-item>
+        <v-list-item-content>
+          <v-select
+            v-model="settingsLocale"
+            :items="language"
+            item-text="name"
+            item-value="value"
+            :label="$t('Language')"
+            @change="triggerUpdateUser"
+          ></v-select>
+        </v-list-item-content>
+      </v-list-item>
 
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{ mdi.translate }}</v-icon>
-                </v-list-item-icon>
+      <v-list-item>
+        <v-list-item-icon>
+          <v-icon color="primary lighten-1">{{ mdi.weight }}</v-icon>
+        </v-list-item-icon>
 
-                <v-list-item-content>
-                  <v-select
-                    v-model="settingsLocale"
-                    :items="language"
-                    item-text="name"
-                    item-value="value"
-                    :label="$t('Language')"
-                    @change="triggerUpdateUser"
-                  ></v-select>
-                </v-list-item-content>
-              </v-list-item>
+        <v-list-item-content>
+          <v-select
+            v-model="settingsWeight"
+            :items="settings.weight"
+            item-value="value"
+            :label="$t('Weight system')"
+            @change="triggerUpdateUser"
+          >
+            <template #selection="{ item }">
+              {{ $t(item.name) }}
+            </template>
+            <template #item="{ item }">
+              {{ $t(item.name) }}
+            </template>
+          </v-select>
+        </v-list-item-content>
+      </v-list-item>
 
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{ mdi.weight }}</v-icon>
-                </v-list-item-icon>
+      <v-list-item :disabled="settingsScheme">
+        <v-list-item-icon>
+          <v-icon color="primary lighten-1" :disabled="settingsScheme">{{
+            mdi.themeLightDark
+          }}</v-icon>
+        </v-list-item-icon>
 
-                <v-list-item-content>
-                  <v-select
-                    v-model="settingsWeight"
-                    :items="settings.weight"
-                    item-value="value"
-                    :label="$t('Weight system')"
-                    @change="triggerUpdateUser"
-                  >
-                    <template #selection="{ item }">
-                      {{ $t(item.name) }}
-                    </template>
-                    <template #item="{ item }">
-                      {{ $t(item.name) }}
-                    </template>
-                  </v-select>
-                </v-list-item-content>
-              </v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>{{ $t('Dark mode') }}</v-list-item-title>
+          <v-list-item-subtitle>{{
+            $t('Enable dark mode')
+          }}</v-list-item-subtitle>
+        </v-list-item-content>
 
-              <v-list-item :disabled="settingsScheme">
-                <v-list-item-icon>
-                  <v-icon
-                    color="primary lighten-1"
-                    :disabled="settingsScheme"
-                    >{{ mdi.themeLightDark }}</v-icon
-                  >
-                </v-list-item-icon>
+        <v-list-item-action>
+          <v-checkbox
+            v-model="settingsTheme"
+            :disabled="settingsScheme"
+            @change="triggerUpdateUser"
+          ></v-checkbox>
+        </v-list-item-action>
+      </v-list-item>
 
-                <v-list-item-content>
-                  <v-list-item-title>{{ $t('Dark mode') }}</v-list-item-title>
-                  <v-list-item-subtitle>{{
-                    $t('Enable dark mode')
-                  }}</v-list-item-subtitle>
-                </v-list-item-content>
+      <v-list-item three-line>
+        <v-list-item-icon>
+          <v-icon color="primary lighten-1">{{ mdi.cellphoneLink }}</v-icon>
+        </v-list-item-icon>
 
-                <v-list-item-action>
-                  <v-checkbox
-                    v-model="settingsTheme"
-                    :disabled="settingsScheme"
-                    @change="triggerUpdateUser"
-                  ></v-checkbox>
-                </v-list-item-action>
-              </v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>{{ $t('Use system mode') }}</v-list-item-title>
+          <v-list-item-subtitle>
+            {{
+              $t('overwrites manual dark mode setting based on device settings')
+            }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
 
-              <v-list-item three-line>
-                <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{
-                    mdi.cellphoneLink
-                  }}</v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                  <v-list-item-title>{{
-                    $t('Use system mode')
-                  }}</v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{
-                      $t(
-                        'overwrites manual dark mode setting based on device settings'
-                      )
-                    }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-checkbox
-                    v-model="settingsScheme"
-                    @change="triggerUpdateUser"
-                  ></v-checkbox>
-                </v-list-item-action>
-              </v-list-item>
-            </v-list>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+        <v-list-item-action>
+          <v-checkbox
+            v-model="settingsScheme"
+            @change="triggerUpdateUser"
+          ></v-checkbox>
+        </v-list-item-action>
+      </v-list-item>
+    </v-list>
+  </app-container>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import IRCRA from 'ircra'
 import { getImg } from '@/misc/helpers'
+
 import {
-  mdiArrowLeft,
   mdiChartGantt,
   mdiThemeLightDark,
   mdiCellphoneLink,
@@ -149,11 +121,13 @@ import {
 } from '@mdi/js'
 
 export default {
+  components: {
+    AppContainer
+  },
   data: () => ({
     scale: new IRCRA().scale(),
     mq: window.matchMedia('(prefers-color-scheme: dark)'),
     mdi: {
-      arrowLeft: mdiArrowLeft,
       chartGantt: mdiChartGantt,
       themeLightDark: mdiThemeLightDark,
       cellphoneLink: mdiCellphoneLink,

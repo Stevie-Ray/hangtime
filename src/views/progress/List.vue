@@ -1,15 +1,6 @@
 <template>
-  <v-layout class="progress-list">
-    <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ path: currentTab })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('Your progress') }}
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
+  <app-container name="Your progress" :back-link="{ path: currentTab }">
+    <template #icons>
       <span v-if="currentStats[index] && currentStats[index].recordings.length">
         <v-btn v-if="edit" icon @click="edit = false">
           <v-icon>{{ mdi.pencilOff }}</v-icon>
@@ -18,7 +9,6 @@
           <v-icon>{{ mdi.pencil }}</v-icon>
         </v-btn>
       </span>
-
       <v-btn
         v-if="currentStats[index] && currentStats[index].recordings.length"
         icon
@@ -26,270 +16,258 @@
       >
         <v-icon>{{ mdi.tune }}</v-icon>
       </v-btn>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <v-row justify="center" align="start" class="fill-height">
-          <v-col cols="12" sm="8" md="6">
-            <v-container
-              v-if="
-                currentStats[index] && !currentStats[index].recordings.length
-              "
-            >
-              <v-row justify="center" align="center">
-                <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
-                  <img src="@/assets/sloth/sleepy.svg" alt="sloth sleepy" />
-                </v-avatar>
-              </v-row>
-              <v-row>
-                <v-card flat>
-                  <v-card-title>
-                    {{ $t('No recordings added yet') }}
-                  </v-card-title>
-                  <v-card-subtitle>
-                    {{
-                      $t('Start recording your progress using the below button')
-                    }}
-                  </v-card-subtitle>
-                </v-card>
-              </v-row>
-            </v-container>
-            <v-container
-              v-if="
-                currentStats[index] && currentStats[index].recordings.length
-              "
-            >
-              <v-row>
-                <v-col cols="12">
-                  <line-chart
-                    :chart-data="chartData"
-                    :height="300"
-                    class="justify-center d-flex"
-                  ></line-chart>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-col>
+    </template>
+
+    <v-col cols="12" sm="8" md="6">
+      <v-container
+        v-if="currentStats[index] && !currentStats[index].recordings.length"
+      >
+        <v-row justify="center" align="center">
+          <v-avatar aspect-ratio="1" class="grey lighten-2" size="164">
+            <img src="@/assets/sloth/sleepy.svg" alt="sloth sleepy" />
+          </v-avatar>
+        </v-row>
+        <v-row>
+          <v-card flat>
+            <v-card-title>
+              {{ $t('No recordings added yet') }}
+            </v-card-title>
+            <v-card-subtitle>
+              {{ $t('Start recording your progress using the below button') }}
+            </v-card-subtitle>
+          </v-card>
+        </v-row>
+      </v-container>
+      <v-container
+        v-if="currentStats[index] && currentStats[index].recordings.length"
+      >
+        <v-row>
           <v-col cols="12">
-            <hangboard
-              v-if="currentStats[index]"
-              :user="user"
-              :data="currentStats[index]"
-              :edit-workout="false"
-            ></hangboard>
-            <v-list
-              v-if="
-                currentStats[index] &&
-                currentStats[index]['recordings'].length > 0
-              "
-              two-line
-            >
-              <span v-for="(recording, item) in filteredRecordings" :key="item">
-                <v-list-item>
-                  <v-list-item-avatar>
-                    <v-img
-                      v-if="grip[returnType(recording.type)]"
-                      :src="getImg(grip[returnType(recording.type)].image)"
-                      :alt="grip[returnType(recording.type)].name"
-                      aspect-ratio="1"
-                      class="grey lighten-2"
-                    />
-                  </v-list-item-avatar>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      v-if="
-                        currentStats[index] &&
-                        currentStats[index]['recordings'].length
-                      "
-                    >
-                      <span>Max </span>
-                      <span
-                        v-if="
-                          (currentStats[index] &&
-                            currentStats[index].left === null) ||
-                          (currentStats[index] &&
-                            currentStats[index].right === null)
-                        "
-                        >{{ $t('One Arm') }}
-                      </span>
-                      <span v-if="grip[returnType(recording.type)]">
-                        {{ grip[returnType(recording.type)].name }}
-                      </span>
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ recording.label }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                  <v-list-item-action>
-                    <v-list-item-action-text>
-                      <span>
-                        {{ count(recording.value) }}
-                      </span>
-                      <v-icon v-if="edit" @click="deleteRecording(recording)">
-                        {{ mdi.delete }}
-                      </v-icon>
-                    </v-list-item-action-text>
-                  </v-list-item-action>
-                </v-list-item>
-                <v-divider inset></v-divider>
-              </span>
-            </v-list>
+            <line-chart
+              :chart-data="chartData"
+              :height="300"
+              class="justify-center d-flex"
+            ></line-chart>
           </v-col>
         </v-row>
       </v-container>
+    </v-col>
+    <v-col cols="12">
+      <hangboard
+        v-if="currentStats[index]"
+        :user="user"
+        :data="currentStats[index]"
+        :edit-workout="false"
+      ></hangboard>
+      <v-list
+        v-if="
+          currentStats[index] && currentStats[index]['recordings'].length > 0
+        "
+        two-line
+      >
+        <span v-for="(recording, item) in filteredRecordings" :key="item">
+          <v-list-item>
+            <v-list-item-avatar>
+              <v-img
+                v-if="grip[returnType(recording.type)]"
+                :src="getImg(grip[returnType(recording.type)].image)"
+                :alt="grip[returnType(recording.type)].name"
+                aspect-ratio="1"
+                class="grey lighten-2"
+              />
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title
+                v-if="
+                  currentStats[index] &&
+                  currentStats[index]['recordings'].length
+                "
+              >
+                <span>Max </span>
+                <span
+                  v-if="
+                    (currentStats[index] &&
+                      currentStats[index].left === null) ||
+                    (currentStats[index] && currentStats[index].right === null)
+                  "
+                  >{{ $t('One Arm') }}
+                </span>
+                <span v-if="grip[returnType(recording.type)]">
+                  {{ grip[returnType(recording.type)].name }}
+                </span>
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                {{ recording.label }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-list-item-action-text>
+                <span>
+                  {{ count(recording.value) }}
+                </span>
+                <v-icon v-if="edit" @click="deleteRecording(recording)">
+                  {{ mdi.delete }}
+                </v-icon>
+              </v-list-item-action-text>
+            </v-list-item-action>
+          </v-list-item>
+          <v-divider inset></v-divider>
+        </span>
+      </v-list>
+    </v-col>
 
-      <v-dialog v-model="filterDialog" max-width="500">
-        <v-card>
-          <v-card-title class="text-h5">{{
-            $t('Filter your recordings')
-          }}</v-card-title>
+    <v-dialog v-model="filterDialog" max-width="500">
+      <v-card>
+        <v-card-title class="text-h5">{{
+          $t('Filter your recordings')
+        }}</v-card-title>
 
-          <v-card-text>
-            <v-container fluid>
-              <v-checkbox
+        <v-card-text>
+          <v-container fluid>
+            <v-checkbox
+              v-for="option in grip"
+              :key="option.id"
+              v-model="selected"
+              :label="option.name"
+              :value="option.id"
+              hide-details="auto"
+            ></v-checkbox>
+          </v-container>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn text @click="filterDialog = false">
+            {{ $t('Close') }}
+          </v-btn>
+
+          <v-btn color="primary" text @click="filterDialog = false">
+            {{ $t('Save') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="selectTypeDialog" max-width="500">
+      <v-card>
+        <v-card-title class="text-h5">{{
+          $t('What do you want to do?')
+        }}</v-card-title>
+        <v-card-text>
+          <v-container fluid>
+            <v-radio-group v-if="currentStats[index]" v-model="workoutType">
+              <v-radio
                 v-for="option in grip"
                 :key="option.id"
-                v-model="selected"
-                :label="option.name"
                 :value="option.id"
-                hide-details="auto"
-              ></v-checkbox>
-            </v-container>
-          </v-card-text>
+              >
+                <template #label>
+                  <div>
+                    <span>{{ $t('Max.') }} </span>
+                    <span
+                      v-if="
+                        (currentStats[index] &&
+                          currentStats[index].left === null) ||
+                        (currentStats[index] &&
+                          currentStats[index].right === null)
+                      "
+                      >{{ $t('One Arm') }}
+                    </span>
+                    <span>{{ option.name }}</span>
+                  </div>
+                </template>
+              </v-radio>
+            </v-radio-group>
+          </v-container>
+          <div
+            v-if="
+              (currentStats[index] && currentStats[index].left === null) ||
+              (currentStats[index] && currentStats[index].right === null)
+            "
+            class="text-subtitle-2"
+          >
+            {{
+              $t(
+                'Warning: Make sure you know what you are doing and be properly warmed up before doing one-arm hangs'
+              )
+            }}
+          </div>
+        </v-card-text>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
+        <v-card-actions>
+          <v-spacer></v-spacer>
 
-            <v-btn text @click="filterDialog = false">
-              {{ $t('Close') }}
-            </v-btn>
+          <v-btn text @click="selectTypeDialog = false">
+            {{ $t('Close') }}
+          </v-btn>
 
-            <v-btn color="primary" text @click="filterDialog = false">
-              {{ $t('Save') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+          <v-btn color="primary" text @click="goToRecord">
+            {{ $t('Start') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
-      <v-dialog v-model="selectTypeDialog" max-width="500">
-        <v-card>
-          <v-card-title class="text-h5">{{
-            $t('What do you want to do?')
-          }}</v-card-title>
-          <v-card-text>
-            <v-container fluid>
-              <v-radio-group v-if="currentStats[index]" v-model="workoutType">
-                <v-radio
-                  v-for="option in grip"
-                  :key="option.id"
-                  :value="option.id"
-                >
-                  <template #label>
-                    <div>
-                      <span>{{ $t('Max.') }} </span>
-                      <span
-                        v-if="
-                          (currentStats[index] &&
-                            currentStats[index].left === null) ||
-                          (currentStats[index] &&
-                            currentStats[index].right === null)
-                        "
-                        >{{ $t('One Arm') }}
-                      </span>
-                      <span>{{ option.name }}</span>
-                    </div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-            </v-container>
-            <div
-              v-if="
-                (currentStats[index] && currentStats[index].left === null) ||
-                (currentStats[index] && currentStats[index].right === null)
-              "
-              class="text-subtitle-2"
-            >
-              {{
-                $t(
-                  'Warning: Make sure you know what you are doing and be properly warmed up before doing one-arm hangs'
-                )
-              }}
-            </div>
-          </v-card-text>
+    <v-dialog v-if="deleteDialogItem" v-model="deleteDialog" max-width="500">
+      <v-card>
+        <v-card-title class="text-h5">{{
+          $t('Delete recording')
+        }}</v-card-title>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
+        <v-card-text>
+          <v-container fluid>
+            {{
+              $t(
+                'Are you sure you want to delete this Max. {name} recording of {value}? This can not be undone.',
+                {
+                  name: grip[returnType(deleteDialogItem.type)].name,
+                  value: count(deleteDialogItem.value)
+                }
+              )
+            }}
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
 
-            <v-btn text @click="selectTypeDialog = false">
-              {{ $t('Close') }}
-            </v-btn>
+          <v-btn text @click="deleteDialog = false">
+            {{ $t('Close') }}
+          </v-btn>
 
-            <v-btn color="primary" text @click="goToRecord">
-              {{ $t('Start') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+          <v-btn
+            color="primary"
+            text
+            @click="deteleRecordingAction(deleteDialogItem)"
+          >
+            {{ $t('Delete') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
-      <v-dialog v-if="deleteDialogItem" v-model="deleteDialog" max-width="500">
-        <v-card>
-          <v-card-title class="text-h5">{{
-            $t('Delete recording')
-          }}</v-card-title>
-
-          <v-card-text>
-            <v-container fluid>
-              {{
-                $t(
-                  'Are you sure you want to delete this Max. {name} recording of {value}? This can not be undone.',
-                  {
-                    name: grip[returnType(deleteDialogItem.type)].name,
-                    value: count(deleteDialogItem.value)
-                  }
-                )
-              }}
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-
-            <v-btn text @click="deleteDialog = false">
-              {{ $t('Close') }}
-            </v-btn>
-
-            <v-btn
-              color="primary"
-              text
-              @click="deteleRecordingAction(deleteDialogItem)"
-            >
-              {{ $t('Delete') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-      <v-fab-transition>
-        <v-btn
-          slot="activator"
-          color="secondary"
-          dark
-          fab
-          bottom
-          right
-          fixed
-          @click="selectTypeDialog = true"
-        >
-          <v-icon>{{ mdi.timer }}</v-icon>
-        </v-btn>
-      </v-fab-transition>
-    </v-main>
-  </v-layout>
+    <v-fab-transition>
+      <v-btn
+        slot="activator"
+        color="secondary"
+        dark
+        fab
+        bottom
+        right
+        fixed
+        @click="selectTypeDialog = true"
+      >
+        <v-icon>{{ mdi.timer }}</v-icon>
+      </v-btn>
+    </v-fab-transition>
+  </app-container>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import LineChart from '@/components/atoms/LineChart/LineChart'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg, count, shortDate } from '@/misc/helpers'
 import {
   mdiPencil,
@@ -301,7 +279,11 @@ import {
 } from '@mdi/js'
 
 export default {
-  components: { Hangboard, LineChart },
+  components: {
+    AppContainer,
+    Hangboard,
+    LineChart
+  },
   props: {
     data: Object,
     index: Number

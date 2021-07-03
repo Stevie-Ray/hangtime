@@ -1,97 +1,78 @@
 <template>
-  <v-layout class="profile">
-    <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('Notifications') }} ({{ $t('soon') }})
-      </v-toolbar-title>
+  <app-container name="Notifications" :back-link="{ path: '/settings' }">
+    <v-list two-line>
+      <v-list-item v-if="hasToken">
+        <v-list-item-icon>
+          <v-icon color="primary lighten-1">{{ mdi.key }}</v-icon>
+        </v-list-item-icon>
 
-      <v-spacer></v-spacer>
-    </v-app-bar>
+        <v-list-item-content>
+          <v-list-item-title>Registration Token</v-list-item-title>
+          <v-list-item-subtitle>{{ currentToken }}</v-list-item-subtitle>
+        </v-list-item-content>
 
-    <v-main>
-      <v-container>
-        <v-row justify="center" align="start">
-          <v-col cols="12">
-            <v-list two-line>
-              <v-list-item v-if="hasToken">
-                <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{ mdi.key }}</v-icon>
-                </v-list-item-icon>
+        <v-list-item-action>
+          <v-btn icon small @click="copyText">
+            <v-icon>{{ mdi.copy }}</v-icon>
+          </v-btn>
+          <v-btn icon small @click="deleteToken">
+            <v-icon>{{ mdi.delete }}</v-icon>
+          </v-btn>
+        </v-list-item-action>
+      </v-list-item>
+      <v-list-item v-if="needsPermission">
+        <v-list-item-icon>
+          <v-icon color="primary lighten-1">{{ mdi.key }}</v-icon>
+        </v-list-item-icon>
 
-                <v-list-item-content>
-                  <v-list-item-title>Registration Token</v-list-item-title>
-                  <v-list-item-subtitle>{{
-                    currentToken
-                  }}</v-list-item-subtitle>
-                </v-list-item-content>
+        <v-list-item-content>
+          <v-list-item-title>Needs Permission</v-list-item-title>
+          <v-list-item-subtitle>{{ currentToken }}</v-list-item-subtitle>
+        </v-list-item-content>
 
-                <v-list-item-action>
-                  <v-btn icon small @click="copyText">
-                    <v-icon>{{ mdi.copy }}</v-icon>
-                  </v-btn>
-                  <v-btn icon small @click="deleteToken">
-                    <v-icon>{{ mdi.delete }}</v-icon>
-                  </v-btn>
-                </v-list-item-action>
-              </v-list-item>
-              <v-list-item v-if="needsPermission">
-                <v-list-item-icon>
-                  <v-icon color="primary lighten-1">{{ mdi.key }}</v-icon>
-                </v-list-item-icon>
+        <v-list-item-action>
+          <v-btn @click="requestPermission"> Request Permission </v-btn>
+        </v-list-item-action>
+      </v-list-item>
+    </v-list>
 
-                <v-list-item-content>
-                  <v-list-item-title>Needs Permission</v-list-item-title>
-                  <v-list-item-subtitle>{{
-                    currentToken
-                  }}</v-list-item-subtitle>
-                </v-list-item-content>
+    <v-snackbar
+      v-for="(message, index) in messages.filter((m) => m.show)"
+      :key="message.collapse_key"
+      v-model="message.show"
+      :timeout="-1"
+      multi-line
+      :style="`bottom: ${index * 68 + index * 10}px`"
+      bottom
+    >
+      <div>
+        <strong>{{ message.notification.title }}</strong>
+      </div>
+      <div>
+        {{ message.notification.body }}
+      </div>
 
-                <v-list-item-action>
-                  <v-btn @click="requestPermission"> Request Permission </v-btn>
-                </v-list-item-action>
-              </v-list-item>
-            </v-list>
-
-            <v-snackbar
-              v-for="(message, index) in messages.filter((m) => m.show)"
-              :key="message.collapse_key"
-              v-model="message.show"
-              :timeout="-1"
-              multi-line
-              :style="`bottom: ${index * 68 + index * 10}px`"
-              bottom
-            >
-              <div>
-                <strong>{{ message.notification.title }}</strong>
-              </div>
-              <div>
-                {{ message.notification.body }}
-              </div>
-
-              <template #action="{ attrs }">
-                <v-btn text v-bind="attrs" @click="message.show = false">
-                  {{ $t('Close') }}
-                </v-btn>
-              </template>
-            </v-snackbar>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+      <template #action="{ attrs }">
+        <v-btn text v-bind="attrs" @click="message.show = false">
+          {{ $t('Close') }}
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </app-container>
 </template>
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
-import { mdiArrowLeft, mdiKey, mdiContentCopy, mdiDelete } from '@mdi/js'
+import { mdiKey, mdiContentCopy, mdiDelete } from '@mdi/js'
 import firebase from 'firebase/app'
 import 'firebase/messaging'
 
 export default {
+  components: {
+    AppContainer
+  },
   data: () => ({
     currentToken: '',
     messages: [],
@@ -101,7 +82,6 @@ export default {
     hasToken: false,
     needsPermission: true,
     mdi: {
-      arrowLeft: mdiArrowLeft,
       key: mdiKey,
       copy: mdiContentCopy,
       delete: mdiDelete

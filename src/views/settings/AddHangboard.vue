@@ -1,60 +1,48 @@
 <template>
-  <v-layout class="add-hangboard">
-    <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings-hangboards' })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('Add a hangboard') }}
-      </v-toolbar-title>
+  <app-container
+    name="Add a Hangboard"
+    :back-link="{ path: '/settings' }"
+    class="text-center"
+  >
+    <hangboard-select @image="hangboardImage"></hangboard-select>
 
-      <v-spacer></v-spacer>
-    </v-app-bar>
+    <v-divider class="mb-4" />
 
-    <v-main>
-      <v-container>
-        <v-row justify="center" align="start">
-          <v-col cols="12" class="text-center">
-            <hangboard-select @image="hangboardImage"></hangboard-select>
+    <div class="mt-8">
+      {{ $t('Is your hangboard missing?') }}
+      <a href="mailto:mail@stevie-ray.nl?subject=Hangboard%20Request">
+        {{ $t('Get in touch') }}
+      </a>
+    </div>
 
-            <v-divider class="mb-4" />
-
-            <div class="mt-8">
-              {{ $t('Is your hangboard missing?') }}
-              <a href="mailto:mail@stevie-ray.nl?subject=Hangboard%20Request">
-                {{ $t('Get in touch') }}
-              </a>
-            </div>
-
-            <v-speed-dial bottom right fixed>
-              <v-btn
-                slot="activator"
-                :disabled="disableButton"
-                color="secondary"
-                fab
-                @click="addHangboard"
-              >
-                <v-icon>{{ mdi.contentSave }}</v-icon>
-              </v-btn>
-            </v-speed-dial>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+    <v-speed-dial bottom right fixed>
+      <v-btn
+        slot="activator"
+        :disabled="disableButton"
+        color="secondary"
+        fab
+        @click="addHangboard"
+      >
+        <v-icon>{{ mdi.contentSave }}</v-icon>
+      </v-btn>
+    </v-speed-dial>
+  </app-container>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect'
-import { mdiArrowLeft, mdiContentSave } from '@mdi/js'
+import { mdiContentSave } from '@mdi/js'
 
 export default {
-  components: { HangboardSelect },
+  components: {
+    AppContainer,
+    HangboardSelect
+  },
   data: () => ({
     disableButton: false,
     mdi: {
-      arrowLeft: mdiArrowLeft,
       contentSave: mdiContentSave
     }
   }),

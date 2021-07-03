@@ -1,120 +1,90 @@
 <template>
-  <v-layout class="hangboards">
-    <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ name: 'settings' })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('Hangboards') }}
-      </v-toolbar-title>
+  <app-container name="Hangboards" :back-link="{ path: '/settings' }">
+    <div v-for="(item, index) in user.settings['hangboards']" :key="index">
+      <v-card flat class="mb-2">
+        <v-container fluid class="py-0">
+          <v-row>
+            <v-col cols="12">
+              <div class="hangboard mt-4">
+                <div class="leftside">
+                  <v-img
+                    :src="
+                      getImg(
+                        companies[item.company].hangboards[item.hangboard].image
+                      )
+                    "
+                  />
+                </div>
+                <div class="rightside">
+                  <v-img
+                    :src="
+                      getImg(
+                        companies[item.company].hangboards[item.hangboard].image
+                      )
+                    "
+                  />
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
 
-      <v-spacer></v-spacer>
-    </v-app-bar>
+        <v-card-title primary-title>
+          <div class="text-center">
+            <h3 class="text-h5">
+              {{ companies[item.company].name }}
+              {{ companies[item.company].hangboards[item.hangboard].name }}
+            </h3>
+          </div>
+        </v-card-title>
 
-    <v-main>
-      <v-container>
-        <v-row justify="center" align="start">
-          <v-col cols="12">
-            <div
-              v-for="(item, index) in user.settings['hangboards']"
-              :key="index"
-            >
-              <v-card flat class="mb-2">
-                <v-container fluid class="py-0">
-                  <v-row>
-                    <v-col cols="12">
-                      <div class="hangboard mt-4">
-                        <div class="leftside">
-                          <v-img
-                            :src="
-                              getImg(
-                                companies[item.company].hangboards[
-                                  item.hangboard
-                                ].image
-                              )
-                            "
-                          />
-                        </div>
-                        <div class="rightside">
-                          <v-img
-                            :src="
-                              getImg(
-                                companies[item.company].hangboards[
-                                  item.hangboard
-                                ].image
-                              )
-                            "
-                          />
-                        </div>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </v-container>
+        <v-card-actions>
+          <v-btn v-if="user.settings.selected === index" text disabled>
+            {{ $t('Selected') }}
+          </v-btn>
+          <v-btn v-else text @click="triggerChangeHangboardAction(index)">
+            {{ $t('Select') }}
+          </v-btn>
+          <v-btn
+            v-if="user.settings.selected !== index"
+            text
+            color="primary"
+            @click="triggerRemoveHangboardAction(index)"
+          >
+            {{ $t('Delete') }}
+          </v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
 
-                <v-card-title primary-title>
-                  <div class="text-center">
-                    <h3 class="text-h5">
-                      {{ companies[item.company].name }}
-                      {{
-                        companies[item.company].hangboards[item.hangboard].name
-                      }}
-                    </h3>
-                  </div>
-                </v-card-title>
-
-                <v-card-actions>
-                  <v-btn v-if="user.settings.selected === index" text disabled>
-                    {{ $t('Selected') }}
-                  </v-btn>
-                  <v-btn
-                    v-else
-                    text
-                    @click="triggerChangeHangboardAction(index)"
-                  >
-                    {{ $t('Select') }}
-                  </v-btn>
-                  <v-btn
-                    v-if="user.settings.selected !== index"
-                    text
-                    color="primary"
-                    @click="triggerRemoveHangboardAction(index)"
-                  >
-                    {{ $t('Delete') }}
-                  </v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-
-              <v-divider></v-divider>
-            </div>
-
-            <v-speed-dial bottom right fixed>
-              <v-btn
-                slot="activator"
-                color="secondary"
-                dark
-                fab
-                to="/settings/hangboards/add"
-              >
-                <v-icon>{{ mdi.plus }}</v-icon>
-              </v-btn>
-            </v-speed-dial>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+      <v-divider></v-divider>
+    </div>
+    <v-speed-dial bottom right fixed>
+      <v-btn
+        slot="activator"
+        color="secondary"
+        dark
+        fab
+        to="/settings/hangboards/add"
+      >
+        <v-icon>{{ mdi.plus }}</v-icon>
+      </v-btn>
+    </v-speed-dial>
+  </app-container>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
-import { mdiArrowLeft, mdiPlus } from '@mdi/js'
+import { mdiPlus } from '@mdi/js'
 
 export default {
+  components: {
+    AppContainer
+  },
   data: () => ({
     mdi: {
-      arrowLeft: mdiArrowLeft,
       plus: mdiPlus
     }
   }),

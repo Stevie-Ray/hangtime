@@ -1,123 +1,100 @@
 <template>
-  <v-layout class="workouts">
-    <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'settings' })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('Workouts') }}
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+  <app-container name="Workouts" :back-link="{ path: '/settings' }">
+    <v-form>
+      <v-list two-line>
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon color="primary lighten-1">{{ mdi.volumeHigh }} </v-icon>
+          </v-list-item-icon>
 
-    <v-main>
-      <v-container>
-        <v-row justify="center" align="start">
-          <v-col cols="12">
-            <v-form>
-              <v-list two-line>
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon color="primary lighten-1">{{
-                      mdi.volumeHigh
-                    }}</v-icon>
-                  </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('Play sound') }}</v-list-item-title>
+            <v-list-item-subtitle>
+              {{ $t('Just two simple tones') }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
-                  <v-list-item-content>
-                    <v-list-item-title>{{
-                      $t('Play sound')
-                    }}</v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ $t('Just two simple tones') }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
+          <v-list-item-action>
+            <v-checkbox
+              v-model="settingsSound"
+              @change="triggerUpdateUser"
+            ></v-checkbox>
+          </v-list-item-action>
+        </v-list-item>
 
-                  <v-list-item-action>
-                    <v-checkbox
-                      v-model="settingsSound"
-                      @change="triggerUpdateUser"
-                    ></v-checkbox>
-                  </v-list-item-action>
-                </v-list-item>
+        <v-list-item v-if="synth && voiceList.length">
+          <v-list-item-icon>
+            <v-icon color="primary lighten-1">{{ mdi.accountVoice }} </v-icon>
+          </v-list-item-icon>
 
-                <v-list-item v-if="synth && voiceList.length">
-                  <v-list-item-icon>
-                    <v-icon color="primary lighten-1">{{
-                      mdi.accountVoice
-                    }}</v-icon>
-                  </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t('Speak instructions') }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              {{ $t('Spoken exercises') }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      {{ $t('Speak instructions') }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ $t('Spoken exercises') }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
+          <v-list-item-action>
+            <v-checkbox
+              v-model="settingsSpeak"
+              @change="triggerUpdateUser"
+            ></v-checkbox>
+          </v-list-item-action>
+        </v-list-item>
 
-                  <v-list-item-action>
-                    <v-checkbox
-                      v-model="settingsSpeak"
-                      @change="triggerUpdateUser"
-                    ></v-checkbox>
-                  </v-list-item-action>
-                </v-list-item>
+        <v-list-item v-if="user.settings.speak">
+          <v-list-item-icon>
+            <v-icon color="primary lighten-1"
+              >{{ mdi.accountMultiple }}
+            </v-icon>
+          </v-list-item-icon>
 
-                <v-list-item v-if="user.settings.speak">
-                  <v-list-item-icon>
-                    <v-icon color="primary lighten-1">{{
-                      mdi.accountMultiple
-                    }}</v-icon>
-                  </v-list-item-icon>
+          <v-list-item-content>
+            <v-select
+              v-if="voiceList.length"
+              id="voices"
+              v-model="selectedVoice"
+              :items="voiceList"
+              :item-text="(item) => `${item.name} (${item.lang})`"
+              :placeholder="$t('Tap to change')"
+              :label="$t('Select voice')"
+              return-object
+            >
+            </v-select>
+          </v-list-item-content>
+        </v-list-item>
 
-                  <v-list-item-content>
-                    <v-select
-                      v-if="voiceList.length"
-                      id="voices"
-                      v-model="selectedVoice"
-                      :items="voiceList"
-                      :item-text="(item) => `${item.name} (${item.lang})`"
-                      :placeholder="$t('Tap to change')"
-                      :label="$t('Select voice')"
-                      return-object
-                    >
-                    </v-select>
-                  </v-list-item-content>
-                </v-list-item>
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon color="primary lighten-1">{{ mdi.vibrate }}</v-icon>
+          </v-list-item-icon>
 
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon color="primary lighten-1">{{ mdi.vibrate }}</v-icon>
-                  </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('Vibration') }}</v-list-item-title>
+            <v-list-item-subtitle
+              >{{ $t('Vibrate when finishing a workout') }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
-                  <v-list-item-content>
-                    <v-list-item-title>{{ $t('Vibration') }}</v-list-item-title>
-                    <v-list-item-subtitle
-                      >{{ $t('Vibrate when finishing a workout') }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-
-                  <v-list-item-action>
-                    <v-checkbox
-                      v-model="settingsVibrate"
-                      @change="triggerUpdateUser"
-                    ></v-checkbox>
-                  </v-list-item-action>
-                </v-list-item>
-              </v-list>
-            </v-form>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+          <v-list-item-action>
+            <v-checkbox
+              v-model="settingsVibrate"
+              @change="triggerUpdateUser"
+            ></v-checkbox>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+    </v-form>
+  </app-container>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
+
 import {
-  mdiArrowLeft,
   mdiVolumeHigh,
   mdiVibrate,
   mdiAccountVoice,
@@ -125,12 +102,14 @@ import {
 } from '@mdi/js'
 
 export default {
+  components: {
+    AppContainer
+  },
   data: () => ({
     synth: window.speechSynthesis,
     greetingSpeech: new window.SpeechSynthesisUtterance(),
     voiceList: [],
     mdi: {
-      arrowLeft: mdiArrowLeft,
       volumeHigh: mdiVolumeHigh,
       vibrate: mdiVibrate,
       accountVoice: mdiAccountVoice,
