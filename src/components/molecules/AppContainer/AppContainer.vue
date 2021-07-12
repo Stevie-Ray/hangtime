@@ -1,27 +1,46 @@
 <template>
-  <v-layout :class="className">
-    <v-app-bar color="primary" app fixed dark>
-      <v-icon v-if="backButton" @click="$router.push(backLink)">{{
-        mdi.arrowLeft
-      }}</v-icon>
+  <div class="layout" :class="className">
+    <v-app-bar
+      color="primary"
+      app
+      fixed
+      dark
+      :tabs="tabs"
+      :extended="extended"
+      :hide-on-scroll="hideOnScroll"
+    >
+      <slot name="back-link">
+        <v-icon v-if="backButton" @click="$router.push(backLink)">
+          {{ mdi.arrowLeft }}
+        </v-icon>
+      </slot>
+
+      <slot name="avatar" />
+
       <v-toolbar-title>
-        {{ $t(name) }}
+        <slot name="title">
+          {{ $t(name) }}
+        </slot>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <slot name="icons"></slot>
+
+      <template v-if="extended" #extension>
+        <slot name="extension" />
+      </template>
     </v-app-bar>
     <v-main>
-      <v-container>
-        <v-row justify="center" align="start">
+      <v-container class="fill-height">
+        <v-row justify="center" align="start" class="fill-height">
           <v-col cols="12">
             <slot></slot>
           </v-col>
         </v-row>
       </v-container>
     </v-main>
-  </v-layout>
+  </div>
 </template>
 
 <script>
@@ -43,6 +62,18 @@ export default {
       default: () => ({
         name: '/'
       })
+    },
+    tabs: {
+      type: Boolean,
+      default: false
+    },
+    extended: {
+      type: Boolean,
+      default: false
+    },
+    hideOnScroll: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({

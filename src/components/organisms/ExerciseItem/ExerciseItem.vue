@@ -494,7 +494,6 @@ import Hand from '@/components/atoms/Hand/Hand'
 import { getImg, count, weightConverter } from '@/misc/helpers'
 import {
   mdiClockOutline,
-  mdiArrowLeft,
   mdiClock,
   mdiClockAlert,
   mdiMenu,
@@ -522,7 +521,6 @@ export default {
       max: (max) => (v) => v <= max || `A maximum of  ${max} is allowed`
     },
     mdi: {
-      arrowLeft: mdiArrowLeft,
       clockOutline: mdiClockOutline,
       menu: mdiMenu,
       clock: mdiClock,

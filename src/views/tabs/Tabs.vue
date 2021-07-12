@@ -1,28 +1,22 @@
 <template>
-  <v-layout class="tabs">
-    <v-app-bar
-      app
-      fixed
-      tabs
-      dark
-      color="primary"
-      hide-on-scroll
-      extended
-      :class="{ offline: !networkOnLine }"
-    >
+  <app-container
+    :name="appTitle"
+    :back-button="false"
+    tabs
+    hide-on-scroll
+    extended
+    :class="{ offline: !networkOnLine }"
+  >
+    <template #avatar>
       <v-img
         class="app-logo mr-1"
         :src="getImg('icons/logo.svg')"
         :alt="appTitle"
         contain
       />
+    </template>
 
-      <v-toolbar-title to="/">
-        {{ appTitle }}
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
+    <template #icons>
       <!--      <v-btn icon>-->
       <!--      <v-icon>{{ mdi.magnify }}</v-icon>-->
       <!--      </v-btn>-->
@@ -73,7 +67,9 @@
           </v-list-item>
         </v-list>
       </v-menu>
+    </template>
 
+    <template #extension>
       <v-tabs
         slot="extension"
         v-model="activeTab"
@@ -94,71 +90,61 @@
           {{ $t(tab.name) }}
         </v-tab>
       </v-tabs>
-    </v-app-bar>
+    </template>
 
-    <v-main>
-      <v-container class="fill-height">
-        <v-row justify="center" align="start" class="fill-height" no-gutters>
-          <v-col cols="12" class="fill-height">
-            <v-tabs-items
-              v-model="activeTab"
-              class="fill-height"
-              @change="updateRouter($event)"
-            >
-              <v-tab-item
-                v-for="tab of tabs"
-                :key="tab.id"
-                class="fill-height"
-                :value="tab.route"
-              >
-                <router-view></router-view>
-              </v-tab-item>
-            </v-tabs-items>
+    <v-tabs-items
+      v-model="activeTab"
+      class="fill-height"
+      @change="updateRouter($event)"
+    >
+      <v-tab-item
+        v-for="tab of tabs"
+        :key="tab.id"
+        class="fill-height"
+        :value="tab.route"
+      >
+        <router-view></router-view>
+      </v-tab-item>
+    </v-tabs-items>
 
-            <v-fab-transition>
-              <v-btn
-                v-if="networkOnLine && activeFab.click !== null"
-                :key="activeFab.icon"
-                :class="activeFab.class"
-                fixed
-                fab
-                bottom
-                right
-                color="secondary"
-                @click="fabResolver"
-              >
-                <v-icon v-if="activeFab.icon != ''">{{
-                  activeFab.icon
-                }}</v-icon>
-              </v-btn>
-            </v-fab-transition>
+    <v-fab-transition>
+      <v-btn
+        v-if="networkOnLine && activeFab.click !== null"
+        :key="activeFab.icon"
+        :class="activeFab.class"
+        fixed
+        fab
+        bottom
+        right
+        color="secondary"
+        @click="fabResolver"
+      >
+        <v-icon v-if="activeFab.icon != ''">{{ activeFab.icon }}</v-icon>
+      </v-btn>
+    </v-fab-transition>
 
-            <dialog-hangboard-switch
-              v-model="hangboardDialog"
-              :user="user"
-            ></dialog-hangboard-switch>
+    <dialog-hangboard-switch
+      v-model="hangboardDialog"
+      :user="user"
+    ></dialog-hangboard-switch>
 
-            <dialog-community-filter v-model="filterDialog">
-            </dialog-community-filter>
+    <dialog-community-filter v-model="filterDialog"> </dialog-community-filter>
 
-            <dialog-walkthrough
-              v-if="user && !user.settings.walkthrough"
-              v-model="walkthroughDialog"
-            ></dialog-walkthrough>
+    <dialog-walkthrough
+      v-if="user && !user.settings.walkthrough"
+      v-model="walkthroughDialog"
+    ></dialog-walkthrough>
 
-            <dialog-add-progress
-              v-model="addProgressDialog"
-              :user="user"
-            ></dialog-add-progress>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+    <dialog-add-progress
+      v-model="addProgressDialog"
+      :user="user"
+    ></dialog-add-progress>
+  </app-container>
 </template>
 
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
 import DialogHangboardSwitch from '@/components/molecules/DialogHangboardSwitch/DialogHangboardSwitch'
 import DialogCommunityFilter from '@/components/molecules/DialogCommunityFilter/DialogCommunityFilter'
@@ -168,6 +154,7 @@ import { mdiTune, mdiPlus, mdiDotsVertical } from '@mdi/js'
 
 export default {
   components: {
+    AppContainer,
     DialogHangboardSwitch,
     DialogWalkthrough,
     DialogCommunityFilter,
@@ -248,8 +235,8 @@ export default {
 
 <style lang="scss">
 @import '@/theme/variables.scss';
-.tabs {
-  &.offline {
+.hangtime {
+  .offline {
     /*background: #FFF;*/
   }
 

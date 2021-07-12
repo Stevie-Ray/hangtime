@@ -1,139 +1,118 @@
 <template>
-  <v-layout class="grades">
-    <v-app-bar color="primary" app fixed dark>
-      <v-icon @click="$router.push({ name: 'workouts' })">{{
-        mdi.arrowLeft
-      }}</v-icon>
-      <v-toolbar-title>
-        {{ $t('Quick workout') }}
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
+  <app-container name="Quick workout" :back-link="{ name: 'workouts' }">
+    <template #icons>
       <!--      <v-icon v-if="startWorkout || !defaultTime" @click="resetTime">{{-->
       <!--        mdi.undo-->
       <!--      }}</v-icon>-->
-    </v-app-bar>
+    </template>
 
-    <v-main>
-      <v-container class="fill-height">
-        <v-row class="fill-height" no-gutters>
-          <v-col cols="12">
-            <v-row
-              justify="space-around"
-              align="center"
-              class="fill-height text-center"
-              no-gutters
-            >
-              <circle-timer
-                :current-exercise="currentExercise"
-                :start-button="startWorkout"
-                :pause-button="pauseWorkout"
-              ></circle-timer>
+    <v-row
+      justify="space-around"
+      align="center"
+      class="fill-height text-center"
+      no-gutters
+    >
+      <circle-timer
+        :current-exercise="currentExercise"
+        :start-button="startWorkout"
+        :pause-button="pauseWorkout"
+      ></circle-timer>
 
-              <v-row justify="center" align="start" no-gutters>
-                <v-col cols="6" justify="center">
-                  <v-row justify="center" align="start">
-                    <!-- Hold -->
-                    <v-col cols="12">
-                      <v-text-field
-                        v-model="hold"
-                        :disabled="startWorkout"
-                        hide-details
-                        min="0"
-                        type="number"
-                        :label="$t('Hold')"
-                        :append-outer-icon="mdi.plus"
-                        :prepend-icon="mdi.minus"
-                        @click:append-outer="increment('hold')"
-                        @click:prepend="decrement('hold')"
-                      >
-                      </v-text-field>
-                    </v-col>
-                    <!-- Pause -->
-                    <v-col cols="12">
-                      <v-text-field
-                        v-model="pause"
-                        :disabled="startWorkout"
-                        min="0"
-                        hide-details
-                        type="number"
-                        :label="$t('Pause')"
-                        :append-outer-icon="mdi.plus"
-                        :prepend-icon="mdi.minus"
-                        @click:append-outer="increment('pause')"
-                        @click:prepend="decrement('pause')"
-                      >
-                      </v-text-field>
-                    </v-col>
-                    <!-- Repeat -->
-                    <v-col cols="12">
-                      <v-text-field
-                        v-model="repeat"
-                        :disabled="startWorkout"
-                        hide-details
-                        min="0"
-                        type="number"
-                        :label="$t('Repeat')"
-                        :append-outer-icon="mdi.plus"
-                        :prepend-icon="mdi.minus"
-                        @click:append-outer="increment('repeat')"
-                        @click:prepend="decrement('repeat')"
-                      >
-                      </v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
-      <v-fab-transition>
-        <v-btn
-          v-if="startWorkout"
-          slot="activator"
-          color="secondary"
-          fixed
-          bottom
-          right
-          fab
-          @click="pauseWorkout = !pauseWorkout"
-        >
-          <v-icon v-if="!pauseWorkout">{{ mdi.pause }}</v-icon>
-          <v-icon v-else>{{ mdi.play }}</v-icon>
-        </v-btn>
-        <v-btn
-          v-else
-          slot="activator"
-          color="secondary"
-          fixed
-          bottom
-          right
-          fab
-          @click="startWorkout = !startWorkout"
-        >
-          <v-icon>{{ mdi.play }}</v-icon>
-        </v-btn>
-      </v-fab-transition>
-    </v-main>
-  </v-layout>
+      <v-row justify="center" align="start" no-gutters>
+        <v-col cols="6" justify="center">
+          <v-row justify="center" align="start">
+            <!-- Hold -->
+            <v-col cols="12">
+              <v-text-field
+                v-model="hold"
+                :disabled="startWorkout"
+                hide-details
+                min="0"
+                type="number"
+                :label="$t('Hold')"
+                :append-outer-icon="mdi.plus"
+                :prepend-icon="mdi.minus"
+                @click:append-outer="increment('hold')"
+                @click:prepend="decrement('hold')"
+              >
+              </v-text-field>
+            </v-col>
+            <!-- Pause -->
+            <v-col cols="12">
+              <v-text-field
+                v-model="pause"
+                :disabled="startWorkout"
+                min="0"
+                hide-details
+                type="number"
+                :label="$t('Pause')"
+                :append-outer-icon="mdi.plus"
+                :prepend-icon="mdi.minus"
+                @click:append-outer="increment('pause')"
+                @click:prepend="decrement('pause')"
+              >
+              </v-text-field>
+            </v-col>
+            <!-- Repeat -->
+            <v-col cols="12">
+              <v-text-field
+                v-model="repeat"
+                :disabled="startWorkout"
+                hide-details
+                min="0"
+                type="number"
+                :label="$t('Repeat')"
+                :append-outer-icon="mdi.plus"
+                :prepend-icon="mdi.minus"
+                @click:append-outer="increment('repeat')"
+                @click:prepend="decrement('repeat')"
+              >
+              </v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-row>
+
+    <v-fab-transition>
+      <v-btn
+        v-if="startWorkout"
+        slot="activator"
+        color="secondary"
+        fixed
+        bottom
+        right
+        fab
+        @click="pauseWorkout = !pauseWorkout"
+      >
+        <v-icon v-if="!pauseWorkout">{{ mdi.pause }}</v-icon>
+        <v-icon v-else>{{ mdi.play }}</v-icon>
+      </v-btn>
+      <v-btn
+        v-else
+        slot="activator"
+        color="secondary"
+        fixed
+        bottom
+        right
+        fab
+        @click="startWorkout = !startWorkout"
+      >
+        <v-icon>{{ mdi.play }}</v-icon>
+      </v-btn>
+    </v-fab-transition>
+  </app-container>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import CircleTimer from '@/components/molecules/CircleTimer/CircleTimer'
-import {
-  mdiArrowLeft,
-  mdiPlay,
-  mdiPlus,
-  mdiMinus,
-  mdiPause,
-  mdiUndo
-} from '@mdi/js'
+import { mdiPlay, mdiPlus, mdiMinus, mdiPause, mdiUndo } from '@mdi/js'
 
 export default {
   components: {
+    AppContainer,
     CircleTimer
   },
   data: () => ({
@@ -148,7 +127,6 @@ export default {
     startWorkout: false,
     pauseWorkout: false,
     mdi: {
-      arrowLeft: mdiArrowLeft,
       play: mdiPlay,
       pause: mdiPause,
       plus: mdiPlus,

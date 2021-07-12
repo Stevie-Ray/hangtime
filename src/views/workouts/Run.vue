@@ -1,15 +1,13 @@
 <template>
-  <v-layout class="run">
-    <v-app-bar v-if="currentWorkout" color="primary" app fixed dark>
-      <v-icon
-        @click="
-          $router.push({
-            name: 'workout',
-            params: { id: currentWorkout.id, userId: userId }
-          })
-        "
-        >{{ mdi.arrowLeft }}</v-icon
-      >
+  <app-container
+    v-if="currentWorkout"
+    name="Run"
+    :back-link="{
+      name: 'workout',
+      params: { id: currentWorkout.id, userId: userId }
+    }"
+  >
+    <template #avatar>
       <v-avatar size="32px" class="grey lighten-2">
         <v-img
           v-if="networkOnLine && currentWorkout.user.photoURL"
@@ -17,143 +15,123 @@
           :alt="currentWorkout.user.displayName"
         />
       </v-avatar>
-      <v-toolbar-title>
-        {{ currentWorkout.name }}
-        <div class="subheading">{{ currentWorkout.description }}</div>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+    </template>
+    <template #title>
+      {{ currentWorkout.name }}
+      <div class="subheading">{{ currentWorkout.description }}</div>
+    </template>
 
-    <v-main v-if="currentExercise">
-      <v-container class="fill-height">
-        <v-row class="fill-height">
-          <v-col cols="12">
-            <v-row
-              justify="space-around"
-              align="center"
-              class="fill-height text-center canvas"
-              :class="binding"
-            >
-              <!-- circle -->
-              <div class="Counter">
-                <circle-timer
-                  :current-exercise="currentExercise"
-                  :current-workout="currentWorkout"
-                  :start-button="startWorkout"
-                  :pause-button="pauseWorkout"
-                  @current-step="editCurrentStep"
-                ></circle-timer>
-              </div>
+    <v-row
+      v-if="currentExercise"
+      justify="space-around"
+      align="center"
+      class="fill-height text-center canvas"
+      :class="binding"
+    >
+      <!-- circle -->
+      <div class="Counter">
+        <circle-timer
+          :current-exercise="currentExercise"
+          :current-workout="currentWorkout"
+          :start-button="startWorkout"
+          :pause-button="pauseWorkout"
+          @current-step="editCurrentStep"
+        ></circle-timer>
+      </div>
 
-              <!-- hangboard -->
-              <div class="Hangboard">
-                <v-container fluid class="py-0">
-                  <v-row>
-                    <v-col cols="12" class="py-0">
-                      <hangboard
-                        :user="user"
-                        :data="currentExercise"
-                      ></hangboard>
-                      <hand
-                        v-if="
-                          currentExercise.leftHand || currentExercise.rightHand
-                        "
-                        :data="currentExercise"
-                      ></hand>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </div>
+      <!-- hangboard -->
+      <div class="Hangboard">
+        <v-container fluid class="py-0">
+          <v-row>
+            <v-col cols="12" class="py-0">
+              <hangboard :user="user" :data="currentExercise"></hangboard>
+              <hand
+                v-if="currentExercise.leftHand || currentExercise.rightHand"
+                :data="currentExercise"
+              ></hand>
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
 
-              <!-- title -->
-              <div class="Title">
-                <div class="title">
-                  <workout-item-name
-                    :data="currentExercise"
-                  ></workout-item-name>
-                </div>
-                <div class="subheading">
-                  <span
-                    >{{
-                      $t('Hold for {hold} sec.', { hold: currentExercise.hold })
-                    }}
-                  </span>
-                  <span v-if="currentExercise.repeat > 0">
-                    {{
-                      $t('Rest for {rest} sec.', { rest: currentExercise.rest })
-                    }}
-                  </span>
-                </div>
-                <div
-                  v-if="currentExercise.notes !== ''"
-                  class="text--secondary"
-                >
-                  {{ currentExercise.notes }}
-                </div>
-              </div>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
+      <!-- title -->
+      <div class="Title">
+        <div class="title">
+          <workout-item-name :data="currentExercise"></workout-item-name>
+        </div>
+        <div class="subheading">
+          <span
+            >{{ $t('Hold for {hold} sec.', { hold: currentExercise.hold }) }}
+          </span>
+          <span v-if="currentExercise.repeat > 0">
+            {{ $t('Rest for {rest} sec.', { rest: currentExercise.rest }) }}
+          </span>
+        </div>
+        <div v-if="currentExercise.notes !== ''" class="text--secondary">
+          {{ currentExercise.notes }}
+        </div>
+      </div>
+    </v-row>
 
-      <!-- Show pay wall if device can pay, has user, didn't pay before, had completed 100 minutes -->
-      <dialog-subscribe-to-app
-        v-if="
-          canSubscribe &&
-          user &&
-          !user.subscribed &&
-          user.completed &&
-          user.completed.time / 60 > (subscribeLimit / 4) * 3
-        "
-        :limit="subscribeLimit"
-        :user="user"
-        class="dialog-subscribe-to-app"
+    <!-- Show pay wall if device can pay, has user, didn't pay before, had completed 100 minutes -->
+    <dialog-subscribe-to-app
+      v-if="
+        canSubscribe &&
+        user &&
+        !user.subscribed &&
+        user.completed &&
+        user.completed.time / 60 > (subscribeLimit / 4) * 3
+      "
+      :limit="subscribeLimit"
+      :user="user"
+      class="dialog-subscribe-to-app"
+    >
+    </dialog-subscribe-to-app>
+
+    <v-fab-transition>
+      <v-btn
+        v-if="startWorkout"
+        slot="activator"
+        color="secondary"
+        fixed
+        bottom
+        right
+        fab
+        @click="pauseWorkout = !pauseWorkout"
       >
-      </dialog-subscribe-to-app>
-
-      <v-fab-transition>
-        <v-btn
-          v-if="startWorkout"
-          slot="activator"
-          color="secondary"
-          fixed
-          bottom
-          right
-          fab
-          @click="pauseWorkout = !pauseWorkout"
-        >
-          <v-icon v-if="!pauseWorkout">{{ mdi.pause }}</v-icon>
-          <v-icon v-else>{{ mdi.play }}</v-icon>
-        </v-btn>
-        <v-btn
-          v-else
-          slot="activator"
-          color="secondary"
-          fixed
-          bottom
-          right
-          fab
-          @click="startWorkout = !startWorkout"
-        >
-          <v-icon>{{ mdi.play }}</v-icon>
-        </v-btn>
-      </v-fab-transition>
-    </v-main>
-  </v-layout>
+        <v-icon v-if="!pauseWorkout">{{ mdi.pause }}</v-icon>
+        <v-icon v-else>{{ mdi.play }}</v-icon>
+      </v-btn>
+      <v-btn
+        v-else
+        slot="activator"
+        color="secondary"
+        fixed
+        bottom
+        right
+        fab
+        @click="startWorkout = !startWorkout"
+      >
+        <v-icon>{{ mdi.play }}</v-icon>
+      </v-btn>
+    </v-fab-transition>
+  </app-container>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import Hand from '@/components/atoms/Hand/Hand'
 import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
 import CircleTimer from '@/components/molecules/CircleTimer/CircleTimer'
 import DialogSubscribeToApp from '@/components/molecules/DialogSubscribeToApp/DialogSubscribeToApp'
 
-import { mdiArrowLeft, mdiPlay, mdiPause } from '@mdi/js'
+import { mdiPlay, mdiPause } from '@mdi/js'
 
 export default {
   components: {
+    AppContainer,
     WorkoutItemName,
     Hangboard,
     Hand,
@@ -173,8 +151,7 @@ export default {
     subscribeLimit: 100,
     mdi: {
       play: mdiPlay,
-      pause: mdiPause,
-      arrowLeft: mdiArrowLeft
+      pause: mdiPause
     },
     meta: {
       title: 'Workout'

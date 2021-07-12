@@ -1,9 +1,6 @@
 <template>
-  <v-layout class="workout-list">
-    <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ path: currentTab })"
-        >{{ mdi.arrowLeft }}
-      </v-icon>
+  <app-container name="Workout List" :back-link="{ currentTab }">
+    <template #avatar>
       <v-avatar
         v-if="currentWorkout && user"
         class="grey lighten-2"
@@ -15,29 +12,28 @@
           :alt="user.displayName"
         />
       </v-avatar>
-      <v-toolbar-title>
-        <!-- Workout details -->
-        <span v-if="currentWorkout">
-          <span v-if="currentWorkout.name">{{ currentWorkout.name }}</span>
-          <span v-else>{{ $t('New workout') }}</span>
-          <div class="subheading">
-            <span
-              v-if="currentWorkout.exercises && currentWorkout.exercises.length"
-              >{{ count(currentWorkout.time) }}</span
-            >
-            <span v-if="currentWorkout.description">
-              - {{ currentWorkout.description }}
-            </span>
-          </div>
-        </span>
-        <!-- This will be display while loading workouts -->
-        <span v-else>
-          {{ $t('New workout') }}
-        </span>
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
+    </template>
+    <template #title>
+      <!-- Workout details -->
+      <span v-if="currentWorkout">
+        <span v-if="currentWorkout.name">{{ currentWorkout.name }}</span>
+        <span v-else>{{ $t('New workout') }}</span>
+        <div class="subheading">
+          <span
+            v-if="currentWorkout.exercises && currentWorkout.exercises.length"
+            >{{ count(currentWorkout.time) }}</span
+          >
+          <span v-if="currentWorkout.description">
+            - {{ currentWorkout.description }}
+          </span>
+        </div>
+      </span>
+      <!-- This will be display while loading workouts -->
+      <span v-else>
+        {{ $t('New workout') }}
+      </span>
+    </template>
+    <template #icons>
       <v-btn
         v-if="currentWorkout.exercises && currentWorkout.exercises.length"
         icon
@@ -46,48 +42,43 @@
       >
         <v-icon>{{ mdi.contentSave }}</v-icon>
       </v-btn>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <exercise-list
-              :id="'new'"
-              :edit-workout="true"
-              class="exercise-list"
-            ></exercise-list>
+    </template>
 
-            <dialog-new-workout-add v-model="dialog"></dialog-new-workout-add>
+    <exercise-list
+      :id="'new'"
+      :edit-workout="true"
+      class="exercise-list"
+    ></exercise-list>
 
-            <v-speed-dial bottom right fixed>
-              <v-btn
-                slot="activator"
-                color="secondary"
-                class="button-workout-add"
-                dark
-                fab
-                @click="addExercise"
-              >
-                <v-icon>{{ mdi.playlistPlus }}</v-icon>
-              </v-btn>
-            </v-speed-dial>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+    <dialog-new-workout-add v-model="dialog"></dialog-new-workout-add>
+
+    <v-speed-dial bottom right fixed>
+      <v-btn
+        slot="activator"
+        color="secondary"
+        class="button-workout-add"
+        dark
+        fab
+        @click="addExercise"
+      >
+        <v-icon>{{ mdi.playlistPlus }}</v-icon>
+      </v-btn>
+    </v-speed-dial>
+  </app-container>
 </template>
 
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import IRCRA from 'ircra'
 import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList'
 import DialogNewWorkoutAdd from '@/components/molecules/DialogNewWorkoutAdd/DialogNewWorkoutAdd'
 import { getImg, count } from '@/misc/helpers'
-import { mdiPlaylistPlus, mdiContentSave, mdiArrowLeft } from '@mdi/js'
+import { mdiPlaylistPlus, mdiContentSave } from '@mdi/js'
 
 export default {
   components: {
+    AppContainer,
     ExerciseList,
     DialogNewWorkoutAdd
   },
@@ -100,8 +91,7 @@ export default {
     dialog: false,
     mdi: {
       playlistPlus: mdiPlaylistPlus,
-      contentSave: mdiContentSave,
-      arrowLeft: mdiArrowLeft
+      contentSave: mdiContentSave
     },
     meta: {
       title: 'New workout'

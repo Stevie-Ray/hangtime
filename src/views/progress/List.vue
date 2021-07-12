@@ -269,14 +269,7 @@ import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import LineChart from '@/components/atoms/LineChart/LineChart'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg, count, shortDate } from '@/misc/helpers'
-import {
-  mdiPencil,
-  mdiPencilOff,
-  mdiArrowLeft,
-  mdiTimer,
-  mdiTune,
-  mdiDelete
-} from '@mdi/js'
+import { mdiPencil, mdiPencilOff, mdiTimer, mdiTune, mdiDelete } from '@mdi/js'
 
 export default {
   components: {
@@ -300,7 +293,6 @@ export default {
     mdi: {
       pencil: mdiPencil,
       pencilOff: mdiPencilOff,
-      arrowLeft: mdiArrowLeft,
       timer: mdiTimer,
       tune: mdiTune,
       delete: mdiDelete

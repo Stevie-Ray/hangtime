@@ -1,7 +1,9 @@
 <template>
-  <v-layout class="exercise">
-    <v-app-bar color="primary" app dark fixed>
+  <app-container name="Exercise">
+    <template #back-link>
       <v-icon @click="goBack">{{ mdi.arrowLeft }}</v-icon>
+    </template>
+    <template #avatar>
       <v-avatar
         v-if="currentWorkout && currentWorkout.user"
         class="grey lighten-2"
@@ -13,16 +15,16 @@
           :alt="currentWorkout.user.displayName"
         />
       </v-avatar>
-      <v-toolbar-title v-if="currentExercise">
-        <workout-item-name :data="currentExercise"></workout-item-name>
+    </template>
+    <template v-if="currentExercise" #title>
+      <workout-item-name :data="currentExercise"></workout-item-name>
 
-        <div v-if="currentExercise.time" class="subheading">
-          {{ count(currentExercise.time) }}
-        </div>
-      </v-toolbar-title>
+      <div v-if="currentExercise.time" class="subheading">
+        {{ count(currentExercise.time) }}
+      </div>
+    </template>
 
-      <v-spacer></v-spacer>
-
+    <template #icons>
       <v-btn v-if="!editWorkout && userWorkout" icon @click="edit = true">
         <v-icon>{{ mdi.pencil }}</v-icon>
       </v-btn>
@@ -48,44 +50,38 @@
           }}
         </v-icon>
       </v-btn>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <!-- Get exercises item -->
-            <v-form ref="form" v-model="valid">
-              <exercise-item
-                v-if="currentExercise"
-                :id="id"
-                :index="index"
-                :data="currentExercise"
-                :edit-workout="editWorkout"
-              ></exercise-item>
-            </v-form>
+    </template>
 
-            <v-speed-dial bottom right fixed>
-              <v-btn
-                v-if="editWorkout"
-                slot="activator"
-                class="button-exercise-add"
-                color="secondary"
-                dark
-                fab
-                @click="clickUpdateExercise"
-              >
-                <v-icon>{{ mdi.contentSave }}</v-icon>
-              </v-btn>
-            </v-speed-dial>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+    <!-- Get exercises item -->
+    <v-form ref="form" v-model="valid">
+      <exercise-item
+        v-if="currentExercise"
+        :id="id"
+        :index="index"
+        :data="currentExercise"
+        :edit-workout="editWorkout"
+      ></exercise-item>
+    </v-form>
+
+    <v-speed-dial bottom right fixed>
+      <v-btn
+        v-if="editWorkout"
+        slot="activator"
+        class="button-exercise-add"
+        color="secondary"
+        dark
+        fab
+        @click="clickUpdateExercise"
+      >
+        <v-icon>{{ mdi.contentSave }}</v-icon>
+      </v-btn>
+    </v-speed-dial>
+  </app-container>
 </template>
 
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import ExerciseItem from '@/components/organisms/ExerciseItem/ExerciseItem'
 import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
 import { getImg, count } from '@/misc/helpers'
@@ -99,7 +95,7 @@ import {
 } from '@mdi/js'
 
 export default {
-  components: { WorkoutItemName, ExerciseItem },
+  components: { WorkoutItemName, ExerciseItem, AppContainer },
   props: {
     id: String,
     index: Number,

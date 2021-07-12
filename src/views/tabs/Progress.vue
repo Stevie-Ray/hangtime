@@ -81,20 +81,12 @@
 import { mapState, mapGetters } from 'vuex'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import { getImg, count, shortDate } from '@/misc/helpers'
-import {
-  mdiArrowLeft,
-  mdiPlus,
-  mdiMedal,
-  mdiPageLast,
-  mdiTimer,
-  mdiRepeat
-} from '@mdi/js'
+import { mdiPlus, mdiMedal, mdiPageLast, mdiTimer, mdiRepeat } from '@mdi/js'
 
 export default {
   components: { Hangboard },
   data: () => ({
     mdi: {
-      arrowLeft: mdiArrowLeft,
       plus: mdiPlus,
       medal: mdiMedal,
       pageLast: mdiPageLast,

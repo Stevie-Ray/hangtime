@@ -111,7 +111,6 @@ import NoSleep from 'nosleep.js'
 import DialogWorkoutComplete from '@/components/molecules/DialogWorkoutComplete/DialogWorkoutComplete'
 import { count, getImg, sound, speak, weightConverter } from '@/misc/helpers'
 import {
-  mdiArrowLeft,
   mdiTimer,
   mdiSkipNext,
   mdiSkipPrevious,
@@ -156,7 +155,6 @@ export default {
       skipPrevious: mdiSkipPrevious,
       play: mdiPlay,
       pause: mdiPause,
-      arrowLeft: mdiArrowLeft,
       history: mdiHistory,
       weight: mdiWeight
     }

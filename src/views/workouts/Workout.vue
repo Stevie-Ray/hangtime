@@ -1,9 +1,6 @@
 <template>
-  <v-layout class="workout-list">
-    <v-app-bar color="primary" app dark fixed>
-      <v-icon @click="$router.push({ path: currentTab })">{{
-        mdi.arrowLeft
-      }}</v-icon>
+  <app-container name="Workout list" :back-link="{ path: currentTab }">
+    <template #avatar>
       <v-avatar
         v-if="currentWorkout"
         size="32px"
@@ -16,25 +13,24 @@
           :alt="currentWorkout.user.displayName"
         />
       </v-avatar>
-      <v-toolbar-title @click="dialogs.general = true">
-        <!-- Workout details -->
-        <span v-if="currentWorkout">
-          <span v-if="currentWorkout.name">{{ currentWorkout.name }}</span>
-          <div class="subheading">
-            <span>{{ count(currentWorkout.time) }}</span>
-            <span v-if="currentWorkout.description">
-              - {{ currentWorkout.description }}
-            </span>
-          </div>
-        </span>
-        <!-- This will be display while loading workouts -->
-        <span v-else>
-          {{ $t('Fetching workout...') }}
-        </span>
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
+    </template>
+    <template #title @click="dialogs.general = true">
+      <!-- Workout details -->
+      <span v-if="currentWorkout">
+        <span v-if="currentWorkout.name">{{ currentWorkout.name }}</span>
+        <div class="subheading">
+          <span>{{ count(currentWorkout.time) }}</span>
+          <span v-if="currentWorkout.description">
+            - {{ currentWorkout.description }}
+          </span>
+        </div>
+      </span>
+      <!-- This will be display while loading workouts -->
+      <span v-else>
+        {{ $t('Fetching workout...') }}
+      </span>
+    </template>
+    <template #icons>
       <!-- share -->
       <workout-share
         v-if="currentWorkout && userWorkout && !editWorkout"
@@ -77,114 +73,108 @@
           </v-list-item>
         </v-list>
       </v-menu>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <v-responsive
-              v-if="
-                currentWorkout &&
-                currentWorkout.video &&
-                parseVideo(currentWorkout.video)
-              "
-              :aspect-ratio="16 / 9"
-            >
-              <iframe
-                width="100%"
-                height="100%"
-                :src="parseVideo(currentWorkout.video)"
-                frameborder="0"
-              ></iframe>
-            </v-responsive>
+    </template>
 
-            <!-- Get exercises list -->
-            <exercise-list
-              :id="id"
-              :edit-workout="editWorkout"
-              class="exercise-list"
-            ></exercise-list>
+    <v-responsive
+      v-if="
+        currentWorkout &&
+        currentWorkout.video &&
+        parseVideo(currentWorkout.video)
+      "
+      :aspect-ratio="16 / 9"
+    >
+      <iframe
+        width="100%"
+        height="100%"
+        :src="parseVideo(currentWorkout.video)"
+        frameborder="0"
+      ></iframe>
+    </v-responsive>
 
-            <!--  Check if user has current hangboard-->
-            <v-dialog v-model="hasHangboard" persistent max-width="500">
-              <v-card>
-                <v-card-title class="text-h5">
-                  {{ $t('You are not using this hangboard') }}
-                </v-card-title>
+    <!-- Get exercises list -->
+    <exercise-list
+      :id="id"
+      :edit-workout="editWorkout"
+      class="exercise-list"
+    ></exercise-list>
 
-                <v-card-text>
-                  {{
-                    $t(
-                      "To view this workout we'll add this hangboard to your hangboards"
-                    )
-                  }}
-                </v-card-text>
+    <!--  Check if user has current hangboard-->
+    <v-dialog v-model="hasHangboard" persistent max-width="500">
+      <v-card>
+        <v-card-title class="text-h5">
+          {{ $t('You are not using this hangboard') }}
+        </v-card-title>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+        <v-card-text>
+          {{
+            $t(
+              "To view this workout we'll add this hangboard to your hangboards"
+            )
+          }}
+        </v-card-text>
 
-                  <v-btn color="green darken-1" text @click="addHangboard">
-                    {{ $t('Ok') }}
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+        <v-card-actions>
+          <v-spacer></v-spacer>
 
-            <!-- General Dialog -->
-            <dialog-workout-general
-              v-if="currentWorkout"
-              v-model="dialogs.general"
-              :edit="edit"
-              :edit-workout="editWorkout"
-              :current-workout="currentWorkout"
-              :user-workout="userWorkout"
-              @edit="edit = true"
-            ></dialog-workout-general>
+          <v-btn color="green darken-1" text @click="addHangboard">
+            {{ $t('Ok') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
-            <!-- Delete Dialog -->
-            <dialog-workout-delete
-              v-if="currentWorkout"
-              v-model="dialogs.delete"
-              :current-workout="currentWorkout"
-            ></dialog-workout-delete>
+    <!-- General Dialog -->
+    <dialog-workout-general
+      v-if="currentWorkout"
+      v-model="dialogs.general"
+      :edit="edit"
+      :edit-workout="editWorkout"
+      :current-workout="currentWorkout"
+      :user-workout="userWorkout"
+      @edit="edit = true"
+    ></dialog-workout-general>
 
-            <dialog-user-image
-              v-if="currentWorkout"
-              v-model="dialogs.user"
-              :data="currentWorkout.user"
-            ></dialog-user-image>
+    <!-- Delete Dialog -->
+    <dialog-workout-delete
+      v-if="currentWorkout"
+      v-model="dialogs.delete"
+      :current-workout="currentWorkout"
+    ></dialog-workout-delete>
 
-            <v-speed-dial bottom right fixed>
-              <v-btn
-                v-if="!editWorkout"
-                slot="activator"
-                color="secondary"
-                dark
-                fab
-                :to="{ name: 'run', params: { data: currentWorkout } }"
-              >
-                <v-icon>{{ mdi.play }}</v-icon>
-              </v-btn>
-              <v-btn
-                v-if="editWorkout"
-                slot="activator"
-                color="secondary"
-                dark
-                fab
-                @click="addExercise"
-              >
-                <v-icon>{{ mdi.playlistPlus }}</v-icon>
-              </v-btn>
-            </v-speed-dial>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-layout>
+    <dialog-user-image
+      v-if="currentWorkout"
+      v-model="dialogs.user"
+      :data="currentWorkout.user"
+    ></dialog-user-image>
+
+    <v-speed-dial bottom right fixed>
+      <v-btn
+        v-if="!editWorkout"
+        slot="activator"
+        color="secondary"
+        dark
+        fab
+        :to="{ name: 'run', params: { data: currentWorkout } }"
+      >
+        <v-icon>{{ mdi.play }}</v-icon>
+      </v-btn>
+      <v-btn
+        v-if="editWorkout"
+        slot="activator"
+        color="secondary"
+        dark
+        fab
+        @click="addExercise"
+      >
+        <v-icon>{{ mdi.playlistPlus }}</v-icon>
+      </v-btn>
+    </v-speed-dial>
+  </app-container>
 </template>
 
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList'
 import WorkoutSubscribe from '@/components/molecules/WorkoutSubscribe/WorkoutSubscribe'
 import WorkoutShare from '@/components/molecules/WorkoutShare/WorkoutShare'
@@ -194,7 +184,6 @@ import DialogUserImage from '@/components/molecules/DialogUserImage/DialogUserIm
 import { count } from '@/misc/helpers'
 import urlParser from 'js-video-url-parser'
 import {
-  mdiArrowLeft,
   mdiDotsVertical,
   mdiContentSave,
   mdiPlay,
@@ -204,6 +193,7 @@ import {
 
 export default {
   components: {
+    AppContainer,
     ExerciseList,
     WorkoutSubscribe,
     WorkoutShare,
@@ -229,7 +219,6 @@ export default {
       user: false
     },
     mdi: {
-      arrowLeft: mdiArrowLeft,
       dotsVertical: mdiDotsVertical,
       contentSave: mdiContentSave,
       pencil: mdiPencil,

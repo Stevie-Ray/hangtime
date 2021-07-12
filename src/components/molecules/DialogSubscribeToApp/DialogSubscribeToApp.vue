@@ -125,7 +125,7 @@
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { getImg, count } from '@/misc/helpers'
-import { mdiArrowLeft, mdiCashMultiple, mdiDelete } from '@mdi/js'
+import { mdiCashMultiple, mdiDelete } from '@mdi/js'
 
 export default {
   props: {
@@ -136,7 +136,6 @@ export default {
   data: () => ({
     show: true,
     mdi: {
-      arrowLeft: mdiArrowLeft,
       delete: mdiDelete,
       cashMultiple: mdiCashMultiple
     },
