@@ -2096,6 +2096,20 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Evolv x Kilter',
+      description: 'Rock Climbing & Bouldering Gear',
+      id: 84,
+      website: 'https://www.evolvsports.com/',
+      hangboards: [
+        {
+          name: 'Basic Training Board',
+          id: 0,
+          image: 'hangboards/EVOLVBASIC.svg',
+          holds: 3
+        }
+      ]
     }
   ]
 }

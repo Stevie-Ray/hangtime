@@ -1,6 +1,8 @@
+// import { preset } from 'vue-cli-plugin-vuetify-preset-basil/preset'
 // https://color.adobe.com/_DS89712-color-theme-12679944
 // eslint-disable-next-line no-unused-vars
 const options = {
+  // preset,
   icons: {
     iconfont: 'mdiSvg'
   },
