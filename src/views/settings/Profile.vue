@@ -28,7 +28,11 @@
                 <v-btn slot="badge" icon @click="selectFile('user')">
                   <v-icon>{{ mdi.camera }}</v-icon>
                 </v-btn>
-                <v-avatar size="72" @click="selectFile(false)">
+                <v-avatar
+                  size="72"
+                  @click="selectFile(false)"
+                  class="grey lighten-2"
+                >
                   <img
                     v-if="user.photoURL || user.pictureURL"
                     :src="userPhoto"

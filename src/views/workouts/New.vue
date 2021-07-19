@@ -1,5 +1,5 @@
 <template>
-  <app-container name="Workout List" :back-link="{ currentTab }">
+  <app-container name="Workout List" :back-link="{ path: currentTab }">
     <template #avatar>
       <v-avatar
         v-if="currentWorkout && user"
@@ -157,8 +157,7 @@ export default {
           displayName: this.user.displayName,
           grade: this.user.settings.grade,
           id: this.user.id,
-          photoURL: this.user.photoURL,
-          pictureURL: this.user.pictureURL
+          photoURL: this.userPhoto
         }
       })
       this.$router.push({
