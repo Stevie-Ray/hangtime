@@ -1871,21 +1871,21 @@ export default {
     },
     {
       name: 'Woodoclimb',
-      description: '',
+      description: 'Find your way, 100% designed and made in Italy',
       id: 74,
       website: 'http://www.woodoclimb.com/',
       hangboards: [
         {
           name: 'Change V2',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WOODOCHANGE2.svg',
+          holds: 14
         },
         {
           name: 'Tricky V2',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WOODOTRICKY2.svg',
+          holds: 14
         }
       ]
     },
