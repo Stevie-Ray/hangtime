@@ -30,8 +30,8 @@
                 </v-btn>
                 <v-avatar
                   size="72"
-                  @click="selectFile(false)"
                   class="grey lighten-2"
+                  @click="selectFile(false)"
                 >
                   <img
                     v-if="user.photoURL || user.pictureURL"

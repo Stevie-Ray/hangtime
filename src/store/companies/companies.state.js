@@ -2110,6 +2110,50 @@ export default {
           holds: 3
         }
       ]
+    },
+    {
+      name: 'ScallyWags Climbing',
+      description: 'South Africa Climbing brand',
+      id: 85,
+      website: 'https://www.scallywagsclimbing.com/',
+      hangboards: [
+        {
+          name: 'Dapper Board Vol. III/IV',
+          id: 0,
+          image: 'hangboards/SCALLYDAPPER.svg',
+          sides: [
+            {
+              name: '0°',
+              image: 'hangboards/SCALLYDAPPER.svg',
+              holds: 7
+            },
+            {
+              name: '180°',
+              image: 'hangboards/SCALLYDAPPER180.svg',
+              holds: 7
+            }
+          ],
+          holds: 7
+        },
+        {
+          name: 'Swank Board',
+          id: 1,
+          image: 'hangboards/SCALLYSWANK.svg',
+          sides: [
+            {
+              name: '0°',
+              image: 'hangboards/SCALLYSWANK.svg',
+              holds: 2
+            },
+            {
+              name: '180°',
+              image: 'hangboards/SCALLYSWANK180.svg',
+              holds: 2
+            }
+          ],
+          holds: 2
+        }
+      ]
     }
   ]
 }
