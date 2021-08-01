@@ -2125,15 +2125,25 @@ export default {
             {
               name: '0°',
               image: 'hangboards/SCALLYDAPPER.svg',
-              holds: 7
+              holds: 6
             },
             {
               name: '180°',
               image: 'hangboards/SCALLYDAPPER180.svg',
-              holds: 7
+              holds: 6
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/SCALLYDAPPERBACK.svg',
+              holds: 1
+            },
+            {
+              name: 'Back 180°',
+              image: 'hangboards/SCALLYDAPPERBACK180.svg',
+              holds: 1
             }
           ],
-          holds: 7
+          holds: 8
         },
         {
           name: 'Swank Board',
@@ -2143,12 +2153,17 @@ export default {
             {
               name: '0°',
               image: 'hangboards/SCALLYSWANK.svg',
-              holds: 2
+              holds: 3
             },
             {
               name: '180°',
               image: 'hangboards/SCALLYSWANK180.svg',
-              holds: 2
+              holds: 3
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/SCALLYSWANKBACK.svg',
+              holds: 1
             }
           ],
           holds: 2

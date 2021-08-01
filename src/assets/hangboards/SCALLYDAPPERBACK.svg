@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="581px" height="377px" viewBox="0 0 581 377" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>SCALLYDAPPERBACK</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SCALLYDAPPERBACK" transform="translate(0.000000, 1.000000)" stroke="#000000">
+            <path d="M581,375 L19,375 C9.0588745,375 1,366.941125 1,357 L1,40 C1,30.0588745 9.0588745,22 19,22 L581,22" id="board" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <rect id="board" x="87" y="175" width="82" height="48" rx="8"></rect>
+            <path d="M581,199 L451,199 C444.924868,199 440,194.075132 440,188 L440,134 C440,127.924868 444.924868,123 451,123 L581,123" id="h2" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <path d="M581,3.58824082e-13 C218.844795,0.378995145 31.5114617,0.568492717 19,0.568492717 C6.48853826,0.568492717 0.488538259,13.9018261 1,40.5684927 C1,30.6273672 9.0588745,22.5684927 19,22.5684927 L581,22.5684927" id="h1" fill="#FFFFFF" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

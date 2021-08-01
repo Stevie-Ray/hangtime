@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="581px" height="376px" viewBox="0 0 581 376" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>SCALLYDAPPERBACK180</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SCALLYDAPPERBACK180" transform="translate(290.500000, 188.000000) scale(1, -1) translate(-290.500000, -188.000000) translate(0.000000, 1.000000)" stroke="#000000">
+            <path d="M581,353 L19,353 C9.0588745,353 1,344.941125 1,335 L1,18 C1,8.0588745 9.0588745,0 19,0 L581,0" id="board" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <rect id="board" x="87" y="153" width="82" height="48" rx="8"></rect>
+            <path d="M581,177 L451,177 C444.924868,177 440,172.075132 440,166 L440,112 C440,105.924868 444.924868,101 451,101 L581,101" id="h2" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <path d="M581,333 C218.844795,333.378995 31.5114617,333.568493 19,333.568493 C6.48853826,333.568493 0.488538259,346.901826 1,373.568493 C1,363.627367 9.0588745,355.568493 19,355.568493 L581,355.568493" id="h1" fill="#FFFFFF" fill-rule="nonzero" transform="translate(290.984935, 353.284246) scale(1, -1) translate(-290.984935, -353.284246) "></path>
+        </g>
+    </g>
+</svg>
