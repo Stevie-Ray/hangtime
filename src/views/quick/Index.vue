@@ -9,7 +9,7 @@
     <v-row
       justify="space-around"
       align="center"
-      class="fill-height text-center"
+      class="fill-height text-center canvas column"
       no-gutters
     >
       <circle-timer
@@ -18,60 +18,58 @@
         :pause-button="pauseWorkout"
       ></circle-timer>
 
-      <v-row justify="center" align="start" no-gutters>
-        <v-col cols="6" justify="center">
-          <v-row justify="center" align="start">
-            <!-- Hold -->
-            <v-col cols="12">
-              <v-text-field
-                v-model="hold"
-                :disabled="startWorkout"
-                hide-details
-                min="0"
-                type="number"
-                :label="$t('Hold')"
-                :append-outer-icon="mdi.plus"
-                :prepend-icon="mdi.minus"
-                @click:append-outer="increment('hold')"
-                @click:prepend="decrement('hold')"
-              >
-              </v-text-field>
-            </v-col>
-            <!-- Pause -->
-            <v-col cols="12">
-              <v-text-field
-                v-model="pause"
-                :disabled="startWorkout"
-                min="0"
-                hide-details
-                type="number"
-                :label="$t('Pause')"
-                :append-outer-icon="mdi.plus"
-                :prepend-icon="mdi.minus"
-                @click:append-outer="increment('pause')"
-                @click:prepend="decrement('pause')"
-              >
-              </v-text-field>
-            </v-col>
-            <!-- Repeat -->
-            <v-col cols="12">
-              <v-text-field
-                v-model="repeat"
-                :disabled="startWorkout"
-                hide-details
-                min="0"
-                type="number"
-                :label="$t('Repeat')"
-                :append-outer-icon="mdi.plus"
-                :prepend-icon="mdi.minus"
-                @click:append-outer="increment('repeat')"
-                @click:prepend="decrement('repeat')"
-              >
-              </v-text-field>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
+      <v-col cols="6" class="pt-4" justify="center">
+        <v-row justify="center" align="start">
+          <!-- Hold -->
+          <v-col cols="12">
+            <v-text-field
+              v-model="hold"
+              :disabled="startWorkout"
+              hide-details
+              min="0"
+              type="number"
+              :label="$t('Hold')"
+              :append-outer-icon="mdi.plus"
+              :prepend-icon="mdi.minus"
+              @click:append-outer="increment('hold')"
+              @click:prepend="decrement('hold')"
+            >
+            </v-text-field>
+          </v-col>
+          <!-- Pause -->
+          <v-col cols="12">
+            <v-text-field
+              v-model="pause"
+              :disabled="startWorkout"
+              min="0"
+              hide-details
+              type="number"
+              :label="$t('Pause')"
+              :append-outer-icon="mdi.plus"
+              :prepend-icon="mdi.minus"
+              @click:append-outer="increment('pause')"
+              @click:prepend="decrement('pause')"
+            >
+            </v-text-field>
+          </v-col>
+          <!-- Repeat -->
+          <v-col cols="12">
+            <v-text-field
+              v-model="repeat"
+              :disabled="startWorkout"
+              hide-details
+              min="0"
+              type="number"
+              :label="$t('Repeat')"
+              :append-outer-icon="mdi.plus"
+              :prepend-icon="mdi.minus"
+              @click:append-outer="increment('repeat')"
+              @click:prepend="decrement('repeat')"
+            >
+            </v-text-field>
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
 
     <v-fab-transition>
