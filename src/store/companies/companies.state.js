@@ -1487,34 +1487,34 @@ export default {
       website: 'https://www.2climb.cz/',
       hangboards: [
         {
-          name: 'Crux',
+          name: 'Approach',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/2CLIMBAPPROACH.svg',
+          holds: 7
+        },
+        {
+          name: 'Crimp Travel',
+          id: 1,
+          image: 'hangboards/2CLIMBCRIMPTRAVEL.svg',
+          holds: 2
+        },
+        {
+          name: 'Crux',
+          id: 2,
+          image: 'hangboards/2CLIMBCRUX.svg',
+          holds: 11
         },
         {
           name: 'Gamechanger',
-          id: 1,
+          id: 3,
           image: 'hangboards/2CLIMBGAMECHANGER.svg',
           holds: 9
         },
         {
           name: 'Onsight',
-          id: 2,
-          image: 'hangboards/2CLIMBINSIGHT.svg',
-          holds: 10
-        },
-        {
-          name: 'Approach',
-          id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
-        },
-        {
-          name: 'Crimp Travel',
           id: 4,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/2CLIMBONSIGHT.svg',
+          holds: 10
         }
       ]
     },
