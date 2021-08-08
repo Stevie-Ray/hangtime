@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="585px" height="134px" viewBox="0 0 585 134" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>WORK1950FINGER</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="WORK1950FINGER" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M584,132 L23,132 C10.2974508,132 0,121.702549 0,109 L0,23 C0,10.2974508 10.2974508,0 23,0 L584,0" id="board"></path>
+            <circle id="h5" cx="361.5" cy="85.5" r="21.5"></circle>
+            <circle id="h7" cx="548.5" cy="85.5" r="21.5"></circle>
+            <rect id="h3" x="19" y="64" width="177" height="43" rx="21.5"></rect>
+            <rect id="h4" x="223" y="64" width="90" height="43" rx="21.5"></rect>
+            <rect id="h6" x="410" y="64" width="90" height="43" rx="21.5"></rect>
+            <path d="M584,3.99680289e-13 L383,3.99680289e-13 C382.544181,16.4732042 390.894809,24.7098064 408.051884,24.7098064 C425.208959,24.7098064 483.858331,24.7098064 584,24.7098064" id="h2"></path>
+            <path d="M382.982305,-4.54747351e-13 C382.91802,16.4732042 391.923918,24.7098064 410,24.7098064 C410,24.7098064 273.333333,24.7098064 0,24.7098064 C1.13257674,8.23660212 10.1325767,-4.54747351e-13 27,-4.54747351e-13 C43.8674233,-4.54747351e-13 162.528192,-4.54747351e-13 382.982305,-4.54747351e-13 Z" id="h1"></path>
+        </g>
+    </g>
+</svg>

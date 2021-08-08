@@ -1445,38 +1445,38 @@ export default {
         {
           name: 'Campboard',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WORK1950CAMP.svg',
+          holds: 7
         },
         {
           name: 'Cascade +',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WORK1950CASCADE.svg',
+          holds: 6
         },
         {
           name: 'Ergo',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WORK1950ERGO.svg',
+          holds: 11
         },
         {
           name: 'Papijo',
           id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WORK1950PAPIJO.svg',
+          holds: 6
         },
         {
-          name: 'Portable Fingerboard No.3',
+          name: 'Fingerboard No.3',
           id: 4,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WORK1950FINGER.svg',
+          holds: 6
         },
         {
           name: 'SimpleBoard',
           id: 5,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WORK1950SIMPLE.svg',
+          holds: 4
         }
       ]
     },
