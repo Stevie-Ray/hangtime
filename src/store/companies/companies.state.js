@@ -1100,7 +1100,7 @@ export default {
     },
     {
       name: 'AIX',
-      description: '',
+      description: 'Climbing Holds, Volumes & Walls.',
       id: 43,
       website: 'https://www.aix.cz/',
       hangboards: [
@@ -1108,25 +1108,25 @@ export default {
           name: 'Training Board 1',
           id: 0,
           image: 'hangboards/AIXTRAINING1.svg',
-          holds: 0
+          holds: 9
         },
         {
           name: 'Training Board 2',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/AIXTRAINING2.svg',
+          holds: 7
         },
         {
           name: 'Training Board 3',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/AIXTRAINING3.svg',
+          holds: 3
         },
         {
           name: 'Woodboard',
           id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/AIXWOODEN.svg',
+          holds: 3
         }
       ]
     },
@@ -1377,8 +1377,8 @@ export default {
         {
           name: 'Midnight Hangboard',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ACRONMIDNIGHT.svg',
+          holds: 11
         }
       ]
     },
@@ -1391,8 +1391,8 @@ export default {
         {
           name: 'ArtBoard',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ARTLINEBOARD.svg',
+          holds: 9
         }
       ]
     },
@@ -2092,8 +2092,8 @@ export default {
         {
           name: 'Affenbrett (Monkey Board)',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/ADDENHOLZBRETT.svg',
+          holds: 3
         }
       ]
     },

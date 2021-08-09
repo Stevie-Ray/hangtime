@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="557px" height="430px" viewBox="0 0 557 430" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ADDENHOLZBRETT</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ADDENHOLZBRETT" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M556,428 L10,428 C4.4771525,428 0,423.522847 0,418 L0,10 C0,4.4771525 4.4771525,0 10,0 L556,0" id="board"></path>
+            <path d="M556,155 L98,155 C73.699471,155 54,135.300529 54,111 C54,86.699471 73.699471,67 98,67 L556,67" id="h1"></path>
+            <rect id="h2" x="54" y="269" width="290" height="88" rx="44"></rect>
+            <circle id="h3" cx="300" cy="313" r="44"></circle>
+            <path d="M556,357 L442,357 C417.699471,357 398,337.300529 398,313 C398,288.699471 417.699471,269 442,269 L556,269" id="h4"></path>
+        </g>
+    </g>
+</svg>

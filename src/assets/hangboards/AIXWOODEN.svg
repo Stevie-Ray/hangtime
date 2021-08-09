@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="578px" height="389px" viewBox="0 0 578 389" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AIXWOODEN</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AIXWOODEN" transform="translate(1.374593, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <polyline id="board" points="575.625407 387 25.6254066 387 25.6254066 0 575.625407 0"></polyline>
+            <polyline id="h1" points="575.625407 32.3479061 0 32.3479061 0 61.659663 575.625407 61.659663"></polyline>
+            <polyline id="board" points="575.625407 61.659663 5.68434189e-14 61.659663 16.6535307 102.695042 575.625407 102.695042"></polyline>
+            <polyline id="h2" points="575.625407 140.536894 8.40072263 140.536894 8.40072263 164.192101 575.625407 164.192101"></polyline>
+            <polyline id="board" points="575.625407 164.192101 8.40072263 164.192101 18.0373965 193.5 575.625407 193.5"></polyline>
+            <polyline id="h3" points="575.625407 229.808796 12.3784121 229.808796 12.3784121 249.059134 575.625407 249.059134"></polyline>
+            <polyline id="board" points="575.625407 249.059134 12.3784121 249.059134 21.6703413 266.165405 575.625407 266.165405"></polyline>
+            <polyline id="h4" points="575.625407 304.625081 20.2547734 304.625081 20.2547734 336.744069 575.625407 336.744069"></polyline>
+        </g>
+    </g>
+</svg>
