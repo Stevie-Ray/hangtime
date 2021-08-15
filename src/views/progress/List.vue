@@ -265,11 +265,11 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import { mdiPencil, mdiPencilOff, mdiTimer, mdiTune, mdiDelete } from '@mdi/js'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import LineChart from '@/components/atoms/LineChart/LineChart'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg, count, shortDate } from '@/misc/helpers'
-import { mdiPencil, mdiPencilOff, mdiTimer, mdiTune, mdiDelete } from '@mdi/js'
 
 export default {
   components: {

@@ -217,8 +217,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { mdiArrowLeft } from '@mdi/js'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 
 export default {
   components: {

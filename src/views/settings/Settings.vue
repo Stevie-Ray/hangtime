@@ -145,10 +145,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getImg } from '@/misc/helpers'
 import { SimpleSVG } from 'vue-simple-svg'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
-
 import {
   mdiCog,
   mdiTimer,
@@ -157,6 +154,8 @@ import {
   mdiCashMultiple,
   mdiFacebook
 } from '@mdi/js'
+import { getImg } from '@/misc/helpers'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 
 export default {
   components: {

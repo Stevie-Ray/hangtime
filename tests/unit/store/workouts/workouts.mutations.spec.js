@@ -1,5 +1,5 @@
-import mutations from '@/store/workouts/workouts.mutations'
 import { cloneDeep } from 'lodash'
+import mutations from '@/store/workouts/workouts.mutations'
 
 const workout1 = { id: 1, name: 'workout1' }
 const workout2 = { id: 2, name: 'workout2' }

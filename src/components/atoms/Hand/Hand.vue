@@ -52,8 +52,8 @@
 <script>
 import { mapState } from 'vuex'
 import { SimpleSVG } from 'vue-simple-svg'
-import { getImg } from '@/misc/helpers'
 import { mdiHand, mdiUndo } from '@mdi/js'
+import { getImg } from '@/misc/helpers'
 
 export default {
   components: { 'svg-inline': SimpleSVG },

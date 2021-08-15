@@ -120,14 +120,13 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import { mdiPlay, mdiPause } from '@mdi/js'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import Hand from '@/components/atoms/Hand/Hand'
 import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
 import CircleTimer from '@/components/molecules/CircleTimer/CircleTimer'
 import DialogSubscribeToApp from '@/components/molecules/DialogSubscribeToApp/DialogSubscribeToApp'
-
-import { mdiPlay, mdiPause } from '@mdi/js'
 
 export default {
   components: {

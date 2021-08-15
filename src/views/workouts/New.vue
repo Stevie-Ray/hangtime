@@ -69,12 +69,12 @@
 
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import IRCRA from 'ircra'
+import { mdiPlaylistPlus, mdiContentSave } from '@mdi/js'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList'
 import DialogNewWorkoutAdd from '@/components/molecules/DialogNewWorkoutAdd/DialogNewWorkoutAdd'
 import { getImg, count } from '@/misc/helpers'
-import { mdiPlaylistPlus, mdiContentSave } from '@mdi/js'
 
 export default {
   components: {

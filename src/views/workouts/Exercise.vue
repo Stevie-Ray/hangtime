@@ -81,10 +81,6 @@
 
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
-import ExerciseItem from '@/components/organisms/ExerciseItem/ExerciseItem'
-import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
-import { getImg, count } from '@/misc/helpers'
 import {
   mdiArrowLeft,
   mdiContentSave,
@@ -93,6 +89,10 @@ import {
   mdiAutorenew,
   mdiDelete
 } from '@mdi/js'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
+import ExerciseItem from '@/components/organisms/ExerciseItem/ExerciseItem'
+import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
+import { getImg, count } from '@/misc/helpers'
 
 export default {
   components: { WorkoutItemName, ExerciseItem, AppContainer },

@@ -97,9 +97,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import { getImg } from '@/misc/helpers'
 import { orderBy } from 'lodash'
 import { mdiNumeric1Box, mdiNumeric2Box } from '@mdi/js'
+import { getImg } from '@/misc/helpers'
 
 export default {
   data: () => ({

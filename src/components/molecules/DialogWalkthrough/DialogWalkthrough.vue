@@ -175,8 +175,8 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 import IRCRA from 'ircra'
-import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect'
 import { mdiChartGantt, mdiChartTimelineVariant } from '@mdi/js'
+import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect'
 
 export default {
   components: { HangboardSelect },

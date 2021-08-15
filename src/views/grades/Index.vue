@@ -41,8 +41,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import IRCRA from 'ircra'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 
 export default {
   components: {

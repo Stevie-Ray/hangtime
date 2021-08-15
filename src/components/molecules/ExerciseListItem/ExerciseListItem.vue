@@ -52,8 +52,8 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import { getImg, count, weightConverter } from '@/misc/helpers'
 import { mdiDrag, mdiWeight } from '@mdi/js'
+import { getImg, count, weightConverter } from '@/misc/helpers'
 import WorkoutItemName from '@/components/atoms/WorkoutItemName/WorkoutItemName'
 
 export default {

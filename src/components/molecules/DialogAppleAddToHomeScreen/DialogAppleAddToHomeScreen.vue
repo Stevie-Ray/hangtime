@@ -41,8 +41,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getImg } from '@/misc/helpers'
 import { mdiOpenInApp } from '@mdi/js'
+import { getImg } from '@/misc/helpers'
 
 export default {
   data: () => ({

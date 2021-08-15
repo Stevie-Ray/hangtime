@@ -80,8 +80,8 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import WorkoutListItem from '@/components/molecules/WorkoutListItem/WorkoutListItem'
 import { mdiPlus } from '@mdi/js'
+import WorkoutListItem from '@/components/molecules/WorkoutListItem/WorkoutListItem'
 
 export default {
   components: { WorkoutListItem },

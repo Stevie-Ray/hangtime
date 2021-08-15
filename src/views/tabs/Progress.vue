@@ -79,9 +79,9 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import { mdiPlus, mdiMedal, mdiPageLast, mdiTimer, mdiRepeat } from '@mdi/js'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import { getImg, count, shortDate } from '@/misc/helpers'
-import { mdiPlus, mdiMedal, mdiPageLast, mdiTimer, mdiRepeat } from '@mdi/js'
 
 export default {
   components: { Hangboard },

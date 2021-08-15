@@ -68,8 +68,8 @@
 <script>
 import draggable from 'vuedraggable'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import ExerciseListItem from '@/components/molecules/ExerciseListItem/ExerciseListItem'
 import { mdiPlaylistPlus } from '@mdi/js'
+import ExerciseListItem from '@/components/molecules/ExerciseListItem/ExerciseListItem'
 
 export default {
   components: { ExerciseListItem, draggable },

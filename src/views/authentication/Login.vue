@@ -244,8 +244,8 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/app'
-import { getImg } from '@/misc/helpers'
 import { mdiGoogle, mdiFacebook, mdiIncognito, mdiKey } from '@mdi/js'
+import { getImg } from '@/misc/helpers'
 
 export default {
   data: () => ({

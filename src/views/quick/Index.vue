@@ -104,9 +104,9 @@
 
 <script>
 import { mapState } from 'vuex'
+import { mdiPlay, mdiPlus, mdiMinus, mdiPause, mdiUndo } from '@mdi/js'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import CircleTimer from '@/components/molecules/CircleTimer/CircleTimer'
-import { mdiPlay, mdiPlus, mdiMinus, mdiPause, mdiUndo } from '@mdi/js'
 
 export default {
   components: {

@@ -489,9 +489,6 @@
 
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import Hangboard from '@/components/atoms/Hangboard/Hangboard'
-import Hand from '@/components/atoms/Hand/Hand'
-import { getImg, count, weightConverter } from '@/misc/helpers'
 import {
   mdiClockOutline,
   mdiClock,
@@ -503,6 +500,9 @@ import {
   mdiHelpCircleOutline,
   mdiUndo
 } from '@mdi/js'
+import Hangboard from '@/components/atoms/Hangboard/Hangboard'
+import Hand from '@/components/atoms/Hand/Hand'
+import { getImg, count, weightConverter } from '@/misc/helpers'
 
 export default {
   components: { Hangboard, Hand },

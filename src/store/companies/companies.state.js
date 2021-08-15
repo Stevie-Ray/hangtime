@@ -2169,6 +2169,70 @@ export default {
           holds: 2
         }
       ]
+    },
+    {
+      name: 'Gripmonkeys',
+      description: 'Climbing Hangboards',
+      id: 86,
+      website: 'https://gripmonkeys.co.uk/',
+      hangboards: [
+        {
+          name: 'Climbing Hangboard (Default)',
+          id: 0,
+          image: 'hangboards/GRIPMONKEYSHANGBOARD.svg',
+          holds: 14
+        }
+      ]
+    },
+    {
+      name: 'One Stone',
+      description: 'AliExpress',
+      id: 87,
+      website: 'https://onestone.aliexpress.com/',
+      hangboards: [
+        {
+          name: 'CJ-HB2001',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'CJ-HB2002',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'CJ-HB2005',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'CJ-HB2007',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'CJ-HB2024',
+          id: 4,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'CJ-HB2046',
+          id: 5,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'CJ-HB2047',
+          id: 6,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }

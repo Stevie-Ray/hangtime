@@ -63,10 +63,10 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
-import { getImg } from '@/misc/helpers'
 import { mdiKey, mdiContentCopy, mdiDelete } from '@mdi/js'
 import firebase from 'firebase/app'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
+import { getImg } from '@/misc/helpers'
 import 'firebase/messaging'
 
 export default {

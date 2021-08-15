@@ -119,9 +119,9 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
+import { mdiDelete, mdiCashMultiple, mdiReload } from '@mdi/js'
 import { getImg, count } from '@/misc/helpers'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
-import { mdiDelete, mdiCashMultiple, mdiReload } from '@mdi/js'
 
 export default {
   components: {

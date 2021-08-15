@@ -108,10 +108,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import IRCRA from 'ircra'
-import { getImg } from '@/misc/helpers'
-
 import {
   mdiChartGantt,
   mdiThemeLightDark,
@@ -119,6 +116,8 @@ import {
   mdiWeight,
   mdiTranslate
 } from '@mdi/js'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
+import { getImg } from '@/misc/helpers'
 
 export default {
   components: {

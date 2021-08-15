@@ -24,8 +24,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import DialogWorkoutSubscribe from '@/components/molecules/DialogWorkoutSubscribe/DialogWorkoutSubscribe'
 import { mdiStar, mdiStarOutline } from '@mdi/js'
+import DialogWorkoutSubscribe from '@/components/molecules/DialogWorkoutSubscribe/DialogWorkoutSubscribe'
 
 export default {
   name: 'WorkoutSubscribe',

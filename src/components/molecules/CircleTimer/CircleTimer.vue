@@ -108,8 +108,6 @@
 <script>
 import { mapGetters, mapState, mapActions } from 'vuex'
 import NoSleep from 'nosleep.js'
-import DialogWorkoutComplete from '@/components/molecules/DialogWorkoutComplete/DialogWorkoutComplete'
-import { count, getImg, sound, speak, weightConverter } from '@/misc/helpers'
 import {
   mdiTimer,
   mdiSkipNext,
@@ -119,6 +117,8 @@ import {
   mdiHistory,
   mdiWeight
 } from '@mdi/js'
+import DialogWorkoutComplete from '@/components/molecules/DialogWorkoutComplete/DialogWorkoutComplete'
+import { count, getImg, sound, speak, weightConverter } from '@/misc/helpers'
 
 export default {
   name: 'CircleTimer',

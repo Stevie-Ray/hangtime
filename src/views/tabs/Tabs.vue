@@ -144,13 +144,13 @@
 
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
+import { mdiTune, mdiPlus, mdiDotsVertical } from '@mdi/js'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
 import DialogHangboardSwitch from '@/components/molecules/DialogHangboardSwitch/DialogHangboardSwitch'
 import DialogCommunityFilter from '@/components/molecules/DialogCommunityFilter/DialogCommunityFilter'
 import DialogWalkthrough from '@/components/molecules/DialogWalkthrough/DialogWalkthrough'
 import DialogAddProgress from '@/components/molecules/DialogAddProgress/DialogAddProgress'
-import { mdiTune, mdiPlus, mdiDotsVertical } from '@mdi/js'
 
 export default {
   components: {

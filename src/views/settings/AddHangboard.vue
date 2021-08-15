@@ -31,9 +31,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { mdiContentSave } from '@mdi/js'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect'
-import { mdiContentSave } from '@mdi/js'
 
 export default {
   components: {

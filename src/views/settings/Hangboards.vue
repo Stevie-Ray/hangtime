@@ -75,9 +75,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { mdiPlus } from '@mdi/js'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
-import { mdiPlus } from '@mdi/js'
 
 export default {
   components: {

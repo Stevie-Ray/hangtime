@@ -174,14 +174,6 @@
 
 <script>
 import { mapGetters, mapState, mapActions, mapMutations } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
-import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList'
-import WorkoutSubscribe from '@/components/molecules/WorkoutSubscribe/WorkoutSubscribe'
-import WorkoutShare from '@/components/molecules/WorkoutShare/WorkoutShare'
-import DialogWorkoutGeneral from '@/components/molecules/DialogWorkoutGeneral/DialogWorkoutGeneral'
-import DialogWorkoutDelete from '@/components/molecules/DialogWorkoutDelete/DialogWorkoutDelete'
-import DialogUserImage from '@/components/molecules/DialogUserImage/DialogUserImage'
-import { count } from '@/misc/helpers'
 import urlParser from 'js-video-url-parser'
 import {
   mdiDotsVertical,
@@ -190,6 +182,14 @@ import {
   mdiPlaylistPlus,
   mdiPencil
 } from '@mdi/js'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
+import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList'
+import WorkoutSubscribe from '@/components/molecules/WorkoutSubscribe/WorkoutSubscribe'
+import WorkoutShare from '@/components/molecules/WorkoutShare/WorkoutShare'
+import DialogWorkoutGeneral from '@/components/molecules/DialogWorkoutGeneral/DialogWorkoutGeneral'
+import DialogWorkoutDelete from '@/components/molecules/DialogWorkoutDelete/DialogWorkoutDelete'
+import DialogUserImage from '@/components/molecules/DialogUserImage/DialogUserImage'
+import { count } from '@/misc/helpers'
 
 export default {
   components: {

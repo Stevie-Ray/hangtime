@@ -294,11 +294,11 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import NoSleep from 'nosleep.js'
+import { mdiStop, mdiTimer } from '@mdi/js'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import { getImg, count, sound, speak } from '@/misc/helpers'
-import { mdiStop, mdiTimer } from '@mdi/js'
 
 export default {
   components: { AppContainer, Hangboard },

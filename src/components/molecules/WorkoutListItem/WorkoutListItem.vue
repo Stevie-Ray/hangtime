@@ -63,11 +63,11 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import { mdiVideo } from '@mdi/js'
 import DialogUserImage from '@/components/molecules/DialogUserImage/DialogUserImage'
 import WorkoutSubscribe from '@/components/molecules/WorkoutSubscribe/WorkoutSubscribe'
 import WorkoutShare from '@/components/molecules/WorkoutShare/WorkoutShare'
 import { count } from '@/misc/helpers'
-import { mdiVideo } from '@mdi/js'
 import 'long-press-event/dist/long-press-event.min'
 
 export default {

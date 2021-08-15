@@ -92,14 +92,13 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
-import AppContainer from '@/components/molecules/AppContainer/AppContainer'
-
 import {
   mdiVolumeHigh,
   mdiVibrate,
   mdiAccountVoice,
   mdiAccountMultiple
 } from '@mdi/js'
+import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 
 export default {
   components: {
