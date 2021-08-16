@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="596px" height="741px" viewBox="0 0 596 741" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AWESOMEWOODYSCLIFFBACK</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AWESOMEWOODYSCLIFFBACK" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <polyline id="board" points="594 725.084251 9 725.084251 9 38.0842507 594 38.0842507"></polyline>
+            <path d="M594,739.084251 L9,739.084251 C4.02943725,739.084251 0,735.054813 0,730.084251 L0,693.084251 C0,688.113688 4.02943725,684.084251 9,684.084251 L594,684.084251" id="h8"></path>
+            <rect id="h7" x="93" y="542.084251" width="329" height="93" rx="34"></rect>
+            <path d="M594.006959,360.084251 L559,360.084251 C540.222319,360.084251 525,344.861932 525,326.084251 C525,307.306569 540.222319,292.084251 559,292.084251 L594.006959,292.084251" id="h6"></path>
+            <circle id="h5" cx="413" cy="326.084251" r="34"></circle>
+            <rect id="h2" x="106" y="53.0842507" width="146" height="68" rx="34"></rect>
+            <rect id="h3" x="336" y="53.0842507" width="214" height="68" rx="34"></rect>
+            <rect id="h4" x="88" y="292.084251" width="214" height="68" rx="34"></rect>
+            <polyline id="h1" points="594 38.0842507 9 38.0842507 37.4226851 0 594 0"></polyline>
+        </g>
+    </g>
+</svg>

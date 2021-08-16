@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="613px" height="493px" viewBox="0 0 613 493" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AWESOMEWOODYSCLIFFMINI</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AWESOMEWOODYSCLIFFMINI" transform="translate(1.000000, 0.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <polyline id="board" points="612 442 11 442 11 28 612 28"></polyline>
+            <path d="M612,492 L16,491.820848 C7.163444,491.820848 0,484.657404 0,475.820848 L0,455 C0,446.163444 7.163444,439 16,439 L612,439.179152" id="h5"></path>
+            <rect id="h4" x="97" y="304" width="336" height="89" rx="22"></rect>
+            <path d="M612,295.38801 L16,295.38801 C7.163444,295.38801 0,288.224566 0,279.38801 L0,251 C0,242.163444 7.163444,235 16,235 L612,235" id="h3"></path>
+            <path d="M612,221 C611.43132,221 611.004811,221 610.720471,221 C578.560366,221 530.320209,221 466,221 C453.849736,221 444,211.150264 444,199 L444,154 C444,141.849736 453.849736,132 466,132 L612,132" id="h2"></path>
+            <path d="M612,126.77602 L16,126.77602 C7.163444,126.77602 7.95807864e-13,119.302732 7.95807864e-13,110.083965 L7.95807864e-13,17.4680752 C7.95807864e-13,8.24930761 7.163444,0.776019902 16,0.776019902 L612,0.776019902" id="h1"></path>
+        </g>
+    </g>
+</svg>

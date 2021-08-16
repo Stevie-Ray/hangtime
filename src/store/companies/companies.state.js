@@ -1291,37 +1291,61 @@ export default {
       website: 'https://awesomewoodys.com/',
       hangboards: [
         {
-          name: 'The Home Boy',
+          name: 'Cliff Board',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/AWESOMEWOODYSCLIFF.svg',
+          sides: [
+            {
+              name: 'Front',
+              image: 'hangboards/AWESOMEWOODYSCLIFF.svg',
+              holds: 4
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/AWESOMEWOODYSCLIFFBACK.svg',
+              holds: 7
+            }
+          ],
+          holds: 4
         },
         {
-          name: 'Cliff Board',
+          name: 'Cliff Board Micro',
           id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
-          name: 'Cliff Board Wide Boy',
+          name: 'Cliff Board Mini',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/AWESOMEWOODYSCLIFFMINI.svg',
+          sides: [
+            {
+              name: 'Front',
+              image: 'hangboards/AWESOMEWOODYSCLIFFMINI.svg',
+              holds: 4
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/AWESOMEWOODYSCLIFFMINIBACK.svg',
+              holds: 6
+            }
+          ],
           holds: 0
         },
         {
-          name: 'Cliff Board Mini',
+          name: 'Cliff Board Petite',
           id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
-          name: 'Cliff Board Micro',
+          name: 'Cliff Board Wide Boy',
           id: 4,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
-          name: 'Cliff Board Petite',
+          name: 'The Home Boy',
           id: 5,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0

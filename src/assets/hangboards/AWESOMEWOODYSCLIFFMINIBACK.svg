@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="595px" height="489px" viewBox="0 0 595 489" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AWESOMEWOODYSCLIFFMINIBACK</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AWESOMEWOODYSCLIFFMINIBACK" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <polyline id="Path" points="594 479.084251 9 479.084251 9 38.0842507 594 38.0842507"></polyline>
+            <path d="M594,487.084251 L9,487.084251 C4.02943725,487.084251 0,483.054813 0,478.084251 L0,441.084251 C0,436.113688 4.02943725,432.084251 9,432.084251 L594,432.084251" id="h7"></path>
+            <rect id="h6" x="86" y="304.084251" width="329" height="93" rx="34"></rect>
+            <path d="M594,233.084251 L455,233.084251 C436.222319,233.084251 421,217.861932 421,199.084251 L421,174.084251 C421,155.306569 436.222319,140.084251 455,140.084251 L594,140.084251" id="h5"></path>
+            <path d="M594,113.084251 L548,113.084251 C529.222319,113.084251 514,97.8619322 514,79.0842507 C514,60.3065692 529.222319,45.0842507 548,45.0842507 L594,45.0842507" id="h4"></path>
+            <circle id="h3" cx="398" cy="79.0842507" r="34"></circle>
+            <rect id="h2" x="86" y="45.0842507" width="214" height="68" rx="34"></rect>
+            <polyline id="h1" points="594 38.0842507 9 38.0842507 37.4226851 0 594 0"></polyline>
+        </g>
+    </g>
+</svg>
