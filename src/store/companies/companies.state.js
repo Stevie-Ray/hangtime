@@ -2257,6 +2257,26 @@ export default {
           holds: 0
         }
       ]
-    }
+    },
+    {
+      name: 'Altissimo',
+      description: 'ALTI Escalade',
+      id: 88,
+      website: 'https://www.altissimo.fr',
+      hangboards: [
+        {
+          name: 'Altitrac',
+          id: 0,
+          image: 'hangboards/ALTISSIMOALTITRAC.svg',
+          holds: 6
+        },
+        {
+          name: 'Papillon',
+          id: 1,
+          image: 'hangboards/ALTISSIMOPAPILLON.svg',
+          holds: 8
+        }
+      ]
+    },
   ]
 }
