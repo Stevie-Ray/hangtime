@@ -2277,6 +2277,6 @@ export default {
           holds: 8
         }
       ]
-    },
+    }
   ]
 }
