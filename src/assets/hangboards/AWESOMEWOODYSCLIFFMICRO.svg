@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="613px" height="349px" viewBox="0 0 613 349" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AWESOMEWOODYSCLIFFMICRO</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AWESOMEWOODYSCLIFFMICRO" transform="translate(1.000000, 0.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <polyline id="board" points="612 292 11 292 11 28 612 28"></polyline>
+            <path d="M612,348 L16,347.820848 C7.163444,347.820848 0,340.657404 0,331.820848 L0,294 C0,285.163444 7.163444,278 16,278 L612,278.179152" id="h3"></path>
+            <rect id="h2" x="97" y="158" width="336" height="89" rx="22"></rect>
+            <path d="M612,126.77602 L16,126.77602 C7.163444,126.77602 7.95807864e-13,119.302732 7.95807864e-13,110.083965 L7.95807864e-13,17.4680752 C7.95807864e-13,8.24930761 7.163444,0.776019902 16,0.776019902 L612,0.776019902" id="h1"></path>
+        </g>
+    </g>
+</svg>

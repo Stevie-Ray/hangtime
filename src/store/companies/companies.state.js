@@ -1311,8 +1311,20 @@ export default {
         {
           name: 'Cliff Board Micro',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/AWESOMEWOODYSCLIFFMICRO.svg',
+          sides: [
+            {
+              name: 'Front',
+              image: 'hangboards/AWESOMEWOODYSCLIFFMICRO.svg',
+              holds: 2
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/AWESOMEWOODYSCLIFFMICROBACK.svg',
+              holds: 5
+            }
+          ],
+          holds: 2
         },
         {
           name: 'Cliff Board Mini',
@@ -1330,25 +1342,31 @@ export default {
               holds: 6
             }
           ],
-          holds: 0
-        },
-        {
-          name: 'Cliff Board Petite',
-          id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          holds: 4
         },
         {
           name: 'Cliff Board Wide Boy',
-          id: 4,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 3,
+          image: 'hangboards/AWESOMEWOODYSCLIFFWIDE.svg',
+          sides: [
+            {
+              name: 'Front',
+              image: 'hangboards/AWESOMEWOODYSCLIFFWIDE.svg',
+              holds: 5
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/AWESOMEWOODYSCLIFFWIDEBACK.svg',
+              holds: 9
+            }
+          ],
+          holds: 5
         },
         {
           name: 'The Home Boy',
-          id: 5,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 4,
+          image: 'hangboards/AWESOMEWOODYSHOMEBOY.svg',
+          holds: 9
         }
       ]
     },
