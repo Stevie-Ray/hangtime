@@ -310,6 +310,12 @@ export default {
           id: 7,
           image: 'hangboards/METOLIUSDELUXEII.svg',
           holds: 14
+        },
+        {
+          name: 'Rock Rings 3D',
+          id: 8,
+          image: 'hangboards/METOLIUSROCK.svg',
+          holds: 3
         }
       ]
     },
@@ -1758,8 +1764,8 @@ export default {
         {
           name: 'Wildwood 1001',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/MOUNTAINROCK1001.svg',
+          holds: 6
         },
         {
           name: 'Wildwood 2001',
@@ -1769,13 +1775,13 @@ export default {
         },
         {
           name: 'Wildwood 2002',
-          id: 1,
+          id: 2,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Wildwood 2003',
-          id: 1,
+          id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
