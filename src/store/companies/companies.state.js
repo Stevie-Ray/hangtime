@@ -2241,14 +2241,14 @@ export default {
         {
           name: 'CJ-HB2001',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/BEAST1000.svg',
+          holds: 11
         },
         {
           name: 'CJ-HB2002',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/BEAST2000.svg',
+          holds: 14
         },
         {
           name: 'CJ-HB2005',
@@ -2299,6 +2299,20 @@ export default {
           id: 1,
           image: 'hangboards/ALTISSIMOPAPILLON.svg',
           holds: 8
+        }
+      ]
+    },
+    {
+      name: 'N8',
+      description: '',
+      id: 89,
+      website: '',
+      hangboards: [
+        {
+          name: 'SPASU',
+          id: 0,
+          image: 'hangboards/N8SPASU.svg',
+          holds: 15
         }
       ]
     }
