@@ -2315,6 +2315,21 @@ export default {
           holds: 15
         }
       ]
+    },
+    {
+      name: 'Art Rocher',
+      description:
+        'Artificial climbing walls - the greatest experience in Europe and Poland',
+      id: 90,
+      website: 'http://www.artrocher.com.pl/',
+      hangboards: [
+        {
+          name: 'Wooden Fingerboard',
+          id: 0,
+          image: 'hangboards/ARTROCHERWOODEN.svg',
+          holds: 16
+        }
+      ]
     }
   ]
 }

@@ -35,7 +35,7 @@
     "vue-router": "^3.5.3",
     "vue-simple-svg": "^2.0.2",
     "vuedraggable": "^2.24.3",
-    "vuetify": "^2.5.13",
+    "vuetify": "^2.5.14",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^3.2.1"
   },
@@ -67,7 +67,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-vue": "^7.20.0",
     "firebase-tools": "^9.22.0",
