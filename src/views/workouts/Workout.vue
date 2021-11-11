@@ -14,9 +14,9 @@
         />
       </v-avatar>
     </template>
-    <template #title @click="dialogs.general = true">
+    <template #title>
       <!-- Workout details -->
-      <span v-if="currentWorkout">
+      <span v-if="currentWorkout" @click="dialogs.general = true">
         <span v-if="currentWorkout.name">{{ currentWorkout.name }}</span>
         <div class="subheading">
           <span>{{ count(currentWorkout.time) }}</span>

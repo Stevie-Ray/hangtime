@@ -52,7 +52,7 @@
 <script>
 import { mapState } from 'vuex'
 import { SimpleSVG } from 'vue-simple-svg'
-import { mdiHand, mdiUndo } from '@mdi/js'
+import { mdiHandFrontRight, mdiUndo } from '@mdi/js'
 import { getImg } from '@/misc/helpers'
 
 export default {
@@ -64,7 +64,7 @@ export default {
   data: () => ({
     mdi: {
       undo: mdiUndo,
-      hand: mdiHand
+      hand: mdiHandFrontRight
     }
   }),
   computed: {
