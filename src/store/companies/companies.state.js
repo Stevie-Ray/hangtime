@@ -2330,6 +2330,33 @@ export default {
           holds: 16
         }
       ]
+    },
+    {
+      name: 'Iura',
+      description:
+        'Iura produces innovative climbing accessories. Expect more.',
+      id: 91,
+      website: 'https://iura.pl/',
+      hangboards: [
+        {
+          name: 'Warm up',
+          id: 0,
+          image: 'hangboards/IURAWARMUP.svg',
+          sides: [
+            {
+              name: 'Default',
+              image: 'hangboards/IURAWARMUP.svg',
+              holds: 2
+            },
+            {
+              name: 'Rotated',
+              image: 'hangboards/IURAWARMUP180.svg',
+              holds: 2
+            }
+          ],
+          holds: 2
+        }
+      ]
     }
   ]
 }
