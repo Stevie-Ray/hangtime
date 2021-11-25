@@ -73,18 +73,12 @@
       <v-list-item
         v-for="(purchase, index) in purchasesList"
         :key="index"
-        three-line
+        two-line
       >
         <v-list-item-content>
           <v-list-item-title>ItemId: {{ purchase.itemId }}</v-list-item-title>
           <v-list-item-subtitle>
-            Acknowledged: {{ purchase.acknowledged }}, willAutoRenew:
-            {{ purchase.willAutoRenew }}
-          </v-list-item-subtitle>
-          <v-list-item-subtitle>
-            purchaseState: {{ purchase.purchaseState }}, purchaseTime:
-            {{ purchase.purchaseTime }}, purchaseToken:
-            {{ purchase.purchaseToken }}
+            purchaseToken: {{ purchase.purchaseToken }}
           </v-list-item-subtitle>
           <v-list-item-action>
             <v-btn
@@ -187,68 +181,94 @@ export default {
       }
     },
     async listPurchases() {
+      if (this.canSubscribe === undefined) {
+        // Digital Goods API is not supported in this context.
+        this.log("window doesn't have getDigitalGoodsService.")
+        return
+      }
       try {
-        if (this.canSubscribe) {
-          const service = await window.getDigitalGoodsService(
-            this.PAYMENT_METHOD
-          )
-          const purchases = await service.listPurchases()
-          this.log('Got purchases list.')
-          this.purchasesList = purchases
-        } else {
-          this.log("window doesn't have getDigitalGoodsService.")
+        const service = await window.getDigitalGoodsService(this.PAYMENT_METHOD)
+        if (service === null) {
+          // DGAPI 1.0 - Play Billing is not available. Use another payment flow.
+          this.log('Play Billing is not available.')
+          return
         }
+        const purchases = await service.listPurchases()
+        this.log('Got purchases list.')
+        this.purchasesList = purchases
       } catch (error) {
+        // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
+        this.log('Play Billing is not available.')
         this.log(error)
       }
     },
     async populatePrice(sku) {
+      if (this.canSubscribe === undefined) {
+        // Digital Goods API is not supported in this context.
+        this.log("window doesn't have getDigitalGoodsService.")
+        return false
+      }
       try {
-        if (this.canSubscribe) {
-          const service = await window.getDigitalGoodsService(
-            this.PAYMENT_METHOD
-          )
-          const details = await service.getDetails([sku])
+        const service = await window.getDigitalGoodsService(this.PAYMENT_METHOD)
 
-          if (details.length === 0) {
-            this.log(
-              `Could not get "${sku}", are you running a Play Store build?`
-            )
-            return false
-          }
-          this.log(JSON.stringify(details, null, 2))
-
-          const item = details[0]
-          const { value } = item.price
-          const { currency } = item.price
-
-          this.item.value = item.price.value
-          this.item.currency = item.price.currency
-          this.price = new Intl.NumberFormat(navigator.language, {
-            style: 'currency',
-            currency
-          }).format(value)
-
-          return true
+        if (service === null) {
+          // DGAPI 1.0 - Play Billing is not available. Use another payment flow.
+          this.log('Play Billing is not available.')
+          return false
         }
+
+        const details = await service.getDetails([sku])
+
+        if (details.length === 0) {
+          this.log(
+            `Could not get "${sku}", are you running a Play Store build?`
+          )
+          return false
+        }
+        this.log(JSON.stringify(details, null, 2))
+
+        const item = details[0]
+        const { value } = item.price
+        const { currency } = item.price
+
+        this.item.value = item.price.value
+        this.item.currency = item.price.currency
+        this.price = new Intl.NumberFormat(navigator.language, {
+          style: 'currency',
+          currency
+        }).format(value)
+        return true
       } catch (error) {
+        // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
         this.log(error)
       }
       return false
     },
     async acknowledge(token, type = 'repeatable', onComplete = () => {}) {
+      if (this.canSubscribe === undefined) {
+        // Digital Goods API is not supported in this context.
+        this.log("window doesn't have getDigitalGoodsService.")
+        return
+      }
       try {
-        if (this.canSubscribe) {
-          const service = await window.getDigitalGoodsService(
-            this.PAYMENT_METHOD
-          )
-          await service.acknowledge(token, type)
-          this.log('Purchase acknowledged.')
-          onComplete()
-        } else {
-          this.log("window doesn't have getDigitalGoodsService.")
+        const service = await window.getDigitalGoodsService(this.PAYMENT_METHOD)
+
+        if (service === null) {
+          // DGAPI 1.0 -  Play Billing is not available. Use another payment flow.
+          this.log('Play Billing is not available.')
+          return
         }
+        if ('acknowledge' in service) {
+          // DGAPI 1.0
+          await service.acknowledge(token, type)
+        } else {
+          // DGAPI 2.0
+          await service.consume(token)
+        }
+        this.log('Purchase acknowledged.')
+        onComplete()
       } catch (error) {
+        // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
         this.log(error)
       }
     },
@@ -367,12 +387,13 @@ export default {
         this.buyStatus = 'Purchase processing..'
         this.setSubscription(true)
         this.triggerUpdateUser()
-        this.acknowledge(token, 'onetime', () => {
+        this.acknowledge(token, 'repeatable', () => {
           this.buyStatus = 'Purchase successful, thank you!'
         })
       })
     },
     log(contents) {
+      console.log(contents)
       this.logField += `${contents}\n`
     },
     getChromeVersion() {
