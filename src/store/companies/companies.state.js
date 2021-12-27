@@ -2357,6 +2357,34 @@ export default {
           holds: 2
         }
       ]
+    },
+    {
+      name: 'Ucraft',
+      description: '',
+      id: 92,
+      website: 'https://ucraftclimbing.com/',
+      hangboards: [
+        {
+          name: 'EVO Rings',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'NonMollo',
+      description: '',
+      id: 93,
+      website: 'https://www.nonmollo-climbing.com/',
+      hangboards: [
+        {
+          name: 'Hangboard',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
