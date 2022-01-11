@@ -2385,6 +2385,45 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Smog',
+      description:
+        'Well-made product created entirely in Italy. Sold by Oliunìd',
+      id: 94,
+      website: 'https://www.oliunid.it/',
+      hangboards: [
+        {
+          name: 'Small',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Medium',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Large',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'The Change',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Pump',
+          id: 4,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
     }
   ]
 }
