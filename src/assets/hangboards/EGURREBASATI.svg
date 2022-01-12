@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="542px" height="346px" viewBox="0 0 542 346" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>EGURREBASATI</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="EGURREBASATI" transform="translate(0.500000, 0.699899)" fill="#FFFFFF" stroke="#000000">
+            <polyline id="Path" points="540.5 344.281629 0.5 344.281629 0.5 0 540.5 0"></polyline>
+            <polyline id="h7" points="540.5 252.448751 0.5 252.448751 0.5 308.100785 540.5 308.100785"></polyline>
+            <circle id="h6" cx="413" cy="190.800101" r="30.5"></circle>
+            <path d="M0.933171294,160.300101 L324.562944,160.300101 C341.404879,160.300101 355.057965,173.955416 355.057965,190.800101 C355.057965,207.644786 341.404879,221.300101 324.562944,221.300101 L0.933171294,221.300101" id="h5"></path>
+            <path d="M540.5,125.300101 L462,125.300101 C445.155315,125.300101 431.5,111.644786 431.5,94.8001006 C431.5,77.9554158 445.155315,64.3001006 462,64.3001006 L540.5,64.3001006" id="h4"></path>
+            <rect id="h3" x="255.5" y="64.3001006" width="154" height="61" rx="30.5"></rect>
+            <rect id="h2" x="27.5" y="64.3001006" width="206" height="61" rx="30.5"></rect>
+            <polyline id="h1" points="540.5 9.09494702e-13 0.5 9.09494702e-13 0.5 41.8066537 540.5 41.8066537"></polyline>
+        </g>
+    </g>
+</svg>

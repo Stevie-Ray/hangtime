@@ -1,6 +1,6 @@
 <template>
   <app-container
-    name="Add a Hangboard"
+    name="Add a hangboard"
     :back-link="{ path: '/settings' }"
     class="text-center"
   >

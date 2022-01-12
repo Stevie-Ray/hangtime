@@ -1744,14 +1744,20 @@ export default {
         {
           name: 'Basati',
           id: 0,
+          image: 'hangboards/EGURREBASATI.svg',
+          holds: 6
+        },
+        {
+          name: 'Behatz',
+          id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Deabru',
-          id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 2,
+          image: 'hangboards/EGURREDEABRU.svg',
+          holds: 14
         }
       ]
     },
@@ -1796,12 +1802,18 @@ export default {
         {
           name: 'Ruby',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/CRAFTYRUBY.svg',
+          holds: 1
         },
         {
           name: 'Sapphire',
           id: 1,
+          image: 'hangboards/CRAFTYSAPPHIRE.svg',
+          holds: 6
+        },
+        {
+          name: 'Topaz',
+          id: 2,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
@@ -2367,8 +2379,8 @@ export default {
         {
           name: 'EVO Rings',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/UCRAFTEVO.svg',
+          holds: 3
         }
       ]
     },
@@ -2379,10 +2391,10 @@ export default {
       website: 'https://www.nonmollo-climbing.com/',
       hangboards: [
         {
-          name: 'Hangboard',
+          name: 'Il Trave',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/NONMOLLOTRAVE.svg',
+          holds: 13
         }
       ]
     },
@@ -2408,7 +2420,7 @@ export default {
         {
           name: 'Large',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
+          image: 'hangboards/SMOGGRANDE.svg',
           holds: 0
         },
         {

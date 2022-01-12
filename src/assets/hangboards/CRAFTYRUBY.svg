@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="574px" height="466px" viewBox="0 0 574 466" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>CRAFTYRUBY</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CRAFTYRUBY" transform="translate(2.000000, 2.649291)" fill="#FFFFFF" stroke="#000000">
+            <polyline id="board" points="572 -4.51194637e-13 139.473136 -4.51194637e-13 139.473136 46.6155386 572 46.6155386"></polyline>
+            <polyline id="h1" points="572 46.6155386 139.473136 46.6155386 116.501918 126.930993 572 126.930993"></polyline>
+            <polyline id="board" points="572 126.930993 116.501918 126.930993 116.501918 299.693078 572 299.693078"></polyline>
+            <polyline id="board" points="572 461.443866 73.4662421 461.443866 0 177.172851 0 57.2827905 116.501918 57.2827905 116.501918 439.861441 572 439.861441"></polyline>
+            <polygon id="board" points="139.473136 0 139.473136 46.6155386 116.501918 123.869851 116.501918 57.2827905"></polygon>
+            <polygon id="board" points="139.473136 0 80.8558986 0 1.54846287e-14 57.2827905 116.501918 57.2827905"></polygon>
+            <polygon id="board" points="73.4662421 461.443866 38.3372776 432.437095 12.1194525 305.658546 1.42108547e-14 177.172851"></polygon>
+            <polyline id="h2" points="572 439.861441 116.501918 439.861441 136.061962 374.920108 572 374.920108"></polyline>
+            <polygon id="board" points="116.501918 439.861441 136.061962 374.920108 136.061962 299.693078 116.501918 299.693078"></polygon>
+            <polyline id="board" points="572 374.920108 136.061962 374.920108 136.061962 299.693078 572 299.693078"></polyline>
+        </g>
+    </g>
+</svg>
