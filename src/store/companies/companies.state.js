@@ -2436,6 +2436,20 @@ export default {
           holds: 0
         }
       ]
+    },
+    {
+      name: 'Lemur Design',
+      description: 'Traction beam in recycled ash wood',
+      id: 95,
+      website: 'https://www.lemurdesign.ca/',
+      hangboards: [
+        {
+          name: 'Traction beam',
+          id: 0,
+          image: 'hangboards/LEMURBEAM.svg',
+          holds: 6
+        }
+      ]
     }
   ]
 }

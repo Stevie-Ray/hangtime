@@ -4,7 +4,7 @@
     name="Leaderboard"
     :back-link="{ name: 'workouts' }"
   >
-    <v-row v-if="leaderboard" justify="center" align="start">
+    <div v-if="leaderboard">
       <div class="text-center pa-4">
         <v-btn-toggle v-model="sort" mandatory @change="jumpToSelection">
           <v-btn value="amount">
@@ -107,7 +107,7 @@
           ></v-pagination>
         </div>
       </v-col>
-    </v-row>
+    </div>
     <v-row v-else class="text-center pt-4" justify="center" align="center">
       <v-col cols="12" sm="8" md="6">
         {{ $t('Loading...') }}

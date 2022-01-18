@@ -325,3 +325,17 @@ div.required.v-input .v-label::after {
   font-weight: bold;
   padding: 0 8px;
 }
+
+.v-data-table > .v-data-table__wrapper > table {
+  & > tbody > tr > td,
+  & > thead > tr > td,
+  & > tfoot > tr > td {
+    width: 100%;
+  }
+}
+
+.v-data-table--mobile {
+  &.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th:last-child {
+    padding: 0;
+  }
+}
