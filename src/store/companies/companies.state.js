@@ -1788,8 +1788,8 @@ export default {
         {
           name: 'Wildwood 2003',
           id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/MOUNTAINROCK2003.svg',
+          holds: 12
         }
       ]
     },
@@ -2245,8 +2245,8 @@ export default {
       ]
     },
     {
-      name: 'One Stone',
-      description: 'AliExpress',
+      name: 'Two Stones / One Stone',
+      description: 'AliExpress / Amazon',
       id: 87,
       website: 'https://onestone.aliexpress.com/',
       hangboards: [
@@ -2263,26 +2263,32 @@ export default {
           holds: 14
         },
         {
-          name: 'CJ-HB2005',
+          name: 'CJ-HB2003BX',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/TWOSTONESHB2003BX.svg',
+          holds: 12
         },
         {
-          name: 'CJ-HB2007',
+          name: 'CJ-HB2005',
           id: 3,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
-          name: 'CJ-HB2024',
+          name: 'CJ-HB2007',
           id: 4,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
-          name: 'CJ-HB2046',
+          name: 'CJ-HB2024',
           id: 5,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'CJ-HB2046',
+          id: 6,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
