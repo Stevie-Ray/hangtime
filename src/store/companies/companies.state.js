@@ -1164,25 +1164,25 @@ export default {
         },
         {
           name: 'The Mask',
-          id: 0,
+          id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Twins',
-          id: 0,
+          id: 2,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         },
         {
           name: 'Vario',
-          id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          id: 3,
+          image: 'hangboards/HRTVARIO.svg',
+          holds: 14
         },
         {
           name: 'Butterfly',
-          id: 0,
+          id: 4,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
         }
