@@ -336,6 +336,12 @@ export default {
           id: 1,
           image: 'hangboards/MOONPHAT.svg',
           holds: 3
+        },
+        {
+          name: 'Armstrong',
+          id: 2,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     },
