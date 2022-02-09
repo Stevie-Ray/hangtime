@@ -2462,6 +2462,20 @@ export default {
           holds: 6
         }
       ]
+    },
+    {
+      name: 'JOOD',
+      description: 'Jood Climbing Walls Philippines',
+      id: 96,
+      website: 'http://www.climbingwallphilippines.com',
+      hangboards: [
+        {
+          name: 'Training Board',
+          id: 0,
+          image: 'hangboards/JOODBOARD.svg',
+          holds: 11
+        }
+      ]
     }
   ]
 }
