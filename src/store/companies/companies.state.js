@@ -1531,6 +1531,23 @@ export default {
           id: 5,
           image: 'hangboards/WORK1950SIMPLE.svg',
           holds: 4
+        },
+        {
+          name: 'PocketMaster',
+          id: 6,
+          image: 'hangboards/WORK1950POCKET-EASY.svg',
+          sides: [
+            {
+              name: 'Easy',
+              image: 'hangboards/WORK1950POCKET-EASY.svg',
+              holds: 1
+            },
+            {
+              name: 'Hard',
+              image: 'hangboards/WORK1950POCKET-HARD.svg',
+              holds: 1
+            }
+          ]
         }
       ]
     },
@@ -2474,6 +2491,26 @@ export default {
           id: 0,
           image: 'hangboards/JOODBOARD.svg',
           holds: 11
+        }
+      ]
+    },
+    {
+      name: 'YY Vertical',
+      description: 'Climbers comfort creator',
+      id: 97,
+      website: 'https://www.yyvertical.com',
+      hangboards: [
+        {
+          name: 'La Baguette',
+          id: 0,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Travelboard',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     }
