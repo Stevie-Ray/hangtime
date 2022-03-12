@@ -1540,12 +1540,12 @@ export default {
             {
               name: 'Easy',
               image: 'hangboards/WORK1950POCKET-EASY.svg',
-              holds: 1
+              holds: 3
             },
             {
               name: 'Hard',
               image: 'hangboards/WORK1950POCKET-HARD.svg',
-              holds: 1
+              holds: 3
             }
           ]
         }
@@ -2320,6 +2320,12 @@ export default {
           id: 6,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
+        },
+        {
+          name: 'CJ-HB2055',
+          id: 7,
+          image: 'hangboards/TWOSTONESHB2055.svg',
+          holds: 6
         }
       ]
     },
