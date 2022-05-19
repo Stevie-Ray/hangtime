@@ -222,7 +222,13 @@
               </div>
             </v-card>
             <div
-              class="text-caption grey--text text--darken-2 font-weight-light mt-4"
+              class="
+                text-caption
+                grey--text
+                text--darken-2
+                font-weight-light
+                mt-4
+              "
             >
               {{ $t('Version {appVersion}', { appVersion: appVersion }) }} |
               &copy; 2019 - {{ year }} {{ appTitle }} |
@@ -265,7 +271,8 @@ export default {
         'E-mail must be valid',
       passwordRule: (value) => {
         // eslint-disable-next-line
-        const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+        const pattern =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
         return (
           pattern.test(value) ||
           'Min. 8 characters with at least one capital letter, a number and a special character.'

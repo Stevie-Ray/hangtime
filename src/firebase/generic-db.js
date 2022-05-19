@@ -94,7 +94,9 @@ export default class GenericDB {
     const clonedData = cloneDeep(data)
     delete clonedData.id
 
-    await (await firestore())
+    await (
+      await firestore()
+    )
       .collection(this.collectionPath)
       .doc(id)
       .update({

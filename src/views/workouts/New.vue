@@ -149,10 +149,10 @@ export default {
     addExercise() {
       this.addExerciseToCreate(this.exerciseToCreate)
       this.setWorkoutToCreate({
-        company: this.user.settings.hangboards[this.user.settings.selected]
-          .company,
-        hangboard: this.user.settings.hangboards[this.user.settings.selected]
-          .hangboard,
+        company:
+          this.user.settings.hangboards[this.user.settings.selected].company,
+        hangboard:
+          this.user.settings.hangboards[this.user.settings.selected].hangboard,
         user: {
           displayName: this.user.displayName,
           grade: this.user.settings.grade,
@@ -164,10 +164,11 @@ export default {
         name: 'exercise',
         params: {
           id: 'new',
-          company: this.user.settings.hangboards[this.user.settings.selected]
-            .company,
-          hangboard: this.user.settings.hangboards[this.user.settings.selected]
-            .hangboard,
+          company:
+            this.user.settings.hangboards[this.user.settings.selected].company,
+          hangboard:
+            this.user.settings.hangboards[this.user.settings.selected]
+              .hangboard,
           index: this.currentWorkout.exercises.length - 1,
           editingWorkout: true
         }

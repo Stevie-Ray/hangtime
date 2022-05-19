@@ -1,8 +1,8 @@
 const path = require('path')
 // eslint-disable-next-line import/no-extraneous-dependencies
 const webpack = require('webpack')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer') // eslint-disable-line
-  .BundleAnalyzerPlugin
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin // eslint-disable-line
 const PrerenderSPAPlugin = require('prerender-spa-plugin') // eslint-disable-line
 
 const prerenderedRoutesList = ['/login', '/']
