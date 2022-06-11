@@ -240,6 +240,12 @@ export default {
               holds: 13
             }
           ]
+        },
+        {
+          name: 'Maxgrip',
+          id: 1,
+          image: 'hangboards/MAXGRIP.svg',
+          holds: 4
         }
       ]
     },
@@ -338,10 +344,10 @@ export default {
           holds: 3
         },
         {
-          name: 'Armstrong',
+          name: 'Armstrong (symmetric)',
           id: 2,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/MOONARM.svg',
+          holds: 12
         }
       ]
     },
@@ -1909,8 +1915,8 @@ export default {
         {
           name: 'XC Classic',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/EXPLORECLASSIC.svg',
+          holds: 12
         },
         {
           name: 'XC Evo-X',
@@ -2517,6 +2523,40 @@ export default {
           id: 1,
           image: 'hangboards/NOTFOUND.svg',
           holds: 0
+        }
+      ]
+    },
+    {
+      name: 'SAN Power',
+      description: 'Training holds',
+      id: 98,
+      website: 'https://www.sanpower.info/',
+      hangboards: [
+        {
+          name: 'Multi-Dam',
+          id: 0,
+          image: 'hangboards/SANMULTIDAM.svg',
+          holds: 0
+        },
+        {
+          name: 'Multipresa',
+          id: 1,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        }
+      ]
+    },
+    {
+      name: 'T-Wall',
+      description: 'Climbing walls and climbing holds',
+      id: 99,
+      website: 'https://www.t-wall.org/',
+      hangboards: [
+        {
+          name: 'Crank',
+          id: 0,
+          image: 'hangboards/TWALLCRANK.svg',
+          holds: 11
         }
       ]
     }
