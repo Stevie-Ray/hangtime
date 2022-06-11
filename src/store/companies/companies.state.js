@@ -1429,7 +1429,7 @@ export default {
       ]
     },
     {
-      name: 'Acron Climbing',
+      name: 'Acorn Climbing',
       description: 'Sustainably crafted Hangboards',
       id: 55,
       website: 'https://www.acornclimbing.com/',
