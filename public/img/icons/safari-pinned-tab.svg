@@ -5,7 +5,7 @@
      width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
      preserveAspectRatio="xMidYMid meet">
     <g fill="#000000" stroke="none">
-            <rect fill="#000000" x="0" y="0" width="512" height="512" rx="256"></rect>
+            <rect fill="#0E0E0E" x="0" y="0" width="512" height="512" rx="256"></rect>
             <circle fill="#0E0E0E" cx="255.5" cy="256.5" r="204.5"></circle>
             <circle cx="256" cy="256" r="128"></circle>
             <polygon fill="#FFFFFF" points="213 115 298 115 298 86 213 86"></polygon>
