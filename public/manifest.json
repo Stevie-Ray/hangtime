@@ -13,13 +13,13 @@
       "src": "./img/icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "./img/icons/android-chrome.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "./img/icons/android-chrome-monochrome-512x512.png",
@@ -32,18 +32,6 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "monochrome"
-    },
-    {
-      "src": "./img/icons/android-chrome-maskable-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "./img/icons/android-chrome-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -57,7 +45,25 @@
           "src": "./img/icons/android-shortcut-512x512.png",
           "sizes": "512x512",
           "type": "image/png",
-          "purpose": "any"
+          "purpose": "any maskable"
+        },
+        {
+          "src": "./img/icons/android-shortcut.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "monochrome"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "monochrome"
         }
       ]
     },
@@ -71,7 +77,25 @@
           "src": "./img/icons/android-shortcut-512x512.png",
           "sizes": "512x512",
           "type": "image/png",
-          "purpose": "any"
+          "purpose": "any maskable"
+        },
+        {
+          "src": "./img/icons/android-shortcut.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "monochrome"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "monochrome"
         }
       ]
     },
@@ -85,7 +109,25 @@
           "src": "./img/icons/android-shortcut-512x512.png",
           "sizes": "512x512",
           "type": "image/png",
-          "purpose": "any"
+          "purpose": "any maskable"
+        },
+        {
+          "src": "./img/icons/android-shortcut.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "monochrome"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "monochrome"
         }
       ]
     }
