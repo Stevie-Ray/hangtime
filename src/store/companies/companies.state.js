@@ -2533,16 +2533,16 @@ export default {
       website: 'https://www.sanpower.info/',
       hangboards: [
         {
-          name: 'Multi-Dam',
+          name: 'Corme 2',
           id: 0,
-          image: 'hangboards/SANMULTIDAM.svg',
-          holds: 0
+          image: 'hangboards/SANCORME2.svg',
+          holds: 15
         },
         {
-          name: 'Multipresa',
+          name: 'Ingrávido',
           id: 1,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/SANINGRAVIDO.svg',
+          holds: 9
         }
       ]
     },
