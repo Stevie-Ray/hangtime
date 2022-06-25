@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 import { cloneDeep } from 'lodash'
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import LoginView from '@/views/authentication/Login.vue'
 
 const defaultStoreStructure = {
@@ -93,7 +93,10 @@ describe('LoginView', () => {
       const wrapper = shallowMount(LoginView, {
         store,
         localVue,
-        mocks: { $t }
+        mocks: { $t },
+        stubs: {
+          RouterLink: RouterLinkStub
+        }
       })
       const loader = wrapper.find('[data-test="loader"]')
       expect(loader.isVisible()).toBeFalsy()
@@ -104,7 +107,10 @@ describe('LoginView', () => {
       const wrapper = shallowMount(LoginView, {
         store,
         localVue,
-        mocks: { $t }
+        mocks: { $t },
+        stubs: {
+          RouterLink: RouterLinkStub
+        }
       })
       const loginButton = wrapper.find('[data-test="login-btn"]')
       expect(loginButton.isVisible()).toBeTruthy()
@@ -115,7 +121,10 @@ describe('LoginView', () => {
       const wrapper = shallowMount(LoginView, {
         store,
         localVue,
-        mocks: { $t }
+        mocks: { $t },
+        stubs: {
+          RouterLink: RouterLinkStub
+        }
       })
       const offlineInstruction = wrapper.find(
         '[data-test="offline-instruction"]'
@@ -133,7 +142,10 @@ describe('LoginView', () => {
         const wrapper = shallowMount(LoginView, {
           store,
           localVue,
-          mocks: { $t }
+          mocks: { $t },
+          stubs: {
+            RouterLink: RouterLinkStub
+          }
         })
         const loginButton = wrapper.find('[data-test="login-btn"]')
         expect(loginButton.isVisible()).toBeFalsy()
@@ -144,7 +156,10 @@ describe('LoginView', () => {
         const wrapper = shallowMount(LoginView, {
           store,
           localVue,
-          mocks: { $t }
+          mocks: { $t },
+          stubs: {
+            RouterLink: RouterLinkStub
+          }
         })
         const offlineInstruction = wrapper.find(
           '[data-test="offline-instruction"]'
@@ -160,7 +175,10 @@ describe('LoginView', () => {
       const wrapper = shallowMount(LoginView, {
         store,
         localVue,
-        mocks: { $t }
+        mocks: { $t },
+        stubs: {
+          RouterLink: RouterLinkStub
+        }
       })
       const loader = wrapper.find('[data-test="loader"]')
       expect(loader.isVisible()).toBeTruthy()
@@ -171,7 +189,10 @@ describe('LoginView', () => {
       const wrapper = shallowMount(LoginView, {
         store,
         localVue,
-        mocks: { $t }
+        mocks: { $t },
+        stubs: {
+          RouterLink: RouterLinkStub
+        }
       })
       const loginButton = wrapper.find('[data-test="login-btn"]')
       expect(loginButton.isVisible()).toBeFalsy()
@@ -182,7 +203,10 @@ describe('LoginView', () => {
       const wrapper = shallowMount(LoginView, {
         store,
         localVue,
-        mocks: { $t }
+        mocks: { $t },
+        stubs: {
+          RouterLink: RouterLinkStub
+        }
       })
       const offlineInstruction = wrapper.find(
         '[data-test="offline-instruction"]'
