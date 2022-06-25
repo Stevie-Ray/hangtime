@@ -24,6 +24,6 @@ module.exports = {
     'prefer-const': 2
   },
   parserOptions: {
-    parser: '@babel/eslint-parser'
+    parser: 'babel-eslint'
   }
 }
