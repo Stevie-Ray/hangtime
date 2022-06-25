@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="588px" height="165px" viewBox="0 0 588 165" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>OWLPORTABLEBACK</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="OWLPORTABLEBACK" transform="translate(1.000000, 0.721123)" fill="#FFFFFF">
+            <path d="M587,19.5183845 L21.8258141,19.5183845 C7.27527137,20.7078506 0,41.7865393 0,82.7544504 C0,123.722361 5.7922925,150.525778 17.3768775,163.164699 L587,163.164699" id="board" stroke="#000000"></path>
+            <line x1="284.555282" y1="48.9969471" x2="284.555282" y2="110.39821" id="line" stroke="#000000"></line>
+            <rect id="h4" stroke="#000000" x="294.5" y="79.7788773" width="112" height="51" rx="25.5"></rect>
+            <rect id="h3" stroke="#000000" x="48.5" y="68.7788773" width="215" height="51" rx="25.5"></rect>
+            <polyline id="h2" stroke="#000000" points="587 0 300.697958 0 284.555282 48.9969471 587 48.9969471"></polyline>
+            <path d="M284.391232,24.5183845 L276.002932,53.9969471 L11.3912324,53.9969471 C14.9848941,34.344572 21.0601042,24.5183845 29.6168628,24.5183845 C38.1736214,24.5183845 123.098411,24.5183845 284.391232,24.5183845 Z" id="h1"></path>
+        </g>
+    </g>
+</svg>

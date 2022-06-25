@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import { isNil } from 'lodash'
 
 let asyncFirestore = null
@@ -8,7 +8,7 @@ let asyncFirestore = null
 export default () => {
   if (isNil(asyncFirestore)) {
     asyncFirestore = import(
-      /* webpackChunkName: "chunk-firestore" */ 'firebase/firestore'
+      /* webpackChunkName: "chunk-firestore" */ 'firebase/compat/firestore'
     ).then(() => {
       firebase.firestore().settings({})
       firebase.firestore().enablePersistence({ synchronizeTabs: true })

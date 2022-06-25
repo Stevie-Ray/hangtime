@@ -1241,8 +1241,20 @@ export default {
         {
           name: 'Portable',
           id: 3,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/OWLPORTABLE.svg',
+          sides: [
+            {
+              name: 'Front',
+              image: 'hangboards/OWLPORTABLE.svg',
+              holds: 3
+            },
+            {
+              name: 'Back',
+              image: 'hangboards/OWLPORTABLEBACK.svg',
+              holds: 3
+            }
+          ],
+          holds: 3
         }
       ]
     },
@@ -2075,22 +2087,34 @@ export default {
       website: 'https://www.woodrock.fr/',
       hangboards: [
         {
-          name: 'Original V2',
-          id: 0,
-          image: 'hangboards/WOODROCKORIGINAL2.svg',
-          holds: 9
-        },
-        {
           name: 'Nomad',
           id: 1,
           image: 'hangboards/WOODROCKNOMAD.svg',
           holds: 4
         },
         {
-          name: 'Varappe',
+          name: 'Original V2',
+          id: 0,
+          image: 'hangboards/WOODROCKORIGINAL2.svg',
+          holds: 9
+        },
+        {
+          name: 'Varappe (Old model)',
           id: 2,
           image: 'hangboards/WOODROCKVARAPPE.svg',
           holds: 16
+        },
+        {
+          name: 'Varappe 5.7',
+          id: 3,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
+        },
+        {
+          name: 'Varappe 8.9',
+          id: 4,
+          image: 'hangboards/NOTFOUND.svg',
+          holds: 0
         }
       ]
     },

@@ -1,5 +1,5 @@
 import { isNil, keys, cloneDeep } from 'lodash'
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 
 import firestore from './async-firestore'
 

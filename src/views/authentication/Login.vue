@@ -249,7 +249,7 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 import { isNil } from 'lodash'
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import { mdiGoogle, mdiFacebook, mdiIncognito, mdiKey } from '@mdi/js'
 import { getImg } from '@/misc/helpers'
 

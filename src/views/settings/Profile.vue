@@ -262,7 +262,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import 'firebase/storage'
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex'
 import IRCRA from 'ircra'

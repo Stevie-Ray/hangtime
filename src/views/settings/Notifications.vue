@@ -64,7 +64,7 @@
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { mdiKey, mdiContentCopy, mdiDelete } from '@mdi/js'
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
 import 'firebase/messaging'
