@@ -23,7 +23,7 @@
             <v-card
               elevation="2"
               class="d-flex justify-center align-center"
-              max-width="500"
+              max-width="548"
               min-height="250"
               style="margin: 0 auto"
             >
@@ -50,8 +50,8 @@
                 </v-card-subtitle>
                 <v-card-text>
                   <!-- Auth UI -->
-                  <v-row v-if="networkOnLine">
-                    <v-col cols="6">
+                  <v-row v-if="networkOnLine" class="social-icons">
+                    <v-col cols="12" md="4">
                       <div class="text-center">
                         <v-btn
                           v-show="user !== undefined && !user && networkOnLine"
@@ -66,11 +66,11 @@
                           <v-icon dark left>
                             {{ mdi.facebook }}
                           </v-icon>
-                          <span class="social-login-text"> Facebook </span>
+                          <span class="social-login-text">Facebook</span>
                         </v-btn>
                       </div>
                     </v-col>
-                    <v-col cols="6">
+                    <v-col cols="12" md="4">
                       <v-btn
                         v-show="user !== undefined && !user && networkOnLine"
                         data-test="login-btn"
@@ -82,7 +82,22 @@
                         @click="connect('google')"
                       >
                         <v-icon dark left>{{ mdi.google }}</v-icon>
-                        <span class="social-login-text"> Google </span>
+                        <span class="social-login-text">Google</span>
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-btn
+                        v-show="user !== undefined && !user && networkOnLine"
+                        data-test="login-btn"
+                        elevation="1"
+                        block
+                        dark
+                        large
+                        color="#000000"
+                        @click="connect('apple')"
+                      >
+                        <v-icon dark left>{{ mdi.apple }}</v-icon>
+                        <span class="social-login-text">Apple</span>
                       </v-btn>
                     </v-col>
                   </v-row>
@@ -250,7 +265,7 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/compat/app'
-import { mdiGoogle, mdiFacebook, mdiIncognito, mdiKey } from '@mdi/js'
+import { mdiGoogle, mdiFacebook, mdiIncognito, mdiKey, mdiApple } from '@mdi/js'
 import { getImg } from '@/misc/helpers'
 
 export default {
@@ -285,6 +300,7 @@ export default {
     mdi: {
       google: mdiGoogle,
       facebook: mdiFacebook,
+      apple: mdiApple,
       incognito: mdiIncognito,
       key: mdiKey
     }
@@ -352,6 +368,11 @@ export default {
       }
       if (method === 'facebook') {
         provider = new firebase.auth.FacebookAuthProvider()
+      }
+      if (method === 'apple') {
+        provider = new firebase.auth.OAuthProvider('apple.com')
+        provider.addScope('email')
+        provider.addScope('name')
       }
       if (method === 'login') {
         const self = this
@@ -460,8 +481,18 @@ export default {
 }
 
 .logo-container {
-  padding-top: 7.5vh;
-  padding-bottom: 7.5vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  @media only screen and (min-width: 768px) {
+    padding-top: 7.5vh;
+    padding-bottom: 7.5vh;
+  }
+}
+
+.social-icons {
+  @media only screen and (min-width: 960px) {
+    min-width: 500px;
+  }
 }
 
 .login-screen {
