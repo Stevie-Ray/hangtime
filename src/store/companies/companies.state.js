@@ -322,6 +322,24 @@ export default {
           id: 8,
           image: 'hangboards/METOLIUSROCK.svg',
           holds: 3
+        },
+        {
+          name: 'Light Rail',
+          id: 9,
+          image: 'hangboards/METOLIUSLIGHTRAIL.svg',
+          holds: 3,
+          sides: [
+            {
+              name: 'Top',
+              image: 'hangboards/METOLIUSLIGHTRAIL.svg',
+              holds: 3
+            },
+            {
+              name: 'Bottom',
+              image: 'hangboards/METOLIUSLIGHTRAIL180.svg',
+              holds: 3
+            }
+          ]
         }
       ]
     },
@@ -2113,8 +2131,8 @@ export default {
         {
           name: 'Varappe 8.9',
           id: 4,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/WOODROCKVARAPPE89.svg',
+          holds: 16
         }
       ]
     },
@@ -2539,8 +2557,8 @@ export default {
         {
           name: 'La Baguette',
           id: 0,
-          image: 'hangboards/NOTFOUND.svg',
-          holds: 0
+          image: 'hangboards/YYVERTICALBAGUETTE.svg',
+          holds: 3
         },
         {
           name: 'Travelboard',
