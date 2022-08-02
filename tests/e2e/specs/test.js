@@ -4,7 +4,7 @@ const number = Math.floor(Math.random() * 100) + 1
 describe('Test the login page', () => {
   it('Visits the login page', () => {
     cy.visit('/login')
-    cy.contains('Welcome')
+    cy.contains('Hi there')
   })
 
   /**
