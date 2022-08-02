@@ -15,7 +15,7 @@
           <v-row>
             <v-col class="text-right">
               <div class="text-overline">Grade</div>
-              <div>
+              <div v-if="user.settings">
                 {{
                   ircra
                     .convert('ircra', user.settings.grade)
@@ -51,7 +51,7 @@
       <v-card-title> Hangboards </v-card-title>
       <v-card-text>
         <v-item-group>
-          <v-row>
+          <v-row v-if="user && user.settings">
             <v-col
               v-for="(item, index) in user.settings['hangboards']"
               :key="index"

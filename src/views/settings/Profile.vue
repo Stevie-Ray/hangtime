@@ -374,7 +374,7 @@ export default {
     },
     userWeight: {
       get() {
-        if (this.user.weight) {
+        if (this.user && this.user.weight) {
           return this.user.weight
         }
         return 65
@@ -384,7 +384,7 @@ export default {
       }
     },
     userPhoto() {
-      if (this.user.pictureURL) {
+      if (this.user && this.user.pictureURL) {
         return this.user.pictureURL
       }
       if (this.pictureURL !== '') {

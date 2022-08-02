@@ -22,8 +22,8 @@
 
             <v-card
               elevation="2"
-              class="d-flex justify-center align-center"
-              max-width="548"
+              class="login-card"
+              max-width="832"
               min-height="250"
               style="margin: 0 auto"
             >
@@ -42,16 +42,30 @@
 
               <!-- Forms -->
               <div v-show="user !== undefined && !user && networkOnLine">
-                <v-card-title class="justify-center">
-                  {{ $t('Welcome') }}
+                <v-card-title class="justify-center login-card--title pt-md-8">
+                  {{ $t('Hi there!') }} 👋
                 </v-card-title>
-                <v-card-subtitle class="text-center">
-                  {{ $t('Continue with') }}
+                <v-card-subtitle
+                  class="text-center text-body-2 login-card--subtitle"
+                >
+                  {{
+                    $t(
+                      'Sign in to join HangTime, a community driven hangboard training app, start getting stronger and climb even harder.'
+                    )
+                  }}
                 </v-card-subtitle>
                 <v-card-text>
                   <!-- Auth UI -->
-                  <v-row v-if="networkOnLine" class="social-icons">
-                    <v-col cols="12" md="4">
+                  <v-row
+                    v-if="networkOnLine"
+                    class="social-icons justify-center"
+                  >
+                    <v-col
+                      v-for="social in socials"
+                      :key="social.id"
+                      cols="12"
+                      md="4"
+                    >
                       <div class="text-center">
                         <v-btn
                           v-show="user !== undefined && !user && networkOnLine"
@@ -59,50 +73,20 @@
                           elevation="1"
                           dark
                           large
-                          block
-                          color="#1877F2"
-                          @click="connect('facebook')"
+                          class="login-btn"
+                          :color="social.color"
+                          @click="connect(social.id)"
                         >
-                          <v-icon dark left>
-                            {{ mdi.facebook }}
-                          </v-icon>
-                          <span class="social-login-text">Facebook</span>
+                          <v-icon dark left> {{ mdi[social.id] }} </v-icon>
+                          <span class="social-login-text">
+                            {{ $t('Sign in with') }} {{ social.name }}
+                          </span>
                         </v-btn>
                       </div>
                     </v-col>
-                    <v-col cols="12" md="4">
-                      <v-btn
-                        v-show="user !== undefined && !user && networkOnLine"
-                        data-test="login-btn"
-                        elevation="1"
-                        block
-                        dark
-                        large
-                        color="#DB4437"
-                        @click="connect('google')"
-                      >
-                        <v-icon dark left>{{ mdi.google }}</v-icon>
-                        <span class="social-login-text">Google</span>
-                      </v-btn>
-                    </v-col>
-                    <v-col cols="12" md="4">
-                      <v-btn
-                        v-show="user !== undefined && !user && networkOnLine"
-                        data-test="login-btn"
-                        elevation="1"
-                        block
-                        dark
-                        large
-                        color="#000000"
-                        @click="connect('apple')"
-                      >
-                        <v-icon dark left>{{ mdi.apple }}</v-icon>
-                        <span class="social-login-text">Apple</span>
-                      </v-btn>
-                    </v-col>
                   </v-row>
 
-                  <v-row>
+                  <v-row class="form-sign-in">
                     <v-col cols="12">
                       <div
                         class="text-center subtitle-2 text-uppercase side-lines"
@@ -219,7 +203,7 @@
                     </v-col>
                   </v-row>
 
-                  <v-row class="hidden-lg-and-down">
+                  <v-row class="d-none">
                     <v-col cols="12" md="12">
                       <v-btn
                         v-show="user !== undefined && !user && networkOnLine"
@@ -297,6 +281,23 @@ export default {
     displayName: '',
     email: '',
     password: '',
+    socials: [
+      {
+        id: 'facebook',
+        name: 'Facebook',
+        color: '#1877F2'
+      },
+      {
+        id: 'google',
+        name: 'Google',
+        color: '#DB4437'
+      },
+      {
+        id: 'apple',
+        name: 'Apple',
+        color: '#000000'
+      }
+    ],
     mdi: {
       google: mdiGoogle,
       facebook: mdiFacebook,
@@ -471,9 +472,6 @@ export default {
 @import '~vuetify/src/styles/settings/_variables';
 
 @media only screen and (max-width: 360px) {
-  .social-login-text {
-    text-indent: -9999px;
-  }
   .logo-container {
     padding-top: 0 !important;
     padding-bottom: 16px !important;
@@ -483,15 +481,43 @@ export default {
 .logo-container {
   padding-top: 5vh;
   padding-bottom: 5vh;
-  @media only screen and (min-width: 768px) {
+  @media #{map-get($display-breakpoints, 'md-and-up')} {
     padding-top: 7.5vh;
     padding-bottom: 7.5vh;
   }
 }
 
+.form-sign-in {
+  @media #{map-get($display-breakpoints, 'md-and-up')} {
+    max-width: 480px;
+    margin: 0 auto !important;
+  }
+}
+
+.login-card {
+  &--tile,
+  &--subtitle {
+    @media #{map-get($display-breakpoints, 'md-and-up')} {
+      max-width: 480px;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+  }
+}
+
 .social-icons {
-  @media only screen and (min-width: 960px) {
-    min-width: 500px;
+  & > div {
+    @media #{map-get($display-breakpoints, 'md-and-up')} {
+      flex: 0;
+    }
+  }
+}
+.login-btn {
+  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    display: flex;
+    flex: 1 0 auto;
+    min-width: 100% !important;
+    max-width: none;
   }
 }
 
