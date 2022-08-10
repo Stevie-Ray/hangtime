@@ -355,6 +355,11 @@ export default {
         this.connect('register')
       }
     },
+    getCookieValue(name) {
+      return (
+        document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || ''
+      )
+    },
     async connect(method) {
       this.loginError = null
       this.resetPassword = false
@@ -451,7 +456,10 @@ export default {
           // but we can't use it on mobile because it's not well supported
           // when app is running as standalone on ios & android
           // eslint-disable-next-line no-unused-expressions
-          await firebase.auth().signInWithPopup(provider)
+          this.getCookieValue('app-platform') === 'iOS App Store'
+            ? await firebase.auth().signInWithRedirect(provider)
+            : await firebase.auth().signInWithPopup(provider)
+
           // Enable https://console.developers.google.com/apis/library/people.googleapis.com
           // .then(res => {
           //   fetch(
