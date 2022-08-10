@@ -15,7 +15,7 @@
           <v-row>
             <v-col class="text-right">
               <div class="text-overline">{{ $t('Grade') }}</div>
-              <div>
+              <div v-if="user">
                 {{
                   ircra
                     .convert('ircra', user.settings.grade)
@@ -29,6 +29,7 @@
                   <v-icon>{{ mdi.camera }}</v-icon>
                 </v-btn>
                 <v-avatar
+                  v-if="user"
                   size="72"
                   class="grey lighten-2"
                   @click="selectFile(false)"
