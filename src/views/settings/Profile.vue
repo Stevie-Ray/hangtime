@@ -38,6 +38,7 @@
                     v-if="user.photoURL || user.pictureURL"
                     :src="userPhoto"
                     :alt="user.displayName"
+                    style="height: 100%"
                   />
                 </v-avatar>
               </v-badge>
@@ -264,7 +265,7 @@
 
 <script>
 import firebase from 'firebase/compat/app'
-import 'firebase/storage'
+import 'firebase/compat/storage'
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex'
 import IRCRA from 'ircra'
 
@@ -462,10 +463,15 @@ export default {
       const input = document.createElement('input')
       input.type = 'file'
       input.accept = 'image/*'
+      input.style.display = 'none'
+      input.id = 'camera'
       if (capture) {
         input.capture = capture
       }
+      // safari image append camera fix
+      document.body.appendChild(input)
       input.onchange = (e) => {
+        document.body.removeChild(input)
         this.uploadValue = 0
         const file = e.target.files[0]
         if (file.size > 2 * 1024 * 1024) {
