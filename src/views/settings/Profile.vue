@@ -467,6 +467,11 @@ export default {
       input.id = 'camera'
       if (capture) {
         input.capture = capture
+        if (capture === 'camera' || capture === 'user') {
+          // safari image append camera fix
+          console.log('image/*;capture=camera')
+          input.accept = 'image/*;capture=camera'
+        }
       }
       // safari image append camera fix
       document.body.appendChild(input)
