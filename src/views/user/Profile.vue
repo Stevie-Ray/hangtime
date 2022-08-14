@@ -97,6 +97,7 @@ import { mapState } from 'vuex'
 import IRCRA from 'ircra'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg, shortDate } from '@/misc/helpers'
+import companies from '@/misc/hangboards'
 
 export default {
   components: {
@@ -106,6 +107,7 @@ export default {
     userId: String
   },
   data: () => ({
+    companies,
     ircra: new IRCRA()
   }),
   head: {
@@ -122,8 +124,7 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine', 'currentTab']),
-    ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies'])
+    ...mapState('authentication', ['user'])
   },
   methods: {
     getImg,

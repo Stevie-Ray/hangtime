@@ -250,7 +250,7 @@ import { mapState, mapMutations, mapActions } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/compat/app'
 import { mdiGoogle, mdiFacebook, mdiIncognito, mdiKey, mdiApple } from '@mdi/js'
-import { getImg } from '@/misc/helpers'
+import { getImg, getCookieValue } from '@/misc/helpers'
 
 export default {
   data: () => ({
@@ -343,6 +343,7 @@ export default {
     ...mapMutations('authentication', ['setUser']),
     ...mapActions('authentication', ['login', 'triggerUpdateUser']),
     getImg,
+    getCookieValue,
     validateLogin() {
       this.$refs.login.validate()
       if (this.valid) {
@@ -354,11 +355,6 @@ export default {
       if (this.valid) {
         this.connect('register')
       }
-    },
-    getCookieValue(name) {
-      return (
-        document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || ''
-      )
     },
     async connect(method) {
       this.loginError = null

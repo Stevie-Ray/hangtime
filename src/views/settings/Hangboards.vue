@@ -78,12 +78,14 @@ import { mapState, mapActions } from 'vuex'
 import { mdiPlus } from '@mdi/js'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
+import companies from '@/misc/hangboards'
 
 export default {
   components: {
     AppContainer
   },
   data: () => ({
+    companies,
     mdi: {
       plus: mdiPlus
     }
@@ -102,8 +104,7 @@ export default {
   },
   computed: {
     ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies'])
+    ...mapState('authentication', ['user'])
   },
   methods: {
     ...mapActions('authentication', [

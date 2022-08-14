@@ -83,10 +83,12 @@
 import { mapState, mapGetters } from 'vuex'
 import { mdiStarOutline } from '@mdi/js'
 import WorkoutListItem from '@/components/molecules/WorkoutListItem/WorkoutListItem'
+import companies from '@/misc/hangboards'
 
 export default {
   components: { WorkoutListItem },
   data: () => ({
+    companies,
     windowHeight: window.innerHeight,
     mdi: {
       starOutline: mdiStarOutline
@@ -96,7 +98,6 @@ export default {
     ...mapGetters('workouts', ['communityWorkoutsByHangboard']),
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies']),
     ...mapState('workouts', ['workoutFilter', 'sortOrder']),
     workouts() {
       if (!this.user) return

@@ -177,6 +177,7 @@ import { mapState, mapMutations, mapActions } from 'vuex'
 import IRCRA from 'ircra'
 import { mdiChartGantt, mdiChartTimelineVariant } from '@mdi/js'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect'
+import companies from '@/misc/hangboards'
 
 export default {
   components: { HangboardSelect },
@@ -184,6 +185,7 @@ export default {
     value: Boolean
   },
   data: () => ({
+    companies,
     ircra: new IRCRA(),
     e1: 1,
     disableButton: false,
@@ -194,7 +196,6 @@ export default {
   }),
   computed: {
     ...mapState('authentication', ['user', 'hangboardToAdd']),
-    ...mapState('companies', ['companies']),
     ...mapState('app', ['appTitle', 'language']),
     settingsScale: {
       get() {

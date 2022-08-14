@@ -503,6 +503,7 @@ import {
 import Hangboard from '@/components/atoms/Hangboard/Hangboard'
 import Hand from '@/components/atoms/Hand/Hand'
 import { getImg, count, weightConverter } from '@/misc/helpers'
+import companies from '@/misc/hangboards'
 
 export default {
   components: { Hangboard, Hand },
@@ -520,6 +521,7 @@ export default {
       min: (min) => (v) => v >= min || `A minimun of  ${min} is allowed`,
       max: (max) => (v) => v <= max || `A maximum of  ${max} is allowed`
     },
+    companies,
     mdi: {
       clockOutline: mdiClockOutline,
       menu: mdiMenu,
@@ -536,7 +538,6 @@ export default {
     ...mapState('app', ['networkOnLine']),
     ...mapState('workouts', ['grip', 'exercises']),
     ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies']),
     ...mapGetters('workouts', ['workoutById', 'exerciseByType']),
     ...mapGetters('authentication', ['weightShort']),
     openAdvancedTab: {

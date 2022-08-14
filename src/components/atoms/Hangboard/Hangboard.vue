@@ -50,10 +50,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { SimpleSVG } from 'vue-simple-svg'
 import { mdiFormatRotate90 } from '@mdi/js'
 import { getImg } from '@/misc/helpers'
+import companies from '@/misc/hangboards'
 
 export default {
   components: { 'svg-inline': SimpleSVG },
@@ -63,12 +63,12 @@ export default {
     editWorkout: Boolean
   },
   data: () => ({
+    companies,
     mdi: {
       formatRotate90: mdiFormatRotate90
     }
   }),
   computed: {
-    ...mapState('companies', ['companies']),
     hangboard() {
       if (!this.user) return
       // eslint-disable-next-line consistent-return

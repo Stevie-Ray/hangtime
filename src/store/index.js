@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 
 import authentication from './authentication'
 import app from './app'
-import companies from './companies'
 import progress from './progress'
 import workouts from './workouts'
 
@@ -17,7 +16,6 @@ export default new Vuex.Store({
   modules: {
     authentication,
     app,
-    companies,
     progress,
     workouts
   }

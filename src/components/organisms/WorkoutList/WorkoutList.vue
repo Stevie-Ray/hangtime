@@ -82,10 +82,12 @@
 import { mapState, mapGetters } from 'vuex'
 import { mdiPlus } from '@mdi/js'
 import WorkoutListItem from '@/components/molecules/WorkoutListItem/WorkoutListItem'
+import companies from '@/misc/hangboards'
 
 export default {
   components: { WorkoutListItem },
   data: () => ({
+    companies,
     windowHeight: window.innerHeight,
     mdi: {
       plus: mdiPlus
@@ -95,7 +97,6 @@ export default {
     ...mapGetters('workouts', ['workoutsByHangboard']),
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies']),
     workouts() {
       if (!this.user) return
       // eslint-disable-next-line consistent-return

@@ -100,9 +100,11 @@ import { mapState, mapMutations } from 'vuex'
 import { orderBy } from 'lodash'
 import { mdiNumeric1Box, mdiNumeric2Box } from '@mdi/js'
 import { getImg } from '@/misc/helpers'
+import companies from '@/misc/hangboards'
 
 export default {
   data: () => ({
+    companies,
     email: 'mail@stevie-ray.nl',
     body: encodeURIComponent('Hello HangTime,\n\n...'),
     mdi: {
@@ -113,7 +115,6 @@ export default {
   computed: {
     ...mapState('app', ['networkOnLine']),
     ...mapState('authentication', ['user', 'hangboardToAdd']),
-    ...mapState('companies', ['companies']),
     subject() {
       return encodeURIComponent(
         `Hangboard Request: ${

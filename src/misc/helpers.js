@@ -1,5 +1,4 @@
 import UsersWorkoutsDB from '@/firebase/users-workouts-db'
-
 /**
  * Create new user from firebase auth user infos
  */
@@ -96,4 +95,8 @@ export function weightConverter(weight, user) {
     return Math.round(weight * 2.2046)
   }
   return weight
+}
+
+export function getCookieValue(name) {
+  return document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || ''
 }

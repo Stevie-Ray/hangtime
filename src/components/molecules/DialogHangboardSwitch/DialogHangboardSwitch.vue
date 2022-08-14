@@ -45,8 +45,9 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import { getImg } from '@/misc/helpers'
+import companies from '@/misc/hangboards'
 
 export default {
   name: 'DialogHangboardSwitch',
@@ -54,9 +55,10 @@ export default {
     value: Boolean,
     user: Object
   },
-  data: () => ({}),
+  data: () => ({
+    companies
+  }),
   computed: {
-    ...mapState('companies', ['companies']),
     show: {
       get() {
         return this.value

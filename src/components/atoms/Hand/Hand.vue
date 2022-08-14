@@ -54,6 +54,7 @@ import { mapState } from 'vuex'
 import { SimpleSVG } from 'vue-simple-svg'
 import { mdiHandFrontRight, mdiUndo } from '@mdi/js'
 import { getImg } from '@/misc/helpers'
+import companies from '@/misc/hangboards'
 
 export default {
   components: { 'svg-inline': SimpleSVG },
@@ -62,14 +63,14 @@ export default {
     data: Object
   },
   data: () => ({
+    companies,
     mdi: {
       undo: mdiUndo,
       hand: mdiHandFrontRight
     }
   }),
   computed: {
-    ...mapState('authentication', ['user']),
-    ...mapState('companies', ['companies'])
+    ...mapState('authentication', ['user'])
   },
   methods: {
     getImg,
