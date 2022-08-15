@@ -2357,20 +2357,26 @@ export default [
         holds: 0
       },
       {
-        name: 'CJ-HB2046',
+        name: 'CJ-HB2025',
         id: 6,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/TWOSTONESHB2025.svg',
+        holds: 0
+      },
+      {
+        name: 'CJ-HB2046',
+        id: 7,
+        image: 'hangboards/TWOSTONESHB2025.svg',
         holds: 0
       },
       {
         name: 'CJ-HB2047',
-        id: 6,
+        id: 8,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
       },
       {
         name: 'CJ-HB2055',
-        id: 7,
+        id: 9,
         image: 'hangboards/TWOSTONESHB2055.svg',
         holds: 6
       }
@@ -2596,6 +2602,73 @@ export default [
         id: 0,
         image: 'hangboards/TWALLCRANK.svg',
         holds: 11
+      }
+    ]
+  },
+  {
+    name: 'Entropy Holds',
+    description: '',
+    id: 100,
+    website: 'http://www.entropyholds.com/',
+    hangboards: [
+      {
+        name: 'Fingerboard',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Rock + Run',
+    description: 'Online Climbing and Mountaineering Shop',
+    id: 101,
+    website: 'https://rockrun.com/',
+    hangboards: [
+      {
+        name: 'Praxis',
+        id: 0,
+        image: 'hangboards/ROCKRUNPRAXIS.svg',
+        holds: 12
+      }
+    ]
+  },
+  {
+    name: 'Get Out!',
+    description: 'Provides premium outdoor games and fitness accessories',
+    id: 103,
+    website:
+      'https://www.amazon.com/stores/page/13F4502E-65B8-4372-947D-89E1090DB80D/',
+    hangboards: [
+      {
+        name: 'B07C67JND2',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'B08HBYK5BT',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'B08HC2XXND',
+        id: 2,
+        image: 'hangboards/BEAST1000.svg',
+        holds: 0
+      },
+      {
+        name: 'B08Z5WPFPS',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'B08Z66L44K',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
       }
     ]
   }

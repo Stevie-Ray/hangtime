@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="573px" height="252px" viewBox="0 0 573 252" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>TWOSTONESHB2025</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="TWOSTONESHB2025" transform="translate(0.583333, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M571.416667,250 L20,250 C8.954305,250 0,241.045695 0,230 L0.416666667,20 C0.416666667,8.954305 9.37097167,0 20.4166667,0 L571.833333,0" id="h1"></path>
+            <path d="M571.833333,250 L20.4166667,250 C9.37097167,250 0.416666667,241.045695 0.416666667,230 L0.416666667,41 C0.416666667,29.954305 9.37097167,21 20.4166667,21 L571.833333,21" id="board"></path>
+            <rect id="board" x="121.916667" y="75.5" width="242" height="121" rx="25"></rect>
+            <rect id="h3" x="121.916667" y="136.5" width="242" height="60" rx="25"></rect>
+            <path d="M571.833333,192 L472.416667,192 C458.609548,192 447.416667,180.807119 447.416667,167 L447.416667,156 C447.416667,142.192881 458.609548,131 472.416667,131 L571.833333,131" id="h4"></path>
+            <rect id="h2" x="121.916667" y="75.5" width="242" height="60" rx="25"></rect>
+        </g>
+    </g>
+</svg>
