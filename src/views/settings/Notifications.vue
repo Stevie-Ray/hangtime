@@ -67,7 +67,7 @@ import { mdiKey, mdiContentCopy, mdiDelete } from '@mdi/js'
 import firebase from 'firebase/compat/app'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
 import { getImg } from '@/misc/helpers'
-import 'firebase/messaging'
+import 'firebase/compat/messaging'
 
 export default {
   components: {
