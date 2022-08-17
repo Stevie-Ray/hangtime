@@ -149,7 +149,7 @@ export default {
     startWorkout: false,
     pauseWorkout: false,
     canSubscribe: window.getDigitalGoodsService,
-    subscribeLimit: 100,
+    subscribeLimit: 30,
     mdi: {
       play: mdiPlay,
       pause: mdiPause

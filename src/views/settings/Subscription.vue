@@ -17,7 +17,7 @@
       </v-card-title>
       <v-card-subtitle>
         <span>{{ appTitle }} gives you </span>
-        <span style="text-decoration: line-through">60 minutes</span>
+        <span style="text-decoration: line-through">{{ limit / 2 }} minutes</span>
         <strong> {{ limit }} minutes</strong> of free usage.
         <span>Want to do more? </span>
         <span>Buy a subscription! After that it's free forever.</span>
@@ -134,7 +134,7 @@ export default {
       currency: 'EUR',
       value: 0
     },
-    limit: 100,
+    limit: 30,
     disabled: true,
     buyStatus: '',
     logField: '',
