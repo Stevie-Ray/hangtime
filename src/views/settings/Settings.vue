@@ -210,7 +210,10 @@ export default {
         if (service === null) {
           console.log('Play Billing is not available.')
         } else {
-          const details = await service.getDetails(['subscription'])
+          const items = ['subscription']
+          console.log(Array.isArray(items))
+          console.log(items)
+          const details = await service.getDetails(items)
           console.log(details)
           if (details === null) {
             console.log('Are you running a Play Store build?')
