@@ -135,6 +135,7 @@ export default {
     dialogs: {
       complete: false
     },
+    audio: new Audio(),
     currentStep: 0,
     progressText: 'Press Play',
     total: 0,
@@ -203,6 +204,11 @@ export default {
     async startWorkout() {
       await this.requestWakeLock()
       this.exerciseSetup()
+      if (this.audio) {
+        this.audio.autoplay = true
+        this.audio.src =
+          'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'
+      }
       this.timer = setInterval(() => {
         if (!this.paused) this.countdown()
       }, 1000)
@@ -536,7 +542,12 @@ export default {
       }
     },
     playSound(path) {
-      if (this.user && this.user.settings.sound) this.sound(path)
+      if (this.user && this.user.settings.sound) {
+        // this.sound(path)
+        // workaround for iOS / Safari
+        // eslint-disable-next-line global-require,import/no-dynamic-require
+        this.audio.src = require(`@/assets/sound/${path}`)
+      }
     },
     vibratePhone() {
       if ('vibrate' in navigator) {
