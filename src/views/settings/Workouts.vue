@@ -58,9 +58,9 @@
               v-model="selectedVoice"
               :items="voiceList"
               :item-text="(item) => `${item.name} (${item.lang})`"
+              :item-value="(item) => item.name"
               :placeholder="$t('Tap to change')"
               :label="$t('Select voice')"
-              return-object
             >
             </v-select>
           </v-list-item-content>
@@ -99,6 +99,7 @@ import {
   mdiAccountMultiple
 } from '@mdi/js'
 import AppContainer from '@/components/molecules/AppContainer/AppContainer'
+import { sound } from '@/misc/helpers'
 
 export default {
   components: {
@@ -134,7 +135,7 @@ export default {
         return this.voiceList[this.user.settings.voice]
       },
       set(value) {
-        this.setVoice(this.voiceList.indexOf(value))
+        this.setVoice(this.voiceList.findIndex((voice) => voice.name === value))
         this.greet(value)
         this.triggerUpdateUser()
       }
@@ -145,6 +146,7 @@ export default {
       },
       set(value) {
         this.setSound(value)
+        this.playSound('start.mp3')
       }
     },
     settingsSpeak: {
@@ -197,15 +199,19 @@ export default {
       'setVibrate',
       'setVoice'
     ]),
-    greet(event) {
+    sound,
+    playSound(path) {
+      if (this.user && this.user.settings.sound) this.sound(path)
+    },
+    greet(name) {
       this.greetingSpeech.text = `${this.$i18n.t(
         'You chose {voice}, this is my new voice',
         {
-          voice: event.name
+          voice: name
         }
       )}
       `
-      this.greetingSpeech.voice = event
+      this.greetingSpeech.voice = this.voiceList.find((v) => v.name === name)
       try {
         this.synth.speak(this.greetingSpeech)
       } catch (ex) {
