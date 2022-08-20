@@ -720,7 +720,19 @@ export default [
         name: '180°',
         id: 0,
         image: 'hangboards/CAPTAIN180.svg',
-        holds: 3
+        sides: [
+          {
+            name: '',
+            image: 'hangboards/CAPTAIN180.svg',
+            holds: 4
+          },
+          {
+            name: 'Warm-up (180°)',
+            image: 'hangboards/CAPTAIN180.svg',
+            holds: 4
+          }
+        ],
+        holds: 4
       }
     ]
   },

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="638px" height="156px" viewBox="0 0 638 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+<svg width="638px" height="177px" viewBox="0 0 638 177" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>CAPTAIN180</title>
-    <desc>Created with Sketch.</desc>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="CAPTAIN180" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
-            <path d="M637,154 L34,154 C15.2223185,154 0,138.777681 0,120 L0,34 C0,15.2223185 15.2223185,0 34,0 L637,0" id="hangboard"></path>
-            <path d="M637,115.606965 L555.094203,116 C530.189362,116 510,98.7551668 510,77.4825871 L510,75.9104478 C510,54.637868 530.189362,37.3930348 555.094203,37.3930348 L637,37" id="h4"></path>
-            <rect id="h2" x="347" y="37" width="143" height="79" rx="39.5"></rect>
-            <ellipse id="h3" cx="449" cy="76.5" rx="41" ry="39.5"></ellipse>
-            <rect id="h1" x="82" y="37" width="245" height="79" rx="39.5"></rect>
+        <g id="CAPTAIN180" transform="translate(1.000000, 0.697563)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <path d="M637,137.302437 L34,137.302437 C15.2223185,137.302437 0,122.080118 0,103.302437 L0,50.5973578 C0,31.8196763 15.2223185,-5.68434189e-14 34,-5.68434189e-14 L637,-5.68434189e-14" id="h1"></path>
+            <path d="M637,175.302437 L34,175.302437 C15.2223185,175.302437 0,160.080118 0,141.302437 L0,55.3024372 C0,36.5247557 15.2223185,21.3024372 34,21.3024372 L637,21.3024372" id="hangboard"></path>
+            <path d="M637,136.909402 L555.094203,137.302437 C530.189362,137.302437 510,120.057604 510,98.7850243 L510,97.212885 C510,75.9403052 530.189362,58.695472 555.094203,58.695472 L637,58.3024372" id="h5"></path>
+            <rect id="h3" x="347" y="58.3024372" width="143" height="79" rx="39.5"></rect>
+            <ellipse id="h4" cx="449" cy="97.8024372" rx="41" ry="39.5"></ellipse>
+            <rect id="h2" x="82" y="58.3024372" width="245" height="79" rx="39.5"></rect>
         </g>
     </g>
 </svg>
