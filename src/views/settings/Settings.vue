@@ -163,7 +163,9 @@ export default {
     'svg-inline': SimpleSVG
   },
   data: () => ({
-    canSubscribe: window.getDigitalGoodsService,
+    canSubscribe:
+      window.getDigitalGoodsService &&
+      window.getDigitalGoodsService('https://play.google.com/billing'),
     mdi: {
       cog: mdiCog,
       timer: mdiTimer,

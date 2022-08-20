@@ -148,7 +148,9 @@ export default {
     initialStart: true,
     startWorkout: false,
     pauseWorkout: false,
-    canSubscribe: window.getDigitalGoodsService,
+    canSubscribe:
+      window.getDigitalGoodsService &&
+      window.getDigitalGoodsService('https://play.google.com/billing'),
     subscribeLimit: 30,
     mdi: {
       play: mdiPlay,

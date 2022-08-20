@@ -161,7 +161,8 @@ export default {
     porgressValue() {
       let time = 60
       if (!this.user || (this.user && this.user.subscribed)) time = 0
-      return ((this.user.completed.time / time) * 100) / this.limit
+      const value = ((this.user.completed.time / time) * 100) / this.limit
+      return value < 100 ? value : 100
     }
   },
   mounted() {
