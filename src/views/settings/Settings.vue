@@ -71,9 +71,8 @@
       </v-list-item>
 
       <v-divider inset></v-divider>
-
       <v-list-item
-        v-if="canSubscribe"
+        v-if="canSubscribePlayBilling"
         class="item-subscription"
         to="/settings/subscription"
       >
@@ -88,8 +87,7 @@
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-
-      <v-divider v-if="canSubscribe" inset></v-divider>
+      <v-divider v-if="canSubscribePlayBilling" inset></v-divider>
 
       <v-list-item class="item-notifications" to="/settings/notifications">
         <v-list-item-icon>
@@ -163,9 +161,9 @@ export default {
     'svg-inline': SimpleSVG
   },
   data: () => ({
-    canSubscribe:
-      window.getDigitalGoodsService &&
-      window.getDigitalGoodsService('https://play.google.com/billing'),
+    PAYMENT_METHOD: 'https://play.google.com/billing',
+    canSubscribe: window.getDigitalGoodsService,
+    canSubscribePlayBilling: false,
     mdi: {
       cog: mdiCog,
       timer: mdiTimer,
@@ -197,8 +195,25 @@ export default {
       return this.user.photoURL
     }
   },
+  mounted() {
+    this.canUsePlayBilling()
+  },
   methods: {
-    getImg
+    getImg,
+    async canUsePlayBilling() {
+      if (this.canSubscribe === undefined) {
+        console.log("window doesn't have getDigitalGoodsService.")
+      }
+      try {
+        const service = await window.getDigitalGoodsService(this.PAYMENT_METHOD)
+        if (service === null) {
+          console.log('Play Billing is not available.')
+        }
+        this.canSubscribePlayBilling = true
+      } catch (error) {
+        console.log(error)
+      }
+    },
   }
 }
 </script>

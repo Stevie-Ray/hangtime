@@ -76,7 +76,7 @@
     <!-- Show pay wall if device can pay, has user, didn't pay before, had completed 100 minutes -->
     <dialog-subscribe-to-app
       v-if="
-        canSubscribe &&
+        canSubscribePlayBilling &&
         user &&
         !user.subscribed &&
         user.completed &&
@@ -148,9 +148,9 @@ export default {
     initialStart: true,
     startWorkout: false,
     pauseWorkout: false,
-    canSubscribe:
-      window.getDigitalGoodsService &&
-      window.getDigitalGoodsService('https://play.google.com/billing'),
+    PAYMENT_METHOD: 'https://play.google.com/billing',
+    canSubscribe: window.getDigitalGoodsService,
+    canSubscribePlayBilling: false,
     subscribeLimit: 30,
     mdi: {
       play: mdiPlay,
@@ -209,11 +209,26 @@ export default {
       // eslint-disable-next-line vue/custom-event-name-casing
       this.$emit('updateHead')
     }
+    this.canUsePlayBilling()
   },
   methods: {
     editCurrentStep(step) {
       this.currentStep = step
-    }
+    },
+    async canUsePlayBilling() {
+      if (this.canSubscribe === undefined) {
+        console.log("window doesn't have getDigitalGoodsService.")
+      }
+      try {
+        const service = await window.getDigitalGoodsService(this.PAYMENT_METHOD)
+        if (service === null) {
+          console.log('Play Billing is not available.')
+        }
+        this.canSubscribePlayBilling = true
+      } catch (error) {
+        console.log(error)
+      }
+    },
   }
 }
 </script>

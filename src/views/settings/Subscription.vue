@@ -38,7 +38,9 @@
             </strong>
           </template>
         </v-progress-linear>
-        <p>{{ count(user.completed.time) }} minutes.</p>
+        <p v-if="user && user.completed">
+          {{ count(user.completed.time) }} minutes.
+        </p>
         <v-row>
           <v-col cols="12" class="text-center">
             <div v-if="canSubscribe">
