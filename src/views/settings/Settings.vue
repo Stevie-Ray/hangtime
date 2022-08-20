@@ -206,10 +206,12 @@ export default {
       }
       try {
         const service = await window.getDigitalGoodsService(this.PAYMENT_METHOD)
+        console.log(service)
         if (service === null) {
           console.log('Play Billing is not available.')
+        } else {
+          this.canSubscribePlayBilling = true
         }
-        this.canSubscribePlayBilling = true
       } catch (error) {
         console.log(error)
       }
