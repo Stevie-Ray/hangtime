@@ -967,6 +967,12 @@ export default [
         id: 0,
         image: 'hangboards/EUROHOLDSASYM.svg',
         holds: 9
+      },
+      {
+        name: 'Smartie Board',
+        id: 1,
+        image: 'hangboards/EUROHOLDSMARTIE.svg',
+        holds: 2
       }
     ]
   },
