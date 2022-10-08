@@ -2357,7 +2357,7 @@ export default [
         holds: 12
       },
       {
-        name: 'CJ-HB2005',
+        name: 'CJ-HB2005BX',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
@@ -2397,6 +2397,12 @@ export default [
         id: 9,
         image: 'hangboards/TWOSTONESHB2055.svg',
         holds: 6
+      },
+      {
+        name: 'CJ-HB2006BX',
+        id: 10,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
       }
     ]
   },
@@ -2512,8 +2518,8 @@ export default [
       {
         name: 'Small',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/SMOGSMALL.svg',
+        holds: 4
       },
       {
         name: 'Medium',
