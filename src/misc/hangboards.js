@@ -2660,7 +2660,7 @@ export default [
   {
     name: 'Get Out!',
     description: 'Provides premium outdoor games and fitness accessories',
-    id: 103,
+    id: 102,
     website:
       'https://www.amazon.com/stores/page/13F4502E-65B8-4372-947D-89E1090DB80D/',
     hangboards: [
@@ -2691,6 +2691,32 @@ export default [
       {
         name: 'B08Z66L44K',
         id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Spin Agarras',
+    description: 'Brazilian Climbing Grips',
+    id: 103,
+    website: 'http://www.spinagarras.com.br/',
+    hangboards: [
+      {
+        name: 'Fingerboard',
+        id: 0,
+        image: 'hangboards/SPINFINGER.svg',
+        holds: 8
+      },
+      {
+        name: 'Fusion',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Grande',
+        id: 2,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
       }
