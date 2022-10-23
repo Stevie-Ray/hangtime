@@ -1980,8 +1980,8 @@ export default [
       {
         name: 'XC Tsaranoro',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/EXPLORETSARANORO.svg',
+        holds: 9
       }
     ]
   },

@@ -1,0 +1,15 @@
+<svg width="558" height="368" viewBox="0 0 558 368" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="EXPLORETSARANORO">
+<path id="board" fill="white" d="M558 38.0001H36C16.67 38.0001 0.999969 53.6702 0.999969 73.0001V332C0.999969 351.33 16.67 367 36 367H558" stroke="black"/>
+<path id="h1" fill="white" d="M558 38.0001H36C16.67 38.0001 0.999982 53.6702 0.999982 73.0001V78.5001C-6.33374e-05 50.5 10 0.5 65 0.5C80.2 0.5 390.167 0.500122 558 0.500122" stroke="black"/>
+<rect id="h2" x="18.5" y="79.5001" width="185" height="63" rx="31.5" fill="white" stroke="black"/>
+<path id="h4" d="M557.5 79.5001V142.5H333C315.603 142.5 301.5 128.397 301.5 111C301.5 93.6032 315.603 79.5001 333 79.5001H557.5Z" fill="white" stroke="black"/>
+<path id="h7" d="M557.5 171.5V234.5H333C315.603 234.5 301.5 220.397 301.5 203C301.5 185.603 315.603 171.5 333 171.5H557.5Z" fill="white" stroke="black"/>
+<path id="h10" d="M557.5 263.5V326.5H333C315.603 326.5 301.5 312.397 301.5 295C301.5 277.603 315.603 263.5 333 263.5H557.5Z" fill="white" stroke="black"/>
+<rect id="h5" x="18.5" y="171.5" width="185" height="63" rx="31.5" fill="white" stroke="black"/>
+<rect id="h8" x="18.5" y="263.5" width="185" height="63" rx="31.5" fill="white" stroke="black"/>
+<rect id="h3" x="224.5" y="79.5001" width="63" height="63" rx="31.5" fill="white" stroke="black"/>
+<rect id="h6" x="225.5" y="171.5" width="63" height="63" rx="31.5" fill="white" stroke="black"/>
+<rect id="h9" x="224.5" y="263.5" width="63" height="63" rx="31.5" fill="white" stroke="black"/>
+</g>
+</svg>
