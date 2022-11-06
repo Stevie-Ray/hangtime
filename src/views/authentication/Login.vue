@@ -35,7 +35,9 @@
               >
                 <v-progress-circular :size="48" color="primary" indeterminate>
                 </v-progress-circular>
-                <div class="text-center pa-4">{{ $t('Authenticating...') }}</div>
+                <div class="text-center pa-4">
+                  {{ $t('Authenticating...') }}
+                </div>
               </div>
 
               <!-- Offline instruction -->
