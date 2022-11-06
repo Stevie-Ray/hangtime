@@ -35,7 +35,7 @@
               >
                 <v-progress-circular :size="48" color="primary" indeterminate>
                 </v-progress-circular>
-                <div class="text-center">{{ $t('Authenticating...') }}</div>
+                <div class="text-center pa-4">{{ $t('Authenticating...') }}</div>
               </div>
 
               <!-- Offline instruction -->
@@ -195,10 +195,6 @@
                         </v-btn>
                       </v-form>
 
-                      <div v-if="loginError">
-                        <v-divider class="mt-2 mb-4"></v-divider>
-                        <div>{{ loginError }}</div>
-                      </div>
                       <div v-if="resetPassword">
                         <v-divider class="mt-2 mb-4"></v-divider>
                         <div class="mb-2">Forgot your password?</div>
