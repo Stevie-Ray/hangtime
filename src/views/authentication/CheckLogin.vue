@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-alert{
+.v-alert {
   position: fixed;
   bottom: 8px;
   left: 8px;
