@@ -1,5 +1,6 @@
 export default {
   user: undefined,
+  error: undefined,
   hangboardToAdd: {
     company: 60,
     hangboard: 0

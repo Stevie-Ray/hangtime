@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 export default {
   setUser: (state, value) => (state.user = value),
+  setError: (state, value) => (state.error = value),
   setUserWeight: (state, value) => (state.user.weight = value),
   setUserStatus: (state, value) => (state.user.status = value),
   setUserGender: (state, value) => (state.user.gender = value),

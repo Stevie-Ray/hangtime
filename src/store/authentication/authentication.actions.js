@@ -9,24 +9,32 @@ export default {
    * Callback fired when user login
    */
   login: async ({ commit, dispatch }, firebaseAuthUser) => {
-    const userFromFirebase = await new UsersWorkoutsDB().read(
-      firebaseAuthUser.uid
-    )
+    try {
+      const userFromFirebase = await new UsersWorkoutsDB().read(
+        firebaseAuthUser.uid
+      )
 
-    const user = isNil(userFromFirebase)
-      ? await createNewUserFromFirebaseAuthUser(firebaseAuthUser)
-      : userFromFirebase
+      const user = isNil(userFromFirebase)
+        ? await createNewUserFromFirebaseAuthUser(firebaseAuthUser)
+        : userFromFirebase
 
-    commit('setUser', user)
+      commit('setUser', user)
 
-    if (!isNil(user) && user.settings && user.settings.locale) {
-      i18n.locale = user.settings.locale
+      if (!isNil(user) && user.settings && user.settings.locale) {
+        i18n.locale = user.settings.locale
+      }
+
+      dispatch('workouts/getUserWorkouts', null, { root: true })
+      // dispatch('workouts/updateUserWorkouts', null, { root: true })
+      dispatch('workouts/getCommunityWorkouts', null, { root: true })
+      dispatch('progress/getUserProgress', null, { root: true })
+    } catch (e) {
+      commit('setError', e.toString())
+      if (e.code?.toString() === 'resource-exhausted') {
+        commit('setError', 'Usage limit exceeded. Try again tomorrow.')
+      }
+      console.error(e)
     }
-
-    dispatch('workouts/getUserWorkouts', null, { root: true })
-    // dispatch('workouts/updateUserWorkouts', null, { root: true })
-    dispatch('workouts/getCommunityWorkouts', null, { root: true })
-    dispatch('progress/getUserProgress', null, { root: true })
   },
 
   /**

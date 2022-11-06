@@ -448,8 +448,8 @@ export default {
         this.setUser(undefined)
 
         try {
-          // Firebase signin with popup is faster than redirect
-          // but we can't use it on mobile because it's not well supported
+          // Firebase signing with popup is faster than redirect,
+          // but we can't use it on mobile because it's not well-supported
           // when app is running as standalone on ios & android
           // eslint-disable-next-line no-unused-expressions
           this.getCookieValue('app-platform') === 'iOS App Store'

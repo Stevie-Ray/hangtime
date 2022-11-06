@@ -11,6 +11,7 @@
         </div>
       </v-col>
     </v-row>
+    <v-alert v-if="error" type="error">{{ error }}</v-alert>
   </v-main>
 </template>
 
@@ -31,7 +32,7 @@ export default {
       }
     ]
   },
-  computed: mapState('authentication', ['user']),
+  computed: mapState('authentication', ['user', 'error']),
   watch: {
     user: {
       handler(user) {
@@ -53,4 +54,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-alert{
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+}
+</style>
