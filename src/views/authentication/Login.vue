@@ -28,7 +28,11 @@
               style="margin: 0 auto"
             >
               <!-- Loader -->
-              <div v-show="user === undefined" data-test="loader">
+              <div
+                v-show="user === undefined"
+                class="login-card--loader"
+                data-test="loader"
+              >
                 <v-progress-circular :size="48" color="primary" indeterminate>
                 </v-progress-circular>
                 <div class="text-center">{{ $t('Authenticating...') }}</div>
@@ -242,6 +246,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-alert v-if="error" type="error">{{ error }}</v-alert>
   </v-main>
 </template>
 
@@ -254,7 +259,6 @@ import { getImg, getCookieValue } from '@/misc/helpers'
 
 export default {
   data: () => ({
-    loginError: null,
     resetPassword: false,
     year: new Date().getFullYear(),
     formDisabled: false,
@@ -319,7 +323,7 @@ export default {
     ]
   },
   computed: {
-    ...mapState('authentication', ['user']),
+    ...mapState('authentication', ['user', 'error']),
     ...mapState('app', ['networkOnLine', 'appTitle', 'appVersion'])
   },
   watch: {
@@ -340,7 +344,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('authentication', ['setUser']),
+    ...mapMutations('authentication', ['setUser', 'setError']),
     ...mapActions('authentication', ['login', 'triggerUpdateUser']),
     getImg,
     getCookieValue,
@@ -357,7 +361,7 @@ export default {
       }
     },
     async connect(method) {
-      this.loginError = null
+      this.setError(null)
       this.resetPassword = false
       let provider = null
 
@@ -389,7 +393,7 @@ export default {
             if (self.errorCode === 'auth/wrong-password') {
               self.resetPassword = true
             } else {
-              self.loginError = error.message
+              self.setError(error.message)
             }
             self.valid = false
             self.setUser(null)
@@ -411,7 +415,7 @@ export default {
           // eslint-disable-next-line func-names
           .catch(function (error) {
             // Handle Errors here.
-            self.loginError = error.message
+            self.setError(error.message)
             self.valid = false
             self.setUser(null)
           })
@@ -439,7 +443,7 @@ export default {
             this.$router.push('/workouts')
           })
           .catch((err) => {
-            this.loginError = err
+            this.setError(err)
             this.setUser(null)
           })
       }
@@ -463,7 +467,7 @@ export default {
           //   ).then(response => console.log(response))
           // })
         } catch (err) {
-          this.loginError = err
+          this.setError(err.toString())
           this.setUser(null)
         }
       }
@@ -499,6 +503,13 @@ export default {
 }
 
 .login-card {
+  &--loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 250px;
+    justify-content: center;
+  }
   &--tile,
   &--subtitle {
     @media #{map-get($display-breakpoints, 'md-and-up')} {
@@ -554,5 +565,12 @@ export default {
   &:after {
     margin-left: 8px;
   }
+}
+
+.v-alert {
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
 }
 </style>

@@ -31,7 +31,10 @@ export default {
     } catch (e) {
       commit('setError', e.toString())
       if (e.code?.toString() === 'resource-exhausted') {
-        commit('setError', 'Usage limit exceeded. Try again tomorrow.')
+        commit(
+          'setError',
+          'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.'
+        )
       }
       console.error(e)
     }
