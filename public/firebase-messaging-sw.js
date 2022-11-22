@@ -1,6 +1,6 @@
-importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js')
 // eslint-disable-next-line no-undef
-importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js')
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js')
 
 const config = {
   apiKey: 'AIzaSyDkE4T_MphbbPVq8gdnZjyRcLCDcqrheW8',

@@ -76,7 +76,6 @@ export default {
   data: () => ({
     currentToken: '',
     messages: [],
-    snackbar: true,
     copyAPI: navigator.clipboard,
     messaging: firebase.messaging(),
     hasToken: false,

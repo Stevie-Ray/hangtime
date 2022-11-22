@@ -203,6 +203,7 @@ export default {
     async canUsePlayBilling() {
       if (this.canSubscribe === undefined) {
         console.log("window doesn't have getDigitalGoodsService.")
+        return
       }
       try {
         const service = await window.getDigitalGoodsService(this.PAYMENT_METHOD)
