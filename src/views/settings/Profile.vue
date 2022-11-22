@@ -12,7 +12,6 @@
         gradient="to bottom, rgba(1,46,64,.66), rgba(0,0,0,.33)"
       >
         <v-card-title class="justify-center align-center">
-
           <v-row>
             <v-col class="text-right">
               <div class="text-overline">{{ $t('Grade') }}</div>
