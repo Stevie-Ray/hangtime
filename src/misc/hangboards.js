@@ -538,6 +538,24 @@ export default [
           }
         ],
         holds: 7
+      },
+      {
+        name: 'Honestone',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Whetstone',
+        id: 5,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Simple Board',
+        id: 6,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
       }
     ]
   },
@@ -2590,8 +2608,20 @@ export default [
       {
         name: 'Travelboard',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/YYVERTICALTRAVEL.svg',
+        sides: [
+          {
+            name: 'Default',
+            image: 'hangboards/YYVERTICALTRAVEL.svg',
+            holds: 3
+          },
+          {
+            name: 'Rotated',
+            image: 'hangboards/YYVERTICALTRAVELBACK.svg',
+            holds: 2
+          }
+        ],
+        holds: 3
       }
     ]
   },

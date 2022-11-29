@@ -49,7 +49,7 @@
     "@storybook/addon-storysource": "^6.5.13",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/vue": "^6.5.13",
-    "@types/lodash": "^4.14.189",
+    "@types/lodash": "^4.14.190",
     "@vue/cli-plugin-babel": "^4.5.19",
     "@vue/cli-plugin-e2e-cypress": "^4.5.19",
     "@vue/cli-plugin-eslint": "^4.5.19",
