@@ -1,5 +1,6 @@
 {
   "projects": {
-    "hangtime": "hangtime-app"
+    "hangtime": "hangtime-app",
+    "default": "hangtime-app"
   }
 }
