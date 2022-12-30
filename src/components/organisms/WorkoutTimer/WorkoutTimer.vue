@@ -395,6 +395,7 @@ const startTimer = () => {
   .v-theme--dark & {
     color: rgb(var(--v-theme-surface-variant));
   }
+  color: rgba(var(--v-theme-on-primary));
   mix-blend-mode: difference;
 }
 
