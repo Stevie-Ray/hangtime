@@ -1,5 +1,4 @@
 const { defineConfig } = require('@vue/cli-service')
-const path = require('path')
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -9,7 +8,7 @@ module.exports = defineConfig({
     appleMobileWebAppStatusBarStyle: 'black',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      swSrc: path.join('./public', 'service-worker.js')
+      swSrc: './public/service-worker.js'
     }
   },
   pluginOptions: {
