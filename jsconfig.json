@@ -1,10 +1,12 @@
-// VSCode configuration providing help with aliases
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "target": "es5",
+    "module": "esnext",
+    "baseUrl": "./",
+    "moduleResolution": "node",
     "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["src", "tests"]
+      "@/*": ["src/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  }
 }

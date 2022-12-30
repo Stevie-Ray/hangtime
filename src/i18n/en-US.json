@@ -88,6 +88,7 @@
   "Repeat": "Repeat",
   "Repeat the exercise (1x = no repeat)": "Repeat the exercise (1x = no repeat)",
   "Rest": "Rest",
+  "Hang": "Hang",
   "Time to rest between repeating the exercise": "Time to rest between repeating the exercise",
   "Fingers": "Fingers",
   "Tap on fingers that are not allowed'": "Tap on fingers that are not allowed",
@@ -182,7 +183,7 @@
   "Recording result": "Recording result",
   "Start recording your progress using the below button": "Start recording your progress using the below button",
   "Fetching workout...": "Fetching workout...",
-  "Rename Workout": "Rename Workout",
+  "Rename workout": "Rename workout",
   "Delete Workout": "Delete Workout",
   "You are not using this hangboard": "You are not using this hangboard",
   "To view this workout we'll add this hangboard to your hangboards": "To view this workout we'll add this hangboard to your hangboards",
@@ -230,5 +231,8 @@
   "Male": "Male",
   "Female": "Female",
   "Other": "Other",
-  "Country": "Country"
+  "Country": "Country",
+  "Hi there!": "Hi there!",
+  "Sign in to join HangTime, a community driven hangboard training app, start getting stronger and climb even harder.": "Sign in to join HangTime, a community driven hangboard training app, start getting stronger and climb even harder.",
+  "Edit exercise": "Edit exercise"
 }

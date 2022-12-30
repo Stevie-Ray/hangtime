@@ -1,34 +1,40 @@
+<script setup>
+import { defineEmits, defineProps, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const snackbar = ref(true)
+
+const props = defineProps({
+  refreshingApp: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const emit = defineEmits(['refresh'])
+
+const refresh = () => {
+  emit('refresh')
+  snackbar.value = false
+}
+</script>
+
 <template>
   <v-snackbar v-model="snackbar" :timeout="-1" bottom>
-    <div v-if="refreshingApp">
-      {{ $t('Loading new content...') }}
+    <div v-if="props.refreshingApp">
+      {{ t('Loading new content...') }}
     </div>
     <div v-else>
-      {{ $t('New content available') }}
+      {{ t('New content available') }}
     </div>
-    <template v-if="!refreshingApp" #action="{ attrs }">
-      <v-btn text v-bind="attrs" @click="refesh">
-        {{ $t('Refresh') }}
+    <template v-if="!props.refreshingApp" #actions>
+      <v-btn color="light" @click="refresh">
+        {{ t('Refresh') }}
       </v-btn>
     </template>
   </v-snackbar>
 </template>
-
-<script>
-export default {
-  props: {
-    refreshingApp: Boolean
-  },
-  data: () => ({
-    snackbar: true
-  }),
-  methods: {
-    refesh() {
-      this.$emit('refresh')
-      this.snackbar = false
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped></style>

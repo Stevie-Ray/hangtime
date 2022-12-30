@@ -1,78 +1,20 @@
-// Imports
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import options from '@/misc/theme'
-import StoryRouter from './addon-router'
+import { app } from '@storybook/vue3'
+import { createPinia } from 'pinia'
+const pinia = createPinia()
+import i18n from '@/plugins/i18n'
 
-// Theme
-import '@/theme/global.scss'
+app.use(i18n).use(pinia)
 
-// Vuetify
-import 'vuetify/dist/vuetify.min.css'
-import '@mdi/js'
-
-Vue.use(Vuetify)
-
-// Vue i18n
-import i18n from '@/misc/i18n'
-
-// Import Vue plugins
-import Vuex from 'vuex'
-import store from '@/store'
-import router from '../src/router'
-
-Vue.use(Vuex)
-Vue.prototype.$store = store
-
-// this was the only thing here by default
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' }
+  actions: { argTypesRegex: '^on[A-Z].*' },
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/
+    }
+  }
 }
 
-// Custom decorator
-export const decorators = [
-  (story, context) => {
-    // wrap the passed component within the passed context
-    const wrapped = story(context)
-    // extend Vue to use Vuetify around the wrapped component
-    return Vue.extend({
-      router,
-      store,
-      vuetify: new Vuetify(options),
-      i18n,
-      components: { wrapped },
-      props: {
-        dark: {
-          type: Boolean,
-          default: context.args.dark
-        },
-        locale: {
-          type: String,
-          default: 'nl-NL'
-        }
-      },
-      watch: {
-        dark: {
-          immediate: true,
-          handler(val) {
-            this.$vuetify.theme.dark = val
-          }
-        },
-        locale: {
-          immediate: true,
-          handler(val) {
-            this.$i18n.locale = val
-          }
-        }
-      },
-      template: `
-        <v-app>
-          <v-container fluid>
-            <wrapped />
-          </v-container>
-        </v-app>
-      `
-    })
-  },
-  StoryRouter()
-]
+import { withVuetify } from 'storybook-addon-vuetify3/dist/decorators'
+
+export const decorators = [withVuetify]

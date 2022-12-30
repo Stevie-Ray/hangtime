@@ -1,297 +1,147 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Head from 'vue-head'
-import { isNil } from 'lodash'
-import CheckLogin from '@/views/authentication/CheckLogin'
-import store from '@/store'
+import { createRouter, createWebHistory } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useAuthentication } from '@/stores/authentication'
 
-Vue.use(Router)
+// 1. Define route components.
+// These can be imported from other files
+import AccountPage from '@/pages/account/AccountPage.vue'
 
-/* If you don't know about VueHead, please refer to https://github.com/ktquez/vue-head */
+import AccountGeneralPage from '@/pages/account/AccountGeneralPage.vue'
+import AccountHangboardsPage from '@/pages/account/AccountHangboardsPage.vue'
+import AccountHelpPage from '@/pages/account/AccountHelpPage.vue'
+import AccountPrivacyPage from '@/pages/account/AccountPrivacyPage.vue'
+import AccountProfilePage from '@/pages/account/AccountProfilePage.vue'
+import AccountSubscriptionPage from '@/pages/account/AccountSubscriptionPage.vue'
+import AccountWorkoutsPage from '@/pages/account/AccountWorkoutsPage.vue'
 
-Vue.use(Head, {
-  complement: process.env.VUE_APP_TITLE
+import ActivityPage from '@/pages/activity/ActivityPage.vue'
+import ActivityLeaderboardPage from '@/pages/activity/ActivityLeaderboardPage.vue'
+import ActivityNotificationsPage from '@/pages/activity/ActivityNotificationsPage.vue'
+
+import LoginPage from '@/pages/authentication/LoginPage.vue'
+import CheckLoginPage from '@/pages/authentication/CheckLoginPage.vue'
+
+import WorkoutsPage from '@/pages/workouts/WorkoutsPage.vue'
+import WorkoutsDetailPage from '@/pages/workouts/WorkoutsDetailPage.vue'
+import WorkoutsTimerPage from '@/pages/workouts/WorkoutsTimerPage.vue'
+// import WorkoutsNewPage from '@/pages/workouts/WorkoutsNewPage.vue'
+import WorkoutsQuickPage from '@/pages/workouts/WorkoutsQuickPage.vue'
+
+// 2. Define some routes
+// Each route should map to a component.
+// We'll talk about nested routes later.
+const routes = [
+  {
+    path: '/',
+    redirect: 'workouts',
+    component: WorkoutsPage,
+    name: 'HomePage'
+  },
+  {
+    path: '/login',
+    component: LoginPage,
+    name: 'LoginPage',
+    meta: { public: true }
+  },
+  {
+    path: '/check-login',
+    component: CheckLoginPage,
+    name: 'CheckLoginPage',
+    meta: { public: true }
+  },
+  { path: '/activity', component: ActivityPage, name: 'ActivityPage' },
+  {
+    path: '/activity/notifications',
+    component: ActivityNotificationsPage,
+    name: 'ActivityNotificationsPage'
+  },
+  {
+    path: '/activity/leaderboard',
+    component: ActivityLeaderboardPage,
+    name: 'ActivityLeaderboardPage'
+  },
+  { path: '/workouts', component: WorkoutsPage, name: 'WorkoutsPage' },
+  {
+    path: '/workouts/:id',
+    component: WorkoutsDetailPage,
+    name: 'WorkoutsDetailPage'
+  },
+  {
+    path: '/workouts/:id/timer',
+    component: WorkoutsTimerPage,
+    name: 'WorkoutsTimerPage'
+  },
+  // { path: '/workouts/new', component: WorkoutsDetailPage, name: 'WorkoutsNewPage' },
+  {
+    path: '/workouts/quick',
+    component: WorkoutsQuickPage,
+    name: 'WorkoutsQuickPage'
+  },
+  {
+    path: '/workouts/community',
+    component: WorkoutsPage,
+    name: 'WorkoutsCommunityPage'
+  },
+  { path: '/account', component: AccountPage, name: 'AccountPage' },
+  {
+    path: '/account/profile',
+    component: AccountProfilePage,
+    name: 'AccountProfilePage'
+  },
+  {
+    path: '/account/general',
+    component: AccountGeneralPage,
+    name: 'AccountGeneralPage'
+  },
+  {
+    path: '/account/hangboards',
+    component: AccountHangboardsPage,
+    name: 'AccountHangboardsPage'
+  },
+  {
+    path: '/account/workouts',
+    component: AccountWorkoutsPage,
+    name: 'AccountWorkoutsPage'
+  },
+  {
+    path: '/account/subscription',
+    component: AccountSubscriptionPage,
+    name: 'AccountSubscriptionPage'
+  },
+  {
+    path: '/account/help',
+    component: AccountHelpPage,
+    name: 'AccountHelpPage'
+  },
+  {
+    path: '/privacy',
+    component: AccountPrivacyPage,
+    name: 'AccountPrivacyPage',
+    meta: { public: true }
+  }
+]
+
+// 3. Create the router instance and pass the `routes` option
+// You can pass in additional options here, but let's
+// keep it simple for now.
+const router = createRouter({
+  // 4. Provide the history implementation to use.
+  history: createWebHistory(),
+  routes // short for `routes: routes`
 })
 
-/* If you don't know about VueRouter, please refer to https://router.vuejs.org/ */
-
-const router = new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-tabs" */ '@/views/tabs/Tabs.vue'
-        ),
-      children: [
-        {
-          path: '/',
-          name: 'workouts',
-          component: () =>
-            import(
-              /* webpackChunkName: "client-chunk-tab-workouts" */ '@/views/tabs/Workouts.vue'
-            )
-        },
-        {
-          path: '/community',
-          name: 'community',
-          component: () =>
-            import(
-              /* webpackChunkName: "client-chunk-tab-community" */ '@/views/tabs/Community.vue'
-            )
-        },
-        {
-          path: '/progress',
-          name: 'progress',
-          component: () =>
-            import(
-              /* webpackChunkName: "client-chunk-tab-progress" */ '@/views/tabs/Progress.vue'
-            )
-        }
-      ]
-    },
-    {
-      path: '/grades',
-      name: 'grades',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-grades" */ '@/views/grades/Index.vue'
-        )
-    },
-    {
-      path: '/quick-workout',
-      name: 'quick-workout',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-quick" */ '@/views/quick/Index.vue'
-        )
-    },
-    {
-      path: '/leaderboard',
-      name: 'leaderboard',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-quick" */ '@/views/leaderboard/Index.vue'
-        )
-    },
-    {
-      path: '/privacy',
-      name: 'privacy',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-quick" */ '@/views/settings/Privacy.vue'
-        ),
-      meta: {
-        authNotRequired: true
-      }
-    },
-    {
-      path: '/:userId/workout/new',
-      name: 'new-workout',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/New.vue'
-        )
-    },
-    {
-      path: '/:userId/workout/:company/:hangboard/:id',
-      name: 'workout',
-      props(route) {
-        const props = { ...route.params }
-        props.company = +props.company
-        props.hangboard = +props.hangboard
-        return props
-      },
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue'
-        )
-    },
-    {
-      path: '/:userId/workout/:company/:hangboard/:id/run',
-      name: 'run',
-      props(route) {
-        const props = { ...route.params }
-        props.company = +props.company
-        props.hangboard = +props.hangboard
-        props.index = +props.index
-        return props
-      },
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Run.vue'
-        )
-    },
-    {
-      path: '/:userId/workout/:company/:hangboard/:id/:index',
-      name: 'exercise',
-      props(route) {
-        const props = { ...route.params }
-        props.company = +props.company
-        props.hangboard = +props.hangboard
-        props.index = +props.index
-        return props
-      },
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Exercise.vue'
-        )
-    },
-    {
-      path: '/:userId/community/:company/:hangboard/:id',
-      name: 'community-workout',
-      props: true,
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-workouts" */ '@/views/workouts/Workout.vue'
-        )
-    },
-    {
-      path: '/profile/:userId/',
-      name: 'user-profile',
-      props: true,
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-profile" */ '@/views/user/Profile.vue'
-        )
-    },
-    {
-      path: '/progress/record/:index',
-      name: 'progress-record',
-      props(route) {
-        const props = { ...route.params }
-        props.index = +props.index
-        return props
-      },
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-progress" */ '@/views/progress/Record.vue'
-        )
-    },
-    {
-      path: '/:userId/progress/list/:index',
-      name: 'progress-list',
-      props(route) {
-        const props = { ...route.params }
-        props.index = +props.index
-        return props
-      },
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-progress" */ '@/views/progress/List.vue'
-        )
-    },
-    {
-      path: '/settings',
-      name: 'settings',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Settings.vue'
-        )
-    },
-    {
-      path: '/settings/general',
-      name: 'settings-general',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/General.vue'
-        )
-    },
-    {
-      path: '/settings/hangboards',
-      name: 'settings-hangboards',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Hangboards.vue'
-        )
-    },
-    {
-      path: '/settings/hangboards/add',
-      name: 'settings-hangboards-add',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/AddHangboard.vue'
-        )
-    },
-    {
-      path: '/settings/profile',
-      name: 'settings-profile',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Profile.vue'
-        )
-    },
-    {
-      path: '/settings/workouts',
-      name: 'settings-workout',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Workouts.vue'
-        )
-    },
-    {
-      path: '/settings/subscription',
-      name: 'settings-subscription',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Subscription.vue'
-        )
-    },
-    {
-      path: '/settings/notifications',
-      name: 'settings-notifications',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Notifications.vue'
-        )
-    },
-    {
-      path: '/settings/help',
-      name: 'faq',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-settings" */ '@/views/settings/Help.vue'
-        )
-    },
-    {
-      path: '/check-login',
-      name: 'check-login',
-      component: CheckLogin,
-      meta: {
-        authNotRequired: true
-      }
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-login" */
-          /* webpackPreload: true */
-          '@/views/authentication/Login.vue'
-        ),
-      meta: {
-        authNotRequired: true
-      }
-    },
-    { path: '*', redirect: '/' }
-  ]
-})
-
-/**
- * Handle user redirections
- */
-// eslint-disable-next-line consistent-return
 router.beforeEach((to, from, next) => {
+  // ✅ This will work because the router starts its navigation after
+  // the router is installed and pinia will be installed too
+  const { user } = storeToRefs(useAuthentication())
+
   if (
-    !(to.meta && to.meta.authNotRequired) &&
-    isNil(store.state.authentication.user)
+    !(to.meta && to.meta.public) &&
+    (user.value === null || user.value === undefined)
   ) {
-    const path =
-      store.state.authentication.user === null ? '/login' : '/check-login'
-    return next(`${path}?redirectUrl=${to.path}`)
+    const path = user.value === null ? '/login' : '/check-login'
+    next(`${path}?redirectUrl=${to.path}`)
+    return
   }
   next()
 })

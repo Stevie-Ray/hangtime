@@ -1,172 +1,75 @@
-<template>
-  <div>
-    <v-list two-line>
-      <v-list-item>
-        <v-list-item-content>
-          <v-select
-            v-model="settingsCompany"
-            :items="sortedCompanies"
-            item-text="name"
-            item-value="id"
-            :label="$t('Hangboard manufacturer')"
-            required
-            style="width: calc(100% - 32px)"
-            @change="resetHangboard"
-          >
-            <template #prepend>
-              <v-icon color="primary lighten-1">{{ mdi.numeric1Box }}</v-icon>
-            </template>
-          </v-select>
-        </v-list-item-content>
-      </v-list-item>
+<script setup>
+import { computed, defineEmits, defineProps, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
+import { useUser } from '@/stores/user'
 
-      <v-list-item>
-        <v-list-item-content>
-          <!-- @change="setSetting"-->
-          <v-select
-            v-model="settingsHangboard"
-            :items="sortedHangboards"
-            item-text="name"
-            item-value="id"
-            :label="$t('Select your model')"
-            required
-            style="width: calc(100% - 32px)"
-          >
-            <template #prepend>
-              <v-icon color="primary lighten-1">{{ mdi.numeric2Box }}</v-icon>
-            </template>
-          </v-select>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+const { t } = useI18n()
 
-    <v-container fluid class="py-0">
-      <div
-        v-if="hasImage"
-        class="hangboard mx-auto pa-0"
-        :class="
-          companies[hangboardToAdd.company].hangboards[hangboardToAdd.hangboard]
-            .name
-        "
-      >
-        <div class="leftside">
-          <img
-            :src="
-              getImg(
-                companies[hangboardToAdd.company].hangboards[
-                  hangboardToAdd.hangboard
-                ].image
-              )
-            "
-          />
-        </div>
-        <div class="rightside">
-          <img
-            :src="
-              getImg(
-                companies[hangboardToAdd.company].hangboards[
-                  hangboardToAdd.hangboard
-                ].image
-              )
-            "
-          />
-        </div>
-      </div>
-      <v-row justify="center" align="center">
-        <v-col cols="12" md="10" lg="8" class="text-center">
-          <p v-if="!hasImage">
-            <!--eslint-disable-next-line vue/no-parsing-error-->
-            <v-btn :href="`mailto:${email}?subject=${subject}&body=${body}`">
-              {{ $t('Request Hangboard') }}
-            </v-btn>
-          </p>
-          <p>
-            {{ $t('Hangboard by') }}
-            <a
-              :href="companies[hangboardToAdd.company].website"
-              target="_blank"
-            >
-              {{ companies[hangboardToAdd.company].name }}
-            </a>
-          </p>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
-</template>
+const { getHangboardNameByIds, getCompanies, getHangboardsByCompanyId } =
+  useUser()
 
-<script>
-import { mapState, mapMutations } from 'vuex'
-import { orderBy } from 'lodash'
-import { mdiNumeric1Box, mdiNumeric2Box } from '@mdi/js'
-import { getImg } from '@/misc/helpers'
-import companies from '@/misc/hangboards'
-
-export default {
-  data: () => ({
-    companies,
-    email: 'mail@stevie-ray.nl',
-    body: encodeURIComponent('Hello HangTime,\n\n...'),
-    mdi: {
-      numeric1Box: mdiNumeric1Box,
-      numeric2Box: mdiNumeric2Box
-    }
-  }),
-  computed: {
-    ...mapState('app', ['networkOnLine']),
-    ...mapState('authentication', ['user', 'hangboardToAdd']),
-    subject() {
-      return encodeURIComponent(
-        `Hangboard Request: ${
-          this.companies[this.hangboardToAdd.company].name
-        } - ${
-          this.companies[this.hangboardToAdd.company].hangboards[
-            this.hangboardToAdd.hangboard
-          ].name
-        }`
-      )
-    },
-    settingsCompany: {
-      get() {
-        return this.hangboardToAdd.company
-      },
-      set(value) {
-        this.setCompany(value)
-      }
-    },
-    settingsHangboard: {
-      get() {
-        return this.hangboardToAdd.hangboard
-      },
-      set(value) {
-        this.setHangboard(value)
-      }
-    },
-    sortedCompanies() {
-      return orderBy(this.companies, 'name')
-    },
-    sortedHangboards() {
-      return orderBy(
-        this.companies[this.hangboardToAdd.company].hangboards,
-        'name'
-      )
-    },
-    hasImage() {
-      const image =
-        this.companies[this.hangboardToAdd.company].hangboards[
-          this.hangboardToAdd.hangboard
-        ].image !== 'hangboards/NOTFOUND.svg'
-      this.$emit('image', image)
-      return image
-    }
-  },
-  methods: {
-    ...mapMutations('authentication', [
-      'setCompany',
-      'setHangboard',
-      'resetHangboard'
-    ]),
-    getImg
+const props = defineProps({
+  selectedHangboard: {
+    type: Object,
+    default: () => ({
+      company: 1,
+      hangboard: 0
+    })
   }
-}
+})
+
+const emit = defineEmits(['update-selected'])
+
+const selected = ref(props.selectedHangboard)
+
+watch(selected, (item) => {
+  emit('update-selected', item)
+})
+
+const getHangboards = computed(() =>
+  getHangboardsByCompanyId(selected.value.company)
+)
 </script>
+
+<template>
+  <v-select
+    v-model="selected.company"
+    :items="getCompanies"
+    :label="t('Hangboard manufacturer')"
+    item-title="name"
+    item-value="id"
+    required
+    @update:modelValue="selected.hangboard = 0"
+  >
+    <template #prepend>
+      <v-icon color="text">mdi-numeric-1-box</v-icon>
+    </template>
+  </v-select>
+  <v-select
+    v-model="selected.hangboard"
+    :items="getHangboards"
+    :label="t('Select your model')"
+    item-title="name"
+    item-value="id"
+    required
+  >
+    <template #prepend>
+      <v-icon color="text">mdi-numeric-2-box</v-icon>
+    </template>
+  </v-select>
+  <v-card>
+    <v-card-text>
+      <exercise-hangboard
+        :hangboard="{
+          company: selected.company,
+          hangboard: selected.hangboard
+        }"
+      >
+      </exercise-hangboard>
+    </v-card-text>
+    <v-card-title>
+      {{ getHangboardNameByIds(selected.company, selected.hangboard) }}
+    </v-card-title>
+  </v-card>
+</template>

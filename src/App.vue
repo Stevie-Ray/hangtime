@@ -1,73 +1,49 @@
-<template>
-  <v-app id="app">
-    <router-view />
+<script setup>
+import { watch } from 'vue'
+import { useTheme } from 'vuetify'
+import { storeToRefs } from 'pinia'
+import { useApp } from '@/stores/app'
 
-    <new-content-available
-      v-if="newContentAvailable"
-      class="new-content-available"
-      :refreshing-app="refreshingApp"
-      @refresh="serviceWorkerSkipWaiting"
-    ></new-content-available>
-    <dialog-apple-add-to-home-screen
-      v-if="showAddToHomeScreenModalForApple"
-      class="apple-add-to-home-screen-modal"
-      @close="closeAddToHomeScreenModalForApple(false)"
-    >
-    </dialog-apple-add-to-home-screen>
-  </v-app>
-</template>
-<script>
-import { mapState, mapActions, mapGetters } from 'vuex'
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable'
-import DialogAppleAddToHomeScreen from '@/components/molecules/DialogAppleAddToHomeScreen/DialogAppleAddToHomeScreen'
+import { useAuthentication } from '@/stores/authentication'
 
-export default {
-  components: {
-    NewContentAvailable,
-    DialogAppleAddToHomeScreen
-  },
-  data: () => ({
-    mq: window.matchMedia('(prefers-color-scheme: dark)')
-  }),
-  computed: {
-    ...mapGetters('app', ['newContentAvailable']),
-    ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp']),
-    ...mapState('authentication', ['user']),
-    setTheme() {
-      if (this.user) {
-        if (this.user.settings.scheme) {
-          const mq = window.matchMedia('(prefers-color-scheme: dark)')
-          return mq.matches
-        }
-        if (this.user.settings.theme) {
-          return this.user.settings.theme
-        }
-      }
-      return false
-    }
-  },
-  mounted() {
-    const self = this
-    if (this.mq) {
-      this.mq.addEventListener('change', () => {
-        if (self.user && self.user.settings.scheme) {
-          self.$vuetify.theme.dark = window.matchMedia(
-            '(prefers-color-scheme: dark)'
-          ).matches
-        }
-      })
-    }
-  },
-  updated() {
-    this.$vuetify.theme.dark = this.setTheme
-  },
-  methods: mapActions('app', [
-    'closeAddToHomeScreenModalForApple',
-    'serviceWorkerSkipWaiting'
-  ])
-}
+const { newAppContent, serviceWorkerSkipWaiting } = useApp()
+
+const app = useApp()
+
+const { user } = storeToRefs(useAuthentication())
+
+const theme = useTheme()
+
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+
+prefersDark.addEventListener('change', () => {
+  if (user.value.settings.theme > 0) {
+    theme.global.name.value = user.value.settings.theme === 2 ? 'dark' : 'light'
+  } else {
+    theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
+  }
+})
+
+// watch works directly on a ref
+watch(user, async (updatedUser) => {
+  if (updatedUser?.settings?.theme > 0) {
+    theme.global.name.value =
+      updatedUser.settings.theme === 2 ? 'dark' : 'light'
+  } else {
+    theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
+  }
+})
 </script>
 
-<style lang="scss">
-@import '@/theme/global.scss';
-</style>
+<template>
+  <v-app>
+    <router-view></router-view>
+    <new-content-available
+      v-if="newAppContent"
+      class="new-content-available"
+      :refreshing-app="app.refreshingApp"
+      @refresh="serviceWorkerSkipWaiting"
+    ></new-content-available>
+  </v-app>
+</template>

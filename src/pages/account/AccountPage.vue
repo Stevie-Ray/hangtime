@@ -1,0 +1,177 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+import { getAuth, signOut } from 'firebase/auth'
+import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAuthentication } from '@/stores/authentication'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import { useApp } from '@/stores/app'
+
+const { t } = useI18n()
+
+const { user } = storeToRefs(useAuthentication())
+
+const { networkOnLine } = storeToRefs(useApp())
+
+const items = [
+  {
+    title: t('Profile'),
+    icon: 'mdi-account',
+    subtitle: t('Avatar, weight, gender, grade'),
+    link: '/account/profile'
+  },
+  {
+    title: t('General'),
+    icon: 'mdi-cog',
+    subtitle: t('Language, grading, weight, dark mode'),
+    link: '/account/general'
+  },
+  {
+    title: t('Hangboards'),
+    icon: 'mdi-keyboard',
+    subtitle: t('Manage your hangboards'),
+    link: '/account/hangboards'
+  },
+  {
+    title: t('Workouts'),
+    icon: 'mdi-timer',
+    subtitle: t('Sound, speech, vibrate'),
+    link: '/account/workouts'
+  },
+  {
+    title: t('Subscription'),
+    icon: 'mdi-cash-multiple',
+    subtitle: t('Unlimited workouts'),
+    link: '/account/subscription'
+  },
+  {
+    title: t('Follow {appTitle}', { appTitle: 'HangTIme' }),
+    icon: 'mdi-facebook',
+    subtitle: t('App and hangboard updates'),
+    link: 'https://www.facebook.com/hangtime.hangboarding',
+    external: true
+  },
+  {
+    title: t('Help'),
+    icon: 'mdi-help-circle',
+    subtitle: t('FAQ, exercises, privacy, contact'),
+    link: '/account/help'
+  }
+]
+
+let canSubscribePlayBilling = false
+const PAYMENT_METHOD = 'https://play.google.com/billing'
+const canSubscribe = window.getDigitalGoodsService
+
+async function canUsePlayBilling() {
+  if (canSubscribe === undefined) {
+    console.log("window doesn't have getDigitalGoodsService.")
+    return
+  }
+  try {
+    const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
+    console.log(service)
+    if (service === null) {
+      console.log('Play Billing is not available.')
+    } else {
+      // eslint-disable-next-line no-shadow
+      const items = ['subscription']
+      const details = await service.getDetails(items)
+      console.log(details)
+      if (details === null) {
+        console.log('Are you running a Play Store build?')
+      } else if (details.length === 0) {
+        console.log('Are you running a Play Store build? 2')
+      } else {
+        canSubscribePlayBilling = true
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function showAccountLink(item) {
+  if (item.title !== t('Subscription') || canSubscribePlayBilling) return true
+  return false
+}
+
+onMounted(() => {
+  canUsePlayBilling()
+})
+
+async function signOutUser() {
+  const auth = getAuth()
+
+  signOut(auth)
+    .then(() => {
+      console.log('user signed out')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+</script>
+
+<template>
+  <app-container>
+    <template #title>
+      <router-link
+        v-if="user"
+        class="d-flex align-center text-decoration-none text-high-emphasis"
+        to="/account/profile"
+      >
+        <span>
+          <v-avatar size="small" color="grey-darken-1" class="mr-2">
+            <v-img :src="user.photoURL" :alt="user.displayName"></v-img>
+          </v-avatar>
+        </span>
+        <span>{{ user.displayName }}</span>
+      </router-link>
+    </template>
+
+    <template #icons>
+      <v-btn
+        icon="mdi-logout"
+        color="text"
+        :disabled="!networkOnLine"
+        @click="signOutUser"
+      ></v-btn>
+    </template>
+
+    <template #default>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
+            <v-list lines="two">
+              <template v-for="(item, i) in items" :key="i">
+                <v-list-item
+                  v-if="showAccountLink(item)"
+                  :to="!item.external ? item.link : null"
+                  :href="item.external ? item.link : null"
+                  :target="item.external ? '_blank' : null"
+                >
+                  <template #prepend>
+                    <v-icon :icon="item.icon"></v-icon>
+                  </template>
+
+                  <v-list-item-title v-text="item.title"></v-list-item-title>
+
+                  <v-list-item-subtitle
+                    v-text="item.subtitle"
+                  ></v-list-item-subtitle>
+                </v-list-item>
+
+                <v-divider
+                  v-if="i !== items.length - 1 && showAccountLink(item)"
+                  :key="`divider-${i}`"
+                  inset
+                ></v-divider>
+              </template>
+            </v-list>
+          </v-col>
+        </v-row>
+      </v-container>
+    </template>
+  </app-container>
+</template>

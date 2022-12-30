@@ -7,8 +7,8 @@ module.exports = {
   extends: [
     'airbnb-base',
     'eslint:recommended',
-    'plugin:vue/recommended',
-    '@vue/prettier'
+    'plugin:vue/vue3-essential',
+    'plugin:prettier/recommended'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -21,7 +21,10 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-return-assign': 'off',
     'no-var': 2,
-    'prefer-const': 2
+    'prefer-const': 2,
+    'max-len': 'off',
+    'import/prefer-default-export': 'off',
+    'no-return-await': 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'

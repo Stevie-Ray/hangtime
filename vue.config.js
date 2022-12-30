@@ -1,19 +1,26 @@
-// Declare root dirname globally
+const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 
-// eslint-disable-next-line no-underscore-dangle
-global.__rootDirname = path.join(__dirname, 'dist')
-
-const fs = require('fs')
-const { merge } = require('webpack-merge')
-const defaultConfiguration = require('./vue-config/config.default')
-
-const environmentConfigurationPath = `./vue-config/config.${process.env.NODE_ENV}.js`
-
-const environmentConfiguration = fs.existsSync(environmentConfigurationPath)
-  ? require(environmentConfigurationPath) // eslint-disable-line
-  : {}
-
-const config = merge(defaultConfiguration, environmentConfiguration)
-
-module.exports = config
+module.exports = defineConfig({
+  transpileDependencies: true,
+  /* See https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa for more details */
+  pwa: {
+    themeColor: '#012E40',
+    appleMobileWebAppStatusBarStyle: 'black',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: path.join('public', 'service-worker.js')
+    }
+  },
+  pluginOptions: {
+    vuetify: {
+      // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
+    },
+    i18n: {
+      locale: 'en-US',
+      fallbackLocale: 'en-US',
+      localeDir: 'locales',
+      enableInSFC: true
+    }
+  }
+})

@@ -1,27 +1,39 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+import { createApp } from 'vue'
+import VueGtag from 'vue-gtag'
+import App from '@/App.vue'
+import head from '@/plugins/head'
+import i18n from '@/plugins/i18n'
+import pinia from '@/plugins/pinia'
+import vuetify from '@/plugins/vuetify'
+import router from '@/router'
+import { loadFonts } from '@/plugins/webfontloader'
 
-import i18n from '@/misc/i18n'
-import options from '@/misc/theme'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import '@/plugins/firebase'
 
-import '@/misc/register-service-worker'
-import '@/misc/handle-network-status'
-import '@/firebase/init'
-import '@/firebase/authentication'
-import '@/misc/handle-apple-install-prompt'
-import 'pwacompat'
+loadFonts()
 
-Vue.config.productionTip = false
+const app = createApp(App)
 
-Vue.use(Vuetify)
+app
+  .use(head)
+  .use(i18n)
+  .use(pinia)
+  .use(vuetify)
+  .use(router)
+  .use(
+    VueGtag,
+    {
+      appName: 'HangTime',
+      pageTrackerScreenviewEnabled: true,
+      config: { id: 'G-D2DR5GPWS3' }
+    },
+    router
+  )
+  .mount('#app')
 
-new Vue({
-  router,
-  store,
-  vuetify: new Vuetify(options),
-  i18n,
-  render: (h) => h(App)
-}).$mount('#app')
+// make sure app is ready
+if (app) {
+  import('@/plugins/firebase/authentication')
+  import('@/helpers/online')
+  import('@/plugins/register-service-worker')
+}
