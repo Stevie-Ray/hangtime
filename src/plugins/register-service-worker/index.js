@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 
 import { register } from 'register-service-worker'
-import { useApp } from '@/stores/app'
 import { storeToRefs } from 'pinia'
+import { useApp } from '@/stores/app'
 
 const { SWRegistrationForNewContent } = storeToRefs(useApp())
 
