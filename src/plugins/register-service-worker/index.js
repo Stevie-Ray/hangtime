@@ -25,9 +25,7 @@ if (process.env.NODE_ENV === 'production') {
     },
     updated(reg) {
       console.log('New content is available; please refresh.')
-      console.log(reg)
       SWRegistrationForNewContent.value = reg
-      console.log(SWRegistrationForNewContent.value)
     },
     offline() {
       console.log(
