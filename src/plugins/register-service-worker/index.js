@@ -2,7 +2,7 @@
 
 import { register } from 'register-service-worker'
 import { useApp } from '@/stores/app'
-import {storeToRefs} from 'pinia'
+import { storeToRefs } from 'pinia'
 
 const { SWRegistrationForNewContent } = storeToRefs(useApp())
 
