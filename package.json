@@ -14,8 +14,8 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "@mdi/font": "7.0.96",
-    "@vueuse/head": "^0.9.8",
+    "@mdi/font": "7.1.96",
+    "@vueuse/head": "^1.0.22",
     "core-js": "^3.27.1",
     "firebase": "^9.15.0",
     "ircra": "^2.2.4",

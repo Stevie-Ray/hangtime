@@ -1,30 +1,27 @@
 import { precacheAndRoute } from 'workbox-precaching'
+import { setCacheNameDetails } from 'workbox-core'
+import { createHandlerBoundToURL } from 'workbox-precaching'
+import { NavigationRoute, registerRoute } from 'workbox-routing'
+import { StaleWhileRevalidate } from 'workbox-strategies'
+
+setCacheNameDetails({ prefix: 'hangtime' })
 
 precacheAndRoute(self.__WB_MANIFEST)
 
-workbox.core.setCacheNameDetails({ prefix: 'hangtime' })
-
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-self.__precacheManifest = [].concat(self.__precacheManifest || [])
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
-
-// Redirect to index.html if sw cannot find matching route
-workbox.routing.registerNavigationRoute('/', {
-  /* Do not redirect routes used by firebase auth  */
-  blacklist: [
+const handler = createHandlerBoundToURL('/')
+const navigationRoute = new NavigationRoute(handler, {
+  denylist: [
     new RegExp('/__/auth/handler'),
     new RegExp('/__/auth/iframe'),
     new RegExp('/.well-known')
   ]
 })
 
-workbox.routing.registerRoute(
+registerRoute(navigationRoute)
+
+registerRoute(
   /^https:\/\/fonts/,
-  workbox.strategies.staleWhileRevalidate({
+  new StaleWhileRevalidate({
     cacheName: 'fonts.googleapis',
     plugins: []
   }),
