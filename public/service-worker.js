@@ -6,10 +6,17 @@ import { StaleWhileRevalidate } from 'workbox-strategies'
 
 setCacheNameDetails({ prefix: 'hangtime' })
 
+/**
+ * The precacheAndRoute() method efficiently caches and responds to
+ * requests for URLs in the manifest.
+ * See https://goo.gl/S9QRab
+ */
 precacheAndRoute(self.__WB_MANIFEST)
 
-const handler = createHandlerBoundToURL('/')
+// Redirect to index.html if sw cannot find matching route
+const handler = createHandlerBoundToURL('/index.html')
 const navigationRoute = new NavigationRoute(handler, {
+  /* Do not redirect routes used by firebase auth  */
   denylist: [
     new RegExp('/__/auth/handler'),
     new RegExp('/__/auth/iframe'),
