@@ -61,16 +61,12 @@ const exercise = computed(() => workout.value.exercises[exerciseIndex.value])
 
 // eslint-disable-next-line no-shadow
 const exerciseEdit = (timer, time) => {
-  console.log(timer, time)
   exercise.value[timer] = time
-  console.log(workout.value.time)
   workout.value.time -= exercise.value.time
-  console.log(workout.value.time)
   exercise.value.time =
     (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
     exercise.value.rest +
     exercise.value.pause
-  console.log(workout.value.time)
   workout.value.time += exercise.value.time
 }
 
