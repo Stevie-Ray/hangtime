@@ -2,8 +2,10 @@
 import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import { event } from 'vue-gtag'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect'
 import { useApp } from '@/stores/app'
+import { useUser } from '@/stores/user'
 import { useAuthentication } from '@/stores/authentication'
 
 const { t } = useI18n()
@@ -11,6 +13,8 @@ const { t } = useI18n()
 const { networkOnLine } = storeToRefs(useApp())
 
 const { user } = storeToRefs(useAuthentication())
+
+const { getHangboardNameByIds } = useUser()
 
 const { updateUser } = useAuthentication()
 
@@ -27,6 +31,10 @@ const updateSelected = () => {
       item.company === selected.company && item.hangboard === selected.hangboard
   )
   if (!exists) {
+    // measure selected hangboard data
+    event('add-hangboard', {
+      hangboard: getHangboardNameByIds(selected.company, selected.hangboard)
+    })
     // add the newly selected board and set it
     user.value.settings.hangboards.push(selected)
     user.value.settings.selected = user.value.settings.hangboards.length - 1
