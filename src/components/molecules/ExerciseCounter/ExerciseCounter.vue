@@ -68,7 +68,10 @@ function decrement() {
   if (count.value <= 15 || !props.timer) {
     count.value -= 1
   }
-  if (count.value > 15 && count.value <= 60 && props.timer) {
+  if (count.value > 15 && count.value <= 30 && props.timer) {
+    count.value -= 5
+  }
+  if (count.value > 30 && count.value <= 60 && props.timer) {
     count.value -= 15
   }
   if (count.value > 60 && count.value <= 300 && props.timer) {
