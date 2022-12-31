@@ -151,16 +151,34 @@ const exerciseDone = () => {
   clockText.value = t('Done')
   stopTimer()
 }
-const hasNextExercise = () => {
-  // if there is another exercise
-  if (currentExercise.value !== props.exercises.length - 1) {
-    currentExercise.value += 1
+
+const hasExercise = (type) => {
+  const setupTimers = () => {
     nextTick(() => {
-      clock.value = exercise.value.pause - 1
+      if (currentExercise.value === 0) {
+        clock.value = 0
+      }
+      if (currentExercise.value !== 0) {
+        clock.value = exercise.value.pause - 1
+      }
       currentExerciseStep.value = 0
       currentExerciseStepRepeat.value = 0
     })
     return true
+  }
+
+  if (type === 'next') {
+    // if there is another exercise
+    if (currentExercise.value !== props.exercises.length - 1) {
+      currentExercise.value += 1
+      setupTimers()
+    }
+  }
+  if (type === 'prev') {
+    if (currentExercise.value > 0) {
+      currentExercise.value -= 1
+      setupTimers()
+    }
   }
   return false
 }
@@ -191,7 +209,7 @@ const exerciseSteps = () => {
         currentExerciseStep.value = 2
         break
       }
-      if (hasNextExercise()) {
+      if (hasExercise('next')) {
         break
       }
       currentExerciseStep.value = 4
@@ -208,7 +226,7 @@ const exerciseSteps = () => {
         currentExerciseStep.value = 3
         break
       }
-      if (hasNextExercise()) {
+      if (hasExercise('next')) {
         break
       }
       currentExerciseStep.value = 4
@@ -225,7 +243,7 @@ const exerciseSteps = () => {
         currentExerciseStep.value = 2
         break
       }
-      if (hasNextExercise()) {
+      if (hasExercise('next')) {
         break
       }
       currentExerciseStep.value = 4
@@ -324,9 +342,19 @@ const startTimer = () => {
 
         <v-card class="pt-12 mt-12 position-relative overflow-visible">
           <v-card-title
-            class="text-center position-absolute w-100"
-            style="top: -36px"
+            class="justify-center align-center position-absolute w-100 d-flex"
+            style="top: -36px; gap: 32px"
           >
+            <v-btn
+              :style="{
+                visibility: exercises?.length > 1 ? 'visible' : 'hidden'
+              }"
+              :disabled="currentExercise <= 0"
+              variant="flat"
+              icon="mdi-skip-previous"
+              class="rounded-circle"
+              @click="hasExercise('prev')"
+            ></v-btn>
             <v-btn
               variant="flat"
               :icon="
@@ -339,6 +367,16 @@ const startTimer = () => {
               class="rounded-circle"
               size="x-large"
               @click="timerPaused === null ? startTimer() : pauseWorkout()"
+            ></v-btn>
+            <v-btn
+              :style="{
+                visibility: exercises?.length > 1 ? 'visible' : 'hidden'
+              }"
+              :disabled="currentExercise >= exercises?.length - 1"
+              variant="flat"
+              icon="mdi-skip-next"
+              class="rounded-circle"
+              @click="hasExercise('next')"
             ></v-btn>
           </v-card-title>
 
