@@ -1,43 +1,42 @@
+/* eslint-disable no-console */
+
 import { register } from 'register-service-worker'
 import { useApp } from '@/stores/app'
 
 const app = useApp()
 
 if (process.env.NODE_ENV === 'production') {
-  register('/service-worker.js', {
+  register(`${process.env.BASE_URL}service-worker.js`, {
     ready() {
-      // eslint-disable-next-line no-console
-      console.info('Service worker is active.')
+      console.log(
+          'App is being served from cache by a service worker.\n' +
+          'For more details, visit https://goo.gl/AFskqB'
+      )
     },
     registered() {
-      // eslint-disable-next-line no-console
-      console.info('Service worker has been registered.')
+      console.log('Service worker has been registered.')
     },
     cached() {
-      // eslint-disable-next-line no-console
-      console.info('Content has been cached for offline use.')
+      console.log('Content has been cached for offline use.')
     },
     updatefound() {
-      // eslint-disable-next-line no-console
-      console.info('New content is downloading.')
+      console.log('New content is downloading.')
     },
     updated(reg) {
-      // eslint-disable-next-line no-console
-      console.info('New content is available; please refresh.')
+      console.log('New content is available; please refresh.')
       app.SWRegistrationForNewContent = reg
     },
     offline() {
-      // eslint-disable-next-line no-console
-      console.info(
-        'No internet connection found. App is running in offline mode.'
+      console.log(
+          'No internet connection found. App is running in offline mode.'
       )
     },
     error(error) {
-      // eslint-disable-next-line no-console
       console.error('Error during service worker registration:', error)
     }
   })
 }
+
 
 if ('serviceWorker' in navigator) {
   let refreshing = false
