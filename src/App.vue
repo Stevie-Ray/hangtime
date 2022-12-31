@@ -7,9 +7,9 @@ import { useApp } from '@/stores/app'
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable'
 import { useAuthentication } from '@/stores/authentication'
 
-const { newAppContent, serviceWorkerSkipWaiting } = useApp()
+const { serviceWorkerSkipWaiting } = useApp()
 
-const app = useApp()
+const { newAppContent, refreshingApp } = storeToRefs(useApp())
 
 const { user } = storeToRefs(useAuthentication())
 
@@ -42,7 +42,7 @@ watch(user, async (updatedUser) => {
     <new-content-available
       v-if="newAppContent"
       class="new-content-available"
-      :refreshing-app="app.refreshingApp"
+      :refreshing-app="refreshingApp"
       @refresh="serviceWorkerSkipWaiting"
     ></new-content-available>
   </v-app>

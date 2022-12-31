@@ -13,15 +13,13 @@ export const useApp = defineStore('app', () => {
    */
   function serviceWorkerSkipWaiting() {
     if (
-      !(
-        SWRegistrationForNewContent.value === undefined ||
-        SWRegistrationForNewContent.value === null
-      )
-    )
+      SWRegistrationForNewContent.value === undefined ||
+      SWRegistrationForNewContent.value === null
+    ) {
       return
-
+    }
     refreshingApp.value = true
-    SWRegistrationForNewContent.value.waiting.postMessage('skipWaiting')
+    SWRegistrationForNewContent.value.waiting?.postMessage('skipWaiting')
   }
 
   // getter
