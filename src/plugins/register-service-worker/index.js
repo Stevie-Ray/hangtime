@@ -2,8 +2,9 @@
 
 import { register } from 'register-service-worker'
 import { useApp } from '@/stores/app'
+import {storeToRefs} from 'pinia'
 
-const app = useApp()
+const { SWRegistrationForNewContent } = storeToRefs(useApp())
 
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
@@ -24,7 +25,9 @@ if (process.env.NODE_ENV === 'production') {
     },
     updated(reg) {
       console.log('New content is available; please refresh.')
-      app.SWRegistrationForNewContent = reg
+      console.log(reg)
+      SWRegistrationForNewContent.value = reg
+      console.log(SWRegistrationForNewContent.value)
     },
     offline() {
       console.log(
