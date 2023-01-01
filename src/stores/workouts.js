@@ -79,7 +79,7 @@ export const useWorkouts = defineStore('workouts', {
       }
     },
     /**
-     * Update a users workout
+     * Update the users workout
      * @param payload
      * @return {Promise<void>}
      */
@@ -102,6 +102,15 @@ export const useWorkouts = defineStore('workouts', {
       const index = this.workouts.findIndex((workout) => workout.id === id)
 
       this.workouts.splice(index, 1)
+    },
+    /**
+     * Update another users workout
+     * @param payload
+     * @return {Promise<void>}
+     */
+    async updateWorkout(payload) {
+      const userWorkoutsDb = new UserWorkoutsDB(payload.userId)
+      await userWorkoutsDb.update(payload.workout)
     }
   },
   getters: {

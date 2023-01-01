@@ -27,6 +27,8 @@ const { t } = useI18n()
 
 const { networkOnLine } = storeToRefs(useApp())
 
+const { workouts } = storeToRefs(useWorkouts())
+
 // helpers
 const grip = useGrip()
 const exercises = useExercises()
@@ -40,7 +42,8 @@ const {
   getWorkoutById,
   removeUserWorkoutById,
   createUserWorkout,
-  updateUserWorkout
+  updateUserWorkout,
+  updateWorkout
 } = useWorkouts()
 
 const workout = computed(() => getWorkoutById(route.params.id))
@@ -158,11 +161,31 @@ const removeWorkout = () => {
   router.push('/workouts')
 }
 
-const { user } = useAuthentication()
+const { user } = storeToRefs(useAuthentication())
 
-const isHearted = (subscribers) => {
-  if (!subscribers?.length || !user.value) return
-  subscribers.some((subscriber) => subscriber === user.value.id)
+// workout - weight
+const isHearted = computed(() => {
+  if (!workout?.value?.subscribers?.length || !user.value) return false
+  return workout.value.subscribers.some(
+    (subscriber) => subscriber === user.value.id
+  )
+})
+
+const workoutSubscriber = () => {
+  if (!isHearted.value) {
+    workout?.value.subscribers.unshift(user.value.id)
+    // TODO: push to workouts
+    workouts?.value.unshift(workout?.value)
+  } else {
+    const userIndex = workout?.value.subscribers.indexOf(user.value.id)
+    workout?.value.subscribers.splice(userIndex, 1)
+    // TODO: remove from workouts
+    const index = workouts?.value.findIndex(
+      (item) => item.id === workout?.value.id
+    )
+    workouts?.value.splice(index, 1)
+  }
+  updateWorkout({ userId: workout.value.user.id, workout: workout.value })
 }
 
 // workout - weight
@@ -244,9 +267,8 @@ useHead({
         :disabled="!networkOnLine"
         size="x-large"
         color="text"
-        :append-icon="
-          isHearted(workout?.subscribers) ? 'mdi-heart' : 'mdi-heart-outline'
-        "
+        :append-icon="isHearted ? 'mdi-heart' : 'mdi-heart-outline'"
+        @click="workoutSubscriber"
       >
         {{ workout?.subscribers?.length - 1 }}
       </v-btn>
