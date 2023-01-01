@@ -6,6 +6,7 @@ const { t } = useI18n()
 
 const snackbar = ref(true)
 
+// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   refreshingApp: {
     type: Boolean,

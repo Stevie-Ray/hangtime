@@ -1,13 +1,13 @@
 <script setup>
 import { defineProps, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName'
 import { time } from '@/helpers'
 
 const { t } = useI18n()
 
+// eslint-disable-next-line no-unused-vars
 const props = defineProps({
-  exercise: {
+  workout: {
     type: Object
   }
 })
@@ -22,8 +22,9 @@ const dialog = ref(false)
     :scrim="false"
     transition="dialog-bottom-transition"
   >
-    {{ exercise }}
+    {{ workout }}
     {{ time(0) }}
+    {{ t('test') }}
   </v-dialog>
 </template>
 
