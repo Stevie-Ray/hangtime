@@ -312,7 +312,7 @@ const startTimer = () => {
     class="position-absolute h-100 pa-0 progress"
   ></v-container>
   <v-container class="position-relative">
-    <v-row>
+    <v-row align="center" justify="center">
       <v-col cols="12" sm="6">
         <v-row align="center" class="timer" justify="center">
           <v-col class="text-center" cols="8" sm="10">
