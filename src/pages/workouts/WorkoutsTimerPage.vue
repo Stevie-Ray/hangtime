@@ -30,7 +30,7 @@ useHead({
     </template>
 
     <template #default="">
-      <workout-timer :exercises="workout?.exercises"></workout-timer>
+      <workout-timer :workout="workout"></workout-timer>
     </template>
   </app-container>
 </template>

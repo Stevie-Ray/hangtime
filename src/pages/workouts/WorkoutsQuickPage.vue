@@ -11,13 +11,15 @@ const { t } = useI18n()
 
 const router = useRouter()
 
-const exercises = reactive([
-  {
-    hold: 7,
-    rest: 3,
-    repeat: 9
-  }
-])
+const workout = reactive({
+  exercises: [
+    {
+      hold: 7,
+      rest: 3,
+      repeat: 9
+    }
+  ]
+})
 
 useHead({
   title: 'Quick Workouts',
@@ -34,37 +36,35 @@ useHead({
     <template #title>{{ t('Quick workout') }}</template>
 
     <template #default>
-      <workout-timer :exercises="exercises">
+      <workout-timer v-if="workout?.exercises?.length" :workout="workout">
         <template #default>
-          <!--              :disabled="play"-->
           <exercise-counter
             title="Hang"
-            :value="exercises[0].hold"
+            :value="workout.exercises[0].hold"
             :min="3"
             :max="180"
-            @input="(value) => (exercises[0].hold = value)"
+            @input="(value) => (workout.exercises[0].hold = value)"
           >
           </exercise-counter>
 
-          <!--              :disabled="play"-->
           <exercise-counter
             title="Repeat"
-            :value="exercises[0].repeat"
+            :value="workout.exercises[0].repeat"
             :timer="false"
             :min="0"
             :max="14"
-            @input="(value) => (exercises[0].repeat = value)"
+            @input="(value) => (workout.exercises[0].repeat = value)"
           >
-            <template #default>{{ exercises[0].repeat + 1 }}x</template>
+            <template #default>{{ workout.exercises[0].repeat + 1 }}x</template>
           </exercise-counter>
 
           <exercise-counter
-            v-if="exercises[0].repeat > 0"
+            v-if="workout.exercises[0].repeat > 0"
             title="Rest"
-            :value="exercises[0].rest"
+            :value="workout.exercises[0].rest"
             :min="3"
-            :disabled="exercises[0].repeat === 0"
-            @input="(value) => (exercises[0].rest = value)"
+            :disabled="workout.exercises[0].repeat === 0"
+            @input="(value) => (workout.exercises[0].rest = value)"
           >
           </exercise-counter>
         </template>

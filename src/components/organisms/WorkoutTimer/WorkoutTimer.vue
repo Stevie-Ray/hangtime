@@ -12,7 +12,7 @@ const { t } = useI18n()
 const { user } = storeToRefs(useAuthentication())
 
 const props = defineProps({
-  exercises: {
+  workout: {
     type: Object
   }
 })
@@ -35,7 +35,8 @@ onBeforeUnmount(() => {
 })
 
 const exercise = computed(() => {
-  if (props.exercises) return props.exercises[currentExercise.value]
+  if (props?.workout?.exercises)
+    return props?.workout?.exercises[currentExercise.value]
   return {}
 })
 
@@ -169,7 +170,7 @@ const hasExercise = (type) => {
 
   if (type === 'next') {
     // if there is another exercise
-    if (currentExercise.value !== props.exercises.length - 1) {
+    if (currentExercise.value !== props.workout.exercises.length - 1) {
       currentExercise.value += 1
       setupTimers()
     }
@@ -298,7 +299,7 @@ const startTimer = () => {
 
 <template>
   <v-container
-    v-if="exercises"
+    v-if="workout?.exercises"
     :class="{
       rest:
         !timerPaused &&
@@ -316,7 +317,7 @@ const startTimer = () => {
       <v-col cols="12" sm="6">
         <v-row align="center" class="timer" justify="center">
           <v-col class="text-center" cols="8" sm="10">
-            <div v-if="exercises" class="text-h1">
+            <div v-if="workout?.exercises" class="text-h1">
               {{ time(clock) }}
             </div>
             <div class="text-h6 pt-2 pb-4">
@@ -326,12 +327,12 @@ const startTimer = () => {
               <v-col class="text-center">
                 <div class="text-h6">{{ time(exerciseTime) }}</div>
               </v-col>
-              <v-col class="text-center" v-if="exercises?.length > 1">
+              <v-col class="text-center" v-if="workout?.exercises?.length > 1">
                 <div class="text-h6">
-                  {{ currentExercise + 1 }}/{{ exercises.length }}
+                  {{ currentExercise + 1 }}/{{ workout?.exercises.length }}
                 </div>
               </v-col>
-              <v-col class="text-center" v-if="exercises">
+              <v-col class="text-center" v-if="workout?.exercises">
                 <div class="text-h6">
                   {{ currentExerciseStepRepeat + 1 }}/{{ exercise.repeat + 1 }}
                 </div>
@@ -350,7 +351,8 @@ const startTimer = () => {
           >
             <v-btn
               :style="{
-                visibility: exercises?.length > 1 ? 'visible' : 'hidden'
+                visibility:
+                  workout?.exercises?.length > 1 ? 'visible' : 'hidden'
               }"
               :disabled="currentExercise <= 0"
               variant="flat"
@@ -373,9 +375,10 @@ const startTimer = () => {
             ></v-btn>
             <v-btn
               :style="{
-                visibility: exercises?.length > 1 ? 'visible' : 'hidden'
+                visibility:
+                  workout?.exercises?.length > 1 ? 'visible' : 'hidden'
               }"
-              :disabled="currentExercise >= exercises?.length - 1"
+              :disabled="currentExercise >= workout?.exercises?.length - 1"
               variant="flat"
               icon="mdi-skip-next"
               class="rounded-circle"
@@ -390,8 +393,8 @@ const startTimer = () => {
                 :index="currentExercise"
                 :exercise="exercise"
                 :hangboard="{
-                  hangboard: 0,
-                  company: 1
+                  hangboard: workout.hangboard,
+                  company: workout.company
                 }"
                 hide-rest
               >
