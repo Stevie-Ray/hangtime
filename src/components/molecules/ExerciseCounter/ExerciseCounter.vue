@@ -86,15 +86,15 @@ function decrement() {
 <template>
   <v-row align="center" class="mb-4">
     <v-col cols="4">
-      <div class="text-h6 text-truncate">{{ t(props.title) }}</div>
-      <div class="text-caption">{{ t(props.subtitle) }}</div>
+      <div class="text-h6 text-truncate">{{ t(title) }}</div>
+      <div class="text-caption">{{ t(subtitle) }}</div>
     </v-col>
 
     <v-col cols="8">
       <v-row align="center">
         <v-col cols="4">
           <v-btn
-            :disabled="props.disabled"
+            :disabled="disabled"
             color="text"
             icon="mdi-minus"
             variant="outlined"
@@ -104,16 +104,16 @@ function decrement() {
         <v-col cols="4">
           <div
             class="text-subtitle-2 text-center"
-            :class="{ 'text-disabled': props.disabled }"
+            :class="{ 'text-disabled': disabled }"
           >
             <slot>
-              {{ props.timer ? time(count) : `${count}${props.suffix}` }}
+              {{ timer ? time(count) : `${count}${suffix}` }}
             </slot>
           </div>
         </v-col>
         <v-col cols="4">
           <v-btn
-            :disabled="props.disabled"
+            :disabled="disabled"
             color="text"
             icon="mdi-plus"
             variant="outlined"

@@ -23,13 +23,13 @@ const refresh = () => {
 
 <template>
   <v-snackbar v-model="snackbar" :timeout="-1" bottom>
-    <div v-if="props.refreshingApp">
+    <div v-if="refreshingApp">
       {{ t('Loading new content...') }}
     </div>
     <div v-else>
       {{ t('New content available') }}
     </div>
-    <template v-if="!props.refreshingApp" #actions>
+    <template v-if="!refreshingApp" #actions>
       <v-btn color="light" @click="refresh">
         {{ t('Refresh') }}
       </v-btn>

@@ -7,6 +7,7 @@ import { useAuthentication } from '@/stores/authentication'
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthentication())
 
+// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   extension: {
     type: Boolean
@@ -22,7 +23,7 @@ const props = defineProps({
 
 <template>
   <v-app-bar app>
-    <template #prepend v-if="props.prepend">
+    <template #prepend v-if="prepend">
       <slot name="prepend"></slot>
     </template>
 
@@ -37,7 +38,7 @@ const props = defineProps({
     </template>
 
     <!--  toolbar tabs  -->
-    <template #extension v-if="props.extension">
+    <template #extension v-if="extension">
       <slot name="extension" />
     </template>
   </v-app-bar>
@@ -47,7 +48,7 @@ const props = defineProps({
     <slot></slot>
   </v-main>
 
-  <v-footer v-if="user && !props.hideFooter" class="pa-0" app>
+  <v-footer v-if="user && !hideFooter" class="pa-0" app>
     <!-- bottom navigation -->
     <v-bottom-navigation grow>
       <v-btn to="/activity">

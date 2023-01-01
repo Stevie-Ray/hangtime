@@ -10,6 +10,7 @@ const { t } = useI18n()
 
 const emit = defineEmits(['left', 'right', 'rotate'])
 
+// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   variant: {
     type: String,
@@ -42,52 +43,50 @@ const props = defineProps({
 <template>
   <div class="exercise-card">
     <v-card
-      :variant="props.variant"
-      v-if="!props.hideRest || (props.index !== 0 && !props.hideRest)"
+      :variant="variant"
+      v-if="!hideRest || (index !== 0 && !hideRest)"
       class="mb-8"
     >
       <v-card-title class="d-flex justify-space-between">
         <div>{{ t('Rest') }}</div>
-        <div v-if="props.exercise">{{ time(props.exercise.pause) }}</div>
+        <div v-if="exercise">{{ time(exercise.pause) }}</div>
       </v-card-title>
     </v-card>
 
-    <v-card :variant="props.variant" class="mb-8">
-      <v-card-title v-if="props.exercise" class="d-flex justify-space-between">
+    <v-card :variant="variant" class="mb-8">
+      <v-card-title v-if="exercise" class="d-flex justify-space-between">
         <div>
-          <v-chip class="mr-2" color="primary">{{ props.index + 1 }}.</v-chip>
+          <v-chip class="mr-2" color="primary">{{ index + 1 }}.</v-chip>
         </div>
 
         <div class="flex-grow-1 text-truncate">
-          <exercise-name :exercise="props.exercise" hide-repeat></exercise-name>
+          <exercise-name :exercise="exercise" hide-repeat></exercise-name>
         </div>
 
         <div>
-          <v-chip v-if="props.exercise.repeat > 0" variant="outlined">
-            {{ props.exercise.repeat + 1 }}x
+          <v-chip v-if="exercise.repeat > 0" variant="outlined">
+            {{ exercise.repeat + 1 }}x
           </v-chip>
           <v-chip v-else variant="outlined">1x</v-chip>
         </div>
       </v-card-title>
 
-      <v-card-subtitle v-if="props.exercise">
+      <v-card-subtitle v-if="exercise">
         <div class="d-flex justify-space-between">
           <div>
-            <span v-if="props.exercise.hold"
-              >{{ t('Hang') }}:
-              {{ time(Math.round(props.exercise.hold)) }}</span
+            <span v-if="exercise.hold"
+              >{{ t('Hang') }}: {{ time(Math.round(exercise.hold)) }}</span
             >
-            <span v-if="props.exercise.repeat">
-              | {{ t('Rest') }}:
-              {{ time(Math.round(props.exercise.rest)) }}</span
+            <span v-if="exercise.repeat">
+              | {{ t('Rest') }}: {{ time(Math.round(exercise.rest)) }}</span
             >
           </div>
 
           <v-chip
             size="x-small"
-            v-if="props.exercise.weight && props.exercise?.weight !== 0"
+            v-if="exercise.weight && exercise?.weight !== 0"
           >
-            {{ props.exercise.weight }}kg
+            {{ exercise.weight }}kg
           </v-chip>
         </div>
       </v-card-subtitle>
@@ -96,11 +95,11 @@ const props = defineProps({
         <v-row>
           <v-col cols="12">
             <exercise-hangboard
-              v-if="props.hangboard && props.exercise"
-              :exercise="props.exercise"
+              v-if="hangboard && exercise"
+              :exercise="exercise"
               :hangboard="{
-                hangboard: props.hangboard.hangboard,
-                company: props.hangboard.company
+                hangboard: hangboard.hangboard,
+                company: hangboard.company
               }"
               :edit="editHangboard"
               @right="(hold) => emit('right', hold)"
@@ -109,20 +108,20 @@ const props = defineProps({
             >
             </exercise-hangboard>
             <exercise-hand
-              v-if="props.exercise"
-              :exercise="props.exercise"
+              v-if="exercise"
+              :exercise="exercise"
               :edit="editHand"
               :style="{ 'pointer-events': editHand ? 'auto' : 'none' }"
             ></exercise-hand>
 
             <v-row
-              v-if="props.exercise?.notes && props.exercise.notes !== ''"
+              v-if="exercise?.notes && exercise.notes !== ''"
               justify="center"
               style="margin-top: -32px"
             >
               <v-col cols="8">
                 <div class="text-center text-caption">
-                  {{ props.exercise.notes }}
+                  {{ exercise.notes }}
                 </div>
               </v-col>
             </v-row>

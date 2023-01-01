@@ -1,25 +1,19 @@
 {
   "name": "HangTime",
   "short_name": "HangTime",
-  "description": "Fingerboard / Hangboard training for climbers.",
-  "categories": ["fitness", "health", "sports"],
-  "lang": "en-US",
-  "start_url": "/?utm_source=homescreen",
-  "display": "standalone",
-  "theme_color": "#012E40",
-  "background_color": "#012E40",
+  "theme_color": "#212121",
   "icons": [
     {
-      "src": "./img/icons/android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./img/icons/android-chrome.svg",
+      "src": "./img/icons/android-chrome-maskable.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    },
+    {
+      "src": "./img/icons/android-chrome-monochrome.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "monochrome"
     },
     {
       "src": "./img/icons/android-chrome-monochrome-512x512.png",
@@ -28,30 +22,64 @@
       "purpose": "monochrome"
     },
     {
-      "src": "./img/icons/android-chrome-monochrome.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "monochrome"
+      "src": "./img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
+  "start_url": "/?utm_source=homescreen",
+  "display": "standalone",
+  "background_color": "#212121",
+  "description": "Hangboard Training",
+  "categories": [
+    "fitness",
+    "health",
+    "sports"
+  ],
+  "lang": "en-US",
   "shortcuts": [
     {
+      "name": "Quick Workout",
+      "url": "/workouts/quick?utm_source=shortcut",
+      "icons": [
+        {
+          "src": "./img/icons/android-shortcut.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "maskable"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "monochrome"
+        },
+        {
+          "src": "./img/icons/android-shortcut-monochrome.svg",
+          "sizes": "any",
+          "type": "image/svg+xml",
+          "purpose": "monochrome"
+
+        },
+        {
+          "src": "./img/icons/android-shortcut-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ],
+      "description": "Do a Quick Workout"
+    },
+    {
       "name": "Workouts",
-      "short_name": "Workouts",
-      "description": "Create and customize your own workouts",
       "url": "/?utm_source=shortcut",
       "icons": [
         {
-          "src": "./img/icons/android-shortcut-512x512.png",
-          "sizes": "512x512",
-          "type": "image/png",
-          "purpose": "any maskable"
-        },
-        {
           "src": "./img/icons/android-shortcut.svg",
           "sizes": "any",
           "type": "image/svg+xml",
-          "purpose": "any maskable"
+          "purpose": "maskable"
         },
         {
           "src": "./img/icons/android-shortcut-monochrome-512x512.png",
@@ -64,26 +92,26 @@
           "sizes": "any",
           "type": "image/svg+xml",
           "purpose": "monochrome"
+
+        },
+        {
+          "src": "./img/icons/android-shortcut-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
         }
-      ]
+      ],
+      "description": "Create and do your workouts"
     },
     {
-      "name": "Community",
-      "short_name": "Community",
-      "description": "Share and do workouts from the community",
-      "url": "/community?utm_source=shortcut",
+      "name": "Activity",
+      "url": "/activity?utm_source=shortcut",
       "icons": [
-        {
-          "src": "./img/icons/android-shortcut-512x512.png",
-          "sizes": "512x512",
-          "type": "image/png",
-          "purpose": "any maskable"
-        },
         {
           "src": "./img/icons/android-shortcut.svg",
           "sizes": "any",
           "type": "image/svg+xml",
-          "purpose": "any maskable"
+          "purpose": "maskable"
         },
         {
           "src": "./img/icons/android-shortcut-monochrome-512x512.png",
@@ -96,48 +124,74 @@
           "sizes": "any",
           "type": "image/svg+xml",
           "purpose": "monochrome"
+
+        },
+        {
+          "src": "./img/icons/android-shortcut-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
         }
-      ]
+      ],
+      "description": "Track your progress over time"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot1.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Get stronger with HangTime"
     },
     {
-      "name": "Progress",
-      "short_name": "Progress",
-      "description": "Track your progress over time",
-      "url": "/progress?utm_source=shortcut",
-      "icons": [
-        {
-          "src": "./img/icons/android-shortcut-512x512.png",
-          "sizes": "512x512",
-          "type": "image/png",
-          "purpose": "any maskable"
-        },
-        {
-          "src": "./img/icons/android-shortcut.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
-          "purpose": "any maskable"
-        },
-        {
-          "src": "./img/icons/android-shortcut-monochrome-512x512.png",
-          "sizes": "512x512",
-          "type": "image/png",
-          "purpose": "monochrome"
-        },
-        {
-          "src": "./img/icons/android-shortcut-monochrome.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
-          "purpose": "monochrome"
-        }
-      ]
+      "src": "screenshot2.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Workouts, that you create"
+    },
+    {
+      "src": "screenshot3.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Manage multiple hangboards"
+    },
+    {
+      "src": "screenshot4.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Inspire, or get inspired"
+    },
+    {
+      "src": "screenshot5.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Track your progress"
     }
   ],
   "related_applications": [
     {
       "platform": "play",
-      "id": "nl.stevie.ray.hangtime",
-      "url": "https://play.google.com/store/apps/details?id=nl.stevie.ray.hangtime"
+      "url": "https://play.google.com/store/apps/details?id=nl.stevie.ray.hangtime",
+      "id": "nl.stevie.ray.hangtime"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/hangtime-hangboard-training/id1631706818",
+      "id": "nl.stevie.ray.hangtime"
     }
   ],
-  "prefer_related_applications": true
+  "prefer_related_applications": true,
+  "dir": "ltr",
+  "orientation": "any",
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "fullscreen",
+    "browser"
+  ]
 }

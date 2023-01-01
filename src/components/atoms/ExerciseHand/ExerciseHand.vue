@@ -80,11 +80,8 @@ function resetHands() {
 </script>
 
 <template>
-  <div
-    class="hand__wrapper"
-    :class="{ 'position-relative pb-12': !props.edit }"
-  >
-    <v-list lines="one" class="hand__text w-100" v-show="props.edit">
+  <div class="hand__wrapper" :class="{ 'position-relative pb-12': !edit }">
+    <v-list lines="one" class="hand__text w-100" v-show="edit">
       <v-list-item>
         <v-list-item-title>
           {{ t('Tap on fingers that are not allowed') }}
@@ -93,10 +90,7 @@ function resetHands() {
         <template #append>
           <v-list-item-action end>
             <v-btn
-              v-if="
-                props.exercise.leftHand?.length ||
-                props.exercise.rightHand?.length
-              "
+              v-if="exercise.leftHand?.length || exercise.rightHand?.length"
               icon="mdi-undo"
               color="text"
               variant="text"
@@ -115,13 +109,13 @@ function resetHands() {
     </v-list>
     <div
       class="hand d-flex flex-row justify-space-between w-100"
-      :class="{ 'position-absolute': !props.edit }"
+      :class="{ 'position-absolute': !edit }"
     >
       <div class="hand__left">
         <inline-svg
           @click="toggleLeft($event)"
-          v-if="props.exercise.left !== null"
-          :class="[leftClass, { large: props.edit }]"
+          v-if="exercise.left !== null"
+          :class="[leftClass, { large: edit }]"
           :src="require('@/assets/icons/hand.svg')"
           class="w-100"
         />
@@ -129,8 +123,8 @@ function resetHands() {
       <div class="hand__right">
         <inline-svg
           @click="toggleRight($event)"
-          v-if="props.exercise.right !== null"
-          :class="[rightClass, { large: props.edit }]"
+          v-if="exercise?.right !== null"
+          :class="[rightClass, { large: edit }]"
           :src="require('@/assets/icons/hand.svg')"
           class="w-100"
         />

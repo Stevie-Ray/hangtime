@@ -185,7 +185,7 @@ useHead({
                   @update:modelValue="updateUser"
                 >
                   <!--                    <template #thumb-label="props">-->
-                  <!--                      {{ weightConverter(props.value, user) }}{{ weightShort }}-->
+                  <!--                      {{ weightConverter(value, user) }}{{ weightShort }}-->
                   <!--                    </template>-->
                   <!--                    <template #append>-->
                   <!--                      <v-label v-if="user && user.weight">-->
