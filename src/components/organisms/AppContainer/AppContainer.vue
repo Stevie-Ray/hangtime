@@ -13,6 +13,9 @@ const props = defineProps({
   },
   prepend: {
     type: Boolean
+  },
+  hideFooter: {
+    type: Boolean
   }
 })
 </script>
@@ -44,7 +47,7 @@ const props = defineProps({
     <slot></slot>
   </v-main>
 
-  <v-footer v-if="user" class="pa-0" app>
+  <v-footer v-if="user && !props.hideFooter" class="pa-0" app>
     <!-- bottom navigation -->
     <v-bottom-navigation grow>
       <v-btn to="/activity">

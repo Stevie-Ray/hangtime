@@ -32,7 +32,7 @@ const updateSelected = () => {
   )
   if (!exists) {
     // measure selected hangboard data
-    event('add-hangboard', {
+    event('add_hangboard', {
       hangboard: getHangboardNameByIds(selected.company, selected.hangboard)
     })
     // add the newly selected board and set it

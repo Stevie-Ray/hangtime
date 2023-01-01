@@ -26,7 +26,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
+  <app-container prepend hide-footer>
     <template #prepend>
       <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
     </template>

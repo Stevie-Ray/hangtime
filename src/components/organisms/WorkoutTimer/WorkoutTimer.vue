@@ -313,13 +313,13 @@ const startTimer = () => {
   ></v-container>
   <v-container class="position-relative">
     <v-row>
-      <v-col cols="12">
-        <v-row align="center" class="pt-4 timer" justify="center">
-          <v-col class="text-center" cols="8">
+      <v-col cols="12" sm="6">
+        <v-row align="center" class="timer" justify="center">
+          <v-col class="text-center" cols="8" sm="10">
             <div v-if="exercises" class="text-h1">
               {{ time(clock) }}
             </div>
-            <div class="text-h6">
+            <div class="text-h6 pt-2 pb-4">
               {{ clockText }}
             </div>
             <v-row align="center" justify="center">
@@ -339,11 +339,14 @@ const startTimer = () => {
             </v-row>
           </v-col>
         </v-row>
-
-        <v-card class="pt-12 mt-12 position-relative overflow-visible">
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-card
+          class="pt-12 mt-12 mt-sm-4 pt-sm-8 position-relative overflow-visible"
+        >
           <v-card-title
             class="justify-center align-center position-absolute w-100 d-flex"
-            style="top: -36px; gap: 32px"
+            style="top: -36px; gap: 32px; z-index: 1"
           >
             <v-btn
               :style="{
@@ -413,7 +416,7 @@ const startTimer = () => {
   background-image: url('@/assets/cartographer.png');
   background-repeat: repeat;
   width: 0;
-  height: calc(100% - 56px - 64px) !important; // header + footer
+  height: calc(100% - 56px) !important; // header
   will-change: width;
 
   &.hang {
