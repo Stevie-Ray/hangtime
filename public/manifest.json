@@ -32,11 +32,7 @@
   "display": "standalone",
   "background_color": "#212121",
   "description": "Hangboard Training",
-  "categories": [
-    "fitness",
-    "health",
-    "sports"
-  ],
+  "categories": ["fitness", "health", "sports"],
   "lang": "en-US",
   "shortcuts": [
     {
@@ -60,7 +56,6 @@
           "sizes": "any",
           "type": "image/svg+xml",
           "purpose": "monochrome"
-
         },
         {
           "src": "./img/icons/android-shortcut-512x512.png",
@@ -92,7 +87,6 @@
           "sizes": "any",
           "type": "image/svg+xml",
           "purpose": "monochrome"
-
         },
         {
           "src": "./img/icons/android-shortcut-512x512.png",
@@ -124,7 +118,6 @@
           "sizes": "any",
           "type": "image/svg+xml",
           "purpose": "monochrome"
-
         },
         {
           "src": "./img/icons/android-shortcut-512x512.png",
@@ -188,10 +181,5 @@
   "prefer_related_applications": true,
   "dir": "ltr",
   "orientation": "any",
-  "display_override": [
-    "standalone",
-    "minimal-ui",
-    "fullscreen",
-    "browser"
-  ]
+  "display_override": ["standalone", "minimal-ui", "fullscreen", "browser"]
 }
