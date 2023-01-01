@@ -1,7 +1,10 @@
 {
-  "name": "HangTime",
-  "short_name": "HangTime",
-  "theme_color": "#212121",
+  "background_color": "#212121",
+  "categories": ["fitness", "health", "sports"],
+  "description": "Hangboard Training",
+  "dir": "ltr",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "fullscreen", "browser"],
   "icons": [
     {
       "src": "./img/icons/android-chrome-maskable.svg",
@@ -28,12 +31,62 @@
       "purpose": "any"
     }
   ],
-  "start_url": "/?utm_source=homescreen",
-  "display": "standalone",
-  "background_color": "#212121",
-  "description": "Hangboard Training",
-  "categories": ["fitness", "health", "sports"],
+  "id": "nl.stevie.ray.hangtime",
   "lang": "en-US",
+  "name": "HangTime",
+  "orientation": "any",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "id": "nl.stevie.ray.hangtime",
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/hangtime-hangboard-training/id1631706818"
+    },
+    {
+      "id": "nl.stevie.ray.hangtime",
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=nl.stevie.ray.hangtime"
+    }
+  ],
+  "scope": "https://hangtime.stevie-ray.nl/",
+  "screenshots": [
+    {
+      "label": "Get stronger with HangTime",
+      "platform": "narrow",
+      "sizes": "887x1920",
+      "src": "./img/icons/screenshot1.png",
+      "type": "image/png"
+    },
+    {
+      "label": "Workouts, that you create",
+      "platform": "narrow",
+      "sizes": "887x1920",
+      "src": "./img/icons/screenshot2.png",
+      "type": "image/png"
+    },
+    {
+      "label": "Manage multiple hangboards",
+      "platform": "narrow",
+      "sizes": "887x1920",
+      "src": "./img/icons/screenshot3.png",
+      "type": "image/png"
+    },
+    {
+      "label": "Inspire, or get inspired",
+      "platform": "narrow",
+      "sizes": "887x1920",
+      "src": "./img/icons/screenshot4.png",
+      "type": "image/png"
+    },
+    {
+      "label": "Track your progress",
+      "platform": "narrow",
+      "sizes": "887x1920",
+      "src": "./img/icons/screenshot5.png",
+      "type": "image/png"
+    }
+  ],
+  "short_name": "HangTime",
   "shortcuts": [
     {
       "name": "Quick Workout",
@@ -129,57 +182,6 @@
       "description": "Track your progress over time"
     }
   ],
-  "screenshots": [
-    {
-      "src": "screenshot1.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "platform": "wide",
-      "label": "Get stronger with HangTime"
-    },
-    {
-      "src": "screenshot2.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "platform": "wide",
-      "label": "Workouts, that you create"
-    },
-    {
-      "src": "screenshot3.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "platform": "wide",
-      "label": "Manage multiple hangboards"
-    },
-    {
-      "src": "screenshot4.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "platform": "wide",
-      "label": "Inspire, or get inspired"
-    },
-    {
-      "src": "screenshot5.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "platform": "wide",
-      "label": "Track your progress"
-    }
-  ],
-  "related_applications": [
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=nl.stevie.ray.hangtime",
-      "id": "nl.stevie.ray.hangtime"
-    },
-    {
-      "platform": "itunes",
-      "url": "https://apps.apple.com/app/hangtime-hangboard-training/id1631706818",
-      "id": "nl.stevie.ray.hangtime"
-    }
-  ],
-  "prefer_related_applications": true,
-  "dir": "ltr",
-  "orientation": "any",
-  "display_override": ["standalone", "minimal-ui", "fullscreen", "browser"]
+  "start_url": "/?utm_source=homescreen",
+  "theme_color": "#212121"
 }
