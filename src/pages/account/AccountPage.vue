@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { getAuth, signOut } from 'firebase/auth'
 import { useI18n } from 'vue-i18n'
+import { useHead } from '@vueuse/head'
 import { useAuthentication } from '@/stores/authentication'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 import { useApp } from '@/stores/app'
@@ -112,6 +113,11 @@ async function signOutUser() {
       console.log(error)
     })
 }
+
+useHead({
+  title: 'Account',
+  meta: [{ name: 'description', content: '' }]
+})
 </script>
 
 <template>

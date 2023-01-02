@@ -13,6 +13,7 @@ const router = useRouter()
 
 const workout = reactive({
   name: t('Quick workout'),
+  description: 'Just a simple timer go get you going',
   exercises: [
     {
       hold: 7,
@@ -23,7 +24,7 @@ const workout = reactive({
 })
 
 useHead({
-  title: 'Quick Workouts',
+  title: t('Quick workout'),
   meta: [{ name: 'description', content: '' }]
 })
 </script>

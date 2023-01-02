@@ -71,8 +71,7 @@ const shareExternal = () => {
             icon="mdi-export-variant"
             color="text"
             @click="shareExternal"
-            >{{ t('Share') }}
-          </v-btn>
+          ></v-btn>
           <v-btn
             icon="mdi-close"
             color="text"
