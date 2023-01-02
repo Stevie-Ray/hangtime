@@ -4,12 +4,16 @@ import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard'
+import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import { time } from '@/helpers'
 
 import { useAuthentication } from '@/stores/authentication'
 
 const { t } = useI18n()
+
 const { user } = storeToRefs(useAuthentication())
+
+const { updateUser } = useAuthentication()
 
 const props = defineProps({
   workout: {
@@ -24,9 +28,16 @@ const clockText = ref(t('Press Play'))
 const currentExercise = ref(0)
 const currentExerciseStep = ref(0)
 const currentExerciseStepRepeat = ref(0)
+
 const audio = new Audio()
 const noSleep = new NoSleep()
 const setupTime = 5
+
+// complete
+const dialogWorkoutComplete = ref(false)
+// eslint-disable-next-line no-unused-vars
+let workoutCompleteTimeTotal = 0
+let workoutCompleteTimeHanging = 0
 
 onBeforeUnmount(() => {
   // make sure timer is disabled and speech is stopped
@@ -150,6 +161,16 @@ const exerciseRest = () => {
 
 const exerciseDone = () => {
   clockText.value = t('Done')
+  // check if object exists
+  if (!user?.value?.completed) user.value.completed = {}
+  // set values
+  user.value.completed.time += workoutCompleteTimeTotal
+  user.value.completed.hold += workoutCompleteTimeHanging
+  user.value.completed.amount += 1
+  updateUser()
+  // open dialog
+  dialogWorkoutComplete.value = true
+  // stop timers
   stopTimer()
 }
 
@@ -185,6 +206,7 @@ const hasExercise = (type) => {
 }
 
 const exerciseSteps = () => {
+  workoutCompleteTimeTotal += 1
   // eslint-disable-next-line default-case
   switch (currentExerciseStep.value) {
     // PAUSE
@@ -202,6 +224,7 @@ const exerciseSteps = () => {
       if (clock.value > 0) {
         exerciseHold()
         clock.value -= 1
+        workoutCompleteTimeHanging += 1
         break
       }
       // check if exercise has to repeat
@@ -236,6 +259,7 @@ const exerciseSteps = () => {
     case 3:
       if (clock.value > 0) {
         exerciseHold()
+        workoutCompleteTimeHanging += 1
         clock.value -= 1
         break
       }
@@ -389,6 +413,7 @@ const startTimer = () => {
           <v-card-text class="pt-0">
             <slot>
               <exercise-card
+                v-if="workout"
                 variant="flat"
                 :index="currentExercise"
                 :exercise="exercise"
@@ -405,6 +430,15 @@ const startTimer = () => {
       </v-col>
     </v-row>
   </v-container>
+  <workout-complete
+    v-if="workout"
+    v-model="dialogWorkoutComplete"
+    :time-total="workoutCompleteTimeTotal"
+    :time-hanging="workoutCompleteTimeHanging"
+    :workout="workout"
+    @show="dialogWorkoutComplete = !dialogWorkoutComplete"
+  >
+  </workout-complete>
 </template>
 
 <style lang="scss" scoped>

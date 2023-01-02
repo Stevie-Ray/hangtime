@@ -174,12 +174,12 @@ const isHearted = computed(() => {
 const workoutSubscriber = () => {
   if (!isHearted.value) {
     workout?.value.subscribers.unshift(user.value.id)
-    // TODO: push to workouts
+    // push to workouts
     workouts?.value.unshift(workout?.value)
   } else {
     const userIndex = workout?.value.subscribers.indexOf(user.value.id)
     workout?.value.subscribers.splice(userIndex, 1)
-    // TODO: remove from workouts
+    // remove from workouts
     const index = workouts?.value.findIndex(
       (item) => item.id === workout?.value.id
     )
