@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import VueGtag from 'vue-gtag'
-import App from '@/App.vue'
+import App from '@/App'
 import head from '@/plugins/head'
 import i18n from '@/plugins/i18n'
 import pinia from '@/plugins/pinia'

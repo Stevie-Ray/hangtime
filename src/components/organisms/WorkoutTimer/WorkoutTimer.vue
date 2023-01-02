@@ -1,10 +1,18 @@
 <script setup>
-import { computed, defineProps, ref, nextTick, onBeforeUnmount } from 'vue'
+import {
+  computed,
+  defineProps,
+  ref,
+  nextTick,
+  onBeforeUnmount,
+  onMounted
+} from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard'
-import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
+import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete'
+import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp'
 import { time } from '@/helpers'
 
 import { useAuthentication } from '@/stores/authentication'
@@ -319,6 +327,44 @@ const startTimer = () => {
   }
   setupWorkout()
 }
+
+const dialogWorkoutSubscribe = ref(true)
+const canSubscribePlayBilling = ref(false)
+const subscribeLimit = 30
+const PAYMENT_METHOD = 'https://play.google.com/billing'
+const canSubscribe = window.getDigitalGoodsService
+
+async function canUsePlayBilling() {
+  if (canSubscribe === undefined) {
+    console.log("window doesn't have getDigitalGoodsService.")
+    return
+  }
+  try {
+    const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
+    console.log(service)
+    if (service === null) {
+      console.log('Play Billing is not available.')
+    } else {
+      // eslint-disable-next-line no-shadow
+      const items = ['subscription']
+      const details = await service.getDetails(items)
+      console.log(details)
+      if (details === null) {
+        console.log('Are you running a Play Store build?')
+      } else if (details.length === 0) {
+        console.log('Are you running a Play Store build? 2')
+      } else {
+        canSubscribePlayBilling.value = true
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+onMounted(() => {
+  canUsePlayBilling()
+})
 </script>
 
 <template>
@@ -430,6 +476,17 @@ const startTimer = () => {
       </v-col>
     </v-row>
   </v-container>
+  <!-- Show subscribe wall -->
+  <subscribe-to-app
+    v-model="dialogWorkoutSubscribe"
+    v-if="
+      canSubscribePlayBilling &&
+      !user?.subscribed &&
+      user?.completed?.time / 60 > (subscribeLimit / 4) * 3
+    "
+    :limit="subscribeLimit"
+  >
+  </subscribe-to-app>
   <workout-complete
     v-if="workout"
     v-model="dialogWorkoutComplete"

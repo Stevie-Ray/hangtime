@@ -4,28 +4,27 @@ import { useAuthentication } from '@/stores/authentication'
 
 // 1. Define route components.
 // These can be imported from other files
-import AccountPage from '@/pages/account/AccountPage.vue'
+import AccountPage from '@/pages/account/AccountPage'
 
-import AccountGeneralPage from '@/pages/account/AccountGeneralPage.vue'
-import AccountHangboardsPage from '@/pages/account/AccountHangboardsPage.vue'
-import AccountHelpPage from '@/pages/account/AccountHelpPage.vue'
-import AccountPrivacyPage from '@/pages/account/AccountPrivacyPage.vue'
-import AccountProfilePage from '@/pages/account/AccountProfilePage.vue'
-import AccountSubscriptionPage from '@/pages/account/AccountSubscriptionPage.vue'
-import AccountWorkoutsPage from '@/pages/account/AccountWorkoutsPage.vue'
+import AccountGeneralPage from '@/pages/account/AccountGeneralPage'
+import AccountHangboardsPage from '@/pages/account/AccountHangboardsPage'
+import AccountHelpPage from '@/pages/account/AccountHelpPage'
+import AccountPrivacyPage from '@/pages/account/AccountPrivacyPage'
+import AccountProfilePage from '@/pages/account/AccountProfilePage'
+import AccountSubscriptionPage from '@/pages/account/AccountSubscriptionPage'
+import AccountWorkoutsPage from '@/pages/account/AccountWorkoutsPage'
 
-import ActivityPage from '@/pages/activity/ActivityPage.vue'
-import ActivityLeaderboardPage from '@/pages/activity/ActivityLeaderboardPage.vue'
-import ActivityNotificationsPage from '@/pages/activity/ActivityNotificationsPage.vue'
+import ActivityPage from '@/pages/activity/ActivityPage'
+import ActivityLeaderboardPage from '@/pages/activity/ActivityLeaderboardPage'
+import ActivityNotificationsPage from '@/pages/activity/ActivityNotificationsPage'
 
-import LoginPage from '@/pages/authentication/LoginPage.vue'
-import CheckLoginPage from '@/pages/authentication/CheckLoginPage.vue'
+import LoginPage from '@/pages/authentication/LoginPage'
+import CheckLoginPage from '@/pages/authentication/CheckLoginPage'
 
-import WorkoutsPage from '@/pages/workouts/WorkoutsPage.vue'
-import WorkoutsDetailPage from '@/pages/workouts/WorkoutsDetailPage.vue'
-import WorkoutsTimerPage from '@/pages/workouts/WorkoutsTimerPage.vue'
-// import WorkoutsNewPage from '@/pages/workouts/WorkoutsNewPage.vue'
-import WorkoutsQuickPage from '@/pages/workouts/WorkoutsQuickPage.vue'
+import WorkoutsPage from '@/pages/workouts/WorkoutsPage'
+import WorkoutsDetailPage from '@/pages/workouts/WorkoutsDetailPage'
+import WorkoutsTimerPage from '@/pages/workouts/WorkoutsTimerPage'
+import WorkoutsQuickPage from '@/pages/workouts/WorkoutsQuickPage'
 
 // 2. Define some routes
 // Each route should map to a component.

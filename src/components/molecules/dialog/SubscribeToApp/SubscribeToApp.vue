@@ -1,16 +1,21 @@
 <script setup>
-import { useHead } from '@vueuse/head'
-import { useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
+import { defineProps, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { computed, onMounted } from 'vue'
-import { useAuthentication } from '@/stores/authentication'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import { storeToRefs } from 'pinia'
 import { time } from '@/helpers'
+
+import { useAuthentication } from '@/stores/authentication'
 
 const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthentication())
+
+// eslint-disable-next-line no-unused-vars
+const props = defineProps({
+  limit: {
+    type: Number
+  }
+})
 
 const { updateUser } = useAuthentication()
 
@@ -282,98 +287,79 @@ function buySubscription() {
 onMounted(() => {
   loadSkus()
 })
-
-const router = useRouter()
-
-useHead({
-  title: 'Subscription',
-  meta: [{ name: 'description', content: '' }]
-})
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
-    </template>
-
-    <template #title>
-      {{ t('Subscription') }}
-    </template>
-
-    <template #icons>
-      <v-btn
-        v-if="purchasesList.length === 0"
-        :disabled="!canSubscribe"
-        icon="mdi-reload"
-        @click="listPurchases"
-      ></v-btn>
-    </template>
-
-    <template #default>
+  <v-dialog fullscreen :scrim="false" transition="dialog-bottom-transition">
+    <v-card>
+      <v-toolbar>
+        <v-toolbar-title>{{
+          t('Enjoying {appTitle}?', { appTitle: 'HangTime' })
+        }}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn
+            v-if="purchasesList.length === 0"
+            :disabled="!canSubscribe"
+            icon="mdi-reload"
+            @click="listPurchases"
+          ></v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
       <v-container>
         <v-row>
           <v-col cols="12">
             <v-card>
-              <v-card-title>
-                {{ t('Enjoying {appTitle}?', { appTitle: 'HangTime' }) }}
-              </v-card-title>
-              <v-card-text>
-                <div class="mb-4">
-                  <span>HangTime gives you </span>
-                  <span style="text-decoration: line-through"
-                    >{{ limit / 2 }} minutes</span
-                  >
-                  <strong>&nbsp;{{ limit }} minutes</strong> of free usage.
-                  <span>Want to do more? </span>
-                  <span>Buy a subscription! After that it's free forever.</span>
-                </div>
-                <div class="text-h6">{{ t('Current usage') }}</div>
-                <v-progress-linear
-                  v-if="user?.completed"
-                  :model-value="progressValue"
-                  color="primary"
-                  height="25"
+              <div class="mb-4">
+                <span>HangTime gives you </span>
+                <span style="text-decoration: line-through"
+                  >{{ limit / 2 }} minutes</span
                 >
-                  <template #default="{ value }">
-                    <strong
-                      v-if="user && !user.subscribed"
-                      style="color: white"
+                <strong>&nbsp;{{ limit }} minutes</strong> of free usage.
+                <span>Want to do more? </span>
+                <span>Buy a subscription! After that it's free forever.</span>
+              </div>
+              <div class="text-h6">{{ t('Current usage') }}</div>
+              <v-progress-linear
+                v-if="user?.completed"
+                :model-value="progressValue"
+                color="primary"
+                height="25"
+              >
+                <template #default="{ value }">
+                  <strong v-if="user && !user.subscribed" style="color: white">
+                    {{ Math.ceil(value) }}<span v-if="isFinite(value)">%</span>
+                  </strong>
+                </template>
+              </v-progress-linear>
+              <p v-if="user?.completed" class="mb-4">
+                {{ time(user.completed.time) }} minutes.
+              </p>
+              <v-row class="text-center">
+                <v-col cols="12">
+                  <div v-if="canSubscribe">
+                    <div class="text-h5 mb-6">{{ price }}</div>
+                    <v-btn
+                      color="primary"
+                      x-large
+                      :disabled="disabled || (user && user.subscribed)"
+                      @click="buySubscription"
                     >
-                      {{ Math.ceil(value)
-                      }}<span v-if="isFinite(value)">%</span>
+                      <v-icon left>mdi-cash-multiple</v-icon>
+                      {{ t('Buy') }}
+                    </v-btn>
+                  </div>
+                  <div v-else>
+                    <strong>
+                      {{ t("It's currently not possible to pay") }}
                     </strong>
-                  </template>
-                </v-progress-linear>
-                <p v-if="user?.completed" class="mb-4">
-                  {{ time(user.completed.time) }} minutes.
-                </p>
-                <v-row class="text-center">
-                  <v-col cols="12">
-                    <div v-if="canSubscribe">
-                      <div class="text-h5 mb-6">{{ price }}</div>
-                      <v-btn
-                        color="primary"
-                        x-large
-                        :disabled="disabled || (user && user.subscribed)"
-                        @click="buySubscription"
-                      >
-                        <v-icon left>mdi-cash-multiple</v-icon>
-                        {{ t('Buy') }}
-                      </v-btn>
-                    </div>
-                    <div v-else>
-                      <strong>
-                        {{ t("It's currently not possible to pay") }}
-                      </strong>
-                    </div>
-                    <p class="mt-4">{{ buyStatus }}</p>
-                    <p v-if="user?.subscribed">
-                      <strong>{{ t('Subscription is valid') }}</strong>
-                    </p>
-                  </v-col>
-                </v-row>
-              </v-card-text>
+                  </div>
+                  <p class="mt-4">{{ buyStatus }}</p>
+                  <p v-if="user?.subscribed">
+                    <strong>{{ t('Subscription is valid') }}</strong>
+                  </p>
+                </v-col>
+              </v-row>
             </v-card>
             <v-card v-if="purchasesList.length > 0">
               <v-card-title>
@@ -415,8 +401,8 @@ useHead({
           </v-col>
         </v-row>
       </v-container>
-    </template>
-  </app-container>
+    </v-card>
+  </v-dialog>
 </template>
 
 <style lang="scss" scoped></style>
