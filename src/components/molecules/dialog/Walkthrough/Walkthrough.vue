@@ -143,6 +143,7 @@ const settingsGrade = computed({
 <template>
   <v-dialog
     v-model="dialog"
+    persistent
     :scrim="false"
     fullscreen
     transition="dialog-bottom-transition"
