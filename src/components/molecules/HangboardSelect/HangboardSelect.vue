@@ -6,8 +6,12 @@ import { useUser } from '@/stores/user'
 
 const { t } = useI18n()
 
-const { getHangboardNameByIds, getCompanies, getHangboardsByCompanyId } =
-  useUser()
+const {
+  getHangboardNameByIds,
+  getHangboardImageByIds,
+  getCompanies,
+  getHangboardsByCompanyId
+} = useUser()
 
 const props = defineProps({
   selectedHangboard: {
@@ -29,6 +33,24 @@ watch(selected, (item) => {
 
 const getHangboards = computed(() =>
   getHangboardsByCompanyId(selected.value.company)
+)
+
+const email = 'mail@stevie-ray.nl'
+const body = computed(() =>
+  encodeURIComponent(
+    `Hello HangTime,\n\nPlease add the following Hangboard: ${getHangboardNameByIds(
+      selected.value.company,
+      selected.value.hangboard
+    )}`
+  )
+)
+const subject = computed(() =>
+  encodeURIComponent(
+    `Hangboard Request: ${getHangboardNameByIds(
+      selected.value.company,
+      selected.value.hangboard
+    )}`
+  )
 )
 </script>
 
@@ -61,12 +83,24 @@ const getHangboards = computed(() =>
   <v-card>
     <v-card-text>
       <exercise-hangboard
+        v-if="
+          getHangboardImageByIds(selected.company, selected.hangboard) !==
+          'hangboards/NOTFOUND.svg'
+        "
         :hangboard="{
           company: selected.company,
           hangboard: selected.hangboard
         }"
       >
       </exercise-hangboard>
+      <div v-else>
+        <v-btn
+          size="large"
+          :href="`mailto:${email}?subject=${subject}&body=${body}`"
+        >
+          {{ t('Request Hangboard') }}
+        </v-btn>
+      </div>
     </v-card-text>
     <v-card-title>
       {{ getHangboardNameByIds(selected.company, selected.hangboard) }}

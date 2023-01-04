@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
@@ -7,6 +8,8 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 import { time, useRandomImage } from '@/helpers'
 
 const { t } = useI18n()
+
+const notifications = ref(false)
 
 const cards = [
   {
@@ -64,8 +67,8 @@ const slides = [
   {
     title: 'A new HangTime 🎉',
     subtitle: 'Welcome to the new and improved HangTime',
-    text: 'Happy 2023! 💥 A complete rewritten app, found a bug? Please let me know.',
-    button_text: 'Report bug',
+    text: 'Happy 2023 💥 A completely rewritten app. Found a bug or want to request a feature? Let me know!',
+    button_text: 'Get in touch',
     external_link: 'mailto:mail@stevie-ray.nl?subject=Bug%20Report'
   },
   {
@@ -124,9 +127,9 @@ useHead({
       <v-btn
         class="text-none"
         color="text"
-        disabled
+        :disabled="!notifications"
         icon
-        to="/activity/notifications"
+        :to="notifications ? '/activity/notifications' : null"
       >
         <v-badge dot color="secondary">
           <v-icon>mdi-bell-outline</v-icon>

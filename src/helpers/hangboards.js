@@ -2622,6 +2622,12 @@ export default [
           }
         ],
         holds: 3
+      },
+      {
+        name: 'The Penta',
+        id: 2,
+        image: 'hangboards/YYVERTICALPENTRA.svg',
+        holds: 6
       }
     ]
   },
@@ -2695,10 +2701,10 @@ export default [
       'https://www.amazon.com/stores/page/13F4502E-65B8-4372-947D-89E1090DB80D/',
     hangboards: [
       {
-        name: 'B07C67JND2',
+        name: 'B07C67JND2 / B08D6Z977X / B07SB85N8G',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/GETOUTB08D6Z977X.svg',
+        holds: 7
       },
       {
         name: 'B08HBYK5BT',
@@ -2748,6 +2754,26 @@ export default [
         name: 'Grande',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Lama Holds',
+    description: 'Wooden hangboards and campus boards',
+    id: 104,
+    website: 'https://www.lamaholds.cz/',
+    hangboards: [
+      {
+        name: 'Baguette',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Totem',
+        id: 1,
+        image: 'hangboards/LAMATOTEM.svg',
         holds: 0
       }
     ]

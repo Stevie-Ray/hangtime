@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="667px" height="299px" viewBox="0 0 667 299" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>LAMATOTEM</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="LAMATOTEM" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M666,297 L42.8340249,297 C19.1774462,297 0,271.384404 0,239.785965 L0,91.2140351 C0,59.615596 19.1774462,34 42.8340249,34 L666,34" id="board"></path>
+            <rect id="h2" x="52.5" y="85.5" width="185" height="51" rx="25.5"></rect>
+            <rect id="h8" x="39.5" y="210.5" width="526" height="51" rx="25.5"></rect>
+            <rect id="h7" x="40.5" y="210.5" width="353" height="51" rx="25.5"></rect>
+            <rect id="h6" x="40.5" y="210.5" width="178" height="51" rx="25.5"></rect>
+            <rect id="h3" x="270.5" y="85.5" width="92" height="51" rx="25.5"></rect>
+            <rect id="h4" x="395.5" y="85.5" width="135" height="51" rx="25.5"></rect>
+            <path d="M666,137 L582.099338,137 C571.551065,137 563,125.359403 563,111 C563,96.6405965 571.551065,85 582.099338,85 L666,85" id="h5"></path>
+            <path d="M666,0 C290.116336,0 85.3590545,0 51.7281553,0 C18.0972562,0 0.854537741,30.3333333 0,91 C0,59.3659661 19.1774462,33.7215147 42.8340249,33.7215147 L666,33.7215147" id="h1"></path>
+        </g>
+    </g>
+</svg>
