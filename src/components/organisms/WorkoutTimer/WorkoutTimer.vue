@@ -378,7 +378,7 @@ onMounted(() => {
         !timerPaused && (currentExerciseStep === 1 || currentExerciseStep === 3)
     }"
     :style="{
-      transition: `width ${clock}s linear, background-position 99s linear`
+      transition: `width ${clock}s linear`
     }"
     class="position-absolute h-100 pa-0 progress"
   ></v-container>
@@ -506,22 +506,41 @@ onMounted(() => {
   }
 }
 
+@keyframes forwards {
+  0% {
+    background-position: 0 -1000%;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes backwards {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 -1000%;
+  }
+}
+
 .progress {
   background-image: url('@/assets/cartographer.png');
   background-repeat: repeat;
+  background-position: 0 0;
   width: 0;
   height: calc(100% - 56px) !important; // header
-  will-change: width;
+  will-change: width, background-position;
 
   &.hang {
     background-color: rgb(var(--v-theme-secondary));
-    background-position: -990px -990px;
+    animation: forwards 300s infinite linear;
     width: 100%;
   }
 
   &.rest {
     background-color: rgb(var(--v-theme-tertiary));
-    background-position: 990px 990px;
+    animation: backwards 300s infinite linear;
     width: 0;
   }
 }

@@ -93,11 +93,8 @@ async function canUsePlayBilling() {
 }
 
 function showAccountLink(item) {
-  if (
-    item.title !== t('Subscription') ||
-    (canSubscribePlayBilling.value && user?.value?.subscribed)
-  )
-    return true
+  if (item.title !== t('Subscription')) return true
+  if (canSubscribePlayBilling.value && !user?.value?.subscribed) return true
   return false
 }
 
