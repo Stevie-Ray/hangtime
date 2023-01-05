@@ -46,7 +46,7 @@ const items = [
     link: '/account/subscription'
   },
   {
-    title: t('Follow {appTitle}', { appTitle: 'HangTIme' }),
+    title: t('Follow {appTitle}', { appTitle: 'HangTime' }),
     icon: 'mdi-facebook',
     subtitle: t('App and hangboard updates'),
     link: 'https://www.facebook.com/hangtime.hangboarding',
