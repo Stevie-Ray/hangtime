@@ -36,9 +36,9 @@ const progressValue = computed(() => {
   // eslint-disable-next-line no-shadow
   let time = 60
   // eslint-disable-next-line no-unsafe-optional-chaining
-  if (!user || user?.subscribed) time = 0
+  if (!user || user?.value?.subscribed) time = 0
   // eslint-disable-next-line no-unsafe-optional-chaining
-  const value = ((user?.completed?.time / time) * 100) / limit
+  const value = ((user?.value?.completed?.time / time) * 100) / limit
   return value < 100 ? value : 100
 })
 
@@ -275,7 +275,7 @@ function trigger(sku, onToken = () => {}) {
 function buySubscription() {
   trigger('subscription', (token) => {
     buyStatus = 'Purchase processing..'
-    user.subscribed = true
+    user.value.subscribed = true
     updateUser()
 
     acknowledge(token, 'repeatable', () => {

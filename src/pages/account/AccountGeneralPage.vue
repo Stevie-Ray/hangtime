@@ -71,7 +71,7 @@ const settingsLocale = computed({
   get() {
     if (!user) return
     // eslint-disable-next-line consistent-return
-    if (user?.settings?.locale) return user.settings.locale
+    if (user?.value.settings?.locale) return user.value.settings.locale
     // eslint-disable-next-line consistent-return
     return i18n.locale
   },
