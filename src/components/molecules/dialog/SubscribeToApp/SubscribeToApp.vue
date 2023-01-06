@@ -26,6 +26,7 @@ const limit = 30
 const PAYMENT_METHOD = 'https://play.google.com/billing'
 
 let price = ''
+let item = null
 
 let buyStatus = ''
 let logField = ''
@@ -85,8 +86,8 @@ async function populatePrice(sku) {
       return false
     }
     log(JSON.stringify(details, null, 2))
-
-    const item = details[0]
+    // eslint-disable-next-line prefer-destructuring
+    item = details[0]
     const { value } = item.price
     const { currency } = item.price
 
@@ -166,8 +167,6 @@ async function acknowledge(token, type = 'repeatable', onComplete = () => {}) {
   }
 }
 function trigger(sku, onToken = () => {}) {
-  const self = this
-
   // The PaymentRequest() constructor creates a new PaymentRequest object which will be used to handle the process of generating, validating, and submitting a payment request.
   if (!window.PaymentRequest) {
     log('No PaymentRequest object.')
@@ -191,7 +190,7 @@ function trigger(sku, onToken = () => {}) {
     // The total amount of the payment request.
     total: {
       label: 'Subscription',
-      amount: { currency: self.item.currency, value: self.item.value }
+      amount: { currency: item?.currency, value: item?.value }
     }
   }
 
@@ -203,17 +202,17 @@ function trigger(sku, onToken = () => {}) {
         .complete('success')
         // eslint-disable-next-line func-names
         .then(() => {
-          self.log(`Payment done: ${JSON.stringify(response, undefined, 2)}`)
+          log(`Payment done: ${JSON.stringify(response, undefined, 2)}`)
           if (response.details && response.details.token) {
             const { token } = response.details
-            self.log(`Read Token: ${token.substring(0, 6)}...`)
+            log(`Read Token: ${token.substring(0, 6)}...`)
             onToken(token)
           }
         })
         // eslint-disable-next-line func-names
         .catch((e) => {
-          self.log(e.message)
-          self.log(JSON.stringify(response, undefined, 2))
+          log(e.message)
+          log(JSON.stringify(response, undefined, 2))
         })
       // request = buildPaymentRequest();
     }, 500)
@@ -224,11 +223,11 @@ function trigger(sku, onToken = () => {}) {
       .canMakePayment()
       // eslint-disable-next-line func-names
       .then((result) => {
-        self.log(result ? 'Can make payment' : 'Cannot make payment')
+        log(result ? 'Can make payment' : 'Cannot make payment')
       })
       // eslint-disable-next-line func-names
       .catch((e) => {
-        self.log(e.message)
+        log(e.message)
       })
   }
 
@@ -239,9 +238,9 @@ function trigger(sku, onToken = () => {}) {
       // eslint-disable-next-line func-names
       .then((result) => {
         if (result) {
-          self.log('Has enrolled instrument')
+          log('Has enrolled instrument')
         } else {
-          self.log('No enrolled instrument')
+          log('No enrolled instrument')
         }
 
         // Call show even if we don't have any enrolled instruments.
@@ -251,15 +250,15 @@ function trigger(sku, onToken = () => {}) {
           // eslint-disable-next-line func-names
           .catch((e) => {
             // log(JSON.stringify(e, undefined, 2));
-            self.log(e)
-            self.log(
+            log(e)
+            log(
               "Maybe you've already purchased the item (try acknowledging first)."
             )
           })
       })
       // eslint-disable-next-line func-names
       .catch((e) => {
-        self.log(e.message)
+        log(e.message)
 
         // Also call show if hasEnrolledInstrument throws.
         request
@@ -267,8 +266,8 @@ function trigger(sku, onToken = () => {}) {
           .then(handlePaymentResponse)
           // eslint-disable-next-line no-shadow,func-names
           .catch((e) => {
-            self.log(JSON.stringify(e, undefined, 2))
-            self.log(e)
+            log(JSON.stringify(e, undefined, 2))
+            log(e)
           })
       })
   }
