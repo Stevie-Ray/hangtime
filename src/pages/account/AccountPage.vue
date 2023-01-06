@@ -78,7 +78,6 @@ async function canUsePlayBilling() {
       // eslint-disable-next-line no-shadow
       const items = ['subscription']
       const details = await service.getDetails(items)
-      console.log(details)
       if (details === null) {
         console.log('Are you running a Play Store build?')
       } else if (details.length === 0) {

@@ -3,7 +3,7 @@ import { useHead } from '@vueuse/head'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useAuthentication } from '@/stores/authentication'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 import { time } from '@/helpers'
@@ -15,12 +15,12 @@ const { user } = storeToRefs(useAuthentication())
 const { updateUser } = useAuthentication()
 
 const debug = false
+const disabled = ref(true)
 const canSubscribe = window.getDigitalGoodsService
 const limit = 30
 const PAYMENT_METHOD = 'https://play.google.com/billing'
 
 let price = ''
-let disabled = true
 let buyStatus = ''
 let logField = ''
 let purchasesList = []
@@ -104,7 +104,7 @@ async function loadSkus() {
   const playStoreBuild = await populatePrice('subscription')
   // enable button
   if (playStoreBuild) {
-    disabled = false
+    disabled.value = false
   }
 }
 

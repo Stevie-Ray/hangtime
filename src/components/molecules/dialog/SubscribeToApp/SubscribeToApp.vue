@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, computed, onMounted } from 'vue'
+import { defineProps, computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { time } from '@/helpers'
@@ -20,12 +20,13 @@ const props = defineProps({
 const { updateUser } = useAuthentication()
 
 const debug = false
+const disabled = ref(true)
 const canSubscribe = window.getDigitalGoodsService
 const limit = 30
 const PAYMENT_METHOD = 'https://play.google.com/billing'
 
 let price = ''
-let disabled = true
+
 let buyStatus = ''
 let logField = ''
 let purchasesList = []
@@ -109,7 +110,7 @@ async function loadSkus() {
   const playStoreBuild = await populatePrice('subscription')
   // enable button
   if (playStoreBuild) {
-    disabled = false
+    disabled.value = false
   }
 }
 
