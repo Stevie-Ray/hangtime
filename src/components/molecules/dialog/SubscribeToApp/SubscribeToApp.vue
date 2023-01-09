@@ -2,6 +2,7 @@
 import { defineProps, computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
+import { purchase } from 'vue-gtag'
 import { time } from '@/helpers'
 
 import { useAuthentication } from '@/stores/authentication'
@@ -275,10 +276,30 @@ function trigger(sku, onToken = () => {}) {
 function buySubscription() {
   trigger('subscription', (token) => {
     buyStatus = 'Purchase processing..'
-    user.value.subscribed = true
-    updateUser()
 
     acknowledge(token, 'repeatable', () => {
+      user.value.subscribed = true
+      updateUser()
+
+      purchase({
+        transaction_id: token,
+        affiliation: 'HangTime',
+        value: item?.value,
+        currency: item?.currency,
+        tax: 0,
+        shipping: 0,
+        items: [
+          {
+            item_id: 'subscription',
+            item_name: 'Subscription',
+            affiliation: 'HangTime',
+            currency: item?.currency,
+            price: item?.value,
+            quantity: 1
+          }
+        ]
+      })
+
       buyStatus = 'Purchase successful, thank you!'
     })
   })
