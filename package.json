@@ -23,7 +23,7 @@
     "nosleep.js": "^0.12.0",
     "pinia": "^2.0.28",
     "register-service-worker": "^1.7.2",
-    "roboto-fontface": "*",
+    "roboto-fontface": "^0.10.0",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.45",
@@ -32,11 +32,11 @@
     "vue-inline-svg": "^3.1.0",
     "vue-router": "^4.1.6",
     "vuetify": "^3.1.0",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
-    "@babel/eslint-parser": "^7.12.16",
+    "@babel/eslint-parser": "^7.19.1",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",
@@ -64,7 +64,7 @@
     "storybook-dark-mode": "^1.1.2",
     "vue-cli-plugin-vuetify": "~2.5.8",
     "vue-loader": "^16.8.3",
-    "webpack-plugin-vuetify": "^2.0.0-alpha.0"
+    "webpack-plugin-vuetify": "^2.0.0"
   },
   "eslintConfig": {
     "root": true,
