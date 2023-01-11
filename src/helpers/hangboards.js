@@ -2777,5 +2777,19 @@ export default [
         holds: 0
       }
     ]
+  },
+  {
+    name: 'Bat Holds',
+    description: 'PU climbing holds producer',
+    id: 105,
+    website: 'https://batholds.com/',
+    hangboards: [
+      {
+        name: 'Fat Bat Board',
+        id: 0,
+        image: 'hangboards/BATFAT.svg',
+        holds: 15
+      }
+    ]
   }
 ]
