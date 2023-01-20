@@ -913,6 +913,18 @@ export default [
         id: 1,
         image: 'hangboards/NICROSWARRIOR.svg',
         holds: 7
+      },
+      {
+        name: 'V10 Training Board',
+        id: 2,
+        image: 'hangboards/NICROSBOARD.svg',
+        holds: 10
+      },
+      {
+        name: 'NEXGEN 2',
+        id: 3,
+        image: 'hangboards/NICROSNEXGEN.svg',
+        holds: 9
       }
     ]
   },
@@ -2070,9 +2082,15 @@ export default [
     website: 'https://dudesvsgravity.com/',
     hangboards: [
       {
-        name: 'GRAVITYBOARD',
+        name: 'GRAVITYboard LITE / PRO',
         id: 0,
         image: 'hangboards/DUDESVSGRAVITYBOARD.svg',
+        holds: 9
+      },
+      {
+        name: 'GRAVITYstick',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
         holds: 0
       }
     ]
@@ -2628,6 +2646,12 @@ export default [
         id: 2,
         image: 'hangboards/YYVERTICALPENTRA.svg',
         holds: 6
+      },
+      {
+        name: 'Verticalboard One',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 11
       }
     ]
   },

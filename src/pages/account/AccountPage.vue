@@ -161,11 +161,11 @@ useHead({
                     <v-icon :icon="item.icon"></v-icon>
                   </template>
 
-                  <v-list-item-title v-text="item.title"></v-list-item-title>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
 
-                  <v-list-item-subtitle
-                    v-text="item.subtitle"
-                  ></v-list-item-subtitle>
+                  <v-list-item-subtitle>{{
+                    item.subtitle
+                  }}</v-list-item-subtitle>
                 </v-list-item>
 
                 <v-divider

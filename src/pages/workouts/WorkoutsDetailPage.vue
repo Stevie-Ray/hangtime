@@ -49,7 +49,7 @@ const {
 const workout = computed(() => getWorkoutById(route.params.id))
 
 // workout - edit
-let editMode = ref(false)
+const editMode = ref(false)
 
 const editWorkout = () => {
   editMode.value = true
@@ -57,7 +57,7 @@ const editWorkout = () => {
 
 // workout - exercise
 const exerciseEditDialog = ref(false)
-let workoutSaveDialog = ref(false)
+const workoutSaveDialog = ref(false)
 const exerciseIndex = ref(0)
 
 const exercise = computed(() => workout.value.exercises[exerciseIndex.value])
@@ -148,9 +148,9 @@ const workoutSave = () => {
     updateUserWorkout(workout.value)
   }
 
-  workoutSaveDialog = false
+  workoutSaveDialog.value = false
 
-  editMode = false
+  editMode.value = false
 
   router.push('/workouts')
 }

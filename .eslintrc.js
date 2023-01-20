@@ -27,6 +27,6 @@ module.exports = {
     'no-return-await': 'off'
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: '@babel/eslint-parser'
   }
 }
