@@ -29,6 +29,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  sort: {
+    type: Boolean,
+    default: false
+  },
   editHand: {
     type: Boolean,
     default: false
@@ -68,6 +72,13 @@ const props = defineProps({
             {{ exercise.repeat + 1 }}x
           </v-chip>
           <v-chip v-else variant="outlined">1x</v-chip>
+          <v-icon
+            v-if="sort"
+            size="x-large"
+            class="handle"
+            style="cursor: grab"
+            icon="mdi-drag"
+          ></v-icon>
         </div>
       </v-card-title>
 

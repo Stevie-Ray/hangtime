@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import draggable from 'vuedraggable'
 
 import urlParser from 'js-video-url-parser'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
@@ -113,6 +114,16 @@ onMounted(() => {
 
 const exerciseRemove = () => {
   workout.value.exercises.splice(exerciseIndex.value)
+  exerciseIndex.value = 0
+  exerciseEditDialog.value = false
+}
+
+const exerciseCopy = () => {
+  workout.value.exercises.splice(
+    exerciseIndex.value,
+    0,
+    workout.value.exercises[exerciseIndex.value]
+  )
   exerciseIndex.value = 0
   exerciseEditDialog.value = false
 }
@@ -429,19 +440,31 @@ useHead({
               <v-row class="mb-4">
                 <v-col cols="12">
                   <div class="workout">
-                    <exercise-card
-                      v-for="(exercise, index) in workout.exercises"
-                      :exercise="exercise"
-                      :hangboard="{
-                        hangboard: workout.hangboard,
-                        company: workout.company
-                      }"
-                      :index="index"
-                      :key="index"
-                      :hide-rest="index === 0"
-                      @click="openExerciseEditDialog(index)"
+                    <draggable
+                      v-model="workout.exercises"
+                      item-key="id"
+                      class="draggable"
+                      ghost-class="ghost"
+                      :animation="0"
+                      :disabled="!networkOnLine"
+                      handle=".handle"
                     >
-                    </exercise-card>
+                      <template #item="{ element, index }">
+                        <exercise-card
+                          :exercise="element"
+                          :hangboard="{
+                            hangboard: workout.hangboard,
+                            company: workout.company
+                          }"
+                          :index="index"
+                          :key="index"
+                          :hide-rest="index === 0"
+                          :sort="editMode"
+                          @click="openExerciseEditDialog(index)"
+                        >
+                        </exercise-card>
+                      </template>
+                    </draggable>
 
                     <v-card
                       v-if="editMode"
@@ -476,6 +499,10 @@ useHead({
                               v-if="exerciseIndex !== 0"
                               icon="mdi-delete-outline"
                               @click="exerciseRemove"
+                            ></v-btn>
+                            <v-btn
+                              icon="mdi-content-copy"
+                              @click="exerciseCopy"
                             ></v-btn>
                             <v-btn
                               icon="mdi-content-save-outline"
