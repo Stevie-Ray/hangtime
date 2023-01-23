@@ -2650,8 +2650,8 @@ export default [
       {
         name: 'Verticalboard One',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 11
+        image: 'hangboards/YYVERTICALONE.svg',
+        holds: 10
       }
     ]
   },
