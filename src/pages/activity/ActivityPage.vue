@@ -67,7 +67,7 @@ const slides = [
   {
     title: 'A new HangTime 🎉',
     subtitle: 'Welcome to the new and improved HangTime',
-    text: 'Happy 2023 💥 A completely rewritten app. Found a bug or want to request a feature? Let me know!',
+    text: 'A completely rewritten app. Found a bug or want to request a feature? Let me know!',
     button_text: 'Get in touch',
     external_link: 'mailto:mail@stevie-ray.nl?subject=Bug%20Report'
   },
