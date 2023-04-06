@@ -16,8 +16,8 @@
   "dependencies": {
     "@mdi/font": "7.2.96",
     "@vueuse/head": "^1.1.23",
-    "core-js": "^3.29.1",
-    "firebase": "^9.18.0",
+    "core-js": "^3.30.0",
+    "firebase": "^9.19.1",
     "ircra": "^2.2.4",
     "js-video-url-parser": "^0.5.1",
     "nosleep.js": "^0.12.0",
@@ -32,11 +32,11 @@
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.1.6",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.1.12",
+    "vuetify": "^3.1.13",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
+    "@babel/core": "^7.21.4",
     "@babel/eslint-parser": "^7.21.3",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.16",
