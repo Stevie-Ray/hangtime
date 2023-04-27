@@ -705,7 +705,7 @@ useHead({
                                       subtitle="Before hang"
                                       :value="exercise.pause"
                                       :min="3"
-                                      :max="180"
+                                      :max="300"
                                       @input="
                                         (value) => exerciseEdit('pause', value)
                                       "
@@ -745,6 +745,7 @@ useHead({
                                       subtitle="After repeats"
                                       :value="exercise.rest"
                                       :min="3"
+                                      :max="180"
                                       :disabled="exercise.repeat === 0"
                                       @input="
                                         (value) => exerciseEdit('rest', value)

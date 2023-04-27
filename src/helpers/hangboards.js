@@ -1882,8 +1882,8 @@ export default [
       {
         name: 'Wildwood 2001',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/MOUNTAINROCK2001.svg',
+        holds: 13
       },
       {
         name: 'Wildwood 2002',
@@ -2813,6 +2813,65 @@ export default [
         id: 0,
         image: 'hangboards/BATFAT.svg',
         holds: 15
+      }
+    ]
+  },
+  {
+    name: 'Freerock',
+    description: 'Climbing & outdoor sports.',
+    id: 106,
+    website: 'https://freerock.mercadoshops.com.ar/',
+    hangboards: [
+      {
+        name: 'Acción Directa',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Jumbo Love',
+        id: 1,
+        image: 'hangboards/FREEROCKJUMBO.svg',
+        holds: 14
+      },
+      {
+        name: 'One-inch Punch',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Shantala',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'POWER GUIDANCE',
+    description: 'POWER UP UNSTOPPABLE LIFE',
+    id: 107,
+    website:
+      'https://www.amazon.com/stores/POWERGUIDANCE/page/2702B694-0CF6-439A-9E2F-9FC8F8F67976',
+    hangboards: [
+      {
+        name: 'Rock Climbing Board 1.0',
+        id: 0,
+        image: 'hangboards/BEAST1000.svg',
+        holds: 11
+      },
+      {
+        name: 'Rock Climbing Board 2.0',
+        id: 1,
+        image: 'hangboards/BEAST2000.svg',
+        holds: 14
+      },
+      {
+        name: '7 in 1 Fitness Boards',
+        id: 2,
+        image: 'hangboards/YYVERTICALPENTRA.svg',
+        holds: 6
       }
     ]
   }
