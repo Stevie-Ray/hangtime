@@ -172,8 +172,18 @@ const exerciseRest = () => {
 
 const updateUserCompleted = () => {
   // check if object exists
-  if (!user?.value?.completed) user.value.completed = {}
-  // set values
+  if (!user?.value?.completed) {
+    user.value.completed = {
+      time: 0,
+      hold: 0,
+      amount: 0
+    }
+  }
+  // resolve bug
+  if (Number.isNaN(user.value.completed.time)) user.value.completed.time = 0
+  if (Number.isNaN(user.value.completed.hold)) user.value.completed.hold = 0
+  if (Number.isNaN(user.value.completed.amount)) user.value.completed.amount = 0
+  // update values
   user.value.completed.time += workoutCompleteTimeTotal
   user.value.completed.hold += workoutCompleteTimeHanging
   user.value.completed.amount += 1
@@ -182,7 +192,6 @@ const updateUserCompleted = () => {
 
 const exerciseDone = () => {
   clockText.value = t('Done')
-  console.log(props?.workout)
   createUserActivity({
     name: props?.workout?.name ? props.workout.name : '',
     start_date_local: new Date(),
