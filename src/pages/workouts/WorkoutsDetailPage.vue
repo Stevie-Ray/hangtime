@@ -122,7 +122,7 @@ const exerciseCopy = () => {
   workout.value.exercises.splice(
     exerciseIndex.value,
     0,
-    workout.value.exercises[exerciseIndex.value]
+    structuredClone(workout.value.exercises[exerciseIndex.value])
   )
   exerciseIndex.value = 0
   exerciseEditDialog.value = false
@@ -446,6 +446,8 @@ useHead({
                       class="draggable"
                       ghost-class="ghost"
                       :animation="0"
+                      :scroll="true"
+                      :scrollSensitivity="120"
                       :disabled="!networkOnLine"
                       handle=".handle"
                     >
