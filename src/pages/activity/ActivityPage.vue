@@ -8,10 +8,13 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 import { useActivities } from '@/stores/activities'
 
 import { time, useRandomImage } from '@/helpers'
+import { useAuthentication } from '@/stores/authentication'
 
 const { t } = useI18n()
 
 const notifications = ref(false)
+
+const { user } = storeToRefs(useAuthentication())
 
 const { activities } = storeToRefs(useActivities())
 
@@ -26,7 +29,9 @@ const difficultyById = (id) => levels.find((level) => level.value === id).name
 const activitiesByDay = computed(() =>
   activities.value.reduce((days, activity) => {
     // Get the date of the current card as a string in the format "YYYY-MM-DD"
-    const dateString = activity.start_date_local?.toISOString().split('T')[0]
+    const dateString = activity.start_date_local?.toLocaleDateString(
+      user?.value?.settings?.locale ? user.value.settings.locale : 'en-US'
+    )
     // Check if we have already added a sub-array for the current date
     if (!days[dateString]) {
       // If not, create a new sub-array for the current date
