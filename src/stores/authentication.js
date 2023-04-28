@@ -5,6 +5,7 @@ import UsersDB from '@/plugins/firebase/users-db'
 import UsersWorkoutsDB from '@/plugins/firebase/users-workouts-db'
 import router from '@/router'
 import { useWorkouts } from '@/stores/workouts'
+import { useActivities } from '@/stores/activities'
 
 export const useAuthentication = defineStore('authentication', () => {
   const user = ref(undefined)
@@ -64,6 +65,7 @@ export const useAuthentication = defineStore('authentication', () => {
           : userFromFirebase
 
       const workouts = useWorkouts()
+      const activities = useActivities()
 
       if (user.value?.settings?.locale) {
         i18n.global.locale.value = user.value.settings.locale
@@ -72,6 +74,7 @@ export const useAuthentication = defineStore('authentication', () => {
       if (user.value?.id) {
         workouts.fetchUserWorkouts()
         workouts.fetchCommunityWorkouts()
+        activities.fetchUserActivity()
       }
     } catch (e) {
       error.value = e.toString()

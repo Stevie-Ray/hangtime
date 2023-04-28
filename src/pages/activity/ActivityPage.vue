@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import { useActivities } from '@/stores/activities'
 
 import { time, useRandomImage } from '@/helpers'
 
@@ -11,57 +13,31 @@ const { t } = useI18n()
 
 const notifications = ref(false)
 
-const cards = [
-  {
-    title: 'Warm-up Session',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    time: 1230,
-    level: 'easy',
-    type: 'workout',
-    date: ((d) => new Date(d.setDate(d.getDate() - 0)))(new Date())
-  },
-  {
-    title: 'Quick Workout',
-    text: '',
-    time: 97,
-    level: 'easy',
-    type: 'quick',
-    date: ((d) => new Date(d.setDate(d.getDate() - 1)))(new Date())
-  },
-  {
-    title: 'HangTime Workout',
-    text: 'Nihil repellendus distinctio similique.',
-    time: 390,
-    level: 'normal',
-    type: 'workout',
-    date: ((d) => new Date(d.setDate(d.getDate() - 1)))(new Date())
-  },
-  {
-    title: 'HangTime Workout',
-    text: 'Nihil repellendus distinctio similique.',
-    time: 390,
-    level: 'normal',
-    type: 'workout',
-    date: ((d) => new Date(d.setDate(d.getDate() - 7)))(new Date())
-  }
+const { activities } = storeToRefs(useActivities())
+
+const levels = [
+  { name: t('easy'), value: 1 },
+  { name: t('normal'), value: 2 },
+  { name: t('hard'), value: 3 }
 ]
 
-const cardsByDay = cards.reduce((days, card) => {
-  // Get the date of the current card as a string in the format "YYYY-MM-DD"
-  const dateString = card.date.toISOString().split('T')[0]
+const difficultyById = (id) => levels.find((level) => level.value === id).name
 
-  // Check if we have already added a sub-array for the current date
-  if (!days[dateString]) {
-    // If not, create a new sub-array for the current date
-    days[dateString] = []
-  }
-
-  // Add the current card to the sub-array for its date
-  days[dateString].push(card)
-
-  // Return the modified days object
-  return days
-}, {})
+const activitiesByDay = computed(() =>
+  activities.value.reduce((days, activity) => {
+    // Get the date of the current card as a string in the format "YYYY-MM-DD"
+    const dateString = activity.start_date_local?.toISOString().split('T')[0]
+    // Check if we have already added a sub-array for the current date
+    if (!days[dateString]) {
+      // If not, create a new sub-array for the current date
+      days[dateString] = []
+    }
+    // Add the current card to the sub-array for its date
+    days[dateString].push(activity)
+    // Return the modified days object
+    return days
+  }, {})
+)
 
 const slides = [
   {
@@ -202,7 +178,7 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-card
-              v-for="(cards, date) in cardsByDay"
+              v-for="(activity, date) in activitiesByDay"
               :key="date"
               class="mb-4"
               disabled
@@ -210,32 +186,32 @@ useHead({
               <v-list lines="one">
                 <v-list-subheader>{{ date }}</v-list-subheader>
 
-                <v-list-item v-for="(card, j) in cards" :key="j" class="mb-4">
+                <v-list-item
+                  v-for="(activity, j) in activity"
+                  :key="j"
+                  class="mb-4"
+                >
                   <template #prepend>
                     <v-avatar color="grey-darken-1"></v-avatar>
                   </template>
 
-                  <template v-if="card.type !== 'quick'" #append>
+                  <template v-if="activity.type !== 'quick'" #append>
                     <div class="d-flex flex-column">
-                      <v-chip size="x-small" variant="outlined">
-                        {{ t(card.level) }}
-                      </v-chip>
-                      <v-btn
-                        append-icon="mdi-heart-outline"
-                        color="text"
+                      <v-chip
+                        v-if="activity.difficulty"
                         size="x-small"
-                        variant="text"
+                        variant="outlined"
                       >
-                        0
-                      </v-btn>
+                        {{ difficultyById(activity.difficulty) }}
+                      </v-chip>
                     </div>
                   </template>
 
-                  <v-list-item-title>{{ card.title }}</v-list-item-title>
+                  <v-list-item-title>{{ activity.name }}</v-list-item-title>
 
                   <v-list-item-subtitle
-                    >{{ time(card.time) }} -
-                    {{ card.text }}</v-list-item-subtitle
+                    >{{ time(activity.elapsed_time) }} -
+                    {{ activity.description }}</v-list-item-subtitle
                   >
                 </v-list-item>
               </v-list>

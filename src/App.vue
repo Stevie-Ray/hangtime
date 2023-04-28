@@ -47,3 +47,13 @@ watch(user, async (updatedUser) => {
     ></new-content-available>
   </v-app>
 </template>
+
+<style lang="scss">
+.v-toolbar__extension {
+  .v-btn__overlay,
+  .v-btn__underlay,
+  .v-ripple__container {
+    border-radius: 0;
+  }
+}
+</style>

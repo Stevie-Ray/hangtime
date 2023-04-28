@@ -64,7 +64,6 @@ const addHangboard = () => {
       <v-toolbar>
         <v-btn @click="dialog = false" color="text" icon="mdi-close"></v-btn>
         <v-toolbar-title>{{ t('Add Hangboard') }}</v-toolbar-title>
-        <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn
             icon="mdi-content-save-outline"

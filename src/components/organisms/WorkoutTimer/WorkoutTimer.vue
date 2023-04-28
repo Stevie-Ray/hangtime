@@ -16,12 +16,15 @@ import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/Subscri
 import { time } from '@/helpers'
 
 import { useAuthentication } from '@/stores/authentication'
+import { useActivities } from '@/stores/activities'
 
 const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthentication())
 
 const { updateUser } = useAuthentication()
+
+const { createUserActivity } = useActivities()
 
 const props = defineProps({
   workout: {
@@ -167,8 +170,7 @@ const exerciseRest = () => {
   }
 }
 
-const exerciseDone = () => {
-  clockText.value = t('Done')
+const updateUserCompleted = () => {
   // check if object exists
   if (!user?.value?.completed) user.value.completed = {}
   // set values
@@ -176,6 +178,26 @@ const exerciseDone = () => {
   user.value.completed.hold += workoutCompleteTimeHanging
   user.value.completed.amount += 1
   updateUser()
+}
+
+const exerciseDone = () => {
+  clockText.value = t('Done')
+  console.log(props?.workout)
+  createUserActivity({
+    name: props?.workout?.name ? props.workout.name : '',
+    start_date_local: new Date(),
+    sport_type: 'Workout',
+    elapsed_time: workoutCompleteTimeTotal,
+    elapsed_time_hanging: workoutCompleteTimeHanging,
+    description: props?.workout?.description ? props.workout.description : '',
+    difficulty: props?.workout?.level ? props.workout.level : '',
+    type: 'Hangboarding',
+    company: props?.workout?.company ? props.workout.company : '',
+    hangboard: props?.workout?.hangboard ? props.workout.hangboard : '',
+    user: props?.workout?.user?.id ? props.workout.user.id : '',
+    workout: props?.workout?.id ? props?.workout.id : ''
+  })
+  updateUserCompleted()
   // open dialog
   dialogWorkoutComplete.value = true
   // stop timers

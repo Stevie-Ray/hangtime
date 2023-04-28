@@ -60,13 +60,6 @@ const levels = [
 ]
 
 const difficultyById = (id) => levels.find((level) => level.value === id).name
-// const difficultyClassById = (id) => {
-//   const { value } = levels.find((level) => level.value === id)
-//   if (value === 3) return 'xxx'
-//   if (value === 2) return 'xxx'
-//   if (value === 1) return 'xxx'
-//   return ''
-// }
 
 useHead({
   title: 'Workouts',

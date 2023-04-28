@@ -22,7 +22,7 @@ service cloud.firestore {
       allow update, delete: if authenticated() && request.auth.uid == userId;
     }
 
-     match /users/{userId}/progress/{progressId} {
+     match /users/{userId}/activities/{activityId} {
       allow get: if authenticated() && request.auth.uid == userId;
       allow list: if authenticated() && request.auth.uid == userId;
       allow create: if authenticated() && request.auth.uid == userId;
