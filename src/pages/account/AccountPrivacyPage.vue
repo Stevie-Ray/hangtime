@@ -1,12 +1,16 @@
 <script setup>
 import { useHead } from '@vueuse/head'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+
+const { t } = useI18n()
 
 const router = useRouter()
 
 useHead({
-  title: 'Privacy',
+  title: 'Terms and Privacy Policy',
   meta: [{ name: 'description', content: '' }]
 })
 </script>
@@ -18,7 +22,7 @@ useHead({
     </template>
 
     <template #title>
-      {{ t('Privacy') }}
+      {{ t('Terms and Privacy Policy') }}
     </template>
 
     <template #default>

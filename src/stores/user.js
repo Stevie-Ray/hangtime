@@ -34,6 +34,14 @@ export const useUser = defineStore('user', {
     getHangboardsByCompanyId: () => (company) =>
       hangboardBrands[company].hangboards,
     /**
+     * Get company by it's url key
+     * @return Array
+     */
+    getCompanyByUrlKey: () => (url) =>
+      hangboardBrands.find(
+        (company) => company.name.replace(/\s+/g, '-').toLowerCase() === url
+      ),
+    /**
      * Get the users hangboards
      * @return Array
      */

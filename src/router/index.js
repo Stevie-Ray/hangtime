@@ -5,7 +5,6 @@ import { useAuthentication } from '@/stores/authentication'
 // 1. Define route components.
 // These can be imported from other files
 import AccountPage from '@/pages/account/AccountPage'
-
 import AccountGeneralPage from '@/pages/account/AccountGeneralPage'
 import AccountHangboardsPage from '@/pages/account/AccountHangboardsPage'
 import AccountHelpPage from '@/pages/account/AccountHelpPage'
@@ -17,6 +16,9 @@ import AccountWorkoutsPage from '@/pages/account/AccountWorkoutsPage'
 import ActivityPage from '@/pages/activity/ActivityPage'
 import ActivityLeaderboardPage from '@/pages/activity/ActivityLeaderboardPage'
 import ActivityNotificationsPage from '@/pages/activity/ActivityNotificationsPage'
+
+import BrandsPage from '@/pages/brands/BrandsPage'
+import BrandsDetailPage from '@/pages/brands/BrandsDetailPage'
 
 import LoginPage from '@/pages/authentication/LoginPage'
 import CheckLoginPage from '@/pages/authentication/CheckLoginPage'
@@ -111,6 +113,18 @@ const routes = [
     path: '/account/help',
     component: AccountHelpPage,
     name: 'AccountHelpPage'
+  },
+  {
+    path: '/brands',
+    component: BrandsPage,
+    name: 'BrandsPage',
+    meta: { public: true }
+  },
+  {
+    path: '/brands/:id',
+    component: BrandsDetailPage,
+    name: 'BrandsDetailPage',
+    meta: { public: true }
   },
   {
     path: '/privacy',

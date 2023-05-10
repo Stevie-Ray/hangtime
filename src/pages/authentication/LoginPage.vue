@@ -446,14 +446,20 @@ useHead({
           class="text-caption text-grey-darken-2 font-weight-light mt-4"
         >
           <span
-            >{{ t('Version {appVersion}', { appVersion: appVersion }) }} |
-            &copy; 2019 - {{ year }} HangTime |&nbsp;
+            >v{{ appVersion }} | &copy; 2019 - {{ year }} HangTime |&nbsp;
           </span>
           <router-link
             class="text-grey-darken-2 font-weight-light"
             to="/privacy"
           >
-            Privacy Policy
+            Privacy
+          </router-link>
+          <span>&nbsp;|&nbsp;</span>
+          <router-link
+            class="text-grey-darken-2 font-weight-light"
+            to="/brands"
+          >
+            Hangboards
           </router-link>
         </v-footer>
       </v-col>

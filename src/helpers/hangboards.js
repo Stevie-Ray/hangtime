@@ -3,6 +3,7 @@ export default [
     name: 'Antworks',
     description:
       'Training devices for climber, crossfitter, ninja warrior- made in Austria',
+    country: 'AT',
     id: 0,
     website: 'https://www.antworks.at/',
     hangboards: [
@@ -48,6 +49,7 @@ export default [
     name: 'Beastmaker',
     description:
       'Beastmaker is a UK company who specialise in wooden training equipment for climbers.',
+    country: 'GB',
     id: 1,
     website: 'https://www.beastmaker.co.uk/',
     hangboards: [
@@ -69,6 +71,7 @@ export default [
     name: 'Core Climbing',
     description:
       'Manufacturers of high-quality climbing holds, based in Sheffield, United Kingdom.',
+    country: 'GB',
     id: 2,
     website: 'https://coreclimbing.co.uk/',
     hangboards: [
@@ -84,6 +87,7 @@ export default [
     name: 'Crusher Holds',
     description:
       'Climbing Hangboards, Wooden Climbing Holds and Climbing Training aids, made by climbers for climbers.',
+    country: 'GB',
     id: 3,
     website: 'http://crusherholds.co.uk/',
     hangboards: [
@@ -123,6 +127,7 @@ export default [
     name: 'Entre-Prises',
     description:
       'The world’s leading manufacturer of climbing walls and holds, provides support to climbing facility, school wall and competition wall projects, and much more more besides.',
+    country: 'US',
     id: 4,
     website: 'https://www.entre-prises.us/',
     hangboards: [
@@ -162,6 +167,7 @@ export default [
     name: 'Holdz',
     description:
       'Manufacturer of climbing holds, finger boards and bouldering gear. The leader in Climbing wall crash matting.',
+    country: 'US',
     id: 5,
     website: 'https://www.holdz.co.uk/',
     hangboards: [
@@ -182,6 +188,7 @@ export default [
   {
     name: 'Kraxl Board',
     description: 'Handicraft in Collalbo, Italy',
+    country: 'IT',
     id: 6,
     website: 'https://www.kraxl-board.net/',
     hangboards: [
@@ -219,7 +226,8 @@ export default [
   },
   {
     name: 'Max Climbing',
-    description: '',
+    description: 'Handcrafted climbing products made in Belgium',
+    country: 'BE',
     id: 7,
     website: 'https://www.maxclimbing.com/',
     hangboards: [
@@ -250,7 +258,9 @@ export default [
   },
   {
     name: 'Mammut',
-    description: '',
+    description:
+      'Swiss outdoor brand providing high quality products and unique brand experiences to mountain sports enthusiasts around the globe.',
+    country: 'CH',
     id: 8,
     website: 'https://www.mammut.com/',
     hangboards: [
@@ -264,7 +274,8 @@ export default [
   },
   {
     name: 'Metolius Climbing',
-    description: '',
+    description: 'Making climbing gear since 1983.',
+    country: 'US',
     id: 9,
     website: 'https://www.metoliusclimbing.com/',
     hangboards: [
@@ -344,7 +355,8 @@ export default [
   },
   {
     name: 'Moon Climbing',
-    description: '',
+    description: '100% Climbing since 2002. Based in Sheffield, UK',
+    country: 'GB',
     id: 10,
     website: 'https://moonclimbing.com/',
     hangboards: [
@@ -372,6 +384,7 @@ export default [
     name: 'OCÚN',
     description:
       'Climbing gear developed and manufactured by climbers in Czech Republic.',
+    country: 'CZ',
     id: 11,
     website: 'http://www.ocun.com/',
     hangboards: [
@@ -385,7 +398,8 @@ export default [
   },
   {
     name: 'Problemsolver',
-    description: '',
+    description: 'Portable hangboards for climbing. Bring it wherever you go!',
+    country: 'SE',
     id: 12,
     website: 'https://www.problemsolver.rocks/',
     hangboards: [
@@ -423,7 +437,8 @@ export default [
   },
   {
     name: 'So iLL',
-    description: '',
+    description: 'Climbing Shoes, Climbing Holds, Climbing Apparel, & Training',
+    country: 'US',
     id: 13,
     website: 'https://soillholds.com/',
     hangboards: [
@@ -473,7 +488,8 @@ export default [
   },
   {
     name: 'Target10a',
-    description: '',
+    description: 'Climbing- & Bouldertraining',
+    country: 'DE',
     id: 14,
     website: 'https://www.target10a.com/',
     hangboards: [
@@ -499,7 +515,8 @@ export default [
   },
   {
     name: 'Tension Climbing',
-    description: '',
+    description: 'The All-in-one Training Solution',
+    country: 'US',
     id: 15,
     website: 'https://www.tensionclimbing.com/',
     hangboards: [
@@ -561,7 +578,9 @@ export default [
   },
   {
     name: 'Trango',
-    description: '',
+    description:
+      'Trango is a company of climbers who design products to improve the climbing experience',
+    country: 'US',
     id: 16,
     website: 'http://www.trango.com/',
     hangboards: [
@@ -609,7 +628,8 @@ export default [
   },
   {
     name: 'Witchholds',
-    description: '',
+    description: 'Wooden fingerboards',
+    country: 'PL',
     id: 17,
     website: 'https://witchholds.com/',
     hangboards: [
@@ -629,7 +649,8 @@ export default [
   },
   {
     name: 'Zlagboard',
-    description: '',
+    description: 'Personalized Hangboard Training',
+    country: 'IT',
     id: 18,
     website: 'https://www.zlagboard.com/',
     hangboards: [
@@ -663,6 +684,7 @@ export default [
     name: 'Simond / Decathlon',
     description:
       "Decathlon's Mountaineering & Climbing brand based in Chamonix valley",
+    country: 'FR',
     id: 19,
     website: 'https://www.simond.com/',
     hangboards: [
@@ -677,6 +699,7 @@ export default [
   {
     name: 'Crimptonite',
     description: 'We make training tools dedicated for the Climbing sport.',
+    country: 'NL',
     id: 20,
     website: 'https://crimptonite.com/',
     hangboards: [
@@ -730,7 +753,8 @@ export default [
   },
   {
     name: 'Captain Fingerfood',
-    description: '',
+    description: 'For all your climbing training',
+    country: 'DE',
     id: 21,
     website: 'https://www.captainfingerfood.rocks/',
     hangboards: [
@@ -756,7 +780,8 @@ export default [
   },
   {
     name: 'Surfaces for Climbing ',
-    description: 'Eva López',
+    description: 'By Eva López',
+    country: 'ES',
     id: 22,
     website: 'https://www.surfacesforclimbing.com/',
     hangboards: [
@@ -770,7 +795,8 @@ export default [
   },
   {
     name: 'Wataaah',
-    description: '',
+    description: 'Climbing Holds and Volumes | unleash your creativity',
+    country: 'DE',
     id: 23,
     website: 'https://www.wataaah.de/',
     hangboards: [
@@ -784,7 +810,9 @@ export default [
   },
   {
     name: 'Fingerschinder',
-    description: '',
+    description:
+      'Innovative and functional grip strength training devices for climbing & bouldering.',
+    country: 'AT',
     id: 24,
     website: 'https://www.fingerschinder.com/',
     hangboards: [
@@ -810,9 +838,10 @@ export default [
   },
   {
     name: 'CrimpMonster',
-    description: '',
+    description: 'By Meisterschreiner',
+    country: 'DE',
     id: 25,
-    website: 'https://crimpmonster.com/',
+    website: 'http://jk-meisterschreiner.de/',
     hangboards: [
       {
         name: '3x4 small / 4x3 large',
@@ -824,7 +853,8 @@ export default [
   },
   {
     name: 'Vola',
-    description: '',
+    description: 'Sport climbing training equipment.',
+    country: 'TH',
     id: 26,
     website: 'https://www.thevola.com/',
     hangboards: [
@@ -838,7 +868,9 @@ export default [
   },
   {
     name: 'Alpidex',
-    description: '',
+    description:
+      'Your specialist for sportswear, climbing and outdoor equipment so that you are always well equipped for sports and leisure!',
+    country: 'DE',
     id: 27,
     website: 'https://www.alpidex.com/',
     hangboards: [
@@ -859,6 +891,7 @@ export default [
   {
     name: 'Erzi',
     description: 'Quality products from wood GmbH',
+    country: 'DE',
     id: 28,
     website: 'https://erzi.de/',
     hangboards: [
@@ -884,7 +917,8 @@ export default [
   },
   {
     name: 'Smartrock',
-    description: '',
+    description: 'Door mount system for climbing and training',
+    country: 'DE',
     id: 29,
     website: 'https://smartrock.de/',
     hangboards: [
@@ -898,7 +932,8 @@ export default [
   },
   {
     name: 'Nicros',
-    description: '',
+    description: 'Custom Rock Climbing Wall and Hold Solutions Nicros',
+    country: 'US',
     id: 30,
     website: 'https://nicros.com/',
     hangboards: [
@@ -930,7 +965,9 @@ export default [
   },
   {
     name: 'Concept Climbing',
-    description: '',
+    description:
+      "Producing the finest climbing equipment you've ever laid your hands on!",
+    country: 'AU',
     id: 31,
     website: 'https://www.conceptclimbing.com/',
     hangboards: [
@@ -968,7 +1005,8 @@ export default [
   },
   {
     name: 'Bleaustone',
-    description: '',
+    description: 'Re-creating the feeling of climbing outdoors, indoors.',
+    country: 'SI',
     id: 32,
     website: 'https://www.bleaustone.com/',
     hangboards: [
@@ -988,7 +1026,8 @@ export default [
   },
   {
     name: 'Euroholds / Rokodromo',
-    description: '',
+    description: 'Buy the best climbing holds.',
+    country: 'ES',
     id: 33,
     website: 'https://www.euroholds.com/',
     hangboards: [
@@ -1008,9 +1047,11 @@ export default [
   },
   {
     name: 'Blank Slate Climbing',
-    description: '',
+    description:
+      'Stand out from the competition with elite training boards, hangboards & holds for climbers.',
+    country: 'US',
     id: 34,
-    website: 'https://blankslateclimbing.myshopify.com/',
+    website: 'https://www.instagram.com/blankslateclimbing/',
     hangboards: [
       {
         name: 'Champion Hangboard',
@@ -1034,7 +1075,9 @@ export default [
   },
   {
     name: 'Lyons Edge',
-    description: '',
+    description:
+      'Gorgeous hangboards that will take your climbing abilities to the next level!',
+    country: 'FR',
     id: 35,
     website: 'https://lyonsedge.com/',
     hangboards: [
@@ -1060,7 +1103,9 @@ export default [
   },
   {
     name: 'Escape Climbing',
-    description: '',
+    description:
+      'Climbing Holds that Inspire, Hardware that Lasts, and Training Tools that Work.',
+    country: 'US',
     id: 36,
     website: 'https://escapeclimbing.com/',
     hangboards: [
@@ -1080,7 +1125,8 @@ export default [
   },
   {
     name: 'Lapis Holds',
-    description: '',
+    description: 'Best climbing holds in the world',
+    country: 'SI',
     id: 37,
     website: 'https://www.lapisholds.com/',
     hangboards: [
@@ -1096,6 +1142,7 @@ export default [
     name: 'Atomik Holds',
     description:
       'High quality climbing holds and Ninja Warrior products from Provo, Utah, USA',
+    country: 'US',
     id: 38,
     website: 'https://www.atomikclimbingholds.com',
     hangboards: [
@@ -1109,7 +1156,8 @@ export default [
   },
   {
     name: 'Arête Climbing',
-    description: 'Solid Climbing',
+    description: 'Improve your climbing',
+    country: 'GB',
     id: 39,
     website: 'https://arête.com',
     hangboards: [
@@ -1123,7 +1171,8 @@ export default [
   },
   {
     name: 'Nature Climbing',
-    description: '',
+    description: 'Handmade quality climbing gear',
+    country: 'DK',
     id: 40,
     website: 'https://natureclimbing.com/',
     hangboards: [
@@ -1137,7 +1186,8 @@ export default [
   },
   {
     name: 'Digital Climbing Holds',
-    description: '',
+    description: 'Digital climbing holds. French brand',
+    country: 'FR',
     id: 41,
     website: 'https://digital-climbing.com/',
     hangboards: [
@@ -1163,7 +1213,8 @@ export default [
   },
   {
     name: 'Volx Holds',
-    description: '',
+    description: 'Manufacturer & Designer of Climbing Holds',
+    country: 'FR',
     id: 42,
     website: 'https://volxholds.com/',
     hangboards: [
@@ -1184,6 +1235,7 @@ export default [
   {
     name: 'AIX',
     description: 'Climbing Holds, Volumes & Walls.',
+    country: 'CZ',
     id: 43,
     website: 'https://www.aix.cz/',
     hangboards: [
@@ -1215,7 +1267,8 @@ export default [
   },
   {
     name: '360 Holds',
-    description: '',
+    description: '360 holds and volumes are designed with passion for climbing',
+    country: 'SI',
     id: 44,
     website: 'http://www.360holds.com/',
     hangboards: [
@@ -1229,7 +1282,9 @@ export default [
   },
   {
     name: 'HRT Holds',
-    description: '',
+    description:
+      '4 different brands of climbing holds, more than 3000 shapes of holds and 150 models of climbing volumes and features',
+    country: 'BG',
     id: 45,
     website: 'https://hrt-holds.com/',
     hangboards: [
@@ -1267,7 +1322,8 @@ export default [
   },
   {
     name: 'Gecko Holds',
-    description: '',
+    description: 'With passion for climbing!',
+    country: 'SI',
     id: 46,
     website: 'https://www.gecko-holds.com/',
     hangboards: [
@@ -1282,6 +1338,7 @@ export default [
   {
     name: 'Owl Climb',
     description: 'Hangboards made in italy',
+    country: 'IT',
     id: 47,
     website: 'https://owlclimb.com/',
     hangboards: [
@@ -1325,7 +1382,9 @@ export default [
   },
   {
     name: 'Bäm!',
-    description: '',
+    description:
+      'The most adjustable hangboard. Improve your abilities. Reach for the top',
+    country: 'DE',
     id: 48,
     website: 'https://www.bam-products.com/',
     hangboards: [
@@ -1339,7 +1398,8 @@ export default [
   },
   {
     name: 'Edgy Climbing Holds',
-    description: '(Dave MacLeod)',
+    description: 'By Dave MacLeod',
+    country: 'GB',
     id: 49,
     website: 'https://www.davemacleod.com/',
     hangboards: [
@@ -1353,7 +1413,8 @@ export default [
   },
   {
     name: 'Expressions holds',
-    description: '',
+    description: 'Wood and fiberglass climbing volumes',
+    country: 'FR',
     id: 50,
     website: 'https://www.expression-holds.com/',
     hangboards: [
@@ -1367,7 +1428,8 @@ export default [
   },
   {
     name: 'DeWoodstok',
-    description: '',
+    description: 'Boulder brushes. Adjustable in angle and height.',
+    country: 'NL',
     id: 51,
     website: 'https://www.dewoodstok.nl/',
     hangboards: [
@@ -1382,6 +1444,7 @@ export default [
   {
     name: 'Awesome Woodys',
     description: 'Handcrafted training tools for climbers',
+    country: 'AU',
     id: 52,
     website: 'https://awesomewoodys.com/',
     hangboards: [
@@ -1468,6 +1531,7 @@ export default [
   {
     name: 'DefyTheCrux',
     description: 'Train Hard, Climb Harder',
+    country: 'US',
     id: 53,
     website: 'https://defythecrux.com/',
     hangboards: [
@@ -1488,6 +1552,7 @@ export default [
   {
     name: 'WhiteOak',
     description: 'Wooden climbing equipment',
+    country: 'PL',
     id: 54,
     website: 'https://whiteoak.com.pl/',
     hangboards: [
@@ -1508,6 +1573,7 @@ export default [
   {
     name: 'Acorn Climbing',
     description: 'Sustainably crafted Hangboards',
+    country: 'US',
     id: 55,
     website: 'https://www.acornclimbing.com/',
     hangboards: [
@@ -1522,6 +1588,7 @@ export default [
   {
     name: 'ArtLine Climbing Holds',
     description: 'Climbing holds and volumes',
+    country: 'FR',
     id: 56,
     website: 'https://www.artline-holds.com/',
     hangboards: [
@@ -1536,6 +1603,7 @@ export default [
   {
     name: 'Butterfinger Sports',
     description: 'Out of love for climbing and devotion to innovative design',
+    country: 'US',
     id: 57,
     website: 'http://butterfingersports.com/',
     hangboards: [
@@ -1550,6 +1618,7 @@ export default [
   {
     name: 'WOOD BOARD',
     description: 'Quality wooden booster boards, designed for all climbers',
+    country: 'CZ',
     id: 58,
     website: 'https://www.wood-board.cz',
     hangboards: [
@@ -1576,6 +1645,7 @@ export default [
   {
     name: 'Workshop 19/50',
     description: 'Tailor-made training gear and climbing gym accessories',
+    country: 'RU',
     id: 59,
     website: 'https://workshop1950.ru/',
     hangboards: [
@@ -1636,7 +1706,8 @@ export default [
   },
   {
     name: '2Climb',
-    description: '',
+    description: 'Producing workout gear for climbers 🧗‍♂️',
+    country: 'CZ',
     id: 60,
     website: 'https://www.2climb.cz/',
     hangboards: [
@@ -1675,6 +1746,7 @@ export default [
   {
     name: 'Top Out Climbing',
     description: 'Hangboards and Rock Climbing training equipment',
+    country: 'GB',
     id: 61,
     website: 'https://www.topoutclimbing.co.uk/',
     hangboards: [
@@ -1728,6 +1800,7 @@ export default [
     name: 'Canigó',
     description:
       'Natural wood climbing Hangboards. Train at home with chemical-free dams!',
+    country: 'ES',
     id: 63,
     website: 'https://canigo.eu/',
     hangboards: [
@@ -1765,7 +1838,8 @@ export default [
   },
   {
     name: 'Climbnboulder',
-    description: '',
+    description: 'By Thomas G.',
+    country: 'DE',
     id: 64,
     website: 'https://www.etsy.com/shop/climbnboulder',
     hangboards: [
@@ -1786,6 +1860,7 @@ export default [
   {
     name: 'Danger Buddies',
     description: 'Innovative outdoor gear for your adventures',
+    country: 'US',
     id: 65,
     website: 'https://www.dangerbuddies.com/',
     hangboards: [
@@ -1806,6 +1881,7 @@ export default [
   {
     name: 'Makak',
     description: 'Climbing holds and walls production',
+    country: 'CZ',
     id: 66,
     website: 'http://www.makak.cz/',
     hangboards: [
@@ -1902,6 +1978,7 @@ export default [
   {
     name: 'Crafty Climbing',
     description: 'Cute and Furry climbing chalk bags and more',
+    country: 'PL',
     id: 69,
     website: 'https://craftyclimbing.com/',
     hangboards: [
@@ -1927,7 +2004,8 @@ export default [
   },
   {
     name: 'Custom Climbs',
-    description: 'Engineering the Send',
+    description: 'Engineering the send',
+    country: 'US',
     id: 70,
     website: 'https://customclimbsofficial.com/',
     hangboards: [
@@ -1986,6 +2064,7 @@ export default [
   {
     name: 'Explore Climbing',
     description: 'Handmade in Italy',
+    country: 'IT',
     id: 72,
     website: 'https://www.exploreclimbing.it/',
     hangboards: [
@@ -2038,6 +2117,7 @@ export default [
   {
     name: 'Woodoclimb',
     description: 'Find your way, 100% designed and made in Italy',
+    country: 'IT',
     id: 74,
     website: 'http://www.woodoclimb.com/',
     hangboards: [
@@ -2058,6 +2138,7 @@ export default [
   {
     name: 'Rustam Climbing',
     description: 'High quality wooden training devices',
+    country: 'NL',
     id: 75,
     website: 'https://rustamclimbing.com/',
     hangboards: [
@@ -2078,6 +2159,7 @@ export default [
   {
     name: 'DUDES vs. GRAVITY',
     description: 'Group of climbers from Slovenia.',
+    country: 'SI',
     id: 76,
     website: 'https://dudesvsgravity.com/',
     hangboards: [
@@ -2098,6 +2180,7 @@ export default [
   {
     name: 'Lattice',
     description: 'Coaching & Training',
+    country: 'GB',
     id: 77,
     website: 'https://latticetraining.com/',
     hangboards: [
@@ -2154,6 +2237,7 @@ export default [
   {
     name: 'Woodrock',
     description: '100% Made in France',
+    country: 'FR',
     id: 79,
     website: 'https://www.woodrock.fr/',
     hangboards: [
@@ -2191,7 +2275,8 @@ export default [
   },
   {
     name: 'Northeast Climb (NEC)',
-    description: '',
+    description: 'Shenyang (China) based',
+    country: 'CH',
     id: 80,
     website: '#',
     hangboards: [
@@ -2270,6 +2355,7 @@ export default [
   {
     name: 'Affenholz',
     description: 'Better bouldering.',
+    country: 'DE',
     id: 83,
     website: 'https://affenholz.com',
     hangboards: [
@@ -2357,6 +2443,7 @@ export default [
   {
     name: 'Gripmonkeys',
     description: 'Climbing Hangboards',
+    country: 'GB',
     id: 86,
     website: 'https://gripmonkeys.co.uk/',
     hangboards: [
@@ -2445,6 +2532,7 @@ export default [
   {
     name: 'Altissimo',
     description: 'ALTI Escalade',
+    country: 'FR',
     id: 88,
     website: 'https://www.altissimo.fr',
     hangboards: [
@@ -2465,6 +2553,7 @@ export default [
   {
     name: 'N8',
     description: '',
+    country: 'CN',
     id: 89,
     website: '',
     hangboards: [
@@ -2480,6 +2569,7 @@ export default [
     name: 'Art Rocher',
     description:
       'Artificial climbing walls - the greatest experience in Europe and Poland',
+    country: 'PL',
     id: 90,
     website: 'http://www.artrocher.com.pl/',
     hangboards: [
@@ -2494,6 +2584,7 @@ export default [
   {
     name: 'Iura',
     description: 'Iura produces innovative climbing accessories. Expect more.',
+    country: 'PL',
     id: 91,
     website: 'https://iura.pl/',
     hangboards: [
@@ -2518,8 +2609,9 @@ export default [
     ]
   },
   {
-    name: 'Ucraft',
-    description: '',
+    name: 'Ucraft Climbing',
+    description: 'Clothes and accessories for climbers',
+    country: 'UA',
     id: 92,
     website: 'https://ucraftclimbing.com/',
     hangboards: [
@@ -2533,7 +2625,8 @@ export default [
   },
   {
     name: 'NonMollo',
-    description: '',
+    description: 'Wooden Climbing Stuff 🧗‍',
+    country: 'IT',
     id: 93,
     website: 'https://www.nonmollo-climbing.com/',
     hangboards: [
@@ -2548,6 +2641,7 @@ export default [
   {
     name: 'Smog',
     description: 'Well-made product created entirely in Italy. Sold by Oliunìd',
+    country: 'IT',
     id: 94,
     website: 'https://www.oliunid.it/',
     hangboards: [
@@ -2586,6 +2680,7 @@ export default [
   {
     name: 'Lemur Design',
     description: 'Traction beam in recycled ash wood',
+    country: 'CA',
     id: 95,
     website: 'https://www.lemurdesign.ca/',
     hangboards: [
@@ -2600,6 +2695,7 @@ export default [
   {
     name: 'JOOD',
     description: 'Jood Climbing Walls Philippines',
+    country: 'PH',
     id: 96,
     website: 'http://www.climbingwallphilippines.com',
     hangboards: [
@@ -2613,7 +2709,8 @@ export default [
   },
   {
     name: 'YY Vertical',
-    description: 'Climbers comfort creator',
+    description: 'Smart Products for Vertical Sports',
+    country: 'FR',
     id: 97,
     website: 'https://www.yyvertical.com',
     hangboards: [
@@ -2691,7 +2788,8 @@ export default [
   },
   {
     name: 'Entropy Holds',
-    description: '',
+    description: 'Climbing holds',
+    country: 'PL',
     id: 100,
     website: 'http://www.entropyholds.com/',
     hangboards: [
@@ -2759,6 +2857,7 @@ export default [
   {
     name: 'Spin Agarras',
     description: 'Brazilian Climbing Grips',
+    country: 'BR',
     id: 103,
     website: 'http://www.spinagarras.com.br/',
     hangboards: [
@@ -2785,6 +2884,7 @@ export default [
   {
     name: 'Lama Holds',
     description: 'Wooden hangboards and campus boards',
+    country: 'CZ',
     id: 104,
     website: 'https://www.lamaholds.cz/',
     hangboards: [
@@ -2805,6 +2905,7 @@ export default [
   {
     name: 'Bat Holds',
     description: 'PU climbing holds producer',
+    country: 'PL',
     id: 105,
     website: 'https://batholds.com/',
     hangboards: [
@@ -2819,6 +2920,7 @@ export default [
   {
     name: 'Freerock',
     description: 'Climbing & outdoor sports.',
+    country: 'AR',
     id: 106,
     website: 'https://freerock.mercadoshops.com.ar/',
     hangboards: [

@@ -30,13 +30,18 @@ useHead({
           <v-col cols="12">
             <v-list>
               <v-list-item href="mailto:mail@stevie-ray.nl">
-                <v-list-item-title
-                  >{{ t('Questions? Need help?') }}
+                <v-list-item-title>
+                  {{ t('Questions? Need help?') }}
                 </v-list-item-title>
               </v-list-item>
               <v-list-item to="/privacy">
-                <v-list-item-title
-                  >{{ t('Terms and Privacy Policy') }}
+                <v-list-item-title>
+                  {{ t('Terms and Privacy Policy') }}
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item to="/brands">
+                <v-list-item-title>
+                  {{ t('Supported Hangboards') }}
                 </v-list-item-title>
               </v-list-item>
             </v-list>
