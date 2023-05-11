@@ -1767,6 +1767,7 @@ export default [
   {
     name: 'TriPoint Holds',
     description: 'designed, made and tested by climbers for climbers.',
+    country: 'PL',
     id: 62,
     website: 'https://tripoint-holds.com/',
     hangboards: [
@@ -1920,8 +1921,9 @@ export default [
   {
     name: 'Egurre Holds',
     description: 'High quality beech wood hangboards',
+    country: 'ES',
     id: 67,
-    website: 'https://www.instagram.com/egurreholds/',
+    website: 'https://egurreholds.com/',
     hangboards: [
       {
         name: 'Basati',
@@ -1945,9 +1947,10 @@ export default [
   },
   {
     name: 'Mountain Rocks',
-    description: 'For adventure lovers',
+    description: 'An Exceptional Climbing Experience',
+    country: 'AU',
     id: 68,
-    website: 'http://www.mountainrocks.online/',
+    website: 'https://mountainrocks.com.au/',
     hangboards: [
       {
         name: 'Wildwood 1001',
@@ -2030,8 +2033,9 @@ export default [
     ]
   },
   {
-    name: 'Didak',
+    name: "Dídak's Climbing",
     description: 'Climbing Holds',
+    country: 'ES',
     id: 71,
     website: 'http://www.didaks.com/',
     hangboards: [
@@ -2097,6 +2101,7 @@ export default [
   {
     name: 'IseClimb Factory',
     description: 'Wooden articles for training climbers',
+    country: 'IT',
     id: 73,
     website: 'https://www.facebook.com/iseclimbfactory/',
     hangboards: [
@@ -2201,6 +2206,7 @@ export default [
   {
     name: 'Puc Series',
     description: 'Patxi Usobiaga Climbing',
+    country: 'ES',
     id: 78,
     website: 'https://pucseries.com/',
     hangboards: [
@@ -2236,7 +2242,7 @@ export default [
   },
   {
     name: 'Woodrock',
-    description: '100% Made in France',
+    description: 'Wooden climbing beam, made in France',
     country: 'FR',
     id: 79,
     website: 'https://www.woodrock.fr/',
@@ -2276,7 +2282,7 @@ export default [
   {
     name: 'Northeast Climb (NEC)',
     description: 'Shenyang (China) based',
-    country: 'CH',
+    country: 'CN',
     id: 80,
     website: '#',
     hangboards: [
@@ -2321,6 +2327,7 @@ export default [
   {
     name: 'Hold Emporium',
     description: 'Climb stronger, train smarter.',
+    country: 'CA',
     id: 81,
     website: 'https://holdemporium.com/',
     hangboards: [
@@ -2341,6 +2348,7 @@ export default [
   {
     name: 'Manuva Climbing',
     description: 'First of its kind, fixture free hangboard',
+    country: 'CA',
     id: 82,
     website: 'https://manuvaclimbing.com/',
     hangboards: [
@@ -2370,6 +2378,7 @@ export default [
   {
     name: 'Evolv x Kilter',
     description: 'Rock Climbing & Bouldering Gear',
+    country: 'US',
     id: 84,
     website: 'https://www.evolvsports.com/',
     hangboards: [
@@ -2384,6 +2393,7 @@ export default [
   {
     name: 'ScallyWags Climbing',
     description: 'South Africa Climbing brand',
+    country: 'ZA',
     id: 85,
     website: 'https://www.scallywagsclimbing.com/',
     hangboards: [
@@ -2457,9 +2467,11 @@ export default [
   },
   {
     name: 'Two Stones / One Stone',
-    description: 'AliExpress / Amazon',
+    description: 'Amazon / AliExpress',
+    country: 'US',
     id: 87,
-    website: 'https://onestone.aliexpress.com/',
+    website:
+      'https://www.amazon.com/stores/TWOSTONESSPORTS/page/5B0DA811-7FB3-4C55-A8AC-4B3AC7BB2EF4',
     hangboards: [
       {
         name: 'CJ-HB2001',
@@ -2755,6 +2767,7 @@ export default [
   {
     name: 'SAN Power',
     description: 'Training holds',
+    country: 'ES',
     id: 98,
     website: 'https://www.sanpower.info/',
     hangboards: [
@@ -2775,6 +2788,7 @@ export default [
   {
     name: 'T-Wall',
     description: 'Climbing walls and climbing holds',
+    country: 'DE',
     id: 99,
     website: 'https://www.t-wall.org/',
     hangboards: [
@@ -2804,6 +2818,7 @@ export default [
   {
     name: 'Rock + Run',
     description: 'Online Climbing and Mountaineering Shop',
+    country: 'GB',
     id: 101,
     website: 'https://rockrun.com/',
     hangboards: [
@@ -2818,6 +2833,7 @@ export default [
   {
     name: 'Get Out!',
     description: 'Provides premium outdoor games and fitness accessories',
+    country: 'US',
     id: 102,
     website:
       'https://www.amazon.com/stores/page/13F4502E-65B8-4372-947D-89E1090DB80D/',
@@ -2953,6 +2969,7 @@ export default [
   {
     name: 'POWER GUIDANCE',
     description: 'POWER UP UNSTOPPABLE LIFE',
+    country: 'US',
     id: 107,
     website:
       'https://www.amazon.com/stores/POWERGUIDANCE/page/2702B694-0CF6-439A-9E2F-9FC8F8F67976',

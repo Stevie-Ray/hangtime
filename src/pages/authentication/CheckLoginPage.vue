@@ -18,14 +18,14 @@ watch(
   user,
   () => {
     // check if user is defined
-    if (user === undefined) return
+    if (user.value === undefined) return
     // check if redirectUrl is current url
     if (route.query.redirectUrl === route.path) {
-      router.push('/login')
+      router.push('/')
     }
     // check if user is logged in
     const redirectUrl =
-      user === null || user === undefined
+      user.value === null || user.value === undefined
         ? `/login?redirectUrl=${route.query.redirectUrl}`
         : route.query.redirectUrl
     // go to redirect url

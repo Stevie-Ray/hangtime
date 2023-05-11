@@ -154,7 +154,6 @@ router.beforeEach((to, from, next) => {
   ) {
     const path = user.value === null ? '/login' : '/check-login'
     next(`${path}?redirectUrl=${to.path}`)
-    return
   }
   next()
 })

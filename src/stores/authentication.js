@@ -93,7 +93,7 @@ export const useAuthentication = defineStore('authentication', () => {
     // you can directly mutate the state
     user.value = null
     const currentRouter = router.currentRoute
-    if (!(currentRouter.meta && currentRouter.meta.public)) {
+    if (!(currentRouter.value.meta && currentRouter.value.meta.public)) {
       router.push('/login')
     }
   }

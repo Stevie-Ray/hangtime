@@ -46,7 +46,7 @@ watch(
   user,
   () => {
     // check if user is set
-    if (!(user === null || user === undefined)) {
+    if (!(user.value === null || user.value === undefined)) {
       // check if route has redirect url or set homepage
       const redirectUrl =
         route.query.redirectUrl === null ||
