@@ -2,12 +2,18 @@
 import { computed } from 'vue'
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n'
+import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
+
+import { useAuthentication } from '@/stores/authentication'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 import { useRandomImage } from '@/helpers'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
+import countries from '@/helpers/countries'
+
+const { user } = storeToRefs(useAuthentication())
 
 const { t } = useI18n()
 
@@ -20,22 +26,32 @@ const router = useRouter()
 const getCompany = computed(() => getCompanyByUrlKey(route.params.id))
 
 useHead({
-  title: getCompany.value.name,
-  meta: [{ name: 'description', content: getCompany.value.description }]
+  title: user.value
+    ? `${getCompany.value?.name}`
+    : `${getCompany.value?.name} Hangboard Workouts`,
+  meta: [{ name: 'description', content: getCompany.value?.description }]
 })
 </script>
 
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.push('/brands')">mdi-arrow-left</v-icon>
     </template>
 
     <template #title>
-      {{ getCompany.name }}
+      {{
+        `${
+          getCompany?.country
+            ? countries.find((country) => country.alpha2 === getCompany.country)
+                ?.emoji
+            : ''
+        }`
+      }}
+      {{
+        user ? `${getCompany?.name}` : `${getCompany?.name} Hangboard Workouts`
+      }}
     </template>
-
-    <template #icons> </template>
 
     <template #default>
       <v-container>
@@ -50,12 +66,12 @@ useHead({
               <v-img :src="useRandomImage()" cover>
                 <v-card-text>
                   <div class="text-subtitle-1 mb-4">
-                    {{ getCompany.description }}
+                    {{ getCompany?.description }}
                   </div>
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
-                    :href="getCompany.website"
+                    :href="getCompany?.website"
                     class="mb-1"
                     color="text"
                     size="large"
@@ -71,7 +87,7 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-card
-              v-for="hangboard in getCompany.hangboards"
+              v-for="hangboard in getCompany?.hangboards"
               :key="hangboard.id"
               class="mb-8"
             >
@@ -85,8 +101,17 @@ useHead({
                 </exercise-hangboard>
               </v-card-text>
               <v-card-title>
-                {{ hangboard.name }}
+                {{
+                  user
+                    ? `${hangboard.name}`
+                    : `${getCompany.name} ${hangboard.name} Workouts`
+                }}
               </v-card-title>
+              <v-card-actions v-if="!user">
+                <v-btn color="text" to="/login">
+                  {{ hangboard.name }} {{ t('workouts') }}
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>

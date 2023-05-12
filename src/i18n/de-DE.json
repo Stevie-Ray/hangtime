@@ -221,5 +221,9 @@
   "Male": "Männlich",
   "Female": "Weiblich",
   "Other": "Andere",
-  "Country": "Herkunftsland"
+  "Country": "Herkunftsland",
+  "Add exercise": "Übung hinzufügen",
+  "Save workout": "Training speichern",
+  "History": "Geschichte",
+  "Supported Hangboards": "Unterstützte Hangboards"
 }

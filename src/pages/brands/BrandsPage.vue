@@ -14,7 +14,7 @@ const { getCompanies } = useUser()
 const router = useRouter()
 
 useHead({
-  title: 'Brands',
+  title: t('Supported Hangboards'),
   meta: [{ name: 'description', content: '' }]
 })
 </script>
