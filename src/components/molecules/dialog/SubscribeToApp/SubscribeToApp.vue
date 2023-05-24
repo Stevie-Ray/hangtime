@@ -14,7 +14,8 @@ const { user } = storeToRefs(useAuthentication())
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   limit: {
-    type: Number
+    type: Number,
+    default: 30
   }
 })
 
@@ -23,7 +24,6 @@ const { updateUser } = useAuthentication()
 const debug = false
 const disabled = ref(true)
 const canSubscribe = window.getDigitalGoodsService
-const limit = 30
 const PAYMENT_METHOD = 'https://play.google.com/billing'
 
 let price = ''
@@ -39,7 +39,7 @@ const progressValue = computed(() => {
   // eslint-disable-next-line no-unsafe-optional-chaining
   if (!user || user?.value?.subscribed) time = 0
   // eslint-disable-next-line no-unsafe-optional-chaining
-  const value = ((user?.value?.completed?.time / time) * 100) / limit
+  const value = ((user?.value?.completed?.time / time) * 100) / props.limit
   return value < 100 ? value : 100
 })
 
