@@ -2993,5 +2993,75 @@ export default [
         holds: 6
       }
     ]
+  },
+  {
+    name: 'Wapaje',
+    description:
+      'Sports accessories and implements for climbing and functional training',
+    country: 'CL',
+    id: 108,
+    website: 'https://www.instagram.com/wapajechile/',
+    hangboards: [
+      {
+        name: 'Araucana',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Evolution',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Origen',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Romeral',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Clevo Climbing',
+    description: '“CLEVO” is the abbreviation for Climbing EVOlution.',
+    country: 'DE',
+    id: 109,
+    website: 'https://clevo-climbing.com/',
+    hangboards: [
+      {
+        name: 'CLEVO hangboard',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'KTM Holds',
+    description: 'First Nepalese climbing hold brand in Nepal. ',
+    country: 'NP',
+    id: 110,
+    website: 'https://www.facebook.com/ktmholds',
+    hangboards: [
+      {
+        name: 'Single line hangboard',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Portable hangboard',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
   }
 ]
