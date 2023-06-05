@@ -51,7 +51,7 @@
     "@vue/cli-plugin-pwa": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
     "babel-eslint": "^10.1.0",
-    "eslint": "^8.41.0",
+    "eslint": "^8.42.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
@@ -63,7 +63,7 @@
     "storybook-addon-vuetify3": "^2.0.5",
     "storybook-dark-mode": "^3.0.0",
     "vue-cli-plugin-vuetify": "~2.5.8",
-    "vue-loader": "^17.2.1",
+    "vue-loader": "^17.2.2",
     "webpack-plugin-vuetify": "^2.0.1"
   },
   "browserslist": [

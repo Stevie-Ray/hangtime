@@ -46,9 +46,8 @@ const setupTime = 5
 
 // complete
 const dialogWorkoutComplete = ref(false)
-// eslint-disable-next-line no-unused-vars
-let workoutCompleteTimeTotal = 0
-let workoutCompleteTimeHanging = 0
+const workoutCompleteTimeTotal = ref(0)
+const workoutCompleteTimeHanging = ref(0)
 
 onBeforeUnmount(() => {
   // make sure timer is disabled and speech is stopped
@@ -184,8 +183,8 @@ const updateUserCompleted = () => {
   if (Number.isNaN(user.value.completed.hold)) user.value.completed.hold = 0
   if (Number.isNaN(user.value.completed.amount)) user.value.completed.amount = 0
   // update values
-  user.value.completed.time += workoutCompleteTimeTotal
-  user.value.completed.hold += workoutCompleteTimeHanging
+  user.value.completed.time += workoutCompleteTimeTotal.value
+  user.value.completed.hold += workoutCompleteTimeHanging.value
   user.value.completed.amount += 1
   updateUser()
 }
@@ -196,8 +195,8 @@ const exerciseDone = () => {
     name: props?.workout?.name ? props.workout.name : '',
     start_date_local: new Date(),
     sport_type: 'Workout',
-    elapsed_time: workoutCompleteTimeTotal,
-    elapsed_time_hanging: workoutCompleteTimeHanging,
+    elapsed_time: workoutCompleteTimeTotal.value,
+    elapsed_time_hanging: workoutCompleteTimeHanging.value,
     description: props?.workout?.description ? props.workout.description : '',
     difficulty: props?.workout?.level ? props.workout.level : '',
     type: 'Hangboarding',
@@ -245,11 +244,10 @@ const hasExercise = (type) => {
 }
 
 const exerciseSteps = () => {
-  workoutCompleteTimeTotal += 1
-  // eslint-disable-next-line default-case
   switch (currentExerciseStep.value) {
     // PAUSE
     case 0:
+      workoutCompleteTimeTotal.value += 1
       if (clock.value > 0) {
         exercisePause()
         clock.value -= 1
@@ -260,10 +258,11 @@ const exerciseSteps = () => {
       break
     // HOLD
     case 1:
+      workoutCompleteTimeTotal.value += 1
+      workoutCompleteTimeHanging.value += 1
       if (clock.value > 0) {
         exerciseHold()
         clock.value -= 1
-        workoutCompleteTimeHanging += 1
         break
       }
       // check if exercise has to repeat
@@ -279,6 +278,7 @@ const exerciseSteps = () => {
       break
     // REST
     case 2:
+      workoutCompleteTimeTotal.value += 1
       if (clock.value > 0) {
         exerciseRest()
         clock.value -= 1
@@ -296,9 +296,10 @@ const exerciseSteps = () => {
       break
     // REPEAT
     case 3:
+      workoutCompleteTimeTotal.value += 1
+      workoutCompleteTimeHanging.value += 1
       if (clock.value > 0) {
         exerciseHold()
-        workoutCompleteTimeHanging += 1
         clock.value -= 1
         break
       }
@@ -315,6 +316,8 @@ const exerciseSteps = () => {
     // // NEXT / FINISH
     case 4:
       exerciseDone()
+      break
+    default:
       break
   }
 }

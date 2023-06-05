@@ -120,7 +120,9 @@ useHead({
                           :alt="user.displayName"
                         ></v-img>
                       </v-avatar>
-                      <span class="text-truncate">{{ user.displayName }}</span>
+                      <span class="text-truncate">
+                        {{ user.displayName }}
+                      </span>
                     </td>
                     <td v-if="rank === 'completed.amount'" class="text-right">
                       {{ user.completed?.amount }}
