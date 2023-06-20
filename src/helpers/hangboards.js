@@ -2506,8 +2506,8 @@ export default [
       {
         name: 'CJ-HB2024',
         id: 5,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/TWOSTONESHB2024.svg',
+        holds: 3
       },
       {
         name: 'CJ-HB2025',
@@ -2518,7 +2518,7 @@ export default [
       {
         name: 'CJ-HB2046',
         id: 7,
-        image: 'hangboards/TWOSTONESHB2025.svg',
+        image: 'hangboards/NOTFOUND.svg',
         holds: 0
       },
       {
@@ -2538,6 +2538,12 @@ export default [
         id: 10,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
+      },
+      {
+        name: 'CJ-HB2112',
+        id: 11,
+        image: 'hangboards/TWOSTONESHB2112.svg',
+        holds: 16
       }
     ]
   },
@@ -3030,7 +3036,7 @@ export default [
   },
   {
     name: 'Clevo Climbing',
-    description: '“CLEVO” is the abbreviation for Climbing EVOlution.',
+    description: '“CLEVO” is the abbreviation for Climbing EVOlution',
     country: 'DE',
     id: 109,
     website: 'https://clevo-climbing.com/',
@@ -3045,7 +3051,7 @@ export default [
   },
   {
     name: 'KTM Holds',
-    description: 'First Nepalese climbing hold brand in Nepal. ',
+    description: 'First Nepalese climbing hold brand in Nepal',
     country: 'NP',
     id: 110,
     website: 'https://www.facebook.com/ktmholds',
@@ -3059,6 +3065,55 @@ export default [
       {
         name: 'Portable hangboard',
         id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Treniraj z naravo',
+    description:
+      'Online store with unique and ergonomically designed wooden training aids for training anywhere',
+    country: 'SI',
+    id: 111,
+    website: 'https://trenirajznaravo.com/',
+    hangboards: [
+      {
+        name: 'FingerPeg 1.0',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'FingerBoard 2.0',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Gimme Kraft',
+    description: 'Produced by Café Kraft',
+    country: 'DE',
+    id: 112,
+    website: 'https://cafekraft.shop/',
+    hangboards: [
+      {
+        name: 'Goldfinger',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Large',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Fingerhakler',
+        id: 2,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
       }
