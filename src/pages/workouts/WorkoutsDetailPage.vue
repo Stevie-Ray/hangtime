@@ -916,6 +916,7 @@ useHead({
                                 :rules="[rules.required, rules.length(36)]"
                                 :label="t('Name')"
                                 required
+                                class="required"
                               >
                               </v-text-field>
 
@@ -931,6 +932,7 @@ useHead({
                                 "
                                 :label="t('Description')"
                                 required
+                                class="required"
                               ></v-textarea>
 
                               <v-text-field
@@ -976,6 +978,8 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
+@use 'vuetify/settings';
+
 .exercise-card:last-child::v-deep(.v-card):last-child:after {
   border: none;
 }
@@ -996,6 +1000,13 @@ useHead({
   & > :first-child {
     border-bottom-left-radius: 8px !important;
     border-bottom-right-radius: 8px !important;
+  }
+}
+.required :deep {
+  label::after {
+    content: '*';
+    margin-left: settings.$spacer;
+    color: rgb(var(--v-theme-error));
   }
 }
 </style>
