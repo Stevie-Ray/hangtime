@@ -50,35 +50,37 @@ const count = computed({
   }
 })
 
+const steps = [1, 5, 15, 60, 180, 300]
+
 function increment() {
   if (count.value >= props.max) return
-  if (count.value < 15 || !props.timer) {
-    count.value += 1
+  if (count.value < steps[2] || !props.timer) {
+    count.value += steps[0]
   }
-  if (count.value >= 15 && count.value < 30 && props.timer) {
-    count.value += 5
+  if (count.value >= steps[2] && count.value < steps[3] && props.timer) {
+    count.value += steps[1]
   }
-  if (count.value >= 30 && count.value < 60 && props.timer) {
-    count.value += 15
+  if (count.value >= steps[3] && count.value < steps[4] && props.timer) {
+    count.value += steps[2]
   }
-  if (count.value >= 60 && count.value < 300 && props.timer) {
-    count.value += 30
+  if (count.value >= steps[4] && count.value < steps[5] && props.timer) {
+    count.value += steps[3]
   }
 }
 
 function decrement() {
   if (count.value <= props.min) return
-  if (count.value <= 15 || !props.timer) {
-    count.value -= 1
+  if (count.value <= steps[2] || !props.timer) {
+    count.value -= steps[0]
   }
-  if (count.value > 15 && count.value <= 30 && props.timer) {
-    count.value -= 5
+  if (count.value > steps[2] && count.value <= steps[3] && props.timer) {
+    count.value -= steps[1]
   }
-  if (count.value > 30 && count.value <= 60 && props.timer) {
-    count.value -= 15
+  if (count.value > steps[3] && count.value <= steps[4] && props.timer) {
+    count.value -= steps[2]
   }
-  if (count.value > 60 && count.value <= 300 && props.timer) {
-    count.value -= 30
+  if (count.value > steps[4] && count.value <= steps[5] && props.timer) {
+    count.value -= steps[3]
   }
 }
 </script>
