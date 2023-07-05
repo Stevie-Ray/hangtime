@@ -101,6 +101,7 @@ function decrement() {
             icon="mdi-minus"
             variant="outlined"
             @click="decrement"
+            style="touch-action: manipulation"
           ></v-btn>
         </v-col>
         <v-col cols="4">
@@ -120,6 +121,7 @@ function decrement() {
             icon="mdi-plus"
             variant="outlined"
             @click="increment"
+            style="touch-action: manipulation"
           ></v-btn>
         </v-col>
       </v-row>
