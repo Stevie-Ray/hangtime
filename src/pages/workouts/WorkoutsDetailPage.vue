@@ -731,7 +731,7 @@ useHead({
                                       :value="exercise.repeat"
                                       :timer="false"
                                       :min="0"
-                                      :max="14"
+                                      :max="24"
                                       @input="
                                         (value) => exerciseEdit('repeat', value)
                                       "

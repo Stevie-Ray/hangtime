@@ -54,7 +54,7 @@ useHead({
             :value="workout.exercises[0].repeat"
             :timer="false"
             :min="0"
-            :max="14"
+            :max="24"
             @input="(value) => (workout.exercises[0].repeat = value)"
           >
             <template #default>{{ workout.exercises[0].repeat + 1 }}x</template>
