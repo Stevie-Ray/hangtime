@@ -1,10 +1,7 @@
 {
-  "background_color": "#212121",
-  "categories": ["fitness", "health", "sports"],
-  "description": "Hangboard Training",
-  "dir": "ltr",
-  "display": "standalone",
-  "display_override": ["standalone", "minimal-ui", "fullscreen", "browser"],
+  "name": "HangTime",
+  "short_name": "HangTime",
+  "theme_color": "#212121",
   "icons": [
     {
       "src": "./img/icons/android-chrome-maskable.svg",
@@ -31,8 +28,24 @@
       "purpose": "any"
     }
   ],
-  "lang": "en-US",
-  "name": "HangTime",
+  "start_url": "/?utm_source=homescreen",
+  "display": "standalone",
+  "background_color": "#212121",
+  "categories": [
+    "fitness",
+    "health",
+    "sports"
+  ],
+  "description": "Hangboard Training",
+  "dir": "ltr",
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "fullscreen",
+    "browser",
+    "window-controls-overlay"
+  ],
+  "lang": "en",
   "orientation": "any",
   "prefer_related_applications": true,
   "related_applications": [
@@ -85,7 +98,6 @@
       "type": "image/png"
     }
   ],
-  "short_name": "HangTime",
   "shortcuts": [
     {
       "name": "Quick Workout",
@@ -180,7 +192,5 @@
       ],
       "description": "Track your progress over time"
     }
-  ],
-  "start_url": "/?utm_source=homescreen",
-  "theme_color": "#212121"
+  ]
 }
