@@ -31,11 +31,7 @@
   "start_url": "/?utm_source=homescreen",
   "display": "standalone",
   "background_color": "#212121",
-  "categories": [
-    "fitness",
-    "health",
-    "sports"
-  ],
+  "categories": ["fitness", "health", "sports"],
   "description": "Hangboard Training",
   "dir": "ltr",
   "display_override": [
