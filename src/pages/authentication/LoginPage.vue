@@ -196,7 +196,7 @@ const connect = async (method) => {
       // but we can't use it on mobile because it's not well-supported
       // when app is running as standalone on ios & android
       // eslint-disable-next-line no-unused-expressions
-      getCookieValue('app-platform') === 'iOS App Store'
+      String(getCookieValue('app-platform')) === 'iOS App Store'
         ? await signInWithRedirect(auth, provider)
         : await signInWithPopup(auth, provider)
     } catch (err) {
