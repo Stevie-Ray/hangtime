@@ -200,8 +200,10 @@ const connect = async (method) => {
       // when app is running as standalone on ios & android
       console.log(getCookieValue('app-platform'))
       if (getCookieValue('app-platform') === 'iOS App Store') {
+        console.log(true)
         await signInWithRedirect(auth, provider)
       } else {
+        console.log(false)
         await signInWithPopup(auth, provider)
       }
     } catch (err) {
