@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
-  getRedirectResult,
   updateProfile,
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -199,12 +198,9 @@ const connect = async (method) => {
       // Firebase signing with popup is faster than redirect,
       // but we can't use it on mobile because it's not well-supported
       // when app is running as standalone on ios & android
-      console.log(getCookieValue('app-platform'))
       if (getCookieValue('app-platform') === 'iOS App Store') {
-        console.log(true)
         await signInWithRedirect(auth, provider)
       } else {
-        console.log(false)
         await signInWithPopup(auth, provider)
       }
     } catch (err) {
@@ -212,10 +208,6 @@ const connect = async (method) => {
     }
   }
 }
-
-getRedirectResult(auth).then((result) => {
-  console.log(result)
-})
 
 const validateLogin = () => {
   login.value.validate()
