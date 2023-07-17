@@ -112,7 +112,10 @@ const rules = {
 }
 
 const getCookieValue = (name) => {
-  document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '' // eslint-disable-line
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+  return ''
 }
 
 const connect = async (method) => {
@@ -195,10 +198,12 @@ const connect = async (method) => {
       // Firebase signing with popup is faster than redirect,
       // but we can't use it on mobile because it's not well-supported
       // when app is running as standalone on ios & android
-      // eslint-disable-next-line no-unused-expressions
-      String(getCookieValue('app-platform')) === 'iOS App Store'
-        ? await signInWithRedirect(auth, provider)
-        : await signInWithPopup(auth, provider)
+      console.log(getCookieValue('app-platform'))
+      if (getCookieValue('app-platform') === 'iOS App Store') {
+        await signInWithRedirect(auth, provider)
+      } else {
+        await signInWithPopup(auth, provider)
+      }
     } catch (err) {
       error.value = err.toString()
     }
