@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
+  getRedirectResult,
   updateProfile,
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -41,6 +42,7 @@ watch(networkOnLine, (status) => {
 
 const route = useRoute()
 const router = useRouter()
+const auth = getAuth()
 
 watch(
   user,
@@ -121,7 +123,6 @@ const getCookieValue = (name) => {
 const connect = async (method) => {
   error.value = undefined
   resetPassword.value = false
-  const auth = getAuth()
   let provider = null
 
   if (method === 'google') {
@@ -211,6 +212,10 @@ const connect = async (method) => {
     }
   }
 }
+
+getRedirectResult(auth).then((result) => {
+  console.log(result)
+})
 
 const validateLogin = () => {
   login.value.validate()
