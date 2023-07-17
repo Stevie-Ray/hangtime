@@ -6,7 +6,7 @@ importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js')
 
 const config = {
   apiKey: 'AIzaSyDkE4T_MphbbPVq8gdnZjyRcLCDcqrheW8',
-  authDomain: 'auth.hangtime.stevie-ray.nl',
+  authDomain: 'hangtime.stevie-ray.nl',
   databaseURL: 'https://hangtime-app.firebaseio.com',
   projectId: 'hangtime-app',
   storageBucket: 'hangtime-app.appspot.com',

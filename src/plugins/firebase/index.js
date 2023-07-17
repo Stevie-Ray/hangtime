@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app'
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDkE4T_MphbbPVq8gdnZjyRcLCDcqrheW8',
-  authDomain: 'auth.hangtime.stevie-ray.nl',
+  authDomain: 'hangtime.stevie-ray.nl',
   databaseURL: 'https://hangtime-app.firebaseio.com',
   projectId: 'hangtime-app',
   storageBucket: 'hangtime-app.appspot.com',
