@@ -470,10 +470,11 @@ useHead({
     </v-row>
     <v-alert
       class="position-fixed"
+      closable
       v-if="error"
       :text="error"
       type="error"
-      style="left: 8px; right: 8px; bottom: 8px"
+      style="left: 8px; right: 8px; bottom: 8px; z-index: 1007"
     ></v-alert>
   </v-container>
 </template>

@@ -10,7 +10,7 @@ import {
   OAuthProvider
 } from 'firebase/auth'
 import IRCRA from 'ircra'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuthentication } from '@/stores/authentication'
 import { weightConverter } from '@/helpers'
@@ -26,6 +26,8 @@ const { networkOnLine } = storeToRefs(useApp())
 
 const { updateUser } = useAuthentication()
 
+const router = useRouter()
+
 const ircra = new IRCRA()
 
 const rules = {
@@ -37,6 +39,8 @@ const rules = {
 const grades = computed(() =>
   ircra.get(user.value.settings?.scale).filter((item) => item)
 )
+
+const error = ref(undefined)
 
 const login = async (method) => {
   let provider = null
@@ -63,13 +67,13 @@ const login = async (method) => {
           console.log(credential)
           console.log(user)
         },
-        (error) => {
-          console.log(error)
-          this.linkError = error
+        (err) => {
+          console.log(err)
+          error.value = err.code.toString()
         }
       )
-    } catch (error) {
-      this.linkError = error
+    } catch (err) {
+      error.value = err
     }
   }
 }
@@ -79,14 +83,13 @@ const deleteAccount = async () => {
   await auth.currentUser
     .delete()
     .then(() => {
-      this.$router.push('/')
+      router.push('/')
     })
-    .catch((error) => {
-      console.log(error)
+    .catch((err) => {
+      console.log(err)
+      error.value = err
     })
 }
-
-const router = useRouter()
 
 useHead({
   title: 'Profile',
@@ -306,6 +309,15 @@ useHead({
           </v-col>
         </v-row>
       </v-container>
+      <v-alert
+        class="position-fixed"
+        closable
+        v-if="error"
+        :text="error"
+        type="error"
+        style="left: 8px; right: 8px; bottom: 8px; z-index: 1007"
+        >{{ error }}</v-alert
+      >
     </template>
   </app-container>
 </template>
