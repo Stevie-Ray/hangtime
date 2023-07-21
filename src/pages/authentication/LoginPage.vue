@@ -483,8 +483,7 @@ useHead({
 @import '~vuetify/_settings';
 
 .logo-container {
-  padding-top: 1.25vh;
-  padding-bottom: 1.25vh;
+  padding-bottom: 20px;
   @media #{map-get($display-breakpoints, 'md-and-up')} {
     padding-top: 5vh;
     padding-bottom: 5vh;

@@ -2150,14 +2150,38 @@ export default [
       {
         name: 'Bombita',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/RUSTAMBOMBITA.svg',
+        holds: 11
       },
       {
         name: 'Pinchette',
         id: 1,
+        image: 'hangboards/RUSTAMPUNCHETTE.svg',
+        holds: 4
+      },
+      {
+        name: 'UltiMate',
+        id: 2,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
+      },
+      {
+        name: 'Moro',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Jokko',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'PlayMate',
+        id: 5,
+        image: 'hangboards/RUSTAMPLAYMATE.svg',
+        holds: 2
       }
     ]
   },
