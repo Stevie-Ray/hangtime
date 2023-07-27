@@ -71,7 +71,7 @@ useHead({
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
-                    :href="getCompany?.website"
+                    :href="getCompany?.url"
                     class="mb-1"
                     color="text"
                     size="large"
