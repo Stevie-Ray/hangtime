@@ -805,43 +805,115 @@ export default [
         name: 'All Chalk No Action',
         id: 0,
         image: 'hangboards/SOILLALLCHALK.svg',
+        size: {
+          x: 660,
+          y: 250,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://www.problemsolver.rocks/shop/problemsolver-motion',
         holds: 13
       },
       {
         name: 'Blister Board',
         id: 1,
         image: 'hangboards/SOILLBIGBLISTER.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 6
       },
       {
         name: 'Remedy Board',
         id: 2,
         image: 'hangboards/SOILLREMEDY.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 10
       },
       {
         name: 'Boost Board',
         id: 3,
         image: 'hangboards/SOILLBOOST.svg',
+        size: {
+          x: 610,
+          y: 240,
+          z: 57
+        },
+        type: 'wood',
+        url: 'https://soillholds.com/collections/hangboards/products/wood-boost',
         holds: 18
       },
       {
         name: 'Crimp Reaper',
         id: 4,
         image: 'hangboards/SOILLCRIMP.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 3
       },
       {
-        name: 'Iron Palm',
+        name: 'Wood / Iron Palm (2.0)',
         id: 5,
         image: 'hangboards/SOILLIRONPALM.svg',
+        size: {
+          x: 685,
+          y: 300,
+          z: 10
+        },
+        type: 'plastic',
+        url: 'https://soillholds.com/collections/hangboards/products/iron-palm-2-0',
         holds: 6
       },
       {
         name: 'SlopeyMon',
         id: 6,
         image: 'hangboards/SOILLSLOPEY.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 5
+      },
+      {
+        name: 'Split Palm',
+        id: 7,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 420,
+          y: 280,
+          z: 100
+        },
+        type: 'plastic',
+        url: 'https://soillholds.com/collections/hangboards/products/split-palm',
+        holds: 0
+      },
+      {
+        name: 'Rise',
+        id: 8,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 150,
+          z: 60
+        },
+        type: 'plastic',
+        url: 'https://soillholds.com/collections/hangboards/products/rise',
+        holds: 0
+      },
+      {
+        name: 'Training Tiles x Meagan Martin',
+        id: 9,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 350,
+          y: 200,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://soillholds.com/collections/hangboards/products/training-tiles-so-ill-x-meagan-martin',
+        holds: 0
       }
     ]
   },
@@ -856,19 +928,66 @@ export default [
         name: 'Base',
         id: 0,
         image: 'hangboards/TARGETLINEBASE.svg',
+        size: {
+          x: 580,
+          y: 150,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://www.target10a.com/en/linebreaker-boards/409-linebreaker-base-trainingsboard.html',
         holds: 12
       },
       {
         name: 'Pro',
         id: 1,
         image: 'hangboards/TARGETLINEPRO.svg',
+        size: {
+          x: 580,
+          y: 150,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://www.target10a.com/en/linebreaker-boards/421-linebreaker-pro-trainingsboard.html',
         holds: 11
       },
       {
         name: 'Air',
         id: 2,
         image: 'hangboards/TARGETLINEAIR.svg',
+        size: {
+          x: 420,
+          y: 120,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.target10a.com/en/linebreaker-boards/410-linebreaker-air.html',
         holds: 8
+      },
+      {
+        name: 'Crimp',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 580,
+          y: 150,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://www.target10a.com/en/linebreaker-boards/410-linebreaker-air.html',
+        holds: 0
+      },
+      {
+        name: 'Rail',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 580,
+          y: 45,
+          z: 70
+        },
+        type: 'wood',
+        url: 'https://www.target10a.com/en/linebreaker-boards/410-linebreaker-air.html',
+        holds: 0
       }
     ]
   },
@@ -883,24 +1002,44 @@ export default [
         name: 'Grindstone',
         id: 0,
         image: 'hangboards/TENSIONGRIND.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 8
       },
       {
         name: 'Grindstone Pro',
         id: 1,
         image: 'hangboards/TENSIONGRINDPRO.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 10
       },
       {
         name: 'Grindstone Mk2',
         id: 2,
         image: 'hangboards/TENSIONGRINDMK2.svg',
+        size: {
+          x: 584,
+          y: 178,
+          z: 76
+        },
+        type: 'wood',
+        url: 'https://tensionclimbing.com/product/grindstone/',
         holds: 7
       },
       {
         name: 'Flash Board',
         id: 3,
         image: 'hangboards/TENSIONFLASHFRONT.svg',
+        size: {
+          x: 480,
+          y: 76,
+          z: 76
+        },
+        type: 'wood',
+        url: 'https://tensionclimbing.com/product/flash-board-2/',
         sides: [
           {
             name: 'Front',
@@ -919,18 +1058,35 @@ export default [
         name: 'Honestone',
         id: 4,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 660,
+          y: 152,
+          z: 51
+        },
+        type: 'wood',
+        url: 'https://tensionclimbing.com/product/honestone/',
         holds: 0
       },
       {
         name: 'Whetstone',
         id: 5,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 660,
+          y: 152,
+          z: 51
+        },
+        type: 'wood',
+        url: 'https://tensionclimbing.com/product/whetstone/',
         holds: 0
       },
       {
         name: 'Simple Board',
         id: 6,
         image: 'hangboards/NOTFOUND.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 0
       }
     ]
@@ -944,21 +1100,38 @@ export default [
     url: 'http://www.trango.com/',
     hangboards: [
       {
-        name: 'Rock Prodigy',
+        name: 'Rock Prodigy Training Center',
         id: 0,
         image: 'hangboards/TRANGOROCK.svg',
+        size: {
+          x: 230,
+          y: 307,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://trango.com/products/rock-prodigy-training-center',
         holds: 11
       },
       {
         name: 'Rock Prodigy Forge',
         id: 1,
         image: 'hangboards/TRANGOROCKFORGE.svg',
+        size: {
+          x: 134,
+          y: 324,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://trango.com/products/rock-prodigy-forge',
         holds: 11
       },
       {
         name: 'Rock Prodigy Pivot',
         id: 2,
         image: 'hangboards/TRANGOROCKPIVOT.svg',
+        size: null,
+        type: 'plastic',
+        url: 'https://trango.com/products/rock-prodigy-pivot',
         sides: [
           {
             name: '0°',
@@ -996,12 +1169,26 @@ export default [
         name: 'Fingerboard Easy',
         id: 0,
         image: 'hangboards/WITCHHOLDSEASY.svg',
+        size: {
+          x: 660,
+          y: 195,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://witchholds.com/en/sklep/tablica/',
         holds: 10
       },
       {
         name: 'Fingerboard Hard',
         id: 1,
         image: 'hangboards/WITCHHOLDSHARD.svg',
+        size: {
+          x: 580,
+          y: 195,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://witchholds.com/en/sklep/tab/',
         holds: 13
       }
     ]
@@ -1017,30 +1204,50 @@ export default [
         name: 'Zlagboard Mini',
         id: 0,
         image: 'hangboards/ZLAGMINI.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 6
       },
       {
         name: 'Zlagboard Evo',
         id: 1,
         image: 'hangboards/ZLAGEVO.svg',
+        size: {
+          x: 705,
+          y: 230,
+          z: 80
+        },
+        type: 'wood',
+        url: 'https://shop.vertical-life.info/en/zlagboard-evo',
         holds: 10
       },
       {
         name: 'Zlagboard Pro',
         id: 2,
         image: 'hangboards/ZLAGPRO.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 11
       },
       {
         name: 'Zlagboard Pro 2.0',
         id: 3,
         image: 'hangboards/ZLAGPRO2.svg',
+        size: {
+          x: 705,
+          y: 250,
+          z: 80
+        },
+        type: 'wood',
+        url: 'https://shop.vertical-life.info/en/zlagboard-pro-2.0',
         holds: 14
       }
     ]
   },
   {
-    name: 'Simond / Decathlon',
+    name: 'Decathlon / Simond',
     description:
       "Decathlon's Mountaineering & Climbing brand based in Chamonix valley",
     country: 'FR',
@@ -1048,9 +1255,16 @@ export default [
     url: 'https://www.simond.com/',
     hangboards: [
       {
-        name: 'Ballsy Board',
+        name: 'Vertika-R / Ballsy Board',
         id: 0,
         image: 'hangboards/SIMONDBALLSY.svg',
+        size: {
+          x: 485,
+          y: 210,
+          z: 65
+        },
+        type: 'plastic',
+        url: 'https://www.decathlon.co.uk/p/climbing-training-beam-vertika-r-black/_/R-p-345145?mc=8788963&c=GREY',
         holds: 10
       }
     ]

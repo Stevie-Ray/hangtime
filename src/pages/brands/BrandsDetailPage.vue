@@ -100,16 +100,37 @@ useHead({
                 >
                 </exercise-hangboard>
               </v-card-text>
-              <v-card-title>
-                {{
-                  user
-                    ? `${hangboard.name}`
-                    : `${getCompany.name} ${hangboard.name} Workouts`
-                }}
+              <v-card-title class="d-flex justify-space-between">
+                <div v-if="hangboard.name">{{ hangboard.name }}</div>
+                <v-chip v-if="hangboard.type">{{ hangboard.type }}</v-chip>
               </v-card-title>
-              <v-card-actions v-if="!user">
-                <v-btn color="text" to="/login">
-                  {{ hangboard.name }} {{ t('workouts') }}
+              <v-card-subtitle>
+                {{ getCompany.name }}
+              </v-card-subtitle>
+              <v-card-text v-if="hangboard.size">
+                <div class="text-caption">
+                  <span v-if="hangboard.size.x">
+                    {{ hangboard.size.x }}mm
+                  </span>
+                  <span v-if="hangboard.size.y">
+                    &nbsp;x {{ hangboard.size.y }}mm
+                  </span>
+                  <span v-if="hangboard.size.z">
+                    &nbsp;x {{ hangboard.size.z }}mm
+                  </span>
+                </div>
+              </v-card-text>
+              <v-card-actions v-if="!user || hangboard.url">
+                <v-btn v-if="!user" color="text" to="/login">
+                  {{ t('workouts') }}
+                </v-btn>
+                <v-btn
+                  v-if="hangboard.url"
+                  color="text"
+                  :href="hangboard.url"
+                  target="_blank"
+                >
+                  {{ t('Buy') }}
                 </v-btn>
               </v-card-actions>
             </v-card>

@@ -447,7 +447,7 @@ useHead({
         </v-card>
 
         <v-footer
-          class="text-caption text-grey-darken-2 font-weight-light mt-4"
+          class="text-caption text-grey-darken-2 justify-center font-weight-light mt-4"
         >
           <span
             >v{{ appVersion }} | &copy; 2019 - {{ year }} HangTime |&nbsp;
@@ -488,6 +488,10 @@ useHead({
     padding-top: 5vh;
     padding-bottom: 5vh;
   }
+}
+
+.text-caption {
+  font-size: 0.625rem !important;
 }
 
 .side-lines {
