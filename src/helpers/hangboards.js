@@ -2133,12 +2133,26 @@ export default [
         name: 'Standard hangboard',
         id: 0,
         image: 'hangboards/WHITEOAKSTAND.svg',
+        size: {
+          x: 500,
+          y: 125,
+          z: 46
+        },
+        type: 'wood',
+        url: 'https://whiteoak.com.pl/en/produkt/wooden-hangboard/',
         holds: 8
       },
       {
         name: 'Portable hangboard',
         id: 1,
         image: 'hangboards/WHITEOAKPORT.svg',
+        size: {
+          x: 500,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://whiteoak.com.pl/en/produkt/wooden-hangboard/',
         holds: 3
       }
     ]

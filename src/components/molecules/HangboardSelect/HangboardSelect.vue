@@ -25,6 +25,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update-selected'])
 
+// eslint-disable-next-line vue/no-setup-props-destructure
 const selected = ref(props.selectedHangboard)
 
 watch(selected, (item) => {
