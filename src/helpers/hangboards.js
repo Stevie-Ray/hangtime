@@ -2879,8 +2879,8 @@ export default [
       {
         name: 'Varappe 5.7',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/WOODROCKVARAPPE57.svg',
+        holds: 13
       },
       {
         name: 'Varappe 8.9',
