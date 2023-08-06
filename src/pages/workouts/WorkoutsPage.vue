@@ -252,10 +252,10 @@ useHead({
   min-height: 64px;
   padding-top: 16px;
   padding-bottom: 16px;
-  &::v-deep(.v-list-item__prepend) {
+  &:deep(.v-list-item__prepend) {
     align-self: center;
   }
-  &::v-deep(.v-list-item-action) {
+  &:deep(.v-list-item-action) {
     align-items: end;
   }
 }

@@ -16,7 +16,7 @@ const { user } = storeToRefs(useAuthentication())
 
 const { networkOnLine } = storeToRefs(useApp())
 
-const { getHangboardNameByIds } = useUser()
+const { getHangboardNameByIds, getHangboardByIds } = useUser()
 
 const { updateUser } = useAuthentication()
 
@@ -74,6 +74,10 @@ const selected = reactive({
   hangboard: 0
 })
 
+const getHangboard = computed(() =>
+  getHangboardByIds(selected.company, selected.hangboard)
+)
+
 const updateSelected = () => {
   const exists = user.value.settings.hangboards.some(
     (item) =>
@@ -91,13 +95,15 @@ const updateSelected = () => {
 }
 
 const finishWalkthrough = (addWorkout) => {
-  if (user.value) {
+  if (user.value && networkOnLine) {
     user.value.settings.walkthrough = true
-    updateSelected()
+    if (getHangboard.value?.holds !== 0) {
+      updateSelected()
+    }
     updateUser()
   }
   dialog.value = false
-  if (addWorkout) {
+  if (addWorkout && networkOnLine) {
     router.push('/workouts/new')
   } else {
     router.push('/workouts/community')
@@ -149,7 +155,7 @@ const settingsGrade = computed({
     transition="dialog-bottom-transition"
   >
     <v-card>
-      <v-toolbar v-if="networkOnLine">
+      <v-toolbar>
         <v-toolbar-title
           >{{ t('Welcome to {appTitle}', { appTitle: 'HangTime' }) }} 👋
         </v-toolbar-title>
@@ -255,7 +261,11 @@ const settingsGrade = computed({
                 </span>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="text" @click="finishWalkthrough(true)">
+                <v-btn
+                  color="text"
+                  :disabled="getHangboard && getHangboard.holds === 0"
+                  @click="finishWalkthrough(true)"
+                >
                   {{ $t('Add a workout') }}
                 </v-btn>
                 <v-btn text @click="finishWalkthrough(false)">

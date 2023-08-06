@@ -980,10 +980,10 @@ useHead({
 <style lang="scss" scoped>
 @use 'vuetify/settings';
 
-.exercise-card:last-child::v-deep(.v-card):last-child:after {
+.exercise-card:last-child:deep(.v-card):last-child:after {
   border: none;
 }
-.v-expansion-panel-text::v-deep(.v-expansion-panel-text__wrapper) {
+.v-expansion-panel-text:deep(.v-expansion-panel-text__wrapper) {
   padding: 8px 16px 16px;
 }
 .v-toolbar .v-btn--size-x-large {

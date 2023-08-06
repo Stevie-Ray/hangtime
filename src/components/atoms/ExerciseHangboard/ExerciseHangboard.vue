@@ -111,24 +111,24 @@ const nextImage = () => {
 }
 
 svg {
-  &.h1::v-deep(#h1),
-  &.h2::v-deep(#h2),
-  &.h3::v-deep(#h3),
-  &.h4::v-deep(#h4),
-  &.h5::v-deep(#h5),
-  &.h6::v-deep(#h6),
-  &.h7::v-deep(#h7),
-  &.h8::v-deep(#h8),
-  &.h9::v-deep(#h9),
-  &.h10::v-deep(#h10),
-  &.h11::v-deep(#h11),
-  &.h12::v-deep(#h12),
-  &.h13::v-deep(#h13),
-  &.h14::v-deep(#h14),
-  &.h15::v-deep(#h15),
-  &.h16::v-deep(#h16),
-  &.h17::v-deep(#h17),
-  &.h18::v-deep(#h18) {
+  &.h1:deep(#h1),
+  &.h2:deep(#h2),
+  &.h3:deep(#h3),
+  &.h4:deep(#h4),
+  &.h5:deep(#h5),
+  &.h6:deep(#h6),
+  &.h7:deep(#h7),
+  &.h8:deep(#h8),
+  &.h9:deep(#h9),
+  &.h10:deep(#h10),
+  &.h11:deep(#h11),
+  &.h12:deep(#h12),
+  &.h13:deep(#h13),
+  &.h14:deep(#h14),
+  &.h15:deep(#h15),
+  &.h16:deep(#h16),
+  &.h17:deep(#h17),
+  &.h18:deep(#h18) {
     //fill: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
     fill: rgb(var(--v-theme-primary));
   }

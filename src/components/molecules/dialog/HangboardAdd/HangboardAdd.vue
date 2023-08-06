@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { event } from 'vue-gtag'
@@ -14,7 +14,7 @@ const { networkOnLine } = storeToRefs(useApp())
 
 const { user } = storeToRefs(useAuthentication())
 
-const { getHangboardNameByIds } = useUser()
+const { getHangboardByIds, getHangboardNameByIds } = useUser()
 
 const { updateUser } = useAuthentication()
 
@@ -24,6 +24,10 @@ const selected = reactive({
   company: 1,
   hangboard: 0
 })
+
+const getHangboard = computed(() =>
+  getHangboardByIds(selected.company, selected.hangboard)
+)
 
 const updateSelected = () => {
   const exists = user.value.settings.hangboards.some(
@@ -67,7 +71,9 @@ const addHangboard = () => {
         <v-toolbar-items>
           <v-btn
             icon="mdi-content-save-outline"
-            :disabled="!networkOnLine"
+            :disabled="
+              !networkOnLine || (getHangboard && getHangboard.holds === 0)
+            "
             @click="addHangboard"
           ></v-btn>
         </v-toolbar-items>

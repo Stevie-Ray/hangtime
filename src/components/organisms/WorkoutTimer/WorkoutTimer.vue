@@ -533,7 +533,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.exercise-card:last-child::v-deep(.v-card) {
+.exercise-card:last-child:deep(.v-card) {
   margin-bottom: 0 !important;
   &:last-child:after {
     border: none;

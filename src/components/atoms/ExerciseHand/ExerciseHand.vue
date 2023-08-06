@@ -149,11 +149,11 @@ function resetHands() {
       max-width: 100px;
     }
 
-    &.f1::v-deep(#f1),
-    &.f2::v-deep(#f2),
-    &.f3::v-deep(#f3),
-    &.f4::v-deep(#f4),
-    &.f5::v-deep(#f5) {
+    &.f1:deep(#f1),
+    &.f2:deep(#f2),
+    &.f3:deep(#f3),
+    &.f4:deep(#f4),
+    &.f5:deep(#f5) {
       visibility: hidden;
     }
   }

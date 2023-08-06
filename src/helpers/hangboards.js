@@ -1081,12 +1081,29 @@ export default [
         holds: 0
       },
       {
-        name: 'Simple Board',
+        name: 'Simple Board (J2015)',
         id: 6,
-        image: 'hangboards/NOTFOUND.svg',
-        size: null,
+        image: 'hangboards/TENSIONSIMPLEJ2015.svg',
+        size: {
+          x: 560,
+          y: 160,
+          z: 100
+        },
         type: 'wood',
-        url: null,
+        url: 'https://tensionclimbing.com/product/simple-board/',
+        holds: 0
+      },
+      {
+        name: 'Simple Board (J1086)',
+        id: 7,
+        image: 'hangboards/TENSIONSIMPLEJ1086.svg',
+        size: {
+          x: 560,
+          y: 160,
+          z: 100
+        },
+        type: 'wood',
+        url: 'https://tensionclimbing.com/product/simple-board/',
         holds: 0
       }
     ]
@@ -3722,6 +3739,52 @@ export default [
       {
         name: 'Fingerhakler',
         id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Frictitious Climbing',
+    description:
+      'Maximizing Your Climbing Progression With Functional Training Tools',
+    country: 'US',
+    id: 113,
+    url: 'https://frictitiousclimbing.com',
+    hangboards: [
+      {
+        name: 'The Megalith',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'The Monolith',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Hangboard 3.0',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'EZ Board',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'Easy Board',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'The Port-A-Board',
+        id: 5,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
       }
