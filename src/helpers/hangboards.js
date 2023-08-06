@@ -1091,7 +1091,7 @@ export default [
         },
         type: 'wood',
         url: 'https://tensionclimbing.com/product/simple-board/',
-        holds: 0
+        holds: 2
       },
       {
         name: 'Simple Board (J1086)',
@@ -1104,7 +1104,7 @@ export default [
         },
         type: 'wood',
         url: 'https://tensionclimbing.com/product/simple-board/',
-        holds: 0
+        holds: 3
       }
     ]
   },
@@ -1610,7 +1610,7 @@ export default [
         name: 'Compact Training Board',
         id: 1,
         image: 'hangboards/BLEAUSTONECOMP.svg',
-        holds: 0
+        holds: 4
       }
     ]
   },
@@ -1703,7 +1703,7 @@ export default [
         name: 'Unlimited Board',
         id: 0,
         image: 'hangboards/ESCAPEULTIMED.svg',
-        holds: 0
+        holds: 2
       },
       {
         name: 'Beta Board',
@@ -2012,7 +2012,7 @@ export default [
         name: 'ComiX Club',
         id: 0,
         image: 'hangboards/EXPRESSIONSCOMIX.svg',
-        holds: 0
+        holds: 10
       }
     ]
   },
@@ -2027,7 +2027,7 @@ export default [
         name: 'Woodboard',
         id: 0,
         image: 'hangboards/WOODSTOKBOARD.svg',
-        holds: 0
+        holds: 7
       }
     ]
   },
@@ -2864,7 +2864,7 @@ export default [
             holds: 0
           }
         ],
-        holds: 0
+        holds: 1
       }
     ]
   },
@@ -3140,7 +3140,7 @@ export default [
         name: 'CJ-HB2025',
         id: 6,
         image: 'hangboards/TWOSTONESHB2025.svg',
-        holds: 0
+        holds: 3
       },
       {
         name: 'CJ-HB2046',
@@ -3306,7 +3306,7 @@ export default [
         name: 'Large',
         id: 2,
         image: 'hangboards/SMOGGRANDE.svg',
-        holds: 0
+        holds: 7
       },
       {
         name: 'The Change',
@@ -3486,7 +3486,7 @@ export default [
         name: 'B08HC2XXND',
         id: 2,
         image: 'hangboards/BEAST1000.svg',
-        holds: 0
+        holds: 11
       },
       {
         name: 'B08Z5WPFPS',
@@ -3546,7 +3546,7 @@ export default [
         name: 'Totem',
         id: 1,
         image: 'hangboards/LAMATOTEM.svg',
-        holds: 0
+        holds: 7
       }
     ]
   },
