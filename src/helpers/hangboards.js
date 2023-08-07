@@ -3667,10 +3667,17 @@ export default [
     url: 'https://clevo-climbing.com/',
     hangboards: [
       {
-        name: 'CLEVO hangboard',
+        name: 'Hangboard',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/CLEVOHANGBOARD.svg',
+        size: {
+          x: 600,
+          y: 146,
+          z: 52
+        },
+        type: 'wood',
+        url: 'https://clevo-climbing.com/en/products/hangboard',
+        holds: 10
       }
     ]
   },
@@ -3706,12 +3713,26 @@ export default [
       {
         name: 'FingerPeg 1.0',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/TRENIRAJZNARAVOFINGERPEG.svg',
+        size: {
+          x: 720,
+          y: 180,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://trenirajznaravo.com/trening/fingerpeg-1-0/',
+        holds: 15
       },
       {
         name: 'FingerBoard 2.0',
         id: 1,
+        size: {
+          x: 720,
+          y: 180,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://trenirajznaravo.com/trening/fingerboard-2000/',
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
       }
