@@ -1281,7 +1281,7 @@ export default [
           z: 65
         },
         type: 'plastic',
-        url: 'https://www.decathlon.co.uk/p/climbing-training-beam-vertika-r-black/_/R-p-345145?mc=8788963&c=GREY',
+        url: 'https://www.decathlon.co.uk/p/climbing-training-beam-vertika-r-black/_/R-p-345145',
         holds: 10
       }
     ]
@@ -1297,18 +1297,31 @@ export default [
         name: 'Fixed hangboard',
         id: 0,
         image: 'hangboards/CRIMPTONITEFIXED.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 4
       },
       {
         name: 'Mobile hangboard',
         id: 1,
         image: 'hangboards/CRIMPTONITEMOB.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 2
       },
       {
         name: 'Mobile hangboard UL',
         id: 2,
         image: 'hangboards/CRIMPTONITEMOBUL.svg',
+        size: {
+          x: 400,
+          y: 58,
+          z: 58
+        },
+        type: 'wood',
+        url: 'https://crimptonite.com/product/mobile-hangboard-ul-ultra-light/',
         sides: [
           {
             name: '22mm + 30mm + 22mm',
@@ -1337,7 +1350,27 @@ export default [
         name: 'Fixed hangboard V2',
         id: 3,
         image: 'hangboards/CRIMPTONITEFIXED2.svg',
+        size: {
+          x: 615,
+          y: 100,
+          z: 38
+        },
+        type: 'wood',
+        url: 'https://crimptonite.com/product/fixed-hangboard/',
         holds: 5
+      },
+      {
+        name: 'Helium',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 400,
+          y: 58,
+          z: 26
+        },
+        type: 'wood',
+        url: 'https://crimptonite.com/product/mobile-nano-limited-edition/',
+        holds: 0
       }
     ]
   },
@@ -1352,6 +1385,13 @@ export default [
         name: '180°',
         id: 0,
         image: 'hangboards/CAPTAIN180.svg',
+        size: {
+          x: 450,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://captainfingerfood.rocks/products/180-hangboard',
         sides: [
           {
             name: '',
@@ -1370,7 +1410,7 @@ export default [
   },
   {
     name: 'Surfaces for Climbing ',
-    description: 'By Eva López',
+    description: 'Construction and maintenance of climbing walls',
     country: 'ES',
     id: 22,
     url: 'https://www.surfacesforclimbing.com/',
@@ -1379,7 +1419,40 @@ export default [
         name: 'Progression / Transgression',
         id: 0,
         image: 'hangboards/SURFACEGRESSION.svg',
+        size: {
+          x: 595,
+          y: 405,
+          z: 105
+        },
+        type: 'plastic',
+        url: 'https://captainfingerfood.rocks/products/180-hangboard',
         holds: 8
+      },
+      {
+        name: 'Skok Training Board',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 590,
+          y: 180,
+          z: 120
+        },
+        type: 'plastic',
+        url: 'https://www.surfacesforclimbing.com/shop/es-tabla-entrenamiento-skok/',
+        holds: 0
+      },
+      {
+        name: 'Table Wood Dolmen',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 70,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://www.surfacesforclimbing.com/shop/es-tabla-wood-dolmen/',
+        holds: 0
       }
     ]
   },
@@ -1394,6 +1467,9 @@ export default [
         name: 'Transformer board (inc. Kurt)',
         id: 0,
         image: 'hangboards/WATAAAHTRANS.svg',
+        size: null,
+        type: 'plastic',
+        url: 'https://wataaah.de/product/kurt/',
         holds: 6
       }
     ]
@@ -1410,34 +1486,80 @@ export default [
         name: 'Classic',
         id: 0,
         image: 'hangboards/FINGERSCHINDERCLASSIC.svg',
+        size: {
+          x: 540,
+          y: 100,
+          z: 36
+        },
+        type: 'wood',
+        url: 'https://www.fingerschinder.com/store/',
         holds: 4
       },
       {
         name: 'Plus',
         id: 1,
         image: 'hangboards/FINGERSCHINDERPLUS.svg',
+        size: {
+          x: 540,
+          y: 75,
+          z: 34
+        },
+        type: 'wood',
+        url: 'https://www.fingerschinder.com/store/',
         holds: 2
       },
       {
         name: 'Mini',
         id: 2,
         image: 'hangboards/FINGERSCHINDERMINI.svg',
+        size: {
+          x: 400,
+          y: 75,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://www.fingerschinder.com/store/',
+        holds: 2
+      },
+      {
+        name: 'Homebase',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        size: null,
+        type: 'wood',
+        url: 'https://www.fingerschinder.com/store/',
         holds: 2
       }
     ]
   },
   {
-    name: 'CrimpMonster',
-    description: 'By Meisterschreiner',
+    name: 'JK-Meisterschreiner',
+    description: 'By Johannes Kauschinger',
     country: 'DE',
     id: 25,
     url: 'http://jk-meisterschreiner.de/',
     hangboards: [
       {
-        name: '3x4 small / 4x3 large',
+        name: 'CrimpMonster 3x4 / 4x3',
         id: 0,
         image: 'hangboards/CRIMPMOSTER.svg',
+        size: null,
+        type: 'wood',
+        url: 'http://jk-meisterschreiner.de/crimpmonster.html',
         holds: 3
+      },
+      {
+        name: 'GripMonster 200',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 800,
+          y: 165,
+          z: 65
+        },
+        type: 'wood',
+        url: 'http://jk-meisterschreiner.de/gripmonster---griffbretter.html',
+        holds: 0
       }
     ]
   },
@@ -1452,7 +1574,27 @@ export default [
         name: 'Hangboard',
         id: 0,
         image: 'hangboards/VOLAHANGBOARD.svg',
+        size: {
+          x: 570,
+          y: 180,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.thevola.com/product/hangboard/',
         holds: 13
+      },
+      {
+        name: 'Moody Hangboard',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 350,
+          y: 120,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://www.thevola.com/product/moody-hangboard/',
+        holds: 0
       }
     ]
   },
