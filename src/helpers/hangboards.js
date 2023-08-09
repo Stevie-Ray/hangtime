@@ -1981,13 +1981,40 @@ export default [
         name: 'Unlimited Board',
         id: 0,
         image: 'hangboards/ESCAPEULTIMED.svg',
+        size: {
+          x: 597,
+          y: 152,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://escapeclimbing.com/collections/training/products/ec72000',
         holds: 2
       },
       {
         name: 'Beta Board',
         id: 1,
         image: 'hangboards/ESCAPEBETA.svg',
+        size: {
+          x: 660,
+          y: 152,
+          z: 51
+        },
+        type: 'plastic',
+        url: 'https://escapeclimbing.com/collections/training/products/ec72100',
         holds: 10
+      },
+      {
+        name: 'Micro-Beta Board',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 470,
+          y: 89,
+          z: 45
+        },
+        type: 'plastic',
+        url: 'https://escapeclimbing.com/collections/training/products/ec72200',
+        holds: 0
       }
     ]
   },
@@ -2002,6 +2029,9 @@ export default [
         name: 'Training Board',
         id: 0,
         image: 'hangboards/LAPISTRAIN.svg',
+        size: null,
+        type: 'plastic',
+        url: 'https://escapeclimbing.com/collections/training/products/ec72200',
         holds: 10
       }
     ]
@@ -2018,7 +2048,23 @@ export default [
         name: 'Yaniro Power Hang Board',
         id: 0,
         image: 'hangboards/YANIROPOWERBOARD.svg',
+        size: {
+          x: 787,
+          y: 279,
+          z: 76
+        },
+        type: 'plastic',
+        url: 'https://www.atomikclimbingholds.com/yaniro-power-hang-board-2',
         holds: 18
+      },
+      {
+        name: 'Atomik Grip Training HangBoard',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: null,
+        type: 'plastic',
+        url: 'https://www.atomikclimbingholds.com/advanced-grip-training-hangboard-one-piece',
+        holds: 0
       }
     ]
   },
@@ -2027,13 +2073,33 @@ export default [
     description: 'Improve your climbing',
     country: 'GB',
     id: 39,
-    url: 'https://arête.com',
+    url: 'https://www.arête.com',
     hangboards: [
       {
         name: 'Crag Stick',
         id: 0,
         image: 'hangboards/ARETECRABSTICK.svg',
+        size: {
+          x: 360,
+          y: 68,
+          z: 34
+        },
+        type: 'wood',
+        url: 'https://www.arête.com/product/crag-stick/',
         holds: 2
+      },
+      {
+        name: 'Horizon 3.0',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 750,
+          y: 110,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.arête.com/product/horizon/',
+        holds: 0
       }
     ]
   },
@@ -2048,6 +2114,13 @@ export default [
         name: 'STOAK board',
         id: 0,
         image: 'hangboards/NATURESTOAK.svg',
+        size: {
+          x: 490,
+          y: 145,
+          z: 24
+        },
+        type: 'wood',
+        url: 'https://natureclimbing.com/collections/hangboards/products/stoak-board',
         holds: 3
       }
     ]
@@ -2060,21 +2133,42 @@ export default [
     url: 'https://digital-climbing.com/',
     hangboards: [
       {
-        name: 'Small climbing beam',
+        name: 'Small Oak beam',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 560,
+          y: 100,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       },
       {
-        name: 'Large climbing beam',
+        name: 'Large Oak/Hevea beam',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 930,
+          y: 190,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       },
       {
         name: 'Taurine',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 680,
+          y: 200,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
         holds: 0
       }
     ]
@@ -2090,12 +2184,26 @@ export default [
         name: 'Froggy',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 700,
+          y: 400,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://volxholds.com/en/catalogue/holds/holds-v-training/froggy-unibicolore-2-2/',
         holds: 0
       },
       {
         name: 'Dingo',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 500,
+          y: 350,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://volxholds.com/en/catalogue/holds/holds-v-training/training-dingo/',
         holds: 0
       }
     ]
@@ -2111,24 +2219,48 @@ export default [
         name: 'Training Board 1',
         id: 0,
         image: 'hangboards/AIXTRAINING1.svg',
+        size: {
+          x: 540,
+          y: 240,
+          z: 60
+        },
+        type: 'plastic',
+        url: 'https://aix.cz/holds/pu-training-board-1/',
         holds: 9
       },
       {
         name: 'Training Board 2',
         id: 1,
         image: 'hangboards/AIXTRAINING2.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 7
       },
       {
         name: 'Training Board 3',
         id: 2,
         image: 'hangboards/AIXTRAINING3.svg',
+        size: {
+          x: 420,
+          y: 180,
+          z: 55
+        },
+        type: 'plastic',
+        url: 'https://aix.cz/holds/pu-training-board-3/',
         holds: 3
       },
       {
         name: 'Woodboard',
         id: 3,
         image: 'hangboards/AIXWOODEN.svg',
+        size: {
+          x: 600,
+          y: 220,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://aix.cz/holds/wood-board/',
         holds: 3
       }
     ]
@@ -2144,7 +2276,27 @@ export default [
         name: '360 Rainbow Hangboard',
         id: 0,
         image: 'hangboards/360RAINBOW.svg',
+        size: {
+          x: 640,
+          y: 180,
+          z: 90
+        },
+        type: 'wood',
+        url: 'https://www.360holds.com/en/Online-Store/HANGBOARDS%2C-HOME-WALL-SETS-and-ACCESSORIES/HANGBOARDS/360-Rainbow-Hangboard',
         holds: 4
+      },
+      {
+        name: '360 Shift Bar',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 800,
+          y: 350,
+          z: 220
+        },
+        type: 'wood',
+        url: 'https://www.360holds.com/en/Online-Store/HANGBOARDS%2C-HOME-WALL-SETS-and-ACCESSORIES/HANGBOARDS/360-Shift-Bar',
+        holds: 0
       }
     ]
   },
