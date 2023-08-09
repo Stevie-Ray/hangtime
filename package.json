@@ -32,12 +32,12 @@
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.2.4",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.3.11",
+    "vuetify": "^3.3.12",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.9",
-    "@babel/eslint-parser": "^7.22.9",
+    "@babel/core": "^7.22.10",
+    "@babel/eslint-parser": "^7.22.10",
     "@storybook/addon-actions": "^7.0.17",
     "@storybook/addon-essentials": "^7.2.1",
     "@storybook/addon-interactions": "^7.2.1",

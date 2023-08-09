@@ -1610,12 +1610,26 @@ export default [
         name: 'Training Board - Higher 2.0 (48x32)',
         id: 0,
         image: 'hangboards/ALPIDEXHIGHER.svg',
+        size: {
+          x: 480,
+          y: 200,
+          z: 75
+        },
+        type: 'plastic',
+        url: 'https://www.alpidex.com/klettern/training/trainingsboard-higher-2-0-griffbrett-in-verschiedenen-farben-von-alpidex_15065',
         holds: 8
       },
       {
         name: 'Training Board - Pro 2.0 (53x20)',
         id: 1,
         image: 'hangboards/ALPIDEXTRAINING.svg',
+        size: {
+          x: 530,
+          y: 200,
+          z: 75
+        },
+        type: 'plastic',
+        url: 'https://www.alpidex.com/klettern/training/trainingsboard-higher-2-0-griffbrett-in-verschiedenen-farben-von-alpidex_15065',
         holds: 10
       }
     ]
@@ -1631,18 +1645,35 @@ export default [
         name: 'Training board small',
         id: 0,
         image: 'hangboards/ERZISMALL.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 5
       },
       {
         name: 'Training board medium',
         id: 1,
         image: 'hangboards/ERZIMEDIUM.svg',
+        size: {
+          x: 665,
+          y: 320,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://erzi.de/shop/en/Fit-Healthy/Equipment/Trainings-Board-medium.html',
         holds: 13
       },
       {
         name: 'Training board large',
         id: 2,
         image: 'hangboards/ERZILARGE.svg',
+        size: {
+          x: 950,
+          y: 380,
+          z: 90
+        },
+        type: 'wood',
+        url: 'https://erzi.de/shop/en/Fit-Healthy/Equipment/Trainings-Board-large.html',
         holds: 21
       }
     ]
@@ -1658,6 +1689,13 @@ export default [
         name: 'Griptonite',
         id: 0,
         image: 'hangboards/SMARTROCKGRIP.svg',
+        size: {
+          x: 580,
+          y: 150,
+          z: 60
+        },
+        type: 'plastic',
+        url: 'https://shop.smartrock.de/komp/product/griptonite.html',
         holds: 14
       }
     ]
