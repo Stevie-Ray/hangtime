@@ -1711,24 +1711,36 @@ export default [
         name: 'Ultimate Board',
         id: 0,
         image: 'hangboards/NICROSULTIMATE.svg',
+        size: null,
+        type: 'plastic',
+        url: 'https://shop.nicros.com/ultimate-board/',
         holds: 15
       },
       {
         name: 'Warrior Hangboard',
         id: 1,
         image: 'hangboards/NICROSWARRIOR.svg',
+        size: null,
+        type: 'plastic',
+        url: 'https://shop.nicros.com/warrior-board/',
         holds: 7
       },
       {
         name: 'V10 Training Board',
         id: 2,
         image: 'hangboards/NICROSBOARD.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 10
       },
       {
         name: 'NEXGEN 2',
         id: 3,
         image: 'hangboards/NICROSNEXGEN.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 9
       }
     ]
@@ -1745,30 +1757,49 @@ export default [
         name: 'Quarantine Board',
         id: 0,
         image: 'hangboards/CONCEPTQUARATINE.svg',
+        size: null,
+        type: 'wood',
+        url: 'https://www.conceptclimbing.com/contents/en-us/p55156_Quarantine-Board-.html',
         holds: 4
       },
       {
         name: 'Solution',
         id: 1,
         image: 'hangboards/CONCEPTSOL.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 14
       },
       {
         name: 'Solution #2.0',
         id: 2,
         image: 'hangboards/CONCEPTSOL2.svg',
+        size: null,
+        type: 'wood',
+        url: 'https://www.conceptclimbing.com/contents/en-us/p55108_Solution2.0.html',
         holds: 11
       },
       {
         name: 'The Edge',
         id: 3,
         image: 'hangboards/CONCEPTEDGE.svg',
+        size: null,
+        type: 'wood',
+        url: 'https://www.conceptclimbing.com/contents/en-us/p55016.html',
         holds: 11
       },
       {
         name: 'Crag Board',
         id: 4,
         image: 'hangboards/CONCEPTCRAG.svg',
+        size: {
+          x: 300,
+          y: 150,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.conceptclimbing.com/contents/en-us/p55015_Cragboard.html',
         holds: 4
       }
     ]
@@ -1784,12 +1815,22 @@ export default [
         name: 'Long Training Board',
         id: 0,
         image: 'hangboards/BLEAUSTONELONG.svg',
+        size: {
+          x: 680,
+          y: 185,
+          z: 70
+        },
+        type: 'plastic',
+        url: null,
         holds: 4
       },
       {
         name: 'Compact Training Board',
         id: 1,
         image: 'hangboards/BLEAUSTONECOMP.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 4
       }
     ]
@@ -1805,13 +1846,40 @@ export default [
         name: 'Asymmetric Board v3',
         id: 0,
         image: 'hangboards/EUROHOLDSASYM.svg',
+        size: {
+          x: 660,
+          y: 160,
+          z: 6
+        },
+        type: 'wood',
+        url: null,
         holds: 9
       },
       {
         name: 'Smartie Board',
         id: 1,
         image: 'hangboards/EUROHOLDSMARTIE.svg',
+        size: {
+          x: 540,
+          y: 40,
+          z: 35
+        },
+        type: 'wood',
+        url: null,
         holds: 2
+      },
+      {
+        name: 'Basic wood board v2',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 100,
+          z: 5
+        },
+        type: 'wood',
+        url: 'https://euroholds.com/en/fingerboards/1058-basic-wood-board-8435561579160.html',
+        holds: 0
       }
     ]
   },
@@ -1827,18 +1895,27 @@ export default [
         name: 'Champion Hangboard',
         id: 0,
         image: 'hangboards/BLANKSLATECHAMP.svg',
+        size: null,
+        type: 'wood',
+        url: null,
         holds: 14
       },
       {
         name: 'The Ninja Challenge',
         id: 1,
         image: 'hangboards/BLANKSLATENINJA.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 7
       },
       {
         name: 'The Black Peacemaker',
         id: 2,
         image: 'hangboards/BLANKSLATEPEACE.svg',
+        size: null,
+        type: 'plastic',
+        url: null,
         holds: 16
       }
     ]
@@ -1847,26 +1924,47 @@ export default [
     name: 'Lyons Edge',
     description:
       'Gorgeous hangboards that will take your climbing abilities to the next level!',
-    country: 'FR',
+    country: 'CA',
     id: 35,
-    url: 'https://lyonsedge.com/',
+    url: 'https://lyons-edge.myshopify.com/',
     hangboards: [
       {
         name: 'The Base-Camp',
         id: 0,
         image: 'hangboards/LYONSBASE.svg',
+        size: {
+          x: null,
+          y: 158,
+          z: 44
+        },
+        type: 'wood',
+        url: 'https://lyons-edge.myshopify.com/collections/hangboards/products/the-base-camp',
         holds: 3
       },
       {
         name: 'The Explorer',
         id: 1,
         image: 'hangboards/LYONSEXPLORER.svg',
+        size: {
+          x: null,
+          y: 102,
+          z: 39
+        },
+        type: 'wood',
+        url: 'https://lyons-edge.myshopify.com/collections/hangboards/products/the-explorer',
         holds: 2
       },
       {
         name: 'The Hideout',
         id: 2,
         image: 'hangboards/LYONSHIDEOUT.svg',
+        size: {
+          x: null,
+          y: 158,
+          z: 44
+        },
+        type: 'wood',
+        url: 'https://lyons-edge.myshopify.com/collections/hangboards/products/the-hideout',
         holds: 4
       }
     ]
@@ -3986,6 +4084,46 @@ export default [
       {
         name: 'The Port-A-Board',
         id: 5,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Yosyamitya Climbing',
+    description:
+      'OkBoard 🌳 Wooden Hangboards 💪 Training Tools Made by Climbers.',
+    country: 'UA',
+    id: 113,
+    url: 'https://www.instagram.com/yosyamitya_climb/',
+    hangboards: [
+      {
+        name: 'OkBoard Wall',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'OkBoard Crag',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'OkBoard Lite',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'OkBoard Stick',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        holds: 0
+      },
+      {
+        name: 'OkBoard Plank',
+        id: 3,
         image: 'hangboards/NOTFOUND.svg',
         holds: 0
       }
