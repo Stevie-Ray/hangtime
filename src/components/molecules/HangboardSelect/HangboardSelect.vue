@@ -3,10 +3,13 @@ import { computed, defineEmits, defineProps, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
 import { useUser } from '@/stores/user'
+import countries from '@/helpers/countries'
 
 const { t } = useI18n()
 
 const {
+  getHangboardByIds,
+  getCompanyById,
   getHangboardNameByIds,
   getHangboardImageByIds,
   getCompanies,
@@ -65,6 +68,25 @@ const subject = computed(() =>
     required
     @update:modelValue="selected.hangboard = 0"
   >
+    <template #item="{ item, props: { onClick } }">
+      <v-list-item @click="onClick">
+        <span>
+          {{
+            item.raw.country
+              ? countries.find((country) => country.alpha2 === item.raw.country)
+                  ?.emoji
+              : ''
+          }}&nbsp;{{ item.title }}</span
+        >
+        <v-chip
+          class="mx-2"
+          size="x-small"
+          v-if="item.value >= getCompanies.length - 5"
+        >
+          {{ $t('new') }}
+        </v-chip>
+      </v-list-item>
+    </template>
     <template #prepend>
       <v-icon color="text">mdi-numeric-1-box</v-icon>
     </template>
@@ -103,8 +125,76 @@ const subject = computed(() =>
         </v-btn>
       </div>
     </v-card-text>
-    <v-card-title>
-      {{ getHangboardNameByIds(selected.company, selected.hangboard) }}
+    <v-card-title class="d-flex justify-space-between">
+      <div v-if="getHangboardByIds(selected.company, selected.hangboard).name">
+        {{ getHangboardByIds(selected.company, selected.hangboard).name }}
+      </div>
+      <v-chip
+        v-if="getHangboardByIds(selected.company, selected.hangboard).type"
+      >
+        {{ getHangboardByIds(selected.company, selected.hangboard).type }}
+      </v-chip>
     </v-card-title>
+    <v-card-subtitle>
+      <span>
+        {{
+          getCompanyById(selected.company).country
+            ? countries.find(
+                (country) =>
+                  country.alpha2 === getCompanyById(selected.company).country
+              )?.emoji
+            : ''
+        }}&nbsp;{{ getCompanyById(selected.company).name }}</span
+      >
+    </v-card-subtitle>
+    <v-card-actions>
+      <v-btn
+        color="text"
+        disabled
+        v-if="getHangboardByIds(selected.company, selected.hangboard).size"
+      >
+        <div class="text-caption">
+          <span
+            v-if="
+              getHangboardByIds(selected.company, selected.hangboard).size.x
+            "
+          >
+            {{
+              getHangboardByIds(selected.company, selected.hangboard).size.x
+            }}mm
+          </span>
+          <span
+            v-if="
+              getHangboardByIds(selected.company, selected.hangboard).size.y
+            "
+          >
+            &nbsp;x
+            {{
+              getHangboardByIds(selected.company, selected.hangboard).size.y
+            }}mm
+          </span>
+          <span
+            v-if="
+              getHangboardByIds(selected.company, selected.hangboard).size.z
+            "
+          >
+            &nbsp;x
+            {{
+              getHangboardByIds(selected.company, selected.hangboard).size.z
+            }}mm
+          </span>
+        </div>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn
+        size="small"
+        v-if="getHangboardByIds(selected.company, selected.hangboard).url"
+        color="text"
+        icon="mdi-share-variant"
+        :href="getHangboardByIds(selected.company, selected.hangboard).url"
+        target="_blank"
+      >
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>

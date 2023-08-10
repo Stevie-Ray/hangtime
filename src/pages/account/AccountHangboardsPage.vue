@@ -10,12 +10,13 @@ import { useWorkouts } from '@/stores/workouts'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
 import HangboardAdd from '@/components/molecules/dialog/HangboardAdd/HangboardAdd'
 import { useApp } from '@/stores/app'
+import countries from '@/helpers/countries'
 
 const { t } = useI18n()
 
 const { getUserHangboards, getUserHangboardSelectedId } = storeToRefs(useUser())
 
-const { getHangboardNameByIds } = useUser()
+const { getHangboardByIds, getCompanyById } = useUser()
 
 const { networkOnLine } = storeToRefs(useApp())
 
@@ -68,6 +69,10 @@ useHead({
                 v-for="(hangboard, index) in getUserHangboards"
                 :key="index"
                 class="mb-8"
+                @click="setHangboard(index)"
+                :variant="
+                  getUserHangboardSelectedId === index ? 'outlined' : 'elevated'
+                "
               >
                 <v-card-text>
                   <exercise-hangboard
@@ -78,33 +83,125 @@ useHead({
                   >
                   </exercise-hangboard>
                 </v-card-text>
-                <v-card-title>
-                  {{
-                    getHangboardNameByIds(
-                      hangboard.company,
-                      hangboard.hangboard
-                    )
-                  }}
+                <v-card-title class="d-flex justify-space-between">
+                  <div
+                    v-if="
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)
+                        .name
+                    "
+                  >
+                    {{
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)
+                        .name
+                    }}
+                  </div>
+                  <v-chip
+                    v-if="
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)
+                        .type
+                    "
+                  >
+                    {{
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)
+                        .type
+                    }}
+                  </v-chip>
                 </v-card-title>
+                <v-card-subtitle>
+                  {{
+                    getCompanyById(hangboard.company).country
+                      ? countries.find(
+                          (country) =>
+                            country.alpha2 ===
+                            getCompanyById(hangboard.company).country
+                        )?.emoji
+                      : ''
+                  }}&nbsp;{{ getCompanyById(hangboard.company).name }}
+                </v-card-subtitle>
                 <v-card-actions>
                   <v-btn
                     color="text"
-                    :disabled="getUserHangboardSelectedId === index"
-                    @click="setHangboard(index)"
+                    disabled
+                    v-if="
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)
+                        .size
+                    "
                   >
-                    {{
-                      getUserHangboardSelectedId === index
-                        ? t('Selected')
-                        : t('Select')
-                    }}
+                    <div class="text-caption">
+                      <span
+                        v-if="
+                          getHangboardByIds(
+                            hangboard.company,
+                            hangboard.hangboard
+                          ).size.x
+                        "
+                      >
+                        {{
+                          getHangboardByIds(
+                            hangboard.company,
+                            hangboard.hangboard
+                          ).size.x
+                        }}mm
+                      </span>
+                      <span
+                        v-if="
+                          getHangboardByIds(
+                            hangboard.company,
+                            hangboard.hangboard
+                          ).size.y
+                        "
+                      >
+                        &nbsp;x
+                        {{
+                          getHangboardByIds(
+                            hangboard.company,
+                            hangboard.hangboard
+                          ).size.y
+                        }}mm
+                      </span>
+                      <span
+                        v-if="
+                          getHangboardByIds(
+                            hangboard.company,
+                            hangboard.hangboard
+                          ).size.z
+                        "
+                      >
+                        &nbsp;x
+                        {{
+                          getHangboardByIds(
+                            hangboard.company,
+                            hangboard.hangboard
+                          ).size.z
+                        }}mm
+                      </span>
+                    </div>
+                  </v-btn>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    size="small"
+                    v-if="
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)
+                        .url
+                    "
+                    color="text"
+                    icon="mdi-share-variant"
+                    :href="
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)
+                        .url
+                    "
+                    target="_blank"
+                  >
                   </v-btn>
                   <v-btn
-                    v-if="getUserHangboardSelectedId !== index"
+                    size="small"
                     color="text"
-                    :disabled="!networkOnLine"
+                    icon="mdi-delete"
+                    :disabled="
+                      !networkOnLine || getUserHangboardSelectedId === index
+                    "
                     @click="removeHangboard(index)"
                   >
-                    {{ t('Delete') }}
                   </v-btn>
                 </v-card-actions>
               </v-card>

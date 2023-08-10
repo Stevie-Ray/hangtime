@@ -13,6 +13,11 @@ export const useUser = defineStore('user', {
     getHangboardByIds: () => (company, hangboard) =>
       hangboardBrands[company].hangboards[hangboard],
     /**
+     * Get a company Name by  ID
+     * @return Object
+     */
+    getCompanyById: () => (company) => hangboardBrands[company],
+    /**
      * Get a hangboard Name by company & hangboard ID
      * @return {function(*, *): string}
      */

@@ -811,7 +811,7 @@ export default [
           z: null
         },
         type: 'plastic',
-        url: 'https://www.problemsolver.rocks/shop/problemsolver-motion',
+        url: 'https://soillholds.com/products/all-chalk-no-action',
         holds: 13
       },
       {
@@ -2031,7 +2031,7 @@ export default [
         image: 'hangboards/LAPISTRAIN.svg',
         size: null,
         type: 'plastic',
-        url: 'https://escapeclimbing.com/collections/training/products/ec72200',
+        url: 'https://www.climb-holds.com/en/product/training-board-product',
         holds: 10
       }
     ]
