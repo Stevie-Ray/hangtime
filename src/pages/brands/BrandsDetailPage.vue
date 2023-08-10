@@ -1,7 +1,6 @@
 <script setup>
 import { computed } from 'vue'
 import { useHead } from '@vueuse/head'
-import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
@@ -12,10 +11,11 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 import { useRandomImage } from '@/helpers'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import countries from '@/helpers/countries'
+import { useApp } from '@/stores/app'
 
 const { user } = storeToRefs(useAuthentication())
 
-const { t } = useI18n()
+const { networkOnLine } = storeToRefs(useApp())
 
 const { getCompanyByUrlKey, getHangboardImageByIds } = useUser()
 
@@ -39,6 +39,15 @@ useHead({
       <v-icon @click="router.push('/brands')">mdi-arrow-left</v-icon>
     </template>
 
+    <template #icons>
+      <v-btn
+        icon="mdi-open-in-new"
+        color="text"
+        :disabled="!networkOnLine"
+        :href="getCompany?.url"
+      ></v-btn>
+    </template>
+
     <template #title>
       {{
         `${
@@ -59,28 +68,16 @@ useHead({
           <v-col cols="12">
             <v-card
               class="mx-auto"
-              min-height="144"
+              max-height="144"
               max-width="100%"
               theme="light"
             >
               <v-img :src="useRandomImage()" cover>
-                <v-card-text>
+                <v-card-text style="min-height: 144px">
                   <div class="text-subtitle-1 mb-4">
                     {{ getCompany?.description }}
                   </div>
                 </v-card-text>
-                <v-card-actions>
-                  <v-btn
-                    :href="getCompany?.url"
-                    class="mb-1 pr-3"
-                    color="text"
-                    size="large"
-                    variant="outlined"
-                    append-icon="mdi-open-in-new"
-                  >
-                    {{ t('Website') }}
-                  </v-btn>
-                </v-card-actions>
               </v-img>
             </v-card>
           </v-col>

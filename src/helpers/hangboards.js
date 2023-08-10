@@ -228,9 +228,9 @@ export default [
     ]
   },
   {
-    name: 'Entre-Prises',
+    name: 'Entre-Prises (EP Climbing)',
     description:
-      'The world’s leading manufacturer of climbing walls and holds, provides support to climbing facility, school wall and competition wall projects, and much more more besides.',
+      'The world’s leading manufacturer of climbing walls and holds, provides support to climbing facility, school and competition…',
     country: 'US',
     id: 4,
     url: 'https://www.entre-prises.us/',
@@ -1601,7 +1601,7 @@ export default [
   {
     name: 'Alpidex',
     description:
-      'Your specialist for sportswear, climbing and outdoor equipment so that you are always well equipped for sports and leisure!',
+      'Your specialist for sportswear, climbing & outdoor equipment so that you are always well prepared for sports and leisure!',
     country: 'DE',
     id: 27,
     url: 'https://www.alpidex.com/',

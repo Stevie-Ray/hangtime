@@ -56,4 +56,10 @@ watch(user, async (updatedUser) => {
     border-radius: 0;
   }
 }
+
+@media (min-width: 1280px) {
+  .v-container {
+    max-width: 900px;
+  }
+}
 </style>
