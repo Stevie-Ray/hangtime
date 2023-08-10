@@ -161,6 +161,10 @@ useHead({
                     <v-icon :icon="item.icon"></v-icon>
                   </template>
 
+                  <template #append v-if="item.external">
+                    <v-icon icon="mdi-open-in-new"></v-icon>
+                  </template>
+
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
 
                   <v-list-item-subtitle>{{

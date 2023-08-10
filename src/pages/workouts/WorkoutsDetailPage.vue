@@ -285,7 +285,7 @@ useHead({
       </v-btn>
       <v-btn
         v-if="workout?.share && navigatorShare && !editMode"
-        icon="mdi-export-variant"
+        icon="mdi-share-variant"
         color="text"
         @click="shareWorkout"
       ></v-btn>

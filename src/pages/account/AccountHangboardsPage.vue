@@ -185,7 +185,7 @@ useHead({
                         .url
                     "
                     color="text"
-                    icon="mdi-share-variant"
+                    icon="mdi-open-in-new"
                     :href="
                       getHangboardByIds(hangboard.company, hangboard.hangboard)
                         .url

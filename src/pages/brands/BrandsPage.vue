@@ -46,15 +46,26 @@ useHead({
                 "
                 v-for="company in getCompanies"
                 :key="company.id"
-                :title="`${
-                  company.country
-                    ? countries.find(
-                        (country) => country.alpha2 === company.country
-                      )?.emoji
-                    : ''
-                } ${company.name}`"
-                :subtitle="company.description"
               >
+                <v-list-item-title>
+                  {{
+                    company.country
+                      ? countries.find(
+                          (country) => country.alpha2 === company.country
+                        )?.emoji
+                      : ''
+                  }}&nbsp;{{ company.name }}
+                  <v-chip
+                    class="mx-2"
+                    size="x-small"
+                    v-if="company.id >= getCompanies.length - 5"
+                  >
+                    {{ $t('new') }}
+                  </v-chip>
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ company.description }}
+                </v-list-item-subtitle>
               </v-list-item>
             </v-list>
           </v-col>

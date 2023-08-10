@@ -17,7 +17,7 @@ const { user } = storeToRefs(useAuthentication())
 
 const { t } = useI18n()
 
-const { getCompanyByUrlKey } = useUser()
+const { getCompanyByUrlKey, getHangboardImageByIds } = useUser()
 
 // router
 const route = useRoute()
@@ -72,10 +72,11 @@ useHead({
                 <v-card-actions>
                   <v-btn
                     :href="getCompany?.url"
-                    class="mb-1"
+                    class="mb-1 pr-3"
                     color="text"
                     size="large"
                     variant="outlined"
+                    append-icon="mdi-open-in-new"
                   >
                     {{ t('Website') }}
                   </v-btn>
@@ -93,6 +94,10 @@ useHead({
             >
               <v-card-text>
                 <exercise-hangboard
+                  v-if="
+                    getHangboardImageByIds(getCompany.id, hangboard.id) !==
+                    'hangboards/NOTFOUND.svg'
+                  "
                   :hangboard="{
                     company: getCompany.id,
                     hangboard: hangboard.id
@@ -107,31 +112,42 @@ useHead({
               <v-card-subtitle>
                 {{ getCompany.name }}
               </v-card-subtitle>
-              <v-card-text v-if="hangboard.size">
-                <div class="text-caption">
-                  <span v-if="hangboard.size.x">
-                    {{ hangboard.size.x }}mm
-                  </span>
-                  <span v-if="hangboard.size.y">
-                    &nbsp;x {{ hangboard.size.y }}mm
-                  </span>
-                  <span v-if="hangboard.size.z">
-                    &nbsp;x {{ hangboard.size.z }}mm
-                  </span>
-                </div>
-              </v-card-text>
               <v-card-actions v-if="!user || hangboard.url">
-                <v-btn v-if="!user" color="text" to="/login">
-                  {{ t('workouts') }}
+                <v-btn color="text" disabled v-if="hangboard.size">
+                  <div class="text-caption">
+                    <span v-if="hangboard.size.x">
+                      {{ hangboard.size.x }}mm
+                    </span>
+                    <span v-if="hangboard.size.y">
+                      &nbsp;x
+                      {{ hangboard.size.y }}mm
+                    </span>
+                    <span v-if="hangboard.size.z">
+                      &nbsp;x
+                      {{ hangboard.size.z }}mm
+                    </span>
+                  </div>
                 </v-btn>
+                <v-spacer></v-spacer>
                 <v-btn
+                  size="small"
                   v-if="hangboard.url"
                   color="text"
+                  icon="mdi-open-in-new"
                   :href="hangboard.url"
                   target="_blank"
                 >
-                  {{ t('Buy') }}
                 </v-btn>
+                <v-btn
+                  v-if="!user"
+                  :disabled="
+                    getHangboardImageByIds(getCompany.id, hangboard.id) ===
+                    'hangboards/NOTFOUND.svg'
+                  "
+                  color="text"
+                  to="/login"
+                  icon="mdi-login"
+                />
               </v-card-actions>
             </v-card>
           </v-col>
