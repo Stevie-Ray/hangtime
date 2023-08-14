@@ -976,7 +976,7 @@ useHead({
                 v-scroll="onScroll"
                 v-show="!editMode"
                 class="fab text-end"
-                @click.stop="router.push(`/workouts/${workout.id}/timer`)"
+                @click.prevent="router.push(`/workouts/${workout.id}/timer`)"
               >
                 <div class="mx-4">
                   <v-fab-transition>
@@ -985,6 +985,7 @@ useHead({
                       :to="`/workouts/${workout.id}/timer`"
                       size="x-large"
                       rounded="lg"
+                      @click="router.push(`/workouts/${workout.id}/timer`)"
                     >
                       {{ t('Start workout') }}
                     </v-btn>
@@ -1014,12 +1015,12 @@ useHead({
   height: 80px;
   left: 0;
   width: calc((100% - 0px) - 0px);
-  pointer-events: none;
+  //pointer-events: none;
   .v-btn {
     background-color: rgb(var(--v-theme-accent));
     z-index: 1005;
     --v-btn-height: 56px;
-    pointer-events: initial;
+    //pointer-events: initial;
   }
 }
 
