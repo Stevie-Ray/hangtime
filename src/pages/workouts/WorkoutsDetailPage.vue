@@ -250,7 +250,7 @@ const parseVideo = (video) => {
 const startWorkoutButton = ref(false)
 
 const onScroll = () => {
-  startWorkoutButton.value = window.scrollY > 200
+  startWorkoutButton.value = window.scrollY > 250
 }
 
 const rules = {
@@ -334,7 +334,7 @@ useHead({
     </template>
 
     <template #default>
-      <v-container>
+      <v-container v-scroll="onScroll">
         <v-row>
           <v-col cols="12">
             <div v-if="workout">
@@ -972,12 +972,7 @@ useHead({
                 </v-col>
               </v-row>
 
-              <div
-                v-scroll="onScroll"
-                v-show="!editMode"
-                class="fab text-end"
-                @click.prevent="router.push(`/workouts/${workout.id}/timer`)"
-              >
+              <div v-show="!editMode" class="fab text-end">
                 <div class="mx-4">
                   <v-fab-transition>
                     <v-btn
@@ -985,9 +980,7 @@ useHead({
                       :to="`/workouts/${workout.id}/timer`"
                       size="x-large"
                       rounded="lg"
-                      @click="router.push(`/workouts/${workout.id}/timer`)"
                     >
-                      {{ t('Start workout') }}
                     </v-btn>
                   </v-fab-transition>
                 </div>
@@ -1015,12 +1008,12 @@ useHead({
   height: 80px;
   left: 0;
   width: calc((100% - 0px) - 0px);
-  //pointer-events: none;
+  pointer-events: none;
   .v-btn {
     background-color: rgb(var(--v-theme-accent));
     z-index: 1005;
     --v-btn-height: 56px;
-    //pointer-events: initial;
+    pointer-events: initial;
   }
 }
 
