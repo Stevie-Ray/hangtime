@@ -247,6 +247,12 @@ const parseVideo = (video) => {
   return ''
 }
 
+const startWorkoutButton = ref(false)
+
+const onScroll = () => {
+  startWorkoutButton.value = window.scrollY > 200
+}
+
 const rules = {
   number: (v) => !v.isNaN || 'NaN',
   required: (v) => !!v || 'This field is required',
@@ -965,6 +971,25 @@ useHead({
                   </div>
                 </v-col>
               </v-row>
+
+              <div
+                v-scroll="onScroll"
+                v-if="!editMode"
+                class="fab text-end pointer-events-none"
+              >
+                <div class="mx-4">
+                  <v-fab-transition>
+                    <v-btn
+                      v-show="startWorkoutButton"
+                      :to="`/workouts/${workout.id}/timer`"
+                      class="mt-auto pointer-events-initial"
+                      size="x-large"
+                    >
+                      {{ t('Start workout') }}
+                    </v-btn>
+                  </v-fab-transition>
+                </div>
+              </div>
             </div>
 
             <div v-else>
@@ -979,6 +1004,20 @@ useHead({
 
 <style lang="scss" scoped>
 @use 'vuetify/settings';
+
+.fab {
+  bottom: 56px;
+  z-index: 1004;
+  transform: translateY(0%);
+  position: fixed;
+  height: 80px;
+  left: 0px;
+  width: calc((100% - 0px) - 0px);
+  .v-btn {
+    background-color: rgb(var(--v-theme-accent));
+    --v-btn-height: 56px;
+  }
+}
 
 .exercise-card:last-child:deep(.v-card):last-child:after {
   border: none;
@@ -1008,5 +1047,13 @@ useHead({
     margin-left: settings.$spacer;
     color: rgb(var(--v-theme-error));
   }
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-initial {
+  pointer-events: initial;
 }
 </style>
