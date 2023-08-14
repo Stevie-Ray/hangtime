@@ -253,6 +253,10 @@ const onScroll = () => {
   startWorkoutButton.value = window.scrollY > 250
 }
 
+const goToTimer = () => {
+  router.push(`/workouts/${workout.value.id}/timer`)
+}
+
 const rules = {
   number: (v) => !v.isNaN || 'NaN',
   required: (v) => !!v || 'This field is required',
@@ -334,7 +338,7 @@ useHead({
     </template>
 
     <template #default>
-      <v-container v-scroll="onScroll">
+      <v-container>
         <v-row>
           <v-col cols="12">
             <div v-if="workout">
@@ -972,7 +976,7 @@ useHead({
                 </v-col>
               </v-row>
 
-              <div v-show="!editMode" class="fab text-end">
+              <div v-show="!editMode" v-scroll="onScroll" class="fab text-end">
                 <div class="mx-4">
                   <v-fab-transition>
                     <v-btn
@@ -980,7 +984,9 @@ useHead({
                       :to="`/workouts/${workout.id}/timer`"
                       size="x-large"
                       rounded="lg"
+                      @click="goToTimer"
                     >
+                      {{ t('Start workout') }}
                     </v-btn>
                   </v-fab-transition>
                 </div>
@@ -1002,7 +1008,7 @@ useHead({
 
 .fab {
   bottom: 56px;
-  z-index: 1004;
+  z-index: 1007;
   transform: translateY(0%);
   position: fixed;
   height: 80px;
@@ -1011,7 +1017,7 @@ useHead({
   pointer-events: none;
   .v-btn {
     background-color: rgb(var(--v-theme-accent));
-    z-index: 1005;
+    z-index: 1008;
     --v-btn-height: 56px;
     pointer-events: initial;
   }
