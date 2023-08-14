@@ -978,9 +978,9 @@ useHead({
                     <v-btn
                       v-show="startWorkoutButton"
                       :to="`/workouts/${workout.id}/timer`"
-                      class="mt-auto"
                       size="x-large"
                       rounded="lg"
+                      @click.stop="router.push(`/workouts/${workout.id}/timer`)"
                     >
                       {{ t('Start workout') }}
                     </v-btn>
@@ -1008,11 +1008,14 @@ useHead({
   transform: translateY(0%);
   position: fixed;
   height: 80px;
-  left: 0px;
+  left: 0;
   width: calc((100% - 0px) - 0px);
+  pointer-events: none;
   .v-btn {
     background-color: rgb(var(--v-theme-accent));
+    z-index: 1005;
     --v-btn-height: 56px;
+    pointer-events: initial;
   }
 }
 
