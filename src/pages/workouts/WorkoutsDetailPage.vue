@@ -972,7 +972,12 @@ useHead({
                 </v-col>
               </v-row>
 
-              <div v-scroll="onScroll" v-if="!editMode" class="fab text-end">
+              <div
+                v-scroll="onScroll"
+                v-show="!editMode"
+                class="fab text-end"
+                @click.stop="router.push(`/workouts/${workout.id}/timer`)"
+              >
                 <div class="mx-4">
                   <v-fab-transition>
                     <v-btn
@@ -980,7 +985,6 @@ useHead({
                       :to="`/workouts/${workout.id}/timer`"
                       size="x-large"
                       rounded="lg"
-                      @click.stop="router.push(`/workouts/${workout.id}/timer`)"
                     >
                       {{ t('Start workout') }}
                     </v-btn>
