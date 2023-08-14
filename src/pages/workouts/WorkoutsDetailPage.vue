@@ -972,18 +972,15 @@ useHead({
                 </v-col>
               </v-row>
 
-              <div
-                v-scroll="onScroll"
-                v-if="!editMode"
-                class="fab text-end pointer-events-none"
-              >
+              <div v-scroll="onScroll" v-if="!editMode" class="fab text-end">
                 <div class="mx-4">
                   <v-fab-transition>
                     <v-btn
                       v-show="startWorkoutButton"
                       :to="`/workouts/${workout.id}/timer`"
-                      class="mt-auto pointer-events-initial"
+                      class="mt-auto"
                       size="x-large"
+                      rounded="lg"
                     >
                       {{ t('Start workout') }}
                     </v-btn>
@@ -1047,13 +1044,5 @@ useHead({
     margin-left: settings.$spacer;
     color: rgb(var(--v-theme-error));
   }
-}
-
-.pointer-events-none {
-  pointer-events: none;
-}
-
-.pointer-events-initial {
-  pointer-events: initial;
 }
 </style>
