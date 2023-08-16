@@ -3826,67 +3826,146 @@ export default [
     ]
   },
   {
-    name: "Dídak's Climbing",
-    description: 'Climbing Holds',
+    name: "Didak's Climbing Holds",
+    description:
+      "Didak's Climbing from Barcelona are manufacturers of polyurethane climbing holds and climbing walls",
     country: 'ES',
     id: 71,
     url: 'http://www.didaks.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/didaks.holds',
+      instagram: 'https://www.instagram.com/didaks/'
+    },
     hangboards: [
       {
         name: 'Xylon',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 380,
+          y: 110,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://www.didaks.com/holds/training?product_id=487',
         holds: 0
       },
       {
         name: 'Chronos',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 290,
+          z: 80
+        },
+        type: 'wood',
+        url: 'https://www.didaks.com/holds/training?product_id=480',
         holds: 0
       },
       {
         name: 'Stratos',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://www.didaks.com/holds/training?product_id=432',
         holds: 0
       },
       {
         name: 'Paraboltheworld',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 395,
+          y: 145,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://www.didaks.com/holds/training?product_id=477',
+        holds: 0
+      },
+      {
+        name: 'Amazing table',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 610,
+          y: 45,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://www.didaks.com/holds/training/amazing-table',
         holds: 0
       }
     ]
   },
   {
     name: 'Explore Climbing',
-    description: 'Handmade in Italy',
+    description:
+      'Training tools and structures for climbers designed by climbers 🇮🇹made in Italy',
     country: 'IT',
     id: 72,
     url: 'https://www.exploreclimbing.it/',
+    socials: {
+      facebook: 'https://www.facebook.com/explore-climbing',
+      instagram: 'https://www.instagram.com/exploreclimbing/'
+    },
     hangboards: [
       {
         name: 'XC Classic',
         id: 0,
         image: 'hangboards/EXPLORECLASSIC.svg',
+        size: {
+          x: 740,
+          y: 190,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://www.exploreclimbing.it/product/xc-classic/',
         holds: 12
       },
       {
         name: 'XC Evo-X',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 590,
+          y: 140,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://www.exploreclimbing.it/product/xc-evox/',
         holds: 0
       },
       {
         name: 'XC ProEvo',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 740,
+          y: 200,
+          z: 65
+        },
+        type: 'wood',
+        url: 'https://www.exploreclimbing.it/product/xc-proevo/',
         holds: 0
       },
       {
         name: 'XC Tsaranoro',
         id: 3,
         image: 'hangboards/EXPLORETSARANORO.svg',
+        size: {
+          x: 550,
+          y: 145,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.exploreclimbing.it/product/xc-tsaranoro/',
         holds: 9
       }
     ]
@@ -3906,12 +3985,26 @@ export default [
         name: 'Orbit',
         id: 0,
         image: 'hangboards/ISECLIMBORBIT.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 13
       },
       {
         name: 'TrLux',
         id: 1,
         image: 'hangboards/ISECLIMBTRLUX.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 9
       }
     ]
@@ -3919,6 +4012,10 @@ export default [
   {
     name: 'Woodoclimb',
     description: 'Find your way, 100% designed and made in Italy',
+    socials: {
+      facebook: 'https://www.facebook.com/woodoclimb',
+      instagram: 'https://www.instagram.com/woodoclimb/'
+    },
     country: 'IT',
     id: 74,
     url: 'http://www.woodoclimb.com/',
@@ -3927,57 +4024,118 @@ export default [
         name: 'Change V2',
         id: 0,
         image: 'hangboards/WOODOCHANGE2.svg',
+        size: {
+          x: 880,
+          y: 400,
+          z: 60
+        },
+        type: 'wood',
+        url: null,
         holds: 14
       },
       {
         name: 'Tricky V2',
         id: 1,
         image: 'hangboards/WOODOTRICKY2.svg',
+        size: {
+          x: 730,
+          y: 200,
+          z: 44
+        },
+        type: 'wood',
+        url: null,
         holds: 14
       }
     ]
   },
   {
     name: 'Rustam Climbing',
-    description: 'High quality wooden training devices',
+    description:
+      'High quality wooden training devices. Designed by Rustam Gelmanov',
     country: 'NL',
     id: 75,
     url: 'https://rustamclimbing.com/',
+    socials: {
+      facebook: 'https://www.instagram.com/rustamclimbing/',
+      instagram: 'https://www.facebook.com/RustamClimbing'
+    },
     hangboards: [
       {
         name: 'Bombita',
         id: 0,
         image: 'hangboards/RUSTAMBOMBITA.svg',
+        size: {
+          x: 670,
+          y: 180,
+          z: 72
+        },
+        type: 'wood',
+        url: 'https://rustamclimbing.com/shop/hangboards/bombita/',
         holds: 11
       },
       {
         name: 'Pinchette',
         id: 1,
         image: 'hangboards/RUSTAMPUNCHETTE.svg',
+        size: {
+          x: 500,
+          y: 200,
+          z: 72
+        },
+        type: 'wood',
+        url: 'https://rustamclimbing.com/shop/hangboards/pinchette/',
         holds: 4
       },
       {
         name: 'UltiMate',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 750,
+          y: 122,
+          z: 65
+        },
+        type: 'wood',
+        url: 'https://rustamclimbing.com/shop/hangboards/ultimate/',
         holds: 0
       },
       {
         name: 'Moro',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 120,
+          z: 43
+        },
+        type: 'wood',
+        url: 'https://rustamclimbing.com/shop/hangboards/moro/',
         holds: 0
       },
       {
         name: 'Jokko',
         id: 4,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 402,
+          y: 50,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://rustamclimbing.com/shop/hangboards/jokko/',
         holds: 0
       },
       {
         name: 'PlayMate',
         id: 5,
         image: 'hangboards/RUSTAMPLAYMATE.svg',
+        size: {
+          x: 400,
+          y: 55,
+          z: 32
+        },
+        type: 'wood',
+        url: 'https://rustamclimbing.com/shop/hangboards/playmate/',
         holds: 2
       }
     ]
@@ -4398,15 +4556,26 @@ export default [
   },
   {
     name: 'N8',
-    description: '',
+    description: 'Brand on Amazon.com',
     country: 'CN',
     id: 89,
-    url: '',
+    url: null,
+    socials: {
+      facebook: null,
+      instagram: null
+    },
     hangboards: [
       {
         name: 'SPASU',
         id: 0,
         image: 'hangboards/N8SPASU.svg',
+        size: {
+          x: 620,
+          y: 170,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/hangboard%EF%BC%8Changboard-climbing-fingerboard-hangboard-strength/dp/B08TCBWT3Q',
         holds: 15
       }
     ]
