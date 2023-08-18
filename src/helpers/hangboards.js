@@ -5321,7 +5321,7 @@ export default [
     ]
   },
   {
-    name: '',
+    name: 'GripWorks',
     description:
       'Wooden hangboards, campuses, bars and holds 🖤 Made with love for wood and nature 🌲',
     country: 'CZ',
