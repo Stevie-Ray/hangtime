@@ -5319,5 +5319,123 @@ export default [
         holds: 0
       }
     ]
+  },
+  {
+    name: '',
+    description:
+      'Wooden hangboards, campuses, bars and holds 🖤 Made with love for wood and nature 🌲',
+    country: 'CZ',
+    id: 114,
+    url: 'https://www.gripworks.cz/',
+    socials: {
+      facebook: 'https://www.facebook.com/grip.works',
+      instagram: 'https://www.instagram.com/grip.works/'
+    },
+    hangboards: [
+      {
+        name: 'Summit v3.5',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/summit/',
+        holds: 0
+      },
+      {
+        name: ' HoldOn v3.0',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/hold-on/',
+        holds: 0
+      },
+      {
+        name: 'Power v3.0',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/power/',
+        holds: 0
+      },
+      {
+        name: 'Base+ v3.0',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/baseplus/',
+        holds: 0
+      },
+      {
+        name: 'Base v3.5',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/base-v3-5/',
+        holds: 0
+      },
+      {
+        name: 'Minimalist v3.0',
+        id: 5,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/minimalist/',
+        holds: 0
+      },
+      {
+        name: 'Twist v3.0',
+        id: 6,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/twist/',
+        holds: 0
+      },
+      {
+        name: 'Bajt v3.0',
+        id: 7,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.gripworks.cz/bajt/',
+        holds: 0
+      }
+    ]
   }
 ]
