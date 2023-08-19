@@ -150,7 +150,12 @@ export function useRandomImage(dark = false) {
   if (dark) {
     images = [
       'https://lh3.googleusercontent.com/U8dSUmCjiqUZmZoCxzBZ5oGBCqCVipJvghZZDUfRgErjMa_UKYWEAU4TwlArCrW_TLDzfuIE08tirIROhJ8OZDsFZf8DK4p7pam74PGvtqBiE0ES2gI=w960',
-      'https://lh3.googleusercontent.com/1g_8dMsxYAfoZ_VS338syoSlyVpl5yD9Ho5eV7clDTqPGwaKElIciZTvzvxZeaM_-dE3vYWh6oZ4FyuUg3bRo21f6Ue56_ADwSBmh6kasSKS3EA5gQE=w960'
+      'https://lh3.googleusercontent.com/1g_8dMsxYAfoZ_VS338syoSlyVpl5yD9Ho5eV7clDTqPGwaKElIciZTvzvxZeaM_-dE3vYWh6oZ4FyuUg3bRo21f6Ue56_ADwSBmh6kasSKS3EA5gQE=w960',
+      'https://lh3.googleusercontent.com/BvKj8kuRZqLpqPuuZxOl4IeHv5jaD5kT1jhn3P8EMBcmzyoHRAFXsCxNH6ZeHhQG4V1F_AegXIw2cJIBmETy7eHM27IdLQe7FqEgz6NLaXflHiHM4xyh=w960',
+      'https://lh3.googleusercontent.com/7ZPknFvHO9vgAdvojuxlJN9n0AbV3o6ANS6kATRMVK-fqZpwVGKjW7wCDhu1ZS7cDhE5Cjshx1djXctkFcSFtwDZQc-bD3b5ghihe4qc3u1fPbL7ii46=w960',
+      'https://lh3.googleusercontent.com/NRDBavB-Et9GCaCEITN0NahQVdeTIphZvP8ud3MDl9JTCLfMqJgqT8ZQrVuQY_8uhqk2E4ZgmWLlR8MsPtIJHyc0R9cPjQlORl-p08tBzsMfWonJlw=w960',
+      'https://lh3.googleusercontent.com/m8am03OY7pwMPiYPLQ4K1PimDBzWIv49tLkS5ilqBfI4GadhofpAikaOP7bfmxeLWQHIL1dan7DU8wW0ob5w1s2NKf9CXJqkkehN--SM8ROC-ZzgKA=w960',
+      'https://lh3.googleusercontent.com/EhHSqOHkNmcLEZigJr37o1cA1W9JS--miJxKacOFAQZAYVEH-TtViAtiyGzfyPjmceyCSUp43W84R7liQx4std_QkbOHNTLCQHgjzxIB_LtWMnCd6fM=w960'
     ]
   }
 

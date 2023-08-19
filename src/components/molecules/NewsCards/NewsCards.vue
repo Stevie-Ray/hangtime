@@ -1,34 +1,39 @@
 <script setup>
 import { useRandomImage } from '@/helpers'
 import { useUser } from '@/stores/user'
+import countries from '@/helpers/countries'
 
 const { getCompanies } = useUser()
 
 const slides = [
   {
-    title: 'Check our leaderboard',
+    title: '🏆 Check the leaderboard',
     subtitle: 'Who trained longest or hung longest?',
-    text: 'Our top 15 most active HangTime users in three categories.',
+    image: useRandomImage(true),
+    text: 'The top 15 most active HangTime users in three categories.',
     button_text: 'Check your position',
     internal_link: '/activity/leaderboard'
   },
   {
-    title: 'Do a quick workout',
+    title: '🏃 Do a quick workout',
     subtitle: 'No time to create a workout?',
+    image: useRandomImage(true),
     text: 'Just looking for a quick session? Adjust the timers and start hangboarding.',
     button_text: 'Get started',
     internal_link: '/workouts/quick'
   },
   {
-    title: 'Use multiple hangboards',
+    title: '🛠️ Use multiple hangboards',
     subtitle: 'Add your own and that of your gym',
+    image: useRandomImage(true),
     text: 'You can create workouts for multiple hangboards and share them with your friends.',
     button_text: 'Add Hangboards',
     internal_link: '/account/hangboards'
   },
   {
-    title: 'Found a bug? 🐜',
+    title: '🐜 Found a bug?',
     subtitle: 'Help improve HangTime by reporting the issue',
+    image: useRandomImage(true),
     text: 'Found a bug or want to request a feature? Or know a missing hangboard? Help HangTime improve!',
     button_text: 'Get in touch',
     external_link: 'mailto:mail@stevie-ray.nl?subject=Bug%20Report'
@@ -49,8 +54,14 @@ let index = 0
 // eslint-disable-next-line no-restricted-syntax
 for (const newCompany of newCompanies) {
   slides.splice(index, 0, {
-    title: newCompany.name,
+    title: `${
+      newCompany?.country
+        ? countries.find((country) => country.alpha2 === newCompany.country)
+            ?.emoji
+        : ''
+    } ${newCompany.name}`,
     subtitle: 'New in HangTime',
+    image: useRandomImage(true),
     text: newCompany.description,
     button_text: 'View Hangboards',
     internal_link: newCompany.name
@@ -72,22 +83,26 @@ for (const newCompany of newCompanies) {
     hide-delimiters
     class="rounded-lg"
   >
-    <v-carousel-item v-for="(slide, i) in slides" :key="i">
-      <v-card class="mx-auto" max-height="225" max-width="100%">
-        <v-img :src="useRandomImage(true)" cover>
-          <v-card-title v-if="slide.title" class="text-white">{{
-            slide.title
-          }}</v-card-title>
+    <v-carousel-item v-for="(slide, i) in slides" :key="i" v-once>
+      <v-card class="mx-auto" max-width="100%">
+        <v-img :src="slide.image" cover>
+          <v-card-title v-if="slide.title" class="text-white">
+            {{ slide.title }}
+          </v-card-title>
 
-          <v-card-subtitle v-if="slide.subtitle" class="text-white">{{
-            slide.subtitle
-          }}</v-card-subtitle>
+          <v-card-subtitle v-if="slide.subtitle" class="text-white">
+            {{ slide.subtitle }}
+          </v-card-subtitle>
 
-          <v-card-text v-if="slide.text" class="text-white">
+          <v-card-text
+            v-if="slide.text"
+            class="text-white"
+            style="height: 92px"
+          >
             {{ slide.text }}
           </v-card-text>
 
-          <v-card-actions>
+          <v-card-actions class="mt-auto">
             <v-btn
               v-if="
                 slide.button_text &&
@@ -107,3 +122,5 @@ for (const newCompany of newCompanies) {
     </v-carousel-item>
   </v-carousel>
 </template>
+
+<style lang="scss" scoped></style>
