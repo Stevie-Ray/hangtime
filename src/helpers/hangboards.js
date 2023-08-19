@@ -5338,9 +5338,9 @@ export default [
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 660,
+          y: 185,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/summit/',
@@ -5351,9 +5351,9 @@ export default [
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 630,
+          y: 195,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/hold-on/',
@@ -5364,9 +5364,9 @@ export default [
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 660,
+          y: 155,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/power/',
@@ -5377,9 +5377,9 @@ export default [
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 660,
+          y: 135,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/baseplus/',
@@ -5390,9 +5390,9 @@ export default [
         id: 4,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 520,
+          y: 135,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/base-v3-5/',
@@ -5403,9 +5403,9 @@ export default [
         id: 5,
         image: 'hangboards/GRIPWORKSMINIMAL.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 430,
+          y: 76,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/minimalist/',
@@ -5416,9 +5416,9 @@ export default [
         id: 6,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 390,
+          y: 75,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/twist/',
@@ -5429,9 +5429,9 @@ export default [
         id: 7,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 320,
+          y: 65,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/bajt/',
