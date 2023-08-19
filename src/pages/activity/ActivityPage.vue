@@ -4,19 +4,22 @@ import { storeToRefs } from 'pinia'
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
+import { time } from '@/helpers'
+
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
+
 import { useActivities } from '@/stores/activities'
 
-import { time, useRandomImage } from '@/helpers'
 import { useAuthentication } from '@/stores/authentication'
+
+const { activities } = storeToRefs(useActivities())
+
+const { user } = storeToRefs(useAuthentication())
 
 const { t } = useI18n()
 
 const notifications = ref(false)
-
-const { user } = storeToRefs(useAuthentication())
-
-const { activities } = storeToRefs(useActivities())
 
 const levels = [
   { name: t('easy'), value: 1 },
@@ -43,37 +46,6 @@ const activitiesByDay = computed(() =>
     return days
   }, {})
 )
-
-const slides = [
-  {
-    title: 'A new HangTime 🎉',
-    subtitle: 'Welcome to the new and improved HangTime',
-    text: 'A completely rewritten app. Found a bug or want to request a feature? Let me know!',
-    button_text: 'Get in touch',
-    external_link: 'mailto:mail@stevie-ray.nl?subject=Bug%20Report'
-  },
-  {
-    title: 'Check our leaderboard',
-    subtitle: 'Who trained longest or hung longest?',
-    text: 'Our top 15 most active HangTime users in three categories.',
-    button_text: 'Check your position',
-    internal_link: '/activity/leaderboard'
-  },
-  {
-    title: 'Do a quick workout',
-    subtitle: 'No time to create a workout?',
-    text: 'Just looking for a quick session? Adjust the timers and start hangboarding.',
-    button_text: 'Get started',
-    internal_link: '/workouts/quick'
-  },
-  {
-    title: 'Use multiple hangboards',
-    subtitle: 'Add your own and that of your gym',
-    text: 'You can create workouts for multiple hangboards and share them with your friends.',
-    button_text: 'Add Hangboards',
-    internal_link: '/account/hangboards'
-  }
-]
 
 useHead({
   title: 'Activity',
@@ -135,48 +107,7 @@ useHead({
       <v-container>
         <v-row>
           <v-col cols="12">
-            <v-carousel
-              height="225"
-              :show-arrows="false"
-              cycle
-              :interval="6000"
-              hide-delimiters
-              class="rounded-lg"
-            >
-              <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                <v-card class="mx-auto" max-height="225" max-width="100%">
-                  <v-img :src="useRandomImage(true)" cover>
-                    <v-card-title v-if="slide.title" class="text-white">{{
-                      slide.title
-                    }}</v-card-title>
-
-                    <v-card-subtitle v-if="slide.subtitle" class="text-white">{{
-                      slide.subtitle
-                    }}</v-card-subtitle>
-
-                    <v-card-text v-if="slide.text" class="text-white">
-                      {{ slide.text }}
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-btn
-                        v-if="
-                          slide.button_text &&
-                          (slide.internal_link || slide.external_link)
-                        "
-                        color="white"
-                        variant="outlined"
-                        class="mb-2"
-                        :to="slide.internal_link"
-                        :href="slide.external_link"
-                      >
-                        {{ slide.button_text }}
-                      </v-btn>
-                    </v-card-actions>
-                  </v-img>
-                </v-card>
-              </v-carousel-item>
-            </v-carousel>
+            <news-cards></news-cards>
           </v-col>
         </v-row>
 

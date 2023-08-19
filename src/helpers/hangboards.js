@@ -5170,7 +5170,8 @@ export default [
   },
   {
     name: 'Gimme Kraft',
-    description: 'Produced by Café Kraft',
+    description:
+      'Training bibles and hangboards for your next level in climbing, produced by Café Kraft',
     country: 'DE',
     id: 112,
     url: 'https://cafekraft.shop/',
@@ -5244,7 +5245,7 @@ export default [
   {
     name: 'Yosyamitya Climbing',
     description:
-      'OkBoard 🌳 Wooden Hangboards 💪 Training Tools Made by Climbers.',
+      'OkBoard 🌳 Wooden Hangboards 💪 Training Tools. Made by Climbers.',
     country: 'UA',
     id: 113,
     url: null,
