@@ -28,7 +28,7 @@ export const useUser = defineStore('user', {
      * @return {function(*, *): string}
      */
     getHangboardImageByIds: () => (company, hangboard) =>
-      hangboardBrands[company].hangboards[hangboard].image,
+      hangboardBrands[company]?.hangboards[hangboard]?.image,
     getCompanies: () =>
       [...hangboardBrands].sort((a, b) => a.name.localeCompare(b.name)),
 

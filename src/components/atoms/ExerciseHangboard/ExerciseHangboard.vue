@@ -36,8 +36,11 @@ const hangboardImage = () => {
     // eslint-disable-next-line global-require,import/no-dynamic-require
     return require(`@/assets/${getHangboard.value?.sides[0].image}`)
   }
-  // eslint-disable-next-line global-require,import/no-dynamic-require
-  return require(`@/assets/${getHangboard.value?.image}`)
+  if (getHangboard.value) {
+    // eslint-disable-next-line global-require,import/no-dynamic-require
+    return require(`@/assets/${getHangboard.value?.image}`)
+  }
+  return ''
 }
 
 const classHold = (hand) => {

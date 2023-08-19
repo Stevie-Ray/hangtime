@@ -5247,7 +5247,7 @@ export default [
     description:
       'OkBoard 🌳 Wooden Hangboards 💪 Training Tools. Made by Climbers.',
     country: 'UA',
-    id: 113,
+    id: 114,
     url: null,
     socials: {
       facebook: 'https://www.facebook.com/YosyamityaClimbing',
@@ -5326,7 +5326,7 @@ export default [
     description:
       'Wooden hangboards, campuses, bars and holds 🖤 Made with love for wood and nature 🌲',
     country: 'CZ',
-    id: 114,
+    id: 115,
     url: 'https://www.gripworks.cz/',
     socials: {
       facebook: 'https://www.facebook.com/grip.works',
@@ -5347,7 +5347,7 @@ export default [
         holds: 0
       },
       {
-        name: ' HoldOn v3.0',
+        name: 'HoldOn v3.0',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
         size: {
@@ -5401,7 +5401,7 @@ export default [
       {
         name: 'Minimalist v3.0',
         id: 5,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GRIPWORKSMINIMAL.svg',
         size: {
           x: null,
           y: null,
