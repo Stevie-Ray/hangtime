@@ -5409,7 +5409,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/minimalist/',
-        holds: 0
+        holds: 5
       },
       {
         name: 'Twist v3.0',
