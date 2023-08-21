@@ -138,6 +138,10 @@ export default [
     country: 'GB',
     id: 2,
     url: 'https://coreclimbing.co.uk/',
+    socials: {
+      facebook: 'https://www.facebook.com/coreclimbing',
+      instagram: 'https://www.instagram.com/coreclimbing/'
+    },
     hangboards: [
       {
         name: 'Fingerboard',
@@ -161,6 +165,10 @@ export default [
     country: 'GB',
     id: 3,
     url: 'http://crusherholds.co.uk/',
+    socials: {
+      facebook: 'https://www.facebook.com/profile.php?id=100057276916393',
+      instagram: 'https://www.instagram.com/crusherholds/'
+    },
     hangboards: [
       {
         name: 'Matrix',
@@ -262,6 +270,10 @@ export default [
     country: 'US',
     id: 4,
     url: 'https://www.entre-prises.us/',
+    socials: {
+      facebook: 'https://www.facebook.com/epclimbingwalls',
+      instagram: 'https://www.instagram.com/epclimbing/'
+    },
     hangboards: [
       {
         name: 'Hang Time',
@@ -337,6 +349,10 @@ export default [
     country: 'US',
     id: 5,
     url: 'https://www.holdz.co.uk/',
+    socials: {
+      facebook: 'https://www.facebook.com/HOLDZ-158493624184370',
+      instagram: 'https://www.instagram.com/holdz_climbing/'
+    },
     hangboards: [
       {
         name: 'Fingerboard 1',
@@ -368,10 +384,14 @@ export default [
   },
   {
     name: 'Kraxl Board',
-    description: 'Handicraft in Collalbo, Italy',
+    description: 'Handicraft in Collalbo, South Tyrol, Italy',
     country: 'IT',
     id: 6,
     url: 'https://www.kraxl-board.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/klettertraing',
+      instagram: 'https://www.instagram.com/kraxl_board/'
+    },
     hangboards: [
       {
         name: 'Classic',
@@ -446,6 +466,10 @@ export default [
     country: 'BE',
     id: 7,
     url: 'https://www.maxclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/maxclimbingcompany',
+      instagram: 'https://www.instagram.com/max_climbing/'
+    },
     hangboards: [
       {
         name: 'Spinchboard Solo',
@@ -506,6 +530,10 @@ export default [
     country: 'CH',
     id: 8,
     url: 'https://www.mammut.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/mammut/',
+      instagram: 'https://www.instagram.com/mammut_swiss1862'
+    },
     hangboards: [
       {
         name: 'Diamond Fingerboard',
@@ -528,6 +556,10 @@ export default [
     country: 'US',
     id: 9,
     url: 'https://www.metoliusclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/metoliusclimbing',
+      instagram: 'https://www.instagram.com/metoliusclimbing/'
+    },
     hangboards: [
       {
         name: 'Contact',
@@ -679,6 +711,10 @@ export default [
     country: 'GB',
     id: 10,
     url: 'https://moonclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/moonclimbing',
+      instagram: 'https://www.instagram.com/moonclimbing/'
+    },
     hangboards: [
       {
         name: 'Fingerboard',
@@ -741,6 +777,10 @@ export default [
     country: 'CZ',
     id: 11,
     url: 'http://www.ocun.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/ocun.climbing/',
+      instagram: 'https://www.instagram.com/ocun.climbing/'
+    },
     hangboards: [
       {
         name: 'Finger Board',
@@ -763,6 +803,10 @@ export default [
     country: 'SE',
     id: 12,
     url: 'https://www.problemsolver.rocks/',
+    socials: {
+      facebook: 'https://www.facebook.com/problemsolver.rocks',
+      instagram: 'https://www.instagram.com/problemsolver_hangboards/'
+    },
     hangboards: [
       {
         name: 'Hanzo',
@@ -836,6 +880,10 @@ export default [
     country: 'US',
     id: 13,
     url: 'https://soillholds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/soill/',
+      instagram: 'https://www.instagram.com/soill/'
+    },
     hangboards: [
       {
         name: 'All Chalk No Action',
@@ -975,6 +1023,10 @@ export default [
     country: 'DE',
     id: 14,
     url: 'https://www.target10a.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/target10a',
+      instagram: 'https://www.instagram.com/target10a/'
+    },
     hangboards: [
       {
         name: 'Base',
@@ -1049,6 +1101,10 @@ export default [
     country: 'US',
     id: 15,
     url: 'https://www.tensionclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/tensionclimbing',
+      instagram: 'https://www.instagram.com/tensionclimbing/'
+    },
     hangboards: [
       {
         name: 'Grindstone',
@@ -1081,9 +1137,9 @@ export default [
         id: 2,
         image: 'hangboards/TENSIONGRINDMK2.svg',
         size: {
-          x: 584,
-          y: 178,
-          z: 76
+          x: 580,
+          y: 180,
+          z: 75
         },
         type: 'wood',
         url: 'https://tensionclimbing.com/product/grindstone/',
@@ -1175,6 +1231,10 @@ export default [
     country: 'US',
     id: 16,
     url: 'http://www.trango.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/trangoclimbing',
+      instagram: 'https://www.instagram.com/trangoclimbing/'
+    },
     hangboards: [
       {
         name: 'Rock Prodigy Training Center',
@@ -1241,10 +1301,14 @@ export default [
   },
   {
     name: 'Witchholds',
-    description: 'Wooden fingerboards',
+    description: 'Wooden stuff for climbing and workouts',
     country: 'PL',
     id: 17,
     url: 'https://witchholds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/witchholdscom',
+      instagram: 'https://www.instagram.com/witchholds/'
+    },
     hangboards: [
       {
         name: 'Fingerboard Easy',
@@ -1280,6 +1344,10 @@ export default [
     country: 'IT',
     id: 18,
     url: 'https://www.zlagboard.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/zlagboard',
+      instagram: 'https://www.instagram.com/zlagboard.training/'
+    },
     hangboards: [
       {
         name: 'Zlagboard Mini',
@@ -1342,6 +1410,10 @@ export default [
     country: 'FR',
     id: 19,
     url: 'https://www.simond.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/simond.chamonix',
+      instagram: 'https://www.instagram.com/simond_official/'
+    },
     hangboards: [
       {
         name: 'Vertika-R / Ballsy Board',
@@ -1364,6 +1436,10 @@ export default [
     country: 'NL',
     id: 20,
     url: 'https://crimptonite.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/Crimptonite',
+      instagram: 'https://www.instagram.com/crimptonite_climbing/'
+    },
     hangboards: [
       {
         name: 'Fixed hangboard',
@@ -1460,6 +1536,10 @@ export default [
     country: 'DE',
     id: 21,
     url: 'https://www.captainfingerfood.rocks/',
+    socials: {
+      facebook: 'https://www.facebook.com/captainfingerfoodclimbing',
+      instagram: 'https://www.instagram.com/captainfingerfood/'
+    },
     hangboards: [
       {
         name: '180°',
@@ -1494,6 +1574,10 @@ export default [
     country: 'ES',
     id: 22,
     url: 'https://www.surfacesforclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/surfacesforclimbing/',
+      instagram: 'https://www.instagram.com/surfacesforclimbing/'
+    },
     hangboards: [
       {
         name: 'Progression / Transgression',
@@ -1542,6 +1626,10 @@ export default [
     country: 'DE',
     id: 23,
     url: 'https://www.wataaah.de/',
+    socials: {
+      facebook: 'https://www.facebook.com/Wataaah-341685132580666',
+      instagram: 'https://www.instagram.com/wataaah_climbing/'
+    },
     hangboards: [
       {
         name: 'Transformer board (inc. Kurt)',
@@ -1565,6 +1653,10 @@ export default [
     country: 'AT',
     id: 24,
     url: 'https://www.fingerschinder.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/thefingerschinder',
+      instagram: 'https://www.instagram.com/fingerschinder/'
+    },
     hangboards: [
       {
         name: 'Classic',
@@ -1626,6 +1718,10 @@ export default [
     country: 'DE',
     id: 25,
     url: 'http://jk-meisterschreiner.de/',
+    socials: {
+      facebook: null,
+      instagram: null
+    },
     hangboards: [
       {
         name: 'CrimpMonster 3x4 / 4x3',
@@ -1661,6 +1757,10 @@ export default [
     country: 'TH',
     id: 26,
     url: 'https://www.thevola.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/thevoladotcom/',
+      instagram: 'https://www.instagram.com/the.vola/'
+    },
     hangboards: [
       {
         name: 'Hangboard',
@@ -1736,6 +1836,10 @@ export default [
     country: 'DE',
     id: 28,
     url: 'https://erzi.de/',
+    socials: {
+      facebook: 'https://www.facebook.com/erzi.play',
+      instagram: 'https://www.instagram.com/erzi.play/'
+    },
     hangboards: [
       {
         name: 'Training board small',
@@ -1784,6 +1888,10 @@ export default [
     country: 'DE',
     id: 29,
     url: 'https://smartrock.de/',
+    socials: {
+      facebook: 'https://www.facebook.com/smartrock.de',
+      instagram: 'https://www.instagram.com/smartrock.climbing'
+    },
     hangboards: [
       {
         name: 'Griptonite',
@@ -1806,6 +1914,10 @@ export default [
     country: 'US',
     id: 30,
     url: 'https://nicros.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/nicrosclimbing/',
+      instagram: 'https://www.instagram.com/nicrosclimbing'
+    },
     hangboards: [
       {
         name: 'Ultimate Board',
@@ -1868,6 +1980,10 @@ export default [
     country: 'AU',
     id: 31,
     url: 'https://www.conceptclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/conceptclimbing',
+      instagram: 'https://www.instagram.com/concept_climbing/'
+    },
     hangboards: [
       {
         name: 'Quarantine Board',
@@ -1942,6 +2058,10 @@ export default [
     country: 'SI',
     id: 32,
     url: 'https://www.bleaustone.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/bleaustone',
+      instagram: 'https://www.instagram.com/bleaustoneholds/'
+    },
     hangboards: [
       {
         name: 'Long Training Board',
@@ -1977,6 +2097,10 @@ export default [
     country: 'ES',
     id: 33,
     url: 'https://www.euroholds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/EUROHOLDS.CLIMBINGHOLDS',
+      instagram: 'https://www.instagram.com/euroholds/'
+    },
     hangboards: [
       {
         name: 'Asymmetric Board v3',
@@ -2079,6 +2203,10 @@ export default [
     country: 'CA',
     id: 35,
     url: 'https://lyons-edge.myshopify.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/lyonsedge',
+      instagram: 'https://www.instagram.com/lyonsedge/'
+    },
     hangboards: [
       {
         name: 'The Base-Camp',
@@ -2128,6 +2256,10 @@ export default [
     country: 'US',
     id: 36,
     url: 'https://escapeclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/escapeclimbing',
+      instagram: 'https://www.instagram.com/escapeclimbing/'
+    },
     hangboards: [
       {
         name: 'Unlimited Board',
@@ -2176,6 +2308,10 @@ export default [
     country: 'SI',
     id: 37,
     url: 'https://www.lapisholds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/lapisclimbingholds',
+      instagram: 'https://www.instagram.com/lapisholds/'
+    },
     hangboards: [
       {
         name: 'Training Board',
@@ -2277,6 +2413,10 @@ export default [
     country: 'DK',
     id: 40,
     url: 'https://natureclimbing.com/',
+    socials: {
+      facebook: 'https://facebook.com/natureclimbing',
+      instagram: 'https://instagram.com/natureclimbing/'
+    },
     hangboards: [
       {
         name: 'STOAK board',
@@ -2299,6 +2439,10 @@ export default [
     country: 'FR',
     id: 41,
     url: 'https://digital-climbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/digitalclimbing',
+      instagram: 'https://www.instagram.com/digitalclimbingholds/'
+    },
     hangboards: [
       {
         name: 'Small Oak beam',
@@ -2347,6 +2491,10 @@ export default [
     country: 'FR',
     id: 42,
     url: 'https://volxholds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/profile.php?id=100064180023423',
+      instagram: 'https://www.instagram.com/volxholds/'
+    },
     hangboards: [
       {
         name: 'Froggy',
@@ -2487,6 +2635,10 @@ export default [
     country: 'BG',
     id: 45,
     url: 'https://hrt-holds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/hrtholds/',
+      instagram: 'https://www.instagram.com/hrtholds/'
+    },
     hangboards: [
       {
         name: 'Classic',
@@ -2561,6 +2713,10 @@ export default [
     country: 'SI',
     id: 46,
     url: 'https://www.gecko-holds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/geckoholds/',
+      instagram: null
+    },
     hangboards: [
       {
         name: 'Movember',
@@ -2579,10 +2735,14 @@ export default [
   },
   {
     name: 'Owl Climb',
-    description: 'Hangboards made in italy',
+    description: 'Hangboards made in italy 🇮🇹',
     country: 'IT',
     id: 47,
     url: 'https://owlclimb.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/owlclimb/',
+      instagram: 'https://www.instagram.com/owlclimb'
+    },
     hangboards: [
       {
         name: 'Circle',
@@ -2683,6 +2843,10 @@ export default [
     country: 'GB',
     id: 49,
     url: 'https://www.davemacleod.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/davemacleod09',
+      instagram: 'https://www.instagram.com/climbermacleod/'
+    },
     hangboards: [
       {
         name: 'Edge',
@@ -2701,10 +2865,14 @@ export default [
   },
   {
     name: 'Expressions holds',
-    description: 'Wood and fiberglass climbing volumes',
+    description: 'French designed climbing holds & volumes since 2003 ✌️',
     country: 'FR',
     id: 50,
     url: 'https://www.expression-holds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/eXpressionHolds',
+      instagram: 'https://www.instagram.com/expressionholds'
+    },
     hangboards: [
       {
         name: 'Comix Club Board',
@@ -2727,6 +2895,10 @@ export default [
     country: 'NL',
     id: 51,
     url: 'https://www.dewoodstok.nl/',
+    socials: {
+      facebook: 'https://www.facebook.com/dewoodstok',
+      instagram: 'https://instagram.com/dewoodstok.nl/'
+    },
     hangboards: [
       {
         name: 'Woodboard',
@@ -2927,6 +3099,10 @@ export default [
     country: 'PL',
     id: 54,
     url: 'https://whiteoak.com.pl/',
+    socials: {
+      facebook: 'https://www.facebook.com/Whiteoakclimbing',
+      instagram: 'https://www.instagram.com/whiteoakclimbing/'
+    },
     hangboards: [
       {
         name: 'Standard hangboard',
@@ -2972,9 +3148,9 @@ export default [
         id: 0,
         image: 'hangboards/ACRONMIDNIGHT.svg',
         size: {
-          x: 584,
-          y: 152,
-          z: 44
+          x: 580,
+          y: 150,
+          z: 45
         },
         type: 'wood',
         url: 'https://www.acornclimbing.com/midnight',
@@ -3014,6 +3190,10 @@ export default [
     country: 'US',
     id: 57,
     url: 'http://butterfingersports.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/butterfingersports',
+      instagram: 'https://www.instagram.com/butterfinger_sports/'
+    },
     hangboards: [
       {
         name: 'JP-1 Hangboard',
@@ -3031,11 +3211,15 @@ export default [
     ]
   },
   {
-    name: 'WOOD BOARD',
+    name: 'WOOD M BOARD',
     description: 'Quality wooden booster boards, designed for all climbers',
     country: 'CZ',
     id: 58,
-    url: 'https://www.wood-board.cz',
+    url: 'https://www.woodmboard.cz/',
+    socials: {
+      facebook: 'https://www.facebook.com/WOOD1BOARD',
+      instagram: 'https://www.instagram.com/wood___board/'
+    },
     hangboards: [
       {
         name: 'WOOD BOARD hobby',
@@ -3084,6 +3268,10 @@ export default [
     country: 'RU',
     id: 59,
     url: 'https://workshop1950.ru/',
+    socials: {
+      facebook: 'https://www.facebook.com/workshop1950',
+      instagram: 'https://www.instagram.com/workshop1950_climbing/'
+    },
     hangboards: [
       {
         name: 'Campboard',
@@ -3218,9 +3406,9 @@ export default [
         id: 1,
         image: 'hangboards/2CLIMBCRIMPTRAVEL.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 320,
+          y: 110,
+          z: 35
         },
         type: 'wood',
         url: 'https://www.2climb.cz/hangboardy/crimp-travel/',
@@ -3231,9 +3419,9 @@ export default [
         id: 2,
         image: 'hangboards/2CLIMBCRUX.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 560,
+          y: 160,
+          z: 50
         },
         type: 'wood',
         url: 'https://www.2climb.cz/hangboardy/crux/',
@@ -3257,9 +3445,9 @@ export default [
         id: 4,
         image: 'hangboards/2CLIMBONSIGHT.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 565,
+          y: 160,
+          z: 48
         },
         type: 'wood',
         url: 'https://www.2climb.cz/hangboardy/onsight/',
@@ -3378,6 +3566,10 @@ export default [
     country: 'ES',
     id: 63,
     url: 'https://canigo.eu/',
+    socials: {
+      facebook: 'https://www.facebook.com/canigoescalada',
+      instagram: 'https://www.instagram.com/canigoescalada/'
+    },
     hangboards: [
       {
         name: 'Black Dot',
@@ -3452,6 +3644,10 @@ export default [
     country: 'DE',
     id: 64,
     url: 'https://www.etsy.com/shop/climbnboulder',
+    socials: {
+      facebook: null,
+      instagram: null
+    },
     hangboards: [
       {
         name: 'Das Board',
@@ -3487,6 +3683,10 @@ export default [
     country: 'US',
     id: 65,
     url: 'https://www.dangerbuddies.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/dangerbuddiesgear',
+      instagram: 'https://www.instagram.com/dangerbuddiesgear/'
+    },
     hangboards: [
       {
         name: 'BuddyBoard',
@@ -3522,6 +3722,10 @@ export default [
     country: 'CZ',
     id: 66,
     url: 'http://www.makak.cz/',
+    socials: {
+      facebook: 'https://www.facebook.com/makakholdsandwalls/',
+      instagram: 'https://www.instagram.com/makak_holds__walls/'
+    },
     hangboards: [
       {
         name: 'Board 1',
@@ -3815,9 +4019,9 @@ export default [
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
         size: {
-          x: 584,
-          y: 83,
-          z: 38
+          x: 580,
+          y: 85,
+          z: 40
         },
         type: 'wood',
         url: 'https://customclimbsofficial.com/products/slimboard-hangboard',
@@ -4146,17 +4350,35 @@ export default [
     country: 'SI',
     id: 76,
     url: 'https://dudesvsgravity.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/dudesvsgravity/',
+      instagram: 'https://www.instagram.com/dudesvsgravity_official/'
+    },
     hangboards: [
       {
         name: 'GRAVITYboard LITE / PRO',
         id: 0,
         image: 'hangboards/DUDESVSGRAVITYBOARD.svg',
+        size: {
+          x: 650,
+          y: 160,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://dudesvsgravity.com/product/gravityboard-lite-hangboard/',
         holds: 9
       },
       {
         name: 'GRAVITYstick',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 500,
+          y: 50,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://dudesvsgravity.com/product/gravitystick-portable-hangboard/',
         holds: 0
       }
     ]
@@ -4167,17 +4389,35 @@ export default [
     country: 'GB',
     id: 77,
     url: 'https://latticetraining.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/latticetraining/',
+      instagram: 'https://www.instagram.com/latticetraining/'
+    },
     hangboards: [
       {
         name: 'Testing and Training Rung',
         id: 0,
         image: 'hangboards/LATTICETEST.svg',
+        size: {
+          x: 480,
+          y: 120,
+          z: 36
+        },
+        type: 'wood',
+        url: 'https://latticetraining.com/product/lattice-testing-and-training-rung-cosmetic-seconds/',
         holds: 1
       },
       {
         name: 'Triple Rung',
         id: 1,
         image: 'hangboards/LATTICETRIPLE.svg',
+        size: {
+          x: 550,
+          y: 130,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://latticetraining.com/product/lattice-triple-rung-wooden-hangboard/',
         holds: 2
       }
     ]
@@ -4188,11 +4428,22 @@ export default [
     country: 'ES',
     id: 78,
     url: 'https://pucseries.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/PUCseries',
+      instagram: 'https://www.instagram.com/patxiusobiaga_pucseries/'
+    },
     hangboards: [
       {
         name: 'il Domani',
         id: 0,
         image: 'hangboards/PUCILLDOMANI.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://pucseries.myshopify.com/products/il-domani',
         sides: [
           {
             name: 'Front (Default)',
@@ -4225,62 +4476,127 @@ export default [
     country: 'FR',
     id: 79,
     url: 'https://www.woodrock.fr/',
+    socials: {
+      facebook: 'https://www.facebook.com/woodrock.climbing/',
+      instagram: 'https://www.instagram.com/woodrock.climbing/'
+    },
     hangboards: [
       {
         name: 'Nomad',
         id: 1,
         image: 'hangboards/WOODROCKNOMAD.svg',
+        size: {
+          x: 420,
+          y: 90,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://www.woodrock.fr/fr/produit/poutre-d-escalade-portable/',
         holds: 4
       },
       {
         name: 'Original V2',
         id: 0,
         image: 'hangboards/WOODROCKORIGINAL2.svg',
+        size: {
+          x: 540,
+          y: 130,
+          z: 45
+        },
+        type: 'wood',
+        url: 'https://www.woodrock.fr/fr/produit/origin/',
         holds: 9
       },
       {
         name: 'Varappe (Old model)',
         id: 2,
         image: 'hangboards/WOODROCKVARAPPE.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 16
       },
       {
         name: 'Varappe 5.7',
         id: 3,
         image: 'hangboards/WOODROCKVARAPPE57.svg',
+        size: {
+          x: 610,
+          y: 190,
+          z: 58
+        },
+        type: 'wood',
+        url: 'https://www.woodrock.fr/fr/produit/poutre-descalade-varappe-machine/',
         holds: 13
       },
       {
         name: 'Varappe 8.9',
         id: 4,
         image: 'hangboards/WOODROCKVARAPPE89.svg',
+        size: {
+          x: 610,
+          y: 190,
+          z: 58
+        },
+        type: 'wood',
+        url: 'https://www.woodrock.fr/fr/produit/poutre-descalade-varappe-mutant/',
         holds: 16
       }
     ]
   },
   {
     name: 'Northeast Climb (NEC)',
-    description: 'Shenyang (China) based',
+    description:
+      'Founded by Forrest Liu (IFSC Official Photographer) in Shenyang, China',
     country: 'CN',
     id: 80,
-    url: '#',
+    url: null,
+    socials: {
+      facebook: 'https://www.facebook.com/forrest.liu.758',
+      instagram: null
+    },
     hangboards: [
       {
         name: 'FLASH',
         id: 0,
         image: 'hangboards/NECFLASH.svg',
+        size: {
+          x: 400,
+          y: 80,
+          z: 30
+        },
+        type: 'wood',
+        url: null,
         holds: 3
       },
       {
         name: 'Hangboard',
         id: 1,
         image: 'hangboards/NECHANGBOARD.svg',
+        size: {
+          x: 500,
+          y: 100,
+          z: 30
+        },
+        type: 'wood',
+        url: null,
         holds: 13
       },
       {
         name: 'Onsight',
         id: 2,
         image: 'hangboards/NECONSIGHT.svg',
+        size: {
+          x: 450,
+          y: 120,
+          z: 50
+        },
+        type: 'wood',
+        url: null,
         sides: [
           {
             name: 'Default',
@@ -4299,6 +4615,13 @@ export default [
         name: 'Portable',
         id: 3,
         image: 'hangboards/NECPORTABLE.svg',
+        size: {
+          x: 400,
+          y: 80,
+          z: 30
+        },
+        type: 'wood',
+        url: null,
         holds: 6
       }
     ]
@@ -4309,17 +4632,35 @@ export default [
     country: 'CA',
     id: 81,
     url: 'https://holdemporium.com/',
+    socials: {
+      facebook: null,
+      instagram: 'https://www.instagram.com/holdemporium/'
+    },
     hangboards: [
       {
         name: 'Mönster Board',
         id: 0,
         image: 'hangboards/HOLDEMPORIUMMONSTER.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 14
       },
       {
         name: 'Mönster Board Mini',
         id: 1,
         image: 'hangboards/HOLDEMPORIUMMONSTERMINI.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 10
       }
     ]
@@ -4330,11 +4671,22 @@ export default [
     country: 'CA',
     id: 82,
     url: 'https://manuvaclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/manuvaclimbing',
+      instagram: 'https://instagram.com/manuvaclimbing/'
+    },
     hangboards: [
       {
         name: 'Manuva Board',
         id: 0,
         image: 'hangboards/MANUVABOARD.svg',
+        size: {
+          x: 580,
+          y: 60,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://manuvaclimbing.com/products/the-manuva-board',
         holds: 4
       }
     ]
@@ -4354,6 +4706,13 @@ export default [
         name: 'Affenbrett (Monkey Board)',
         id: 0,
         image: 'hangboards/ADDENHOLZBRETT.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 3
       }
     ]
@@ -4364,11 +4723,22 @@ export default [
     country: 'US',
     id: 84,
     url: 'https://www.evolvsports.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/Evolv',
+      instagram: 'https://www.instagram.com/evolv_worldwide/'
+    },
     hangboards: [
       {
         name: 'Basic Training Board',
         id: 0,
         image: 'hangboards/EVOLVBASIC.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://www.evolvsports.com/int/basic-training-board-short-66-0000082100',
         holds: 3
       }
     ]
@@ -4379,11 +4749,22 @@ export default [
     country: 'ZA',
     id: 85,
     url: 'https://www.scallywagsclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/scallywagsclimbing',
+      instagram: 'https://www.instagram.com/scallywagsclimbing/'
+    },
     hangboards: [
       {
         name: 'Dapper Board Vol. III/IV',
         id: 0,
         image: 'hangboards/SCALLYDAPPER.svg',
+        size: {
+          x: 300,
+          y: 150,
+          z: 28
+        },
+        type: 'wood',
+        url: 'https://www.scallywagsclimbing.com/product/dapper-board/',
         sides: [
           {
             name: '0°',
@@ -4412,6 +4793,13 @@ export default [
         name: 'Swank Board',
         id: 1,
         image: 'hangboards/SCALLYSWANK.svg',
+        size: {
+          x: 300,
+          y: 105,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://www.scallywagsclimbing.com/product/swank-board/',
         sides: [
           {
             name: '0°',
@@ -4435,15 +4823,26 @@ export default [
   },
   {
     name: 'Gripmonkeys',
-    description: 'Climbing Hangboards',
+    description: 'The ultimate tools to get your grades up.',
     country: 'GB',
     id: 86,
     url: 'https://gripmonkeys.co.uk/',
+    socials: {
+      facebook: 'https://www.facebook.com/GripMonkeys',
+      instagram: 'https://www.instagram.com/gripmonkeys'
+    },
     hangboards: [
       {
         name: 'Climbing Hangboard (Default)',
         id: 0,
         image: 'hangboards/GRIPMONKEYSHANGBOARD.svg',
+        size: {
+          x: 630,
+          y: 150,
+          z: 58
+        },
+        type: 'wood',
+        url: 'https://gripmonkeys.co.uk/product/gripmonkeys-climbing-hangboard/',
         holds: 14
       }
     ]
@@ -4454,78 +4853,244 @@ export default [
     country: 'US',
     id: 87,
     url: 'https://www.amazon.com/stores/TWOSTONESSPORTS/page/5B0DA811-7FB3-4C55-A8AC-4B3AC7BB2EF4',
+    socials: {
+      facebook: null,
+      instagram: null
+    },
     hangboards: [
       {
         name: 'CJ-HB2001',
         id: 0,
         image: 'hangboards/BEAST1000.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2001BX/dp/B08X1863GV',
         holds: 11
       },
       {
         name: 'CJ-HB2002',
         id: 1,
         image: 'hangboards/BEAST2000.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Climbing-Fingerboard-Training-Hangboard-CJ-HB2002BX/dp/B08X1Y4F33',
         holds: 14
       },
       {
-        name: 'CJ-HB2003BX',
+        name: 'CJ-HB2003',
         id: 2,
         image: 'hangboards/TWOSTONESHB2003BX.svg',
+        size: {
+          x: 580,
+          y: 200,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2003BX/dp/B08WWSHKT1',
         holds: 12
       },
       {
-        name: 'CJ-HB2005BX',
+        name: 'CJ-HB2005',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 200,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2005BX/dp/B08WXFCRJN',
         holds: 0
       },
       {
         name: 'CJ-HB2007',
         id: 4,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       },
       {
         name: 'CJ-HB2024',
         id: 5,
         image: 'hangboards/TWOSTONESHB2024.svg',
+        size: {
+          x: 500,
+          y: 100,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Portable-Fingerboard-Hangboard-Strengthener-CJ-HB2024BX/dp/B08WRRNRCM',
         holds: 3
       },
       {
         name: 'CJ-HB2025',
         id: 6,
         image: 'hangboards/TWOSTONESHB2025.svg',
+        size: {
+          x: 500,
+          y: 100,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://www.amazon.nl/Portable-Fingerboard-Hangboard-Strengthener-CJ-HB2025BX/dp/B08WSK22R3',
         holds: 3
       },
       {
         name: 'CJ-HB2046',
         id: 7,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 200,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.aliexpress.com/item/4001135504952.html',
         holds: 0
       },
       {
         name: 'CJ-HB2047',
         id: 8,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 610,
+          y: 157,
+          z: 56
+        },
+        type: 'wood',
+        url: 'https://www.aliexpress.com/item/4001135556653.html',
         holds: 0
       },
       {
         name: 'CJ-HB2055',
         id: 9,
         image: 'hangboards/TWOSTONESHB2055.svg',
+        size: {
+          x: 500,
+          y: 100,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Portable-Fingerboard-Hangboard-Strengthener-CJ-HB2055BX/dp/B08WSK22R3',
         holds: 6
       },
       {
-        name: 'CJ-HB2006BX',
+        name: 'CJ-HB2006',
         id: 10,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 800,
+          y: 250,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2006BX/dp/B08WX148RY',
         holds: 0
       },
       {
         name: 'CJ-HB2112',
         id: 11,
         image: 'hangboards/TWOSTONESHB2112.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Hangboard-Climbing-Phone-Holder-Pockets/dp/B099WB5253',
         holds: 16
+      },
+      {
+        name: 'CJ-HB2049',
+        id: 12,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Fingerboard-Hangboard-Bouldering/dp/B08WWY3QDM',
+        holds: 0
+      },
+      {
+        name: 'CJ-HB2050',
+        id: 13,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2050BX/dp/B08WWKNFR4',
+        holds: 0
+      },
+      {
+        name: 'CJ-HB2051',
+        id: 14,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 200,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2051BX/dp/B08WWG97FL',
+        holds: 0
+      },
+      {
+        name: 'CJ-HB2053',
+        id: 15,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 200,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2053BX/dp/B08WWNV6HK',
+        holds: 0
+      },
+      {
+        name: 'CJ-HB2101',
+        id: 16,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com.be/-/en/climbing-hanging-decanters-pinching-pockets/dp/B099WB5253',
+        holds: 0
+      },
+      {
+        name: 'CJ-HB2112',
+        id: 17,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Hangboard-Climbing-Fingerboard-Designed-Climbers/dp/B099W8JML5',
+        holds: 0
       }
     ]
   },
@@ -4544,12 +5109,26 @@ export default [
         name: 'Altitrac',
         id: 0,
         image: 'hangboards/ALTISSIMOALTITRAC.svg',
+        size: {
+          x: 570,
+          y: 160,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://shop.altissimo.fr/poutre-altitrac.html',
         holds: 6
       },
       {
         name: 'Papillon',
         id: 1,
         image: 'hangboards/ALTISSIMOPAPILLON.svg',
+        size: {
+          x: 700,
+          y: 200,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://shop.altissimo.fr/poutre-papillon.html',
         holds: 8
       }
     ]
@@ -4639,11 +5218,22 @@ export default [
     country: 'PL',
     id: 91,
     url: 'https://iura.pl/',
+    socials: {
+      facebook: 'https://www.facebook.com/iurapl',
+      instagram: 'https://www.instagram.com/iurapl/'
+    },
     hangboards: [
       {
         name: 'Warm up',
         id: 0,
         image: 'hangboards/IURAWARMUP.svg',
+        size: {
+          x: 400,
+          y: 55,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://iura.pl/en/home/46-warm-up-hangboard.html',
         sides: [
           {
             name: 'Default',
@@ -4666,11 +5256,22 @@ export default [
     country: 'UA',
     id: 92,
     url: 'https://ucraftclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/ucraftclimbing/',
+      instagram: 'https://www.instagram.com/ucraft_climbing/'
+    },
     hangboards: [
       {
         name: 'EVO Rings',
         id: 0,
         image: 'hangboards/UCRAFTEVO.svg',
+        size: {
+          x: 130,
+          y: 138,
+          z: 99
+        },
+        type: 'wood',
+        url: 'https://ucraftclimbing.com/evo-rings-3d.html',
         holds: 3
       }
     ]
@@ -4681,66 +5282,155 @@ export default [
     country: 'IT',
     id: 93,
     url: 'https://www.nonmollo-climbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/nonmolloclimbing',
+      instagram: 'https://www.instagram.com/nonmolloclimbing/'
+    },
     hangboards: [
       {
         name: 'Il Trave',
         id: 0,
         image: 'hangboards/NONMOLLOTRAVE.svg',
+        size: {
+          x: 600,
+          y: 160,
+          z: 6
+        },
+        type: 'wood',
+        url: 'https://www.nonmollo-climbing.com/product-page/il-trave-nonmollo',
         holds: 13
       }
     ]
   },
   {
-    name: 'Smog',
-    description: 'Well-made product created entirely in Italy. Sold by Oliunìd',
+    name: 'Smog Climbing',
+    description:
+      'An Italian brand based in Fossombrone, in Central Italy. It specializes in the production of climbing accessories, holds and boards in polyester.',
     country: 'IT',
     id: 94,
-    url: 'https://www.oliunid.it/',
+    url: null,
+    socials: {
+      facebook: null,
+      instagram: null
+    },
     hangboards: [
       {
-        name: 'Small',
+        name: 'Small Beam',
         id: 0,
         image: 'hangboards/SMOGSMALL.svg',
+        size: {
+          x: 670,
+          y: 120,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
         holds: 4
       },
       {
-        name: 'Medium',
+        name: 'Medium Beam',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 640,
+          y: 200,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
         holds: 0
       },
       {
-        name: 'Large',
+        name: 'Large Beam',
         id: 2,
         image: 'hangboards/SMOGGRANDE.svg',
+        size: {
+          x: 850,
+          y: 300,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
         holds: 7
       },
       {
         name: 'The Change',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 180,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
         holds: 0
       },
       {
         name: 'Pump',
         id: 4,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 550,
+          y: 300,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
         holds: 0
       }
     ]
   },
   {
     name: 'Lemur Design',
-    description: 'Traction beam in recycled ash wood',
+    description:
+      'Works hard to build the best adjustable climbing walls. Enhance your climbing experience',
     country: 'CA',
     id: 95,
     url: 'https://www.lemurdesign.ca/',
+    socials: {
+      facebook: 'https://www.facebook.com/Lemurwalldesign',
+      instagram: 'https://www.instagram.com/lemur_wall_design/'
+    },
     hangboards: [
       {
-        name: 'Traction beam',
+        name: 'Hangboard',
         id: 0,
         image: 'hangboards/LEMURBEAM.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.lemurdesign.ca/products/hangboard-made-from-recycled-ash-wood',
         holds: 6
+      },
+      {
+        name: 'Alannah Yip Portable Hangboard',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.lemurdesign.ca/products/poutre-de-traction-portable-alannah-yip',
+        holds: 0
+      },
+      {
+        name: 'Victor Baudrand Pinch Bloc',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
       }
     ]
   },
@@ -4750,11 +5440,22 @@ export default [
     country: 'PH',
     id: 96,
     url: 'http://www.climbingwallphilippines.com',
+    socials: {
+      facebook: 'https://www.facebook.com/profile.php?id=100063459026922',
+      instagram: null
+    },
     hangboards: [
       {
         name: 'Training Board',
         id: 0,
         image: 'hangboards/JOODBOARD.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
         holds: 11
       }
     ]
@@ -4765,17 +5466,35 @@ export default [
     country: 'FR',
     id: 97,
     url: 'https://www.yyvertical.com',
+    socials: {
+      facebook: 'https://www.facebook.com/yyvertical',
+      instagram: 'https://www.instagram.com/yyvertical_official/'
+    },
     hangboards: [
       {
         name: 'La Baguette',
         id: 0,
         image: 'hangboards/YYVERTICALBAGUETTE.svg',
+        size: {
+          x: 470,
+          y: 40,
+          z: 40
+        },
+        type: 'wood',
+        url: null,
         holds: 3
       },
       {
         name: 'Travelboard',
         id: 1,
         image: 'hangboards/YYVERTICALTRAVEL.svg',
+        size: {
+          x: 340,
+          y: 100,
+          z: 30
+        },
+        type: 'wood',
+        url: null,
         sides: [
           {
             name: 'Default',
@@ -4794,49 +5513,171 @@ export default [
         name: 'The Penta',
         id: 2,
         image: 'hangboards/YYVERTICALPENTRA.svg',
+        size: {
+          x: 190,
+          y: 195,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://www.yyvertical.com/en/collections/training/products/penta',
         holds: 6
       },
       {
         name: 'Verticalboard One',
         id: 3,
         image: 'hangboards/YYVERTICALONE.svg',
+        size: {
+          x: 620,
+          y: 130,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://www.yyvertical.com/products/verticalboard-one',
         holds: 10
+      },
+      {
+        name: 'Verticalboard Evo',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 650,
+          y: 140,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://www.yyvertical.com/products/verticalboard-evo',
+        holds: 0
+      },
+      {
+        name: 'Verticalboard First',
+        id: 5,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 540,
+          y: 130,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.yyvertical.com/products/verticalboard-first',
+        holds: 0
+      },
+      {
+        name: 'Verticalboard Light',
+        id: 6,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 540,
+          y: 90,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.yyvertical.com/products/verticalboard-light',
+        holds: 0
       }
     ]
   },
   {
     name: 'SAN Power',
-    description: 'Training holds',
+    description:
+      'Wooden holds/campus rungs/campus balls/portables and others.. Made in Galicia to the world.',
     country: 'ES',
     id: 98,
     url: 'https://www.sanpower.info/',
+    socials: {
+      facebook: null,
+      instagram: 'https://www.instagram.com/sanpower.es/'
+    },
     hangboards: [
       {
         name: 'Corme 2',
         id: 0,
         image: 'hangboards/SANCORME2.svg',
+        size: {
+          x: 600,
+          y: 200,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.sanpower.info/multipresas-fijas/#cc-m-product-13920186727',
         holds: 15
       },
       {
-        name: 'Ingrávido',
+        name: 'Ingrávido / Weightless (Chocolate)',
         id: 1,
         image: 'hangboards/SANINGRAVIDO.svg',
+        size: {
+          x: 520,
+          y: 150,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.sanpower.info/multipresas-fijas/#cc-m-product-11536218227',
         holds: 9
+      },
+      {
+        name: 'Spartan',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 500,
+          y: 150,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.sanpower.info/multipresas-fijas/#cc-m-product-14455159627',
+        holds: 0
+      },
+      {
+        name: 'Alarma',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 545,
+          y: 20,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.sanpower.info/multipresas-fijas/#cc-m-product-13919604227',
+        holds: 0
       }
     ]
   },
   {
-    name: 'T-Wall',
-    description: 'Climbing walls and climbing holds',
-    country: 'DE',
+    name: 'T-Wall Holds',
+    description: 'Climbing holds, structures, wall construction',
+    country: 'PL',
     id: 99,
-    url: 'https://www.t-wall.org/',
+    url: 'https://t-wall.com.pl/',
+    socials: {
+      facebook: 'https://www.facebook.com/twallholdspoland',
+      instagram: 'https://www.instagram.com/twall_polska/'
+    },
     hangboards: [
       {
         name: 'Crank',
         id: 0,
         image: 'hangboards/TWALLCRANK.svg',
+        size: {
+          x: 525,
+          y: 90,
+          z: 40
+        },
+        type: 'plastic',
+        url: 'https://t-wall.com.pl/produkt/tw0102-chwytotablica-crank/',
         holds: 11
+      },
+      {
+        name: 'T-Bone',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 520,
+          y: 120,
+          z: 50
+        },
+        type: 'plastic',
+        url: 'https://t-wall.com.pl/produkt/tw0101-chwytotablica-t-bone/',
+        holds: 0
       }
     ]
   },
@@ -4846,26 +5687,49 @@ export default [
     country: 'PL',
     id: 100,
     url: 'http://www.entropyholds.com/',
+    socials: {
+      facebook: null,
+      instagram: 'https://www.instagram.com/entropyholds/'
+    },
     hangboards: [
       {
         name: 'Fingerboard',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 650,
+          y: 200,
+          z: null
+        },
+        type: 'plastic',
+        url: 'http://www.entropyholds.com/training/85-fingerboard.html',
         holds: 0
       }
     ]
   },
   {
     name: 'Rock + Run',
-    description: 'Online Climbing and Mountaineering Shop',
+    description:
+      'The UK’s Original Online Climbing Retailer 🇬🇧 #MountainEnthusiasts since 1983 🏔',
     country: 'GB',
     id: 101,
     url: 'https://rockrun.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/rockandrun.uk',
+      instagram: 'https://www.instagram.com/rockandrun_uk'
+    },
     hangboards: [
       {
         name: 'Praxis',
         id: 0,
         image: 'hangboards/ROCKRUNPRAXIS.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://rockrun.com/products/rock-run-praxis-fingerboard',
         holds: 12
       }
     ]
@@ -4876,83 +5740,166 @@ export default [
     country: 'US',
     id: 102,
     url: 'https://www.amazon.com/stores/page/13F4502E-65B8-4372-947D-89E1090DB80D/',
+    socials: {
+      facebook: null,
+      instagram: null
+    },
     hangboards: [
       {
         name: 'B07C67JND2 / B08D6Z977X / B07SB85N8G',
         id: 0,
         image: 'hangboards/GETOUTB08D6Z977X.svg',
+        size: {
+          x: 480,
+          y: 200,
+          z: 50
+        },
+        type: 'plastic',
+        url: 'https://www.amazon.com/Get-Out-Training-Fingerboard-Hangboard/dp/B07C67JND2',
         holds: 7
       },
       {
         name: 'B08HBYK5BT',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 617,
+          y: 330,
+          z: 53
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Get-Out-Training-Fingerboard-Hangboard/dp/B08HBYK5BT',
         holds: 0
       },
       {
         name: 'B08HC2XXND',
         id: 2,
         image: 'hangboards/BEAST1000.svg',
+        size: {
+          x: 546,
+          y: 152,
+          z: 44
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Get-Out-Training-Fingerboard-Hangboard/dp/B08HC2XXND',
         holds: 11
       },
       {
         name: 'B08Z5WPFPS',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 51
+        },
+        type: 'plastic',
+        url: 'https://www.amazon.com/Get-Out-Climbing-Fingerboard-Hangboard/dp/B08Z5WPFPS',
         holds: 0
       },
       {
         name: 'B08Z66L44K',
         id: 4,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 575,
+          y: 229,
+          z: 51
+        },
+        type: 'plastic',
+        url: 'https://www.amazon.com/Get-Out-Climbing-Fingerboard-Hangboard/dp/B08Z66L44K',
         holds: 0
       }
     ]
   },
   {
     name: 'Spin Agarras',
-    description: 'Brazilian Climbing Grips',
+    description: 'Barra Mansa (Rio de Janeiro), Brazil Climbing Grips',
     country: 'BR',
     id: 103,
     url: 'http://www.spinagarras.com.br/',
+    socials: {
+      facebook: 'https://www.facebook.com/agarrasdeescalada/',
+      instagram: null
+    },
     hangboards: [
       {
-        name: 'Fingerboard',
+        name: 'Grip',
         id: 0,
         image: 'hangboards/SPINFINGER.svg',
+        size: {
+          x: 480,
+          y: 150,
+          z: 55
+        },
+        type: 'plastic',
+        url: 'http://www.spinagarras.com.br/p-5216011-Agarra-de-escalada-Fingerboard',
         holds: 8
       },
       {
         name: 'Fusion',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: 'http://www.spinagarras.com.br/p-5349328-Fingerboard-Fusion',
         holds: 0
       },
       {
         name: 'Grande',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 800,
+          y: 220,
+          z: 94
+        },
+        type: 'plastic',
+        url: 'http://www.spinagarras.com.br/p-5268957-Agarra-de-escalada-Fingerboard-Grande',
         holds: 0
       }
     ]
   },
   {
     name: 'Lama Holds',
-    description: 'Wooden hangboards and campus boards',
+    description:
+      'Wooden climbing holds, hangboards and other training equipment. Eco and skin friendly',
     country: 'CZ',
     id: 104,
     url: 'https://www.lamaholds.cz/',
+    socials: {
+      facebook: 'https://www.facebook.com/lamaholds',
+      instagram: 'https://www.instagram.com/lamaholds/'
+    },
     hangboards: [
       {
         name: 'Baguette',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 600,
+          y: 60,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://www.lamaholds.cz/en/lama-baguette/',
         holds: 0
       },
       {
         name: 'Totem',
         id: 1,
         image: 'hangboards/LAMATOTEM.svg',
+        size: {
+          x: 600,
+          y: 120,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://www.lamaholds.cz/en/lama-totem/',
         holds: 7
       }
     ]
@@ -4989,29 +5936,61 @@ export default [
     country: 'AR',
     id: 106,
     url: 'https://freerock.mercadoshops.com.ar/',
+    socials: {
+      facebook: 'https://www.facebook.com/freerock.lifestyle',
+      instagram: 'https://www.instagram.com/freerock.lifestyle/'
+    },
     hangboards: [
       {
         name: 'Acción Directa',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 500,
+          y: 120,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://freerock.mercadoshops.com.ar/MLA-860964762-multipresa-madera-entrenamiento-escalada-accion-directa-_JM',
         holds: 0
       },
       {
         name: 'Jumbo Love',
         id: 1,
         image: 'hangboards/FREEROCKJUMBO.svg',
+        size: {
+          x: 580,
+          y: 150,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://freerock.mercadoshops.com.ar/MLA-863280683-multipresa-madera-entrenamiento-escalada-jumbo-love-_JM',
         holds: 14
       },
       {
         name: 'One-inch Punch',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 450,
+          y: 70,
+          z: 45
+        },
+        type: 'wood',
+        url: 'https://freerock.mercadoshops.com.ar/MLA-859618218-multipresa-madera-entrenamiento-escalada-one-inch-punch-_JM',
         holds: 0
       },
       {
         name: 'Shantala',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 400,
+          y: 100,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://freerock.mercadoshops.com.ar/MLA-859901643-multipresa-portable-madera-entrenamiento-escalada-shantala-_JM',
         holds: 0
       }
     ]
@@ -5019,6 +5998,10 @@ export default [
   {
     name: 'POWER GUIDANCE',
     description: 'POWER UP UNSTOPPABLE LIFE',
+    socials: {
+      facebook: null,
+      instagram: null
+    },
     country: 'US',
     id: 107,
     url: 'https://www.amazon.com/stores/POWERGUIDANCE/page/2702B694-0CF6-439A-9E2F-9FC8F8F67976',
@@ -5027,18 +6010,39 @@ export default [
         name: 'Rock Climbing Board 1.0',
         id: 0,
         image: 'hangboards/BEAST1000.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/POWER-GUIDANCE-Hangboard-Fingerboard-Strengthener/dp/B09CGT1HLH/',
         holds: 11
       },
       {
         name: 'Rock Climbing Board 2.0',
         id: 1,
         image: 'hangboards/BEAST2000.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/POWER-GUIDANCE-Smartphone-Multi-Function-Strengthener/dp/B09VTFVTNG',
         holds: 14
       },
       {
         name: '7 in 1 Fitness Boards',
         id: 2,
         image: 'hangboards/YYVERTICALPENTRA.svg',
+        size: {
+          x: 350,
+          y: 280,
+          z: 120
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/POWER-GUIDANCE-Hangboard-Strengthener-Double-Sided/dp/B09VTG6RZN/',
         holds: 6
       }
     ]
@@ -5059,24 +6063,78 @@ export default [
         name: 'Araucana',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       },
       {
         name: 'Evolution',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       },
       {
         name: 'Origen',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       },
       {
         name: 'Romeral',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Atacama',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Andes',
+        id: 5,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       }
     ]
@@ -5122,12 +6180,26 @@ export default [
         name: 'Single line hangboard',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       },
       {
         name: 'Portable hangboard',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
         holds: 0
       }
     ]
@@ -5139,6 +6211,10 @@ export default [
     country: 'SI',
     id: 111,
     url: 'https://trenirajznaravo.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/Treniraj-z-naravo-1167030646755354',
+      instagram: 'https://www.instagram.com/trenirajznaravo/'
+    },
     hangboards: [
       {
         name: 'FingerPeg 1.0',
@@ -5175,23 +6251,48 @@ export default [
     country: 'DE',
     id: 112,
     url: 'https://cafekraft.shop/',
+    socials: {
+      facebook: 'https://www.facebook.com/GimmeKraft',
+      instagram: 'https://www.instagram.com/cafekraft_nuernberg/'
+    },
     hangboards: [
       {
         name: 'Goldfinger',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://cafekraft.shop/collections/gimmekraft-training/products/https-cafekraft-shop-collections-gimmekraft-products-hangboard-goldfinger',
         holds: 0
       },
       {
-        name: 'Large',
+        name: 'Eisenfinger',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 50
+        },
+        type: 'wood',
+        url: 'https://cafekraft.shop/collections/gimmekraft-training/products/https-cafekraft-shop-collections-gimmekraft-products-hangboard-eisenfinger',
         holds: 0
       },
       {
         name: 'Fingerhakler',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 500,
+          y: 100,
+          z: 30
+        },
+        type: 'wood',
+        url: 'https://cafekraft.shop/products/https-cafekraft-shop-collections-gimmekraft-products-hangboard-fingerhakler',
         holds: 0
       }
     ]
@@ -5203,41 +6304,87 @@ export default [
     country: 'US',
     id: 113,
     url: 'https://frictitiousclimbing.com',
+    socials: {
+      facebook: 'https://www.facebook.com/FrictitiousClimbing',
+      instagram: 'https://www.instagram.com/frictitiousclimbing/?hl=en'
+    },
     hangboards: [
       {
         name: 'The Megalith',
         id: 0,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://frictitiousclimbing.com/products/megalith',
         holds: 0
       },
       {
         name: 'The Monolith',
         id: 1,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 596,
+          y: 190,
+          z: 57
+        },
+        type: 'wood',
+        url: 'https://frictitiousclimbing.com/products/the-monolith',
         holds: 0
       },
       {
         name: 'Hangboard 3.0',
         id: 2,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 596,
+          y: 190,
+          z: 57
+        },
+        type: 'wood',
+        url: 'https://frictitiousclimbing.com/products/3-0-frictitious-hangboard',
         holds: 0
       },
       {
         name: 'EZ Board',
         id: 3,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 483,
+          y: 89,
+          z: 45
+        },
+        type: 'wood',
+        url: 'https://frictitiousclimbing.com/products/ez-board',
         holds: 0
       },
       {
         name: 'Easy Board',
         id: 4,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 470,
+          y: 102,
+          z: 38
+        },
+        type: 'wood',
+        url: 'https://frictitiousclimbing.com/products/the-easy-board-mountable-and-portable-hangboard',
         holds: 0
       },
       {
         name: 'The Port-A-Board',
         id: 5,
         image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 140,
+          y: 127,
+          z: 43
+        },
+        type: 'wood',
+        url: 'https://frictitiousclimbing.com/products/the-port-a-board-portable-and-mountable-portable-hangboard',
         holds: 0
       }
     ]
