@@ -112,6 +112,16 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-list>
+              <v-list-item v-if="user && user.id">
+                <template #prepend>
+                  <v-icon>mdi-identifier</v-icon>
+                </template>
+
+                <v-list-item-title>
+                  {{ user.id }}
+                </v-list-item-title>
+              </v-list-item>
+
               <v-list-item v-if="user && user.displayName">
                 <template #prepend>
                   <v-icon>mdi-account</v-icon>
