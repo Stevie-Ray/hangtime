@@ -4849,7 +4849,8 @@ export default [
   },
   {
     name: 'Two Stones / One Stone',
-    description: 'Amazon / AliExpress',
+    description:
+      'Amazon / AliExpress brand mainly specialized in Rock Climbing gears, sports, training and fitness supplies.',
     country: 'US',
     id: 87,
     url: 'https://www.amazon.com/stores/TWOSTONESSPORTS/page/5B0DA811-7FB3-4C55-A8AC-4B3AC7BB2EF4',
@@ -4885,7 +4886,7 @@ export default [
         holds: 14
       },
       {
-        name: 'CJ-HB2003',
+        name: 'CJ-HB2003 / CJ-HB2051',
         id: 2,
         image: 'hangboards/TWOSTONESHB2003BX.svg',
         size: {
@@ -5041,22 +5042,9 @@ export default [
         holds: 0
       },
       {
-        name: 'CJ-HB2051',
-        id: 14,
-        image: 'hangboards/NOTFOUND.svg',
-        size: {
-          x: 600,
-          y: 200,
-          z: 50
-        },
-        type: 'wood',
-        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2051BX/dp/B08WWG97FL',
-        holds: 0
-      },
-      {
         name: 'CJ-HB2053',
-        id: 15,
-        image: 'hangboards/NOTFOUND.svg',
+        id: 14,
+        image: 'hangboards/TWOSTONESHB2053.svg',
         size: {
           x: 600,
           y: 200,
@@ -5064,11 +5052,11 @@ export default [
         },
         type: 'wood',
         url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2053BX/dp/B08WWNV6HK',
-        holds: 0
+        holds: 12
       },
       {
         name: 'CJ-HB2101',
-        id: 16,
+        id: 15,
         image: 'hangboards/NOTFOUND.svg',
         size: {
           x: 580,
@@ -5081,7 +5069,7 @@ export default [
       },
       {
         name: 'CJ-HB2112',
-        id: 17,
+        id: 16,
         image: 'hangboards/NOTFOUND.svg',
         size: {
           x: 580,

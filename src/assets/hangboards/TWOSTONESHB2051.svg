@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="661px" height="422px" viewBox="0 0 661 422" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>TWOSTONESHB2051</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="TWOSTONESHB2051" transform="translate(1.000000, 1.172857)" fill="#FFFFFF" stroke="#000000">
+            <polyline id="board" points="660 419.764627 0.127425547 419.764627 0.127425547 74.4876808 231 72.687771 231 42.3447182 459.228358 42.3447182 459.228358 21.1723591 660 20.9006426"></polyline>
+            <polyline id="board" points="660 117.762414 394.43915 117.762414 394.43915 419.764627 660 419.764627"></polyline>
+            <path d="M394.410529,198.327143 L394.410529,327.327143 L0.5,327.327143 L0.5,198.327143 L394.410529,198.327143 Z" id="board"></path>
+            <circle id="h13" cx="523.5" cy="299.327143" r="104"></circle>
+            <rect id="h12" x="317.5" y="341.327143" width="54" height="54" rx="27"></rect>
+            <rect id="h11" x="195.5" y="341.327143" width="99" height="54" rx="27"></rect>
+            <rect id="h10" x="16.5" y="341.327143" width="156" height="54" rx="27"></rect>
+            <rect id="h9" x="317.5" y="227.327143" width="54" height="54" rx="27"></rect>
+            <rect id="h8" x="195.5" y="227.327143" width="99" height="54" rx="27"></rect>
+            <rect id="h7" x="16.5" y="227.327143" width="156" height="54" rx="27"></rect>
+            <rect id="h6" x="317.5" y="113.327143" width="54" height="54" rx="27"></rect>
+            <rect id="h5" x="195.5" y="113.327143" width="99" height="54" rx="27"></rect>
+            <rect id="h4" x="16.5" y="113.327143" width="156" height="54" rx="27"></rect>
+            <polyline id="h3" points="660 20.9006426 459.228358 20.9006426 459.228358 8.5154192e-17 660 0"></polyline>
+            <polygon id="h2" points="459.228358 0 459.228358 42.3447182 231 42.3447182 231 0"></polygon>
+            <polygon id="h1" points="231 0 231 72.687771 0.127425547 74.4876808 0.127425547 1.03153535e-12"></polygon>
+        </g>
+    </g>
+</svg>
