@@ -63,7 +63,7 @@ watch(
 
 const resetPassword = ref(false)
 const year = new Date().getFullYear()
-const appVersion = '2.0.0'
+const appVersion = '2.0.2'
 const formDisabled = ref(false)
 const switchForm = ref(false)
 const valid = ref(true)
@@ -224,8 +224,14 @@ const validateRegister = () => {
 }
 
 useHead({
-  title: 'Login',
-  meta: [{ name: 'description', content: 'Sign in or sign up' }]
+  title: 'Hangboard Training App',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Hangboard training App for climbers. Train your finger strength. Create your own workouts or get them from the community. Track your max hang and pull-up progress over time.'
+    }
+  ]
 })
 </script>
 
@@ -234,7 +240,7 @@ useHead({
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" class="text-center">
         <v-row no-gutters justify="center" class="logo-container">
-          <v-col class="flex-grow-0">
+          <v-col class="flex-grow-0" style="margin-bottom: -12px">
             <inline-svg
               height="44"
               width="44"
@@ -244,14 +250,17 @@ useHead({
             />
           </v-col>
           <v-col class="flex-grow-0">
-            <div class="text-h4">HangTime</div>
+            <h2 class="text-h4">HangTime</h2>
+          </v-col>
+          <v-col cols="12">
+            <h1 class="text-subtitle-2">Hangboard Training App</h1>
           </v-col>
         </v-row>
 
         <v-card variant="flat">
           <v-card-text>
             <v-row
-              v-show="user === undefined"
+              v-if="user === undefined"
               align="center"
               justify="center"
               class="fill-height"
@@ -274,13 +283,16 @@ useHead({
                 <div class="text-center text-h5 pb-2">
                   {{ t('Hi there!') }} 👋
                 </div>
-                <div class="text-body-2 text-center pb-4">
+                <h3
+                  class="text-body-2 text-center mx-auto"
+                  style="max-width: 400px"
+                >
                   {{
                     t(
                       'Sign in to join HangTime, a community driven hangboard training app, start getting stronger and climb even harder.'
                     )
                   }}
-                </div>
+                </h3>
               </v-col>
             </v-row>
 
