@@ -5787,7 +5787,7 @@ export default [
       {
         name: 'B08Z5WPFPS',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GETOUTB08Z5WPFPS.svg',
         size: {
           x: 550,
           y: 150,
@@ -5795,7 +5795,7 @@ export default [
         },
         type: 'plastic',
         url: 'https://www.amazon.com/Get-Out-Climbing-Fingerboard-Hangboard/dp/B08Z5WPFPS',
-        holds: 0
+        holds: 8
       },
       {
         name: 'B08Z66L44K',

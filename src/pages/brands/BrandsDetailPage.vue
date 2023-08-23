@@ -1,8 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useHead } from '@vueuse/head'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useUser } from '@/stores/user'
 
 import { useAuthentication } from '@/stores/authentication'
@@ -12,6 +13,8 @@ import { useRandomImage } from '@/helpers'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import countries from '@/helpers/countries'
 import { useApp } from '@/stores/app'
+
+const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthentication())
 
@@ -25,10 +28,16 @@ const router = useRouter()
 
 const getCompany = computed(() => getCompanyByUrlKey(route.params.id))
 
+const loginButton = ref(true)
+
+const onScroll = () => {
+  loginButton.value = window.scrollY >= 0
+}
+
 useHead({
   title: user.value
     ? `${getCompany.value?.name}`
-    : `${getCompany.value?.name} Hangboard Workouts`,
+    : `${getCompany.value?.name} Hangboard Training`,
   meta: [{ name: 'description', content: getCompany.value?.description }]
 })
 </script>
@@ -49,7 +58,7 @@ useHead({
         }`
       }}
       {{
-        user ? `${getCompany?.name}` : `${getCompany?.name} Hangboard Workouts`
+        user ? `${getCompany?.name}` : `${getCompany?.name} Hangboard Training`
       }}
     </template>
 
@@ -97,7 +106,7 @@ useHead({
             </v-card>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row :class="{ 'mb-10': !user }">
           <v-col cols="12">
             <v-card
               v-for="hangboard in getCompany?.hangboards"
@@ -151,21 +160,25 @@ useHead({
                     target="_blank"
                   >
                   </v-btn>
-                  <v-btn
-                    v-if="!user"
-                    :disabled="
-                      getHangboardImageByIds(getCompany.id, hangboard.id) ===
-                      'hangboards/NOTFOUND.svg'
-                    "
-                    color="text"
-                    to="/login"
-                    icon="mdi-login"
-                  />
                 </template>
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
+        <div v-if="!user" v-scroll="onScroll" class="fab text-end">
+          <div class="mx-4">
+            <v-fab-transition>
+              <v-btn
+                v-show="loginButton"
+                to="/login"
+                size="x-large"
+                rounded="lg"
+              >
+                {{ t('Start training') }}
+              </v-btn>
+            </v-fab-transition>
+          </div>
+        </div>
       </v-container>
     </template>
   </app-container>
@@ -175,5 +188,22 @@ useHead({
 .v-responsive:deep(.v-responsive__content) {
   display: flex;
   flex-direction: column;
+}
+
+.fab {
+  bottom: 0px;
+  z-index: 1007;
+  transform: translateY(0%);
+  position: fixed;
+  height: 80px;
+  left: 0;
+  width: calc((100% - 0px) - 0px);
+  pointer-events: none;
+  .v-btn {
+    background-color: rgb(var(--v-theme-accent));
+    z-index: 1008;
+    --v-btn-height: 56px;
+    pointer-events: initial;
+  }
 }
 </style>

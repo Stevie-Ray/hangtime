@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="638px" height="303px" viewBox="0 0 638 303" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
-    <title>Group 2</title>
-    <desc>Created with Sketch.</desc>
+    <title>CRIMPTONITEMOB</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-2" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+        <g id="CRIMPTONITEMOB" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
             <path d="M637,301 L25,301 C11.1928813,301 0,289.807119 0,276 L0,25 C0,11.1928813 11.1928813,0 25,0 L637,0" id="hangboard"></path>
             <rect id="h3" x="68" y="184" width="341" height="71" rx="34"></rect>
             <path d="M637,200 L511,200 C492.222319,200 477,184.777681 477,166 L477,141 C477,122.222319 492.222319,107 511,107 L637,107" id="h2"></path>
