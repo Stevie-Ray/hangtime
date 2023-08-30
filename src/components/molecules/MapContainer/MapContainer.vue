@@ -22,11 +22,10 @@ const loader = new Loader({
 })
 
 /* eslint no-undef: 0 */
-
 loader.load().then(async () => {
   const { Map } = await google.maps.importLibrary('maps')
 
-  const map = new Map(document.getElementById('map'), {
+  const map = new Map(document.querySelector('.map'), {
     zoom: props.zoom,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
@@ -107,8 +106,7 @@ loader.load().then(async () => {
       const icon = {
         url: '/img/icons/favicon.svg',
         scaledSize: new google.maps.Size(20, 20),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 0)
+        anchor: new google.maps.Point(10, 10)
       }
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(item.location.lat, item.location.lon),
@@ -122,13 +120,10 @@ loader.load().then(async () => {
       google.maps.event.addListener(
         marker,
         'click',
-        // eslint-disable-next-line func-names,no-shadow
-        (function (marker) {
-          // eslint-disable-next-line func-names
-          return function () {
-            infowindow.setContent(item.name)
-            infowindow.open(map, marker)
-          }
+        // eslint-disable-next-line no-shadow
+        ((marker) => () => {
+          infowindow.setContent(item.name)
+          infowindow.open(map, marker)
         })(marker)
       )
     }
@@ -136,21 +131,32 @@ loader.load().then(async () => {
   // now fit the map to the newly inclusive bounds
   map.fitBounds(bounds)
   // restore the zoom level after the map is done scaling
-  // eslint-disable-next-line no-var,no-undef,func-names
-  const listener = google.maps.event.addListener(map, 'idle', function () {
+  const listener = google.maps.event.addListener(map, 'idle', () => {
     map.setZoom(props.zoom)
-    // eslint-disable-next-line no-undef
     google.maps.event.removeListener(listener)
   })
 })
 </script>
 
 <template>
-  <div id="map" class="rounded-lg" :style="{ height: height + 'px' }"></div>
+  <div class="map rounded-lg" :style="{ height: height + 'px' }"></div>
 </template>
 
 <style lang="scss">
-.gm-style .gm-style-iw-d {
-  color: black;
+.gm-style {
+  .gm-style-iw-d {
+    color: black;
+  }
+
+  a[href^="https://maps.google.com/maps"]
+  {
+    opacity: 0.5;
+  }
+
+  .gmnoprint a,
+  .gmnoprint span,
+  .gm-style-cc {
+    display: none;
+  }
 }
 </style>

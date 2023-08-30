@@ -108,7 +108,7 @@ useHead({
             </v-card>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row :class="{ 'mb-10': !user }">
           <v-col cols="12">
             <v-card
               v-for="hangboard in getCompany?.hangboards"
@@ -165,11 +165,12 @@ useHead({
                 </template>
               </v-card-actions>
             </v-card>
-          </v-col>
-        </v-row>
-        <v-row v-if="getCompany.location" :class="{ 'mb-10': !user }">
-          <v-col cols="12">
-            <map-container :markers="[getCompany]" :zoom="6" />
+            <!-- company map -->
+            <map-container
+              v-if="getCompany.location"
+              :markers="[getCompany]"
+              :zoom="6"
+            />
           </v-col>
         </v-row>
         <div v-if="!user" v-scroll="onScroll" class="fab text-end">
