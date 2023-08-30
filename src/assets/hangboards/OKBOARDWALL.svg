@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="668px" height="329px" viewBox="0 0 668 329" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>OKBOARDWALL</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="OKBOARDWALL" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M667,327 L59,327 C27.5197693,327 2,301.480231 2,270 L2,167 L2,167 L667,167" id="Path"></path>
+            <path d="M665,163 L18,163 C8.0588745,163 0,154.941125 0,145 L0,18 C0,8.0588745 8.0588745,0 18,0 L665,0" id="h1"></path>
+            <path d="M667,189 L20,189 C10.0588745,189 2,180.941125 2,171 L2,44 C2,34.0588745 10.0588745,26 20,26 L667,26 L667,26" id="board"></path>
+            <rect id="h3" x="44.5" y="82.5" width="118" height="62" rx="31"></rect>
+            <rect id="h8" x="50.5" y="215.5" width="461" height="62" rx="31"></rect>
+            <rect id="h7" x="50.5" y="215.5" width="237" height="62" rx="31"></rect>
+            <path d="M667,145 L333.5,145 C316.10303,145 302,130.89697 302,113.5 C302,96.1030304 316.10303,82 333.5,82 L667,82" id="h5"></path>
+            <path d="M667,145 L575.5,145 C558.10303,145 544,130.89697 544,113.5 C544,96.1030304 558.10303,82 575.5,82 L667,82" id="h6"></path>
+            <path d="M667,278 L575.5,278 C558.10303,278 544,263.89697 544,246.5 C544,229.10303 558.10303,215 575.5,215 L667,215" id="h9"></path>
+            <rect id="h4" x="201.5" y="82.5" width="62" height="62" rx="31"></rect>
+            <polyline id="h2" points="667 26 281 26 281 0 667 -2.39658293e-12"></polyline>
+        </g>
+    </g>
+</svg>

@@ -6851,7 +6851,7 @@ export default [
       {
         name: 'OkBoard Wall',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/OKBOARDWALL.svg',
         size: {
           x: null,
           y: null,
@@ -6859,7 +6859,7 @@ export default [
         },
         type: 'wood',
         url: null,
-        holds: 0
+        holds: 8
       },
       {
         name: 'OkBoard Crag',
@@ -6947,7 +6947,7 @@ export default [
       {
         name: 'HoldOn v3.0',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GRIPWORKSHOLDON.svg',
         size: {
           x: 630,
           y: 195,
@@ -6955,7 +6955,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/hold-on/',
-        holds: 0
+        holds: 15
       },
       {
         name: 'Power v3.0',
