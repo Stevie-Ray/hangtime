@@ -5,13 +5,15 @@ import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useUser } from '@/stores/user'
+import { useRandomImage } from '@/helpers'
+import countries from '@/helpers/countries'
+
+import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
+import MapContainer from '@/components/molecules/MapContainer/MapContainer'
 
 import { useAuthentication } from '@/stores/authentication'
 
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
-import { useRandomImage } from '@/helpers'
-import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
-import countries from '@/helpers/countries'
 import { useApp } from '@/stores/app'
 
 const { t } = useI18n()
@@ -106,7 +108,7 @@ useHead({
             </v-card>
           </v-col>
         </v-row>
-        <v-row :class="{ 'mb-10': !user }">
+        <v-row>
           <v-col cols="12">
             <v-card
               v-for="hangboard in getCompany?.hangboards"
@@ -163,6 +165,11 @@ useHead({
                 </template>
               </v-card-actions>
             </v-card>
+          </v-col>
+        </v-row>
+        <v-row v-if="getCompany.location" :class="{ 'mb-10': !user }">
+          <v-col cols="12">
+            <map-container :markers="[getCompany]" :zoom="6" />
           </v-col>
         </v-row>
         <div v-if="!user" v-scroll="onScroll" class="fab text-end">

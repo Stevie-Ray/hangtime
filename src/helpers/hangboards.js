@@ -4,6 +4,10 @@ export default [
     description:
       'Training devices for climber, crossfitter, ninja warrior- made in Austria',
     country: 'AT',
+    location: {
+      lat: '47.607470',
+      lon: '16.015820'
+    },
     id: 0,
     url: 'https://www.antworks.at/',
     socials: {
@@ -96,6 +100,10 @@ export default [
     description:
       'Beastmaker is a UK company who specialise in wooden training equipment for climbers.',
     country: 'GB',
+    location: {
+      lat: '54.968296',
+      lon: '-3.002794'
+    },
     id: 1,
     url: 'https://www.beastmaker.co.uk/',
     socials: {
@@ -136,6 +144,10 @@ export default [
     description:
       'Manufacturers of high-quality climbing holds, based in Sheffield, United Kingdom.',
     country: 'GB',
+    location: {
+      lat: '53.299214',
+      lon: '-1.457636'
+    },
     id: 2,
     url: 'https://coreclimbing.co.uk/',
     socials: {
@@ -163,6 +175,10 @@ export default [
     description:
       'Climbing Hangboards, Wooden Climbing Holds and Climbing Training aids, made by climbers for climbers.',
     country: 'GB',
+    location: {
+      lat: '53.8624814',
+      lon: '-2.6158097'
+    },
     id: 3,
     url: 'http://crusherholds.co.uk/',
     socials: {
@@ -268,6 +284,10 @@ export default [
     description:
       'The world’s leading manufacturer of climbing walls and holds, provides support to climbing facility, school and competition…',
     country: 'US',
+    location: {
+      lat: '44.0905532',
+      lon: '-121.2857551'
+    },
     id: 4,
     url: 'https://www.entre-prises.us/',
     socials: {
@@ -343,10 +363,14 @@ export default [
     ]
   },
   {
-    name: 'Holdz',
+    name: 'HOLDZ',
     description:
       'Manufacturer of climbing holds, finger boards and bouldering gear. The leader in Climbing wall crash matting.',
-    country: 'US',
+    country: 'GB',
+    location: {
+      lat: '53.6543621',
+      lon: '-1.5458583'
+    },
     id: 5,
     url: 'https://www.holdz.co.uk/',
     socials: {
@@ -386,6 +410,10 @@ export default [
     name: 'Kraxl Board',
     description: 'Handicraft in Collalbo, South Tyrol, Italy',
     country: 'IT',
+    location: {
+      lat: '46.5299282',
+      lon: '11.4433893'
+    },
     id: 6,
     url: 'https://www.kraxl-board.com/',
     socials: {
@@ -464,6 +492,10 @@ export default [
     name: 'Max Climbing',
     description: 'Handcrafted climbing products made in Belgium',
     country: 'BE',
+    location: {
+      lat: '51.0904977',
+      lon: '3.7224814'
+    },
     id: 7,
     url: 'https://www.maxclimbing.com/',
     socials: {
@@ -528,6 +560,10 @@ export default [
     description:
       'Swiss outdoor brand providing high quality products and unique brand experiences to mountain sports enthusiasts around the globe.',
     country: 'CH',
+    location: {
+      lat: '47.362606',
+      lon: '8.1291466'
+    },
     id: 8,
     url: 'https://www.mammut.com/',
     socials: {
@@ -554,6 +590,10 @@ export default [
     name: 'Metolius Climbing',
     description: 'Making climbing gear since 1983.',
     country: 'US',
+    location: {
+      lat: '44.0950297',
+      lon: '-121.3049843'
+    },
     id: 9,
     url: 'https://www.metoliusclimbing.com/',
     socials: {
@@ -709,6 +749,10 @@ export default [
     name: 'Moon Climbing',
     description: '100% Climbing since 2002. Based in Sheffield, UK',
     country: 'GB',
+    location: {
+      lat: '53.3862667',
+      lon: '-1.4762093'
+    },
     id: 10,
     url: 'https://moonclimbing.com/',
     socials: {
@@ -775,6 +819,10 @@ export default [
     description:
       'Climbing gear developed and manufactured by climbers in Czech Republic.',
     country: 'CZ',
+    location: {
+      lat: '50.5195261',
+      lon: '14.98758'
+    },
     id: 11,
     url: 'http://www.ocun.com/',
     socials: {
@@ -801,6 +849,10 @@ export default [
     name: 'Problemsolver',
     description: 'Portable hangboards for climbing. Bring it wherever you go!',
     country: 'SE',
+    location: {
+      lat: '59.326038',
+      lon: '17.8172504'
+    },
     id: 12,
     url: 'https://www.problemsolver.rocks/',
     socials: {
@@ -878,6 +930,10 @@ export default [
     name: 'So iLL',
     description: 'Climbing Shoes, Climbing Holds, Climbing Apparel, & Training',
     country: 'US',
+    location: {
+      lat: '38.616491',
+      lon: '-90.272558'
+    },
     id: 13,
     url: 'https://soillholds.com/',
     socials: {
@@ -1021,6 +1077,10 @@ export default [
     name: 'Target10a',
     description: 'Climbing- & Bouldertraining',
     country: 'DE',
+    location: {
+      lat: '49.8496653',
+      lon: '10.4985367'
+    },
     id: 14,
     url: 'https://www.target10a.com/',
     socials: {
@@ -1099,6 +1159,10 @@ export default [
     name: 'Tension Climbing',
     description: 'The All-in-one Training Solution',
     country: 'US',
+    location: {
+      lat: '39.813736',
+      lon: '-104.9814109'
+    },
     id: 15,
     url: 'https://www.tensionclimbing.com/',
     socials: {
@@ -1229,6 +1293,10 @@ export default [
     description:
       'Trango is a company of climbers who design products to improve the climbing experience',
     country: 'US',
+    location: {
+      lat: '39.9827583',
+      lon: '-105.0777175'
+    },
     id: 16,
     url: 'http://www.trango.com/',
     socials: {
@@ -1303,6 +1371,10 @@ export default [
     name: 'Witchholds',
     description: 'Wooden stuff for climbing and workouts',
     country: 'PL',
+    location: {
+      lat: '50.2731976',
+      lon: '18.9836268'
+    },
     id: 17,
     url: 'https://witchholds.com/',
     socials: {
@@ -1342,6 +1414,10 @@ export default [
     name: 'Zlagboard',
     description: 'Personalized Hangboard Training',
     country: 'IT',
+    location: {
+      lat: '46.7223591',
+      lon: '11.6534146'
+    },
     id: 18,
     url: 'https://www.zlagboard.com/',
     socials: {
@@ -1408,6 +1484,10 @@ export default [
     description:
       "Decathlon's Mountaineering & Climbing brand based in Chamonix valley",
     country: 'FR',
+    location: {
+      lat: '45.9087619',
+      lon: '6.8515411'
+    },
     id: 19,
     url: 'https://www.simond.com/',
     socials: {
@@ -1434,6 +1514,10 @@ export default [
     name: 'Crimptonite',
     description: 'We make training tools dedicated for the Climbing sport.',
     country: 'NL',
+    location: {
+      lat: '52.0333354',
+      lon: '4.7119457'
+    },
     id: 20,
     url: 'https://crimptonite.com/',
     socials: {
@@ -1534,6 +1618,10 @@ export default [
     name: 'Captain Fingerfood',
     description: 'For all your climbing training',
     country: 'DE',
+    location: {
+      lat: '50.7407367',
+      lon: '7.0952848'
+    },
     id: 21,
     url: 'https://www.captainfingerfood.rocks/',
     socials: {
@@ -1569,9 +1657,13 @@ export default [
     ]
   },
   {
-    name: 'Surfaces for Climbing ',
+    name: 'Surfaces for Climbing',
     description: 'Construction and maintenance of climbing walls',
     country: 'ES',
+    location: {
+      lat: '41.6668194',
+      lon: '2.7791911'
+    },
     id: 22,
     url: 'https://www.surfacesforclimbing.com/',
     socials: {
@@ -1624,6 +1716,10 @@ export default [
     name: 'Wataaah',
     description: 'Climbing Holds and Volumes | unleash your creativity',
     country: 'DE',
+    location: {
+      lat: '48.7278602',
+      lon: '8.8890143'
+    },
     id: 23,
     url: 'https://www.wataaah.de/',
     socials: {
@@ -1651,6 +1747,10 @@ export default [
     description:
       'Innovative and functional grip strength training devices for climbing & bouldering.',
     country: 'AT',
+    location: {
+      lat: '47.2802785',
+      lon: '15.5186031'
+    },
     id: 24,
     url: 'https://www.fingerschinder.com/',
     socials: {
@@ -1716,6 +1816,10 @@ export default [
     name: 'JK-Meisterschreiner',
     description: 'By Johannes Kauschinger',
     country: 'DE',
+    location: {
+      lat: '49.0219098',
+      lon: '13.0247499'
+    },
     id: 25,
     url: 'http://jk-meisterschreiner.de/',
     socials: {
@@ -1753,8 +1857,12 @@ export default [
   },
   {
     name: 'Vola',
-    description: 'Sport climbing training equipment.',
+    description: 'Sport climbing training equipment from Thailand.',
     country: 'TH',
+    location: {
+      lat: '13.6917093',
+      lon: '100.3998994'
+    },
     id: 26,
     url: 'https://www.thevola.com/',
     socials: {
@@ -1795,6 +1903,10 @@ export default [
     description:
       'Your specialist for sportswear, climbing & outdoor equipment so that you are always well prepared for sports and leisure!',
     country: 'DE',
+    location: {
+      lat: '48.2469153',
+      lon: '12.5897977'
+    },
     id: 27,
     url: 'https://www.alpidex.com/',
     socials: {
@@ -1834,6 +1946,10 @@ export default [
     name: 'Erzi',
     description: 'Quality products from wood GmbH',
     country: 'DE',
+    location: {
+      lat: '50.763999',
+      lon: '13.152341'
+    },
     id: 28,
     url: 'https://erzi.de/',
     socials: {
@@ -1886,6 +2002,10 @@ export default [
     name: 'Smartrock',
     description: 'Door mount system for climbing and training',
     country: 'DE',
+    location: {
+      lat: '48.1425402',
+      lon: '11.5083402'
+    },
     id: 29,
     url: 'https://smartrock.de/',
     socials: {
@@ -1912,6 +2032,10 @@ export default [
     name: 'Nicros',
     description: 'Custom Rock Climbing Wall and Hold Solutions Nicros',
     country: 'US',
+    location: {
+      lat: '44.9662722',
+      lon: '-93.0676146'
+    },
     id: 30,
     url: 'https://nicros.com/',
     socials: {
@@ -1978,6 +2102,10 @@ export default [
     description:
       "Producing the finest climbing equipment you've ever laid your hands on!",
     country: 'AU',
+    location: {
+      lat: '-38.1624649',
+      lon: '145.0944475'
+    },
     id: 31,
     url: 'https://www.conceptclimbing.com/',
     socials: {
@@ -2056,6 +2184,10 @@ export default [
     name: 'Bleaustone',
     description: 'Re-creating the feeling of climbing outdoors, indoors.',
     country: 'SI',
+    location: {
+      lat: '46.064405',
+      lon: '14.579259'
+    },
     id: 32,
     url: 'https://www.bleaustone.com/',
     socials: {
@@ -2095,6 +2227,10 @@ export default [
     name: 'Euroholds / Rokodromo',
     description: 'Buy the best climbing holds.',
     country: 'ES',
+    location: {
+      lat: '38.9954522',
+      lon: '-0.5235358'
+    },
     id: 33,
     url: 'https://www.euroholds.com/',
     socials: {
@@ -2146,8 +2282,12 @@ export default [
   {
     name: 'Blank Slate Climbing',
     description:
-      'Stand out from the competition with elite training boards, hangboards & holds for climbers.',
+      'Stand out from the competition with elite training boards, hangboards & holds for climbers from Cheyenne, Wyoming.',
     country: 'US',
+    location: {
+      lat: '41.1475252',
+      lon: '-104.808604'
+    },
     id: 34,
     url: 'https://blankslateclimbing.com/',
     socials: {
@@ -2201,6 +2341,10 @@ export default [
     description:
       'Gorgeous hangboards that will take your climbing abilities to the next level!',
     country: 'CA',
+    location: {
+      lat: '51.0275074',
+      lon: '-114.2526389'
+    },
     id: 35,
     url: 'https://lyons-edge.myshopify.com/',
     socials: {
@@ -2254,6 +2398,10 @@ export default [
     description:
       'Climbing Holds that Inspire, Hardware that Lasts, and Training Tools that Work.',
     country: 'US',
+    location: {
+      lat: '45.031554',
+      lon: '-93.1044788'
+    },
     id: 36,
     url: 'https://escapeclimbing.com/',
     socials: {
@@ -2306,6 +2454,10 @@ export default [
     name: 'Lapis Holds',
     description: 'Best climbing holds in the world',
     country: 'SI',
+    location: {
+      lat: '46.064405',
+      lon: '14.579259'
+    },
     id: 37,
     url: 'https://www.lapisholds.com/',
     socials: {
@@ -2333,6 +2485,10 @@ export default [
     description:
       'High quality climbing holds and Ninja Warrior products from Provo, Utah, USA',
     country: 'US',
+    location: {
+      lat: '40.226161',
+      lon: '-111.6577682'
+    },
     id: 38,
     url: 'https://www.atomikclimbingholds.com',
     socials: {
@@ -2370,8 +2526,12 @@ export default [
   },
   {
     name: 'Arête Climbing',
-    description: 'Improve your climbing',
+    description: 'Improve your climbing, climbing gear from deepest Devon',
     country: 'GB',
+    location: {
+      lat: '50.485144',
+      lon: '-3.6957645'
+    },
     id: 39,
     url: 'https://www.arête.com',
     socials: {
@@ -2409,8 +2569,13 @@ export default [
   },
   {
     name: 'Nature Climbing',
-    description: 'Handmade quality climbing gear',
+    description:
+      'Handmade quality climbing holds & gear. Climbing equipment made from natural materials',
     country: 'DK',
+    location: {
+      lat: '56.2052644',
+      lon: '10.1817108'
+    },
     id: 40,
     url: 'https://natureclimbing.com/',
     socials: {
@@ -2437,6 +2602,10 @@ export default [
     name: 'Digital Climbing Holds',
     description: 'Digital climbing holds. French brand',
     country: 'FR',
+    location: {
+      lat: '46.5730681',
+      lon: '5.7515538'
+    },
     id: 41,
     url: 'https://digital-climbing.com/',
     socials: {
@@ -2487,8 +2656,13 @@ export default [
   },
   {
     name: 'Volx Holds',
-    description: 'Manufacturer & Designer of Climbing Holds',
+    description:
+      'Manufacturer & Designer of Climbing Holds, Made in France! 🇫🇷',
     country: 'FR',
+    location: {
+      lat: '45.8872687',
+      lon: '4.6099563'
+    },
     id: 42,
     url: 'https://volxholds.com/',
     socials: {
@@ -2528,6 +2702,10 @@ export default [
     name: 'AIX',
     description: 'Climbing Holds, Volumes & Walls.',
     country: 'CZ',
+    location: {
+      lat: '50.1189685',
+      lon: '14.6162866'
+    },
     id: 43,
     url: 'https://www.aix.cz/',
     socials: {
@@ -2593,6 +2771,10 @@ export default [
     name: '360 Holds',
     description: '360 holds and volumes are designed with passion for climbing',
     country: 'SI',
+    location: {
+      lat: '45.633139',
+      lon: '14.254777'
+    },
     id: 44,
     url: 'http://www.360holds.com/',
     socials: {
@@ -2633,6 +2815,10 @@ export default [
     description:
       '4 different brands of climbing holds, more than 3000 shapes of holds and 150 models of climbing volumes and features',
     country: 'BG',
+    location: {
+      lat: '42.6954026',
+      lon: '23.2415466'
+    },
     id: 45,
     url: 'https://hrt-holds.com/',
     socials: {
@@ -2709,8 +2895,13 @@ export default [
   },
   {
     name: 'Gecko Holds',
-    description: 'With passion for climbing!',
+    description:
+      'Delivering modern and eco friendly holds with the best grip possible along with the great design. With passion for climbing!',
     country: 'SI',
+    location: {
+      lat: '46.228005',
+      lon: '14.6102501'
+    },
     id: 46,
     url: 'https://www.gecko-holds.com/',
     socials: {
@@ -2737,6 +2928,10 @@ export default [
     name: 'Owl Climb',
     description: 'Hangboards made in italy 🇮🇹',
     country: 'IT',
+    location: {
+      lat: '45.4630282',
+      lon: '7.9927652'
+    },
     id: 47,
     url: 'https://owlclimb.com/',
     socials: {
@@ -2815,6 +3010,10 @@ export default [
     description:
       'The most adjustable hangboard. Improve your abilities. Reach for the top',
     country: 'DE',
+    location: {
+      lat: '53.5600438',
+      lon: '9.9374607'
+    },
     id: 48,
     url: 'https://www.bam-products.com/',
     socials: {
@@ -2841,6 +3040,10 @@ export default [
     name: 'Dave MacLeod',
     description: 'In collaboration with Edgy Climbing Holds',
     country: 'GB',
+    location: {
+      lat: '56.8902306',
+      lon: '-4.8413473'
+    },
     id: 49,
     url: 'https://www.davemacleod.com/',
     socials: {
@@ -2867,6 +3070,10 @@ export default [
     name: 'Expressions holds',
     description: 'French designed climbing holds & volumes since 2003 ✌️',
     country: 'FR',
+    location: {
+      lat: '47.6668777',
+      lon: '-3.0195772'
+    },
     id: 50,
     url: 'https://www.expression-holds.com/',
     socials: {
@@ -2893,6 +3100,10 @@ export default [
     name: 'DeWoodstok',
     description: 'Boulder brushes. Adjustable in angle and height.',
     country: 'NL',
+    location: {
+      lat: '52.0212314',
+      lon: '4.3484441'
+    },
     id: 51,
     url: 'https://www.dewoodstok.nl/',
     socials: {
@@ -2919,6 +3130,10 @@ export default [
     name: 'Awesome Woodys',
     description: 'Handcrafted training tools for climbers',
     country: 'AU',
+    location: {
+      lat: '-27.3809811',
+      lon: '152.6635521'
+    },
     id: 52,
     url: 'https://awesomewoodys.com/',
     socials: {
@@ -3043,8 +3258,13 @@ export default [
   },
   {
     name: 'Defythecrux',
-    description: 'Equipment and apparel built for climbers, by climbers.',
+    description:
+      'Equipment and apparel built for climbers, by climbers from Los Angeles, CA',
     country: 'US',
+    location: {
+      lat: '34.0479346',
+      lon: '-118.2863777'
+    },
     id: 53,
     url: 'https://defythecrux.com/',
     socials: {
@@ -3097,6 +3317,10 @@ export default [
     name: 'WhiteOak',
     description: 'Wooden climbing equipment',
     country: 'PL',
+    location: {
+      lat: '51.1096764',
+      lon: '17.1226194'
+    },
     id: 54,
     url: 'https://whiteoak.com.pl/',
     socials: {
@@ -3136,6 +3360,10 @@ export default [
     name: 'Acorn Climbing',
     description: 'Sustainably crafted Hangboards',
     country: 'US',
+    location: {
+      lat: '35.9044179',
+      lon: '-78.6726156'
+    },
     id: 55,
     url: 'https://www.acornclimbing.com/',
     socials: {
@@ -3162,6 +3390,10 @@ export default [
     name: 'ArtLine Climbing Holds',
     description: 'Climbing holds and volumes',
     country: 'FR',
+    location: {
+      lat: '45.7150769',
+      lon: '4.859521'
+    },
     id: 56,
     url: 'https://www.artline-holds.com/',
     socials: {
@@ -3186,8 +3418,13 @@ export default [
   },
   {
     name: 'Butterfinger Sports',
-    description: 'Out of love for climbing and devotion to innovative design',
+    description:
+      'Out of love for climbing and devotion to innovative design from Los Angeles, CA',
     country: 'US',
+    location: {
+      lat: '34.0479346',
+      lon: '-118.2863777'
+    },
     id: 57,
     url: 'http://butterfingersports.com/',
     socials: {
@@ -3214,6 +3451,10 @@ export default [
     name: 'WOOD M BOARD',
     description: 'Quality wooden booster boards, designed for all climbers',
     country: 'CZ',
+    location: {
+      lat: '49.2278038',
+      lon: '17.6871665'
+    },
     id: 58,
     url: 'https://www.woodmboard.cz/',
     socials: {
@@ -3266,6 +3507,10 @@ export default [
     name: 'Workshop 19/50',
     description: 'Tailor-made training gear and climbing gym accessories',
     country: 'RU',
+    location: {
+      lat: '53.746756',
+      lon: '87.1151141'
+    },
     id: 59,
     url: 'https://workshop1950.ru/',
     socials: {
@@ -3381,6 +3626,10 @@ export default [
     name: '2Climb',
     description: 'Producing workout gear for climbers 🧗‍♂️',
     country: 'CZ',
+    location: {
+      lat: '50.3692876',
+      lon: '14.8496803'
+    },
     id: 60,
     url: 'https://www.2climb.cz/',
     socials: {
@@ -3459,6 +3708,10 @@ export default [
     name: 'Top Out Climbing',
     description: 'Hangboards and Rock Climbing training equipment',
     country: 'GB',
+    location: {
+      lat: '51.2627787',
+      lon: '0.4994356'
+    },
     id: 61,
     url: 'https://www.topoutclimbing.co.uk/',
     socials: {
@@ -3498,6 +3751,10 @@ export default [
     name: 'TriPoint Holds',
     description: 'designed, made and tested by climbers for climbers.',
     country: 'PL',
+    location: {
+      lat: '49.7328675',
+      lon: '19.1678935'
+    },
     id: 62,
     url: 'https://tripoint-holds.com/',
     socials: {
@@ -3564,6 +3821,10 @@ export default [
     description:
       'Natural wood climbing Hangboards. Train at home with chemical-free dams!',
     country: 'ES',
+    location: {
+      lat: '41.164387',
+      lon: '1.1528246'
+    },
     id: 63,
     url: 'https://canigo.eu/',
     socials: {
@@ -3642,6 +3903,10 @@ export default [
     name: 'Climbnboulder',
     description: 'By Thomas G.',
     country: 'DE',
+    location: {
+      lat: '47.7334116',
+      lon: '9.2343487'
+    },
     id: 64,
     url: 'https://www.etsy.com/shop/climbnboulder',
     socials: {
@@ -3681,6 +3946,10 @@ export default [
     name: 'Danger Buddies',
     description: 'Innovative outdoor gear for your adventures',
     country: 'US',
+    location: {
+      lat: '43.1485792',
+      lon: '-88.1657709'
+    },
     id: 65,
     url: 'https://www.dangerbuddies.com/',
     socials: {
@@ -3717,9 +3986,13 @@ export default [
     ]
   },
   {
-    name: 'Makak',
-    description: 'Climbing holds and walls production',
+    name: 'Makak Climbing',
+    description: 'Climbing holds and walls production from the Czech Republic',
     country: 'CZ',
+    location: {
+      lat: '50.7266686',
+      lon: '15.1480867'
+    },
     id: 66,
     url: 'http://www.makak.cz/',
     socials: {
@@ -3798,6 +4071,10 @@ export default [
     name: 'Egurre Holds',
     description: 'High quality beech wood hangboards',
     country: 'ES',
+    location: {
+      lat: '43.2909565',
+      lon: '-1.990151'
+    },
     id: 67,
     url: 'https://egurreholds.com/',
     socials: {
@@ -3863,6 +4140,10 @@ export default [
     name: 'Mountain Rocks',
     description: 'An Exceptional Climbing Experience',
     country: 'AU',
+    location: {
+      lat: '-36.7561828',
+      lon: '144.2698368'
+    },
     id: 68,
     url: 'https://mountainrocks.com.au/',
     socials: {
@@ -3928,6 +4209,10 @@ export default [
     name: 'Crafty Climbing',
     description: 'Cute and Furry climbing chalk bags and more',
     country: 'PL',
+    location: {
+      lat: '51.1514841',
+      lon: '17.0653472'
+    },
     id: 69,
     url: 'https://craftyclimbing.com/',
     socials: {
@@ -3981,6 +4266,10 @@ export default [
     description:
       'Engineering the send. Build your custom wood hangboard today!',
     country: 'US',
+    location: {
+      lat: '28.8797209',
+      lon: '-81.9106354'
+    },
     id: 70,
     url: 'https://customclimbsofficial.com/',
     socials: {
@@ -4034,6 +4323,10 @@ export default [
     description:
       "Didak's Climbing from Barcelona are manufacturers of polyurethane climbing holds and climbing walls",
     country: 'ES',
+    location: {
+      lat: '41.8201899',
+      lon: '2.2348697'
+    },
     id: 71,
     url: 'http://www.didaks.com/',
     socials: {
@@ -4113,6 +4406,10 @@ export default [
     description:
       'Training tools and structures for climbers designed by climbers 🇮🇹made in Italy',
     country: 'IT',
+    location: {
+      lat: '45.003799',
+      lon: '8.2069927'
+    },
     id: 72,
     url: 'https://www.exploreclimbing.it/',
     socials: {
@@ -4176,8 +4473,12 @@ export default [
   },
   {
     name: 'IseClimb Factory',
-    description: 'Wooden articles for training climbers',
+    description: 'Wooden articles for training climbers from Soncino, Italy',
     country: 'IT',
+    location: {
+      lat: '45.3996119',
+      lon: '9.8643915'
+    },
     id: 73,
     url: null,
     socials: {
@@ -4215,12 +4516,16 @@ export default [
   },
   {
     name: 'Woodoclimb',
-    description: 'Find your way, 100% designed and made in Italy',
+    description: 'Find your way, 100% designed and made in Verona, Italy',
     socials: {
       facebook: 'https://www.facebook.com/woodoclimb',
       instagram: 'https://www.instagram.com/woodoclimb/'
     },
     country: 'IT',
+    location: {
+      lat: '45.4262429',
+      lon: '10.9512463'
+    },
     id: 74,
     url: 'http://www.woodoclimb.com/',
     hangboards: [
@@ -4257,6 +4562,10 @@ export default [
     description:
       'High quality wooden training devices. Designed by Rustam Gelmanov',
     country: 'NL',
+    location: {
+      lat: '51.4793049',
+      lon: '5.4268555'
+    },
     id: 75,
     url: 'https://rustamclimbing.com/',
     socials: {
@@ -4348,6 +4657,10 @@ export default [
     name: 'DUDES vs. GRAVITY',
     description: 'Group of climbers from Slovenia.',
     country: 'SI',
+    location: {
+      lat: '45.5640048',
+      lon: '15.1920123'
+    },
     id: 76,
     url: 'https://dudesvsgravity.com/',
     socials: {
@@ -4385,8 +4698,13 @@ export default [
   },
   {
     name: 'Lattice',
-    description: 'Coaching & Training',
+    description:
+      "Lattice Training is the world's leading climbing coaching & training plan company. No one builds athletes with more experience or expertise.",
     country: 'GB',
+    location: {
+      lat: '53.2582284',
+      lon: '-1.4286788'
+    },
     id: 77,
     url: 'https://latticetraining.com/',
     socials: {
@@ -4426,6 +4744,10 @@ export default [
     name: 'Puc Series',
     description: 'Patxi Usobiaga Climbing',
     country: 'ES',
+    location: {
+      lat: '42.1737186',
+      lon: '1.316224'
+    },
     id: 78,
     url: 'https://pucseries.com/',
     socials: {
@@ -4474,6 +4796,10 @@ export default [
     name: 'Woodrock',
     description: 'Wooden climbing beam, made in France',
     country: 'FR',
+    location: {
+      lat: '45.0277139',
+      lon: '5.3204425'
+    },
     id: 79,
     url: 'https://www.woodrock.fr/',
     socials: {
@@ -4553,6 +4879,10 @@ export default [
     description:
       'Founded by Forrest Liu (IFSC Official Photographer) in Shenyang, China',
     country: 'CN',
+    location: {
+      lat: '41.8052133',
+      lon: '123.2716924'
+    },
     id: 80,
     url: null,
     socials: {
@@ -4628,8 +4958,13 @@ export default [
   },
   {
     name: 'Hold Emporium',
-    description: 'Climb stronger, train smarter.',
+    description:
+      'Canadian (Toronto) based company Bringing you climbing holds, training equipment & more!',
     country: 'CA',
+    location: {
+      lat: '43.834647',
+      lon: '-79.0734319'
+    },
     id: 81,
     url: 'https://holdemporium.com/',
     socials: {
@@ -4669,6 +5004,10 @@ export default [
     name: 'Manuva Climbing',
     description: 'First of its kind, fixture free hangboard',
     country: 'CA',
+    location: {
+      lat: '49.756617',
+      lon: '-123.2577628'
+    },
     id: 82,
     url: 'https://manuvaclimbing.com/',
     socials: {
@@ -4693,8 +5032,13 @@ export default [
   },
   {
     name: 'Affenholz',
-    description: 'Better bouldering.',
+    description:
+      'The training equipment from Affenholz offers every climbing and street workout athlete the opportunity',
     country: 'DE',
+    location: {
+      lat: '48.7791796',
+      lon: '9.0946444'
+    },
     id: 83,
     url: 'https://affenholz.com',
     socials: {
@@ -4719,8 +5063,13 @@ export default [
   },
   {
     name: 'Evolv x Kilter',
-    description: 'Rock Climbing & Bouldering Gear',
+    description:
+      'Rock Climbing & Bouldering Gear by Evolv a Oberalp Group brand',
     country: 'US',
+    location: {
+      lat: '40.0240763',
+      lon: '-105.2475999'
+    },
     id: 84,
     url: 'https://www.evolvsports.com/',
     socials: {
@@ -4747,6 +5096,10 @@ export default [
     name: 'ScallyWags Climbing',
     description: 'South Africa Climbing brand',
     country: 'ZA',
+    location: {
+      lat: '-26.081209',
+      lon: '27.9746314'
+    },
     id: 85,
     url: 'https://www.scallywagsclimbing.com/',
     socials: {
@@ -4825,6 +5178,10 @@ export default [
     name: 'Gripmonkeys',
     description: 'The ultimate tools to get your grades up.',
     country: 'GB',
+    location: {
+      lat: '51.52035',
+      lon: '-0.1413896'
+    },
     id: 86,
     url: 'https://gripmonkeys.co.uk/',
     socials: {
@@ -4852,6 +5209,7 @@ export default [
     description:
       'Amazon / AliExpress brand mainly specialized in Rock Climbing gears, sports, training and fitness supplies.',
     country: 'US',
+    location: null,
     id: 87,
     url: 'https://www.amazon.com/stores/TWOSTONESSPORTS/page/5B0DA811-7FB3-4C55-A8AC-4B3AC7BB2EF4',
     socials: {
@@ -5083,9 +5441,14 @@ export default [
     ]
   },
   {
-    name: 'Altissimo',
-    description: 'ALTI Escalade',
+    name: 'Altissimo / Altishop',
+    description:
+      'The climbing shop in France, offers you equipment & accessories for Indoor & Outdoor climbing. Altissimo 100% climbing.',
     country: 'FR',
+    location: {
+      lat: '43.5667372',
+      lon: '1.48521575'
+    },
     id: 88,
     url: 'https://www.altissimo.fr',
     socials: {
@@ -5125,6 +5488,7 @@ export default [
     name: 'N8',
     description: 'Brand on Amazon.com',
     country: 'CN',
+    location: null,
     id: 89,
     url: null,
     socials: {
@@ -5152,6 +5516,10 @@ export default [
     description:
       'Artificial climbing walls - the greatest experience in Europe and Poland',
     country: 'PL',
+    location: {
+      lat: '50.3006766',
+      lon: '19.1082843'
+    },
     id: 90,
     url: 'http://www.artrocher.com.pl/',
     socials: {
@@ -5204,6 +5572,10 @@ export default [
     name: 'Iura',
     description: 'Iura produces innovative climbing accessories. Expect more.',
     country: 'PL',
+    location: {
+      lat: '52.2076602',
+      lon: '20.8650172'
+    },
     id: 91,
     url: 'https://iura.pl/',
     socials: {
@@ -5242,6 +5614,10 @@ export default [
     name: 'Ucraft Climbing',
     description: 'Clothes and accessories for climbers',
     country: 'UA',
+    location: {
+      lat: '50.4203837',
+      lon: '30.4801253'
+    },
     id: 92,
     url: 'https://ucraftclimbing.com/',
     socials: {
@@ -5266,8 +5642,12 @@ export default [
   },
   {
     name: 'NonMollo',
-    description: 'Wooden Climbing Stuff 🧗‍',
+    description: 'Wooden Climbing Stuff from Foligno, Italy 🧗‍',
     country: 'IT',
+    location: {
+      lat: '42.9698545',
+      lon: '12.6791555'
+    },
     id: 93,
     url: 'https://www.nonmollo-climbing.com/',
     socials: {
@@ -5295,6 +5675,10 @@ export default [
     description:
       'An Italian brand based in Fossombrone, in Central Italy. It specializes in the production of climbing accessories, holds and boards in polyester.',
     country: 'IT',
+    location: {
+      lat: '43.7064303',
+      lon: '12.8446837'
+    },
     id: 94,
     url: null,
     socials: {
@@ -5374,6 +5758,10 @@ export default [
     description:
       'Works hard to build the best adjustable climbing walls. Enhance your climbing experience',
     country: 'CA',
+    location: {
+      lat: '45.5402205',
+      lon: '-73.5868384'
+    },
     id: 95,
     url: 'https://www.lemurdesign.ca/',
     socials: {
@@ -5426,6 +5814,10 @@ export default [
     name: 'JOOD',
     description: 'Jood Climbing Walls Philippines',
     country: 'PH',
+    location: {
+      lat: '14.279382',
+      lon: '121.0063678'
+    },
     id: 96,
     url: 'http://www.climbingwallphilippines.com',
     socials: {
@@ -5452,6 +5844,10 @@ export default [
     name: 'YY Vertical',
     description: 'Smart Products for Vertical Sports',
     country: 'FR',
+    location: {
+      lat: '45.319529',
+      lon: '5.841783'
+    },
     id: 97,
     url: 'https://www.yyvertical.com',
     socials: {
@@ -5569,6 +5965,10 @@ export default [
     description:
       'Wooden holds/campus rungs/campus balls/portables and others.. Made in Galicia to the world.',
     country: 'ES',
+    location: {
+      lat: '43.2674048',
+      lon: '-8.965936'
+    },
     id: 98,
     url: 'https://www.sanpower.info/',
     socials: {
@@ -5634,6 +6034,10 @@ export default [
     name: 'T-Wall Holds',
     description: 'Climbing holds, structures, wall construction',
     country: 'PL',
+    location: {
+      lat: '50.1013115',
+      lon: '19.9231347'
+    },
     id: 99,
     url: 'https://t-wall.com.pl/',
     socials: {
@@ -5673,6 +6077,10 @@ export default [
     name: 'Entropy Holds',
     description: 'Climbing holds',
     country: 'PL',
+    location: {
+      lat: '49.6592471',
+      lon: '21.0908395'
+    },
     id: 100,
     url: 'http://www.entropyholds.com/',
     socials: {
@@ -5700,6 +6108,10 @@ export default [
     description:
       'The UK’s Original Online Climbing Retailer 🇬🇧 #MountainEnthusiasts since 1983 🏔',
     country: 'GB',
+    location: {
+      lat: '54.2229674',
+      lon: '-2.8007485'
+    },
     id: 101,
     url: 'https://rockrun.com/',
     socials: {
@@ -5726,6 +6138,7 @@ export default [
     name: 'Get Out!',
     description: 'Provides premium outdoor games and fitness accessories',
     country: 'US',
+    location: null,
     id: 102,
     url: 'https://www.amazon.com/stores/page/13F4502E-65B8-4372-947D-89E1090DB80D/',
     socials: {
@@ -5804,6 +6217,10 @@ export default [
     name: 'Spin Agarras',
     description: 'Barra Mansa (Rio de Janeiro), Brazil Climbing Grips',
     country: 'BR',
+    location: {
+      lat: '-22.5373086',
+      lon: '-44.1646717'
+    },
     id: 103,
     url: 'http://www.spinagarras.com.br/',
     socials: {
@@ -5857,6 +6274,10 @@ export default [
     description:
       'Wooden climbing holds, hangboards and other training equipment. Eco and skin friendly',
     country: 'CZ',
+    location: {
+      lat: '50.7248328',
+      lon: '15.1225456'
+    },
     id: 104,
     url: 'https://www.lamaholds.cz/',
     socials: {
@@ -5894,8 +6315,13 @@ export default [
   },
   {
     name: 'Bat Holds',
-    description: 'PU climbing holds producer',
+    description:
+      'We create holds to make you train harder. production and sale of climbing holds',
     country: 'PL',
+    location: {
+      lat: '50.286403',
+      lon: '19.07823'
+    },
     id: 105,
     url: 'https://batholds.com/',
     socials: {
@@ -5920,8 +6346,12 @@ export default [
   },
   {
     name: 'Freerock',
-    description: 'Climbing & outdoor sports.',
+    description: 'Climbing & outdoor sports from Patagonia, Argentina',
     country: 'AR',
+    location: {
+      lat: '-40.1482049',
+      lon: '-71.347628'
+    },
     id: 106,
     url: 'https://freerock.mercadoshops.com.ar/',
     socials: {
@@ -5991,6 +6421,7 @@ export default [
       instagram: null
     },
     country: 'US',
+    location: null,
     id: 107,
     url: 'https://www.amazon.com/stores/POWERGUIDANCE/page/2702B694-0CF6-439A-9E2F-9FC8F8F67976',
     hangboards: [
@@ -6040,6 +6471,10 @@ export default [
     description:
       'Sports accessories and implements for climbing and functional training',
     country: 'CL',
+    location: {
+      lat: '-33.4726789',
+      lon: '-70.7946384'
+    },
     id: 108,
     url: null,
     socials: {
@@ -6131,6 +6566,10 @@ export default [
     name: 'Clevo Climbing',
     description: '“CLEVO” is the abbreviation for Climbing EVOlution',
     country: 'DE',
+    location: {
+      lat: '47.7194589',
+      lon: '9.8979492'
+    },
     id: 109,
     url: 'https://clevo-climbing.com/',
     socials: {
@@ -6155,8 +6594,12 @@ export default [
   },
   {
     name: 'KTM Holds',
-    description: 'First Nepalese climbing hold brand in Nepal',
+    description: 'First Nepalese climbing hold brand in Kathmandu, Nepal',
     country: 'NP',
+    location: {
+      lat: '27.7159382',
+      lon: '85.3048934'
+    },
     id: 110,
     url: null,
     socials: {
@@ -6197,6 +6640,10 @@ export default [
     description:
       'Online store with unique and ergonomically designed wooden training aids for training anywhere',
     country: 'SI',
+    location: {
+      lat: '46.164776',
+      lon: '14.6179851'
+    },
     id: 111,
     url: 'https://trenirajznaravo.com/',
     socials: {
@@ -6237,6 +6684,10 @@ export default [
     description:
       'Training bibles and hangboards for your next level in climbing, produced by Café Kraft',
     country: 'DE',
+    location: {
+      lat: '49.47989',
+      lon: '11.1201297'
+    },
     id: 112,
     url: 'https://cafekraft.shop/',
     socials: {
@@ -6290,6 +6741,10 @@ export default [
     description:
       'Maximizing Your Climbing Progression With Functional Training Tools',
     country: 'US',
+    location: {
+      lat: '40.5726483',
+      lon: '-105.1041407'
+    },
     id: 113,
     url: 'https://frictitiousclimbing.com',
     socials: {
@@ -6380,8 +6835,12 @@ export default [
   {
     name: 'Yosyamitya Climbing',
     description:
-      'OkBoard 🌳 Wooden Hangboards 💪 Training Tools. Made by Climbers.',
+      'OkBoard 🌳 Wooden Hangboards 💪 Training Tools. Climbers family workshop from Ukrain.',
     country: 'UA',
+    location: {
+      lat: '50.4019186',
+      lon: '30.3675458'
+    },
     id: 114,
     url: null,
     socials: {
@@ -6461,6 +6920,10 @@ export default [
     description:
       'Wooden hangboards, campuses, bars and holds 🖤 Made with love for wood and nature 🌲',
     country: 'CZ',
+    location: {
+      lat: '50.3755292',
+      lon: '15.6349732'
+    },
     id: 115,
     url: 'https://www.gripworks.cz/',
     socials: {

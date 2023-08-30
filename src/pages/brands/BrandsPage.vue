@@ -6,6 +6,7 @@ import { useUser } from '@/stores/user'
 import countries from '@/helpers/countries'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
 const { t } = useI18n()
 
@@ -33,6 +34,11 @@ useHead({
 
     <template #default>
       <v-container>
+        <v-row>
+          <v-col cols="12">
+            <map-container :markers="getCompanies" :zoom="2" />
+          </v-col>
+        </v-row>
         <v-row>
           <v-col cols="12">
             <v-list lines="two">
