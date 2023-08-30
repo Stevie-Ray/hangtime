@@ -36,7 +36,7 @@ useHead({
       <v-container>
         <v-row>
           <v-col cols="12">
-            <map-container :markers="getCompanies" :zoom="2" />
+            <map-container :markers="getCompanies" :zoom="1" />
           </v-col>
         </v-row>
         <v-row>

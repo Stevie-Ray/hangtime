@@ -6934,7 +6934,7 @@ export default [
       {
         name: 'Summit v3.5',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GRIPWORKSSUMMIT.svg',
         size: {
           x: 660,
           y: 185,
@@ -6942,7 +6942,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/summit/',
-        holds: 0
+        holds: 13
       },
       {
         name: 'HoldOn v3.0',
