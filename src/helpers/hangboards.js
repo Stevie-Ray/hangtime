@@ -3090,7 +3090,7 @@ export default [
           y: null,
           z: null
         },
-        type: 'wood',
+        type: 'plastic',
         url: 'https://www.expression-holds.com/en/training/1930-72517-comix-club-board.html',
         holds: 10
       }
@@ -7034,6 +7034,37 @@ export default [
         type: 'wood',
         url: 'https://www.gripworks.cz/bajt/',
         holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Roots Climbing',
+    description:
+      'British Bouldering Guidebooks, Hangboards and Foam Masters - for holds and general psych!',
+    country: 'GB',
+    location: {
+      lat: '51.8571552',
+      lon: '-2.2837118'
+    },
+    id: 116,
+    url: 'https://www.roots-climbing.com',
+    socials: {
+      facebook: 'https://www.facebook.com/roots.climbing.5/',
+      instagram: 'https://www.instagram.com/roots.climbing/'
+    },
+    hangboards: [
+      {
+        name: 'Baseline',
+        id: 0,
+        image: 'hangboards/ROOTSBASELINE.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.roots-climbing.com/product/2519429/baseline-fingerboard-includes-uk-shipping-contact-us-for-overseas-sales',
+        holds: 10
       }
     ]
   }
