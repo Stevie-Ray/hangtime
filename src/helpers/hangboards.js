@@ -4249,7 +4249,7 @@ export default [
       {
         name: 'Topaz',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/CRAFTYTOPAZ.svg',
         size: {
           x: 488,
           y: 72,
@@ -4257,7 +4257,7 @@ export default [
         },
         type: 'wood',
         url: 'https://craftyclimbing.com/hangboard-topaz',
-        holds: 0
+        holds: 3
       }
     ]
   },

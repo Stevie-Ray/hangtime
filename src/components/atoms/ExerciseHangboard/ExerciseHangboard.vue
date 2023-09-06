@@ -29,9 +29,9 @@ const hangboardImage = () => {
   if (getHangboard.value?.sides?.length) {
     if (props.exercise?.rotate) {
       // eslint-disable-next-line global-require,import/no-dynamic-require
-      return require(`@/assets/${
-        getHangboard.value?.sides[props.exercise.rotate].image
-      }`)
+      return require(
+        `@/assets/${getHangboard.value?.sides[props.exercise.rotate].image}`
+      )
     }
     // eslint-disable-next-line global-require,import/no-dynamic-require
     return require(`@/assets/${getHangboard.value?.sides[0].image}`)
