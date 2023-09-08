@@ -37,12 +37,15 @@ export const useWorkouts = defineStore('workouts', {
       const authentication = useAuthentication()
       const user = useUser()
       const usersWorkoutsDb = new UsersWorkoutsDB(authentication.user.id)
+      const constraints = [['share', '==', true]]
+      if (user?.getUserHangboardCompany) {
+        constraints.push(['company', '==', user.getUserHangboardCompany.id])
+      }
+      if (user?.getUserHangboard) {
+        constraints.push(['hangboard', '==', user.getUserHangboard.id])
+      }
       this.workoutsCommunity = await usersWorkoutsDb.readAll(
-        [
-          ['share', '==', true],
-          ['company', '==', user.getUserHangboardCompany.id],
-          ['hangboard', '==', user.getUserHangboard.id]
-        ],
+        constraints,
         null,
         100
       )
@@ -160,8 +163,8 @@ export const useWorkouts = defineStore('workouts', {
       return state.workouts
         ?.filter(
           (workout) =>
-            workout?.company === user.getUserHangboardCompany.id &&
-            workout?.hangboard === user.getUserHangboard.id
+            workout?.company === user.getUserHangboardCompany?.id &&
+            workout?.hangboard === user.getUserHangboard?.id
         )
         ?.sort((a, b) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
         ?.slice(0, items)

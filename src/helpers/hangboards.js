@@ -4175,12 +4175,12 @@ export default [
         },
         type: 'wood',
         url: 'https://mountainrocks.com.au/products/wooden-hangboard-climbing-wildwood-2001-for-rock-climbing',
-        holds: 13
+        holds: 12
       },
       {
         name: 'Wildwood 2002',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/MOUNTAINROCK2002.svg',
         size: {
           x: null,
           y: null,
@@ -4188,7 +4188,7 @@ export default [
         },
         type: 'wood',
         url: 'https://mountainrocks.com.au/products/mountain-rocks-hangboard-wildwood-2002',
-        holds: 0
+        holds: 13
       },
       {
         name: 'Wildwood 2003',
@@ -5376,7 +5376,7 @@ export default [
       {
         name: 'CJ-HB2049',
         id: 12,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/MOUNTAINROCK2001.svg',
         size: {
           x: 550,
           y: 150,
@@ -5384,12 +5384,12 @@ export default [
         },
         type: 'wood',
         url: 'https://www.amazon.com/TWO-STONES-Fingerboard-Hangboard-Bouldering/dp/B08WWY3QDM',
-        holds: 0
+        holds: 12
       },
       {
         name: 'CJ-HB2050',
         id: 13,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/MOUNTAINROCK2002.svg',
         size: {
           x: 580,
           y: 160,
@@ -5397,12 +5397,12 @@ export default [
         },
         type: 'wood',
         url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2050BX/dp/B08WWKNFR4',
-        holds: 0
+        holds: 13
       },
       {
         name: 'CJ-HB2053',
         id: 14,
-        image: 'hangboards/TWOSTONESHB2053.svg',
+        image: 'hangboards/MOUNTAINROCK2003.svg',
         size: {
           x: 600,
           y: 200,

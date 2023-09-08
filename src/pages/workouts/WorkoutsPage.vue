@@ -73,9 +73,9 @@ useHead({
       <v-menu v-model="hangboardMenu">
         <template v-slot:activator="{ props }">
           <div v-bind="props" class="hangboard-select">
-            <span>{{
-              `${getUserHangboardCompany.name} - ${getUserHangboard.name}`
-            }}</span>
+            <span v-if="getUserHangboardCompany">
+              {{ `${getUserHangboardCompany.name} - ${getUserHangboard.name}` }}
+            </span>
             <span v-if="hangboardMenu && getUserHangboards?.length > 1"
               ><v-icon>mdi-chevron-up</v-icon></span
             >

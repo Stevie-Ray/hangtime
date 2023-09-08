@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="666px" height="716px" viewBox="0 0 666 716" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="666px" height="355px" viewBox="0 0 666 355" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>MOUNTAINROCK2001</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="MOUNTAINROCK2001" transform="translate(1.000000, 0.700485)" fill="#FFFFFF">
@@ -18,7 +18,6 @@
             <rect id="h8" stroke="#000000" x="394.5" y="167.799515" width="139" height="56" rx="28"></rect>
             <rect id="h5" stroke="#000000" x="501.5" y="86.7995153" width="139" height="56" rx="28"></rect>
             <path d="M665,224.299515 L584.5,224.299515 C568.759885,224.299515 556,211.539631 556,195.799515 C556,180.0594 568.759885,167.299515 584.5,167.299515 L665,167.299515" id="h9" stroke="#000000"></path>
-            <rect id="h14" stroke="#000000" x="5.5" y="351.799515" width="123" height="363" rx="16"></rect>
         </g>
     </g>
 </svg>
