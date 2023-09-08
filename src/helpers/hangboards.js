@@ -7067,5 +7067,36 @@ export default [
         holds: 10
       }
     ]
+  },
+  {
+    name: 'Redge Climbing',
+    description:
+      'Redgeclimbing make the best training tools for climbing from bamboo',
+    country: 'NL',
+    location: {
+      lat: '52.2469484',
+      lon: '5.4251482'
+    },
+    id: 117,
+    url: 'https://redgeclimbing.com/',
+    socials: {
+      facebook: 'https://facebook.com/redgeclimbing',
+      instagram: 'https://instagram.com/redgeclimbing'
+    },
+    hangboards: [
+      {
+        name: 'Port',
+        id: 0,
+        image: 'hangboards/REDGEPORT.svg',
+        size: {
+          x: 500,
+          y: 150,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://redgeclimbing.com/product/redge-port-portable-hangboard/',
+        holds: 3
+      }
+    ]
   }
 ]
