@@ -4156,9 +4156,9 @@ export default [
         id: 0,
         image: 'hangboards/MOUNTAINROCK1001.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 500,
+          y: 100,
+          z: 30
         },
         type: 'wood',
         url: 'https://mountainrocks.com.au/products/portable-rock-climbing-hangboard-wildwood-1001',
@@ -4169,9 +4169,9 @@ export default [
         id: 1,
         image: 'hangboards/MOUNTAINROCK2001.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 550,
+          y: 150,
+          z: 50
         },
         type: 'wood',
         url: 'https://mountainrocks.com.au/products/wooden-hangboard-climbing-wildwood-2001-for-rock-climbing',
@@ -5437,6 +5437,19 @@ export default [
         type: 'wood',
         url: 'https://www.amazon.com/Hangboard-Climbing-Fingerboard-Designed-Climbers/dp/B099W8JML5',
         holds: 0
+      },
+      {
+        name: 'CJ-HB2008',
+        id: 17,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 580,
+          y: 160,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2008BX/dp/B08WWMYC9Q',
+        holds: 0
       }
     ]
   },
@@ -6698,7 +6711,7 @@ export default [
       {
         name: 'Goldfinger',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GIMMEKRAFTGOLD.svg',
         size: {
           x: 580,
           y: 160,
@@ -6706,12 +6719,12 @@ export default [
         },
         type: 'wood',
         url: 'https://cafekraft.shop/collections/gimmekraft-training/products/https-cafekraft-shop-collections-gimmekraft-products-hangboard-goldfinger',
-        holds: 0
+        holds: 14
       },
       {
         name: 'Eisenfinger',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/MOUNTAINROCK2001.svg',
         size: {
           x: 550,
           y: 150,
@@ -6719,12 +6732,12 @@ export default [
         },
         type: 'wood',
         url: 'https://cafekraft.shop/collections/gimmekraft-training/products/https-cafekraft-shop-collections-gimmekraft-products-hangboard-eisenfinger',
-        holds: 0
+        holds: 12
       },
       {
         name: 'Fingerhakler',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/MOUNTAINROCK1001.svg',
         size: {
           x: 500,
           y: 100,
@@ -6732,7 +6745,7 @@ export default [
         },
         type: 'wood',
         url: 'https://cafekraft.shop/products/https-cafekraft-shop-collections-gimmekraft-products-hangboard-fingerhakler',
-        holds: 0
+        holds: 6
       }
     ]
   },
@@ -7071,7 +7084,7 @@ export default [
   {
     name: 'Redge Climbing',
     description:
-      'Redgeclimbing make the best training tools for climbing from bamboo',
+      'Handcrafted bamboo training tools for climbing made in the Netherlands',
     country: 'NL',
     location: {
       lat: '52.2469484',
