@@ -22,8 +22,11 @@ import { useHead } from '@vueuse/head'
 import { event } from 'vue-gtag'
 import { useAuthentication } from '@/stores/authentication'
 import { useApp } from '@/stores/app'
+import { useUser } from '@/stores/user'
 
 const { t } = useI18n()
+
+const { getCompanies, getHangboards } = useUser()
 
 const { user, error } = storeToRefs(useAuthentication())
 
@@ -92,6 +95,36 @@ const socials = [
     color: '#000000'
   }
 ]
+
+const usps = [
+  {
+    title: `Personalized Hangboard Training Plans`,
+    subtitle: `Unlock the power of hangboard training with HangTime the #1 hangboard training app. Tailor your workouts, target specific finger strength, and track progress over time for optimized hangboard training. Join the largest hangboard training community with access to ${getHangboards?.length} hangboards from ${getCompanies?.length} top brands. Elevate your climbing game with precision.`,
+    prependIcon: `mdi-podium-gold`
+  },
+  {
+    title: `Community-Driven Training Hub`,
+    subtitle: `Become part of our vibrant hangboard training community. Share your workouts and access routines crafted by fellow climbers. Collaborate, inspire, and learn from each other as you progress in your hangboard training journey.`,
+    prependIcon: `mdi-account-group`
+  },
+  {
+    title: `Data-Driven Progress Tracking`,
+    subtitle: `Stay motivated and monitor your hangboard training progress over time. Our app provides detailed insights into your performance, allowing you to identify strengths and weaknesses. With data at your fingertips, you can fine-tune your training plans and climb to new heights with confidence.`,
+    prependIcon: `mdi-chart-line`
+  },
+  {
+    title: `Multi-Hangboard Support`,
+    subtitle: `Diversify your training by adding multiple hangboards from your gym to your app profile. This feature allows you to adapt and switch up your routines easily, ensuring a well-rounded approach to your hangboard training.`,
+    prependIcon: `mdi-card-multiple`
+  },
+  {
+    title: `Extensive Hangboard Catalog`,
+    subtitle: `Access the most extensive hangboard catalog available, featuring ${getHangboards?.length} hangboards from ${getCompanies?.length} trusted brands. No matter your hangboard training preference, our app provides the variety you need to reach your peak climbing potential.`,
+    prependIcon: `mdi-trophy`
+  }
+]
+
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 const rules = {
   length: (len) => (v) =>
@@ -456,6 +489,31 @@ useHead({
               </v-col>
             </v-row>
           </v-card-text>
+        </v-card>
+
+        <v-card variant="flat" class="mt-4 text-left">
+          <v-card-title tag="h2" class="text-center mt-4">
+            HangTime - Hangboard Training
+          </v-card-title>
+          <v-card-subtitle tag="h3" class="text-center">
+            Elevate Your Climbing with Precision Training
+          </v-card-subtitle>
+          <v-card-text>
+            <v-list :items="usps" item-props lines="three">
+              <template v-slot:title="{ title }">
+                <h3 class="v-list-item-title" v-html="title"></h3>
+              </template>
+            </v-list>
+          </v-card-text>
+          <v-card-actions class="justify-center mb-4">
+            <v-btn
+              variant="outlined"
+              color="text"
+              size="large"
+              @click="scrollToTop"
+              >Start training</v-btn
+            >
+          </v-card-actions>
         </v-card>
 
         <v-footer
