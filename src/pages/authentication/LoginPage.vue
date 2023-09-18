@@ -492,16 +492,16 @@ useHead({
         </v-card>
 
         <v-card variant="flat" class="mt-4 text-left">
-          <v-card-title tag="h2" class="text-center mt-4">
+          <v-card-title tag="h3" class="text-center mt-4">
             HangTime - Hangboard Training
           </v-card-title>
-          <v-card-subtitle tag="h3" class="text-center">
+          <v-card-subtitle tag="h4" class="text-center">
             Elevate Your Climbing with Precision Training
           </v-card-subtitle>
           <v-card-text>
             <v-list :items="usps" item-props lines="three">
               <template v-slot:title="{ title }">
-                <h3 class="v-list-item-title" v-html="title"></h3>
+                <h2 class="v-list-item-title" v-html="title"></h2>
               </template>
             </v-list>
           </v-card-text>
