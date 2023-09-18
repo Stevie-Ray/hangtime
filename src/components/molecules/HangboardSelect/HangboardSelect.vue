@@ -11,7 +11,6 @@ const {
   getHangboardByIds,
   getCompanyById,
   getHangboardNameByIds,
-  getHangboardImageByIds,
   getCompanies,
   getHangboardsByCompanyId
 } = useUser()
@@ -45,7 +44,9 @@ const body = computed(() =>
     `Hello HangTime,\n\nPlease add the following Hangboard: ${getHangboardNameByIds(
       selected.value.company,
       selected.value.hangboard
-    )}`
+    )}\n\n
+    ${getHangboardByIds(selected.value.company, selected.value.hangboard).url}
+    `
   )
 )
 const subject = computed(() =>
@@ -107,7 +108,7 @@ const subject = computed(() =>
     <v-card-text>
       <exercise-hangboard
         v-if="
-          getHangboardImageByIds(selected.company, selected.hangboard) !==
+          getHangboardByIds(selected.company, selected.hangboard).image !==
           'hangboards/NOTFOUND.svg'
         "
         :hangboard="{

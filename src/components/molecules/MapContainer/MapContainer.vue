@@ -122,7 +122,17 @@ loader.load().then(async () => {
         'click',
         // eslint-disable-next-line no-shadow
         ((marker) => () => {
-          infowindow.setContent(item.name)
+          infowindow.setContent(
+            `<a href="
+                  ${
+                    item.name
+                      ? `/brands/${encodeURIComponent(
+                          item.name.replace(/\s+/g, '-').toLowerCase()
+                        )}`
+                      : null
+                  }
+                ">${item.name}</a>`
+          )
           infowindow.open(map, marker)
         })(marker)
       )
@@ -145,7 +155,11 @@ loader.load().then(async () => {
 <style lang="scss">
 .gm-style {
   .gm-style-iw-d {
-    color: black;
+    &,
+    & a {
+      color: black;
+      text-decoration: none;
+    }
   }
 
   a[href^="https://maps.google.com/maps"]

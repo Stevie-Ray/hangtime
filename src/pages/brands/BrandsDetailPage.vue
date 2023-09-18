@@ -22,7 +22,7 @@ const { user } = storeToRefs(useAuthentication())
 
 const { networkOnLine } = storeToRefs(useApp())
 
-const { getCompanyByUrlKey, getHangboardImageByIds } = useUser()
+const { getCompanyByUrlKey, getHangboardByIds } = useUser()
 
 // router
 const route = useRoute()
@@ -118,7 +118,7 @@ useHead({
               <v-card-text>
                 <exercise-hangboard
                   v-if="
-                    getHangboardImageByIds(getCompany.id, hangboard.id) !==
+                    getHangboardByIds(getCompany.id, hangboard.id).image !==
                     'hangboards/NOTFOUND.svg'
                   "
                   :hangboard="{

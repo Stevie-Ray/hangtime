@@ -7,7 +7,7 @@ export const useUser = defineStore('user', {
   actions: {},
   getters: {
     /**
-     * Get a hangboard Name by company & hangboard ID
+     * Get a hangboard object by company & hangboard ID
      * @return {function(*, *): string}
      */
     getHangboardByIds: () => (company, hangboard) =>
@@ -23,15 +23,8 @@ export const useUser = defineStore('user', {
      */
     getHangboardNameByIds: () => (company, hangboard) =>
       `${hangboardBrands[company].name} -  ${hangboardBrands[company].hangboards[hangboard].name}`,
-    /**
-     * Get a hangboard by company & hangboard ID
-     * @return {function(*, *): string}
-     */
-    getHangboardImageByIds: () => (company, hangboard) =>
-      hangboardBrands[company]?.hangboards[hangboard]?.image,
     getCompanies: () =>
       [...hangboardBrands].sort((a, b) => a.name.localeCompare(b.name)),
-
     /**
      * Get hangboard from a company id
      * @return Array
@@ -39,7 +32,7 @@ export const useUser = defineStore('user', {
     getHangboardsByCompanyId: () => (company) =>
       hangboardBrands[company].hangboards,
     /**
-     * Get company by it's url key
+     * Get company by its url key
      * @return Array
      */
     getCompanyByUrlKey: () => (url) =>

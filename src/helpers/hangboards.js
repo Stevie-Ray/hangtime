@@ -5754,7 +5754,7 @@ export default [
       {
         name: 'Pump',
         id: 4,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/SMOGPUMP.svg',
         size: {
           x: 550,
           y: 300,
@@ -5762,7 +5762,7 @@ export default [
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 10
       }
     ]
   },
@@ -5935,7 +5935,7 @@ export default [
       {
         name: 'Verticalboard Evo',
         id: 4,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/YYVERTICALEVO.svg',
         size: {
           x: 650,
           y: 140,
@@ -5943,7 +5943,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.yyvertical.com/products/verticalboard-evo',
-        holds: 0
+        holds: 13
       },
       {
         name: 'Verticalboard First',
