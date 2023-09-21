@@ -6768,7 +6768,7 @@ export default [
       {
         name: 'The Megalith',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FRICTITIOUSMEGA.svg',
         size: {
           x: null,
           y: null,
@@ -6776,12 +6776,12 @@ export default [
         },
         type: 'wood',
         url: 'https://frictitiousclimbing.com/products/megalith',
-        holds: 0
+        holds: 9
       },
       {
         name: 'The Monolith',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FRICTITIOUSMONO.svg',
         size: {
           x: 596,
           y: 190,
@@ -6789,7 +6789,7 @@ export default [
         },
         type: 'wood',
         url: 'https://frictitiousclimbing.com/products/the-monolith',
-        holds: 0
+        holds: 7
       },
       {
         name: 'Hangboard 3.0',
