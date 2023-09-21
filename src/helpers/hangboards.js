@@ -2629,7 +2629,7 @@ export default [
       {
         name: 'Large Oak/Hevea beam',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/DIGITALLARGE.svg',
         size: {
           x: 930,
           y: 190,
@@ -2637,7 +2637,7 @@ export default [
         },
         type: 'wood',
         url: null,
-        holds: 0
+        holds: 15
       },
       {
         name: 'Taurine',
@@ -6794,7 +6794,7 @@ export default [
       {
         name: 'Hangboard 3.0',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FRICTITIOUSHANG.svg',
         size: {
           x: 596,
           y: 190,
@@ -6802,7 +6802,7 @@ export default [
         },
         type: 'wood',
         url: 'https://frictitiousclimbing.com/products/3-0-frictitious-hangboard',
-        holds: 0
+        holds: 5
       },
       {
         name: 'EZ Board',
