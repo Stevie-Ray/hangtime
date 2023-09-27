@@ -4,7 +4,10 @@ import { useI18n } from 'vue-i18n'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
-import { time } from '@/helpers'
+import { time, useExercises, useGrip } from '@/helpers'
+
+const grip = useGrip()
+const exercises = useExercises()
 
 const { t } = useI18n()
 
@@ -64,7 +67,59 @@ const props = defineProps({
         </div>
 
         <div class="flex-grow-1 text-truncate">
-          <exercise-name :exercise="exercise" hide-repeat></exercise-name>
+          <v-dialog width="500">
+            <template v-slot:activator="{ props }">
+              <exercise-name
+                :exercise="exercise"
+                v-bind="props"
+                hide-repeat
+              ></exercise-name>
+            </template>
+
+            <template v-slot:default="{ isActive }">
+              <v-card>
+                <v-card-title>
+                  <exercise-name
+                    :exercise="exercise"
+                    v-bind="props"
+                    hide-repeat
+                  ></exercise-name>
+                </v-card-title>
+                <v-card-text>
+                  <span v-if="exercise.exercise === 0">
+                    <span v-if="exercise.grip">
+                      {{ grip[exercise.grip].description }}
+                    </span>
+                    <!-- fallback-->
+                    <span v-else-if="grip[exercise.exercise] !== 0">{{
+                      grip[exercise.exercise].description
+                    }}</span>
+                  </span>
+                  <span v-else-if="exercise.grip !== 0">
+                    <span v-if="exercise.grip">
+                      {{ grip[exercise.grip].description }}&nbsp;
+                    </span>
+                    <!-- fallback-->
+                    <span v-else-if="grip[exercise.exercise]">{{
+                      grip[exercise.exercise].description
+                    }}</span>
+                  </span>
+                  <span v-if="exercise.pullups > 0 && exercise.exercise > 0">
+                    {{ exercises[exercise.exercise - 1].description }}
+                  </span>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                    :text="$t('Close')"
+                    @click="isActive.value = false"
+                  ></v-btn>
+                </v-card-actions>
+              </v-card>
+            </template>
+          </v-dialog>
         </div>
 
         <div>
@@ -160,6 +215,12 @@ const props = defineProps({
     border-right: 4px dashed;
     border-left: 4px dashed;
     border-color: rgb(var(--v-theme-accent)) !important;
+  }
+
+  .v-overlay-container & {
+    &:after {
+      display: none;
+    }
   }
 }
 </style>

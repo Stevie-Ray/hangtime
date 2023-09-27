@@ -42,28 +42,31 @@ export function useGrip() {
       short: 'Dead Hang',
       id: 0,
       image: 'exercises/deadhang.svg',
-      description: 'Arms are fully extended'
+      description:
+        "A deadhang is when you hang from a sturdy bar or a hangboard with your arms straight and your feet off the ground. It's a static exercise, meaning you stay still without moving. Keep your shoulders engaged and avoid swinging."
     },
     {
       name: 'Lock off - 45°',
       short: '45°',
       id: 1,
       image: 'exercises/bentarmhang.svg',
-      description: 'Arms in a 45° bent position'
+      description:
+        'When you hold a specific grip with your arm fully bent at a 45-degree angle'
     },
     {
       name: 'Lock off - 90°',
       short: '90°',
       id: 2,
       image: 'exercises/lhang.svg',
-      description: 'Arms in a 90° bent position'
+      description:
+        'When you hold a specific grip with your arm fully bent at a 90-degree angle'
     },
     {
       name: 'Lock off - Full',
       short: 'Full',
       id: 3,
       image: 'exercises/pullup.svg',
-      description: 'Arms in a full bent position',
+      description: 'When you hold a specific grip with your arm fully bent',
       disabledExercises: [1, 2, 4]
     },
     {
@@ -71,14 +74,16 @@ export function useGrip() {
       short: 'Front Lever',
       id: 4,
       image: 'exercises/frontlever.svg',
-      description: 'Body completely horizontal, facing upwards'
+      description:
+        'A "Front Lever" is an advanced exercise where you hang horizontally with your body parallel to the ground, using your core and upper body strength.'
     },
     {
       name: 'No Hang',
       short: 'No Hang',
       id: 5,
       image: 'exercises/nohang.svg',
-      description: 'Feet on the ground, pull with your fingers',
+      description:
+        'A "no-hang" on a hangboard involves using the holds with your feet on the ground or a support, rather than hanging from them. It helps train finger strength and grip without full-body weight.',
       disabledExercises: [1, 2, 3, 4, 5, 6]
     }
   ]
@@ -92,37 +97,43 @@ export function useExercises() {
   return [
     {
       name: 'Pull-up',
-      description: 'Pull yourself up towards the hangboard',
+      description:
+        'A "Pull-up" involves grabbing holds on the hangboard and pulling your body upward while hanging from the holds.',
       id: 1,
       type: 'arms'
     },
     {
-      name: 'Scrap Pull',
-      description: 'Pull up with shoulders only, without bending arms',
+      name: 'Scap Pull',
+      description:
+        'A "Scapular Pull-up" is an exercise that targets scapular (shoulder blade) strength and stability. Hang from the hold with straight arms and without bending your elbows, squeeze your shoulder blades together to lift your body slightly.',
       id: 2,
       type: 'arms'
     },
     {
       name: 'Negative Pull',
-      description: 'Downward section of a Pull-up',
+      description:
+        'A "Negative Pull-up" involves starting at the top, gripping a hold, and then lowering your body slowly.',
       id: 3,
       type: 'arms'
     },
     {
       name: 'Typewriter',
-      description: 'Full lock off, go from side to side',
+      description:
+        'A "Typewriter" is when you move your hands horizontally between holds, like the keys of a typewriter.',
       id: 4,
       type: 'arms'
     },
     {
       name: 'L-Hang',
-      description: 'Legs are in a 90° bent position',
+      description:
+        'An "L-Hang" is when you hang with your arms and legs forming an "L" shape.',
       id: 5,
       type: 'legs'
     },
     {
       name: 'Knee raise',
-      description: 'Raise your knee upwards ',
+      description:
+        'A "Knee raise" involves raising your knees toward your chest while hanging.',
       id: 6,
       type: 'legs'
     }
