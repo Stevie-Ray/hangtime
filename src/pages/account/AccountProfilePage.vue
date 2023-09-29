@@ -64,10 +64,11 @@ const login = async (method) => {
           const { credential } = result
           // eslint-disable-next-line no-shadow
           const { user } = result
-          console.log(credential)
-          console.log(user)
+          // eslint-disable-next-line no-console
+          console.log(credential, user)
         },
         (err) => {
+          // eslint-disable-next-line no-console
           console.log(err)
           error.value = err.code.toString()
         }
@@ -86,6 +87,7 @@ const deleteAccount = async () => {
       router.push('/')
     })
     .catch((err) => {
+      // eslint-disable-next-line no-console
       console.log(err)
       error.value = err
     })

@@ -82,6 +82,7 @@ export const useAuthentication = defineStore('authentication', () => {
         error.value =
           'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.'
       }
+      // eslint-disable-next-line no-console
       console.error(e)
     }
   }

@@ -229,8 +229,8 @@ const shareWorkout = async () => {
 
   try {
     await navigator.share(shareData)
-    console.log('Thanks for sharing!')
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(`Error: ${err}`)
   }
 }
@@ -1045,11 +1045,9 @@ useHead({
     border-bottom-right-radius: 8px !important;
   }
 }
-.required :deep {
-  label::after {
-    content: '*';
-    margin-left: settings.$spacer;
-    color: rgb(var(--v-theme-error));
-  }
+.required :deep(label::after) {
+  content: '*';
+  margin-left: settings.$spacer;
+  color: rgb(var(--v-theme-error));
 }
 </style>

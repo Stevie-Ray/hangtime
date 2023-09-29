@@ -370,28 +370,35 @@ const canSubscribe = window.getDigitalGoodsService
 
 async function canUsePlayBilling() {
   if (canSubscribe === undefined) {
+    // eslint-disable-next-line no-console
     console.log("window doesn't have getDigitalGoodsService.")
     return
   }
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
+    // eslint-disable-next-line no-console
     console.log(service)
     if (service === null) {
+      // eslint-disable-next-line no-console
       console.log('Play Billing is not available.')
     } else {
       // eslint-disable-next-line no-shadow
       const items = ['subscription']
       const details = await service.getDetails(items)
+      // eslint-disable-next-line no-console
       console.log(details)
       if (details === null) {
+        // eslint-disable-next-line no-console
         console.log('Are you running a Play Store build?')
       } else if (details.length === 0) {
+        // eslint-disable-next-line no-console
         console.log('Are you running a Play Store build? 2')
       } else {
         canSubscribePlayBilling.value = true
       }
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error)
   }
 }

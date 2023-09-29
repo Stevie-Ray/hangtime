@@ -176,11 +176,12 @@ const connect = async (method) => {
       .then((userCredential) => {
         // Signed in
         const firebaseUser = userCredential.user
-        // ...
+        // eslint-disable-next-line no-console
         console.log(firebaseUser)
       })
       .catch((err) => {
         error.value = err.message
+        // eslint-disable-next-line no-console
         console.log(err)
         valid.value = false
       })
@@ -198,6 +199,7 @@ const connect = async (method) => {
       })
       .catch((err) => {
         error.value = err.message
+        // eslint-disable-next-line no-console
         console.log(err)
         valid.value = false
       })

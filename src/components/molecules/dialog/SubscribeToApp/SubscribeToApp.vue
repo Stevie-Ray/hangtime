@@ -44,6 +44,7 @@ const progressValue = computed(() => {
 })
 
 function log(contents) {
+  // eslint-disable-next-line no-console
   console.log(contents)
   logField += `${contents}\n`
 }
