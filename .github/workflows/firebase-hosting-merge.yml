@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-      - env:
+        env:
           CI: false
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
