@@ -6,9 +6,11 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - master
+env:
+  CI: false
 jobs:
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
@@ -33,13 +35,11 @@ jobs:
 #        run: npm run test:e2e:headless
 
   build_and_deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: [tests]
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-        env:
-          CI: false
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
