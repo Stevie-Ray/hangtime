@@ -44,9 +44,9 @@ const body = computed(() =>
     `Hello HangTime,\n\nPlease add the following Hangboard: ${getHangboardNameByIds(
       selected.value.company,
       selected.value.hangboard
-    )}\n\n
-    ${getHangboardByIds(selected.value.company, selected.value.hangboard).url}
-    `
+    )}\n\n${
+      getHangboardByIds(selected.value.company, selected.value.hangboard).url
+    }`
   )
 )
 const subject = computed(() =>

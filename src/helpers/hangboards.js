@@ -5350,7 +5350,7 @@ export default [
       {
         name: 'CJ-HB2006',
         id: 10,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/TWOSTONESHB2006.svg',
         size: {
           x: 800,
           y: 250,
@@ -5358,7 +5358,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2006BX/dp/B08WX148RY',
-        holds: 0
+        holds: 17
       },
       {
         name: 'CJ-HB2112',
@@ -6999,7 +6999,7 @@ export default [
       {
         name: 'Base v3.5',
         id: 4,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GRIPWORKSBASE.svg',
         size: {
           x: 520,
           y: 135,
@@ -7007,7 +7007,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/base-v3-5/',
-        holds: 0
+        holds: 8
       },
       {
         name: 'Minimalist v3.0',

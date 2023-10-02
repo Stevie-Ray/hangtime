@@ -120,7 +120,9 @@ useHead({
               disabled
             >
               <v-list lines="one">
-                <v-list-subheader>{{ date }}</v-list-subheader>
+                <v-list-subheader>{{
+                  date ? new Date(date).toLocaleDateString('default') : ''
+                }}</v-list-subheader>
 
                 <v-list-item
                   v-for="(activity, j) in activity"
