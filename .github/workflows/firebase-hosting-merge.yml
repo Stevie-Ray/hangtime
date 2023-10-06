@@ -39,7 +39,7 @@ jobs:
     needs: [tests]
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build
+      - run: npm ci && UV_USE_IO_URING=0 npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
