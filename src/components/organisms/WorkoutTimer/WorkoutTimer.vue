@@ -116,16 +116,23 @@ const vibratePhone = () => {
 }
 
 const countDown = () => {
-  if (clock.value <= 4 && clock.value > 1) {
+  // if (clock.value === 15) {
+  //   if (user.value?.settings?.speak) {
+  //     speakText(`${t('Get Ready')}!`)
+  //   } else {
+  //     playSound('count.wav')
+  //   }
+  // }
+  if (clock.value <= 3 && clock.value > 1) {
     if (user.value?.settings?.speak) {
       speakText(clock.value - 1)
     } else {
-      playSound('count.mp3')
+      playSound('count.wav')
     }
   }
   if (clock.value === 1) {
     vibratePhone()
-    playSound('start.mp3')
+    playSound('start.wav')
     speakText(`${t('Go')}!`)
   }
 }
@@ -155,7 +162,7 @@ const exerciseHold = () => {
   clockText.value = t('Hold')
   if (clock.value === 1) {
     vibratePhone()
-    playSound('stop.mp3')
+    playSound('stop.wav')
   }
 }
 
