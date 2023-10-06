@@ -1,6 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { useHead } from '@vueuse/head'
+import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 

@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
-import { useHead } from '@vueuse/head'
+import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter'

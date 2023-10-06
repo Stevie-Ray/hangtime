@@ -2,10 +2,15 @@
 import { watch } from 'vue'
 import { useTheme } from 'vuetify'
 import { storeToRefs } from 'pinia'
+import { useHead } from '@unhead/vue'
 import { useApp } from '@/stores/app'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable'
 import { useAuthentication } from '@/stores/authentication'
+
+useHead({
+  titleTemplate: (title) => `${title} | HangTime`
+})
 
 const { serviceWorkerSkipWaiting } = useApp()
 

@@ -1,3 +1,3 @@
-import { createHead } from '@vueuse/head'
+import { createHead } from '@unhead/vue'
 
-export default createHead({ titleTemplate: '%s | HangTime' })
+export default createHead()

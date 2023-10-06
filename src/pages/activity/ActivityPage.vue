@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useHead } from '@vueuse/head'
+import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import { time } from '@/helpers'

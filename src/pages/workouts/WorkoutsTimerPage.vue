@@ -1,5 +1,5 @@
 <script setup>
-import { useHead } from '@vueuse/head'
+import { useHead } from '@unhead/vue'
 import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
 import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer'

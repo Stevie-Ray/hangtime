@@ -1,5 +1,5 @@
 <script setup>
-import { useHead } from '@vueuse/head'
+import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { onMounted, reactive, computed } from 'vue'
 import { storeToRefs } from 'pinia'

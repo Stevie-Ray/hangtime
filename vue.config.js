@@ -21,5 +21,12 @@ module.exports = defineConfig({
       localeDir: 'locales',
       enableInSFC: true
     }
+  },
+  configureWebpack: {
+    performance: {
+      hints: false,
+      maxEntrypointSize: 1024000,
+      maxAssetSize: 1024000
+    }
   }
 })
