@@ -66,7 +66,7 @@ watch(
 
 const resetPassword = ref(false)
 const year = new Date().getFullYear()
-const appVersion = '2.0.2'
+const appVersion = process.env.VUE_APP_VERSION
 const formDisabled = ref(false)
 const switchForm = ref(false)
 const valid = ref(true)

@@ -1,5 +1,8 @@
 const { defineConfig } = require('@vue/cli-service')
 
+// get version from package.json
+process.env.VUE_APP_VERSION = process.env.npm_package_version
+
 module.exports = defineConfig({
   transpileDependencies: true,
   /* See https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa for more details */
