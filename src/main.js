@@ -6,11 +6,12 @@ import i18n from '@/plugins/i18n'
 import pinia from '@/plugins/pinia'
 import vuetify from '@/plugins/vuetify'
 import router from '@/router'
-import { loadFonts } from '@/plugins/webfontloader'
+
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
 import '@/plugins/firebase'
-
-loadFonts()
 
 const app = createApp(App)
 

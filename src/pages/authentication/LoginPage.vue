@@ -294,25 +294,6 @@ useHead({
 
         <v-card variant="flat">
           <v-card-text>
-            <v-row
-              v-if="user === undefined"
-              align="center"
-              justify="center"
-              class="fill-height"
-            >
-              <v-col cols="12" class="text-center">
-                <div>
-                  <v-progress-circular
-                    :size="48"
-                    color="primary"
-                    indeterminate
-                  ></v-progress-circular>
-                </div>
-                <div class="pa-4">
-                  {{ t('Loading...') }}
-                </div>
-              </v-col>
-            </v-row>
             <v-row>
               <v-col cols="12">
                 <div class="text-center text-h5 pb-2">
@@ -340,7 +321,7 @@ useHead({
                 class="text-center"
               >
                 <v-btn
-                  v-show="user !== undefined && !user"
+                  v-show="!user"
                   :color="social.color"
                   :disabled="!networkOnLine"
                   class="text-white"

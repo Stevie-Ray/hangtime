@@ -14,8 +14,9 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.0.8",
     "@googlemaps/js-api-loader": "^1.16.2",
-    "@mdi/font": "7.2.96",
+    "@mdi/font": "7.3.67",
     "@unhead/vue": "^1.7.4",
     "core-js": "^3.33.0",
     "firebase": "^10.4.0",
@@ -24,7 +25,6 @@
     "nosleep.js": "^0.12.0",
     "pinia": "^2.1.6",
     "register-service-worker": "^1.7.2",
-    "roboto-fontface": "^0.10.0",
     "sass": "^1.69.3",
     "sass-loader": "^13.3.2",
     "vue": "^3.3.4",
@@ -33,8 +33,7 @@
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.2.5",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.3.21",
-    "webfontloader": "^1.6.28"
+    "vuetify": "^3.3.21"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
