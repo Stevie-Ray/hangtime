@@ -23,6 +23,9 @@ module.exports = defineConfig({
       fallbackLocale: 'en-US',
       localeDir: 'locales',
       enableInSFC: true
+    },
+    webpackBundleAnalyzer: {
+      openAnalyzer: false
     }
   },
   configureWebpack: {
@@ -30,6 +33,16 @@ module.exports = defineConfig({
       hints: false,
       maxEntrypointSize: 1024000,
       maxAssetSize: 1024000
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        minSize: 15000,
+        maxSize: 250000,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000
+      }
     }
   }
 })
