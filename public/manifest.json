@@ -100,21 +100,9 @@
       "url": "/workouts/quick?utm_source=shortcut",
       "icons": [
         {
-          "src": "./img/icons/android-shortcut.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
-          "purpose": "maskable"
-        },
-        {
           "src": "./img/icons/android-shortcut-monochrome-512x512.png",
           "sizes": "512x512",
           "type": "image/png",
-          "purpose": "monochrome"
-        },
-        {
-          "src": "./img/icons/android-shortcut-monochrome.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
           "purpose": "monochrome"
         },
         {
@@ -131,21 +119,9 @@
       "url": "/?utm_source=shortcut",
       "icons": [
         {
-          "src": "./img/icons/android-shortcut.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
-          "purpose": "maskable"
-        },
-        {
           "src": "./img/icons/android-shortcut-monochrome-512x512.png",
           "sizes": "512x512",
           "type": "image/png",
-          "purpose": "monochrome"
-        },
-        {
-          "src": "./img/icons/android-shortcut-monochrome.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
           "purpose": "monochrome"
         },
         {
@@ -162,21 +138,9 @@
       "url": "/activity?utm_source=shortcut",
       "icons": [
         {
-          "src": "./img/icons/android-shortcut.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
-          "purpose": "maskable"
-        },
-        {
           "src": "./img/icons/android-shortcut-monochrome-512x512.png",
           "sizes": "512x512",
           "type": "image/png",
-          "purpose": "monochrome"
-        },
-        {
-          "src": "./img/icons/android-shortcut-monochrome.svg",
-          "sizes": "any",
-          "type": "image/svg+xml",
           "purpose": "monochrome"
         },
         {
@@ -188,5 +152,17 @@
       ],
       "description": "Track your progress over time"
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": ["focus-existing", "navigate-existing", "auto"]
+  },
+  "handle_links": "auto",
+  "scope_extensions": [
+    { "origin": "hangtime.stevie-ray.nl" },
+    { "origin": "hangtime-app.firebaseapp.com" },
+    { "origin": "hangtime-app.appspot.com" }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
 }
