@@ -3422,8 +3422,8 @@ export default [
       'Out of love for climbing and devotion to innovative design from Los Angeles, CA',
     country: 'US',
     location: {
-      lat: '34.0479346',
-      lon: '-118.2863777'
+      lat: '33.7947748',
+      lon: '-118.0135085'
     },
     id: 57,
     url: 'http://butterfingersports.com/',
@@ -7109,6 +7109,37 @@ export default [
         type: 'wood',
         url: 'https://redgeclimbing.com/product/redge-port-portable-hangboard/',
         holds: 3
+      }
+    ]
+  },
+  {
+    name: 'Baker Boards',
+    description:
+      'Your one stop shop for custom made rock climbing gear 🧗 Train your grip like no one else!',
+    country: 'US',
+    location: {
+      lat: '33.0613788',
+      lon: '-96.8190265'
+    },
+    id: 118,
+    url: 'https://www.etsy.com/shop/bakerboardsworks/',
+    socials: {
+      facebook: 'https://www.facebook.com/Bakerboards',
+      instagram: 'https://www.instagram.com/bakerboardsworks/'
+    },
+    hangboards: [
+      {
+        name: 'Atlas Mini',
+        id: 0,
+        image: 'hangboards/BAKERATLAS.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: 'https://www.etsy.com/listing/1558792936/portable-mountain-and-rock-climbing?click_key=fefb8cd8f94696956098849b199a5d4a846bdd8f%3A1558792936&click_sum=8dae139d&ref=shop_home_feat_1',
+        holds: 4
       }
     ]
   }
