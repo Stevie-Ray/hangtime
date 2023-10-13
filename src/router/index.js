@@ -4,29 +4,84 @@ import { useAuthentication } from '@/stores/authentication'
 
 // 1. Define route components.
 // These can be imported from other files
-import AccountPage from '@/pages/account/AccountPage'
-import AccountGeneralPage from '@/pages/account/AccountGeneralPage'
-import AccountHangboardsPage from '@/pages/account/AccountHangboardsPage'
-import AccountHelpPage from '@/pages/account/AccountHelpPage'
-import AccountPrivacyPage from '@/pages/account/AccountPrivacyPage'
-import AccountProfilePage from '@/pages/account/AccountProfilePage'
-import AccountSubscriptionPage from '@/pages/account/AccountSubscriptionPage'
-import AccountWorkoutsPage from '@/pages/account/AccountWorkoutsPage'
 
-import ActivityPage from '@/pages/activity/ActivityPage'
-import ActivityLeaderboardPage from '@/pages/activity/ActivityLeaderboardPage'
-import ActivityNotificationsPage from '@/pages/activity/ActivityNotificationsPage'
-
-import BrandsPage from '@/pages/brands/BrandsPage'
-import BrandsDetailPage from '@/pages/brands/BrandsDetailPage'
-
-import LoginPage from '@/pages/authentication/LoginPage'
-import CheckLoginPage from '@/pages/authentication/CheckLoginPage'
-
-import WorkoutsPage from '@/pages/workouts/WorkoutsPage'
-import WorkoutsDetailPage from '@/pages/workouts/WorkoutsDetailPage'
-import WorkoutsTimerPage from '@/pages/workouts/WorkoutsTimerPage'
-import WorkoutsQuickPage from '@/pages/workouts/WorkoutsQuickPage'
+// Account
+const AccountPage = () =>
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPage')
+const AccountGeneralPage = () =>
+  import(
+    /* webpackChunkName: "page-account" */ '@/pages/account/AccountGeneralPage'
+  )
+const AccountHangboardsPage = () =>
+  import(
+    /* webpackChunkName: "page-account" */ '@/pages/account/AccountHangboardsPage'
+  )
+const AccountHelpPage = () =>
+  import(
+    /* webpackChunkName: "page-account" */ '@/pages/account/AccountHelpPage'
+  )
+const AccountPrivacyPage = () =>
+  import(
+    /* webpackChunkName: "page-account" */ '@/pages/account/AccountPrivacyPage'
+  )
+const AccountProfilePage = () =>
+  import(
+    /* webpackChunkName: "page-account" */ '@/pages/account/AccountProfilePage'
+  )
+const AccountSubscriptionPage = () =>
+  import(
+    /* webpackChunkName: "page-account" */ '@/pages/account/AccountSubscriptionPage'
+  )
+const AccountWorkoutsPage = () =>
+  import(
+    /* webpackChunkName: "page-account" */ '@/pages/account/AccountWorkoutsPage'
+  )
+// Activity
+const ActivityPage = () =>
+  import(
+    /* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityPage'
+  )
+const ActivityLeaderboardPage = () =>
+  import(
+    /* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityLeaderboardPage'
+  )
+const ActivityNotificationsPage = () =>
+  import(
+    /* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityNotificationsPage'
+  )
+// Authentication
+const LoginPage = () =>
+  import(
+    /* webpackChunkName: "page-login" */ '@/pages/authentication/LoginPage'
+  )
+const CheckLoginPage = () =>
+  import(
+    /* webpackChunkName: "page-login" */ '@/pages/authentication/CheckLoginPage'
+  )
+// Brands
+const BrandsPage = () =>
+  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsPage')
+const BrandsDetailPage = () =>
+  import(
+    /* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsDetailPage'
+  )
+// Brands
+const WorkoutsPage = () =>
+  import(
+    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsPage'
+  )
+const WorkoutsDetailPage = () =>
+  import(
+    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsDetailPage'
+  )
+const WorkoutsTimerPage = () =>
+  import(
+    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsTimerPage'
+  )
+const WorkoutsQuickPage = () =>
+  import(
+    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsQuickPage'
+  )
 
 // 2. Define some routes
 // Each route should map to a component.

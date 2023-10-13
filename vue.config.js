@@ -36,36 +36,12 @@ module.exports = defineConfig({
     },
     optimization: {
       splitChunks: {
-        minSize: 17000,
-        minRemainingSize: 0,
-        minChunks: 1,
+        chunks: 'all',
+        minSize: 15000,
+        maxSize: 250000,
         maxAsyncRequests: 30,
         maxInitialRequests: 30,
-        automaticNameDelimiter: '_',
-        enforceSizeThreshold: 30000,
-        cacheGroups: {
-          common: {
-            test: /[\\/]node_modules[\\/]/,
-            priority: -5,
-            reuseExistingChunk: true,
-            chunks: 'initial',
-            name: 'common_app',
-            minSize: 0
-          },
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true
-          },
-          // we are opting out of defaultVendors, so rest of the node modules will be part of default cacheGroup
-          defaultVendors: false,
-          vuePackage: {
-            test: /[\\/]node_modules[\\/](vue|vue-router|vue-i18n|pinia)[\\/]/,
-            name: 'vendor_vue',
-            chunks: 'all',
-            priority: 10
-          }
-        }
+        enforceSizeThreshold: 50000
       }
     }
   }
