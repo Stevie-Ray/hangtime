@@ -3,13 +3,40 @@ import { watch } from 'vue'
 import { useTheme } from 'vuetify'
 import { storeToRefs } from 'pinia'
 import { useHead } from '@unhead/vue'
+import roboto400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff2'
+import roboto500 from '@fontsource/roboto/files/roboto-latin-500-normal.woff2'
+import roboto700 from '@fontsource/roboto/files/roboto-latin-700-normal.woff2'
+
 import { useApp } from '@/stores/app'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable'
 import { useAuthentication } from '@/stores/authentication'
 
 useHead({
-  titleTemplate: (title) => `${title} | HangTime`
+  titleTemplate: (title) => `${title} | HangTime`,
+  link: [
+    {
+      rel: 'preload',
+      href: roboto400,
+      as: 'font',
+      crossorigin: 'anonymous',
+      type: 'font/woff2'
+    },
+    {
+      rel: 'preload',
+      href: roboto500,
+      as: 'font',
+      crossorigin: 'anonymous',
+      type: 'font/woff2'
+    },
+    {
+      rel: 'preload',
+      href: roboto700,
+      as: 'font',
+      crossorigin: 'anonymous',
+      type: 'font/woff2'
+    }
+  ]
 })
 
 const { serviceWorkerSkipWaiting } = useApp()
