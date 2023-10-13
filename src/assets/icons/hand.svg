@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="273px" height="421px" viewBox="0 0 273 421" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
-    <title>hand</title>
-    <desc>Created with Sketch.</desc>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="hand" transform="translate(-12.000000, 5.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000" stroke-width="10">
             <path d="M87.0567338,194.663414 C55.6855779,189.76723 40,199.30088 40,223.264362 C40,247.227843 40,273.011367 40,309.637813 L111.138033,411 L234.30879,411 L280,318.973547 L280,218.752921 C272.64752,196.933344 259.524456,189.984677 240.630809,197.906919 C240.630809,197.906919 232.816014,165.965509 193.310357,177.887852 C193.310357,177.887852 178.85012,151.11754 143.592198,162.420845 C143.592198,162.420845 116.400185,129.973944 87.0567338,162.420845 C87.0567338,162.420845 87.0567338,192.579747 87.0567338,252.897552 L87.0567338,194.663414 Z" id="base"></path>
