@@ -7133,8 +7133,8 @@ export default [
         id: 0,
         image: 'hangboards/BAKERATLAS.svg',
         size: {
-          x: null,
-          y: null,
+          x: 356,
+          y: 89,
           z: null
         },
         type: 'wood',

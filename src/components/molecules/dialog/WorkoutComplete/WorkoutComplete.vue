@@ -68,12 +68,12 @@ const shareExternal = () => {
         <v-toolbar-items>
           <v-btn
             v-if="shareAPI"
-            icon="mdi-export-variant"
+            icon="$exportVariant"
             color="text"
             @click="shareExternal"
           ></v-btn>
           <v-btn
-            icon="mdi-close"
+            icon="$close"
             color="text"
             @click="emit('show', false)"
           ></v-btn>

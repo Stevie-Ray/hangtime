@@ -77,10 +77,10 @@ useHead({
               {{ `${getUserHangboardCompany.name} - ${getUserHangboard.name}` }}
             </span>
             <span v-if="hangboardMenu && getUserHangboards?.length > 1"
-              ><v-icon>mdi-chevron-up</v-icon></span
+              ><v-icon>$chevronUp</v-icon></span
             >
             <span v-if="!hangboardMenu && getUserHangboards?.length > 1"
-              ><v-icon>mdi-chevron-down</v-icon></span
+              ><v-icon>$chevronDown</v-icon></span
             >
           </div>
         </template>
@@ -120,7 +120,7 @@ useHead({
               class="mr-2"
               to="/account/hangboards"
             >
-              <v-icon class="mr-1">mdi-keyboard-outline</v-icon>
+              <v-icon class="mr-1">$keyboardOutline</v-icon>
               <span>{{ t('Hangboards') }}</span>
             </v-btn>
           </v-card-text>
@@ -131,14 +131,14 @@ useHead({
     <template #icons>
       <v-btn
         v-if="route.path === '/workouts'"
-        icon="mdi-timer-play-outline"
+        icon="$timerPlayOutline"
         color="text"
         to="/workouts/quick"
       ></v-btn>
       <v-btn
         v-if="route.path === '/workouts'"
         :disabled="!networkOnLine"
-        icon="mdi-plus"
+        icon="$plus"
         color="text"
         to="/workouts/new"
       ></v-btn>
@@ -150,11 +150,11 @@ useHead({
     <template #extension>
       <v-tabs grow>
         <v-tab to="/workouts" color="text">
-          <v-icon class="mr-1">mdi-account</v-icon>
+          <v-icon class="mr-1">$account</v-icon>
           <span>{{ t('Your Workouts') }}</span>
         </v-tab>
         <v-tab to="/workouts/community" color="text">
-          <v-icon class="mr-1">mdi-account-group</v-icon>
+          <v-icon class="mr-1">$accountGroup</v-icon>
           <span>{{ t('Community') }}</span>
         </v-tab>
       </v-tabs>
@@ -185,9 +185,7 @@ useHead({
 
                   <v-list-item-subtitle>
                     <span>{{ time(workout.time) }} - </span>
-                    <span v-if="workout.video"
-                      ><v-icon>mdi-video</v-icon> -
-                    </span>
+                    <span v-if="workout.video"><v-icon>$video</v-icon> - </span>
                     <span>{{ workout.description }}</span>
                   </v-list-item-subtitle>
 
@@ -203,8 +201,8 @@ useHead({
                           size="x-small"
                           :append-icon="
                             isHearted(workout.subscribers)
-                              ? 'mdi-heart'
-                              : 'mdi-heart-outline'
+                              ? '$heart'
+                              : '$heartOutline'
                           "
                         >
                           {{ workout?.subscribers?.length - 1 }}
@@ -228,7 +226,7 @@ useHead({
                   {{ t('Check the community or create your own') }}
                 </v-list-item-subtitle>
                 <template #append>
-                  <v-btn variant="text" color="text" icon="mdi-plus"></v-btn>
+                  <v-btn variant="text" color="text" icon="$plus"></v-btn>
                 </template>
               </v-list-item>
             </v-list>

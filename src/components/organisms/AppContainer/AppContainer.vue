@@ -52,15 +52,15 @@ const props = defineProps({
     <!-- bottom navigation -->
     <v-bottom-navigation grow>
       <v-btn to="/activity">
-        <v-icon>mdi-clipboard-text-multiple</v-icon>
+        <v-icon>$clipboardTextMultiple</v-icon>
         <span>{{ t('Stats') }}</span>
       </v-btn>
       <v-btn to="/workouts">
-        <v-icon>mdi-timer</v-icon>
+        <v-icon>$timer</v-icon>
         <span>{{ t('Workouts') }}</span>
       </v-btn>
       <v-btn to="/account">
-        <v-icon>mdi-account-box</v-icon>
+        <v-icon>$accountBox</v-icon>
         <span>{{ t('Account') }}</span>
       </v-btn>
     </v-bottom-navigation>

@@ -23,7 +23,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>

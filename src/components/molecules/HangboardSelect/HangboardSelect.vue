@@ -89,7 +89,7 @@ const subject = computed(() =>
       </v-list-item>
     </template>
     <template #prepend>
-      <v-icon color="text">mdi-numeric-1-box</v-icon>
+      <v-icon color="text">$numeric1Box</v-icon>
     </template>
   </v-select>
   <v-select
@@ -101,7 +101,7 @@ const subject = computed(() =>
     required
   >
     <template #prepend>
-      <v-icon color="text">mdi-numeric-2-box</v-icon>
+      <v-icon color="text">$numeric2Box</v-icon>
     </template>
   </v-select>
   <v-card>
@@ -191,7 +191,7 @@ const subject = computed(() =>
         size="small"
         v-if="getHangboardByIds(selected.company, selected.hangboard).url"
         color="text"
-        icon="mdi-share-variant"
+        icon="$shareVariant"
         :href="getHangboardByIds(selected.company, selected.hangboard).url"
         target="_blank"
       >

@@ -91,14 +91,14 @@ function resetHands() {
           <v-list-item-action end>
             <v-btn
               v-if="exercise.leftHand?.length || exercise.rightHand?.length"
-              icon="mdi-undo"
+              icon="$undo"
               color="text"
               variant="text"
               @click="resetHands"
             ></v-btn>
             <v-btn
               v-else
-              icon="mdi-hand-front-right"
+              icon="$handFrontRight"
               color="text"
               variant="text"
               disabled

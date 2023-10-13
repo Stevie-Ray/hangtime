@@ -80,7 +80,7 @@ const nextImage = () => {
       variant="text"
       size="x-small"
       @click="nextImage"
-      icon="mdi-format-rotate-90"
+      icon="$formatRotate90"
     >
     </v-btn>
     <div class="hangboard d-flex">

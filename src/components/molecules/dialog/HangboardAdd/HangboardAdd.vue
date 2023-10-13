@@ -62,15 +62,15 @@ const addHangboard = () => {
     transition="dialog-bottom-transition"
   >
     <template v-slot:activator="{ props }">
-      <v-btn variant="text" color="text" icon="mdi-plus" v-bind="props"></v-btn>
+      <v-btn variant="text" color="text" icon="$plus" v-bind="props"></v-btn>
     </template>
     <v-card>
       <v-toolbar>
-        <v-btn @click="dialog = false" color="text" icon="mdi-close"></v-btn>
+        <v-btn @click="dialog = false" color="text" icon="$close"></v-btn>
         <v-toolbar-title>{{ t('Add Hangboard') }}</v-toolbar-title>
         <v-toolbar-items>
           <v-btn
-            icon="mdi-content-save-outline"
+            icon="$contentSaveOutline"
             :disabled="
               !networkOnLine || (getHangboard && getHangboard.holds === 0)
             "

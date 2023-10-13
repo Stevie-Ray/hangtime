@@ -317,7 +317,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -328,7 +328,7 @@ useHead({
       <v-btn
         v-if="purchasesList.length === 0"
         :disabled="!canSubscribe"
-        icon="mdi-reload"
+        icon="$reload"
         @click="listPurchases"
       ></v-btn>
     </template>
@@ -381,7 +381,7 @@ useHead({
                         :disabled="disabled || (user && user.subscribed)"
                         @click="buySubscription"
                       >
-                        <v-icon left>mdi-cash-multiple</v-icon>
+                        <v-icon left>$cashMultiple</v-icon>
                         {{ t('Buy') }}
                       </v-btn>
                     </div>
@@ -418,7 +418,7 @@ useHead({
                     icon
                     @click="acknowledge(purchase.purchaseToken, 'repeatable')"
                   >
-                    <v-icon>mdi-delete</v-icon>
+                    <v-icon>$delete</v-icon>
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>

@@ -17,44 +17,44 @@ const { networkOnLine } = storeToRefs(useApp())
 const items = [
   {
     title: t('Profile'),
-    icon: 'mdi-account',
+    icon: '$account',
     subtitle: t('Avatar, weight, gender, grade'),
     link: '/account/profile'
   },
   {
     title: t('General'),
-    icon: 'mdi-cog',
+    icon: '$cog',
     subtitle: t('Language, grading, weight, dark mode'),
     link: '/account/general'
   },
   {
     title: t('Hangboards'),
-    icon: 'mdi-keyboard',
+    icon: '$keyboard',
     subtitle: t('Manage your hangboards'),
     link: '/account/hangboards'
   },
   {
     title: t('Workouts'),
-    icon: 'mdi-timer',
+    icon: '$timer',
     subtitle: t('Sound, speech, vibrate'),
     link: '/account/workouts'
   },
   {
     title: t('Subscription'),
-    icon: 'mdi-cash-multiple',
+    icon: '$cashMultiple',
     subtitle: t('Unlimited workouts'),
     link: '/account/subscription'
   },
   {
     title: t('Follow {appTitle}', { appTitle: 'HangTime' }),
-    icon: 'mdi-facebook',
+    icon: '$facebook',
     subtitle: t('App and hangboard updates'),
     link: 'https://www.facebook.com/hangtime.hangboarding',
     external: true
   },
   {
     title: t('Help'),
-    icon: 'mdi-help-circle',
+    icon: '$helpCircle',
     subtitle: t('FAQ, exercises, privacy, contact'),
     link: '/account/help'
   }
@@ -146,7 +146,7 @@ useHead({
 
     <template #icons>
       <v-btn
-        icon="mdi-logout"
+        icon="$logout"
         color="text"
         :disabled="!networkOnLine"
         @click="signOutUser"
@@ -170,7 +170,7 @@ useHead({
                   </template>
 
                   <template #append v-if="item.external">
-                    <v-icon icon="mdi-open-in-new"></v-icon>
+                    <v-icon icon="$openInNew"></v-icon>
                   </template>
 
                   <v-list-item-title>{{ item.title }}</v-list-item-title>

@@ -188,7 +188,7 @@ const props = defineProps({
             size="x-large"
             class="handle"
             style="cursor: grab"
-            icon="mdi-drag"
+            icon="$drag"
           ></v-icon>
         </div>
       </v-card-title>

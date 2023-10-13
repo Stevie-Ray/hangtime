@@ -216,7 +216,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -230,7 +230,7 @@ useHead({
             <v-list lines="two">
               <v-list-item v-if="hasToken">
                 <template #prepend>
-                  <v-icon icon="mdi-key"></v-icon>
+                  <v-icon icon="$key"></v-icon>
                 </template>
 
                 <v-list-item-title>Registration Token</v-list-item-title>
@@ -245,7 +245,7 @@ useHead({
                     @click="copyText"
                     class="mr-2"
                   >
-                    <v-icon>mdi-content-copy</v-icon>
+                    <v-icon>$contentCopy</v-icon>
                   </v-btn>
                   <v-btn
                     icon
@@ -254,13 +254,13 @@ useHead({
                     variant="outlined"
                     @click="deleteTokens"
                   >
-                    <v-icon>mdi-delete</v-icon>
+                    <v-icon>$delete</v-icon>
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
               <v-list-item v-if="needsPermission">
                 <template #prepend>
-                  <v-icon icon="mdi-key"></v-icon>
+                  <v-icon icon="$key"></v-icon>
                 </template>
 
                 <v-list-item-title>Needs Permission</v-list-item-title>

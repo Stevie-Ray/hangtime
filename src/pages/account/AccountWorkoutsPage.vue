@@ -75,7 +75,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -89,7 +89,7 @@ useHead({
             <v-list two-line>
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-volume-high</v-icon>
+                  <v-icon>$volumeHigh</v-icon>
                 </template>
 
                 <v-list-item-title>{{ t('Play sound') }}</v-list-item-title>
@@ -109,7 +109,7 @@ useHead({
 
               <v-list-item v-if="synth && voices.length">
                 <template #prepend>
-                  <v-icon>mdi-account-voice</v-icon>
+                  <v-icon>$accountVoice</v-icon>
                 </template>
 
                 <v-list-item-title>
@@ -131,7 +131,7 @@ useHead({
 
               <v-list-item v-if="user.settings.speak && voices.length">
                 <template #prepend>
-                  <v-icon>mdi-account-multiple</v-icon>
+                  <v-icon>$accountMultiple</v-icon>
                 </template>
 
                 <v-select
@@ -151,7 +151,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-vibrate</v-icon>
+                  <v-icon>$vibrate</v-icon>
                 </template>
 
                 <v-list-item-title>{{ t('Vibration') }}</v-list-item-title>

@@ -217,7 +217,7 @@ const settingsGrade = computed({
                     item-value="value"
                   >
                     <template #prepend>
-                      <v-icon color="primary lighten-1" icon="mdi-chart-gantt">
+                      <v-icon color="primary lighten-1" icon="$chartGantt">
                       </v-icon>
                     </template>
                   </v-select>
@@ -233,7 +233,7 @@ const settingsGrade = computed({
                     <template #prepend>
                       <v-icon
                         color="primary lighten-1"
-                        icon="mdi-chart-timeline-variant"
+                        icon="$chartTimelineVariant"
                       ></v-icon>
                     </template>
                   </v-select>

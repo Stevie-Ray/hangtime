@@ -98,7 +98,7 @@ function decrement() {
           <v-btn
             :disabled="disabled"
             color="text"
-            icon="mdi-minus"
+            icon="$minus"
             variant="outlined"
             @click="decrement"
             style="touch-action: manipulation"
@@ -118,7 +118,7 @@ function decrement() {
           <v-btn
             :disabled="disabled"
             color="text"
-            icon="mdi-plus"
+            icon="$plus"
             variant="outlined"
             @click="increment"
             style="touch-action: manipulation"

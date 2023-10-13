@@ -49,8 +49,8 @@ useHead({
         <template v-slot:activator="{ props }">
           <div v-bind="props" class="leaderboard-select">
             <span>{{ selectedHeader.text }}</span>
-            <span v-if="leaderboardMenu"><v-icon>mdi-chevron-up</v-icon></span>
-            <span v-else><v-icon>mdi-chevron-down</v-icon></span>
+            <span v-if="leaderboardMenu"><v-icon>$chevronUp</v-icon></span>
+            <span v-else><v-icon>$chevronDown</v-icon></span>
           </div>
         </template>
 
@@ -70,17 +70,17 @@ useHead({
     </template>
 
     <template #icons>
-      <!--      <v-btn class="text-none" icon="mdi-help-circle-outline"></v-btn>-->
+      <!--      <v-btn class="text-none" icon="$helpCircleOutline"></v-btn>-->
     </template>
 
     <template #extension>
       <v-tabs grow>
         <v-tab to="/activity" color="text">
-          <v-icon class="mr-1">mdi-clipboard-text-clock</v-icon>
+          <v-icon class="mr-1">$clipboardTextClock</v-icon>
           <span>{{ t('History') }}</span>
         </v-tab>
         <v-tab to="/activity/leaderboard" color="text">
-          <v-icon class="mr-1">mdi-podium-gold</v-icon>
+          <v-icon class="mr-1">$podiumGold</v-icon>
           <span>{{ t('Leaderboard') }}</span>
         </v-tab>
       </v-tabs>

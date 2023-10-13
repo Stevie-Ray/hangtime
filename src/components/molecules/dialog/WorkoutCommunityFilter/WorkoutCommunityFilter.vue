@@ -33,20 +33,17 @@ const items = [
         variant="text"
         disabled
         color="text"
-        icon="mdi-tune-variant"
+        icon="$tuneVariant"
         v-bind="props"
       ></v-btn>
     </template>
     <v-card>
       <v-toolbar>
-        <v-btn icon="mdi-close" color="text" @click="dialog = false"></v-btn>
+        <v-btn icon="$close" color="text" @click="dialog = false"></v-btn>
         <v-toolbar-title>{{ t('Filter') }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn
-            icon="mdi-content-save-outline"
-            @click="dialog = false"
-          ></v-btn>
+          <v-btn icon="$contentSaveOutline" @click="dialog = false"></v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <v-container>

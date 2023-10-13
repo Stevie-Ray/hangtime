@@ -474,7 +474,7 @@ onMounted(() => {
               }"
               :disabled="currentExercise <= 0"
               variant="flat"
-              icon="mdi-skip-previous"
+              icon="$skipPrevious"
               class="rounded-circle"
               @click="hasExercise('prev')"
             ></v-btn>
@@ -482,10 +482,10 @@ onMounted(() => {
               variant="flat"
               :icon="
                 timerPaused === null
-                  ? 'mdi-play'
+                  ? '$play'
                   : timerPaused
-                  ? 'mdi-play'
-                  : 'mdi-pause'
+                  ? '$play'
+                  : '$pause'
               "
               class="rounded-circle"
               size="x-large"
@@ -498,7 +498,7 @@ onMounted(() => {
               }"
               :disabled="currentExercise >= workout?.exercises?.length - 1"
               variant="flat"
-              icon="mdi-skip-next"
+              icon="$skipNext"
               class="rounded-circle"
               @click="hasExercise('next')"
             ></v-btn>

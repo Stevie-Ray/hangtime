@@ -100,27 +100,27 @@ const usps = [
   {
     title: `Personalized Hangboard Training Plans`,
     subtitle: `Unlock the power of hangboard training with HangTime the #1 hangboard training app. Tailor your workouts, target specific finger strength, and track progress over time for optimized hangboard training. Join the largest hangboard training community with access to ${getHangboards?.length} hangboards from ${getCompanies?.length} top brands. Elevate your climbing game with precision.`,
-    prependIcon: `mdi-podium-gold`
+    prependIcon: `$podiumGold`
   },
   {
     title: `Community-Driven Training Hub`,
     subtitle: `Become part of our vibrant hangboard training community. Share your workouts and access routines crafted by fellow climbers. Collaborate, inspire, and learn from each other as you progress in your hangboard training journey.`,
-    prependIcon: `mdi-account-group`
+    prependIcon: `$accountGroup`
   },
   {
     title: `Data-Driven Progress Tracking`,
     subtitle: `Stay motivated and monitor your hangboard training progress over time. Our app provides detailed insights into your performance, allowing you to identify strengths and weaknesses. With data at your fingertips, you can fine-tune your training plans and climb to new heights with confidence.`,
-    prependIcon: `mdi-chart-line`
+    prependIcon: `$chartLine`
   },
   {
     title: `Multi-Hangboard Support`,
     subtitle: `Diversify your training by adding multiple hangboards from your gym to your app profile. This feature allows you to adapt and switch up your routines easily, ensuring a well-rounded approach to your hangboard training.`,
-    prependIcon: `mdi-card-multiple`
+    prependIcon: `$cardMultiple`
   },
   {
     title: `Extensive Hangboard Catalog`,
     subtitle: `Access the most extensive hangboard catalog available, featuring ${getHangboards?.length} hangboards from ${getCompanies?.length} trusted brands. No matter your hangboard training preference, our app provides the variety you need to reach your peak climbing potential.`,
-    prependIcon: `mdi-trophy`
+    prependIcon: `$trophy`
   }
 ]
 
@@ -327,7 +327,7 @@ useHead({
                   class="text-white"
                   block
                   size="large"
-                  :prepend-icon="`mdi-${social.id}`"
+                  :prepend-icon="`$${social.id}`"
                   @click="connect(social.id)"
                 >
                   <span>Sign in with {{ social.name }}</span>
@@ -377,7 +377,7 @@ useHead({
                     size="large"
                     data-test="login-btn"
                     class="mt-2 mb-4"
-                    prepend-icon="mdi-key"
+                    prepend-icon="$key"
                     @click="validateLogin"
                   >
                     {{ t('Login') }}
@@ -435,7 +435,7 @@ useHead({
                     block
                     size="large"
                     class="mt-2 mb-4"
-                    prepend-icon="mdi-key"
+                    :prepend-icon="$key"
                     @click="validateRegister"
                   >
                     {{ t('Register') }}
@@ -464,7 +464,7 @@ useHead({
                   text
                   disabled
                   x-small
-                  prepend-icon="mdi-icognito"
+                  prepend-icon="$incognito"
                   @click="connect('anonymous')"
                 >
                   {{ t('Continue as Guest') }}

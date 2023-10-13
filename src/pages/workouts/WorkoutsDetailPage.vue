@@ -275,7 +275,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -288,27 +288,27 @@ useHead({
         :disabled="!networkOnLine"
         size="x-large"
         color="text"
-        :append-icon="isHearted ? 'mdi-heart' : 'mdi-heart-outline'"
+        :append-icon="isHearted ? '$heart' : '$heartOutline'"
         @click="workoutSubscriber"
       >
         {{ workout?.subscribers?.length - 1 }}
       </v-btn>
       <v-btn
         v-if="workout?.share && navigatorShare && !editMode"
-        icon="mdi-share-variant"
+        icon="$shareVariant"
         color="text"
         @click="shareWorkout"
       ></v-btn>
       <v-btn
         v-if="workout?.user?.id === user?.id && !editMode"
         :disabled="!networkOnLine"
-        icon="mdi-pencil"
+        icon="$pencil"
         color="text"
         @click="editWorkout"
       ></v-btn>
       <v-btn
         v-if="editMode"
-        icon="mdi-content-save-outline"
+        icon="$contentSaveOutline"
         color="text"
         @click="workoutSaveDialog = true"
       ></v-btn>
@@ -316,7 +316,7 @@ useHead({
         <template v-slot:activator="{ props }">
           <v-btn
             v-if="editMode"
-            icon="mdi-dots-vertical"
+            icon="$dotsVertical"
             color="text"
             v-bind="props"
           ></v-btn>
@@ -406,7 +406,7 @@ useHead({
                   <v-expansion-panels variant="accordion">
                     <v-expansion-panel>
                       <v-expansion-panel-title>
-                        <v-icon class="pr-2">mdi-video</v-icon>Video
+                        <v-icon class="pr-2">$video</v-icon>Video
                       </v-expansion-panel-title>
 
                       <v-expansion-panel-text>
@@ -432,7 +432,7 @@ useHead({
                 <v-col cols="6">
                   <v-card v-if="workout?.time !== null" class="py-4">
                     <v-card-title class="text-center">
-                      <v-icon size="small">mdi-clock-outline</v-icon>
+                      <v-icon size="small">$clockOutline</v-icon>
                       {{ time(workout.time) }}
                     </v-card-title>
                   </v-card>
@@ -440,7 +440,7 @@ useHead({
                 <v-col cols="6">
                   <v-card v-if="workout?.exercises" class="py-4">
                     <v-card-title class="text-center">
-                      <v-icon size="small">mdi-repeat</v-icon>
+                      <v-icon size="small">$repeat</v-icon>
                       {{ workout.exercises.length }} sets
                     </v-card-title>
                   </v-card>
@@ -483,9 +483,14 @@ useHead({
                       variant="tonal"
                       @click="exerciseAdd"
                     >
-                      <v-card-title class="text-center"
-                        >+ {{ t('Add exercise') }}</v-card-title
-                      >
+                      <v-card-title class="text-center">
+                        <v-icon
+                          icon="$plus"
+                          size="x-small"
+                          class="mr-2"
+                        ></v-icon>
+                        <span>{{ t('Add exercise') }}</span>
+                      </v-card-title>
                     </v-card>
 
                     <!-- edit -->
@@ -498,7 +503,7 @@ useHead({
                       <v-card>
                         <v-toolbar>
                           <v-btn
-                            icon="mdi-close"
+                            icon="$close"
                             color="text"
                             @click="exerciseEditDialog = false"
                           ></v-btn>
@@ -509,15 +514,15 @@ useHead({
                           <v-toolbar-items>
                             <v-btn
                               v-if="exerciseIndex !== 0"
-                              icon="mdi-delete-outline"
+                              icon="$deleteOutline"
                               @click="exerciseRemove"
                             ></v-btn>
                             <v-btn
-                              icon="mdi-content-copy"
+                              icon="$contentCopy"
                               @click="exerciseCopy"
                             ></v-btn>
                             <v-btn
-                              icon="mdi-content-save-outline"
+                              icon="$contentSaveOutline"
                               @click="exerciseEditDialog = false"
                             ></v-btn>
                           </v-toolbar-items>
@@ -556,9 +561,7 @@ useHead({
 
                                 <v-expansion-panel>
                                   <v-expansion-panel-title>
-                                    <v-icon
-                                      icon="mdi-numeric-1-box-outline"
-                                    ></v-icon>
+                                    <v-icon icon="$numeric1BoxOutline"></v-icon>
                                     <span class="ml-2">{{
                                       t('Exercise')
                                     }}</span>
@@ -578,7 +581,7 @@ useHead({
                                             <v-tooltip location="bottom">
                                               <template #activator="{ props }">
                                                 <v-icon v-bind="props">
-                                                  mdi-help-circle-outline
+                                                  $helpCircleOutline
                                                 </v-icon>
                                               </template>
                                               <span
@@ -654,7 +657,7 @@ useHead({
                                             >
                                               <template #activator="{ props }">
                                                 <v-icon v-bind="props">
-                                                  mdi-help-circle-outline
+                                                  $helpCircleOutline
                                                 </v-icon>
                                               </template>
                                               <span>{{
@@ -670,7 +673,7 @@ useHead({
                                                     (exercise.pullups = 1)
                                                 "
                                               >
-                                                mdi-undo
+                                                $undo
                                               </v-icon>
                                             </div>
                                           </template>
@@ -697,9 +700,7 @@ useHead({
                                 </v-expansion-panel>
                                 <v-expansion-panel>
                                   <v-expansion-panel-title>
-                                    <v-icon
-                                      icon="mdi-numeric-2-box-outline"
-                                    ></v-icon>
+                                    <v-icon icon="$numeric2BoxOutline"></v-icon>
                                     <span
                                       :class="{
                                         'text--secondary':
@@ -768,9 +769,7 @@ useHead({
                                 </v-expansion-panel>
                                 <v-expansion-panel>
                                   <v-expansion-panel-title>
-                                    <v-icon
-                                      icon="mdi-numeric-3-box-outline"
-                                    ></v-icon>
+                                    <v-icon icon="$numeric3BoxOutline"></v-icon>
                                     <span
                                       :class="{
                                         'text--secondary':
@@ -801,9 +800,7 @@ useHead({
                                 </v-expansion-panel>
                                 <v-expansion-panel>
                                   <v-expansion-panel-title>
-                                    <v-icon
-                                      icon="mdi-numeric-4-box-outline"
-                                    ></v-icon>
+                                    <v-icon icon="$numeric4BoxOutline"></v-icon>
                                     <span
                                       :class="{
                                         'text--secondary':
@@ -844,9 +841,7 @@ useHead({
                                 </v-expansion-panel>
                                 <v-expansion-panel>
                                   <v-expansion-panel-title>
-                                    <v-icon
-                                      icon="mdi-numeric-5-box-outline"
-                                    ></v-icon>
+                                    <v-icon icon="$numeric5BoxOutline"></v-icon>
                                     <span
                                       :class="{
                                         'text--secondary':
@@ -886,7 +881,7 @@ useHead({
                       <v-card>
                         <v-toolbar>
                           <v-btn
-                            icon="mdi-close"
+                            icon="$close"
                             color="text"
                             @click="workoutSaveDialog = false"
                           ></v-btn>
@@ -896,7 +891,7 @@ useHead({
 
                           <v-toolbar-items>
                             <v-btn
-                              icon="mdi-content-save-outline"
+                              icon="$contentSaveOutline"
                               :disabled="
                                 workout.name === '' ||
                                 typeof workout.name === 'undefined' ||

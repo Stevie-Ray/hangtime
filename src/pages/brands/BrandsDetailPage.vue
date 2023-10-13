@@ -47,7 +47,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.push('/brands')">mdi-arrow-left</v-icon>
+      <v-icon @click="router.push('/brands')">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -83,7 +83,7 @@ useHead({
                     variant="outlined"
                     :href="getCompany?.url"
                     target="_blank"
-                    prepend-icon="mdi-web"
+                    prepend-icon="$web"
                     :disabled="!networkOnLine"
                   >
                     Website
@@ -93,14 +93,14 @@ useHead({
                     v-if="getCompany?.socials?.facebook"
                     :href="getCompany?.socials?.facebook"
                     target="_blank"
-                    icon="mdi-facebook"
+                    icon="$facebook"
                     :disabled="!networkOnLine"
                   />
                   <v-btn
                     v-if="getCompany?.socials?.instagram"
                     :href="getCompany?.socials?.instagram"
                     target="_blank"
-                    icon="mdi-instagram"
+                    icon="$instagram"
                     :disabled="!networkOnLine"
                   />
                 </v-card-actions>
@@ -157,7 +157,7 @@ useHead({
                     size="small"
                     v-if="hangboard.url"
                     color="text"
-                    icon="mdi-open-in-new"
+                    icon="$openInNew"
                     :href="hangboard.url"
                     target="_blank"
                   >

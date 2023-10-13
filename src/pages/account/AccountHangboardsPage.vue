@@ -49,7 +49,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -185,7 +185,7 @@ useHead({
                         .url
                     "
                     color="text"
-                    icon="mdi-open-in-new"
+                    icon="$openInNew"
                     :href="
                       getHangboardByIds(hangboard.company, hangboard.hangboard)
                         .url
@@ -196,7 +196,7 @@ useHead({
                   <v-btn
                     size="small"
                     color="text"
-                    icon="mdi-delete"
+                    icon="$delete"
                     :disabled="
                       !networkOnLine || getUserHangboardSelectedId === index
                     "

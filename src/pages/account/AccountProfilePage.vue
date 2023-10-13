@@ -102,7 +102,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -116,7 +116,7 @@ useHead({
             <v-list>
               <v-list-item v-if="user && user.id">
                 <template #prepend>
-                  <v-icon>mdi-identifier</v-icon>
+                  <v-icon>$identifier</v-icon>
                 </template>
 
                 <v-list-item-title>
@@ -126,7 +126,7 @@ useHead({
 
               <v-list-item v-if="user && user.displayName">
                 <template #prepend>
-                  <v-icon>mdi-account</v-icon>
+                  <v-icon>$account</v-icon>
                 </template>
 
                 <v-list-item-title>{{ user.displayName }}</v-list-item-title>
@@ -134,7 +134,7 @@ useHead({
 
               <v-list-item v-if="user && user.email">
                 <template #prepend>
-                  <v-icon>mdi-email</v-icon>
+                  <v-icon>$email</v-icon>
                 </template>
 
                 <v-list-item-title>
@@ -144,7 +144,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-gender-male-female</v-icon>
+                  <v-icon>$genderMaleFemale</v-icon>
                 </template>
 
                 <v-radio-group
@@ -161,7 +161,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-map-marker</v-icon>
+                  <v-icon>$mapMarker</v-icon>
                 </template>
 
                 <v-autocomplete
@@ -179,7 +179,7 @@ useHead({
 
               <v-list-item v-if="user && user.settings.scale">
                 <template #prepend>
-                  <v-icon>mdi-scale-bathroom</v-icon>
+                  <v-icon>$scaleBathroom</v-icon>
                 </template>
 
                 <v-slider
@@ -213,7 +213,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-chart-timeline-variant</v-icon>
+                  <v-icon>$chartTimelineVariant</v-icon>
                 </template>
 
                 <v-select
@@ -232,7 +232,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-information</v-icon>
+                  <v-icon>$information</v-icon>
                 </template>
 
                 <v-text-field
@@ -263,7 +263,7 @@ useHead({
                     size="small"
                     variant="outlined"
                     color="text"
-                    icon="mdi-account"
+                    icon="$account"
                     @click="login('google')"
                   ></v-btn>
                 </template>
@@ -276,7 +276,7 @@ useHead({
                     size="small"
                     variant="outlined"
                     color="text"
-                    icon="mdi-account"
+                    icon="$account"
                     @click="login('facebook')"
                   ></v-btn>
                 </template>
@@ -289,7 +289,7 @@ useHead({
                     size="small"
                     variant="outlined"
                     color="text"
-                    icon="mdi-account"
+                    icon="$account"
                     @click="login('apple')"
                   ></v-btn>
                 </template>

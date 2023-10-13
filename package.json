@@ -16,7 +16,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.0.8",
     "@googlemaps/js-api-loader": "^1.16.2",
-    "@mdi/font": "7.3.67",
+    "@mdi/js": "^7.3.67",
     "@unhead/vue": "^1.7.4",
     "core-js": "^3.33.0",
     "firebase": "^10.4.0",

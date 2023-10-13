@@ -85,7 +85,7 @@ useHead({
         :to="notifications ? '/activity/notifications' : null"
       >
         <v-badge dot color="secondary">
-          <v-icon>mdi-bell-outline</v-icon>
+          <v-icon>$bellOutline</v-icon>
         </v-badge>
       </v-btn>
     </template>
@@ -93,11 +93,11 @@ useHead({
     <template #extension>
       <v-tabs grow>
         <v-tab to="/activity" color="text">
-          <v-icon class="mr-1">mdi-clipboard-text-clock</v-icon>
+          <v-icon class="mr-1">$clipboardTextClock</v-icon>
           <span>{{ t('History') }}</span>
         </v-tab>
         <v-tab to="/activity/leaderboard" color="text">
-          <v-icon class="mr-1">mdi-podium-gold</v-icon>
+          <v-icon class="mr-1">$podiumGold</v-icon>
           <span>{{ t('Leaderboard') }}</span>
         </v-tab>
       </v-tabs>

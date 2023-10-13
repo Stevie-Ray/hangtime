@@ -123,7 +123,7 @@ useHead({
 <template>
   <app-container prepend>
     <template #prepend>
-      <v-icon @click="router.go(-1)">mdi-arrow-left</v-icon>
+      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
     </template>
 
     <template #title>
@@ -137,7 +137,7 @@ useHead({
             <v-list lines="two">
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-chart-gantt</v-icon>
+                  <v-icon>$chartGantt</v-icon>
                 </template>
                 <v-select
                   v-model="user.settings.scale"
@@ -152,7 +152,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-translate</v-icon>
+                  <v-icon>$translate</v-icon>
                 </template>
 
                 <v-select
@@ -168,7 +168,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-weight</v-icon>
+                  <v-icon>$weight</v-icon>
                 </template>
 
                 <v-select
@@ -185,7 +185,7 @@ useHead({
 
               <v-list-item>
                 <template #prepend>
-                  <v-icon>mdi-theme-light-dark</v-icon>
+                  <v-icon>$themeLightDark</v-icon>
                 </template>
 
                 <v-select
