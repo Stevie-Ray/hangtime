@@ -7135,7 +7135,7 @@ export default [
         size: {
           x: 356,
           y: 89,
-          z: null
+          z: 32
         },
         type: 'wood',
         url: 'https://www.etsy.com/listing/1558792936/portable-mountain-and-rock-climbing?click_key=fefb8cd8f94696956098849b199a5d4a846bdd8f%3A1558792936&click_sum=8dae139d&ref=shop_home_feat_1',
