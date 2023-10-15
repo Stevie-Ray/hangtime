@@ -30,6 +30,10 @@ const router = useRouter()
 
 const getCompany = computed(() => getCompanyByUrlKey(route.params.id))
 
+const sortedHangboards = getCompany.value?.hangboards.sort((a, b) =>
+  a.name.localeCompare(b.name)
+)
+
 const loginButton = ref(true)
 
 const onScroll = () => {
@@ -111,7 +115,7 @@ useHead({
         <v-row :class="{ 'mb-10': !user }">
           <v-col cols="12">
             <v-card
-              v-for="hangboard in getCompany?.hangboards"
+              v-for="hangboard in sortedHangboards"
               :key="hangboard.id"
               class="mb-8"
             >

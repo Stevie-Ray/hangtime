@@ -10,19 +10,24 @@ export const useUser = defineStore('user', {
      * Get a hangboard object by company & hangboard ID
      * @return {function(*, *): string}
      */
-    getHangboardByIds: () => (company, hangboard) =>
-      hangboardBrands[company].hangboards[hangboard],
+    getHangboardByIds: () => (companyId, hangboardId) =>
+      hangboardBrands
+        .find((company) => company.id === companyId)
+        .hangboards.find((hangboard) => hangboard.id === hangboardId),
     /**
      * Get a company Name by  ID
      * @return Object
      */
-    getCompanyById: () => (company) => hangboardBrands[company],
+    getCompanyById: () => (companyId) =>
+      hangboardBrands.find((company) => company.id === companyId),
     /**
      * Get a hangboard Name by company & hangboard ID
      * @return {function(*, *): string}
      */
-    getHangboardNameByIds: () => (company, hangboard) =>
-      `${hangboardBrands[company].name} -  ${hangboardBrands[company].hangboards[hangboard].name}`,
+    getHangboardNameByIds: (getters) => (company, hangboard) =>
+      `${getters.getCompanyById(company).name} -  ${
+        getters.getHangboardByIds(company, hangboard).name
+      }`,
     /**
      * Get all companies sorted by name
      * @return {({country: string, hangboards: [{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},null], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: null}, name: string, holds: number, id: number, type: string, url: null}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},null,null], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string})[]}
@@ -42,12 +47,6 @@ export const useUser = defineStore('user', {
       }
       return allHangboards
     },
-    /**
-     * Get hangboard from a company id
-     * @return Array
-     */
-    getHangboardsByCompanyId: () => (company) =>
-      hangboardBrands[company].hangboards,
     /**
      * Get company by its url key
      * @return Array

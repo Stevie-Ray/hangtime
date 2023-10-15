@@ -5227,7 +5227,7 @@ export default [
           z: 48
         },
         type: 'wood',
-        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2001BX/dp/B08X1863GV',
+        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2001BX/dp/B08X1VY48M',
         holds: 11
       },
       {
@@ -5257,9 +5257,9 @@ export default [
         holds: 12
       },
       {
-        name: 'CJ-HB2005',
+        name: 'CJ-HB2005 / CJ-HB2053',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/MOUNTAINROCK2003.svg',
         size: {
           x: 600,
           y: 200,
@@ -5267,7 +5267,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2005BX/dp/B08WXFCRJN',
-        holds: 0
+        holds: 12
       },
       {
         name: 'CJ-HB2007',
@@ -5305,7 +5305,7 @@ export default [
           z: 30
         },
         type: 'wood',
-        url: 'https://www.amazon.nl/Portable-Fingerboard-Hangboard-Strengthener-CJ-HB2025BX/dp/B08WSK22R3',
+        url: 'https://www.amazon.com/Portable-Fingerboard-Hangboard-Strengthener-CJ-HB2025BX/dp/B08WRSWZ6S',
         holds: 3
       },
       {
@@ -5370,7 +5370,7 @@ export default [
           z: 50
         },
         type: 'wood',
-        url: 'https://www.amazon.com/Hangboard-Climbing-Phone-Holder-Pockets/dp/B099WB5253',
+        url: 'https://www.amazon.com/Hangboard-Climbing-Hanging-Pinches-Pockets/dp/B099W8JML5',
         holds: 16
       },
       {
@@ -5400,21 +5400,8 @@ export default [
         holds: 13
       },
       {
-        name: 'CJ-HB2053',
-        id: 14,
-        image: 'hangboards/MOUNTAINROCK2003.svg',
-        size: {
-          x: 600,
-          y: 200,
-          z: 50
-        },
-        type: 'wood',
-        url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2053BX/dp/B08WWNV6HK',
-        holds: 12
-      },
-      {
         name: 'CJ-HB2101',
-        id: 15,
+        id: 14,
         image: 'hangboards/NOTFOUND.svg',
         size: {
           x: 580,
@@ -5422,25 +5409,12 @@ export default [
           z: 50
         },
         type: 'wood',
-        url: 'https://www.amazon.com.be/-/en/climbing-hanging-decanters-pinching-pockets/dp/B099WB5253',
-        holds: 0
-      },
-      {
-        name: 'CJ-HB2112',
-        id: 16,
-        image: 'hangboards/NOTFOUND.svg',
-        size: {
-          x: 580,
-          y: 160,
-          z: 50
-        },
-        type: 'wood',
-        url: 'https://www.amazon.com/Hangboard-Climbing-Fingerboard-Designed-Climbers/dp/B099W8JML5',
+        url: 'https://www.amazon.com/Hangboard-Climbing-Holder-Pinches-Pockets/dp/B099WB5253',
         holds: 0
       },
       {
         name: 'CJ-HB2008',
-        id: 17,
+        id: 15,
         image: 'hangboards/NOTFOUND.svg',
         size: {
           x: 580,

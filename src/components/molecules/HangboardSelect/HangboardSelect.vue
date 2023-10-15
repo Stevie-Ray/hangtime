@@ -11,8 +11,7 @@ const {
   getHangboardByIds,
   getCompanyById,
   getHangboardNameByIds,
-  getCompanies,
-  getHangboardsByCompanyId
+  getCompanies
 } = useUser()
 
 const props = defineProps({
@@ -34,8 +33,8 @@ watch(selected, (item) => {
   emit('update-selected', item)
 })
 
-const getHangboards = computed(() =>
-  getHangboardsByCompanyId(selected.value.company)
+const getHangboards = computed(
+  () => getCompanyById(selected.value.company).hangboards
 )
 
 const email = 'mail@stevie-ray.nl'
