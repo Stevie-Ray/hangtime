@@ -279,7 +279,6 @@ useHead({
             <inline-svg
               height="44"
               width="44"
-              class="mr-1"
               :src="require(`@/assets/logo.svg`)"
               alt="logo"
             />

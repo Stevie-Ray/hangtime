@@ -428,7 +428,7 @@ onMounted(() => {
     :style="{
       transition: `width ${clock}s linear`
     }"
-    class="position-absolute h-100 pa-0 progress"
+    class="position-absolute h-100 px-0 py-0 progress"
   ></v-container>
   <v-container class="position-relative">
     <v-row align="center" justify="center">

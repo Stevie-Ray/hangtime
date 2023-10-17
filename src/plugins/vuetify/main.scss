@@ -1,1 +1,147 @@
-@use 'vuetify/styles';
+@forward 'vuetify' with (
+  $utilities: (
+    'align-content': false,
+    'align-items': (
+      responsive: true,
+      property: align-items,
+      class: align,
+      values: (
+        center: center
+      )
+    ),
+    'align-self': false,
+    'border-bottom': false,
+    'border-end': false,
+    'border-opacity': false,
+    'border-start': false,
+    'border-style': false,
+    'border-top': false,
+    'border': false,
+    'display': (
+      responsive: true,
+      print: true,
+      property: display,
+      class: d,
+      values: none inline-block block flex
+    ),
+    'flex-direction': (
+      responsive: true,
+      property: flex-direction,
+      class: flex,
+      values: row column
+    ),
+    //"fill-height": false,
+    //"flex-grow": false,
+    'flex-shrink': false,
+    'flex-wrap': false,
+    'flex': false,
+    'float:ltr': false,
+    'float:rtl': false,
+    'float': false,
+    'font-italic': false,
+    'font-weight': false,
+    'height': (
+      property: height,
+      class: h,
+      values: (
+        100: 100%
+      )
+    ),
+    'height-screen': false,
+    'justify-content': (
+      responsive: true,
+      property: justify-content,
+      class: justify,
+      values: (
+        center: center,
+        space-between: space-between
+      )
+    ),
+    //"margin-bottom": false,
+    'margin-end': false,
+    //"margin-left": false,
+    //"margin-right": false,
+    'margin-start': false,
+    //"margin-top": false,
+    //"margin-x": false,
+    //"margin-y": false,
+    'margin': false,
+    'negative-margin-bottom': false,
+    'negative-margin-end': false,
+    'negative-margin-left': false,
+    'negative-margin-right': false,
+    'negative-margin-start': false,
+    'negative-margin-top': false,
+    'negative-margin-x': false,
+    'negative-margin-y': false,
+    'negative-margin': false,
+    'order': false,
+    'overflow-wrap': false,
+    'overflow-x': false,
+    'overflow-y': false,
+    'overflow': (
+      property: overflow,
+      values: visible
+    ),
+    //"padding-bottom": false,
+    'padding-end': false,
+    'padding-left': false,
+    'padding-right': false,
+    'padding-start': false,
+    //"padding-top": false,
+    //"padding-x": false,
+    //"padding-y": false,
+    'padding': false,
+    'position': (
+      property: position,
+      class: position,
+      values: relative fixed absolute
+    ),
+    'rounded-bottom-end': false,
+    'rounded-bottom-start': false,
+    'rounded-bottom': false,
+    'rounded-end': false,
+    'rounded-start': false,
+    'rounded-top-end': false,
+    'rounded-top-start': false,
+    'rounded-top': false,
+    //"rounded": false,
+    //"text-align": false,
+    //"text-decoration": false,
+    'text-mono': false,
+    //"text-opacity": false,
+    'text-overflow': false,
+    //"text-transform": false,
+    //"typography": true,
+    'white-space': false,
+    'width': (
+      property: width,
+      class: w,
+      values: (
+        100: 100%
+      )
+    )
+  ),
+  $colors: (
+    'red': false,
+    'pink': false,
+    'purple': false,
+    'deep-purple': false,
+    'indigo': false,
+    'blue': false,
+    'light-blue': false,
+    'cyan': false,
+    'teal': false,
+    'green': false,
+    'light-green': false,
+    'lime': false,
+    'yellow': false,
+    'amber': false,
+    'orange': false,
+    'deep-orange': false,
+    'brown': false,
+    'blue-grey': false,
+    //'grey': false,
+    'shades': false
+  ),
+);

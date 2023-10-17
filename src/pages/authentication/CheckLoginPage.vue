@@ -51,7 +51,7 @@ useHead({
             indeterminate
           ></v-progress-circular>
         </div>
-        <div class="pa-4">
+        <div class="px-4 py-4">
           {{ t('Loading...') }}
         </div>
       </v-col>

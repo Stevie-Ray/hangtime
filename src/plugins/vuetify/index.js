@@ -1,4 +1,3 @@
-// import 'vuetify/styles'
 import './main.scss'
 // Vuetify
 import { createVuetify } from 'vuetify'

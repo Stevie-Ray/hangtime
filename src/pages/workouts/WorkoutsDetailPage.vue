@@ -406,7 +406,7 @@ useHead({
                   <v-expansion-panels variant="accordion">
                     <v-expansion-panel>
                       <v-expansion-panel-title>
-                        <v-icon class="pr-2">$video</v-icon>Video
+                        <v-icon class="mr-2">$video</v-icon>Video
                       </v-expansion-panel-title>
 
                       <v-expansion-panel-text>

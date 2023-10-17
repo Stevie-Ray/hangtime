@@ -48,7 +48,7 @@ const props = defineProps({
     <slot></slot>
   </v-main>
 
-  <v-footer v-if="user && !hideFooter" class="pa-0" app>
+  <v-footer v-if="user && !hideFooter" class="px-0 py-0" app>
     <!-- bottom navigation -->
     <v-bottom-navigation grow>
       <v-btn to="/activity">
