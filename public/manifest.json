@@ -66,10 +66,24 @@
       "type": "image/png"
     },
     {
+      "label": "Get stronger with HangTime",
+      "platform": "wide",
+      "sizes": "1536x2048",
+      "src": "./img/icons/screenshot1w.png",
+      "type": "image/png"
+    },
+    {
       "label": "Workouts, that you create",
       "platform": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot2.png",
+      "type": "image/png"
+    },
+    {
+      "label": "Workouts, that you create",
+      "platform": "wide",
+      "sizes": "1536x2048",
+      "src": "./img/icons/screenshot2w.png",
       "type": "image/png"
     },
     {
@@ -80,6 +94,13 @@
       "type": "image/png"
     },
     {
+      "label": "Manage multiple hangboards",
+      "platform": "wide",
+      "sizes": "1536x2048",
+      "src": "./img/icons/screenshot3w.png",
+      "type": "image/png"
+    },
+    {
       "label": "Inspire, or get inspired",
       "platform": "narrow",
       "sizes": "887x1920",
@@ -87,10 +108,24 @@
       "type": "image/png"
     },
     {
+      "label": "Inspire, or get inspired",
+      "platform": "wide",
+      "sizes": "1536x2048",
+      "src": "./img/icons/screenshot4w.png",
+      "type": "image/png"
+    },
+    {
       "label": "Track your progress",
       "platform": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot5.png",
+      "type": "image/png"
+    },
+    {
+      "label": "Track your progress",
+      "platform": "wide",
+      "sizes": "1536x2048",
+      "src": "./img/icons/screenshot5w.png",
       "type": "image/png"
     }
   ],

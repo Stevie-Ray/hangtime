@@ -41,7 +41,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "max-age=86400"
           }
         ]
       }
