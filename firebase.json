@@ -37,7 +37,7 @@
         ]
       },
       {
-        "source": "/__/auth/iframe.js",
+        "source": "**/auth/iframe.js",
         "headers": [
           {
             "key": "Cache-Control",

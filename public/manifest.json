@@ -60,70 +60,70 @@
   "screenshots": [
     {
       "label": "Get stronger with HangTime",
-      "platform": "narrow",
+      "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot1.png",
       "type": "image/png"
     },
     {
       "label": "Get stronger with HangTime",
-      "platform": "wide",
+      "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot1w.png",
       "type": "image/png"
     },
     {
       "label": "Workouts, that you create",
-      "platform": "narrow",
+      "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot2.png",
       "type": "image/png"
     },
     {
       "label": "Workouts, that you create",
-      "platform": "wide",
+      "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot2w.png",
       "type": "image/png"
     },
     {
       "label": "Manage multiple hangboards",
-      "platform": "narrow",
+      "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot3.png",
       "type": "image/png"
     },
     {
       "label": "Manage multiple hangboards",
-      "platform": "wide",
+      "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot3w.png",
       "type": "image/png"
     },
     {
       "label": "Inspire, or get inspired",
-      "platform": "narrow",
+      "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot4.png",
       "type": "image/png"
     },
     {
       "label": "Inspire, or get inspired",
-      "platform": "wide",
+      "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot4w.png",
       "type": "image/png"
     },
     {
       "label": "Track your progress",
-      "platform": "narrow",
+      "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot5.png",
       "type": "image/png"
     },
     {
       "label": "Track your progress",
-      "platform": "wide",
+      "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot5w.png",
       "type": "image/png"
