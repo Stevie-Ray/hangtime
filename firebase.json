@@ -37,11 +37,11 @@
         ]
       },
       {
-        "source": "404.html",
+        "source": "/__/auth/iframe.js",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=300"
+            "value": "no-cache"
           }
         ]
       }
