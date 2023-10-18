@@ -1,6 +1,6 @@
 {
   "firestore": {
-    "rules": "./src/firebase/firestore.rules"
+    "rules": "./src/plugins/firebase/firestore.rules"
   },
   "hosting": {
     "headers": [
@@ -14,11 +14,15 @@
         ]
       },
       {
-        "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+        "source": "**/*.@(eot|otf|ttf|ttc|woff|woff2|font.css)",
         "headers": [
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31 536000"
           }
         ]
       },
