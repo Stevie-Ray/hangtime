@@ -481,9 +481,9 @@ useHead({
             Elevate Your Climbing with Precision Training
           </v-card-subtitle>
           <v-card-text>
-            <v-list :items="usps" item-props lines="three">
+            <v-list :items="usps" item-props lines="three" aria-label="usps">
               <template v-slot:title="{ title }">
-                <h2 class="v-list-item-title" v-html="title"></h2>
+                <h2 class="v-list-item-title" role="option" v-html="title"></h2>
               </template>
             </v-list>
           </v-card-text>
@@ -499,22 +499,16 @@ useHead({
         </v-card>
 
         <v-footer
-          class="text-caption text-grey-darken-2 justify-center font-weight-light mt-4"
+          class="text-caption text-grey justify-center font-weight-light mt-4"
         >
           <span
             >v{{ appVersion }} | &copy; 2019 - {{ year }} HangTime |&nbsp;
           </span>
-          <router-link
-            class="text-grey-darken-2 font-weight-light"
-            to="/privacy"
-          >
+          <router-link class="text-grey font-weight-light" to="/privacy">
             Privacy
           </router-link>
           <span>&nbsp;|&nbsp;</span>
-          <router-link
-            class="text-grey-darken-2 font-weight-light"
-            to="/brands"
-          >
+          <router-link class="text-grey font-weight-light" to="/brands">
             Hangboards
           </router-link>
         </v-footer>
