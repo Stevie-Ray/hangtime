@@ -298,7 +298,7 @@ useHead({
                 <div class="text-center text-h5 pb-2">
                   {{ t('Hi there!') }} 👋
                 </div>
-                <h3
+                <div
                   class="text-body-2 text-center mx-auto"
                   style="max-width: 400px"
                 >
@@ -307,7 +307,7 @@ useHead({
                       'Sign in to join HangTime, a community driven hangboard training app, start getting stronger and climb even harder.'
                     )
                   }}
-                </h3>
+                </div>
               </v-col>
             </v-row>
 
@@ -474,17 +474,32 @@ useHead({
         </v-card>
 
         <v-card variant="flat" class="mt-4 text-left">
-          <v-card-title tag="h3" class="text-center mt-4">
+          <v-card-title tag="h2" class="text-center mt-4">
             HangTime - Hangboard Training
           </v-card-title>
-          <v-card-subtitle tag="h4" class="text-center">
+          <v-card-subtitle tag="h3" class="text-center" id="usp-title">
             Elevate Your Climbing with Precision Training
           </v-card-subtitle>
           <v-card-text>
-            <v-list :items="usps" item-props lines="three" aria-label="usps">
-              <template v-slot:title="{ title }">
-                <h2 class="v-list-item-title" role="option" v-html="title"></h2>
-              </template>
+            <v-list
+              :items="usps"
+              item-props
+              lines="three"
+              aria-labelledby="usp-title"
+              tabindex="0"
+            >
+              <v-list-item
+                v-for="(usp, index) in usps"
+                :value="usp"
+                :key="index"
+                role="option"
+              >
+                <template v-slot:prepend>
+                  <v-icon :icon="usp.prependIcon"></v-icon>
+                </template>
+                <v-list-item-title tag="h2">{{ usp.title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ usp.subtitle }}</v-list-item-subtitle>
+              </v-list-item>
             </v-list>
           </v-card-text>
           <v-card-actions class="justify-center mb-4">
