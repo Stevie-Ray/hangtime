@@ -304,7 +304,7 @@ useHead({
                 >
                   {{
                     t(
-                      'Sign in to join HangTime, a community driven hangboard training app, start getting stronger and climb even harder.'
+                      'Sign in to HangTime, the community-driven hangboard training app, for stronger climbing.'
                     )
                   }}
                 </div>

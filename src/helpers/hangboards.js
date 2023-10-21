@@ -543,7 +543,7 @@ export default [
       {
         name: 'One Finger Trainer',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/MAXONEFINGER.svg',
         size: {
           x: null,
           y: null,
@@ -551,7 +551,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.maxclimbing.com/products/one-finger-trainer',
-        holds: 0
+        holds: 6
       }
     ]
   },
