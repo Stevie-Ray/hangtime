@@ -12,7 +12,7 @@ const { t } = useI18n()
 const router = useRouter()
 
 const workout = reactive({
-  name: t('Quick workout'),
+  name: 'Quick workout',
   description: 'Just a simple timer go get you going',
   exercises: [
     {

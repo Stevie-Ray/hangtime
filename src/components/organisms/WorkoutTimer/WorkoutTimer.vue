@@ -205,10 +205,11 @@ const exerciseDone = () => {
     elapsed_time: workoutCompleteTimeTotal.value,
     elapsed_time_hanging: workoutCompleteTimeHanging.value,
     description: props?.workout?.description ? props.workout.description : '',
-    difficulty: props?.workout?.level ? props.workout.level : '',
+    difficulty: props?.workout?.level !== undefined ? props.workout.level : '',
     type: 'Hangboarding',
-    company: props?.workout?.company ? props.workout.company : '',
-    hangboard: props?.workout?.hangboard ? props.workout.hangboard : '',
+    company: props?.workout?.company !== undefined ? props.workout.company : '',
+    hangboard:
+      props?.workout?.hangboard !== undefined ? props.workout.hangboard : '',
     user: props?.workout?.user?.id ? props.workout.user.id : '',
     workout: props?.workout?.id ? props?.workout.id : ''
   })
