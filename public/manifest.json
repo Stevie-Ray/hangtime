@@ -62,70 +62,70 @@
       "label": "Get stronger with HangTime",
       "form_factor": "narrow",
       "sizes": "887x1920",
-      "src": "./img/icons/screenshot1.png",
+      "src": "./img/icons/screenshot1.webp",
       "type": "image/webp"
     },
     {
       "label": "Get stronger with HangTime",
       "form_factor": "wide",
       "sizes": "1536x2048",
-      "src": "./img/icons/screenshot1w.png",
+      "src": "./img/icons/screenshot1w.webp",
       "type": "image/webp"
     },
     {
       "label": "Workouts, that you create",
       "form_factor": "narrow",
       "sizes": "887x1920",
-      "src": "./img/icons/screenshot2.png",
+      "src": "./img/icons/screenshot2.webp",
       "type": "image/webp"
     },
     {
       "label": "Workouts, that you create",
       "form_factor": "wide",
       "sizes": "1536x2048",
-      "src": "./img/icons/screenshot2w.png",
+      "src": "./img/icons/screenshot2w.webp",
       "type": "image/webp"
     },
     {
       "label": "Manage multiple hangboards",
       "form_factor": "narrow",
       "sizes": "887x1920",
-      "src": "./img/icons/screenshot3.png",
+      "src": "./img/icons/screenshot3.webp",
       "type": "image/webp"
     },
     {
       "label": "Manage multiple hangboards",
       "form_factor": "wide",
       "sizes": "1536x2048",
-      "src": "./img/icons/screenshot3w.png",
+      "src": "./img/icons/screenshot3w.webp",
       "type": "image/webp"
     },
     {
       "label": "Inspire, or get inspired",
       "form_factor": "narrow",
       "sizes": "887x1920",
-      "src": "./img/icons/screenshot4.png",
+      "src": "./img/icons/screenshot4.webp",
       "type": "image/webp"
     },
     {
       "label": "Inspire, or get inspired",
       "form_factor": "wide",
       "sizes": "1536x2048",
-      "src": "./img/icons/screenshot4w.png",
+      "src": "./img/icons/screenshot4w.webp",
       "type": "image/webp"
     },
     {
       "label": "Track your progress",
       "form_factor": "narrow",
       "sizes": "887x1920",
-      "src": "./img/icons/screenshot5.png",
+      "src": "./img/icons/screenshot5.webp",
       "type": "image/webp"
     },
     {
       "label": "Track your progress",
       "form_factor": "wide",
       "sizes": "1536x2048",
-      "src": "./img/icons/screenshot5w.png",
+      "src": "./img/icons/screenshot5w.webp",
       "type": "image/webp"
     }
   ],
