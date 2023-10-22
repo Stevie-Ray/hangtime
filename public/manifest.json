@@ -63,70 +63,70 @@
       "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot1.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Get stronger with HangTime",
       "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot1w.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Workouts, that you create",
       "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot2.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Workouts, that you create",
       "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot2w.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Manage multiple hangboards",
       "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot3.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Manage multiple hangboards",
       "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot3w.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Inspire, or get inspired",
       "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot4.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Inspire, or get inspired",
       "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot4w.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Track your progress",
       "form_factor": "narrow",
       "sizes": "887x1920",
       "src": "./img/icons/screenshot5.png",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
       "label": "Track your progress",
       "form_factor": "wide",
       "sizes": "1536x2048",
       "src": "./img/icons/screenshot5w.png",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ],
   "shortcuts": [
