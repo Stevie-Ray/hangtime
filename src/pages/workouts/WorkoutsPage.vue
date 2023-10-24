@@ -169,7 +169,9 @@ useHead({
                 v-for="(workout, index) in workoutsList"
                 :key="workout.id"
               >
-                <v-list-item :to="`/workouts/${workout.id}`">
+                <v-list-item
+                  :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}`"
+                >
                   <template #prepend>
                     <v-avatar color="grey-darken-1">
                       <v-img

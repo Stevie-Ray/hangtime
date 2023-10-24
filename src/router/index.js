@@ -118,16 +118,20 @@ const routes = [
   },
   { path: '/workouts', component: WorkoutsPage, name: 'WorkoutsPage' },
   {
-    path: '/workouts/:id',
+    path: '/workouts/:company:/:hangboard/:id',
     component: WorkoutsDetailPage,
     name: 'WorkoutsDetailPage'
   },
   {
-    path: '/workouts/:id/timer',
+    path: '/workouts/:company:/:hangboard/:id/timer',
     component: WorkoutsTimerPage,
     name: 'WorkoutsTimerPage'
   },
-  // { path: '/workouts/new', component: WorkoutsDetailPage, name: 'WorkoutsNewPage' },
+  {
+    path: '/workouts/new',
+    component: WorkoutsDetailPage,
+    name: 'WorkoutsNewPage'
+  },
   {
     path: '/workouts/quick',
     component: WorkoutsQuickPage,

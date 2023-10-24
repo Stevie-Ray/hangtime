@@ -46,7 +46,19 @@ const activitiesByDay = computed(() =>
     return days
   }, {})
 )
-
+const activityUrl = (activity) => {
+  if (
+    activity.company !== null &&
+    activity.company !== '' &&
+    activity.hangboard !== null &&
+    activity.hangboard !== '' &&
+    activity.workout !== null &&
+    activity.workout !== ''
+  ) {
+    return `/workouts/${activity.company}/${activity.hangboard}/${activity.workout}`
+  }
+  return ''
+}
 useHead({
   title: 'Activity',
   meta: [{ name: 'description', content: '' }]
@@ -114,44 +126,42 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-card
-              v-for="(activity, date) in activitiesByDay"
+              v-for="(dates, date) in activitiesByDay"
               :key="date"
-              class="mb-4"
-              disabled
+              class="mb-4 pb-2"
             >
-              <v-list lines="one">
+              <v-list>
                 <v-list-subheader>{{
                   date ? new Date(date).toLocaleDateString('default') : ''
                 }}</v-list-subheader>
 
-                <v-list-item
-                  v-for="(activity, j) in activity"
-                  :key="j"
-                  class="mb-4"
-                >
-                  <template #prepend>
-                    <v-avatar color="grey-darken-1"></v-avatar>
-                  </template>
+                <template v-for="(activity, j) in dates" :key="j">
+                  <v-list-item :to="activityUrl(activity)">
+                    <template #prepend>
+                      <v-avatar color="grey-darken-1"></v-avatar>
+                    </template>
 
-                  <template v-if="activity.type !== 'quick'" #append>
-                    <div class="d-flex flex-column">
-                      <v-chip
-                        v-if="activity.difficulty"
-                        size="x-small"
-                        variant="outlined"
-                      >
-                        {{ difficultyById(activity.difficulty) }}
-                      </v-chip>
-                    </div>
-                  </template>
+                    <template v-if="activity.type !== 'quick'" #append>
+                      <div class="d-flex flex-column">
+                        <v-chip
+                          v-if="activity.difficulty"
+                          size="x-small"
+                          variant="outlined"
+                        >
+                          {{ difficultyById(activity.difficulty) }}
+                        </v-chip>
+                      </div>
+                    </template>
 
-                  <v-list-item-title>{{ activity.name }}</v-list-item-title>
+                    <v-list-item-title>{{ activity.name }}</v-list-item-title>
 
-                  <v-list-item-subtitle
-                    >{{ time(activity.elapsed_time) }} -
-                    {{ activity.description }}</v-list-item-subtitle
-                  >
-                </v-list-item>
+                    <v-list-item-subtitle
+                      >{{ time(activity.elapsed_time) }} -
+                      {{ activity.description }}</v-list-item-subtitle
+                    >
+                  </v-list-item>
+                  <v-divider inset v-if="j !== dates.length - 1"></v-divider>
+                </template>
               </v-list>
             </v-card>
           </v-col>
@@ -160,3 +170,17 @@ useHead({
     </template>
   </app-container>
 </template>
+
+<style lang="scss" scoped>
+.v-list-item {
+  min-height: 64px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  &:deep(.v-list-item__prepend) {
+    align-self: center;
+  }
+  &:deep(.v-list-item-action) {
+    align-items: end;
+  }
+}
+</style>

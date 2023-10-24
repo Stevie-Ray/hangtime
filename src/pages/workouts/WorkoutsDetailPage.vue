@@ -5,6 +5,7 @@ import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
+import { event } from 'vue-gtag'
 
 import urlParser from 'js-video-url-parser'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
@@ -15,6 +16,7 @@ import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand'
 import { useApp } from '@/stores/app'
 import { useWorkouts } from '@/stores/workouts'
 import { useAuthentication } from '@/stores/authentication'
+import { useUser } from '@/stores/user'
 
 import {
   time,
@@ -40,6 +42,7 @@ const router = useRouter()
 
 // workout
 const {
+  fetchCommunityWorkouts,
   getWorkoutById,
   removeUserWorkoutById,
   createUserWorkout,
@@ -47,7 +50,18 @@ const {
   updateWorkout
 } = useWorkouts()
 
-const workout = computed(() => getWorkoutById(route.params.id))
+const { getUserHangboards, getUserHangboardCompany, getUserHangboard } =
+  storeToRefs(useUser())
+
+const { getHangboardNameByIds } = useUser()
+
+const { user } = storeToRefs(useAuthentication())
+
+const { updateUser } = useAuthentication()
+
+const workout = computed(() =>
+  getWorkoutById(route.params.id ? route.params.id : 'new')
+)
 
 // workout - edit
 const editMode = ref(false)
@@ -100,13 +114,15 @@ const exerciseAdd = () => {
     exerciseNew.rest +
     exerciseNew.pause
 
-  workout.value.time += exerciseNew.time
+  if (workout.value) {
+    workout.value.time += exerciseNew.time
 
-  workout.value.exercises.push(exerciseNew)
+    workout.value.exercises.push(exerciseNew)
+  }
 }
 
 onMounted(() => {
-  if (route.params.id === 'new') {
+  if (route.path === '/workouts/new') {
     exerciseAdd()
     editMode.value = true
   }
@@ -172,7 +188,42 @@ const removeWorkout = () => {
   router.push('/workouts')
 }
 
-const { user } = storeToRefs(useAuthentication())
+const hasHangboardDialog = computed(() => {
+  if (!route.params.company || !route.params.hangboard) {
+    return false
+  }
+  const company = parseInt(route.params.company, 10)
+  const hangboard = parseInt(route.params.hangboard, 10)
+  const exists = getUserHangboards.value.some(
+    (el) => el.company === company && el.hangboard === hangboard
+  )
+  if (!exists) {
+    // show dialog to add new hangboard
+    return true
+  }
+  // if hangboard exists but is not selected, switch hangboard
+  if (company !== getUserHangboardCompany && hangboard !== getUserHangboard) {
+    const index = getUserHangboards.value.findIndex(
+      (list) => list.company === company && list.hangboard === hangboard
+    )
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    user.value.settings.selected = index
+    updateUser()
+    fetchCommunityWorkouts()
+  }
+  // do nothing
+  return false
+})
+const addHangboard = () => {
+  const company = parseInt(route.params.company, 10)
+  const hangboard = parseInt(route.params.hangboard, 10)
+  event('add_hangboard', {
+    hangboard: getHangboardNameByIds(company, hangboard)
+  })
+  // add the newly selected board and set it
+  user.value.settings.hangboards.push({ company, hangboard })
+  user.value.settings.selected = user.value.settings.hangboards.length - 1
+}
 
 // workout - weight
 const isHearted = computed(() => {
@@ -217,6 +268,8 @@ const shareWorkout = async () => {
     router.resolve({
       name: 'WorkoutsDetailPage',
       params: {
+        company: getUserHangboardCompany.value.id,
+        hangboard: getUserHangboard.value.id,
         id: workout.value.id
       }
     }).href
@@ -254,7 +307,9 @@ const onScroll = () => {
 }
 
 const goToTimer = () => {
-  router.push(`/workouts/${workout.value.id}/timer`)
+  router.push(
+    `/workouts/${getUserHangboard.value.id}/${getUserHangboardCompany.value.id}/${workout.value.id}/timer`
+  )
 }
 
 const rules = {
@@ -280,6 +335,7 @@ useHead({
 
     <template #title>
       <span v-if="workout">{{ workout.name }}</span>
+      <span v-else>{{ t('No workouts found') }}</span>
     </template>
 
     <template #icons>
@@ -377,7 +433,7 @@ useHead({
                       <v-card-actions>
                         <v-btn
                           v-if="!editMode"
-                          :to="`/workouts/${workout.id}/timer`"
+                          :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
                           class="mb-1"
                           color="text"
                           size="large"
@@ -976,7 +1032,7 @@ useHead({
                   <v-fab-transition>
                     <v-btn
                       v-show="startWorkoutButton"
-                      :to="`/workouts/${workout.id}/timer`"
+                      :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
                       size="x-large"
                       rounded="lg"
                       @click="goToTimer"
@@ -989,7 +1045,42 @@ useHead({
             </div>
 
             <div v-else>
-              {{ t('No personal workouts found') }}
+              {{ t('No workouts found') }}
+
+              <!-- has hangboard -->
+              <v-dialog
+                v-model="hasHangboardDialog"
+                :scrim="false"
+                fullscreen
+                transition="dialog-bottom-transition"
+              >
+                <v-card>
+                  <v-toolbar>
+                    <v-btn icon="$close" color="text" to="/workouts"></v-btn>
+                    <v-toolbar-title>
+                      {{ t('You are not using this hangboard') }}!
+                    </v-toolbar-title>
+
+                    <v-toolbar-items>
+                      <v-btn
+                        icon="$contentSaveOutline"
+                        @click="addHangboard"
+                      ></v-btn>
+                    </v-toolbar-items>
+                  </v-toolbar>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        {{
+                          t(
+                            "To view this workout we'll add this hangboard to your hangboards"
+                          )
+                        }}
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card>
+              </v-dialog>
             </div>
           </v-col>
         </v-row>
