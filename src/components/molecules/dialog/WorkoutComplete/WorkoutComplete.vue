@@ -2,6 +2,7 @@
 import { defineEmits, defineProps } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
+import router from '@/router'
 import { time } from '@/helpers'
 import { useAuthentication } from '@/stores/authentication'
 
@@ -57,6 +58,11 @@ const shareExternal = () => {
       console.error
     )
 }
+
+const closeModal = () => {
+  emit('show', false)
+  router.push('/activity')
+}
 </script>
 
 <template>
@@ -72,11 +78,7 @@ const shareExternal = () => {
             color="text"
             @click="shareExternal"
           ></v-btn>
-          <v-btn
-            icon="$close"
-            color="text"
-            @click="emit('show', false)"
-          ></v-btn>
+          <v-btn icon="$close" color="text" @click="closeModal"></v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <v-container>
