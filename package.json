@@ -33,7 +33,7 @@
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.2.5",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.3.22"
+    "vuetify": "^3.3.23"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
