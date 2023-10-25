@@ -13,7 +13,7 @@ const { login, logout } = useAuthentication()
 const auth = getAuth()
 
 // https://github.com/firebase/firebase-js-sdk/issues/4946
-if (window.chrome) {
+if (navigator.userAgent.indexOf('Chrome') > -1) {
   Object.defineProperty(
     browserPopupRedirectResolver.prototype,
     '_shouldInitProactively',
