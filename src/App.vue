@@ -13,7 +13,7 @@ import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewC
 import { useAuthentication } from '@/stores/authentication'
 
 useHead({
-  titleTemplate: (title) => `${title} | HangTime`,
+  titleTemplate: (title) => (title ? `${title} | HangTime` : `HangTime`),
   link: [
     {
       rel: 'preload',
