@@ -46,6 +46,15 @@ const activitiesByDay = computed(() =>
     return days
   }, {})
 )
+
+const activityDate = (date) => {
+  const timestamp = Date.parse(date)
+  // eslint-disable-next-line no-restricted-globals
+  if (isNaN(timestamp) === false) {
+    return new Date(timestamp).toLocaleDateString('default')
+  }
+  return date
+}
 const activityUrl = (activity) => {
   if (
     activity.company !== null &&
@@ -131,10 +140,7 @@ useHead({
               class="mb-4 pb-2"
             >
               <v-list>
-                <v-list-subheader>{{
-                  date ? new Date(date).toLocaleDateString('default') : ''
-                }}</v-list-subheader>
-
+                <v-list-subheader>{{ activityDate(date) }}</v-list-subheader>
                 <template v-for="(activity, j) in dates" :key="j">
                   <v-list-item :to="activityUrl(activity)">
                     <template #prepend>
