@@ -6623,7 +6623,7 @@ export default [
     ]
   },
   {
-    name: 'Treniraj z naravo',
+    name: 'Gripnatic / Treniraj z naravo',
     description:
       'Online store with unique and ergonomically designed wooden training aids for training anywhere',
     country: 'SI',

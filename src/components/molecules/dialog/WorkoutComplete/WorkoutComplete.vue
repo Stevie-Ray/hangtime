@@ -3,7 +3,7 @@ import { defineEmits, defineProps } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import router from '@/router'
-import { time } from '@/helpers'
+import { time, useRandomImage } from '@/helpers'
 import { useAuthentication } from '@/stores/authentication'
 
 const { t } = useI18n()
@@ -81,42 +81,74 @@ const closeModal = () => {
           <v-btn icon="$close" color="text" @click="closeModal"></v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-container>
+
+      <v-img class="align-end" height="50" :src="useRandomImage('dark')" cover>
+        <v-card-subtitle v-if="workout?.name">
+          {{ t('You completed {name}') }}
+        </v-card-subtitle>
+        <v-card-title v-if="workout?.name" class="mb-2">
+          {{ workout.name }}
+        </v-card-title>
+      </v-img>
+
+      <v-card-text class="mt-4">
         <v-row>
           <v-col cols="12">
-            <p v-if="workout?.name">
-              {{
-                t('You completed {name}', {
-                  name: workout.name
-                })
-              }}
-            </p>
-
-            <div class="subtitle-1">
-              {{ t('Time worked out') }}
+            <div class="pb-4">
+              <div class="text-h5">
+                {{ t('Time worked out') }}
+              </div>
+              <div class="text-h2 font-weight-bold">
+                {{ time(timeTotal) }}
+              </div>
+              <div>{{ t('Hangboarding') }}: {{ time(timeHanging) }}</div>
             </div>
-            <div class="text-h2 font-weight-bold">
-              {{ time(timeTotal) }}
-            </div>
-            <div>{{ t('Hangboarding') }}: {{ time(timeHanging) }}</div>
 
             <v-divider v-if="user?.completed" class="my-4"></v-divider>
 
-            <div v-if="user?.completed?.time !== null" class="subtitle-2">
-              {{ t('Total time worked out') }}:
-              {{ time(user.completed.time) }}
-            </div>
-            <div v-if="user?.completed?.hold !== null" class="subtitle-2">
-              {{ t('Total time hangboarding') }}:
-              {{ time(user.completed.hold) }}
-            </div>
-            <div v-if="user?.completed?.amount !== null" class="subtitle-2">
-              {{ t('Workouts done') }}: {{ user.completed.amount }}
-            </div>
+            <v-list>
+              <v-list-item v-if="user?.completed?.time !== null" class="px-0">
+                <v-list-item-title>
+                  {{ t('Total time worked out') }}
+                </v-list-item-title>
+                <template v-slot:prepend>
+                  <v-icon size="small" icon="$timer"></v-icon>
+                </template>
+                <template v-slot:append>
+                  {{ time(user.completed.time) }}
+                </template>
+              </v-list-item>
+              <v-list-item v-if="user?.completed?.hold !== null" class="px-0">
+                <v-list-item-title>
+                  {{ t('Total time hangboarding') }}
+                </v-list-item-title>
+                <template v-slot:prepend>
+                  <v-icon size="small" icon="$keyboard"></v-icon>
+                </template>
+                <template v-slot:append>
+                  {{ time(user.completed.hold) }}
+                </template>
+              </v-list-item>
+              <v-list-item v-if="user?.completed?.amount !== null" class="px-0">
+                <v-list-item-title>
+                  {{ t('Workouts done') }}
+                </v-list-item-title>
+                <template v-slot:prepend>
+                  <v-icon size="small" icon="$trophy"></v-icon>
+                </template>
+                <template v-slot:append>
+                  {{ user.completed.amount }}
+                </template>
+              </v-list-item>
+            </v-list>
             <v-divider v-if="user?.completed" class="my-4"></v-divider>
           </v-col>
         </v-row>
-      </v-container>
+      </v-card-text>
+      <v-card-actions class="justify-end px-4">
+        <v-btn color="text" @click="router.go()">{{ t('Restart') }}</v-btn>
+        <v-btn color="text" to="/activity">{{ t('Activty') }}</v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
