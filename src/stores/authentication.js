@@ -1,11 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import i18n from '@/plugins/i18n'
-import UsersDB from '@/plugins/firebase/users-db'
-import UsersWorkoutsDB from '@/plugins/firebase/users-workouts-db'
 import router from '@/router'
-import { useWorkouts } from '@/stores/workouts'
-import { useActivities } from '@/stores/activities'
 
 export const useAuthentication = defineStore('authentication', () => {
   const user = ref(undefined)
@@ -22,6 +18,7 @@ export const useAuthentication = defineStore('authentication', () => {
       providerData = firebaseAuthUser
     }
     const { displayName, photoURL, email } = providerData
+    const { default: UsersDB } = await import('@/plugins/firebase/users-db')
     const userDb = new UsersDB()
     // default user settings
     const settings = {
@@ -57,6 +54,7 @@ export const useAuthentication = defineStore('authentication', () => {
    */
   async function login(firebaseAuthUser) {
     try {
+      const { default: UsersDB } = await import('@/plugins/firebase/users-db')
       const userFromFirebase = await new UsersDB().read(firebaseAuthUser.uid)
 
       user.value =
@@ -64,7 +62,9 @@ export const useAuthentication = defineStore('authentication', () => {
           ? await createNewUserFromFirebaseAuthUser(firebaseAuthUser)
           : userFromFirebase
 
+      const { useWorkouts } = await import('@/stores/workouts')
       const workouts = useWorkouts()
+      const { useActivities } = await import('@/stores/activities')
       const activities = useActivities()
 
       if (user.value?.settings?.locale) {
@@ -105,6 +105,9 @@ export const useAuthentication = defineStore('authentication', () => {
    */
   async function updateUser() {
     if (!user.value) return
+    const { default: UsersWorkoutsDB } = await import(
+      '@/plugins/firebase/users-workouts-db'
+    )
     const usersDb = new UsersWorkoutsDB()
     await usersDb.update(user.value)
   }
