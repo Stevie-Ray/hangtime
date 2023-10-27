@@ -1250,7 +1250,7 @@ export default [
       {
         name: 'Whetstone',
         id: 5,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/TENSIONWHETSTONE.svg',
         size: {
           x: 660,
           y: 152,
@@ -1258,7 +1258,7 @@ export default [
         },
         type: 'wood',
         url: 'https://tensionclimbing.com/product/whetstone/',
-        holds: 0
+        holds: 9
       },
       {
         name: 'Simple Board (J2015)',

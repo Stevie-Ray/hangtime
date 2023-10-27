@@ -15,7 +15,6 @@ import {
 } from 'firebase/auth'
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import InlineSvg from 'vue-inline-svg'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { useHead } from '@unhead/vue'
@@ -276,11 +275,12 @@ useHead({
       <v-col cols="12" class="text-center">
         <v-row no-gutters justify="center" class="logo-container">
           <v-col class="flex-grow-0" style="margin-bottom: -12px">
-            <inline-svg
+            <img
+              class="logo"
+              :src="require(`@/assets/logo.svg`)"
+              alt="HangTime Logo"
               height="44"
               width="44"
-              :src="require(`@/assets/logo.svg`)"
-              alt="logo"
             />
           </v-col>
           <v-col class="flex-grow-0">
@@ -371,12 +371,12 @@ useHead({
                   ></v-text-field>
 
                   <v-btn
-                    v-show="user !== undefined && !user && networkOnLine"
                     block
                     size="large"
                     data-test="login-btn"
                     class="mt-2 mb-4"
                     prepend-icon="$key"
+                    :disabled="!(user == undefined && !user && networkOnLine)"
                     @click="validateLogin"
                   >
                     {{ t('Login') }}
@@ -542,6 +542,12 @@ useHead({
 
 <style lang="scss" scoped>
 @import '~vuetify/_settings';
+
+.v-theme--dark {
+  .logo {
+    filter: invert(100%);
+  }
+}
 
 .logo-container {
   padding-bottom: 20px;
