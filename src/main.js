@@ -25,8 +25,9 @@ app
     VueGtag,
     {
       appName: 'HangTime',
-      pageTrackerScreenviewEnabled: true,
-      config: { id: 'G-D2DR5GPWS3' }
+      config: { id: 'G-D2DR5GPWS3' },
+      deferScriptLoad: true,
+      pageTrackerScreenviewEnabled: true
     },
     router
   )
