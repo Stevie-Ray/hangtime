@@ -263,7 +263,7 @@ useHead({
     {
       name: 'description',
       content:
-        'Hangboard training App for climbers. Train your finger strength. Create your own workouts or get them from the community. Track your max hang and pull-up progress over time.'
+        'Discover the ultimate community-driven climbing app - Boost finger strength, personalized workouts, & max gains. Join the climbing revolution! 💪🧗'
     }
   ]
 })

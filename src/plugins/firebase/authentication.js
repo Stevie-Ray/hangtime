@@ -13,6 +13,7 @@ const { login, logout } = useAuthentication()
 const auth = getAuth()
 
 // https://github.com/firebase/firebase-js-sdk/issues/4946
+// https://github.com/GoogleChrome/lighthouse/blob/main/core/config/constants.js#L83
 if (navigator.userAgent.indexOf('moto g power') > -1) {
   Object.defineProperty(
     browserPopupRedirectResolver.prototype,
