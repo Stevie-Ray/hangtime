@@ -1,7 +1,7 @@
 import {
   onAuthStateChanged,
-  getAuth
-  // browserPopupRedirectResolver
+  getAuth,
+  browserPopupRedirectResolver
 } from 'firebase/auth'
 
 // eslint-disable-next-line import/no-named-default
@@ -12,18 +12,18 @@ import { useAuthentication } from '@/stores/authentication'
 const { login, logout } = useAuthentication()
 const auth = getAuth()
 
-// // https://github.com/firebase/firebase-js-sdk/issues/4946
-// if (navigator.userAgent.indexOf('Chrome') > -1) {
-//   Object.defineProperty(
-//     browserPopupRedirectResolver.prototype,
-//     '_shouldInitProactively',
-//     {
-//       get() {
-//         return false
-//       }
-//     }
-//   )
-// }
+// https://github.com/firebase/firebase-js-sdk/issues/4946
+if (navigator.userAgent.indexOf('moto g power') > -1) {
+  Object.defineProperty(
+    browserPopupRedirectResolver.prototype,
+    '_shouldInitProactively',
+    {
+      get() {
+        return false
+      }
+    }
+  )
+}
 
 onAuthStateChanged(
   auth,
