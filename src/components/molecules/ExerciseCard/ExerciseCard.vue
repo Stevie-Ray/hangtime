@@ -66,7 +66,7 @@ const props = defineProps({
           <v-chip class="mr-2" color="primary">{{ index + 1 }}.</v-chip>
         </div>
 
-        <div class="flex-grow-1 text-truncate">
+        <div class="flex-grow-1 text-truncate" style="overflow: hidden">
           <v-dialog width="500">
             <template v-slot:activator="{ props }">
               <exercise-name
@@ -195,13 +195,15 @@ const props = defineProps({
 
       <v-card-subtitle v-if="exercise">
         <div class="d-flex justify-space-between">
-          <div>
-            <span v-if="exercise.hold"
-              >{{ t('Hang') }}: {{ time(Math.round(exercise.hold)) }}</span
-            >
+          <div style="font-size: 1rem">
+            <span v-if="exercise.hold">
+              <span>{{ t('Hang') }}: </span>
+              <strong>{{ time(Math.round(exercise.hold)) }}</strong>
+            </span>
             <span v-if="exercise.repeat">
-              | {{ t('Rest') }}: {{ time(Math.round(exercise.rest)) }}</span
-            >
+              <span> | {{ t('Rest') }}: </span>
+              <strong>{{ time(Math.round(exercise.rest)) }}</strong>
+            </span>
           </div>
 
           <v-chip

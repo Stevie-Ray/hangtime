@@ -435,23 +435,32 @@ onMounted(() => {
     <v-row align="center" justify="center">
       <v-col cols="12" sm="6">
         <v-row align="center" class="timer" justify="center">
-          <v-col class="text-center" cols="8" sm="10">
+          <v-col class="text-center" cols="12" sm="8">
             <div v-if="workout?.exercises" class="text-h1">
               {{ time(clock) }}
             </div>
-            <div class="text-h6 pt-2 pb-4">
+            <div class="text-h6 pt-2 pb-4" style="font-size: 1.5rem !important">
               {{ clockText }}
             </div>
-            <v-row align="center" justify="center">
+            <v-row align="center" justify="space-evenly">
               <v-col class="text-center">
+                <div class="text-caption text-uppercase">
+                  {{ t('Time') }}
+                </div>
                 <div class="text-h6">{{ time(exerciseTime) }}</div>
               </v-col>
               <v-col class="text-center" v-if="workout?.exercises?.length > 1">
+                <div class="text-caption text-uppercase">
+                  {{ t('Exercise') }}
+                </div>
                 <div class="text-h6">
                   {{ currentExercise + 1 }}/{{ workout?.exercises.length }}
                 </div>
               </v-col>
               <v-col class="text-center" v-if="workout?.exercises">
+                <div class="text-caption text-uppercase">
+                  {{ t('Repeat') }}
+                </div>
                 <div class="text-h6">
                   {{ currentExerciseStepRepeat + 1 }}/{{ exercise.repeat + 1 }}
                 </div>
@@ -462,7 +471,7 @@ onMounted(() => {
       </v-col>
       <v-col cols="12" sm="6">
         <v-card
-          class="pt-12 mt-12 mt-sm-4 pt-sm-8 position-relative overflow-visible"
+          class="pt-12 mt-8 mt-sm-4 pt-sm-8 position-relative overflow-visible"
         >
           <v-card-title
             class="justify-center align-center position-absolute w-100 d-flex"
