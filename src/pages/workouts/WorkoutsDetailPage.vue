@@ -223,12 +223,12 @@ const isHearted = computed(() => {
 })
 
 const workoutSubscriber = () => {
-  if (workout?.value.subscribers?.length === 1) return
   if (!isHearted.value) {
     workout?.value.subscribers.unshift(user.value.id)
     // push to workouts
     workouts?.value.unshift(workout?.value)
   } else {
+    if (workout?.value?.user?.id === user?.value?.id) return
     const userIndex = workout?.value.subscribers.indexOf(user.value.id)
     workout?.value.subscribers.splice(userIndex, 1)
     // remove from workouts
