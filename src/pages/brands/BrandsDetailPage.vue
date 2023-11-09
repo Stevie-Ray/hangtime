@@ -30,9 +30,7 @@ const router = useRouter()
 
 const getCompany = computed(() => getCompanyByUrlKey(route.params.id))
 
-const sortedHangboards = getCompany.value?.hangboards.sort((a, b) =>
-  a.name.localeCompare(b.name)
-)
+const sortedHangboards = getCompany.value?.hangboards.sort((a, b) => a.name.localeCompare(b.name))
 
 const loginButton = ref(true)
 
@@ -41,9 +39,7 @@ const onScroll = () => {
 }
 
 useHead({
-  title: user.value
-    ? `${getCompany.value?.name}`
-    : `${getCompany.value?.name} Hangboard Training`,
+  title: user.value ? `${getCompany.value?.name}` : `${getCompany.value?.name} Hangboard Training`,
   meta: [{ name: 'description', content: getCompany.value?.description }]
 })
 </script>
@@ -58,14 +54,11 @@ useHead({
       {{
         `${
           getCompany?.country
-            ? countries.find((country) => country.alpha2 === getCompany.country)
-                ?.emoji
+            ? countries.find((country) => country.alpha2 === getCompany.country)?.emoji
             : ''
         }`
       }}
-      {{
-        user ? `${getCompany?.name}` : `${getCompany?.name} Hangboard Training`
-      }}
+      {{ user ? `${getCompany?.name}` : `${getCompany?.name} Hangboard Training` }}
     </template>
 
     <template #default>
@@ -114,11 +107,7 @@ useHead({
         </v-row>
         <v-row :class="{ 'mb-10': !user }">
           <v-col cols="12">
-            <v-card
-              v-for="hangboard in sortedHangboards"
-              :key="hangboard.id"
-              class="mb-8"
-            >
+            <v-card v-for="hangboard in sortedHangboards" :key="hangboard.id" class="mb-8">
               <v-card-text>
                 <exercise-hangboard
                   v-if="
@@ -143,9 +132,7 @@ useHead({
                 <template v-if="!user || hangboard.url">
                   <v-btn color="text" disabled v-if="hangboard.size">
                     <div class="text-caption">
-                      <span v-if="hangboard.size.x">
-                        {{ hangboard.size.x }}mm
-                      </span>
+                      <span v-if="hangboard.size.x"> {{ hangboard.size.x }}mm </span>
                       <span v-if="hangboard.size.y">
                         &nbsp;x
                         {{ hangboard.size.y }}mm
@@ -170,22 +157,13 @@ useHead({
               </v-card-actions>
             </v-card>
             <!-- company map -->
-            <map-container
-              v-if="getCompany.location"
-              :markers="[getCompany]"
-              :zoom="6"
-            />
+            <map-container v-if="getCompany.location" :markers="[getCompany]" :zoom="6" />
           </v-col>
         </v-row>
         <div v-if="!user" v-scroll="onScroll" class="fab text-end">
           <div class="mx-4">
             <v-fab-transition>
-              <v-btn
-                v-show="loginButton"
-                to="/login"
-                size="x-large"
-                rounded="lg"
-              >
+              <v-btn v-show="loginButton" to="/login" size="x-large" rounded="lg">
                 {{ t('Start training') }}
               </v-btn>
             </v-fab-transition>

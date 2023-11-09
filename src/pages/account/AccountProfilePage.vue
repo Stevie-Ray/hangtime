@@ -31,14 +31,11 @@ const router = useRouter()
 const ircra = new IRCRA()
 
 const rules = {
-  length: (len) => (v) =>
-    (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
+  length: (len) => (v) => (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
   required: (v) => !!v || 'This field is required'
 }
 
-const grades = computed(() =>
-  ircra.get(user.value.settings?.scale).filter((item) => item)
-)
+const grades = computed(() => ircra.get(user.value.settings?.scale).filter((item) => item))
 
 const error = ref(undefined)
 
@@ -185,11 +182,7 @@ useHead({
                 <v-slider
                   v-model="user.weight"
                   :disabled="!networkOnLine"
-                  :hint="
-                    t(
-                      'Set your weight to use with a kettle/dumb-bells or pulley system'
-                    )
-                  "
+                  :hint="t('Set your weight to use with a kettle/dumb-bells or pulley system')"
                   :label="t('Weight')"
                   :max="150"
                   :min="50"
@@ -251,9 +244,7 @@ useHead({
             </v-list>
             <v-list lines="two">
               <v-list-item>
-                <v-list-item-title
-                  ><strong>Link Accounts (Beta)</strong></v-list-item-title
-                >
+                <v-list-item-title><strong>Link Accounts (Beta)</strong></v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title>Google</v-list-item-title>
@@ -306,11 +297,7 @@ useHead({
                       }}
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn
-                        color="error"
-                        :disabled="!networkOnLine"
-                        @click="deleteAccount"
-                      >
+                      <v-btn color="error" :disabled="!networkOnLine" @click="deleteAccount">
                         {{ t('Delete your account') }}
                       </v-btn>
                     </v-card-actions>

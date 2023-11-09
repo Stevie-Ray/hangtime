@@ -16,8 +16,7 @@ import { useAuthentication } from '@/stores/authentication'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
 import { useApp } from '@/stores/app'
 
-const { getUserHangboardCompany, getUserHangboard, getUserHangboards } =
-  storeToRefs(useUser())
+const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUser())
 
 const { getHangboardNameByIds } = useUser()
 
@@ -106,9 +105,7 @@ useHead({
               <v-radio
                 v-for="(hangboard, index) in getUserHangboards"
                 :key="index"
-                :label="
-                  getHangboardNameByIds(hangboard.company, hangboard.hangboard)
-                "
+                :label="getHangboardNameByIds(hangboard.company, hangboard.hangboard)"
                 :value="index"
               ></v-radio>
             </v-radio-group>
@@ -165,19 +162,13 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-list v-if="workoutsList.length">
-              <template
-                v-for="(workout, index) in workoutsList"
-                :key="workout.id"
-              >
+              <template v-for="(workout, index) in workoutsList" :key="workout.id">
                 <v-list-item
                   :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}`"
                 >
                   <template #prepend>
                     <v-avatar color="grey-darken-1">
-                      <v-img
-                        :src="workout.user.photoURL"
-                        :alt="workout.user.displayName"
-                      ></v-img>
+                      <v-img :src="workout.user.photoURL" :alt="workout.user.displayName"></v-img>
                     </v-avatar>
                   </template>
 
@@ -201,11 +192,7 @@ useHead({
                           variant="text"
                           color="text"
                           size="x-small"
-                          :append-icon="
-                            isHearted(workout.subscribers)
-                              ? '$heart'
-                              : '$heartOutline'
-                          "
+                          :append-icon="isHearted(workout.subscribers) ? '$heart' : '$heartOutline'"
                         >
                           {{ workout?.subscribers?.length - 1 }}
                         </v-btn>
@@ -213,10 +200,7 @@ useHead({
                     </v-list-item-action>
                   </template>
                 </v-list-item>
-                <v-divider
-                  inset
-                  v-if="index !== workoutsList.length - 1"
-                ></v-divider>
+                <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
               </template>
             </v-list>
             <v-list v-else>
@@ -236,10 +220,7 @@ useHead({
         </v-row>
       </v-container>
 
-      <walkthrough
-        v-if="!user?.settings?.walkthrough"
-        ref="walkthrough"
-      ></walkthrough>
+      <walkthrough v-if="!user?.settings?.walkthrough" ref="walkthrough"></walkthrough>
     </template>
   </app-container>
 </template>

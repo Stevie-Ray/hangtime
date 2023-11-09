@@ -25,14 +25,11 @@ const selected = reactive({
   hangboard: 0
 })
 
-const getHangboard = computed(() =>
-  getHangboardByIds(selected.company, selected.hangboard)
-)
+const getHangboard = computed(() => getHangboardByIds(selected.company, selected.hangboard))
 
 const updateSelected = () => {
   const exists = user.value.settings.hangboards.some(
-    (item) =>
-      item.company === selected.company && item.hangboard === selected.hangboard
+    (item) => item.company === selected.company && item.hangboard === selected.hangboard
   )
   if (!exists) {
     // measure selected hangboard data
@@ -55,12 +52,7 @@ const addHangboard = () => {
 </script>
 
 <template>
-  <v-dialog
-    v-model="dialog"
-    fullscreen
-    :scrim="false"
-    transition="dialog-bottom-transition"
-  >
+  <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
     <template v-slot:activator="{ props }">
       <v-btn variant="text" color="text" icon="$plus" v-bind="props"></v-btn>
     </template>
@@ -71,9 +63,7 @@ const addHangboard = () => {
         <v-toolbar-items>
           <v-btn
             icon="$contentSaveOutline"
-            :disabled="
-              !networkOnLine || (getHangboard && getHangboard.holds === 0)
-            "
+            :disabled="!networkOnLine || (getHangboard && getHangboard.holds === 0)"
             @click="addHangboard"
           ></v-btn>
         </v-toolbar-items>

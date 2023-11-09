@@ -60,8 +60,7 @@ prefersDark.addEventListener('change', () => {
 // watch works directly on a ref
 watch(user, async (updatedUser) => {
   if (updatedUser?.settings?.theme > 0) {
-    theme.global.name.value =
-      updatedUser.settings.theme === 2 ? 'dark' : 'light'
+    theme.global.name.value = updatedUser.settings.theme === 2 ? 'dark' : 'light'
   } else {
     theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
   }

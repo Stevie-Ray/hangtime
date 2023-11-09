@@ -1,12 +1,5 @@
 <script setup>
-import {
-  computed,
-  defineProps,
-  ref,
-  nextTick,
-  onBeforeUnmount,
-  onMounted
-} from 'vue'
+import { computed, defineProps, ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
@@ -56,15 +49,13 @@ onBeforeUnmount(() => {
 })
 
 const exercise = computed(() => {
-  if (props?.workout?.exercises)
-    return props?.workout?.exercises[currentExercise.value]
+  if (props?.workout?.exercises) return props?.workout?.exercises[currentExercise.value]
   return {}
 })
 
 const exerciseTime = computed(
   () =>
-    (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
-    exercise.value.rest
+    (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) - exercise.value.rest
 )
 
 const requestWakeLock = () => {
@@ -208,8 +199,7 @@ const exerciseDone = () => {
     difficulty: props?.workout?.level !== undefined ? props.workout.level : '',
     type: 'Hangboarding',
     company: props?.workout?.company !== undefined ? props.workout.company : '',
-    hangboard:
-      props?.workout?.hangboard !== undefined ? props.workout.hangboard : '',
+    hangboard: props?.workout?.hangboard !== undefined ? props.workout.hangboard : '',
     user: props?.workout?.user?.id ? props.workout.user.id : '',
     workout: props?.workout?.id ? props?.workout.id : ''
   })
@@ -420,11 +410,8 @@ onMounted(() => {
   <v-container
     v-if="workout?.exercises"
     :class="{
-      rest:
-        !timerPaused &&
-        !(currentExerciseStep === 1 || currentExerciseStep === 3),
-      hang:
-        !timerPaused && (currentExerciseStep === 1 || currentExerciseStep === 3)
+      rest: !timerPaused && !(currentExerciseStep === 1 || currentExerciseStep === 3),
+      hang: !timerPaused && (currentExerciseStep === 1 || currentExerciseStep === 3)
     }"
     :style="{
       transition: `width ${clock}s linear`
@@ -453,9 +440,7 @@ onMounted(() => {
                 <div class="text-caption text-uppercase">
                   {{ t('Exercise') }}
                 </div>
-                <div class="text-h6">
-                  {{ currentExercise + 1 }}/{{ workout?.exercises.length }}
-                </div>
+                <div class="text-h6">{{ currentExercise + 1 }}/{{ workout?.exercises.length }}</div>
               </v-col>
               <v-col class="text-center" v-if="workout?.exercises">
                 <div class="text-caption text-uppercase">
@@ -470,17 +455,14 @@ onMounted(() => {
         </v-row>
       </v-col>
       <v-col cols="12" sm="6">
-        <v-card
-          class="pt-12 mt-8 mt-sm-4 pt-sm-8 position-relative overflow-visible"
-        >
+        <v-card class="pt-12 mt-8 mt-sm-4 pt-sm-8 position-relative overflow-visible">
           <v-card-title
             class="justify-center align-center position-absolute w-100 d-flex"
             style="top: -36px; gap: 32px; z-index: 1"
           >
             <v-btn
               :style="{
-                visibility:
-                  workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
               }"
               :disabled="currentExercise <= 0"
               variant="flat"
@@ -490,21 +472,14 @@ onMounted(() => {
             ></v-btn>
             <v-btn
               variant="flat"
-              :icon="
-                timerPaused === null
-                  ? '$play'
-                  : timerPaused
-                  ? '$play'
-                  : '$pause'
-              "
+              :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
               class="rounded-circle"
               size="x-large"
               @click="timerPaused === null ? startTimer() : pauseWorkout()"
             ></v-btn>
             <v-btn
               :style="{
-                visibility:
-                  workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
               }"
               :disabled="currentExercise >= workout?.exercises?.length - 1"
               variant="flat"

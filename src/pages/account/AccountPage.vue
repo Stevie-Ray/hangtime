@@ -145,12 +145,7 @@ useHead({
     </template>
 
     <template #icons>
-      <v-btn
-        icon="$logout"
-        color="text"
-        :disabled="!networkOnLine"
-        @click="signOutUser"
-      ></v-btn>
+      <v-btn icon="$logout" color="text" :disabled="!networkOnLine" @click="signOutUser"></v-btn>
     </template>
 
     <template #default>
@@ -175,9 +170,7 @@ useHead({
 
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
 
-                  <v-list-item-subtitle>{{
-                    item.subtitle
-                  }}</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
                 </v-list-item>
 
                 <v-divider

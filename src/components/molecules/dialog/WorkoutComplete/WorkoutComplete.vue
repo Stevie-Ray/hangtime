@@ -1,5 +1,4 @@
 <script setup>
-import { defineEmits, defineProps } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import router from '@/router'
@@ -38,10 +37,9 @@ const shareExternal = () => {
     title = `${props.workout.name} | HangTime`
     text = `${t('I just completed {name}', {
       name: props.workout.name
-    })}. ${t('Description')}: "${props.workout.description}". ${t(
-      'Join {appTitle}',
-      { appTitle: 'HangTime' }
-    )}!`
+    })}. ${t('Description')}: "${props.workout.description}". ${t('Join {appTitle}', {
+      appTitle: 'HangTime'
+    })}!`
   }
   navigator
     .share({
@@ -72,12 +70,7 @@ const closeModal = () => {
         <v-toolbar-title>{{ t('Well done') }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn
-            v-if="shareAPI"
-            icon="$exportVariant"
-            color="text"
-            @click="shareExternal"
-          ></v-btn>
+          <v-btn v-if="shareAPI" icon="$exportVariant" color="text" @click="shareExternal"></v-btn>
           <v-btn icon="$close" color="text" @click="closeModal"></v-btn>
         </v-toolbar-items>
       </v-toolbar>

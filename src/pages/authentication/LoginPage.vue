@@ -34,9 +34,7 @@ const { networkOnLine } = storeToRefs(useApp())
 // single ref
 watch(networkOnLine, (status) => {
   if (error) {
-    if (!status)
-      error.value =
-        'Please check your connection, HangTime is not available offline.'
+    if (!status) error.value = 'Please check your connection, HangTime is not available offline.'
     else error.value = null
   }
 })
@@ -52,8 +50,7 @@ watch(
     if (!(user.value === null || user.value === undefined)) {
       // check if route has redirect url or set homepage
       const redirectUrl =
-        route.query.redirectUrl === null ||
-        route.query.redirectUrl === undefined
+        route.query.redirectUrl === null || route.query.redirectUrl === undefined
           ? '/workouts'
           : route.query.redirectUrl
       // push redirectUrl
@@ -126,17 +123,13 @@ const usps = [
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 const rules = {
-  length: (len) => (v) =>
-    (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
+  length: (len) => (v) => (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
   required: (v) => !!v || 'This field is required',
   email: (v) =>
-    !v ||
-    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-    'E-mail must be valid',
+    !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
   password: (value) => {
     // eslint-disable-next-line
-    const pattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/
+    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/
     return (
       pattern.test(value) ||
       'Min. 8 characters with at least one capital letter, a number and a special character.'
@@ -295,13 +288,8 @@ useHead({
           <v-card-text>
             <v-row>
               <v-col cols="12">
-                <div class="text-center text-h5 pb-2">
-                  {{ t('Hi there!') }} 👋
-                </div>
-                <div
-                  class="text-body-2 text-center mx-auto"
-                  style="max-width: 400px"
-                >
+                <div class="text-center text-h5 pb-2">{{ t('Hi there!') }} 👋</div>
+                <div class="text-body-2 text-center mx-auto" style="max-width: 400px">
                   {{
                     t(
                       'Sign in to HangTime, the community-driven hangboard training app, for stronger climbing.'
@@ -381,11 +369,7 @@ useHead({
                   >
                     {{ t('Login') }}
                   </v-btn>
-                  <v-btn
-                    variant="text"
-                    size="x-small"
-                    @click="switchForm = !switchForm"
-                  >
+                  <v-btn variant="text" size="x-small" @click="switchForm = !switchForm">
                     {{ t("Don't have an account?") }} {{ t('Sign up') }}
                   </v-btn>
                 </v-form>
@@ -412,11 +396,7 @@ useHead({
                     class="input-email"
                     autocomplete="email"
                     :rules="[rules.required]"
-                    :hint="
-                      t(
-                        'A verification link will be sent to your email account'
-                      )
-                    "
+                    :hint="t('A verification link will be sent to your email account')"
                     persistent-hint
                     required
                   ></v-text-field>
@@ -439,11 +419,7 @@ useHead({
                   >
                     {{ t('Register') }}
                   </v-btn>
-                  <v-btn
-                    variant="text"
-                    size="x-small"
-                    @click="switchForm = !switchForm"
-                  >
+                  <v-btn variant="text" size="x-small" @click="switchForm = !switchForm">
                     {{ t('Back') }}
                   </v-btn>
                 </v-form>
@@ -481,19 +457,8 @@ useHead({
             Elevate Your Climbing with Precision Training
           </v-card-subtitle>
           <v-card-text>
-            <v-list
-              :items="usps"
-              item-props
-              lines="three"
-              aria-labelledby="usp-title"
-              tabindex="0"
-            >
-              <v-list-item
-                v-for="(usp, index) in usps"
-                :value="usp"
-                :key="index"
-                role="option"
-              >
+            <v-list :items="usps" item-props lines="three" aria-labelledby="usp-title" tabindex="0">
+              <v-list-item v-for="(usp, index) in usps" :value="usp" :key="index" role="option">
                 <template v-slot:prepend>
                   <v-icon :icon="usp.prependIcon"></v-icon>
                 </template>
@@ -503,29 +468,17 @@ useHead({
             </v-list>
           </v-card-text>
           <v-card-actions class="justify-center mb-4">
-            <v-btn
-              variant="outlined"
-              color="text"
-              size="large"
-              @click="scrollToTop"
+            <v-btn variant="outlined" color="text" size="large" @click="scrollToTop"
               >Start training</v-btn
             >
           </v-card-actions>
         </v-card>
 
-        <v-footer
-          class="text-caption text-grey justify-center font-weight-light mt-4"
-        >
-          <span
-            >v{{ appVersion }} | &copy; 2019 - {{ year }} HangTime |&nbsp;
-          </span>
-          <router-link class="text-grey font-weight-light" to="/privacy">
-            Privacy
-          </router-link>
+        <v-footer class="text-caption text-grey justify-center font-weight-light mt-4">
+          <span>v{{ appVersion }} | &copy; 2019 - {{ year }} HangTime |&nbsp; </span>
+          <router-link class="text-grey font-weight-light" to="/privacy"> Privacy </router-link>
           <span>&nbsp;|&nbsp;</span>
-          <router-link class="text-grey font-weight-light" to="/brands">
-            Hangboards
-          </router-link>
+          <router-link class="text-grey font-weight-light" to="/brands"> Hangboards </router-link>
         </v-footer>
       </v-col>
     </v-row>

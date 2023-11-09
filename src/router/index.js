@@ -9,79 +9,44 @@ import { useAuthentication } from '@/stores/authentication'
 const AccountPage = () =>
   import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPage')
 const AccountGeneralPage = () =>
-  import(
-    /* webpackChunkName: "page-account" */ '@/pages/account/AccountGeneralPage'
-  )
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountGeneralPage')
 const AccountHangboardsPage = () =>
-  import(
-    /* webpackChunkName: "page-account" */ '@/pages/account/AccountHangboardsPage'
-  )
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHangboardsPage')
 const AccountHelpPage = () =>
-  import(
-    /* webpackChunkName: "page-account" */ '@/pages/account/AccountHelpPage'
-  )
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHelpPage')
 const AccountPrivacyPage = () =>
-  import(
-    /* webpackChunkName: "page-account" */ '@/pages/account/AccountPrivacyPage'
-  )
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPrivacyPage')
 const AccountProfilePage = () =>
-  import(
-    /* webpackChunkName: "page-account" */ '@/pages/account/AccountProfilePage'
-  )
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountProfilePage')
 const AccountSubscriptionPage = () =>
-  import(
-    /* webpackChunkName: "page-account" */ '@/pages/account/AccountSubscriptionPage'
-  )
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountSubscriptionPage')
 const AccountWorkoutsPage = () =>
-  import(
-    /* webpackChunkName: "page-account" */ '@/pages/account/AccountWorkoutsPage'
-  )
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountWorkoutsPage')
 // Activity
 const ActivityPage = () =>
-  import(
-    /* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityPage'
-  )
+  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityPage')
 const ActivityLeaderboardPage = () =>
-  import(
-    /* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityLeaderboardPage'
-  )
+  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityLeaderboardPage')
 const ActivityNotificationsPage = () =>
-  import(
-    /* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityNotificationsPage'
-  )
+  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityNotificationsPage')
 // Authentication
 const LoginPage = () =>
-  import(
-    /* webpackChunkName: "page-login" */ '@/pages/authentication/LoginPage'
-  )
+  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/LoginPage')
 const CheckLoginPage = () =>
-  import(
-    /* webpackChunkName: "page-login" */ '@/pages/authentication/CheckLoginPage'
-  )
+  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/CheckLoginPage')
 // Brands
-const BrandsPage = () =>
-  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsPage')
+const BrandsPage = () => import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsPage')
 const BrandsDetailPage = () =>
-  import(
-    /* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsDetailPage'
-  )
+  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsDetailPage')
 // Brands
 const WorkoutsPage = () =>
-  import(
-    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsPage'
-  )
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsPage')
 const WorkoutsDetailPage = () =>
-  import(
-    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsDetailPage'
-  )
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsDetailPage')
 const WorkoutsTimerPage = () =>
-  import(
-    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsTimerPage'
-  )
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsTimerPage')
 const WorkoutsQuickPage = () =>
-  import(
-    /* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsQuickPage'
-  )
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsQuickPage')
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -211,10 +176,7 @@ router.beforeEach((to, from, next) => {
   // the router is installed and pinia will be installed too
   const { user } = storeToRefs(useAuthentication())
 
-  if (
-    !(to.meta && to.meta.public) &&
-    (user.value === null || user.value === undefined)
-  ) {
+  if (!(to.meta && to.meta.public) && (user.value === null || user.value === undefined)) {
     const path = user.value === null ? '/login' : '/check-login'
     next(`${path}?redirectUrl=${to.path}`)
   }

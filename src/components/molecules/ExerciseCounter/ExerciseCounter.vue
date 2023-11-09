@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, defineProps, computed } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { time } from '@/helpers'
 
@@ -105,10 +105,7 @@ function decrement() {
           ></v-btn>
         </v-col>
         <v-col cols="4">
-          <div
-            class="text-subtitle-2 text-center"
-            :class="{ 'text-disabled': disabled }"
-          >
+          <div class="text-subtitle-2 text-center" :class="{ 'text-disabled': disabled }">
             <slot>
               {{ timer ? time(count) : `${count}${suffix}` }}
             </slot>

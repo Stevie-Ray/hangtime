@@ -45,11 +45,7 @@ useHead({
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" class="text-center">
         <div>
-          <v-progress-circular
-            :size="48"
-            color="text"
-            indeterminate
-          ></v-progress-circular>
+          <v-progress-circular :size="48" color="text" indeterminate></v-progress-circular>
         </div>
         <div class="px-4 py-4">
           {{ t('Loading...') }}

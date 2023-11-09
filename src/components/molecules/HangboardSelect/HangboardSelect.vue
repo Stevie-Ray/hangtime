@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineEmits, defineProps, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
 import { useUser } from '@/stores/user'
@@ -7,12 +7,7 @@ import countries from '@/helpers/countries'
 
 const { t } = useI18n()
 
-const {
-  getHangboardByIds,
-  getCompanyById,
-  getHangboardNameByIds,
-  getCompanies
-} = useUser()
+const { getHangboardByIds, getCompanyById, getHangboardNameByIds, getCompanies } = useUser()
 
 const props = defineProps({
   selectedHangboard: {
@@ -33,9 +28,7 @@ watch(selected, (item) => {
   emit('update-selected', item)
 })
 
-const getHangboards = computed(
-  () => getCompanyById(selected.value.company).hangboards
-)
+const getHangboards = computed(() => getCompanyById(selected.value.company).hangboards)
 
 const email = 'mail@stevie-ray.nl'
 const body = computed(() =>
@@ -43,17 +36,12 @@ const body = computed(() =>
     `Hello HangTime,\n\nPlease add the following Hangboard: ${getHangboardNameByIds(
       selected.value.company,
       selected.value.hangboard
-    )}\n\n${
-      getHangboardByIds(selected.value.company, selected.value.hangboard).url
-    }`
+    )}\n\n${getHangboardByIds(selected.value.company, selected.value.hangboard).url}`
   )
 )
 const subject = computed(() =>
   encodeURIComponent(
-    `Hangboard Request: ${getHangboardNameByIds(
-      selected.value.company,
-      selected.value.hangboard
-    )}`
+    `Hangboard Request: ${getHangboardNameByIds(selected.value.company, selected.value.hangboard)}`
   )
 )
 </script>
@@ -73,16 +61,11 @@ const subject = computed(() =>
         <span>
           {{
             item.raw.country
-              ? countries.find((country) => country.alpha2 === item.raw.country)
-                  ?.emoji
+              ? countries.find((country) => country.alpha2 === item.raw.country)?.emoji
               : ''
           }}&nbsp;{{ item.title }}</span
         >
-        <v-chip
-          class="mx-2"
-          size="x-small"
-          v-if="item.value >= getCompanies.length - 5"
-        >
+        <v-chip class="mx-2" size="x-small" v-if="item.value >= getCompanies.length - 5">
           {{ $t('new') }}
         </v-chip>
       </v-list-item>
@@ -117,10 +100,7 @@ const subject = computed(() =>
       >
       </exercise-hangboard>
       <div v-else>
-        <v-btn
-          size="large"
-          :href="`mailto:${email}?subject=${subject}&body=${body}`"
-        >
+        <v-btn size="large" :href="`mailto:${email}?subject=${subject}&body=${body}`">
           {{ t('Request Hangboard') }}
         </v-btn>
       </div>
@@ -129,9 +109,7 @@ const subject = computed(() =>
       <div v-if="getHangboardByIds(selected.company, selected.hangboard).name">
         {{ getHangboardByIds(selected.company, selected.hangboard).name }}
       </div>
-      <v-chip
-        v-if="getHangboardByIds(selected.company, selected.hangboard).type"
-      >
+      <v-chip v-if="getHangboardByIds(selected.company, selected.hangboard).type">
         {{ getHangboardByIds(selected.company, selected.hangboard).type }}
       </v-chip>
     </v-card-title>
@@ -140,8 +118,7 @@ const subject = computed(() =>
         {{
           getCompanyById(selected.company).country
             ? countries.find(
-                (country) =>
-                  country.alpha2 === getCompanyById(selected.company).country
+                (country) => country.alpha2 === getCompanyById(selected.company).country
               )?.emoji
             : ''
         }}&nbsp;{{ getCompanyById(selected.company).name }}</span
@@ -154,34 +131,16 @@ const subject = computed(() =>
         v-if="getHangboardByIds(selected.company, selected.hangboard).size"
       >
         <div class="text-caption">
-          <span
-            v-if="
-              getHangboardByIds(selected.company, selected.hangboard).size.x
-            "
-          >
-            {{
-              getHangboardByIds(selected.company, selected.hangboard).size.x
-            }}mm
+          <span v-if="getHangboardByIds(selected.company, selected.hangboard).size.x">
+            {{ getHangboardByIds(selected.company, selected.hangboard).size.x }}mm
           </span>
-          <span
-            v-if="
-              getHangboardByIds(selected.company, selected.hangboard).size.y
-            "
-          >
+          <span v-if="getHangboardByIds(selected.company, selected.hangboard).size.y">
             &nbsp;x
-            {{
-              getHangboardByIds(selected.company, selected.hangboard).size.y
-            }}mm
+            {{ getHangboardByIds(selected.company, selected.hangboard).size.y }}mm
           </span>
-          <span
-            v-if="
-              getHangboardByIds(selected.company, selected.hangboard).size.z
-            "
-          >
+          <span v-if="getHangboardByIds(selected.company, selected.hangboard).size.z">
             &nbsp;x
-            {{
-              getHangboardByIds(selected.company, selected.hangboard).size.z
-            }}mm
+            {{ getHangboardByIds(selected.company, selected.hangboard).size.z }}mm
           </span>
         </div>
       </v-btn>

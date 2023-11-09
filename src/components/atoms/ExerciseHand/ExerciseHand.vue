@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineEmits, defineProps } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 
@@ -96,13 +96,7 @@ function resetHands() {
               variant="text"
               @click="resetHands"
             ></v-btn>
-            <v-btn
-              v-else
-              icon="$handFrontRight"
-              color="text"
-              variant="text"
-              disabled
-            ></v-btn>
+            <v-btn v-else icon="$handFrontRight" color="text" variant="text" disabled></v-btn>
           </v-list-item-action>
         </template>
       </v-list-item>

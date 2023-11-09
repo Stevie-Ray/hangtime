@@ -36,9 +36,7 @@ const selectedVoice = computed({
     return voices[user.value.settings.voice]
   },
   set(value) {
-    user.value.settings.voice = filterVoices.value.findIndex(
-      (v) => v.name === value.name
-    )
+    user.value.settings.voice = filterVoices.value.findIndex((v) => v.name === value.name)
   }
 })
 

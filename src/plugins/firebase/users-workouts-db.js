@@ -26,9 +26,7 @@ export default class UsersWorkoutsDB extends GenericDB {
     const combinedQuery = []
 
     if (constraints) {
-      constraints.forEach((constraint) =>
-        combinedQuery.push(where(...constraint))
-      )
+      constraints.forEach((constraint) => combinedQuery.push(where(...constraint)))
     }
 
     if (sort) {

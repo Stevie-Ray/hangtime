@@ -79,8 +79,7 @@ export const useAuthentication = defineStore('authentication', () => {
     } catch (e) {
       error.value = e.toString()
       if (e.code?.toString() === 'resource-exhausted') {
-        error.value =
-          'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.'
+        error.value = 'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.'
       }
       // eslint-disable-next-line no-console
       console.error(e)
@@ -105,9 +104,7 @@ export const useAuthentication = defineStore('authentication', () => {
    */
   async function updateUser() {
     if (!user.value) return
-    const { default: UsersWorkoutsDB } = await import(
-      '@/plugins/firebase/users-workouts-db'
-    )
+    const { default: UsersWorkoutsDB } = await import('@/plugins/firebase/users-workouts-db')
     const usersDb = new UsersWorkoutsDB()
     await usersDb.update(user.value)
   }

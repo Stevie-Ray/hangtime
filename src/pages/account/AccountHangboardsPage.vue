@@ -70,9 +70,7 @@ useHead({
                 :key="index"
                 class="mb-8"
                 @click="setHangboard(index)"
-                :variant="
-                  getUserHangboardSelectedId === index ? 'outlined' : 'elevated'
-                "
+                :variant="getUserHangboardSelectedId === index ? 'outlined' : 'elevated'"
               >
                 <v-card-text>
                   <exercise-hangboard
@@ -84,36 +82,18 @@ useHead({
                   </exercise-hangboard>
                 </v-card-text>
                 <v-card-title class="d-flex justify-space-between">
-                  <div
-                    v-if="
-                      getHangboardByIds(hangboard.company, hangboard.hangboard)
-                        .name
-                    "
-                  >
-                    {{
-                      getHangboardByIds(hangboard.company, hangboard.hangboard)
-                        .name
-                    }}
+                  <div v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).name">
+                    {{ getHangboardByIds(hangboard.company, hangboard.hangboard).name }}
                   </div>
-                  <v-chip
-                    v-if="
-                      getHangboardByIds(hangboard.company, hangboard.hangboard)
-                        .type
-                    "
-                  >
-                    {{
-                      getHangboardByIds(hangboard.company, hangboard.hangboard)
-                        .type
-                    }}
+                  <v-chip v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).type">
+                    {{ getHangboardByIds(hangboard.company, hangboard.hangboard).type }}
                   </v-chip>
                 </v-card-title>
                 <v-card-subtitle>
                   {{
                     getCompanyById(hangboard.company).country
                       ? countries.find(
-                          (country) =>
-                            country.alpha2 ===
-                            getCompanyById(hangboard.company).country
+                          (country) => country.alpha2 === getCompanyById(hangboard.company).country
                         )?.emoji
                       : ''
                   }}&nbsp;{{ getCompanyById(hangboard.company).name }}
@@ -122,74 +102,29 @@ useHead({
                   <v-btn
                     color="text"
                     disabled
-                    v-if="
-                      getHangboardByIds(hangboard.company, hangboard.hangboard)
-                        .size
-                    "
+                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size"
                   >
                     <div class="text-caption">
-                      <span
-                        v-if="
-                          getHangboardByIds(
-                            hangboard.company,
-                            hangboard.hangboard
-                          ).size.x
-                        "
-                      >
-                        {{
-                          getHangboardByIds(
-                            hangboard.company,
-                            hangboard.hangboard
-                          ).size.x
-                        }}mm
+                      <span v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size.x">
+                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard).size.x }}mm
                       </span>
-                      <span
-                        v-if="
-                          getHangboardByIds(
-                            hangboard.company,
-                            hangboard.hangboard
-                          ).size.y
-                        "
-                      >
+                      <span v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size.y">
                         &nbsp;x
-                        {{
-                          getHangboardByIds(
-                            hangboard.company,
-                            hangboard.hangboard
-                          ).size.y
-                        }}mm
+                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard).size.y }}mm
                       </span>
-                      <span
-                        v-if="
-                          getHangboardByIds(
-                            hangboard.company,
-                            hangboard.hangboard
-                          ).size.z
-                        "
-                      >
+                      <span v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size.z">
                         &nbsp;x
-                        {{
-                          getHangboardByIds(
-                            hangboard.company,
-                            hangboard.hangboard
-                          ).size.z
-                        }}mm
+                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard).size.z }}mm
                       </span>
                     </div>
                   </v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
                     size="small"
-                    v-if="
-                      getHangboardByIds(hangboard.company, hangboard.hangboard)
-                        .url
-                    "
+                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).url"
                     color="text"
                     icon="$openInNew"
-                    :href="
-                      getHangboardByIds(hangboard.company, hangboard.hangboard)
-                        .url
-                    "
+                    :href="getHangboardByIds(hangboard.company, hangboard.hangboard).url"
                     target="_blank"
                   >
                   </v-btn>
@@ -197,9 +132,7 @@ useHead({
                     size="small"
                     color="text"
                     icon="$delete"
-                    :disabled="
-                      !networkOnLine || getUserHangboardSelectedId === index
-                    "
+                    :disabled="!networkOnLine || getUserHangboardSelectedId === index"
                     @click="removeHangboard(index)"
                   >
                   </v-btn>

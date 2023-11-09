@@ -32,8 +32,7 @@ export const useUser = defineStore('user', {
      * Get all companies sorted by name
      * @return {({country: string, hangboards: [{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},null], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: null}, name: string, holds: number, id: number, type: string, url: null}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},null,null], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string})[]}
      */
-    getCompanies: () =>
-      [...hangboardBrands].sort((a, b) => a.name.localeCompare(b.name)),
+    getCompanies: () => [...hangboardBrands].sort((a, b) => a.name.localeCompare(b.name)),
     /**
      *
      */
@@ -52,9 +51,7 @@ export const useUser = defineStore('user', {
      * @return Array
      */
     getCompanyByUrlKey: () => (url) =>
-      hangboardBrands.find(
-        (company) => company.name.replace(/\s+/g, '-').toLowerCase() === url
-      ),
+      hangboardBrands.find((company) => company.name.replace(/\s+/g, '-').toLowerCase() === url),
     /**
      * Get the users hangboards
      * @return Array
@@ -76,11 +73,8 @@ export const useUser = defineStore('user', {
      * @return Object
      */
     getUserHangboardCompany: (state) => {
-      if (!state.getUserHangboards && !state.getUserHangboardSelectedId)
-        return false
-      return hangboardBrands[
-        state.getUserHangboards[state.getUserHangboardSelectedId]?.company
-      ]
+      if (!state.getUserHangboards && !state.getUserHangboardSelectedId) return false
+      return hangboardBrands[state.getUserHangboards[state.getUserHangboardSelectedId]?.company]
     },
     /**
      * Get the selected Hangboard

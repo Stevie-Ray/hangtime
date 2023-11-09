@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineEmits, defineProps } from 'vue'
+import { computed } from 'vue'
 import InlineSvg from 'vue-inline-svg'
 import { useUser } from '@/stores/user'
 
@@ -29,9 +29,7 @@ const hangboardImage = () => {
   if (getHangboard.value?.sides?.length) {
     if (props.exercise?.rotate) {
       // eslint-disable-next-line global-require,import/no-dynamic-require
-      return require(
-        `@/assets/${getHangboard.value?.sides[props.exercise.rotate].image}`
-      )
+      return require(`@/assets/${getHangboard.value?.sides[props.exercise.rotate].image}`)
     }
     // eslint-disable-next-line global-require,import/no-dynamic-require
     return require(`@/assets/${getHangboard.value?.sides[0].image}`)
@@ -44,9 +42,7 @@ const hangboardImage = () => {
 }
 
 const classHold = (hand) => {
-  return props.exercise && props.exercise[hand] !== null
-    ? `h${props.exercise[hand] + 1}`
-    : null
+  return props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand] + 1}` : null
 }
 
 const toggleHold = (hand, e) => {

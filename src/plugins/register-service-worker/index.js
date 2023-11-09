@@ -28,9 +28,7 @@ if (process.env.NODE_ENV === 'production') {
       SWRegistrationForNewContent.value = reg
     },
     offline() {
-      console.log(
-        'No internet connection found. App is running in offline mode.'
-      )
+      console.log('No internet connection found. App is running in offline mode.')
     },
     error(error) {
       console.error('Error during service worker registration:', error)

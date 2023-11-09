@@ -56,8 +56,7 @@ for (const newCompany of newCompanies) {
   slides.splice(index, 0, {
     title: `${
       newCompany?.country
-        ? countries.find((country) => country.alpha2 === newCompany.country)
-            ?.emoji
+        ? countries.find((country) => country.alpha2 === newCompany.country)?.emoji
         : ''
     } ${newCompany.name}`,
     subtitle: 'New in HangTime',
@@ -65,9 +64,7 @@ for (const newCompany of newCompanies) {
     text: newCompany.description,
     button_text: 'View Hangboards',
     internal_link: newCompany.name
-      ? `/brands/${encodeURIComponent(
-          newCompany.name.replace(/\s+/g, '-').toLowerCase()
-        )}`
+      ? `/brands/${encodeURIComponent(newCompany.name.replace(/\s+/g, '-').toLowerCase())}`
       : null
   })
   index += 2
@@ -94,20 +91,13 @@ for (const newCompany of newCompanies) {
             {{ slide.subtitle }}
           </v-card-subtitle>
 
-          <v-card-text
-            v-if="slide.text"
-            class="text-white"
-            style="height: 92px"
-          >
+          <v-card-text v-if="slide.text" class="text-white" style="height: 92px">
             {{ slide.text }}
           </v-card-text>
 
           <v-card-actions class="mt-auto">
             <v-btn
-              v-if="
-                slide.button_text &&
-                (slide.internal_link || slide.external_link)
-              "
+              v-if="slide.button_text && (slide.internal_link || slide.external_link)"
               color="white"
               variant="outlined"
               class="mb-2"

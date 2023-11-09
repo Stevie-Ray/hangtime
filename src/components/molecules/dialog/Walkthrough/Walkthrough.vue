@@ -74,14 +74,11 @@ const selected = reactive({
   hangboard: 0
 })
 
-const getHangboard = computed(() =>
-  getHangboardByIds(selected.company, selected.hangboard)
-)
+const getHangboard = computed(() => getHangboardByIds(selected.company, selected.hangboard))
 
 const updateSelected = () => {
   const exists = user.value.settings.hangboards.some(
-    (item) =>
-      item.company === selected.company && item.hangboard === selected.hangboard
+    (item) => item.company === selected.company && item.hangboard === selected.hangboard
   )
   if (!exists) {
     // measure selected hangboard data
@@ -110,9 +107,7 @@ const finishWalkthrough = (addWorkout) => {
   }
 }
 
-const grades = computed(() =>
-  ircra.get(user?.value.settings?.scale).filter((item) => item)
-)
+const grades = computed(() => ircra.get(user?.value.settings?.scale).filter((item) => item))
 
 const settingsLocale = computed({
   get() {
@@ -138,9 +133,7 @@ const settingsGrade = computed({
     return ircraGrade
   },
   set(value) {
-    const ircraGrade = ircra
-      .convert(user?.value?.settings?.scale, value)
-      .to('ircra').ircra
+    const ircraGrade = ircra.convert(user?.value?.settings?.scale, value).to('ircra').ircra
     user.value.settings.grade = ircraGrade
   }
 })
@@ -217,8 +210,7 @@ const settingsGrade = computed({
                     item-value="value"
                   >
                     <template #prepend>
-                      <v-icon color="primary lighten-1" icon="$chartGantt">
-                      </v-icon>
+                      <v-icon color="primary lighten-1" icon="$chartGantt"> </v-icon>
                     </template>
                   </v-select>
                 </v-list-item>
@@ -231,10 +223,7 @@ const settingsGrade = computed({
                     item-value="ircra"
                   >
                     <template #prepend>
-                      <v-icon
-                        color="primary lighten-1"
-                        icon="$chartTimelineVariant"
-                      ></v-icon>
+                      <v-icon color="primary lighten-1" icon="$chartTimelineVariant"></v-icon>
                     </template>
                   </v-select>
                 </v-list-item>

@@ -72,8 +72,7 @@ export function useGrip() {
       short: '45°',
       id: 1,
       image: 'exercises/bentarmhang.svg',
-      description:
-        'When you hold a specific grip with your arm fully bent at a 45-degree angle.',
+      description: 'When you hold a specific grip with your arm fully bent at a 45-degree angle.',
       steps: [
         {
           name: 'Starting Position',
@@ -101,8 +100,7 @@ export function useGrip() {
       short: '90°',
       id: 2,
       image: 'exercises/lhang.svg',
-      description:
-        'When you hold a specific grip with your arm fully bent at a 90-degree angle.',
+      description: 'When you hold a specific grip with your arm fully bent at a 90-degree angle.',
       steps: [
         {
           name: 'Starting Position',
@@ -372,8 +370,7 @@ export function useExercises() {
       name: 'L-Hang',
       id: 5,
       type: 'legs',
-      description:
-        'An "L-Hang" is when you hang with your arms and legs forming an "L" shape.',
+      description: 'An "L-Hang" is when you hang with your arms and legs forming an "L" shape.',
       steps: [
         {
           name: 'Hanging Position',
@@ -401,8 +398,7 @@ export function useExercises() {
       name: 'Knee raise',
       id: 6,
       type: 'legs',
-      description:
-        'A "Knee raise" involves raising your knees toward your chest while hanging.',
+      description: 'A "Knee raise" involves raising your knees toward your chest while hanging.',
       steps: [
         {
           name: 'Hanging Position',

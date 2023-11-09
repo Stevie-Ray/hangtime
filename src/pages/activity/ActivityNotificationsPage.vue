@@ -5,12 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 
-import {
-  getMessaging,
-  getToken,
-  deleteToken,
-  onMessage
-} from 'firebase/messaging'
+import { getMessaging, getToken, deleteToken, onMessage } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer'
 
@@ -71,10 +66,7 @@ function sendTokenToServer(currentToken) {
     setTokenSentToServer(true)
   } else {
     // eslint-disable-next-line no-console
-    console.log(
-      "Token already sent to server so won't send it again " +
-        'unless it changes'
-    )
+    console.log("Token already sent to server so won't send it again unless it changes")
   }
 }
 // eslint-disable-next-line no-shadow
@@ -108,9 +100,7 @@ function resetUI() {
         } else {
           // Show permission request.
           // eslint-disable-next-line no-console
-          console.log(
-            'No registration token available. Request permission to generate one.'
-          )
+          console.log('No registration token available. Request permission to generate one.')
           // Show permission UI.
           updateUIForPushPermissionRequired()
           setTokenSentToServer(false)
@@ -247,13 +237,7 @@ useHead({
                   >
                     <v-icon>$contentCopy</v-icon>
                   </v-btn>
-                  <v-btn
-                    icon
-                    color="text"
-                    size="small"
-                    variant="outlined"
-                    @click="deleteTokens"
-                  >
+                  <v-btn icon color="text" size="small" variant="outlined" @click="deleteTokens">
                     <v-icon>$delete</v-icon>
                   </v-btn>
                 </v-list-item-action>

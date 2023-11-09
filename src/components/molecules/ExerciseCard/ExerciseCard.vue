@@ -1,5 +1,4 @@
 <script setup>
-import { defineEmits, defineProps } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand'
@@ -49,11 +48,7 @@ const props = defineProps({
 
 <template>
   <div class="exercise-card">
-    <v-card
-      :variant="variant"
-      v-if="!hideRest || (index !== 0 && !hideRest)"
-      class="mb-8"
-    >
+    <v-card :variant="variant" v-if="!hideRest || (index !== 0 && !hideRest)" class="mb-8">
       <v-card-title class="d-flex justify-space-between">
         <div>{{ t('Rest') }}</div>
         <div v-if="exercise">{{ time(exercise.pause) }}</div>
@@ -69,21 +64,13 @@ const props = defineProps({
         <div class="flex-grow-1 text-truncate" style="overflow: hidden">
           <v-dialog width="500">
             <template v-slot:activator="{ props }">
-              <exercise-name
-                :exercise="exercise"
-                v-bind="props"
-                hide-repeat
-              ></exercise-name>
+              <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
             </template>
 
             <template v-slot:default="{ isActive }">
               <v-card>
                 <v-card-title>
-                  <exercise-name
-                    :exercise="exercise"
-                    v-bind="props"
-                    hide-repeat
-                  ></exercise-name>
+                  <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
                 </v-card-title>
                 <v-card-text>
                   <div v-if="exercise.exercise === 0">
@@ -154,8 +141,7 @@ const props = defineProps({
                     </div>
                     <v-expansion-panels>
                       <v-expansion-panel
-                        v-for="(step, index) in exercises[exercise.exercise - 1]
-                          .steps"
+                        v-for="(step, index) in exercises[exercise.exercise - 1].steps"
                         :key="index"
                         :title="step.name"
                         :text="step.description"
@@ -168,10 +154,7 @@ const props = defineProps({
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn
-                    :text="$t('Close')"
-                    @click="isActive.value = false"
-                  ></v-btn>
+                  <v-btn :text="$t('Close')" @click="isActive.value = false"></v-btn>
                 </v-card-actions>
               </v-card>
             </template>
@@ -206,10 +189,7 @@ const props = defineProps({
             </span>
           </div>
 
-          <v-chip
-            size="x-small"
-            v-if="exercise.weight && exercise?.weight !== 0"
-          >
+          <v-chip size="x-small" v-if="exercise.weight && exercise?.weight !== 0">
             {{ exercise.weight }}kg
           </v-chip>
         </div>

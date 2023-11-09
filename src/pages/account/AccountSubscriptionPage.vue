@@ -249,9 +249,7 @@ function trigger(sku, onToken = () => {}) {
           .catch((e) => {
             // log(JSON.stringify(e, undefined, 2));
             log(e)
-            log(
-              "Maybe you've already purchased the item (try acknowledging first)."
-            )
+            log("Maybe you've already purchased the item (try acknowledging first).")
           })
       })
       // eslint-disable-next-line func-names
@@ -344,9 +342,7 @@ useHead({
               <v-card-text>
                 <div class="mb-4">
                   <span>HangTime gives you </span>
-                  <span style="text-decoration: line-through"
-                    >{{ limit / 2 }} minutes</span
-                  >
+                  <span style="text-decoration: line-through">{{ limit / 2 }} minutes</span>
                   <strong>&nbsp;{{ limit }} minutes</strong> of free usage.
                   <span>Want to do more? </span>
                   <span>Buy a subscription! After that it's free forever.</span>
@@ -359,18 +355,12 @@ useHead({
                   height="25"
                 >
                   <template #default="{ value }">
-                    <strong
-                      v-if="user && !user.subscribed"
-                      style="color: white"
-                    >
-                      {{ Math.ceil(value)
-                      }}<span v-if="isFinite(value)">%</span>
+                    <strong v-if="user && !user.subscribed" style="color: white">
+                      {{ Math.ceil(value) }}<span v-if="isFinite(value)">%</span>
                     </strong>
                   </template>
                 </v-progress-linear>
-                <p v-if="user?.completed" class="mb-4">
-                  {{ time(user.completed.time) }} minutes.
-                </p>
+                <p v-if="user?.completed" class="mb-4">{{ time(user.completed.time) }} minutes.</p>
                 <v-row class="text-center">
                   <v-col cols="12">
                     <div v-if="canSubscribe">
@@ -402,22 +392,13 @@ useHead({
               <v-card-title>
                 {{ t('Purchases') }}
               </v-card-title>
-              <v-list-item
-                v-for="(purchase, index) in purchasesList"
-                :key="index"
-                two-line
-              >
-                <v-list-item-title
-                  >ItemId: {{ purchase.itemId }}</v-list-item-title
-                >
+              <v-list-item v-for="(purchase, index) in purchasesList" :key="index" two-line>
+                <v-list-item-title>ItemId: {{ purchase.itemId }}</v-list-item-title>
                 <v-list-item-subtitle>
                   purchaseToken: {{ purchase.purchaseToken }}
                 </v-list-item-subtitle>
                 <v-list-item-action>
-                  <v-btn
-                    icon
-                    @click="acknowledge(purchase.purchaseToken, 'repeatable')"
-                  >
+                  <v-btn icon @click="acknowledge(purchase.purchaseToken, 'repeatable')">
                     <v-icon>$delete</v-icon>
                   </v-btn>
                 </v-list-item-action>

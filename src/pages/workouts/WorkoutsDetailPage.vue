@@ -18,13 +18,7 @@ import { useWorkouts } from '@/stores/workouts'
 import { useAuthentication } from '@/stores/authentication'
 import { useUser } from '@/stores/user'
 
-import {
-  time,
-  useExercises,
-  useGrip,
-  useRandomImage,
-  weightConverter
-} from '@/helpers'
+import { time, useExercises, useGrip, useRandomImage, weightConverter } from '@/helpers'
 
 const { t } = useI18n()
 
@@ -50,8 +44,7 @@ const {
   updateWorkout
 } = useWorkouts()
 
-const { getUserHangboards, getUserHangboardCompany, getUserHangboard } =
-  storeToRefs(useUser())
+const { getUserHangboards, getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
 
 const { getHangboardNameByIds } = useUser()
 
@@ -59,9 +52,7 @@ const { user } = storeToRefs(useAuthentication())
 
 const { updateUser } = useAuthentication()
 
-const workout = computed(() =>
-  getWorkoutById(route.params.id ? route.params.id : 'new')
-)
+const workout = computed(() => getWorkoutById(route.params.id ? route.params.id : 'new'))
 
 // workout - edit
 const editMode = ref(false)
@@ -228,12 +219,11 @@ const addHangboard = () => {
 // workout - weight
 const isHearted = computed(() => {
   if (!workout?.value?.subscribers?.length || !user.value) return false
-  return workout.value.subscribers.some(
-    (subscriber) => subscriber === user.value.id
-  )
+  return workout.value.subscribers.some((subscriber) => subscriber === user.value.id)
 })
 
 const workoutSubscriber = () => {
+  if (workout?.value.subscribers?.length === 1) return
   if (!isHearted.value) {
     workout?.value.subscribers.unshift(user.value.id)
     // push to workouts
@@ -242,12 +232,12 @@ const workoutSubscriber = () => {
     const userIndex = workout?.value.subscribers.indexOf(user.value.id)
     workout?.value.subscribers.splice(userIndex, 1)
     // remove from workouts
-    const index = workouts?.value.findIndex(
-      (item) => item.id === workout?.value.id
-    )
+    const index = workouts?.value.findIndex((item) => item.id === workout?.value.id)
     workouts?.value.splice(index, 1)
   }
-  updateWorkout({ userId: workout.value.user.id, workout: workout.value })
+  if (workout.value?.user) {
+    updateWorkout({ userId: workout.value.user.id, workout: workout.value })
+  }
 }
 
 // workout - weight
@@ -315,8 +305,7 @@ const goToTimer = () => {
 const rules = {
   number: (v) => !v.isNaN || 'NaN',
   required: (v) => !!v || 'This field is required',
-  length: (length) => (v) =>
-    (v || '').length <= length || `Max ${length} characters`,
+  length: (length) => (v) => (v || '').length <= length || `Max ${length} characters`,
   min: (min) => (v) => v >= min || `A minimun of  ${min} is allowed`,
   max: (max) => (v) => v <= max || `A maximum of  ${max} is allowed`
 }
@@ -370,12 +359,7 @@ useHead({
       ></v-btn>
       <v-menu>
         <template v-slot:activator="{ props }">
-          <v-btn
-            v-if="editMode"
-            icon="$dotsVertical"
-            color="text"
-            v-bind="props"
-          ></v-btn>
+          <v-btn v-if="editMode" icon="$dotsVertical" color="text" v-bind="props"></v-btn>
         </template>
 
         <v-list>
@@ -385,9 +369,7 @@ useHead({
             }}</v-list-item-title>
           </v-list-item>
           <v-list-item>
-            <v-list-item-title @click="removeWorkout">{{
-              t('Delete workout')
-            }}</v-list-item-title>
+            <v-list-item-title @click="removeWorkout">{{ t('Delete workout') }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -400,27 +382,15 @@ useHead({
             <div v-if="workout">
               <v-row class="mb-4">
                 <v-col cols="12">
-                  <v-card
-                    class="mx-auto"
-                    min-height="144"
-                    max-width="100%"
-                    theme="light"
-                  >
+                  <v-card class="mx-auto" min-height="144" max-width="100%" theme="light">
                     <v-img :src="useRandomImage()" cover>
                       <v-card-text>
                         <div class="text-subtitle-1 mb-4">
                           {{ workout.description }}
                         </div>
-                        <div
-                          class="d-flex align-center mt-2"
-                          v-if="workout.user"
-                        >
+                        <div class="d-flex align-center mt-2" v-if="workout.user">
                           <div>
-                            <v-avatar
-                              size="small"
-                              color="grey-darken-1"
-                              class="mr-2"
-                            >
+                            <v-avatar size="small" color="grey-darken-1" class="mr-2">
                               <v-img
                                 :src="workout.user.photoURL"
                                 :alt="workout.user.displayName"
@@ -534,17 +504,9 @@ useHead({
                       </template>
                     </draggable>
 
-                    <v-card
-                      v-if="editMode"
-                      variant="tonal"
-                      @click="exerciseAdd"
-                    >
+                    <v-card v-if="editMode" variant="tonal" @click="exerciseAdd">
                       <v-card-title class="text-center">
-                        <v-icon
-                          icon="$plus"
-                          size="x-small"
-                          class="mr-2"
-                        ></v-icon>
+                        <v-icon icon="$plus" size="x-small" class="mr-2"></v-icon>
                         <span>{{ t('Add exercise') }}</span>
                       </v-card-title>
                     </v-card>
@@ -573,10 +535,7 @@ useHead({
                               icon="$deleteOutline"
                               @click="exerciseRemove"
                             ></v-btn>
-                            <v-btn
-                              icon="$contentCopy"
-                              @click="exerciseCopy"
-                            ></v-btn>
+                            <v-btn icon="$contentCopy" @click="exerciseCopy"></v-btn>
                             <v-btn
                               icon="$contentSaveOutline"
                               @click="exerciseEditDialog = false"
@@ -598,29 +557,23 @@ useHead({
                                   :hide-rest="exerciseIndex === 0"
                                   @right="
                                     (hold) =>
-                                      exercise.right === hold &&
-                                      exercise.left !== null
+                                      exercise.right === hold && exercise.left !== null
                                         ? (exercise.right = null)
                                         : (exercise.right = hold)
                                   "
                                   @left="
                                     (hold) =>
-                                      exercise.left === hold &&
-                                      exercise.right !== null
+                                      exercise.left === hold && exercise.right !== null
                                         ? (exercise.left = null)
                                         : (exercise.left = hold)
                                   "
-                                  @rotate="
-                                    (rotate) => (exercise.rotate = rotate)
-                                  "
+                                  @rotate="(rotate) => (exercise.rotate = rotate)"
                                 ></exercise-card>
 
                                 <v-expansion-panel>
                                   <v-expansion-panel-title>
                                     <v-icon icon="$numeric1BoxOutline"></v-icon>
-                                    <span class="ml-2">{{
-                                      t('Exercise')
-                                    }}</span>
+                                    <span class="ml-2">{{ t('Exercise') }}</span>
                                   </v-expansion-panel-title>
                                   <v-expansion-panel-text>
                                     <v-row>
@@ -636,9 +589,7 @@ useHead({
                                           <template #append>
                                             <v-tooltip location="bottom">
                                               <template #activator="{ props }">
-                                                <v-icon v-bind="props">
-                                                  $helpCircleOutline
-                                                </v-icon>
+                                                <v-icon v-bind="props"> $helpCircleOutline </v-icon>
                                               </template>
                                               <span
                                                 v-if="
@@ -646,10 +597,7 @@ useHead({
                                                   grip[exercise.grip] !== null
                                                 "
                                               >
-                                                {{
-                                                  grip[exercise.grip]
-                                                    .description
-                                                }}
+                                                {{ grip[exercise.grip].description }}
                                               </span>
                                             </v-tooltip>
                                           </template>
@@ -679,10 +627,7 @@ useHead({
                                             ></span>
                                           </template>
                                           <template #append>
-                                            <v-row
-                                              align="center"
-                                              justify="center"
-                                            >
+                                            <v-row align="center" justify="center">
                                               <v-col cols="12">
                                                 {{ t('or') }}
                                               </v-col>
@@ -712,9 +657,7 @@ useHead({
                                               location="bottom"
                                             >
                                               <template #activator="{ props }">
-                                                <v-icon v-bind="props">
-                                                  $helpCircleOutline
-                                                </v-icon>
+                                                <v-icon v-bind="props"> $helpCircleOutline </v-icon>
                                               </template>
                                               <span>{{
                                                 t(
@@ -725,8 +668,7 @@ useHead({
                                             <div v-else>
                                               <v-icon
                                                 @click="
-                                                  ;(exercise.exercise = 0),
-                                                    (exercise.pullups = 1)
+                                                  ;(exercise.exercise = 0), (exercise.pullups = 1)
                                                 "
                                               >
                                                 $undo
@@ -739,16 +681,12 @@ useHead({
 
                                     <div v-if="exercise.exercise !== 0">
                                       <exercise-counter
-                                        :title="`${
-                                          exercises[exercise.exercise - 1].name
-                                        }s`"
+                                        :title="`${exercises[exercise.exercise - 1].name}s`"
                                         :value="exercise.pullups"
                                         :disabled="exercise.exercise === 0"
                                         :max="30"
                                         :timer="false"
-                                        @input="
-                                          (value) => (exercise.pullups = value)
-                                        "
+                                        @input="(value) => (exercise.pullups = value)"
                                       >
                                       </exercise-counter>
                                     </div>
@@ -759,8 +697,7 @@ useHead({
                                     <v-icon icon="$numeric2BoxOutline"></v-icon>
                                     <span
                                       :class="{
-                                        'text--secondary':
-                                          exercise?.repeat === 0
+                                        'text--secondary': exercise?.repeat === 0
                                       }"
                                       class="ml-2"
                                     >
@@ -775,9 +712,7 @@ useHead({
                                       :value="exercise.pause"
                                       :min="3"
                                       :max="300"
-                                      @input="
-                                        (value) => exerciseEdit('pause', value)
-                                      "
+                                      @input="(value) => exerciseEdit('pause', value)"
                                     >
                                     </exercise-counter>
 
@@ -786,9 +721,7 @@ useHead({
                                       :value="exercise.hold"
                                       :min="3"
                                       :max="180"
-                                      @input="
-                                        (value) => exerciseEdit('hold', value)
-                                      "
+                                      @input="(value) => exerciseEdit('hold', value)"
                                     >
                                     </exercise-counter>
 
@@ -799,13 +732,9 @@ useHead({
                                       :timer="false"
                                       :min="0"
                                       :max="24"
-                                      @input="
-                                        (value) => exerciseEdit('repeat', value)
-                                      "
+                                      @input="(value) => exerciseEdit('repeat', value)"
                                     >
-                                      <template #default
-                                        >{{ exercise.repeat + 1 }}x</template
-                                      >
+                                      <template #default>{{ exercise.repeat + 1 }}x</template>
                                     </exercise-counter>
 
                                     <exercise-counter
@@ -816,9 +745,7 @@ useHead({
                                       :min="3"
                                       :max="180"
                                       :disabled="exercise.repeat === 0"
-                                      @input="
-                                        (value) => exerciseEdit('rest', value)
-                                      "
+                                      @input="(value) => exerciseEdit('rest', value)"
                                     >
                                     </exercise-counter>
                                   </v-expansion-panel-text>
@@ -833,8 +760,7 @@ useHead({
                                             exercise?.rightHand &&
                                             !exercise?.leftHand.length &&
                                             !exercise?.rightHand.length) ||
-                                          (!exercise?.leftHand &&
-                                            !exercise?.rightHand)
+                                          (!exercise?.leftHand && !exercise?.rightHand)
                                       }"
                                       class="ml-2"
                                       >{{ t('Fingers') }}</span
@@ -843,13 +769,8 @@ useHead({
                                   <v-expansion-panel-text>
                                     <exercise-hand
                                       :exercise="exercise"
-                                      @left="
-                                        (finger) => (exercise.leftHand = finger)
-                                      "
-                                      @right="
-                                        (finger) =>
-                                          (exercise.rightHand = finger)
-                                      "
+                                      @left="(finger) => (exercise.leftHand = finger)"
+                                      @right="(finger) => (exercise.rightHand = finger)"
                                       edit
                                     ></exercise-hand>
                                   </v-expansion-panel-text>
@@ -860,8 +781,7 @@ useHead({
                                     <span
                                       :class="{
                                         'text--secondary':
-                                          exercise?.weight === 0 ||
-                                          !exercise?.weight
+                                          exercise?.weight === 0 || !exercise?.weight
                                       }"
                                       class="ml-2"
                                     >
@@ -878,19 +798,12 @@ useHead({
                                       :value="exercise.weight"
                                       :min="-50"
                                       :max="50"
-                                      @input="
-                                        (value) => (exercise.weight = value)
-                                      "
+                                      @input="(value) => (exercise.weight = value)"
                                       :timer="false"
                                       suffix="kg"
                                     >
                                       <template #default
-                                        >{{
-                                          weightConverter(
-                                            exercise.weight,
-                                            user
-                                          )
-                                        }}kg</template
+                                        >{{ weightConverter(exercise.weight, user) }}kg</template
                                       >
                                     </exercise-counter>
                                   </v-expansion-panel-text>
@@ -901,8 +814,7 @@ useHead({
                                     <span
                                       :class="{
                                         'text--secondary':
-                                          exercise?.notes === '' ||
-                                          !exercise?.notes
+                                          exercise?.notes === '' || !exercise?.notes
                                       }"
                                       class="ml-2"
                                       >{{ t('Notes') }}</span
@@ -941,9 +853,7 @@ useHead({
                             color="text"
                             @click="workoutSaveDialog = false"
                           ></v-btn>
-                          <v-toolbar-title>
-                            {{ t("You're almost there") }}!
-                          </v-toolbar-title>
+                          <v-toolbar-title> {{ t("You're almost there") }}! </v-toolbar-title>
 
                           <v-toolbar-items>
                             <v-btn
@@ -962,11 +872,7 @@ useHead({
                         <v-container>
                           <v-row>
                             <v-col cols="12">
-                              <v-label
-                                >{{
-                                  t('Name your workout and get going')
-                                }}.</v-label
-                              >
+                              <v-label>{{ t('Name your workout and get going') }}.</v-label>
 
                               <v-divider thickness="0" class="mb-4"></v-divider>
 
@@ -987,9 +893,7 @@ useHead({
                                 rows="3"
                                 :rules="[rules.required, rules.length(140)]"
                                 :placeholder="
-                                  t(
-                                    'For example indicate when this workout is most beneficial'
-                                  )
+                                  t('For example indicate when this workout is most beneficial')
                                 "
                                 :label="t('Description')"
                                 required
@@ -1004,10 +908,7 @@ useHead({
                               </v-text-field>
 
                               <v-label>{{ t('Difficulty') }}</v-label>
-                              <v-chip-group
-                                v-model="workout.level"
-                                class="required"
-                              >
+                              <v-chip-group v-model="workout.level" class="required">
                                 <v-chip :value="1">{{ t('easy') }}</v-chip>
                                 <v-chip :value="2">{{ t('normal') }}</v-chip>
                                 <v-chip :value="3">{{ t('hard') }}</v-chip>
@@ -1062,20 +963,13 @@ useHead({
                     </v-toolbar-title>
 
                     <v-toolbar-items>
-                      <v-btn
-                        icon="$contentSaveOutline"
-                        @click="addHangboard"
-                      ></v-btn>
+                      <v-btn icon="$contentSaveOutline" @click="addHangboard"></v-btn>
                     </v-toolbar-items>
                   </v-toolbar>
                   <v-container>
                     <v-row>
                       <v-col cols="12">
-                        {{
-                          t(
-                            "To view this workout we'll add this hangboard to your hangboards"
-                          )
-                        }}
+                        {{ t("To view this workout we'll add this hangboard to your hangboards") }}
                       </v-col>
                     </v-row>
                   </v-container>

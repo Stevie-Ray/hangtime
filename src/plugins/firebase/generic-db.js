@@ -15,6 +15,7 @@ import {
   orderBy,
   limit
 } from 'firebase/firestore'
+import { toRaw } from 'vue'
 import firebaseApp from '@/plugins/firebase'
 
 const db = getFirestore(firebaseApp)
@@ -43,9 +44,7 @@ export default class GenericDB {
     const createPromise =
       id === null || id === undefined
         ? await addDoc(collectionRef, dataToCreate).then((result) => result.id)
-        : await setDoc(doc(db, this.collectionPath, id), dataToCreate).then(
-            () => id
-          )
+        : await setDoc(doc(db, this.collectionPath, id), dataToCreate).then(() => id)
 
     const docId = await createPromise
 
@@ -89,9 +88,7 @@ export default class GenericDB {
     const combinedQuery = []
 
     if (constraints) {
-      constraints.forEach((constraint) =>
-        combinedQuery.push(where(...constraint))
-      )
+      constraints.forEach((constraint) => combinedQuery.push(where(...constraint)))
     }
 
     if (sort) {
@@ -123,7 +120,7 @@ export default class GenericDB {
    */
   async update(data) {
     const { id } = data
-    const clonedData = structuredClone(data)
+    const clonedData = structuredClone(toRaw(data))
     delete clonedData.id
 
     const docRef = doc(db, this.collectionPath, id)

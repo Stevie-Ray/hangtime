@@ -1,8 +1,7 @@
 export default [
   {
     name: 'Antworks',
-    description:
-      'Training devices for climber, crossfitter, ninja warrior- made in Austria',
+    description: 'Training devices for climber, crossfitter, ninja warrior- made in Austria',
     country: 'AT',
     location: {
       lat: '47.607470',
@@ -816,8 +815,7 @@ export default [
   },
   {
     name: 'OCÚN',
-    description:
-      'Climbing gear developed and manufactured by climbers in Czech Republic.',
+    description: 'Climbing gear developed and manufactured by climbers in Czech Republic.',
     country: 'CZ',
     location: {
       lat: '50.5195261',
@@ -1481,8 +1479,7 @@ export default [
   },
   {
     name: 'Decathlon / Simond',
-    description:
-      "Decathlon's Mountaineering & Climbing brand based in Chamonix valley",
+    description: "Decathlon's Mountaineering & Climbing brand based in Chamonix valley",
     country: 'FR',
     location: {
       lat: '45.9087619',
@@ -2099,8 +2096,7 @@ export default [
   },
   {
     name: 'Concept Climbing',
-    description:
-      "Producing the finest climbing equipment you've ever laid your hands on!",
+    description: "Producing the finest climbing equipment you've ever laid your hands on!",
     country: 'AU',
     location: {
       lat: '-38.1624649',
@@ -2338,8 +2334,7 @@ export default [
   },
   {
     name: 'Lyons Edge',
-    description:
-      'Gorgeous hangboards that will take your climbing abilities to the next level!',
+    description: 'Gorgeous hangboards that will take your climbing abilities to the next level!',
     country: 'CA',
     location: {
       lat: '51.0275074',
@@ -2395,8 +2390,7 @@ export default [
   },
   {
     name: 'Escape Climbing',
-    description:
-      'Climbing Holds that Inspire, Hardware that Lasts, and Training Tools that Work.',
+    description: 'Climbing Holds that Inspire, Hardware that Lasts, and Training Tools that Work.',
     country: 'US',
     location: {
       lat: '45.031554',
@@ -2482,8 +2476,7 @@ export default [
   },
   {
     name: 'Atomik Holds',
-    description:
-      'High quality climbing holds and Ninja Warrior products from Provo, Utah, USA',
+    description: 'High quality climbing holds and Ninja Warrior products from Provo, Utah, USA',
     country: 'US',
     location: {
       lat: '40.226161',
@@ -2656,8 +2649,7 @@ export default [
   },
   {
     name: 'Volx Holds',
-    description:
-      'Manufacturer & Designer of Climbing Holds, Made in France! 🇫🇷',
+    description: 'Manufacturer & Designer of Climbing Holds, Made in France! 🇫🇷',
     country: 'FR',
     location: {
       lat: '45.8872687',
@@ -3007,8 +2999,7 @@ export default [
   },
   {
     name: 'Bäm!',
-    description:
-      'The most adjustable hangboard. Improve your abilities. Reach for the top',
+    description: 'The most adjustable hangboard. Improve your abilities. Reach for the top',
     country: 'DE',
     location: {
       lat: '53.5600438',
@@ -3258,8 +3249,7 @@ export default [
   },
   {
     name: 'Defythecrux',
-    description:
-      'Equipment and apparel built for climbers, by climbers from Los Angeles, CA',
+    description: 'Equipment and apparel built for climbers, by climbers from Los Angeles, CA',
     country: 'US',
     location: {
       lat: '34.0479346',
@@ -3418,8 +3408,7 @@ export default [
   },
   {
     name: 'Butterfinger Sports',
-    description:
-      'Out of love for climbing and devotion to innovative design from Los Angeles, CA',
+    description: 'Out of love for climbing and devotion to innovative design from Los Angeles, CA',
     country: 'US',
     location: {
       lat: '33.7947748',
@@ -3818,8 +3807,7 @@ export default [
   },
   {
     name: 'Canigó',
-    description:
-      'Natural wood climbing Hangboards. Train at home with chemical-free dams!',
+    description: 'Natural wood climbing Hangboards. Train at home with chemical-free dams!',
     country: 'ES',
     location: {
       lat: '41.164387',
@@ -4263,8 +4251,7 @@ export default [
   },
   {
     name: 'Custom Climbs',
-    description:
-      'Engineering the send. Build your custom wood hangboard today!',
+    description: 'Engineering the send. Build your custom wood hangboard today!',
     country: 'US',
     location: {
       lat: '28.8797209',
@@ -4403,8 +4390,7 @@ export default [
   },
   {
     name: 'Explore Climbing',
-    description:
-      'Training tools and structures for climbers designed by climbers 🇮🇹made in Italy',
+    description: 'Training tools and structures for climbers designed by climbers 🇮🇹made in Italy',
     country: 'IT',
     location: {
       lat: '45.003799',
@@ -4559,8 +4545,7 @@ export default [
   },
   {
     name: 'Rustam Climbing',
-    description:
-      'High quality wooden training devices. Designed by Rustam Gelmanov',
+    description: 'High quality wooden training devices. Designed by Rustam Gelmanov',
     country: 'NL',
     location: {
       lat: '51.4793049',
@@ -4876,8 +4861,7 @@ export default [
   },
   {
     name: 'Northeast Climb (NEC)',
-    description:
-      'Founded by Forrest Liu (IFSC Official Photographer) in Shenyang, China',
+    description: 'Founded by Forrest Liu (IFSC Official Photographer) in Shenyang, China',
     country: 'CN',
     location: {
       lat: '41.8052133',
@@ -5063,8 +5047,7 @@ export default [
   },
   {
     name: 'Evolv x Kilter',
-    description:
-      'Rock Climbing & Bouldering Gear by Evolv a Oberalp Group brand',
+    description: 'Rock Climbing & Bouldering Gear by Evolv a Oberalp Group brand',
     country: 'US',
     location: {
       lat: '40.0240763',
@@ -5500,8 +5483,7 @@ export default [
   },
   {
     name: 'Art Rocher',
-    description:
-      'Artificial climbing walls - the greatest experience in Europe and Poland',
+    description: 'Artificial climbing walls - the greatest experience in Europe and Poland',
     country: 'PL',
     location: {
       lat: '50.3006766',
@@ -6092,8 +6074,7 @@ export default [
   },
   {
     name: 'Rock + Run',
-    description:
-      'The UK’s Original Online Climbing Retailer 🇬🇧 #MountainEnthusiasts since 1983 🏔',
+    description: 'The UK’s Original Online Climbing Retailer 🇬🇧 #MountainEnthusiasts since 1983 🏔',
     country: 'GB',
     location: {
       lat: '54.2229674',
@@ -6302,8 +6283,7 @@ export default [
   },
   {
     name: 'Bat Holds',
-    description:
-      'We create holds to make you train harder. production and sale of climbing holds',
+    description: 'We create holds to make you train harder. production and sale of climbing holds',
     country: 'PL',
     location: {
       lat: '50.286403',
@@ -6455,8 +6435,7 @@ export default [
   },
   {
     name: 'Wapaje',
-    description:
-      'Sports accessories and implements for climbing and functional training',
+    description: 'Sports accessories and implements for climbing and functional training',
     country: 'CL',
     location: {
       lat: '-33.4726789',
@@ -6725,8 +6704,7 @@ export default [
   },
   {
     name: 'Frictitious Climbing',
-    description:
-      'Maximizing Your Climbing Progression With Functional Training Tools',
+    description: 'Maximizing Your Climbing Progression With Functional Training Tools',
     country: 'US',
     location: {
       lat: '40.5726483',
@@ -7057,8 +7035,7 @@ export default [
   },
   {
     name: 'Redge Climbing',
-    description:
-      'Handcrafted bamboo training tools for climbing made in the Netherlands',
+    description: 'Handcrafted bamboo training tools for climbing made in the Netherlands',
     country: 'NL',
     location: {
       lat: '52.2469484',

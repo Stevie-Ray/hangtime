@@ -44,11 +44,7 @@ export const useWorkouts = defineStore('workouts', {
       if (user?.getUserHangboard) {
         constraints.push(['hangboard', '==', user.getUserHangboard.id])
       }
-      this.workoutsCommunity = await usersWorkoutsDb.readAll(
-        constraints,
-        null,
-        100
-      )
+      this.workoutsCommunity = await usersWorkoutsDb.readAll(constraints, null, 100)
     },
     /**
      * Fetch leaderboard
@@ -56,8 +52,7 @@ export const useWorkouts = defineStore('workouts', {
      * @return {Promise<void>}
      */
     async fetchLeaderboard(rank = 'completed.amount') {
-      if (this.leaderboards.find((leaderboard) => leaderboard.rank === rank))
-        return
+      if (this.leaderboards.find((leaderboard) => leaderboard.rank === rank)) return
       const usersDb = new UsersDB()
       const leaderboard = await usersDb.readAll([[rank, '>', 0]], rank, 15)
       this.leaderboards.push({ rank, leaderboard })
@@ -158,8 +153,7 @@ export const useWorkouts = defineStore('workouts', {
       const user = useUser()
       if (state.workouts === null) return []
       const limit = 999
-      const items =
-        state.workouts.length > limit ? limit : state.workouts.length
+      const items = state.workouts.length > limit ? limit : state.workouts.length
       return state.workouts
         ?.filter(
           (workout) =>
@@ -172,10 +166,7 @@ export const useWorkouts = defineStore('workouts', {
     getWorkoutsByCommunity(state) {
       if (state.workoutsCommunity === null) return []
       const limit = 999
-      const items =
-        state.workoutsCommunity.length > limit
-          ? limit
-          : state.workoutsCommunity.length
+      const items = state.workoutsCommunity.length > limit ? limit : state.workoutsCommunity.length
       return state.workoutsCommunity
         ?.sort((a, b) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
         ?.slice(0, items)

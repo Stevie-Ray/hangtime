@@ -134,11 +134,7 @@ useHead({
 
         <v-row>
           <v-col cols="12">
-            <v-card
-              v-for="(dates, date) in activitiesByDay"
-              :key="date"
-              class="mb-4 pb-2"
-            >
+            <v-card v-for="(dates, date) in activitiesByDay" :key="date" class="mb-4 pb-2">
               <v-list>
                 <v-list-subheader>{{ activityDate(date) }}</v-list-subheader>
                 <template v-for="(activity, j) in dates" :key="j">
@@ -149,11 +145,7 @@ useHead({
 
                     <template v-if="activity.type !== 'quick'" #append>
                       <div class="d-flex flex-column">
-                        <v-chip
-                          v-if="activity.difficulty"
-                          size="x-small"
-                          variant="outlined"
-                        >
+                        <v-chip v-if="activity.difficulty" size="x-small" variant="outlined">
                           {{ difficultyById(activity.difficulty) }}
                         </v-chip>
                       </div>

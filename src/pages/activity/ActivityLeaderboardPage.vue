@@ -30,9 +30,7 @@ const tableHeaders = [
   { text: 'Time worked out', value: 'completed.time' }
 ]
 
-const selectedHeader = computed(() =>
-  tableHeaders.find((header) => header.value === rank.value)
-)
+const selectedHeader = computed(() => tableHeaders.find((header) => header.value === rank.value))
 
 const leaderboardMenu = ref(false)
 
@@ -106,19 +104,11 @@ useHead({
                   </tr>
                 </thead>
                 <tbody v-if="selectedLeaderboard">
-                  <tr
-                    v-for="(user, index) in selectedLeaderboard.leaderboard"
-                    :key="user.id"
-                  >
+                  <tr v-for="(user, index) in selectedLeaderboard.leaderboard" :key="user.id">
                     <td>
-                      <span class="d-inline-block" style="min-width: 30px"
-                        >{{ index + 1 }}.
-                      </span>
+                      <span class="d-inline-block" style="min-width: 30px">{{ index + 1 }}. </span>
                       <v-avatar size="small" color="grey-darken-1" class="mr-2">
-                        <v-img
-                          :src="user.photoURL"
-                          :alt="user.displayName"
-                        ></v-img>
+                        <v-img :src="user.photoURL" :alt="user.displayName"></v-img>
                       </v-avatar>
                       <span class="text-truncate">
                         {{ user.displayName }}

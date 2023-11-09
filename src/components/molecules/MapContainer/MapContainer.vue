@@ -53,11 +53,7 @@ loader.load().then(async () => {
       {
         featureType: 'poi',
         elementType: 'all',
-        stylers: [
-          { saturation: -100 },
-          { lightness: '50' },
-          { visibility: 'simplified' }
-        ]
+        stylers: [{ saturation: -100 }, { lightness: '50' }, { visibility: 'simplified' }]
       },
       {
         featureType: 'road',
