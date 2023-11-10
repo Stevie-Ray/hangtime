@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 import { useExercises, useGrip } from '@/helpers'
 
 const grip = useGrip()

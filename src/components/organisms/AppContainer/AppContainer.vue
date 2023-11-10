@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useAuthentication } from '@/stores/authentication'

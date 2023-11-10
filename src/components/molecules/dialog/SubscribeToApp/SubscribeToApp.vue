@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { purchase } from 'vue-gtag'

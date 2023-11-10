@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineProps, ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
+import { computed, ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
@@ -210,6 +210,13 @@ const exerciseDone = () => {
   stopTimer()
 }
 
+const skip = ref(false)
+
+const skipRest = () => {
+  clock.value = 5
+  skip.value = true
+}
+
 const hasExercise = (type) => {
   const setupTimers = () => {
     nextTick(() => {
@@ -282,6 +289,7 @@ const exerciseSteps = () => {
         clock.value -= 1
         break
       }
+      skip.value = false
       if (exercise.value.repeat > 0) {
         clock.value = exercise.value.hold - 1
         currentExerciseStep.value = 3
@@ -414,7 +422,7 @@ onMounted(() => {
       hang: !timerPaused && (currentExerciseStep === 1 || currentExerciseStep === 3)
     }"
     :style="{
-      transition: `width ${clock}s linear`
+      transition: clock !== 0 ? (skip ? 'none' : `width ${clock}s linear`) : 'none'
     }"
     class="position-absolute h-100 px-0 py-0 progress"
   ></v-container>
@@ -426,9 +434,17 @@ onMounted(() => {
             <div v-if="workout?.exercises" class="text-h1">
               {{ time(clock) }}
             </div>
-            <div class="text-h6 pt-2 pb-4" style="font-size: 1.5rem !important">
+            <div class="text-h6 pt-2 mb-1" style="font-size: 1.5rem !important">
               {{ clockText }}
             </div>
+            <v-btn
+              size="x-small"
+              class="mb-2"
+              :style="clockText === 'Rest' && clock > 5 ? '' : 'visibility:hidden'"
+              @click="skipRest"
+            >
+              {{ t('Skip Rest') }}
+            </v-btn>
             <v-row align="center" justify="space-evenly">
               <v-col class="text-center">
                 <div class="text-caption text-uppercase">
