@@ -2,6 +2,7 @@
 import { watch } from 'vue'
 import { useTheme } from 'vuetify'
 import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import roboto400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff2'
 import roboto500 from '@fontsource/roboto/files/roboto-latin-500-normal.woff2'
@@ -11,6 +12,9 @@ import { useApp } from '@/stores/app'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable'
 import { useAuthentication } from '@/stores/authentication'
+
+// router
+const route = useRoute()
 
 useHead({
   titleTemplate: (title) => (title ? `${title} | HangTime` : `HangTime`),
@@ -71,7 +75,7 @@ watch(user, async (updatedUser) => {
   <v-app>
     <router-view></router-view>
     <new-content-available
-      v-if="newAppContent"
+      v-if="newAppContent && route.name !== 'WorkoutsTimerPage'"
       class="new-content-available"
       :refreshing-app="refreshingApp"
       @refresh="serviceWorkerSkipWaiting"
