@@ -145,7 +145,11 @@ const stopTimer = () => {
 }
 
 const exercisePause = () => {
-  clockText.value = t('Pause')
+  if (clock.value > 5) {
+    clockText.value = t('Pause')
+  } else {
+    clockText.value = t('Get ready')
+  }
   countDown()
 }
 
@@ -158,7 +162,11 @@ const exerciseHold = () => {
 }
 
 const exerciseRest = () => {
-  clockText.value = t('Rest')
+  if (clock.value > 5) {
+    clockText.value = t('Rest')
+  } else {
+    clockText.value = t('Get ready')
+  }
   countDown()
   if (clock.value === 1) {
     if (currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
@@ -228,6 +236,7 @@ const hasExercise = (type) => {
       }
       currentExerciseStep.value = 0
       currentExerciseStepRepeat.value = 0
+      exercisePause()
     })
     return true
   }
@@ -258,6 +267,7 @@ const exerciseSteps = () => {
         clock.value -= 1
         break
       }
+      skip.value = false
       clock.value = exercise.value.hold - 1
       currentExerciseStep.value = 1
       break
@@ -274,6 +284,7 @@ const exerciseSteps = () => {
       if (exercise.value.repeat > 0) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
+        exerciseRest()
         break
       }
       if (hasExercise('next')) {
@@ -290,9 +301,11 @@ const exerciseSteps = () => {
         break
       }
       skip.value = false
+      // repeat exercise
       if (exercise.value.repeat > 0) {
         clock.value = exercise.value.hold - 1
         currentExerciseStep.value = 3
+        exerciseHold()
         break
       }
       if (hasExercise('next')) {
@@ -312,6 +325,7 @@ const exerciseSteps = () => {
       if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
+        exerciseRest()
         break
       }
       if (hasExercise('next')) {
@@ -335,6 +349,8 @@ const startWorkout = async () => {
   timer = setInterval(() => {
     if (!timerPaused.value) exerciseSteps()
   }, 1000)
+  clock.value += 1
+  exerciseSteps()
 }
 
 const setupWorkout = async () => {
@@ -344,7 +360,6 @@ const setupWorkout = async () => {
   clock.value = setupTime
   timer = setInterval(() => {
     if (!timerPaused.value) {
-      clockText.value = t('Get ready')
       countDown()
       clock.value -= 1
       if (clock.value === 0) {
@@ -355,6 +370,9 @@ const setupWorkout = async () => {
       }
     }
   }, 1000)
+  if (!timerPaused.value) {
+    clockText.value = t('Get ready')
+  }
 }
 
 const startTimer = () => {
@@ -440,10 +458,14 @@ onMounted(() => {
             <v-btn
               size="x-small"
               class="mb-2"
-              :style="clockText === 'Rest' && clock > 5 ? '' : 'visibility:hidden'"
+              :style="
+                (clockText === 'Rest' || clockText === 'Pause') && clock >= 5
+                  ? ''
+                  : 'visibility:hidden'
+              "
               @click="skipRest"
             >
-              {{ t('Skip Rest') }}
+              {{ t('Skip {time}', { time: clockText }) }}
             </v-btn>
             <v-row align="center" justify="space-evenly">
               <v-col class="text-center">

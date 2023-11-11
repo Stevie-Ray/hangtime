@@ -168,7 +168,12 @@ useHead({
                 >
                   <template #prepend>
                     <v-avatar color="grey-darken-1">
-                      <v-img :src="workout.user.photoURL" :alt="workout.user.displayName"></v-img>
+                      <v-img
+                        :src="workout.user.photoURL"
+                        :alt="workout.user.displayName"
+                        width="40"
+                        height="40"
+                      ></v-img>
                     </v-avatar>
                   </template>
 
