@@ -270,6 +270,7 @@ const exerciseSteps = () => {
       skip.value = false
       clock.value = exercise.value.hold - 1
       currentExerciseStep.value = 1
+      exerciseHold()
       break
     // HOLD
     case 1:
