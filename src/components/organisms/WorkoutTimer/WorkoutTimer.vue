@@ -155,7 +155,10 @@ const exercisePause = () => {
 
 const exerciseHold = () => {
   clockText.value = t('Hold')
-  if (clock.value === 1) {
+  if (
+    clock.value === 1 &&
+    !(exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+  ) {
     vibratePhone()
     playSound('stop.wav')
   }
@@ -218,13 +221,6 @@ const exerciseDone = () => {
   stopTimer()
 }
 
-const skip = ref(false)
-
-const skipRest = () => {
-  clock.value = 5
-  skip.value = true
-}
-
 const hasExercise = (type) => {
   const setupTimers = () => {
     nextTick(() => {
@@ -257,6 +253,46 @@ const hasExercise = (type) => {
   return false
 }
 
+const skip = ref(false)
+
+const skipRest = () => {
+  clock.value = 5
+  skip.value = true
+}
+
+const maxHold = () => {
+  vibratePhone()
+  playSound('stop.wav')
+  // HOLD
+  if (currentExerciseStep.value === 1) {
+    // check if exercise has to repeat
+    if (exercise.value.repeat > 0) {
+      clock.value = exercise.value.rest - 1
+      currentExerciseStep.value = 2
+      // if (currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
+      //   currentExerciseStepRepeat.value += 1
+      // }
+      return
+    }
+  }
+  // REPEAT
+  if (currentExerciseStep.value === 3) {
+    if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
+      clock.value = exercise.value.rest - 1
+      currentExerciseStep.value = 2
+      // if (currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
+      //   currentExerciseStepRepeat.value += 1
+      // }
+      return
+    }
+  }
+
+  if (hasExercise('next')) {
+    return
+  }
+  currentExerciseStep.value = 4
+}
+
 const exerciseSteps = () => {
   switch (currentExerciseStep.value) {
     // PAUSE
@@ -268,7 +304,11 @@ const exerciseSteps = () => {
         break
       }
       skip.value = false
-      clock.value = exercise.value.hold - 1
+      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+        clock.value = 0
+      } else {
+        clock.value = exercise.value.hold - 1
+      }
       currentExerciseStep.value = 1
       exerciseHold()
       break
@@ -276,7 +316,11 @@ const exerciseSteps = () => {
     case 1:
       workoutCompleteTimeTotal.value += 1
       workoutCompleteTimeHanging.value += 1
-      if (clock.value > 0) {
+      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+        exerciseHold()
+        clock.value += 1
+        break
+      } else if (clock.value > 0) {
         exerciseHold()
         clock.value -= 1
         break
@@ -304,7 +348,11 @@ const exerciseSteps = () => {
       skip.value = false
       // repeat exercise
       if (exercise.value.repeat > 0) {
-        clock.value = exercise.value.hold - 1
+        if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+          clock.value = 0
+        } else {
+          clock.value = exercise.value.hold - 1
+        }
         currentExerciseStep.value = 3
         exerciseHold()
         break
@@ -318,6 +366,10 @@ const exerciseSteps = () => {
     case 3:
       workoutCompleteTimeTotal.value += 1
       workoutCompleteTimeHanging.value += 1
+      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+        clock.value += 1
+        break
+      }
       if (clock.value > 0) {
         exerciseHold()
         clock.value -= 1
@@ -350,7 +402,11 @@ const startWorkout = async () => {
   timer = setInterval(() => {
     if (!timerPaused.value) exerciseSteps()
   }, 1000)
-  clock.value += 1
+  if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+    clock.value -= 1
+  } else {
+    clock.value += 1
+  }
   exerciseSteps()
 }
 
@@ -365,7 +421,12 @@ const setupWorkout = async () => {
       clock.value -= 1
       if (clock.value === 0) {
         clearInterval(timer)
-        clock.value = exercise.value.hold - 1
+        // max exercise or movement
+        if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+          clock.value = 0
+        } else {
+          clock.value = exercise.value.hold - 1
+        }
         // start when setup is done
         startWorkout()
       }
@@ -380,6 +441,9 @@ const startTimer = () => {
   timerPaused.value = false
   // init audio on button click
   if (audio) {
+    if (process.env.NODE_ENV !== 'production') {
+      audio.volume = 0.25
+    }
     audio.autoplay = true
     audio.src =
       'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'
@@ -441,7 +505,15 @@ onMounted(() => {
       hang: !timerPaused && (currentExerciseStep === 1 || currentExerciseStep === 3)
     }"
     :style="{
-      transition: clock !== 0 ? (skip ? 'none' : `width ${clock}s linear`) : 'none'
+      transition:
+        clock !== 0
+          ? skip
+            ? 'none'
+            : (exercise.max || (exercise.exercise && exercise.exercise !== 0)) &&
+              (currentExerciseStep === 1 || currentExerciseStep === 3)
+            ? `width 0s linear`
+            : `width ${clock}s linear`
+          : 'none'
     }"
     class="position-absolute h-100 px-0 py-0 progress"
   ></v-container>
@@ -457,23 +529,43 @@ onMounted(() => {
               {{ clockText }}
             </div>
             <v-btn
-              size="x-small"
               class="mb-2"
+              variant="flat"
               :style="
-                (clockText === 'Rest' || clockText === 'Pause') && clock >= 5
+                ((clockText === 'Rest' || clockText === 'Pause') && clock >= 5) ||
+                (clockText === 'Hold' &&
+                  (exercise.max || (exercise.exercise && exercise.exercise !== 0)))
                   ? ''
                   : 'visibility:hidden'
               "
-              @click="skipRest"
             >
-              {{ t('Skip {time}', { time: clockText }) }}
+              <span
+                v-if="(clockText === 'Rest' || clockText === 'Pause') && clock >= 5"
+                @click="skipRest"
+              >
+                {{ t('Skip {time}', { time: clockText }) }}
+              </span>
+              <span
+                v-else-if="
+                  clockText === 'Hold' &&
+                  (exercise.max || (exercise.exercise && exercise.exercise !== 0))
+                "
+                @click="maxHold"
+              >
+                {{ t('Done') }}
+              </span>
             </v-btn>
             <v-row align="center" justify="space-evenly">
               <v-col class="text-center">
                 <div class="text-caption text-uppercase">
                   {{ t('Time') }}
                 </div>
-                <div class="text-h6">{{ time(exerciseTime) }}</div>
+                <div class="text-h6">
+                  <span v-if="exercise.max || (exercise.exercise && exercise.exercise !== 0)"
+                    >∞</span
+                  >
+                  <span v-else>{{ time(exerciseTime) }}</span>
+                </div>
               </v-col>
               <v-col class="text-center" v-if="workout?.exercises?.length > 1">
                 <div class="text-caption text-uppercase">

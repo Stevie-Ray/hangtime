@@ -57,6 +57,8 @@ const workout = computed(() => getWorkoutById(route.params.id ? route.params.id 
 // workout - edit
 const editMode = ref(false)
 
+const repType = ref('original')
+
 const editWorkout = () => {
   editMode.value = true
 }
@@ -155,6 +157,18 @@ const openExerciseEditDialog = (index) => {
     exerciseEditDialog.value = true
   }
 }
+
+const exerciseMovement = computed({
+  // getter
+  get() {
+    if (exercise.value.exercise === 0) return null
+    return exercise.value.exercise
+  },
+  // setter
+  set(newValue) {
+    exercise.value.exercise = newValue
+  }
+})
 
 // workout - save
 const workoutSave = () => {
@@ -394,6 +408,8 @@ useHead({
                               <v-img
                                 :src="workout.user.photoURL"
                                 :alt="workout.user.displayName"
+                                height="40"
+                                width="40"
                               ></v-img>
                             </v-avatar>
                           </div>
@@ -578,41 +594,27 @@ useHead({
                                   <v-expansion-panel-text>
                                     <v-row>
                                       <v-col cols="12">
+                                        <div class="text-caption">
+                                          {{ t('Body position') }}
+                                        </div>
                                         <v-select
                                           v-model="exercise.grip"
                                           :items="grip"
-                                          :label="t('Hang / Lock off')"
                                           item-title="name"
                                           item-value="id"
                                           required
                                         >
-                                          <template #append>
-                                            <v-tooltip location="bottom">
-                                              <template #activator="{ props }">
-                                                <v-icon v-bind="props"> $helpCircleOutline </v-icon>
-                                              </template>
-                                              <span
-                                                v-if="
-                                                  !isNaN(exercise.grip) &&
-                                                  grip[exercise.grip] !== null
-                                                "
-                                              >
-                                                {{ grip[exercise.grip].description }}
-                                              </span>
-                                            </v-tooltip>
-                                          </template>
                                         </v-select>
                                       </v-col>
                                     </v-row>
 
-                                    <div class="text-caption">
-                                      {{ t('Optional') }}
-                                    </div>
-
                                     <v-row>
                                       <v-col cols="6">
+                                        <div class="text-caption">
+                                          {{ t('Movement (Optional)') }}
+                                        </div>
                                         <v-select
-                                          v-model="exercise.exercise"
+                                          v-model="exerciseMovement"
                                           :items="exerciseFilter('arms')"
                                           :label="t('Arms')"
                                           item-title="name"
@@ -626,23 +628,30 @@ useHead({
                                               v-text="data.item.title"
                                             ></span>
                                           </template>
-                                          <template #append>
-                                            <v-row align="center" justify="center">
-                                              <v-col cols="12">
-                                                {{ t('or') }}
-                                              </v-col>
-                                            </v-row>
-                                          </template>
                                         </v-select>
                                       </v-col>
 
                                       <v-col cols="6">
+                                        <div class="text-caption text-right">
+                                          <span
+                                            v-if="exercise.exercise !== 0"
+                                            @click="
+                                              ;(exercise.exercise = 0),
+                                                (exercise.pullups = 1),
+                                                (exercise.max = false)
+                                            "
+                                          >
+                                            {{ t('Reset') }}
+                                          </span>
+                                          <span v-else>&nbsp;</span>
+                                        </div>
                                         <v-select
-                                          v-model="exercise.exercise"
+                                          v-model="exerciseMovement"
                                           :items="exerciseFilter('legs')"
                                           :label="t('Legs')"
                                           item-title="name"
                                           item-value="id"
+                                          single-line
                                         >
                                           <template #selection="data">
                                             <span
@@ -651,45 +660,9 @@ useHead({
                                               v-text="data.item.title"
                                             ></span>
                                           </template>
-                                          <template #append>
-                                            <v-tooltip
-                                              v-if="exercise.exercise === 0"
-                                              location="bottom"
-                                            >
-                                              <template #activator="{ props }">
-                                                <v-icon v-bind="props"> $helpCircleOutline </v-icon>
-                                              </template>
-                                              <span>{{
-                                                t(
-                                                  'Select an optional arm or leg exercise to perform'
-                                                )
-                                              }}</span>
-                                            </v-tooltip>
-                                            <div v-else>
-                                              <v-icon
-                                                @click="
-                                                  ;(exercise.exercise = 0), (exercise.pullups = 1)
-                                                "
-                                              >
-                                                $undo
-                                              </v-icon>
-                                            </div>
-                                          </template>
                                         </v-select>
                                       </v-col>
                                     </v-row>
-
-                                    <div v-if="exercise.exercise !== 0">
-                                      <exercise-counter
-                                        :title="`${exercises[exercise.exercise - 1].name}s`"
-                                        :value="exercise.pullups"
-                                        :disabled="exercise.exercise === 0"
-                                        :max="30"
-                                        :timer="false"
-                                        @input="(value) => (exercise.pullups = value)"
-                                      >
-                                      </exercise-counter>
-                                    </div>
                                   </v-expansion-panel-text>
                                 </v-expansion-panel>
                                 <v-expansion-panel>
@@ -705,6 +678,34 @@ useHead({
                                     </span>
                                   </v-expansion-panel-title>
                                   <v-expansion-panel-text>
+                                    <v-btn-toggle
+                                      v-model="repType"
+                                      background-color="text"
+                                      dark
+                                      mandatory
+                                      border
+                                      class="d-flex align-content-space-around my-4"
+                                    >
+                                      <v-btn
+                                        value="original"
+                                        class="flex-1-1"
+                                        @click="exercise.max = false"
+                                      >
+                                        <span v-if="exercise.exercise !== 0">
+                                          {{ t('Amount') }}
+                                        </span>
+                                        <span v-else>
+                                          {{ t('Time') }}
+                                        </span>
+                                      </v-btn>
+                                      <v-btn
+                                        value="max"
+                                        class="flex-1-1"
+                                        @click="exercise.max = true"
+                                        >Max</v-btn
+                                      >
+                                    </v-btn-toggle>
+
                                     <exercise-counter
                                       v-if="exerciseIndex !== 0"
                                       title="Rest"
@@ -717,6 +718,18 @@ useHead({
                                     </exercise-counter>
 
                                     <exercise-counter
+                                      v-if="exercise.exercise !== 0 && repType !== 'max'"
+                                      :title="`${exercises[exercise.exercise - 1].name}s`"
+                                      :value="exercise.pullups"
+                                      :disabled="exercise.exercise === 0"
+                                      :max="30"
+                                      :timer="false"
+                                      @input="(value) => (exercise.pullups = value)"
+                                    >
+                                    </exercise-counter>
+
+                                    <exercise-counter
+                                      v-if="exercise.exercise === 0 && repType !== 'max'"
                                       title="Hang"
                                       :value="exercise.hold"
                                       :min="3"

@@ -62,13 +62,13 @@ const props = defineProps({
         </div>
 
         <div class="flex-grow-1 text-truncate" style="overflow: hidden">
-          <v-dialog width="500">
+          <v-dialog width="500" v-if="!sort">
             <template v-slot:activator="{ props }">
               <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
             </template>
 
             <template v-slot:default="{ isActive }">
-              <v-card>
+              <v-card class="help">
                 <v-card-title>
                   <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
                 </v-card-title>
@@ -159,6 +159,9 @@ const props = defineProps({
               </v-card>
             </template>
           </v-dialog>
+          <template v-else>
+            <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
+          </template>
         </div>
 
         <div>
@@ -179,14 +182,20 @@ const props = defineProps({
       <v-card-subtitle v-if="exercise">
         <div class="d-flex justify-space-between">
           <div style="font-size: 1rem">
-            <span v-if="exercise.hold">
+            <span v-if="exercise.hold && exercise.exercise === 0 && !exercise.max">
               <span>{{ t('Hang') }}: </span>
               <strong>{{ time(Math.round(exercise.hold)) }}</strong>
             </span>
+            <span
+              v-if="exercise.hold && exercise.exercise === 0 && !exercise.max && exercise.repeat"
+            >
+              |
+            </span>
             <span v-if="exercise.repeat">
-              <span> | {{ t('Rest') }}: </span>
+              <span>{{ t('Rest') }}: </span>
               <strong>{{ time(Math.round(exercise.rest)) }}</strong>
             </span>
+            <span>&nbsp;</span>
           </div>
 
           <v-chip size="x-small" v-if="exercise.weight && exercise?.weight !== 0">
@@ -256,7 +265,7 @@ const props = defineProps({
   }
 
   .v-overlay-container & {
-    &:after {
+    &.help:after {
       display: none;
     }
   }
