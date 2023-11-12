@@ -34,8 +34,7 @@ const setHangboard = (index) => {
 
 const removeHangboard = (index) => {
   user.value.settings.hangboards.splice(index, 1)
-  user.value.settings.selected = 0
-  updateUser()
+  setHangboard(0)
 }
 
 const router = useRouter()
@@ -68,9 +67,9 @@ useHead({
               <v-card
                 v-for="(hangboard, index) in getUserHangboards"
                 :key="index"
+                :variant="getUserHangboardSelectedId === index ? 'outlined' : 'elevated'"
                 class="mb-8"
                 @click="setHangboard(index)"
-                :variant="getUserHangboardSelectedId === index ? 'outlined' : 'elevated'"
               >
                 <v-card-text>
                   <exercise-hangboard
@@ -100,9 +99,9 @@ useHead({
                 </v-card-subtitle>
                 <v-card-actions>
                   <v-btn
+                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size"
                     color="text"
                     disabled
-                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size"
                   >
                     <div class="text-caption">
                       <span v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size.x">
@@ -120,20 +119,20 @@ useHead({
                   </v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
-                    size="small"
                     v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).url"
+                    :href="getHangboardByIds(hangboard.company, hangboard.hangboard).url"
                     color="text"
                     icon="$openInNew"
-                    :href="getHangboardByIds(hangboard.company, hangboard.hangboard).url"
+                    size="small"
                     target="_blank"
                   >
                   </v-btn>
                   <v-btn
-                    size="small"
+                    :disabled="!networkOnLine || getUserHangboardSelectedId === index"
                     color="text"
                     icon="$delete"
-                    :disabled="!networkOnLine || getUserHangboardSelectedId === index"
-                    @click="removeHangboard(index)"
+                    size="small"
+                    @click.stop="removeHangboard(index)"
                   >
                   </v-btn>
                 </v-card-actions>

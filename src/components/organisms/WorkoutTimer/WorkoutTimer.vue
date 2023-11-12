@@ -145,7 +145,7 @@ const stopTimer = () => {
 }
 
 const exercisePause = () => {
-  if (clock.value > 5) {
+  if (clock.value > setupTime) {
     clockText.value = t('Pause')
   } else {
     clockText.value = t('Get ready')
@@ -169,7 +169,7 @@ const exerciseHold = () => {
 }
 
 const exerciseRest = () => {
-  if (clock.value > 5) {
+  if (clock.value > setupTime) {
     clockText.value = t('Rest')
   } else {
     clockText.value = t('Get ready')
@@ -260,7 +260,7 @@ const hasExercise = (type) => {
 const skip = ref(false)
 
 const skipRest = () => {
-  clock.value = 5
+  clock.value = setupTime
   skip.value = true
 }
 
@@ -273,9 +273,6 @@ const maxHold = () => {
     if (exercise.value.repeat > 0) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
-      // if (currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
-      //   currentExerciseStepRepeat.value += 1
-      // }
       return
     }
   }
@@ -284,9 +281,6 @@ const maxHold = () => {
     if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
-      // if (currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
-      //   currentExerciseStepRepeat.value += 1
-      // }
       return
     }
   }
@@ -532,17 +526,17 @@ onMounted(() => {
               {{ clockText }}
             </div>
             <v-btn
-              class="mb-2"
-              variant="flat"
               :style="
-                ((clockText === t('Rest') || clockText === t('Pause')) && clock >= 5) ||
+                ((clockText === t('Rest') || clockText === t('Pause')) && clock >= setupTime) ||
                 clockText === t('Go')
                   ? ''
                   : 'visibility:hidden'
               "
+              class="mb-2"
+              variant="flat"
             >
               <span
-                v-if="(clockText === t('Rest') || clockText === t('Pause')) && clock >= 5"
+                v-if="(clockText === t('Rest') || clockText === t('Pause')) && clock >= setupTime"
                 @click="skipRest"
               >
                 {{ t('Skip {time}', { time: clockText }) }}
@@ -561,13 +555,13 @@ onMounted(() => {
                   <span v-else>{{ time(exerciseTime) }}</span>
                 </div>
               </v-col>
-              <v-col class="text-center" v-if="workout?.exercises?.length > 1">
+              <v-col v-if="workout?.exercises?.length > 1" class="text-center">
                 <div class="text-caption text-uppercase">
                   {{ t('Exercise') }}
                 </div>
                 <div class="text-h6">{{ currentExercise + 1 }}/{{ workout?.exercises.length }}</div>
               </v-col>
-              <v-col class="text-center" v-if="workout?.exercises">
+              <v-col v-if="workout?.exercises" class="text-center">
                 <div class="text-caption text-uppercase">
                   {{ t('Repeat') }}
                 </div>
@@ -586,30 +580,30 @@ onMounted(() => {
             style="top: -36px; gap: 32px; z-index: 1"
           >
             <v-btn
+              :disabled="currentExercise <= 0"
               :style="{
                 visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
               }"
-              :disabled="currentExercise <= 0"
-              variant="flat"
-              icon="$skipPrevious"
               class="rounded-circle"
+              icon="$skipPrevious"
+              variant="flat"
               @click="hasExercise('prev')"
             ></v-btn>
             <v-btn
-              variant="flat"
               :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
               class="rounded-circle"
               size="x-large"
+              variant="flat"
               @click="timerPaused === null ? startTimer() : pauseWorkout()"
             ></v-btn>
             <v-btn
+              :disabled="currentExercise >= workout?.exercises?.length - 1"
               :style="{
                 visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
               }"
-              :disabled="currentExercise >= workout?.exercises?.length - 1"
-              variant="flat"
-              icon="$skipNext"
               class="rounded-circle"
+              icon="$skipNext"
+              variant="flat"
               @click="hasExercise('next')"
             ></v-btn>
           </v-card-title>
@@ -618,14 +612,14 @@ onMounted(() => {
             <slot>
               <exercise-card
                 v-if="workout"
-                variant="flat"
-                :index="currentExercise"
                 :exercise="exercise"
                 :hangboard="{
                   hangboard: workout.hangboard,
                   company: workout.company
                 }"
+                :index="currentExercise"
                 hide-rest
+                variant="flat"
               >
               </exercise-card>
             </slot>
@@ -636,20 +630,20 @@ onMounted(() => {
   </v-container>
   <!-- Show subscribe wall -->
   <subscribe-to-app
-    v-model="dialogWorkoutSubscribe"
     v-if="
       canSubscribePlayBilling &&
       !user?.subscribed &&
       user?.completed?.time / 60 > (subscribeLimit / 4) * 3
     "
+    v-model="dialogWorkoutSubscribe"
     :limit="subscribeLimit"
   >
   </subscribe-to-app>
   <workout-complete
     v-if="workout"
     v-model="dialogWorkoutComplete"
-    :time-total="workoutCompleteTimeTotal"
     :time-hanging="workoutCompleteTimeHanging"
+    :time-total="workoutCompleteTimeTotal"
     :workout="workout"
     @show="dialogWorkoutComplete = !dialogWorkoutComplete"
   >
@@ -659,6 +653,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .exercise-card:last-child:deep(.v-card) {
   margin-bottom: 0 !important;
+
   &:last-child:after {
     border: none;
   }
@@ -684,31 +679,32 @@ onMounted(() => {
 
 .progress {
   background-image: url('@/assets/cartographer.png');
-  background-repeat: repeat;
   background-position: 0 0;
-  width: 0;
+  background-repeat: repeat;
   height: calc(100% - 56px) !important; // header
+  width: 0;
   will-change: width, background-position;
 
   &.hang {
-    background-color: rgb(var(--v-theme-secondary));
     animation: forwards 300s infinite linear;
+    background-color: rgb(var(--v-theme-secondary));
     width: 100%;
   }
 
   &.rest {
-    background-color: rgb(var(--v-theme-tertiary));
     animation: backwards 300s infinite linear;
+    background-color: rgb(var(--v-theme-tertiary));
     width: 0;
   }
 }
 
 .timer {
+  color: rgba(var(--v-theme-on-primary));
+  mix-blend-mode: difference;
+
   .v-theme--dark & {
     color: rgb(var(--v-theme-surface-variant));
   }
-  color: rgba(var(--v-theme-on-primary));
-  mix-blend-mode: difference;
 }
 
 .rounded-circle {

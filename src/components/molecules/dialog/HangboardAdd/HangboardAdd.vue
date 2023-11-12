@@ -7,12 +7,15 @@ import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSel
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import { useAuthentication } from '@/stores/authentication'
+import { useWorkouts } from '@/stores/workouts'
 
 const { t } = useI18n()
 
 const { networkOnLine } = storeToRefs(useApp())
 
 const { user } = storeToRefs(useAuthentication())
+
+const { fetchCommunityWorkouts } = useWorkouts()
 
 const { getHangboardByIds, getHangboardNameByIds } = useUser()
 
@@ -46,6 +49,7 @@ const addHangboard = () => {
   if (user.value) {
     updateSelected()
     updateUser()
+    fetchCommunityWorkouts()
   }
   dialog.value = false
 }
