@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router'
 
 import { getMessaging, getToken, deleteToken, onMessage } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
 import { useAuthentication } from '@/stores/authentication'
 

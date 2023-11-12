@@ -1,7 +1,9 @@
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here. Other Firebase libraries
 // are not available in the service worker.
+// eslint-disable-next-line no-undef
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js')
+// eslint-disable-next-line no-undef
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js')
 
 const config = {
@@ -24,7 +26,7 @@ const messaging = firebase.messaging()
 // background (Web app is closed or not in browser focus) then you should
 // implement this optional method.
 // [START on_background_message]
-messaging.onBackgroundMessage(function (payload) {
+messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload)
   // Customize notification here
   const notificationTitle = payload.notification.title

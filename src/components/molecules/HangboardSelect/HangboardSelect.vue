@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
+import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import { useUser } from '@/stores/user'
 import countries from '@/helpers/countries'
 

@@ -3,9 +3,9 @@ import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { reactive } from 'vue'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
-import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter'
-import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
+import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer.vue'
 
 const { t } = useI18n()
 

@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
 import countries from '@/helpers/countries'
 
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
 const { t } = useI18n()

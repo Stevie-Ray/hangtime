@@ -1,8 +1,8 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName'
-import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand'
-import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
+import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
+import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
+import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import { time, useExercises, useGrip } from '@/helpers'
 
 const grip = useGrip()

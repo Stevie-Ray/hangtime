@@ -8,9 +8,9 @@ import { useUser } from '@/stores/user'
 import { useRandomImage } from '@/helpers'
 import countries from '@/helpers/countries'
 
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
-import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
-import MapContainer from '@/components/molecules/MapContainer/MapContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
+import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
 import { useAuthentication } from '@/stores/authentication'
 

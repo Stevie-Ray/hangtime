@@ -2,8 +2,8 @@
 import { useHead } from '@unhead/vue'
 import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
-import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer.vue'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useWorkouts } from '@/stores/workouts'
 
 const route = useRoute()

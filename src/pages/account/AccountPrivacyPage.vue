@@ -3,7 +3,7 @@ import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
 const { t } = useI18n()
 

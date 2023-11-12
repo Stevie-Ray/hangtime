@@ -5,7 +5,7 @@ import { onMounted, reactive, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useAuthentication } from '@/stores/authentication'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useApp } from '@/stores/app'
 
 const { t } = useI18n()

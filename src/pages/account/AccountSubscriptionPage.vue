@@ -6,7 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { computed, onMounted, ref } from 'vue'
 import { purchase } from 'vue-gtag'
 import { useAuthentication } from '@/stores/authentication'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { time } from '@/helpers'
 
 const { t } = useI18n()

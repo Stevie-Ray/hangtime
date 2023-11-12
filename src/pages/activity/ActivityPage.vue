@@ -6,7 +6,7 @@ import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import { time } from '@/helpers'
 
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
 
 import { useActivities } from '@/stores/activities'

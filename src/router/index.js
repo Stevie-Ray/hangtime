@@ -7,46 +7,47 @@ import { useAuthentication } from '@/stores/authentication'
 
 // Account
 const AccountPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPage.vue')
 const AccountGeneralPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountGeneralPage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountGeneralPage.vue')
 const AccountHangboardsPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHangboardsPage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHangboardsPage.vue')
 const AccountHelpPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHelpPage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHelpPage.vue')
 const AccountPrivacyPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPrivacyPage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPrivacyPage.vue')
 const AccountProfilePage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountProfilePage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountProfilePage.vue')
 const AccountSubscriptionPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountSubscriptionPage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountSubscriptionPage.vue')
 const AccountWorkoutsPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountWorkoutsPage')
+  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountWorkoutsPage.vue')
 // Activity
 const ActivityPage = () =>
-  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityPage')
+  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityPage.vue')
 const ActivityLeaderboardPage = () =>
-  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityLeaderboardPage')
+  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityLeaderboardPage.vue')
 const ActivityNotificationsPage = () =>
-  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityNotificationsPage')
+  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityNotificationsPage.vue')
 // Authentication
 const LoginPage = () =>
-  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/LoginPage')
+  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/LoginPage.vue')
 const CheckLoginPage = () =>
-  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/CheckLoginPage')
+  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/CheckLoginPage.vue')
 // Brands
-const BrandsPage = () => import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsPage')
+const BrandsPage = () =>
+  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsPage.vue')
 const BrandsDetailPage = () =>
-  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsDetailPage')
+  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsDetailPage.vue')
 // Brands
 const WorkoutsPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsPage')
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsPage.vue')
 const WorkoutsDetailPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsDetailPage')
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsDetailPage.vue')
 const WorkoutsTimerPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsTimerPage')
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsTimerPage.vue')
 const WorkoutsQuickPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsQuickPage')
+  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsQuickPage.vue')
 
 // 2. Define some routes
 // Each route should map to a component.

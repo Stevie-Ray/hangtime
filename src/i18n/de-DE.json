@@ -229,5 +229,7 @@
   "Hi there!": "Hallo!",
   "Sign in to HangTime, the community-driven hangboard training app, for stronger climbing.": "Melden Sie sich an, um HangTime beizutreten, einer von der Community betriebenen Hangboard-Trainings-App. Werden Sie stärker und klettern Sie noch härter.",
   "Edit exercise": "Übung bearbeiten",
-  "new": "neu"
+  "new": "neu",
+  "Skip {time}": "{time} überspringen",
+  "Done": "Erledigt"
 }

@@ -3,9 +3,9 @@ import { computed, ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
-import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard'
-import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete'
-import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp'
+import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
+import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
+import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
 import { time } from '@/helpers'
 
 import { useAuthentication } from '@/stores/authentication'
@@ -154,7 +154,11 @@ const exercisePause = () => {
 }
 
 const exerciseHold = () => {
-  clockText.value = t('Hold')
+  if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+    clockText.value = t('Go')
+  } else {
+    clockText.value = t('Hold')
+  }
   if (
     clock.value === 1 &&
     !(exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
@@ -509,8 +513,7 @@ onMounted(() => {
         clock !== 0
           ? skip
             ? 'none'
-            : (exercise.max || (exercise.exercise && exercise.exercise !== 0)) &&
-              (currentExerciseStep === 1 || currentExerciseStep === 3)
+            : clockText === t('Go') && (currentExerciseStep === 1 || currentExerciseStep === 3)
             ? `width 0s linear`
             : `width ${clock}s linear`
           : 'none'
@@ -532,26 +535,19 @@ onMounted(() => {
               class="mb-2"
               variant="flat"
               :style="
-                ((clockText === 'Rest' || clockText === 'Pause') && clock >= 5) ||
-                (clockText === 'Hold' &&
-                  (exercise.max || (exercise.exercise && exercise.exercise !== 0)))
+                ((clockText === t('Rest') || clockText === t('Pause')) && clock >= 5) ||
+                clockText === t('Go')
                   ? ''
                   : 'visibility:hidden'
               "
             >
               <span
-                v-if="(clockText === 'Rest' || clockText === 'Pause') && clock >= 5"
+                v-if="(clockText === t('Rest') || clockText === t('Pause')) && clock >= 5"
                 @click="skipRest"
               >
                 {{ t('Skip {time}', { time: clockText }) }}
               </span>
-              <span
-                v-else-if="
-                  clockText === 'Hold' &&
-                  (exercise.max || (exercise.exercise && exercise.exercise !== 0))
-                "
-                @click="maxHold"
-              >
+              <span v-else-if="clockText === t('Go')" @click="maxHold">
                 {{ t('Done') }}
               </span>
             </v-btn>
@@ -561,9 +557,7 @@ onMounted(() => {
                   {{ t('Time') }}
                 </div>
                 <div class="text-h6">
-                  <span v-if="exercise.max || (exercise.exercise && exercise.exercise !== 0)"
-                    >∞</span
-                  >
+                  <span v-if="clockText === t('Go')">∞</span>
                   <span v-else>{{ time(exerciseTime) }}</span>
                 </div>
               </v-col>

@@ -6,7 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import IRCRA from 'ircra'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useAuthentication } from '@/stores/authentication'
 import { useApp } from '@/stores/app'
 

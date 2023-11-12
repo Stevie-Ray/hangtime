@@ -10,7 +10,7 @@ import roboto700 from '@fontsource/roboto/files/roboto-latin-700-normal.woff2'
 
 import { useApp } from '@/stores/app'
 
-import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable'
+import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable.vue'
 import { useAuthentication } from '@/stores/authentication'
 
 // router

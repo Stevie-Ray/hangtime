@@ -5,7 +5,7 @@ import { getAuth, signOut } from 'firebase/auth'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
 import { useAuthentication } from '@/stores/authentication'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useApp } from '@/stores/app'
 
 const { t } = useI18n()

@@ -4,16 +4,16 @@ import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
-import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter'
-import Walkthrough from '@/components/molecules/dialog/Walkthrough/Walkthrough'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
+import Walkthrough from '@/components/molecules/dialog/Walkthrough/Walkthrough.vue'
 import { useUser } from '@/stores/user'
 import { useWorkouts } from '@/stores/workouts'
 
 import { time } from '@/helpers'
 import { useAuthentication } from '@/stores/authentication'
 
-import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard'
+import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import { useApp } from '@/stores/app'
 
 const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUser())

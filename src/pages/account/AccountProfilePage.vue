@@ -15,7 +15,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuthentication } from '@/stores/authentication'
 import { weightConverter } from '@/helpers'
 import countries from '@/helpers/countries'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useApp } from '@/stores/app'
 
 const { t } = useI18n()

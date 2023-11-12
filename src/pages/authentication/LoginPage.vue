@@ -494,7 +494,7 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-@import '~vuetify/_settings';
+@use '@/plugins/vuetify/main';
 
 .v-theme--dark {
   .logo {
@@ -504,7 +504,7 @@ useHead({
 
 .logo-container {
   padding-bottom: 20px;
-  @media #{map-get($display-breakpoints, 'md-and-up')} {
+  @media #{map-get(main.$display-breakpoints, 'md-and-up')} {
     padding-top: 5vh;
     padding-bottom: 5vh;
   }
