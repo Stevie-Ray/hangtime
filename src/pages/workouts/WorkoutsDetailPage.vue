@@ -997,7 +997,7 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-@use 'vuetify/settings';
+@use '@/plugins/vuetify/settings';
 
 .fab {
   bottom: 56px;

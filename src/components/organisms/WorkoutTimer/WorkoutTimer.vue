@@ -508,8 +508,8 @@ onMounted(() => {
           ? skip
             ? 'none'
             : clockText === t('Go') && (currentExerciseStep === 1 || currentExerciseStep === 3)
-            ? `width 0s linear`
-            : `width ${clock}s linear`
+              ? `width 0s linear`
+              : `width ${clock}s linear`
           : 'none'
     }"
     class="position-absolute h-100 px-0 py-0 progress"

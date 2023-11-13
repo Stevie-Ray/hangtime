@@ -1,4 +1,4 @@
-import './main.scss'
+import './settings.scss'
 // Vuetify
 import { createVuetify } from 'vuetify'
 // Material Design 3
