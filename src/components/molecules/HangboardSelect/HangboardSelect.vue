@@ -56,18 +56,20 @@ const subject = computed(() =>
     required
     @update:modelValue="selected.hangboard = 0"
   >
-    <template #item="{ item, props: { onClick } }">
-      <v-list-item @click="onClick">
-        <span>
-          {{
-            item.raw.country
-              ? countries.find((country) => country.alpha2 === item.raw.country)?.emoji
-              : ''
-          }}&nbsp;{{ item.title }}</span
-        >
-        <v-chip class="mx-2" size="x-small" v-if="item.value >= getCompanies.length - 5">
-          {{ $t('new') }}
-        </v-chip>
+    <template #item="{ item, props }">
+      <v-list-item v-bind="props">
+        <template #title>
+          <span>
+            {{
+              item.raw.country
+                ? countries.find((country) => country.alpha2 === item.raw.country)?.emoji
+                : ''
+            }}&nbsp;{{ item.title }}</span
+          >
+          <v-chip class="mx-2" size="x-small" v-if="item.value >= getCompanies.length - 5">
+            {{ $t('new') }}
+          </v-chip>
+        </template>
       </v-list-item>
     </template>
     <template #prepend>
