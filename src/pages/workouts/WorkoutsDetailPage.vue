@@ -997,8 +997,6 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-@use '@/plugins/vuetify/settings';
-
 .fab {
   bottom: 56px;
   z-index: 1007;
@@ -1040,7 +1038,7 @@ useHead({
 }
 .required :deep(label::after) {
   content: '*';
-  margin-left: settings.$spacer;
+  margin-left: 4px;
   color: rgb(var(--v-theme-error));
 }
 </style>
