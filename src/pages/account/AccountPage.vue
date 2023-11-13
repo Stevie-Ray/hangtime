@@ -137,7 +137,7 @@ useHead({
       >
         <span>
           <v-avatar size="small" color="grey-darken-1" class="mr-2">
-            <v-img :src="user.photoURL" :alt="user.displayName"></v-img>
+            <v-img :src="user.photoURL" :alt="user.displayName" width="32" height="32"></v-img>
           </v-avatar>
         </span>
         <span>{{ user.displayName }}</span>

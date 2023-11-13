@@ -8,7 +8,8 @@ module.exports = {
     'airbnb-base',
     'eslint:recommended',
     'plugin:vue/vue3-essential',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'prettier'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
