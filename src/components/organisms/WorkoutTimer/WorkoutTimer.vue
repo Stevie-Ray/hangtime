@@ -94,7 +94,7 @@ const speakText = (text) => {
 }
 
 const playSound = (path, type) => {
-  if (user.value?.settings?.sound) {
+  if (user.value?.settings?.sound && audio) {
     // workaround for iOS / Safari
     if (path) {
       // eslint-disable-next-line global-require,import/no-dynamic-require
@@ -103,6 +103,7 @@ const playSound = (path, type) => {
     if (type) {
       audio.type = `audio/${type}`
     }
+    audio.play()
   }
 }
 const vibratePhone = () => {
