@@ -98,7 +98,9 @@ const playSound = (path) => {
     // workaround for iOS / Safari
     // eslint-disable-next-line global-require,import/no-dynamic-require
     audio.src = require(`@/assets/sound/${path}`)
+    console.log(audio)
   }
+  console.log(audio)
 }
 const vibratePhone = () => {
   if ('vibrate' in navigator) {
