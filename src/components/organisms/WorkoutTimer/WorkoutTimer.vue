@@ -101,7 +101,6 @@ const playSound = (path, type) => {
   if (user.value?.settings?.sound && audio) {
     // workaround for iOS / Safari
     if (path) {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
       audio.src = path
     }
     if (type) {
@@ -457,6 +456,7 @@ const startTimer = () => {
     audio.autoplay = true
     audio.preload = 'auto'
     audio.type = 'audio/wav'
+    audio.crossOrigin = 'anonymous'
     audio.src =
       'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA'
   }

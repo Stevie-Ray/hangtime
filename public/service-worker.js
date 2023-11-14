@@ -1,7 +1,9 @@
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
 import { setCacheNameDetails } from 'workbox-core'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
-import { StaleWhileRevalidate } from 'workbox-strategies'
+import { CacheableResponsePlugin } from 'workbox-cacheable-response'
+import { RangeRequestsPlugin } from 'workbox-range-requests'
+import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies'
 
 setCacheNameDetails({ prefix: 'hangtime' })
 
@@ -21,6 +23,23 @@ const navigationRoute = new NavigationRoute(handler, {
 })
 
 registerRoute(navigationRoute)
+
+registerRoute(
+  ({ request }) => {
+    const { destination } = request
+
+    return destination === 'video' || destination === 'audio'
+  },
+  new CacheFirst({
+    cacheName: 'media',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [200]
+      }),
+      new RangeRequestsPlugin()
+    ]
+  })
+)
 
 registerRoute(
   /^https:\/\/fonts/,
