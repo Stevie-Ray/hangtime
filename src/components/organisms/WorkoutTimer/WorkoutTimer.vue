@@ -93,14 +93,17 @@ const speakText = (text) => {
   }
 }
 
-const playSound = (path) => {
+const playSound = (path, type) => {
   if (user.value?.settings?.sound) {
     // workaround for iOS / Safari
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    audio.src = require(`@/assets/sound/${path}`)
-    console.log(audio)
+    if (path) {
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      audio.src = require(`@/assets/sound/${path}`)
+    }
+    if (type) {
+      audio.type = `audio/${type}`
+    }
   }
-  console.log(audio)
 }
 const vibratePhone = () => {
   if ('vibrate' in navigator) {
@@ -113,19 +116,19 @@ const countDown = () => {
   //   if (user.value?.settings?.speak) {
   //     speakText(`${t('Get Ready')}!`)
   //   } else {
-  //     playSound('count.wav')
+  //     playSound('count.wav', 'wav')
   //   }
   // }
   if (clock.value <= 3 && clock.value > 1) {
     if (user.value?.settings?.speak) {
       speakText(clock.value - 1)
     } else {
-      playSound('count.wav')
+      playSound('count.wav', 'wav')
     }
   }
   if (clock.value === 1) {
     vibratePhone()
-    playSound('start.wav')
+    playSound('start.wav', 'wav')
     speakText(`${t('Go')}!`)
   }
 }
@@ -166,7 +169,7 @@ const exerciseHold = () => {
     !(exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
   ) {
     vibratePhone()
-    playSound('stop.wav')
+    playSound('stop.wav', 'wav')
   }
 }
 
@@ -268,7 +271,7 @@ const skipRest = () => {
 
 const maxHold = () => {
   vibratePhone()
-  playSound('stop.wav')
+  playSound('stop.wav', 'wav')
   // HOLD
   if (currentExerciseStep.value === 1) {
     // check if exercise has to repeat
@@ -440,16 +443,15 @@ const setupWorkout = async () => {
 const startTimer = () => {
   timerPaused.value = false
   // init audio on button click
-  console.log(audio)
   if (audio) {
     if (process.env.NODE_ENV !== 'production') {
       audio.volume = 0.25
     }
     audio.autoplay = true
+    audio.type = 'audio/wav'
     audio.src =
-      'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'
+      'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA'
   }
-  console.log(audio)
   setupWorkout()
 }
 
