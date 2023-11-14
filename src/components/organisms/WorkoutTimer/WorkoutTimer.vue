@@ -8,6 +8,10 @@ import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/Worko
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
 import { time } from '@/helpers'
 
+import countSound from '@/assets/sound/count.wav'
+import startSound from '@/assets/sound/start.wav'
+import stopSound from '@/assets/sound/stop.wav'
+
 import { useAuthentication } from '@/stores/authentication'
 import { useActivities } from '@/stores/activities'
 
@@ -98,12 +102,14 @@ const playSound = (path, type) => {
     // workaround for iOS / Safari
     if (path) {
       // eslint-disable-next-line global-require,import/no-dynamic-require
-      audio.src = require(`@/assets/sound/${path}`)
+      audio.src = path
     }
     if (type) {
       audio.type = `audio/${type}`
     }
-    audio.play()
+    audio.addEventListener('canplaythrough', () => {
+      audio.play()
+    })
   }
 }
 const vibratePhone = () => {
@@ -117,19 +123,19 @@ const countDown = () => {
   //   if (user.value?.settings?.speak) {
   //     speakText(`${t('Get Ready')}!`)
   //   } else {
-  //     playSound('count.wav', 'wav')
+  //     playSound(countSound, 'wav')
   //   }
   // }
   if (clock.value <= 3 && clock.value > 1) {
     if (user.value?.settings?.speak) {
       speakText(clock.value - 1)
     } else {
-      playSound('count.wav', 'wav')
+      playSound(countSound, 'wav')
     }
   }
   if (clock.value === 1) {
     vibratePhone()
-    playSound('start.wav', 'wav')
+    playSound(startSound, 'wav')
     speakText(`${t('Go')}!`)
   }
 }
@@ -170,7 +176,7 @@ const exerciseHold = () => {
     !(exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
   ) {
     vibratePhone()
-    playSound('stop.wav', 'wav')
+    playSound(stopSound, 'wav')
   }
 }
 
@@ -272,7 +278,7 @@ const skipRest = () => {
 
 const maxHold = () => {
   vibratePhone()
-  playSound('stop.wav', 'wav')
+  playSound(stopSound, 'wav')
   // HOLD
   if (currentExerciseStep.value === 1) {
     // check if exercise has to repeat
@@ -449,6 +455,7 @@ const startTimer = () => {
       audio.volume = 0.25
     }
     audio.autoplay = true
+    audio.preload = 'auto'
     audio.type = 'audio/wav'
     audio.src =
       'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA'
