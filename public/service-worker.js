@@ -37,7 +37,11 @@ registerRoute(
         statuses: [200]
       }),
       new RangeRequestsPlugin()
-    ]
+    ],
+    matchOptions: {
+      ignoreSearch: true,
+      ignoreVary: true
+    }
   })
 )
 
