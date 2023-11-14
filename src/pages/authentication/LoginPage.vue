@@ -65,6 +65,7 @@ const year = new Date().getFullYear()
 const appVersion = process.env.VUE_APP_VERSION
 const formDisabled = ref(false)
 const switchForm = ref(false)
+const passwordToggle = ref(false)
 const valid = ref(true)
 const login = ref(null)
 const register = ref(null)
@@ -345,6 +346,7 @@ useHead({
                     label="E-mail"
                     class="input-email"
                     autocomplete="email"
+                    autocapitalize="off"
                     :rules="[rules.required]"
                     required
                   ></v-text-field>
@@ -352,10 +354,12 @@ useHead({
                     v-model="password"
                     class="input-password"
                     autocomplete="current-password"
+                    :append-inner-icon="passwordToggle ? '$eye' : '$eyeOff'"
                     :rules="[rules.required]"
                     label="Password"
-                    type="password"
+                    :type="passwordToggle ? 'text' : 'password'"
                     required
+                    @click:append-inner="passwordToggle = !passwordToggle"
                   ></v-text-field>
 
                   <v-btn
