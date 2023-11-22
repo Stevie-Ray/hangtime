@@ -19,7 +19,7 @@
     "@fontsource/roboto": "^5.0.8",
     "@googlemaps/js-api-loader": "^1.16.2",
     "@mdi/js": "^7.3.67",
-    "@unhead/vue": "^1.8.4",
+    "@unhead/vue": "^1.8.7",
     "core-js": "^3.33.3",
     "firebase": "^10.6.0",
     "ircra": "^2.2.4",
@@ -31,11 +31,11 @@
     "sass-loader": "^13.3.2",
     "vue": "^3.3.4",
     "vue-gtag": "^2.0.1",
-    "vue-i18n": "^9.7.0",
+    "vue-i18n": "^9.7.1",
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.2.5",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.4.2"
+    "vuetify": "^3.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.23.3",
