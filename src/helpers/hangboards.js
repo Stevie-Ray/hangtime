@@ -7008,8 +7008,8 @@ export default [
       'British Bouldering Guidebooks, Hangboards and Foam Masters - for holds and general psych!',
     country: 'GB',
     location: {
-      lat: '51.8571552',
-      lon: '-2.2837118'
+      lat: '51.7212645',
+      lon: '-2.5681867'
     },
     id: 116,
     url: 'https://www.roots-climbing.com',
@@ -7023,9 +7023,9 @@ export default [
         id: 0,
         image: 'hangboards/ROOTSBASELINE.svg',
         size: {
-          x: null,
-          y: null,
-          z: null
+          x: 700,
+          y: 117,
+          z: 56
         },
         type: 'wood',
         url: 'https://www.roots-climbing.com/product/2519429/baseline-fingerboard-includes-uk-shipping-contact-us-for-overseas-sales',
