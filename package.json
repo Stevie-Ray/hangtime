@@ -35,10 +35,10 @@
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.2.5",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.4.3"
+    "vuetify": "^3.4.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.3",
+    "@babel/core": "^7.23.5",
     "@babel/eslint-parser": "^7.23.3",
     "@storybook/addon-actions": "^7.0.17",
     "@storybook/addon-essentials": "^7.6.0",
