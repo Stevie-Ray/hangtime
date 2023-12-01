@@ -9,6 +9,7 @@ import IRCRA from 'ircra'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useAuthentication } from '@/stores/authentication'
 import { useApp } from '@/stores/app'
+import { loadLanguageAsync } from '@/plugins/i18n'
 
 const scale = new IRCRA().scale()
 
@@ -28,41 +29,41 @@ const router = useRouter()
 
 const language = [
   {
-    name: '简体中文',
+    title: '简体中文',
     value: 'zh-CN',
     disabled: true
   },
   {
-    name: 'Deutsch',
+    title: 'Deutsch',
     value: 'de-DE'
   },
   {
-    name: 'Français',
+    title: 'Français',
     value: 'fr-FR'
   },
   {
-    name: 'English',
+    title: 'English',
     value: 'en-US'
   },
   {
-    name: 'Español',
+    title: 'Español',
     value: 'es-ES'
   },
   {
-    name: 'Italiano',
+    title: 'Italiano',
     value: 'it-IT'
   },
   {
-    name: '日本語',
+    title: '日本語',
     value: 'ja-JP',
     disabled: true
   },
   {
-    name: 'Nederlands',
+    title: 'Nederlands',
     value: 'nl-NL'
   },
   {
-    name: 'Polski',
+    title: 'Polski',
     value: 'pl-PL'
   }
 ]
@@ -76,19 +77,19 @@ const settingsLocale = computed({
     return i18n.locale
   },
   set(value) {
-    i18n.locale = value
     user.value.settings.locale = value
+    loadLanguageAsync(value)
   }
 })
 
 const weight = [
   {
-    name: t('Kilograms - Metric'),
+    title: t('Kilograms - Metric'),
     short: 'kg',
     value: 0
   },
   {
-    name: t('Pounds - Imperial'),
+    title: t('Pounds - Imperial'),
     short: 'lb',
     value: 1
   }
@@ -96,15 +97,15 @@ const weight = [
 
 const themes = [
   {
-    name: t('System'),
+    title: t('System'),
     value: 0
   },
   {
-    name: t('Light'),
+    title: t('Light'),
     value: 1
   },
   {
-    name: t('Dark'),
+    title: t('Dark'),
     value: 2
   }
 ]
@@ -159,9 +160,8 @@ useHead({
                   v-model="settingsLocale"
                   :disabled="!networkOnLine"
                   :items="language"
+                  :item-props="true"
                   :label="t('Language')"
-                  item-title="name"
-                  item-value="value"
                   @update:modelValue="updateUser"
                 ></v-select>
               </v-list-item>
@@ -176,8 +176,6 @@ useHead({
                   :disabled="!networkOnLine"
                   :items="weight"
                   :label="t('Weight system')"
-                  item-title="name"
-                  item-value="value"
                   @update:modelValue="updateUser"
                 >
                 </v-select>
@@ -193,8 +191,6 @@ useHead({
                   :disabled="!networkOnLine"
                   :items="themes"
                   :label="t('Theme')"
-                  item-title="name"
-                  item-value="value"
                   @update:modelValue="setTheme"
                 >
                 </v-select>

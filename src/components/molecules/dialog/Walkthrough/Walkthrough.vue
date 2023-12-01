@@ -9,6 +9,7 @@ import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSel
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import { useAuthentication } from '@/stores/authentication'
+import { loadLanguageAsync } from '@/plugins/i18n'
 
 const ircra = new IRCRA()
 
@@ -30,41 +31,41 @@ const dialog = ref(true)
 
 const language = [
   {
-    name: '简体中文',
+    title: '简体中文',
     value: 'zh-CN',
     disabled: true
   },
   {
-    name: 'Deutsch',
+    title: 'Deutsch',
     value: 'de-DE'
   },
   {
-    name: 'Français',
+    title: 'Français',
     value: 'fr-FR'
   },
   {
-    name: 'English',
+    title: 'English',
     value: 'en-US'
   },
   {
-    name: 'Español',
+    title: 'Español',
     value: 'es-ES'
   },
   {
-    name: 'Italiano',
+    title: 'Italiano',
     value: 'it-IT'
   },
   {
-    name: '日本語',
+    title: '日本語',
     value: 'ja-JP',
     disabled: true
   },
   {
-    name: 'Nederlands',
+    title: 'Nederlands',
     value: 'nl-NL'
   },
   {
-    name: 'Polski',
+    title: 'Polski',
     value: 'pl-PL'
   }
 ]
@@ -118,8 +119,8 @@ const settingsLocale = computed({
     return i18n.locale
   },
   set(value) {
-    i18n.locale = value
     user.value.settings.locale = value
+    loadLanguageAsync(value)
   }
 })
 
@@ -172,8 +173,7 @@ const settingsGrade = computed({
                   v-model="settingsLocale"
                   :items="language"
                   :label="t('Language')"
-                  item-title="name"
-                  item-value="value"
+                  :item-props="true"
                 ></v-select>
               </v-card-text>
             </v-card>

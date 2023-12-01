@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import i18n from '@/plugins/i18n'
+import { loadLanguageAsync } from '@/plugins/i18n'
 import router from '@/router'
 
 export const useAuthentication = defineStore('authentication', () => {
@@ -68,7 +68,7 @@ export const useAuthentication = defineStore('authentication', () => {
       const activities = useActivities()
 
       if (user.value?.settings?.locale) {
-        i18n.global.locale.value = user.value.settings.locale
+        loadLanguageAsync(user.value.settings.locale)
       }
 
       if (user.value?.id) {
