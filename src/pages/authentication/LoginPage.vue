@@ -22,6 +22,7 @@ import { event } from 'vue-gtag'
 import { useAuthentication } from '@/stores/authentication'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
+import imgLogo from '@/assets/logo.svg'
 
 const { t } = useI18n()
 
@@ -62,7 +63,7 @@ watch(
 
 const resetPassword = ref(false)
 const year = new Date().getFullYear()
-const appVersion = process.env.VUE_APP_VERSION
+const appVersion = import.meta.env.VITE_APP_VERSION
 const formDisabled = ref(false)
 const switchForm = ref(false)
 const passwordToggle = ref(false)
@@ -269,13 +270,7 @@ useHead({
       <v-col cols="12" class="text-center">
         <v-row no-gutters justify="center" class="logo-container">
           <v-col class="flex-grow-0" style="margin-bottom: -12px">
-            <img
-              class="logo"
-              :src="require(`@/assets/logo.svg`)"
-              alt="HangTime Logo"
-              height="44"
-              width="44"
-            />
+            <img class="logo" :src="imgLogo" alt="HangTime Logo" height="44" width="44" />
           </v-col>
           <v-col class="flex-grow-0">
             <h2 class="text-h4">HangTime</h2>

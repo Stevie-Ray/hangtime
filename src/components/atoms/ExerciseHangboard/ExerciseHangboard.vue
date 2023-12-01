@@ -28,15 +28,15 @@ const getHangboard = computed(() =>
 const hangboardImage = () => {
   if (getHangboard.value?.sides?.length) {
     if (props.exercise?.rotate) {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      return require(`@/assets/${getHangboard.value?.sides[props.exercise.rotate].image}`)
+      return new URL(
+        `/src/assets/${getHangboard.value?.sides[props.exercise.rotate].image}`,
+        import.meta.url
+      ).href
     }
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    return require(`@/assets/${getHangboard.value?.sides[0].image}`)
+    return new URL(`/src/assets/${getHangboard.value?.sides[0].image}`, import.meta.url).href
   }
   if (getHangboard.value) {
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    return require(`@/assets/${getHangboard.value?.image}`)
+    return new URL(`/src/assets/${getHangboard.value?.image}`, import.meta.url).href
   }
   return ''
 }

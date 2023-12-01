@@ -450,7 +450,7 @@ const startTimer = () => {
   timerPaused.value = false
   // init audio on button click
   if (audio) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (import.meta.env.MODE !== 'production') {
       audio.volume = 0.25
     }
     audio.autoplay = true

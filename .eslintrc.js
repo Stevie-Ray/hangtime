@@ -26,8 +26,5 @@ module.exports = {
     'max-len': 'off',
     'import/prefer-default-export': 'off',
     'no-return-await': 'off'
-  },
-  parserOptions: {
-    parser: '@babel/eslint-parser'
   }
 }

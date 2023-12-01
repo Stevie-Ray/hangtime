@@ -1,3 +1,17 @@
+import imgBackgroundLight1 from '@/assets/backgrounds/background-l1.png'
+import imgBackgroundLight2 from '@/assets/backgrounds/background-l2.png'
+import imgBackgroundLight3 from '@/assets/backgrounds/background-l3.png'
+import imgBackgroundLight4 from '@/assets/backgrounds/background-l4.png'
+import imgBackgroundLight5 from '@/assets/backgrounds/background-l5.png'
+import imgBackgroundLight6 from '@/assets/backgrounds/background-l6.png'
+import imgBackgroundDark1 from '@/assets/backgrounds/background-d1.jpeg'
+import imgBackgroundDark2 from '@/assets/backgrounds/background-d2.png'
+import imgBackgroundDark3 from '@/assets/backgrounds/background-d3.jpeg'
+import imgBackgroundDark4 from '@/assets/backgrounds/background-d4.png'
+import imgBackgroundDark5 from '@/assets/backgrounds/background-d5.png'
+import imgBackgroundDark6 from '@/assets/backgrounds/background-d6.png'
+import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
+
 /**
  *
  * @param time
@@ -435,22 +449,22 @@ export function useRandomImage(dark = false) {
   let images = []
   if (!dark) {
     images = [
-      require('@/assets/backgrounds/background-l1.png'),
-      require('@/assets/backgrounds/background-l2.png'),
-      require('@/assets/backgrounds/background-l3.png'),
-      require('@/assets/backgrounds/background-l4.png'),
-      require('@/assets/backgrounds/background-l5.png'),
-      require('@/assets/backgrounds/background-l6.png')
+      imgBackgroundLight1,
+      imgBackgroundLight2,
+      imgBackgroundLight3,
+      imgBackgroundLight4,
+      imgBackgroundLight5,
+      imgBackgroundLight6
     ]
   } else {
     images = [
-      require('@/assets/backgrounds/background-d1.jpeg'),
-      require('@/assets/backgrounds/background-d2.png'),
-      require('@/assets/backgrounds/background-d3.jpeg'),
-      require('@/assets/backgrounds/background-d4.png'),
-      require('@/assets/backgrounds/background-d5.png'),
-      require('@/assets/backgrounds/background-d6.png'),
-      require('@/assets/backgrounds/background-d7.png')
+      imgBackgroundDark1,
+      imgBackgroundDark2,
+      imgBackgroundDark3,
+      imgBackgroundDark4,
+      imgBackgroundDark5,
+      imgBackgroundDark6,
+      imgBackgroundDark7
     ]
   }
   /* eslint-enable global-require */
@@ -460,7 +474,7 @@ export function useRandomImage(dark = false) {
 // export function sound(audio) {
 //     if (audio) {
 //         // eslint-disable-next-line global-require
-//         const file = require(`@/assets/sound/${audio}`) // eslint-disable-line import/no-dynamic-require
+//         const file = new URL(`/src/assets/sound/${audio}`, import.meta.url).href
 //         const audioPlayer = new Audio(file)
 //         audioPlayer.play()
 //     }

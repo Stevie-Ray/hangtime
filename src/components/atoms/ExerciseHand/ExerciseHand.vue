@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
+import imgIconHang from '@/assets/icons/hand.svg'
 
 const { t } = useI18n()
 
@@ -110,7 +111,7 @@ function resetHands() {
           @click="toggleLeft($event)"
           v-if="exercise.left !== null"
           :class="[leftClass, { large: edit }]"
-          :src="require('@/assets/icons/hand.svg')"
+          :src="imgIconHang"
           class="w-100"
         />
       </div>
@@ -119,7 +120,7 @@ function resetHands() {
           @click="toggleRight($event)"
           v-if="exercise?.right !== null"
           :class="[rightClass, { large: edit }]"
-          :src="require('@/assets/icons/hand.svg')"
+          :src="imgIconHang"
           class="w-100"
         />
       </div>

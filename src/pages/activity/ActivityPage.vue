@@ -5,6 +5,7 @@ import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import { time } from '@/helpers'
+import imgLogo from '@/assets/logo.svg'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
@@ -86,11 +87,7 @@ useHead({
             style="height: 28px; width: 28px"
           >
             <div class="v-responsive__sizer" style="padding-bottom: 100%"></div>
-            <inline-svg
-              class="v-img__img v-img__img--contain"
-              :src="require(`@/assets/logo.svg`)"
-              alt="logo"
-            />
+            <inline-svg class="v-img__img v-img__img--contain" :src="imgLogo" alt="logo" />
           </div>
         </div>
         <div>HangTime</div>

@@ -1,4 +1,8 @@
-import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
+import {
+  cleanupOutdatedCaches,
+  precacheAndRoute,
+  createHandlerBoundToURL
+} from 'workbox-precaching'
 import { setCacheNameDetails } from 'workbox-core'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
@@ -7,6 +11,7 @@ import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies'
 
 setCacheNameDetails({ prefix: 'hangtime' })
 
+cleanupOutdatedCaches()
 /**
  * The precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
@@ -54,8 +59,8 @@ registerRoute(
   'GET'
 )
 
-// eslint-disable-next-line no-restricted-globals,consistent-return
-addEventListener('message', (messageEvent) => {
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('message', (event) => {
   // eslint-disable-next-line no-restricted-globals
-  if (messageEvent.data === 'skipWaiting') return self.skipWaiting()
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting()
 })
