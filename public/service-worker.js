@@ -21,13 +21,15 @@ cleanupOutdatedCaches()
 precacheAndRoute(self.__WB_MANIFEST)
 
 // Redirect to index.html if sw cannot find matching route
-const handler = createHandlerBoundToURL('/index.html')
-const navigationRoute = new NavigationRoute(handler, {
-  /* Do not redirect routes used by firebase auth  */
-  denylist: [/\/__\/auth\/handler/, /\/__\/auth\/iframe/, /\/.well-known/]
-})
+if (import.meta.env.MODE === 'production') {
+  const handler = createHandlerBoundToURL('/index.html')
+  const navigationRoute = new NavigationRoute(handler, {
+    /* Do not redirect routes used by firebase auth  */
+    denylist: [/\/__\/auth\/handler/, /\/__\/auth\/iframe/, /\/.well-known/]
+  })
 
-registerRoute(navigationRoute)
+  registerRoute(navigationRoute)
+}
 
 registerRoute(
   ({ request }) => {
@@ -62,5 +64,6 @@ registerRoute(
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('message', (event) => {
   // eslint-disable-next-line no-restricted-globals
+  console.log(event.data)
   if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting()
 })
