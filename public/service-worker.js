@@ -60,10 +60,8 @@ registerRoute(
   }),
   'GET'
 )
-
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('message', (event) => {
+// eslint-disable-next-line no-restricted-globals,consistent-return
+addEventListener('message', (messageEvent) => {
   // eslint-disable-next-line no-restricted-globals
-  console.log(event.data)
-  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting()
+  if (messageEvent.data === 'skipWaiting') return self.skipWaiting()
 })
