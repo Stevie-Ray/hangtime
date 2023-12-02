@@ -122,7 +122,7 @@ onMounted(() => {
 })
 
 const exerciseRemove = () => {
-  workout.value.exercises.splice(exerciseIndex.value)
+  workout.value.exercises.splice(exerciseIndex.value, 1)
   exerciseIndex.value = 0
   exerciseEditDialog.value = false
 }

@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import imgIconHang from '@/assets/icons/hand.svg'
@@ -7,74 +6,40 @@ import imgIconHang from '@/assets/icons/hand.svg'
 const { t } = useI18n()
 
 const props = defineProps({
-  exercise: {
-    type: Object
-  },
-  edit: {
-    type: Boolean,
-    default: false
-  }
+  exercise: { type: Object },
+  edit: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['left', 'right'])
 
-function toggleLeft(e) {
+const toggleFinger = (hand, action, finger) => {
   if (props.edit) {
-    const finger = e.target.id
-    const n = finger.startsWith('f')
-
-    if (n && finger.length <= 2) {
-      const number = parseInt(finger.substr(1), 10)
-      let left = []
-      if (props.exercise.leftHand) {
-        if (props.exercise.leftHand.length > 3) return
-        left = [...props.exercise.leftHand]
+    const handArray = props.exercise[hand]
+    if (finger.startsWith('f') && finger.length <= 2) {
+      const fingerNumber = parseInt(finger.substr(1), 10)
+      let updatedHand = []
+      if (handArray) {
+        if (handArray.length > 3) return
+        updatedHand = [...handArray]
       }
-      left.push(number)
-      emit('left', left)
+      updatedHand.push(fingerNumber)
+      emit(action, updatedHand)
     }
   }
 }
 
-const leftClass = computed(() => {
-  if (props.exercise.leftHand) {
-    if (props.exercise.leftHand.length) {
-      return props.exercise.leftHand.map((finger) => `f${finger}`).join(' ')
+const getHandClass = (hand) => {
+  const handArray = props.exercise[hand]
+  if (handArray) {
+    if (handArray.length) {
+      return handArray.map((finger) => `f${finger}`).join(' ')
     }
-    return `f${props.exercise.leftHand}`
+    return `f${handArray}`
   }
   return ''
-})
-
-function toggleRight(e) {
-  if (props.edit) {
-    const finger = e.target.id
-    const n = finger.startsWith('f')
-
-    if (n && finger.length <= 2) {
-      const number = parseInt(finger.substr(1), 10)
-      let right = []
-      if (props.exercise.rightHand) {
-        if (props.exercise.rightHand.length > 3) return
-        right = [...props.exercise.rightHand]
-      }
-      right.push(number)
-      emit('right', right)
-    }
-  }
 }
 
-const rightClass = computed(() => {
-  if (props.exercise.rightHand) {
-    if (props.exercise.rightHand.length) {
-      return props.exercise.rightHand.map((finger) => `f${finger}`).join(' ')
-    }
-    return `f${props.exercise.rightHand}`
-  }
-  return ''
-})
-
-function resetHands() {
+const resetHands = () => {
   emit('left', [])
   emit('right', [])
 }
@@ -108,18 +73,18 @@ function resetHands() {
     >
       <div class="hand__left">
         <inline-svg
-          @click="toggleLeft($event)"
+          @click="(e) => toggleFinger('leftHand', 'left', e.target.id)"
           v-if="exercise.left !== null"
-          :class="[leftClass, { large: edit }]"
+          :class="[getHandClass('leftHand'), { large: edit }]"
           :src="imgIconHang"
           class="w-100"
         />
       </div>
       <div class="hand__right">
         <inline-svg
-          @click="toggleRight($event)"
+          @click="(e) => toggleFinger('rightHand', 'right', e.target.id)"
           v-if="exercise?.right !== null"
-          :class="[rightClass, { large: edit }]"
+          :class="[getHandClass('rightHand'), { large: edit }]"
           :src="imgIconHang"
           class="w-100"
         />

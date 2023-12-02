@@ -19,8 +19,8 @@ const props = defineProps({
 <template>
   <span v-if="exercise">
     <span v-if="exercise.max">Max </span>
-    <span v-if="exercise.repeat > 0 && !hideRepeat && !exercise.max"
-      >{{ exercise.repeat + 1 }}x
+    <span v-if="exercise.repeat > 0 && !hideRepeat && !exercise.max">
+      {{ exercise.repeat + 1 }}x
     </span>
     <span v-if="exercise.pullups > 1 && !exercise.max"> {{ exercise.pullups }}&nbsp;</span>
     <span v-if="exercise.left === null || exercise.right === null">One-Arm </span>

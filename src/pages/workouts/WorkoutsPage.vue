@@ -1,44 +1,35 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import { useHead } from '@unhead/vue'
+import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import { useUser } from '@/stores/user'
+import { useWorkouts } from '@/stores/workouts'
+import { useAuthentication } from '@/stores/authentication'
+import { useApp } from '@/stores/app'
+import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
 import Walkthrough from '@/components/molecules/dialog/Walkthrough/Walkthrough.vue'
-import { useUser } from '@/stores/user'
-import { useWorkouts } from '@/stores/workouts'
-
 import { time } from '@/helpers'
-import { useAuthentication } from '@/stores/authentication'
-
-import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
-import { useApp } from '@/stores/app'
 
 const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUser())
-
 const { getHangboardNameByIds } = useUser()
-
 const { t } = useI18n()
-
 const { user } = storeToRefs(useAuthentication())
-
 const { updateUser } = useAuthentication()
-
 const { networkOnLine } = storeToRefs(useApp())
-
 const { fetchCommunityWorkouts } = useWorkouts()
-
 const workouts = useWorkouts()
-
 const route = useRoute()
 
-const workoutsList = computed(() =>
-  route.path === '/workouts'
-    ? workouts.getWorkoutsBySelectedHangboard
-    : workouts.getWorkoutsByCommunity
-)
+const workoutsList = computed(() => {
+  if (route.path === '/workouts') {
+    return workouts.getWorkoutsBySelectedHangboard
+  }
+  return workouts.getWorkoutsByCommunity
+})
 
 const hangboardMenu = ref(false)
 
@@ -47,10 +38,8 @@ const setHangboard = () => {
   fetchCommunityWorkouts()
 }
 
-const isHearted = (subscribers) => {
-  if (!subscribers?.length || user.value);
-  subscribers.some((subscriber) => subscriber === user.value.id)
-}
+const isHearted = (subscribers) =>
+  subscribers?.length && user.value && subscribers.includes(user.value.id)
 
 const levels = [
   { name: t('easy'), value: 1 },
@@ -91,8 +80,7 @@ useHead({
                 hangboard: getUserHangboard.id,
                 company: getUserHangboardCompany.id
               }"
-            ></exercise-hangboard>
-
+            />
             <v-divider class="my-4" />
 
             <v-radio-group

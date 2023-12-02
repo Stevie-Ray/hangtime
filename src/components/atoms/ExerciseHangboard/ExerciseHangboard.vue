@@ -25,25 +25,21 @@ const getHangboard = computed(() =>
   getHangboardByIds(props.hangboard.company, props.hangboard.hangboard)
 )
 
-const hangboardImage = () => {
-  if (getHangboard.value?.sides?.length) {
-    if (props.exercise?.rotate) {
-      return new URL(
-        `/src/assets/${getHangboard.value?.sides[props.exercise.rotate].image}`,
-        import.meta.url
-      ).href
-    }
-    return new URL(`/src/assets/${getHangboard.value?.sides[0].image}`, import.meta.url).href
-  }
-  if (getHangboard.value) {
-    return new URL(`/src/assets/${getHangboard.value?.image}`, import.meta.url).href
-  }
-  return ''
-}
+const hangboardImage = computed(() => {
+  const sides = getHangboard.value?.sides || []
+  const rotateIndex = props.exercise?.rotate || 0
 
-const classHold = (hand) => {
-  return props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand] + 1}` : null
-}
+  if (sides.length) {
+    return new URL(`/src/assets/${sides[rotateIndex].image}`, import.meta.url).href
+  }
+
+  return getHangboard.value
+    ? new URL(`/src/assets/${getHangboard.value.image}`, import.meta.url).href
+    : ''
+})
+
+const classHold = (hand) =>
+  props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand] + 1}` : null
 
 const toggleHold = (hand, e) => {
   if (props.edit) {
@@ -82,21 +78,19 @@ const nextImage = () => {
     <div class="hangboard d-flex">
       <div class="hangboard--left">
         <inline-svg
-          @click="toggleHold('left', $event)"
-          :src="hangboardImage()"
+          @click="(e) => toggleHold('left', e)"
+          :src="hangboardImage"
           :class="classHold('left')"
           class="hangboard__img hangboard__img--left w-100 h-100"
-        >
-        </inline-svg>
+        />
       </div>
       <div class="hangboard--right">
         <inline-svg
-          @click="toggleHold('right', $event)"
-          :src="hangboardImage()"
+          @click="(e) => toggleHold('right', e)"
+          :src="hangboardImage"
           :class="classHold('right')"
           class="hangboard__img hangboard__img--left w-100 h-100"
-        >
-        </inline-svg>
+        />
       </div>
     </div>
   </div>
