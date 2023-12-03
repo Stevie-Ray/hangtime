@@ -9,6 +9,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/vue3-essential',
     'plugin:prettier/recommended',
+    'plugin:storybook/recommended',
     'prettier'
   ],
   rules: {
