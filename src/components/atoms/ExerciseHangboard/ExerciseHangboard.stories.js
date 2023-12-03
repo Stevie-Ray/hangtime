@@ -61,7 +61,7 @@ export const Core = {
     hangboard: {
       company: 2,
       hangboard: 0
-    },
+    }
   }
 }
 
