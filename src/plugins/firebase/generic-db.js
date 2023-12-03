@@ -14,7 +14,7 @@ import {
   where,
   orderBy,
   limit
-} from 'firebase/firestore'
+} from 'firebase/firestore/lite'
 import { toRaw } from 'vue'
 import firebaseApp from '@/plugins/firebase'
 

@@ -6,7 +6,7 @@ import {
   where,
   orderBy,
   limit
-} from 'firebase/firestore'
+} from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
 

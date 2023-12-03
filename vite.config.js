@@ -34,7 +34,7 @@ export default defineConfig({
         navigateFallback: null
       },
       devOptions: {
-        enabled: true,
+        enabled: false,
         type: 'module'
       }
     }),

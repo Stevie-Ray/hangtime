@@ -1,17 +1,20 @@
 import { createI18n } from 'vue-i18n'
 import defaultMessages from '@/i18n/en-US.json'
 
+const defaultLocale = 'en-US'
+
 const i18n = createI18n({
   legacy: false, // use composition mode
-  locale: 'en-US', // set locale
-  fallbackLocale: 'en-US',
-  messages: defaultMessages, // set locale messages
+  locale: defaultLocale, // set locale
+  fallbackLocale: defaultLocale,
   // If you need to specify other options, you can set other options
   // ...
   missingWarn: false,
   fallbackWarn: false,
   silentTranslationWarn: true
 })
+
+i18n.global.setLocaleMessage(defaultLocale, defaultMessages)
 
 const loadedLanguages = ['en-US'] // our default language that is preloaded
 
@@ -21,7 +24,8 @@ function setI18nLanguage(locale) {
   } else {
     i18n.global.locale.value = locale
   }
-  document.querySelector('html').setAttribute('lang', locale)
+  const htmlLang = locale.slice(0, 2)
+  document.querySelector('html').setAttribute('lang', htmlLang)
 }
 
 export async function loadLanguageAsync(locale) {
