@@ -1,4 +1,4 @@
-import ExerciseHangboard from './ExerciseHangboard'
+import ExerciseHangboard from './ExerciseHangboard.vue'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 export default {
@@ -26,7 +26,7 @@ export default {
       return { args, onRight, onLeft, onRotate }
     },
     template:
-      '<ExerciseHangboard v-bind="args"  @left="onLeft" @right="onRight" @rotate="onRotate" />'
+      '<exercise-hangboard v-bind="args" @left="onLeft" @right="onRight" @rotate="onRotate" />'
   }),
   args: {
     hangboard: {

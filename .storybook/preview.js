@@ -1,5 +1,4 @@
 import { setup } from '@storybook/vue3'
-// import { withVuetify } from 'storybook-addon-vuetify3/dist/decorators'
 
 import { registerPlugins } from '@/plugins'
 
@@ -21,4 +20,3 @@ const preview = {
 }
 
 export default preview
-// export const decorators = [withVuetify]

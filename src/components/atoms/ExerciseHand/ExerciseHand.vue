@@ -15,6 +15,8 @@ const emit = defineEmits(['left', 'right'])
 const toggleFinger = (hand, action, finger) => {
   if (props.edit) {
     const handArray = props.exercise[hand]
+    console.log(props)
+    console.log(handArray)
     if (finger.startsWith('f') && finger.length <= 2) {
       const fingerNumber = parseInt(finger.substr(1), 10)
       let updatedHand = []
@@ -23,6 +25,7 @@ const toggleFinger = (hand, action, finger) => {
         updatedHand = [...handArray]
       }
       updatedHand.push(fingerNumber)
+      console.log(action, updatedHand)
       emit(action, updatedHand)
     }
   }

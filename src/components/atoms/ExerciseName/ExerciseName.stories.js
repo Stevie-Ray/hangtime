@@ -1,76 +1,70 @@
-import ExerciseName from './ExerciseName'
+import ExerciseName from './ExerciseName.vue'
 
+// More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 export default {
   title: 'Components/Atoms/ExerciseName',
   component: ExerciseName,
-  argTypes: {
+  tags: ['autodocs'],
+  argTypes: {},
+  args: {
     exercise: {
-      control: 'object',
-      table: {
-        category: 'Attributes'
-      },
-      defaultValue: {
-        exercise: 1,
-        grip: 1,
-        hold: 20,
-        left: 1,
-        level: 1,
-        pause: 10,
-        pullups: 5,
-        repeat: 2,
-        rest: 3,
-        right: 1,
-        time: 80,
-        weight: 10
-      }
+      exercise: 0,
+      grip: 0,
+      hold: 30,
+      left: 1,
+      level: 1,
+      pause: 30,
+      pullups: 0,
+      repeat: 0,
+      rest: 10,
+      right: 1,
+      time: 80,
+      weight: 10
+    },
+    hideRepeat: false
+  }
+}
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Default = {
+  args: {}
+}
+
+export const Repeat = {
+  args: {
+    exercise: {
+      exercise: 1,
+      grip: 0,
+      hold: 30,
+      left: 1,
+      level: 1,
+      pause: 30,
+      pullups: 10,
+      repeat: 2,
+      rest: 10,
+      right: 1,
+      time: 80,
+      weight: 10
     }
   }
 }
 
-// 👇 We create a “template” of how args map to rendering
-const Template = (args) => ({
-  components: { ExerciseName },
-  setup() {
-    return { args }
-  },
-  template: '<exercise-name v-bind="args"/>'
-})
-
-export const Default = Template.bind({})
-Default.args = {}
-
-export const Secondary = Template.bind({})
-Secondary.args = {
-  exercise: {
-    exercise: 2,
-    grip: 2,
-    hold: 30,
-    left: 1,
-    level: 1,
-    pause: 30,
-    pullups: 10,
-    repeat: 2,
-    rest: 10,
-    right: 1,
-    time: 80,
-    weight: 10
-  }
-}
-
-export const Tertiary = Template.bind({})
-Tertiary.args = {
-  exercise: {
-    exercise: 0,
-    grip: 0,
-    hold: 30,
-    left: 1,
-    level: 1,
-    pause: 30,
-    pullups: 10,
-    repeat: 2,
-    rest: 10,
-    right: null,
-    time: 80,
-    weight: 10
+export const Max = {
+  args: {
+    exercise: {
+      exercise: 2,
+      grip: 0,
+      hold: 30,
+      left: 1,
+      level: 1,
+      pause: 30,
+      pullups: 10,
+      repeat: 2,
+      rest: 10,
+      right: 1,
+      time: 80,
+      weight: 10,
+      max: true
+    }
   }
 }
