@@ -164,7 +164,7 @@ const routes = [
 // keep it simple for now.
 const router = createRouter({
   // 4. Provide the history implementation to use.
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior() {
     // always scroll to top
@@ -180,8 +180,9 @@ router.beforeEach((to, from, next) => {
   if (!(to.meta && to.meta.public) && (user.value === null || user.value === undefined)) {
     const path = user.value === null ? '/login' : '/check-login'
     next(`${path}?redirectUrl=${to.path}`)
+  } else {
+    next()
   }
-  next()
 })
 
 export default router
