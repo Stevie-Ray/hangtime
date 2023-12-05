@@ -19,7 +19,7 @@
     "@googlemaps/js-api-loader": "^1.16.2",
     "@mdi/js": "^7.3.67",
     "@unhead/vue": "^1.8.8",
-    "core-js": "^3.33.3",
+    "core-js": "^3.34.0",
     "firebase": "^10.7.0",
     "ircra": "^2.2.4",
     "js-video-url-parser": "^0.5.1",
@@ -32,7 +32,7 @@
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.2.5",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.4.4"
+    "vuetify": "^3.4.5"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.3",
@@ -52,7 +52,7 @@
     "storybook": "^7.6.3",
     "storybook-dark-mode": "^3.0.3",
     "vite": "^4.5.1",
-    "vite-plugin-pwa": "^0.17.2",
+    "vite-plugin-pwa": "^0.17.3",
     "vite-plugin-vuetify": "^1.0.2"
   }
 }
