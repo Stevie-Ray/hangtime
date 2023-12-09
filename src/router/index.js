@@ -177,7 +177,11 @@ router.beforeEach((to, from, next) => {
   // the router is installed and pinia will be installed too
   const { user } = storeToRefs(useAuthentication())
 
-  if (!(to.meta && to.meta.public) && (user.value === null || user.value === undefined)) {
+  if (
+    !(to.meta && to.meta.public) &&
+    (user.value === null || user.value === undefined) &&
+    to.path !== '/iframe.html'
+  ) {
     const path = user.value === null ? '/login' : '/check-login'
     next(`${path}?redirectUrl=${to.path}`)
   } else {

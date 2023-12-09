@@ -528,12 +528,12 @@ onMounted(() => {
     }"
     class="position-absolute h-100 px-0 py-0 progress"
   ></v-container>
-  <v-container class="position-relative">
+  <v-container v-if="workout?.exercises" class="position-relative">
     <v-row align="center" justify="center">
       <v-col cols="12" sm="6">
         <v-row align="center" class="timer" justify="center">
           <v-col class="text-center" cols="12" sm="8">
-            <div v-if="workout?.exercises" class="text-h1">
+            <div class="text-h1">
               {{ time(clock) }}
             </div>
             <div class="text-h6 pt-2 mb-1" style="font-size: 1.5rem !important">

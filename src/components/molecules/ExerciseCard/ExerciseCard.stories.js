@@ -5,7 +5,28 @@ export default {
   title: 'Components/Molecules/ExerciseCard',
   component: ExerciseCard,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    onLeft: { action: 'left' },
+    onRight: { action: 'right' },
+    onRotate: { action: 'rotate' }
+  },
+  render: (args) => ({
+    components: { ExerciseCard },
+    // add functions for storybook
+    setup() {
+      const onLeft = (number) => {
+        args.exercise = { ...args.exercise, left: number }
+      }
+      const onRight = (number) => {
+        args.exercise = { ...args.exercise, right: number }
+      }
+      const onRotate = (number) => {
+        args.exercise = { ...args.exercise, rotate: number }
+      }
+      return { args, onRight, onLeft, onRotate }
+    },
+    template: '<exercise-card v-bind="args" @left="onLeft" @right="onRight" @rotate="onRotate" />'
+  }),
   args: {
     hangboard: {
       company: 1,
@@ -26,7 +47,7 @@ export default {
       weight: 10
     },
     index: 1,
-    editHangboard: false,
+    editHangboard: true,
     sort: false,
     editHand: false,
     hideRest: false

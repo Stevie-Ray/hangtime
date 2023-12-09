@@ -1,6 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 import router from '@/router'
 import { time, useRandomImage } from '@/helpers'
 import { useAuthentication } from '@/stores/authentication'
@@ -23,6 +24,8 @@ const props = defineProps({
     type: Number
   }
 })
+
+const dialog = ref(true)
 
 const shareAPI = navigator.share
 
@@ -64,7 +67,7 @@ const closeModal = () => {
 </script>
 
 <template>
-  <v-dialog fullscreen :scrim="false" transition="dialog-bottom-transition">
+  <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
     <v-card>
       <v-toolbar>
         <v-toolbar-title>{{ t('Well done') }}</v-toolbar-title>
@@ -100,7 +103,7 @@ const closeModal = () => {
             <v-divider v-if="user?.completed" class="my-4"></v-divider>
 
             <v-list>
-              <v-list-item v-if="user?.completed?.time !== null" class="px-0">
+              <v-list-item v-if="user && user?.completed?.time !== null" class="px-0">
                 <v-list-item-title>
                   {{ t('Total time worked out') }}
                 </v-list-item-title>
@@ -111,7 +114,7 @@ const closeModal = () => {
                   {{ time(user.completed.time) }}
                 </template>
               </v-list-item>
-              <v-list-item v-if="user?.completed?.hold !== null" class="px-0">
+              <v-list-item v-if="user && user?.completed?.hold !== null" class="px-0">
                 <v-list-item-title>
                   {{ t('Total time hangboarding') }}
                 </v-list-item-title>
@@ -122,7 +125,7 @@ const closeModal = () => {
                   {{ time(user.completed.hold) }}
                 </template>
               </v-list-item>
-              <v-list-item v-if="user?.completed?.amount !== null" class="px-0">
+              <v-list-item v-if="user && user?.completed?.amount !== null" class="px-0">
                 <v-list-item-title>
                   {{ t('Workouts done') }}
                 </v-list-item-title>

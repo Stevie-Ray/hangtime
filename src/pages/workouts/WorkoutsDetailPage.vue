@@ -4,21 +4,18 @@ import { useRoute, useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import draggable from 'vuedraggable'
-import { event } from 'vue-gtag'
-
 import urlParser from 'js-video-url-parser'
+
+import WorkoutSave from '@/components/molecules/dialog/WorkoutSave/WorkoutSave.vue'
+import MissingHangboard from '@/components/molecules/dialog/MissingHangboard/MissingHangboard.vue'
+import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
-import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
-import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 
 import { useApp } from '@/stores/app'
 import { useWorkouts } from '@/stores/workouts'
 import { useAuthentication } from '@/stores/authentication'
 import { useUser } from '@/stores/user'
-
-import { time, useExercises, useGrip, useRandomImage, weightConverter } from '@/helpers'
+import { time, useRandomImage } from '@/helpers'
 
 const { t } = useI18n()
 
@@ -26,27 +23,15 @@ const { networkOnLine } = storeToRefs(useApp())
 
 const { workouts } = storeToRefs(useWorkouts())
 
-// helpers
-const grip = useGrip()
-const exercises = useExercises()
-
 // router
 const route = useRoute()
 const router = useRouter()
 
 // workout
-const {
-  fetchCommunityWorkouts,
-  getWorkoutById,
-  removeUserWorkoutById,
-  createUserWorkout,
-  updateUserWorkout,
-  updateWorkout
-} = useWorkouts()
+const { fetchCommunityWorkouts, getWorkoutById, removeUserWorkoutById, updateWorkout } =
+  useWorkouts()
 
 const { getUserHangboards, getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
-
-const { getHangboardNameByIds } = useUser()
 
 const { user } = storeToRefs(useAuthentication())
 
@@ -57,29 +42,8 @@ const workout = computed(() => getWorkoutById(route.params.id ? route.params.id 
 // workout - edit
 const editMode = ref(false)
 
-const repType = ref('original')
-
-const editWorkout = () => {
-  editMode.value = true
-}
-
-// workout - exercise
-const exerciseEditDialog = ref(false)
+// workout - save
 const workoutSaveDialog = ref(false)
-const exerciseIndex = ref(0)
-
-const exercise = computed(() => workout.value.exercises[exerciseIndex.value])
-
-// eslint-disable-next-line no-shadow
-const exerciseEdit = (timer, time) => {
-  exercise.value[timer] = time
-  workout.value.time -= exercise.value.time
-  exercise.value.time =
-    (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
-    exercise.value.rest +
-    exercise.value.pause
-  workout.value.time += exercise.value.time
-}
 
 const exerciseAdd = () => {
   // create in function
@@ -121,79 +85,13 @@ onMounted(() => {
   }
 })
 
-const exerciseRemove = () => {
-  workout.value.exercises.splice(exerciseIndex.value, 1)
-  exerciseIndex.value = 0
-  exerciseEditDialog.value = false
-}
-
-const exerciseCopy = () => {
-  workout.value.exercises.splice(
-    exerciseIndex.value,
-    0,
-    structuredClone(workout.value.exercises[exerciseIndex.value])
-  )
-  exerciseIndex.value = 0
-  exerciseEditDialog.value = false
-}
-
-const exerciseByType = (typeId) =>
-  // eslint-disable-next-line no-shadow
-  exercises.filter((exercise) => exercise.type === typeId)
-
-const exerciseFilter = (type) => {
-  if (exercise.value.grip && grip[exercise.value.grip].disabledExercises) {
-    return exerciseByType(type).map((obj) => ({
-      ...obj,
-      disabled: grip[exercise.value.grip].disabledExercises.includes(obj.id)
-    }))
-  }
-  return exerciseByType(type)
-}
-
-const openExerciseEditDialog = (index) => {
-  if (editMode.value === true) {
-    exerciseIndex.value = index
-    exerciseEditDialog.value = true
-  }
-}
-
-const exerciseMovement = computed({
-  // getter
-  get() {
-    if (exercise.value.exercise === 0) return null
-    return exercise.value.exercise
-  },
-  // setter
-  set(newValue) {
-    exercise.value.exercise = newValue
-  }
-})
-
-// workout - save
-const workoutSave = () => {
-  if (!workout.value.id) {
-    // new workout
-    createUserWorkout(workout.value)
-  } else {
-    // existing workout
-    updateUserWorkout(workout.value)
-  }
-
-  workoutSaveDialog.value = false
-
-  editMode.value = false
-
-  router.push('/workouts')
-}
-
 // workout - remove
 const removeWorkout = () => {
   removeUserWorkoutById(route.params.id)
   router.push('/workouts')
 }
 
-const hasHangboardDialog = computed(() => {
+const missingHangboardDialog = computed(() => {
   if (!route.params.company || !route.params.hangboard) {
     return false
   }
@@ -219,16 +117,6 @@ const hasHangboardDialog = computed(() => {
   // do nothing
   return false
 })
-const addHangboard = () => {
-  const company = parseInt(route.params.company, 10)
-  const hangboard = parseInt(route.params.hangboard, 10)
-  event('add_hangboard', {
-    hangboard: getHangboardNameByIds(company, hangboard)
-  })
-  // add the newly selected board and set it
-  user.value.settings.hangboards.push({ company, hangboard })
-  user.value.settings.selected = user.value.settings.hangboards.length - 1
-}
 
 // workout - weight
 const isHearted = computed(() => {
@@ -253,15 +141,6 @@ const workoutSubscriber = () => {
     updateWorkout({ userId: workout.value.user.id, workout: workout.value })
   }
 }
-
-// workout - weight
-const weightLabel = computed(() => {
-  if (user?.value?.weight && exercise.value.weight !== 0) {
-    return `Your weight: ${user.value.weight}kg.
-     Training weight: ${user.value.weight + exercise.value.weight}kg.`
-  }
-  return 'Adjust using kettle/dumb-bells or pulley system'
-})
 
 // workout - share
 const navigatorShare = navigator.share
@@ -316,17 +195,9 @@ const goToTimer = () => {
   )
 }
 
-const rules = {
-  number: (v) => !v.isNaN || 'NaN',
-  required: (v) => !!v || 'This field is required',
-  length: (length) => (v) => (v || '').length <= length || `Max ${length} characters`,
-  min: (min) => (v) => v >= min || `A minimun of  ${min} is allowed`,
-  max: (max) => (v) => v <= max || `A maximum of  ${max} is allowed`
-}
-
 useHead({
   title: () => workout?.value?.name,
-  meta: [{ name: 'description', content: '' }]
+  meta: [{ name: 'description', content: () => workout?.value?.description }]
 })
 </script>
 
@@ -363,7 +234,7 @@ useHead({
         :disabled="!networkOnLine"
         icon="$pencil"
         color="text"
-        @click="editWorkout"
+        @click="editMode = true"
       ></v-btn>
       <v-btn
         v-if="editMode"
@@ -492,451 +363,14 @@ useHead({
               <v-row class="mb-4">
                 <v-col cols="12">
                   <div class="workout">
-                    <draggable
-                      v-model="workout.exercises"
-                      item-key="id"
-                      class="draggable"
-                      ghost-class="ghost"
-                      :animation="0"
-                      :scroll="true"
-                      :scrollSensitivity="120"
-                      :disabled="!networkOnLine"
-                      handle=".handle"
-                    >
-                      <template #item="{ element, index }">
-                        <exercise-card
-                          :exercise="element"
-                          :hangboard="{
-                            hangboard: workout.hangboard,
-                            company: workout.company
-                          }"
-                          :index="index"
-                          :key="index"
-                          :hide-rest="index === 0"
-                          :sort="editMode"
-                          @click="openExerciseEditDialog(index)"
-                        >
-                        </exercise-card>
-                      </template>
-                    </draggable>
+                    <exercise-list :workout="workout" :edit="editMode" @add="exerciseAdd" />
 
-                    <v-card v-if="editMode" variant="tonal" @click="exerciseAdd">
-                      <v-card-title class="text-center">
-                        <v-icon icon="$plus" size="x-small" class="mr-2"></v-icon>
-                        <span>{{ t('Add exercise') }}</span>
-                      </v-card-title>
-                    </v-card>
-
-                    <!-- edit -->
-                    <v-dialog
-                      v-model="exerciseEditDialog"
-                      :scrim="false"
-                      fullscreen
-                      transition="dialog-bottom-transition"
-                    >
-                      <v-card>
-                        <v-toolbar>
-                          <v-btn
-                            icon="$close"
-                            color="text"
-                            @click="exerciseEditDialog = false"
-                          ></v-btn>
-                          <v-toolbar-title>
-                            {{ t('Edit exercise') }}
-                          </v-toolbar-title>
-
-                          <v-toolbar-items>
-                            <v-btn
-                              v-if="exerciseIndex !== 0"
-                              icon="$deleteOutline"
-                              @click="exerciseRemove"
-                            ></v-btn>
-                            <v-btn icon="$contentCopy" @click="exerciseCopy"></v-btn>
-                            <v-btn
-                              icon="$contentSaveOutline"
-                              @click="exerciseEditDialog = false"
-                            ></v-btn>
-                          </v-toolbar-items>
-                        </v-toolbar>
-                        <v-container>
-                          <v-row>
-                            <v-col cols="12">
-                              <v-expansion-panels variant="accordion">
-                                <exercise-card
-                                  :index="exerciseIndex"
-                                  :exercise="exercise"
-                                  :hangboard="{
-                                    hangboard: workout.hangboard,
-                                    company: workout.company
-                                  }"
-                                  edit-hangboard
-                                  :hide-rest="exerciseIndex === 0"
-                                  @right="
-                                    (hold) =>
-                                      exercise.right === hold && exercise.left !== null
-                                        ? (exercise.right = null)
-                                        : (exercise.right = hold)
-                                  "
-                                  @left="
-                                    (hold) =>
-                                      exercise.left === hold && exercise.right !== null
-                                        ? (exercise.left = null)
-                                        : (exercise.left = hold)
-                                  "
-                                  @rotate="(rotate) => (exercise.rotate = rotate)"
-                                ></exercise-card>
-
-                                <v-expansion-panel>
-                                  <v-expansion-panel-title>
-                                    <v-icon icon="$numeric1BoxOutline"></v-icon>
-                                    <span class="ml-2">{{ t('Exercise') }}</span>
-                                  </v-expansion-panel-title>
-                                  <v-expansion-panel-text>
-                                    <v-row>
-                                      <v-col cols="12">
-                                        <div class="text-caption">
-                                          {{ t('Body position') }}
-                                        </div>
-                                        <v-select
-                                          v-model="exercise.grip"
-                                          :items="grip"
-                                          item-title="name"
-                                          item-value="id"
-                                          required
-                                        >
-                                        </v-select>
-                                      </v-col>
-                                    </v-row>
-
-                                    <v-row>
-                                      <v-col cols="6">
-                                        <div class="text-caption">
-                                          {{ t('Movement (Optional)') }}
-                                        </div>
-                                        <v-select
-                                          v-model="exerciseMovement"
-                                          :items="exerciseFilter('arms')"
-                                          :label="t('Arms')"
-                                          item-title="name"
-                                          item-value="id"
-                                          single-line
-                                        >
-                                          <template #selection="data">
-                                            <span
-                                              class="text-truncate"
-                                              v-if="data.item.raw.type"
-                                              v-text="data.item.title"
-                                            ></span>
-                                          </template>
-                                        </v-select>
-                                      </v-col>
-
-                                      <v-col cols="6">
-                                        <div class="text-caption text-right">
-                                          <span
-                                            v-if="exercise.exercise !== 0"
-                                            @click="
-                                              ;(exercise.exercise = 0),
-                                                (exercise.pullups = 1),
-                                                (exercise.max = false)
-                                            "
-                                          >
-                                            {{ t('Reset') }}
-                                          </span>
-                                          <span v-else>&nbsp;</span>
-                                        </div>
-                                        <v-select
-                                          v-model="exerciseMovement"
-                                          :items="exerciseFilter('legs')"
-                                          :label="t('Legs')"
-                                          item-title="name"
-                                          item-value="id"
-                                          single-line
-                                        >
-                                          <template #selection="data">
-                                            <span
-                                              class="text-truncate"
-                                              v-if="data.item.raw.type"
-                                              v-text="data.item.title"
-                                            ></span>
-                                          </template>
-                                        </v-select>
-                                      </v-col>
-                                    </v-row>
-                                  </v-expansion-panel-text>
-                                </v-expansion-panel>
-                                <v-expansion-panel>
-                                  <v-expansion-panel-title>
-                                    <v-icon icon="$numeric2BoxOutline"></v-icon>
-                                    <span
-                                      :class="{
-                                        'text--secondary': exercise?.repeat === 0
-                                      }"
-                                      class="ml-2"
-                                    >
-                                      {{ t('Timers') }}
-                                    </span>
-                                  </v-expansion-panel-title>
-                                  <v-expansion-panel-text>
-                                    <v-btn-toggle
-                                      v-model="repType"
-                                      background-color="text"
-                                      dark
-                                      mandatory
-                                      border
-                                      class="d-flex align-content-space-around my-4"
-                                    >
-                                      <v-btn
-                                        value="original"
-                                        class="flex-1-1"
-                                        @click="exercise.max = false"
-                                      >
-                                        <span v-if="exercise.exercise !== 0">
-                                          {{ t('Amount') }}
-                                        </span>
-                                        <span v-else>
-                                          {{ t('Time') }}
-                                        </span>
-                                      </v-btn>
-                                      <v-btn
-                                        value="max"
-                                        class="flex-1-1"
-                                        @click="exercise.max = true"
-                                        >Max</v-btn
-                                      >
-                                    </v-btn-toggle>
-
-                                    <exercise-counter
-                                      v-if="exerciseIndex !== 0"
-                                      title="Rest"
-                                      subtitle="Before hang"
-                                      :value="exercise.pause"
-                                      :min="3"
-                                      :max="300"
-                                      @input="(value) => exerciseEdit('pause', value)"
-                                    >
-                                    </exercise-counter>
-
-                                    <exercise-counter
-                                      v-if="exercise.exercise !== 0 && repType !== 'max'"
-                                      :title="`${exercises[exercise.exercise - 1].name}s`"
-                                      :value="exercise.pullups"
-                                      :disabled="exercise.exercise === 0"
-                                      :max="30"
-                                      :timer="false"
-                                      @input="(value) => (exercise.pullups = value)"
-                                    >
-                                    </exercise-counter>
-
-                                    <exercise-counter
-                                      v-if="exercise.exercise === 0 && repType !== 'max'"
-                                      title="Hang"
-                                      :value="exercise.hold"
-                                      :min="3"
-                                      :max="180"
-                                      @input="(value) => exerciseEdit('hold', value)"
-                                    >
-                                    </exercise-counter>
-
-                                    <exercise-counter
-                                      title="Repeat"
-                                      subtitle="1x = No repeat"
-                                      :value="exercise.repeat"
-                                      :timer="false"
-                                      :min="0"
-                                      :max="24"
-                                      @input="(value) => exerciseEdit('repeat', value)"
-                                    >
-                                      <template #default>{{ exercise.repeat + 1 }}x</template>
-                                    </exercise-counter>
-
-                                    <exercise-counter
-                                      v-if="exercise.repeat > 0"
-                                      title="Rest"
-                                      subtitle="After repeats"
-                                      :value="exercise.rest"
-                                      :min="3"
-                                      :max="180"
-                                      :disabled="exercise.repeat === 0"
-                                      @input="(value) => exerciseEdit('rest', value)"
-                                    >
-                                    </exercise-counter>
-                                  </v-expansion-panel-text>
-                                </v-expansion-panel>
-                                <v-expansion-panel>
-                                  <v-expansion-panel-title>
-                                    <v-icon icon="$numeric3BoxOutline"></v-icon>
-                                    <span
-                                      :class="{
-                                        'text--secondary':
-                                          (exercise?.leftHand &&
-                                            exercise?.rightHand &&
-                                            !exercise?.leftHand.length &&
-                                            !exercise?.rightHand.length) ||
-                                          (!exercise?.leftHand && !exercise?.rightHand)
-                                      }"
-                                      class="ml-2"
-                                      >{{ t('Fingers') }}</span
-                                    >
-                                  </v-expansion-panel-title>
-                                  <v-expansion-panel-text>
-                                    <exercise-hand
-                                      :exercise="exercise"
-                                      @left="(finger) => (exercise.leftHand = finger)"
-                                      @right="(finger) => (exercise.rightHand = finger)"
-                                      edit
-                                    ></exercise-hand>
-                                  </v-expansion-panel-text>
-                                </v-expansion-panel>
-                                <v-expansion-panel>
-                                  <v-expansion-panel-title>
-                                    <v-icon icon="$numeric4BoxOutline"></v-icon>
-                                    <span
-                                      :class="{
-                                        'text--secondary':
-                                          exercise?.weight === 0 || !exercise?.weight
-                                      }"
-                                      class="ml-2"
-                                    >
-                                      {{ t('Weight') }}</span
-                                    >
-                                  </v-expansion-panel-title>
-                                  <v-expansion-panel-text>
-                                    <div class="text-caption mb-4">
-                                      {{ weightLabel }}
-                                    </div>
-
-                                    <exercise-counter
-                                      title="Weight"
-                                      :value="exercise.weight"
-                                      :min="-50"
-                                      :max="50"
-                                      @input="(value) => (exercise.weight = value)"
-                                      :timer="false"
-                                      suffix="kg"
-                                    >
-                                      <template #default
-                                        >{{ weightConverter(exercise.weight, user) }}kg</template
-                                      >
-                                    </exercise-counter>
-                                  </v-expansion-panel-text>
-                                </v-expansion-panel>
-                                <v-expansion-panel>
-                                  <v-expansion-panel-title>
-                                    <v-icon icon="$numeric5BoxOutline"></v-icon>
-                                    <span
-                                      :class="{
-                                        'text--secondary':
-                                          exercise?.notes === '' || !exercise?.notes
-                                      }"
-                                      class="ml-2"
-                                      >{{ t('Notes') }}</span
-                                    >
-                                  </v-expansion-panel-title>
-                                  <v-expansion-panel-text>
-                                    <v-textarea
-                                      v-model="exercise.notes"
-                                      :rules="[rules.length(140)]"
-                                      auto-grow
-                                      counter="140"
-                                      filled
-                                      row-height="24"
-                                      rows="2"
-                                    ></v-textarea>
-                                  </v-expansion-panel-text>
-                                </v-expansion-panel>
-                              </v-expansion-panels>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                      </v-card>
-                    </v-dialog>
-
-                    <!-- save -->
-                    <v-dialog
+                    <!-- save dialog -->
+                    <workout-save
                       v-model="workoutSaveDialog"
-                      :scrim="false"
-                      fullscreen
-                      transition="dialog-bottom-transition"
-                    >
-                      <v-card>
-                        <v-toolbar>
-                          <v-btn
-                            icon="$close"
-                            color="text"
-                            @click="workoutSaveDialog = false"
-                          ></v-btn>
-                          <v-toolbar-title> {{ t("You're almost there") }}! </v-toolbar-title>
-
-                          <v-toolbar-items>
-                            <v-btn
-                              icon="$contentSaveOutline"
-                              :disabled="
-                                workout.name === '' ||
-                                typeof workout.name === 'undefined' ||
-                                workout.description === '' ||
-                                typeof workout.description === 'undefined' ||
-                                typeof workout.level === 'undefined'
-                              "
-                              @click="workoutSave"
-                            ></v-btn>
-                          </v-toolbar-items>
-                        </v-toolbar>
-                        <v-container>
-                          <v-row>
-                            <v-col cols="12">
-                              <v-label>{{ t('Name your workout and get going') }}.</v-label>
-
-                              <v-divider thickness="0" class="mb-4"></v-divider>
-
-                              <v-text-field
-                                v-model="workout.name"
-                                :placeholder="t('New workout')"
-                                counter="36"
-                                :rules="[rules.required, rules.length(36)]"
-                                :label="t('Name')"
-                                required
-                                class="required"
-                              >
-                              </v-text-field>
-
-                              <v-textarea
-                                v-model="workout.description"
-                                counter="140"
-                                rows="3"
-                                :rules="[rules.required, rules.length(140)]"
-                                :placeholder="
-                                  t('For example indicate when this workout is most beneficial')
-                                "
-                                :label="t('Description')"
-                                required
-                                class="required"
-                              ></v-textarea>
-
-                              <v-text-field
-                                v-model="workout.video"
-                                placeholder="https://www.youtube.com/watch?v=xxxxxxxx"
-                                :label="t('Video')"
-                              >
-                              </v-text-field>
-
-                              <v-label>{{ t('Difficulty') }}</v-label>
-                              <v-chip-group v-model="workout.level" class="required">
-                                <v-chip :value="1">{{ t('easy') }}</v-chip>
-                                <v-chip :value="2">{{ t('normal') }}</v-chip>
-                                <v-chip :value="3">{{ t('hard') }}</v-chip>
-                              </v-chip-group>
-
-                              <v-checkbox
-                                v-model="workout.share"
-                                hide-details="auto"
-                                :label="t('Share with the community')"
-                              ></v-checkbox>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                      </v-card>
-                    </v-dialog>
+                      :workout="workout"
+                      @show="workoutSaveDialog = !workoutSaveDialog"
+                    />
                   </div>
                 </v-col>
               </v-row>
@@ -961,33 +395,10 @@ useHead({
             <div v-else>
               {{ t('No workouts found') }}
 
-              <!-- has hangboard -->
-              <v-dialog
-                v-model="hasHangboardDialog"
-                :scrim="false"
-                fullscreen
-                transition="dialog-bottom-transition"
-              >
-                <v-card>
-                  <v-toolbar>
-                    <v-btn icon="$close" color="text" to="/workouts"></v-btn>
-                    <v-toolbar-title>
-                      {{ t('You are not using this hangboard') }}!
-                    </v-toolbar-title>
-
-                    <v-toolbar-items>
-                      <v-btn icon="$contentSaveOutline" @click="addHangboard"></v-btn>
-                    </v-toolbar-items>
-                  </v-toolbar>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12">
-                        {{ t("To view this workout we'll add this hangboard to your hangboards") }}
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card>
-              </v-dialog>
+              <missing-hangboard
+                v-model="missingHangboardDialog"
+                @show="missingHangboardDialog = !missingHangboardDialog"
+              />
             </div>
           </v-col>
         </v-row>
@@ -1013,10 +424,6 @@ useHead({
     pointer-events: initial;
   }
 }
-
-.exercise-card:last-child:deep(.v-card):last-child:after {
-  border: none;
-}
 .v-expansion-panel-text:deep(.v-expansion-panel-text__wrapper) {
   padding: 8px 16px 16px;
 }
@@ -1035,10 +442,5 @@ useHead({
     border-bottom-left-radius: 8px !important;
     border-bottom-right-radius: 8px !important;
   }
-}
-.required :deep(label::after) {
-  content: '*';
-  margin-left: 4px;
-  color: rgb(var(--v-theme-error));
 }
 </style>
