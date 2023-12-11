@@ -37,7 +37,8 @@ watch(
   () => initialEdit,
   (newVal) => {
     edit.value = newVal
-  }
+  },
+  { immediate: true }
 )
 
 const exerciseEditDialog = ref(false)
