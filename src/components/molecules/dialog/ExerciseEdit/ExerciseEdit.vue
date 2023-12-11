@@ -18,7 +18,7 @@ const { t } = useI18n()
 
 const repType = ref('original')
 
-const { workout: initialWorkout, index: initialIndex } = defineProps({
+const props = defineProps({
   workout: {
     type: Object
   },
@@ -28,20 +28,20 @@ const { workout: initialWorkout, index: initialIndex } = defineProps({
   }
 })
 
-const workout = ref(initialWorkout)
-const index = ref(initialIndex)
+const workout = ref(props.workout)
+const index = ref(props.index)
 
 watch(
-  () => initialWorkout,
-  (newVal) => {
-    workout.value = newVal
+  () => props.workout,
+  (newValue) => {
+    workout.value = newValue
   }
 )
 
 watch(
-  () => initialIndex,
-  (newVal) => {
-    index.value = newVal
+  () => props.index,
+  (newValue) => {
+    index.value = newValue
   }
 )
 

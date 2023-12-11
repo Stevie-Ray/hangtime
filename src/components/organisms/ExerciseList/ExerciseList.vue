@@ -13,7 +13,7 @@ const { networkOnLine } = storeToRefs(useApp())
 
 const emit = defineEmits(['add'])
 
-const { workout: initialWorkout, edit: initialEdit } = defineProps({
+const props = defineProps({
   workout: {
     type: Object
   },
@@ -23,20 +23,20 @@ const { workout: initialWorkout, edit: initialEdit } = defineProps({
   }
 })
 
-const workout = ref(initialWorkout)
-const edit = ref(initialEdit)
+const workout = ref(props.workout)
+const edit = ref(props.edit)
 
 watch(
-  () => initialWorkout,
-  (newVal) => {
-    workout.value = newVal
+  () => props.workout,
+  (newValue) => {
+    workout.value = newValue
   }
 )
 
 watch(
-  () => initialEdit,
-  (newVal) => {
-    edit.value = newVal
+  () => props.edit,
+  (newValue) => {
+    edit.value = newValue
   },
   { immediate: true }
 )

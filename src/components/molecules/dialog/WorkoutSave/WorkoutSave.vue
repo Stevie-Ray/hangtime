@@ -12,18 +12,18 @@ const { t } = useI18n()
 
 const emit = defineEmits(['show'])
 
-const { workout: initialWorkout } = defineProps({
+const props = defineProps({
   workout: {
     type: Object
   }
 })
 
-const workout = ref(initialWorkout)
+const workout = ref(props.workout)
 
 watch(
-  () => initialWorkout,
-  (newVal) => {
-    workout.value = newVal
+  () => props.workout,
+  (newValue) => {
+    workout.value = newValue
   }
 )
 
