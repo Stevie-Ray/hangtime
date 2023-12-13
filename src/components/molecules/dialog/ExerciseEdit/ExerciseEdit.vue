@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, toRaw } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useExercises, useGrip, weightConverter } from '@/helpers'
@@ -101,7 +101,7 @@ const exerciseCopy = () => {
   workout.value.exercises.splice(
     index.value,
     0,
-    structuredClone(workout.value.exercises[index.value])
+    structuredClone(toRaw(workout.value.exercises[index.value]))
   )
   index.value = 0
   emit('show', false)
