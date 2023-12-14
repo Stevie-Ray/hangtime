@@ -215,43 +215,43 @@ useHead({
     <template #icons>
       <v-btn
         v-if="workout?.subscribers && !editMode"
-        :disabled="!networkOnLine"
-        size="x-large"
-        color="text"
         :append-icon="isHearted ? '$heart' : '$heartOutline'"
+        :disabled="!networkOnLine"
+        color="text"
+        size="x-large"
         @click="workoutSubscriber"
       >
         {{ workout?.subscribers?.length - 1 }}
       </v-btn>
       <v-btn
         v-if="workout?.share && navigatorShare && !editMode"
-        icon="$shareVariant"
         color="text"
+        icon="$shareVariant"
         @click="shareWorkout"
       ></v-btn>
       <v-btn
         v-if="workout?.user?.id === user?.id && !editMode"
         :disabled="!networkOnLine"
-        icon="$pencil"
         color="text"
+        icon="$pencil"
         @click="editMode = true"
       ></v-btn>
       <v-btn
         v-if="editMode"
-        icon="$contentSaveOutline"
         color="text"
+        icon="$contentSaveOutline"
         @click="workoutSaveDialog = true"
       ></v-btn>
       <v-menu>
         <template v-slot:activator="{ props }">
-          <v-btn v-if="editMode" icon="$dotsVertical" color="text" v-bind="props"></v-btn>
+          <v-btn v-if="editMode" color="text" icon="$dotsVertical" v-bind="props"></v-btn>
         </template>
 
         <v-list>
           <v-list-item>
-            <v-list-item-title @click="workoutSaveDialog = true">{{
-              t('Rename workout')
-            }}</v-list-item-title>
+            <v-list-item-title @click="workoutSaveDialog = true"
+              >{{ t('Rename workout') }}
+            </v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-title @click="removeWorkout">{{ t('Delete workout') }}</v-list-item-title>
@@ -262,23 +262,23 @@ useHead({
 
     <template #default>
       <v-container>
-        <v-row>
-          <v-col cols="12">
-            <div v-if="workout">
-              <v-row class="mb-4">
+        <v-row v-if="workout">
+          <v-col cols="12" md="5">
+            <div class="sticky">
+              <v-row class="mb-2">
                 <v-col cols="12">
-                  <v-card class="mx-auto" min-height="144" max-width="100%" theme="light">
+                  <v-card class="mx-auto" max-width="100%" min-height="144" theme="light">
                     <v-img :src="useRandomImage()" cover>
                       <v-card-text>
                         <div class="text-subtitle-1 mb-4">
                           {{ workout.description }}
                         </div>
-                        <div class="d-flex align-center mt-2" v-if="workout.user">
+                        <div v-if="workout.user" class="d-flex align-center mt-2">
                           <div>
-                            <v-avatar size="small" color="grey-darken-1" class="mr-2">
+                            <v-avatar class="mr-2" color="grey-darken-1" size="small">
                               <v-img
-                                :src="workout.user.photoURL"
                                 :alt="workout.user.displayName"
+                                :src="workout.user.photoURL"
                                 height="40"
                                 width="40"
                               ></v-img>
@@ -314,12 +314,13 @@ useHead({
                 </v-col>
               </v-row>
 
-              <v-row v-if="workout.video" class="mb-4">
+              <v-row v-if="workout.video" class="mb-2">
                 <v-col cols="12">
                   <v-expansion-panels variant="accordion">
                     <v-expansion-panel>
                       <v-expansion-panel-title>
-                        <v-icon class="mr-2">$video</v-icon>Video
+                        <v-icon class="mr-2">$video</v-icon>
+                        Video
                       </v-expansion-panel-title>
 
                       <v-expansion-panel-text>
@@ -329,10 +330,10 @@ useHead({
                           class="rounded-lg"
                         >
                           <iframe
-                            width="100%"
-                            height="100%"
                             :src="parseVideo(workout.video)"
                             frameborder="0"
+                            height="100%"
+                            width="100%"
                           ></iframe>
                         </v-responsive>
                       </v-expansion-panel-text>
@@ -341,7 +342,7 @@ useHead({
                 </v-col>
               </v-row>
 
-              <v-row class="mb-4">
+              <v-row class="mb-2">
                 <v-col cols="6">
                   <v-card v-if="workout?.time !== null" class="py-4">
                     <v-card-title class="text-center">
@@ -359,47 +360,47 @@ useHead({
                   </v-card>
                 </v-col>
               </v-row>
-
-              <v-row class="mb-4">
-                <v-col cols="12">
-                  <div class="workout">
-                    <exercise-list :workout="workout" :edit="editMode" @add="exerciseAdd" />
-
-                    <!-- save dialog -->
-                    <workout-save
-                      v-model="workoutSaveDialog"
-                      :workout="workout"
-                      @show="workoutSaveDialog = !workoutSaveDialog"
-                    />
-                  </div>
-                </v-col>
-              </v-row>
-
-              <div v-show="!editMode" v-scroll="onScroll" class="fab text-end">
-                <div class="mx-4">
-                  <v-fab-transition>
-                    <v-btn
-                      v-show="startWorkoutButton"
-                      :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
-                      size="x-large"
-                      rounded="lg"
-                      @click="goToTimer"
-                    >
-                      {{ t('Start workout') }}
-                    </v-btn>
-                  </v-fab-transition>
-                </div>
-              </div>
             </div>
+          </v-col>
 
-            <div v-else>
-              {{ t('No workouts found') }}
+          <v-col cols="12" md="7">
+            <div class="workout">
+              <exercise-list :edit="editMode" :workout="workout" @add="exerciseAdd" />
 
-              <missing-hangboard
-                v-model="missingHangboardDialog"
-                @show="missingHangboardDialog = !missingHangboardDialog"
+              <!-- save dialog -->
+              <workout-save
+                v-model="workoutSaveDialog"
+                :workout="workout"
+                @show="workoutSaveDialog = !workoutSaveDialog"
               />
             </div>
+
+            <div v-show="!editMode" v-scroll="onScroll" class="fab text-end">
+              <div class="mx-4">
+                <v-fab-transition>
+                  <v-btn
+                    v-show="startWorkoutButton"
+                    :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
+                    rounded="lg"
+                    size="x-large"
+                    @click="goToTimer"
+                  >
+                    {{ t('Start workout') }}
+                  </v-btn>
+                </v-fab-transition>
+              </div>
+            </div>
+          </v-col>
+        </v-row>
+
+        <v-row v-else>
+          <v-col cols="12">
+            {{ t('No workouts found') }}
+
+            <missing-hangboard
+              v-model="missingHangboardDialog"
+              @show="missingHangboardDialog = !missingHangboardDialog"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -410,27 +411,38 @@ useHead({
 <style lang="scss" scoped>
 .fab {
   bottom: 56px;
-  z-index: 1007;
-  transform: translateY(0%);
-  position: fixed;
   height: 80px;
   left: 0;
-  width: calc((100% - 0px) - 0px);
   pointer-events: none;
+  position: fixed;
+  transform: translateY(0%);
+  width: calc((100% - 0px) - 0px);
+  z-index: 1007;
+
   .v-btn {
     background-color: rgb(var(--v-theme-accent));
-    z-index: 1008;
     --v-btn-height: 56px;
     pointer-events: initial;
+    z-index: 1008;
   }
 }
+
+.sticky {
+  @media (min-width: 960px) {
+    position: sticky;
+    top: 68px;
+  }
+}
+
 .v-expansion-panel-text:deep(.v-expansion-panel-text__wrapper) {
   padding: 8px 16px 16px;
 }
+
 .v-toolbar .v-btn--size-x-large {
   min-width: 64px;
   padding: 0 12px;
 }
+
 // video
 .v-expansion-panels--variant-accordion {
   & > :last-child {
