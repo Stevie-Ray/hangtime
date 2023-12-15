@@ -73,7 +73,7 @@ useHead({
           </div>
         </template>
 
-        <v-card v-if="getUserHangboards?.length > 1">
+        <v-card v-if="getUserHangboards?.length > 1" :max-width="600">
           <v-card-text>
             <exercise-hangboard
               :hangboard="{

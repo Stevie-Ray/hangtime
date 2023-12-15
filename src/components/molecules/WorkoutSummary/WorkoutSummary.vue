@@ -56,52 +56,51 @@ const parseVideo = (video) => {
 <template>
   <v-row v-if="workout">
     <v-col cols="12">
-      <v-card class="mx-auto position-relative" max-width="100%" min-height="144" theme="light">
-        <v-img v-if="contentToggle" :src="useRandomImage()" cover>
-          <v-card-text>
-            <div
-              class="text-subtitle-1 mb-4"
-              :class="{ 'mr-12': workout.video && parseVideo(workout.video) }"
-            >
-              {{ workout.description }}
+      <v-card class="mx-auto" :image="contentToggle ? useRandomImage() : null" theme="light">
+        <v-card-text v-if="contentToggle" style="min-height: 72px">
+          <div
+            class="text-subtitle-1 mb-4"
+            :class="{ 'mr-12': workout.video && parseVideo(workout.video) }"
+          >
+            {{ workout.description }}
+          </div>
+        </v-card-text>
+        <v-card-actions v-if="contentToggle" class="justify-space-between">
+          <div v-if="workout.user" class="d-flex align-center mt-2">
+            <div>
+              <v-avatar class="mr-2" color="grey-darken-1" size="small">
+                <v-img
+                  :alt="workout.user.displayName"
+                  :src="workout.user.photoURL"
+                  height="40"
+                  width="40"
+                ></v-img>
+              </v-avatar>
             </div>
-            <div v-if="workout.user" class="d-flex align-center mt-2">
-              <div>
-                <v-avatar class="mr-2" color="grey-darken-1" size="small">
-                  <v-img
-                    :alt="workout.user.displayName"
-                    :src="workout.user.photoURL"
-                    height="40"
-                    width="40"
-                  ></v-img>
-                </v-avatar>
-              </div>
-              <div>{{ workout.user.displayName }}</div>
-            </div>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              v-if="!edit"
-              :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
-              class="mb-1"
-              color="text"
-              size="large"
-              variant="outlined"
-            >
-              {{ t('Start workout') }}
-            </v-btn>
-            <v-btn
-              v-else
-              class="mb-1"
-              color="text"
-              size="large"
-              variant="outlined"
-              @click="workoutSaveDialog = true"
-            >
-              {{ t('Save workout') }}
-            </v-btn>
-          </v-card-actions>
-        </v-img>
+            <div>{{ workout.user.displayName }}</div>
+          </div>
+          <v-btn
+            v-if="!edit"
+            :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
+            class="mb-1"
+            color="text"
+            size="large"
+            variant="outlined"
+          >
+            {{ t('Start workout') }}
+          </v-btn>
+          <v-btn
+            v-else
+            class="mb-1"
+            color="text"
+            size="large"
+            variant="outlined"
+            @click="workoutSaveDialog = true"
+          >
+            {{ t('Save workout') }}
+          </v-btn>
+        </v-card-actions>
+
         <v-responsive
           v-if="!contentToggle && workout.video && parseVideo(workout.video)"
           :aspect-ratio="16 / 9"
@@ -115,6 +114,7 @@ const parseVideo = (video) => {
             width="100%"
           ></iframe>
         </v-responsive>
+
         <v-btn
           v-if="workout.video && parseVideo(workout.video)"
           @click="contentToggle = !contentToggle"
@@ -147,7 +147,7 @@ const parseVideo = (video) => {
     </v-col>
   </v-row>
 
-  <v-row v-if="workout">
+  <v-row v-if="workout" class="hidden-sm-and-down">
     <v-col cols="12">
       <v-card class="summary">
         <v-list class="rounded-lg">
@@ -219,9 +219,8 @@ const parseVideo = (video) => {
 
 .summary {
   .v-list {
-    max-height: 192px;
     @media (min-width: 960px) {
-      max-height: 256px;
+      max-height: 320px;
     }
   }
 }

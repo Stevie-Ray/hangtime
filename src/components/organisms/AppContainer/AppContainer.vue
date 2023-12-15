@@ -70,14 +70,27 @@ const props = defineProps({
 </template>
 
 <style lang="scss">
-.v-toolbar__content {
-  margin-right: auto;
-  margin-left: auto;
-  @media (min-width: 960px) {
-    max-width: 900px;
+.v-toolbar {
+  &__content,
+  &__extension {
+    margin-left: auto;
+    margin-right: auto;
+    @media (min-width: 960px) {
+      max-width: 900px;
+    }
+    @media (min-width: 1280px) {
+      max-width: 1200px;
+    }
+    @media (min-width: 1920px) {
+      max-width: 1800px;
+    }
+    @media (min-width: 2560px) {
+      max-width: 2400px;
+    }
   }
-  @media (min-width: 1280px) {
-    max-width: 1200px;
+  &__extension {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 </style>
