@@ -83,6 +83,7 @@ import {
   mdiUndo,
   mdiVibrate,
   mdiVideo,
+  mdiVideoOff,
   mdiVolumeHigh,
   mdiWeb,
   mdiWeight
@@ -170,6 +171,7 @@ export default createVuetify({
       undo: mdiUndo,
       vibrate: mdiVibrate,
       video: mdiVideo,
+      videoOff: mdiVideoOff,
       volumeHigh: mdiVolumeHigh,
       web: mdiWeb,
       weight: mdiWeight

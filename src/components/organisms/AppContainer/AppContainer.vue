@@ -69,4 +69,15 @@ const props = defineProps({
   </v-footer>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.v-toolbar__content {
+  margin-right: auto;
+  margin-left: auto;
+  @media (min-width: 960px) {
+    max-width: 900px;
+  }
+  @media (min-width: 1280px) {
+    max-width: 1200px;
+  }
+}
+</style>
