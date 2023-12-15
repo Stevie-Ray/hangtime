@@ -709,12 +709,12 @@ export default [
         id: 8,
         image: 'hangboards/METOLIUSROCK.svg',
         size: {
-          x: 152,
-          y: 101,
-          z: 38
+          x: 184,
+          y: 146,
+          z: 57
         },
         type: 'wood',
-        url: 'https://www.metoliusclimbing.com/wood-rock-ring.html',
+        url: 'https://www.metoliusclimbing.com/rock_rings.html',
         holds: 3
       },
       {
@@ -741,6 +741,19 @@ export default [
             holds: 3
           }
         ]
+      },
+      {
+        name: 'Wood Rock Ring II',
+        id: 10,
+        image: 'hangboards/METOLIUSROCKWOOD.svg',
+        size: {
+          x: 152,
+          y: 101,
+          z: 38
+        },
+        type: 'wood',
+        url: 'https://www.metoliusclimbing.com/wood-rock-ring.html',
+        holds: 2
       }
     ]
   },

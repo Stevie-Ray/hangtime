@@ -28,7 +28,11 @@ watch(selected, (item) => {
   emit('update-selected', item)
 })
 
-const getHangboards = computed(() => getCompanyById(selected.value.company).hangboards)
+const getHangboards = computed(() => {
+  return getCompanyById(selected.value.company).hangboards.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )
+})
 
 const email = 'mail@stevie-ray.nl'
 const body = computed(() =>
