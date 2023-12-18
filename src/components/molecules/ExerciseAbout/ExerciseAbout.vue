@@ -7,7 +7,7 @@ const exercises = useExercises()
 const props = defineProps({
   exercise: {
     type: Object
-  },
+  }
 })
 </script>
 
