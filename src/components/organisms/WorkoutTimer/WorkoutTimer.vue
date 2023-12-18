@@ -736,6 +736,7 @@ onMounted(() => {
   background-repeat: repeat;
   height: calc(100% - 56px) !important; // header
   width: 0;
+  max-width: 100%;
   will-change: width, background-position;
 
   &.hang {
