@@ -535,36 +535,16 @@ onMounted(() => {
     class="position-absolute h-100 px-0 py-0 progress"
   ></v-container>
   <v-container v-if="workout?.exercises" class="position-relative">
-    <v-row align="center" justify="center">
-      <v-col cols="12" md="7">
+    <v-row align="start" justify="center">
+      <v-col cols="12" md="7" class="d-flex flex-column" style="min-height: 85vh">
         <v-row align="center" class="timer" justify="center">
-          <v-col class="text-center" cols="12" sm="8">
+          <v-col class="text-center pb-4" cols="12" sm="8">
             <div class="text-h1">
               {{ time(clock) }}
             </div>
-            <div class="text-h6 pt-2 mb-1" style="font-size: 1.5rem !important">
+            <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
               {{ clockText }}
             </div>
-            <v-btn
-              :style="
-                ((clockText === t('Rest') || clockText === t('Pause')) && clock >= setupTime) ||
-                clockText === t('Go')
-                  ? ''
-                  : 'visibility:hidden'
-              "
-              class="mb-2"
-              variant="flat"
-            >
-              <span
-                v-if="(clockText === t('Rest') || clockText === t('Pause')) && clock >= setupTime"
-                @click="skipRest"
-              >
-                {{ t('Skip {time}', { time: clockText }) }}
-              </span>
-              <span v-else-if="clockText === t('Go')" @click="maxHold">
-                {{ t('Done') }}
-              </span>
-            </v-btn>
             <v-row align="center" justify="space-evenly">
               <v-col class="text-center">
                 <div class="text-caption text-uppercase">
@@ -592,43 +572,10 @@ onMounted(() => {
             </v-row>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row class="flex-grow-0">
           <v-col cols="12">
-            <v-card class="pt-12 mt-8 mt-sm-4 pt-sm-8 position-relative overflow-visible">
-              <v-card-title
-                class="justify-center align-center position-absolute w-100 d-flex"
-                style="top: -36px; gap: 32px; z-index: 1"
-              >
-                <v-btn
-                  :disabled="currentExercise <= 0"
-                  :style="{
-                    visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                  }"
-                  class="rounded-circle"
-                  icon="$skipPrevious"
-                  variant="flat"
-                  @click="hasExercise('prev')"
-                ></v-btn>
-                <v-btn
-                  :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
-                  class="rounded-circle"
-                  size="x-large"
-                  variant="flat"
-                  @click="timerPaused === null ? startTimer() : pauseWorkout()"
-                ></v-btn>
-                <v-btn
-                  :disabled="currentExercise >= workout?.exercises?.length - 1"
-                  :style="{
-                    visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                  }"
-                  class="rounded-circle"
-                  icon="$skipNext"
-                  variant="flat"
-                  @click="hasExercise('next')"
-                ></v-btn>
-              </v-card-title>
-
-              <v-card-text class="pt-0">
+            <v-card class="mb-4">
+              <v-card-text>
                 <slot>
                   <exercise-card
                     v-if="workout"
@@ -645,11 +592,70 @@ onMounted(() => {
                 </slot>
               </v-card-text>
             </v-card>
+
+            <div class="justify-center align-center w-100 d-flex" style="gap: 4px; z-index: 1">
+              <v-btn
+                :disabled="
+                  clockText !== t('Go') || exercise.max === false || exercise.exercise === 0
+                "
+                :style="{
+                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                }"
+                icon="$check"
+                size="x-large"
+                class="rounded-circle"
+                variant="text"
+                @click="maxHold"
+              />
+              <v-btn
+                :disabled="currentExercise <= 0"
+                :style="{
+                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                }"
+                icon="$skipPrevious"
+                size="x-large"
+                variant="text"
+                class="rounded-circle"
+                @click="hasExercise('prev')"
+              />
+              <v-btn
+                :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
+                size="x-large"
+                variant="flat"
+                class="rounded-circle"
+                @click="timerPaused === null ? startTimer() : pauseWorkout()"
+              ></v-btn>
+              <v-btn
+                :disabled="currentExercise >= workout?.exercises?.length - 1"
+                :style="{
+                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                }"
+                size="x-large"
+                class="rounded-circle"
+                icon="$skipNext"
+                variant="text"
+                @click="hasExercise('next')"
+              />
+              <v-btn
+                :disabled="
+                  !((clockText === t('Rest') || clockText === t('Pause')) && clock >= setupTime) ||
+                  clockText === t('Go')
+                "
+                :style="{
+                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                }"
+                icon="$skipForward"
+                size="x-large"
+                class="rounded-circle"
+                variant="text"
+                @click="skipRest"
+              />
+            </div>
           </v-col>
         </v-row>
       </v-col>
 
-      <v-col cols="12" md="5" align-self="start">
+      <v-col cols="12" md="5">
         <v-card v-if="exerciseNext" class="mb-8">
           <v-card-title>{{ $t('Next exercise') }}</v-card-title>
           <v-card-text>
@@ -746,7 +752,7 @@ onMounted(() => {
 }
 
 .timer {
-  color: rgba(var(--v-theme-on-primary));
+  //color: rgba(var(--v-theme-on-primary));
   mix-blend-mode: difference;
 
   .v-theme--dark & {
@@ -754,7 +760,7 @@ onMounted(() => {
   }
 }
 
-.rounded-circle {
-  outline: rgb(var(--v-theme-surface)) 4px solid;
+.rounded-circle.v-btn--variant-text:deep(.v-icon) {
+  mix-blend-mode: difference;
 }
 </style>
