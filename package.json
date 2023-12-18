@@ -35,10 +35,10 @@
     "vuetify": "^3.4.7"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.4",
-    "@storybook/vue3-vite": "^7.6.4",
+    "@storybook/addon-essentials": "^7.6.5",
+    "@storybook/vue3-vite": "^7.6.5",
     "@vitejs/plugin-vue": "^4.5.2",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -49,9 +49,9 @@
     "prettier": "^3.1.1",
     "rollup-plugin-visualizer": "^5.11.0",
     "sass": "^1.69.5",
-    "storybook": "^7.6.4",
+    "storybook": "^7.6.5",
     "storybook-dark-mode": "^3.0.3",
-    "vite": "^5.0.9",
+    "vite": "^5.0.10",
     "vite-plugin-pwa": "^0.17.4",
     "vite-plugin-vuetify": "^2.0.1"
   }

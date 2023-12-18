@@ -29,8 +29,8 @@ useHead({
       <span v-if="workout">{{ workout.name }}</span>
     </template>
 
-    <template #default="">
-      <workout-timer :workout="workout"></workout-timer>
+    <template #default>
+      <workout-timer :workout="workout" />
     </template>
   </app-container>
 </template>

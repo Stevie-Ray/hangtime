@@ -250,13 +250,13 @@ useHead({
     <template #default>
       <v-container>
         <v-row v-if="workout">
-          <v-col cols="12" md="5">
+          <v-col cols="12" md="5" order-md="last">
             <div class="sticky">
               <workout-summary :edit="edit" :workout="workout" />
             </div>
           </v-col>
 
-          <v-col cols="12" md="7">
+          <v-col cols="12" md="7" order-md="first">
             <div class="workout">
               <exercise-list :edit="edit" :workout="workout" @add="exerciseAdd" />
 

@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
+import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
 import { time } from '@/helpers'
@@ -54,6 +55,11 @@ onBeforeUnmount(() => {
 
 const exercise = computed(() => {
   if (props?.workout?.exercises) return props?.workout?.exercises[currentExercise.value]
+  return {}
+})
+
+const exerciseNext = computed(() => {
+  if (props?.workout?.exercises) return props?.workout?.exercises[currentExercise.value + 1]
   return {}
 })
 
@@ -530,7 +536,7 @@ onMounted(() => {
   ></v-container>
   <v-container v-if="workout?.exercises" class="position-relative">
     <v-row align="center" justify="center">
-      <v-col cols="12" sm="6">
+      <v-col cols="12" md="7">
         <v-row align="center" class="timer" justify="center">
           <v-col class="text-center" cols="12" sm="8">
             <div class="text-h1">
@@ -586,57 +592,84 @@ onMounted(() => {
             </v-row>
           </v-col>
         </v-row>
-      </v-col>
-      <v-col cols="12" sm="6">
-        <v-card class="pt-12 mt-8 mt-sm-4 pt-sm-8 position-relative overflow-visible">
-          <v-card-title
-            class="justify-center align-center position-absolute w-100 d-flex"
-            style="top: -36px; gap: 32px; z-index: 1"
-          >
-            <v-btn
-              :disabled="currentExercise <= 0"
-              :style="{
-                visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-              }"
-              class="rounded-circle"
-              icon="$skipPrevious"
-              variant="flat"
-              @click="hasExercise('prev')"
-            ></v-btn>
-            <v-btn
-              :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
-              class="rounded-circle"
-              size="x-large"
-              variant="flat"
-              @click="timerPaused === null ? startTimer() : pauseWorkout()"
-            ></v-btn>
-            <v-btn
-              :disabled="currentExercise >= workout?.exercises?.length - 1"
-              :style="{
-                visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-              }"
-              class="rounded-circle"
-              icon="$skipNext"
-              variant="flat"
-              @click="hasExercise('next')"
-            ></v-btn>
-          </v-card-title>
-
-          <v-card-text class="pt-0">
-            <slot>
-              <exercise-card
-                v-if="workout"
-                :exercise="exercise"
-                :hangboard="{
-                  hangboard: workout.hangboard,
-                  company: workout.company
-                }"
-                :index="currentExercise"
-                hide-rest
-                variant="flat"
+        <v-row>
+          <v-col cols="12">
+            <v-card class="pt-12 mt-8 mt-sm-4 pt-sm-8 position-relative overflow-visible">
+              <v-card-title
+                class="justify-center align-center position-absolute w-100 d-flex"
+                style="top: -36px; gap: 32px; z-index: 1"
               >
-              </exercise-card>
-            </slot>
+                <v-btn
+                  :disabled="currentExercise <= 0"
+                  :style="{
+                    visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                  }"
+                  class="rounded-circle"
+                  icon="$skipPrevious"
+                  variant="flat"
+                  @click="hasExercise('prev')"
+                ></v-btn>
+                <v-btn
+                  :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
+                  class="rounded-circle"
+                  size="x-large"
+                  variant="flat"
+                  @click="timerPaused === null ? startTimer() : pauseWorkout()"
+                ></v-btn>
+                <v-btn
+                  :disabled="currentExercise >= workout?.exercises?.length - 1"
+                  :style="{
+                    visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                  }"
+                  class="rounded-circle"
+                  icon="$skipNext"
+                  variant="flat"
+                  @click="hasExercise('next')"
+                ></v-btn>
+              </v-card-title>
+
+              <v-card-text class="pt-0">
+                <slot>
+                  <exercise-card
+                    v-if="workout"
+                    :exercise="exercise"
+                    :hangboard="{
+                      hangboard: workout.hangboard,
+                      company: workout.company
+                    }"
+                    :index="currentExercise"
+                    hide-rest
+                    variant="flat"
+                  >
+                  </exercise-card>
+                </slot>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-col>
+
+      <v-col cols="12" md="5" align-self="start">
+        <v-card v-if="exerciseNext" class="mb-8">
+          <v-card-title>{{ $t('Next exercise') }}</v-card-title>
+          <v-card-text>
+            <exercise-card
+              :exercise="exerciseNext"
+              :hangboard="{
+                hangboard: workout.hangboard,
+                company: workout.company
+              }"
+              :index="currentExercise + 1"
+              hide-rest
+              variant="flat"
+            >
+            </exercise-card>
+          </v-card-text>
+        </v-card>
+        <v-card v-if="exercise?.exercise !== undefined" class="mb-8">
+          <v-card-title>{{ $t('About the exercise') }}</v-card-title>
+          <v-card-text>
+            <exercise-about :exercise="exercise" />
           </v-card-text>
         </v-card>
       </v-col>
