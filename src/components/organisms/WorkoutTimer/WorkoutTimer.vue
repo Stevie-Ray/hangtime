@@ -1,8 +1,9 @@
 <script setup>
-import { computed, ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
+import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
+import { useRouter } from 'vue-router'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
@@ -15,20 +16,42 @@ import stopSound from '@/assets/sound/stop.wav'
 
 import { useAuthentication } from '@/stores/authentication'
 import { useActivities } from '@/stores/activities'
+import { useApp } from '@/stores/app'
+import { useWorkouts } from '@/stores/workouts'
+import { useUser } from '@/stores/user'
+
+const router = useRouter()
 
 const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthentication())
 
+const { workouts } = storeToRefs(useWorkouts())
+
+const { networkOnLine } = storeToRefs(useApp())
+
 const { updateUser } = useAuthentication()
 
 const { createUserActivity } = useActivities()
+
+const { updateWorkout } = useWorkouts()
+
+const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
 
 const props = defineProps({
   workout: {
     type: Object
   }
 })
+
+const workout = ref(props.workout)
+
+watch(
+  () => props.workout,
+  (newValue) => {
+    workout.value = newValue
+  }
+)
 
 let timer = null
 const timerPaused = ref(null)
@@ -47,6 +70,60 @@ const dialogWorkoutComplete = ref(false)
 const workoutCompleteTimeTotal = ref(0)
 const workoutCompleteTimeHanging = ref(0)
 
+// subscribe
+const isHearted = computed(() => {
+  if (!workout?.value?.subscribers?.length || !user.value) return false
+  return workout.value.subscribers.some((subscriber) => subscriber === user.value.id)
+})
+
+const workoutSubscriber = () => {
+  if (!isHearted.value) {
+    workout?.value.subscribers.unshift(user.value.id)
+    // push to workouts
+    workouts?.value.unshift(workout?.value)
+  } else {
+    // do not allow users to unsubscribe from self-created workouts
+    if (workout?.value?.user?.id === user?.value?.id) return
+    const userIndex = workout?.value.subscribers.indexOf(user.value.id)
+    workout?.value.subscribers.splice(userIndex, 1)
+    // remove from workouts
+    const index = workouts?.value.findIndex((item) => item.id === workout?.value.id)
+    workouts?.value.splice(index, 1)
+  }
+  if (workout.value?.user) {
+    updateWorkout({ userId: workout.value.user.id, workout: workout.value })
+  }
+}
+
+// share
+const navigatorShare = navigator.share
+
+const shareWorkout = async () => {
+  const path =
+    window.location.origin +
+    router.resolve({
+      name: 'WorkoutsDetailPage',
+      params: {
+        company: getUserHangboardCompany.value.id,
+        hangboard: getUserHangboard.value.id,
+        id: workout.value.id
+      }
+    }).href
+
+  const shareData = {
+    title: `${workout.value.name} | HangTime`,
+    text: `${workout.value.name} | HangTime - ${workout.value.description}`,
+    url: `${path}`
+  }
+
+  try {
+    await navigator.share(shareData)
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(`Error: ${err}`)
+  }
+}
+
 onBeforeUnmount(() => {
   // make sure timer is disabled and speech is stopped
   if (timer !== null) clearInterval(timer)
@@ -54,12 +131,12 @@ onBeforeUnmount(() => {
 })
 
 const exercise = computed(() => {
-  if (props?.workout?.exercises) return props?.workout?.exercises[currentExercise.value]
+  if (workout?.value?.exercises) return workout?.value?.exercises[currentExercise.value]
   return {}
 })
 
 const exerciseNext = computed(() => {
-  if (props?.workout?.exercises) return props?.workout?.exercises[currentExercise.value + 1]
+  if (workout?.value?.exercises) return workout?.value?.exercises[currentExercise.value + 1]
   return {}
 })
 
@@ -222,18 +299,18 @@ const updateUserCompleted = () => {
 const exerciseDone = () => {
   clockText.value = t('Done')
   createUserActivity({
-    name: props?.workout?.name ? props.workout.name : '',
+    name: workout?.value?.name ? workout.value.name : '',
     start_date_local: new Date(),
     sport_type: 'Workout',
     elapsed_time: workoutCompleteTimeTotal.value,
     elapsed_time_hanging: workoutCompleteTimeHanging.value,
-    description: props?.workout?.description ? props.workout.description : '',
-    difficulty: props?.workout?.level !== undefined ? props.workout.level : '',
+    description: workout?.value?.description ? workout.value.description : '',
+    difficulty: workout?.value?.level !== undefined ? workout.value.level : '',
     type: 'Hangboarding',
-    company: props?.workout?.company !== undefined ? props.workout.company : '',
-    hangboard: props?.workout?.hangboard !== undefined ? props.workout.hangboard : '',
-    user: props?.workout?.user?.id ? props.workout.user.id : '',
-    workout: props?.workout?.id ? props?.workout.id : ''
+    company: workout?.value?.company !== undefined ? workout.value.company : '',
+    hangboard: workout?.value?.hangboard !== undefined ? workout.value.hangboard : '',
+    user: workout?.value?.user?.id ? workout.value.user.id : '',
+    workout: workout?.value?.id ? workout.value.id : ''
   })
   updateUserCompleted()
   // open dialog
@@ -260,7 +337,8 @@ const hasExercise = (type) => {
 
   if (type === 'next') {
     // if there is another exercise
-    if (currentExercise.value !== props.workout.exercises.length - 1) {
+    // eslint-disable-next-line no-unsafe-optional-chaining
+    if (currentExercise.value !== workout?.value?.exercises.length - 1) {
       currentExercise.value += 1
       setupTimers()
     }
@@ -593,64 +671,91 @@ onMounted(() => {
               </v-card-text>
             </v-card>
 
-            <div class="justify-center align-center w-100 d-flex" style="gap: 4px; z-index: 1">
-              <v-btn
-                :disabled="
-                  clockText !== t('Go') || exercise.max === false || exercise.exercise === 0
-                "
-                :style="{
-                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                }"
-                icon="$check"
-                size="x-large"
-                class="rounded-circle"
-                variant="text"
-                @click="maxHold"
-              />
-              <v-btn
-                :disabled="currentExercise <= 0"
-                :style="{
-                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                }"
-                icon="$skipPrevious"
-                size="x-large"
-                variant="text"
-                class="rounded-circle"
-                @click="hasExercise('prev')"
-              />
-              <v-btn
-                :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
-                size="x-large"
-                variant="flat"
-                class="rounded-circle"
-                @click="timerPaused === null ? startTimer() : pauseWorkout()"
-              ></v-btn>
-              <v-btn
-                :disabled="currentExercise >= workout?.exercises?.length - 1"
-                :style="{
-                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                }"
-                size="x-large"
-                class="rounded-circle"
-                icon="$skipNext"
-                variant="text"
-                @click="hasExercise('next')"
-              />
-              <v-btn
-                :disabled="
-                  !((clockText === t('Rest') || clockText === t('Pause')) && clock >= setupTime) ||
-                  clockText === t('Go')
-                "
-                :style="{
-                  visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                }"
-                icon="$skipForward"
-                size="x-large"
-                class="rounded-circle"
-                variant="text"
-                @click="skipRest"
-              />
-            </div>
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex align-center justify-space-between w-100 ga-1 mb-2">
+                  <v-btn
+                    :disabled="
+                      clockText !== t('Go') || exercise.max === false || exercise.exercise === 0
+                    "
+                    :style="{
+                      visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                    }"
+                    icon="$check"
+                    size="x-large"
+                    class="rounded-circle"
+                    variant="text"
+                    @click="maxHold"
+                  />
+                  <div class="d-flex align-center justify-center ga-4">
+                    <v-btn
+                      :disabled="currentExercise <= 0"
+                      :style="{
+                        visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                      }"
+                      icon="$skipPrevious"
+                      size="x-large"
+                      variant="text"
+                      class="rounded-circle"
+                      @click="hasExercise('prev')"
+                    />
+                    <v-btn
+                      :icon="timerPaused === null ? '$play' : timerPaused ? '$play' : '$pause'"
+                      size="x-large"
+                      variant="flat"
+                      class="rounded-circle"
+                      @click="timerPaused === null ? startTimer() : pauseWorkout()"
+                    ></v-btn>
+                    <v-btn
+                      :disabled="currentExercise >= workout?.exercises?.length - 1"
+                      :style="{
+                        visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                      }"
+                      size="x-large"
+                      class="rounded-circle"
+                      icon="$skipNext"
+                      variant="text"
+                      @click="hasExercise('next')"
+                    />
+                  </div>
+                  <v-btn
+                    :disabled="
+                      !(
+                        (clockText === t('Rest') || clockText === t('Pause')) &&
+                        clock >= setupTime
+                      ) || clockText === t('Go')
+                    "
+                    :style="{
+                      visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
+                    }"
+                    icon="$skipForward"
+                    size="x-large"
+                    class="rounded-circle"
+                    variant="text"
+                    @click="skipRest"
+                  />
+                </div>
+                <div class="d-flex justify-space-between align-center w-100 px-2">
+                  <v-btn
+                    v-if="workout?.subscribers"
+                    :append-icon="isHearted ? '$heart' : '$heartOutline'"
+                    :disabled="!networkOnLine"
+                    variant="text"
+                    @click="workoutSubscriber"
+                  >
+                    {{ workout?.subscribers?.length - 1 }}
+                  </v-btn>
+                  <v-btn
+                    v-if="workout?.share"
+                    :disabled="!networkOnLine || !navigatorShare"
+                    variant="text"
+                    size="small"
+                    icon="$shareVariant"
+                    @click="shareWorkout"
+                  ></v-btn>
+                </div>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-col>

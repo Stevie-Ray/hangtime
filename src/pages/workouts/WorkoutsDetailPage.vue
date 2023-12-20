@@ -117,7 +117,7 @@ const missingHangboardDialog = computed(() => {
   return false
 })
 
-// workout - weight
+// workout - subscribe
 const isHearted = computed(() => {
   if (!workout?.value?.subscribers?.length || !user.value) return false
   return workout.value.subscribers.some((subscriber) => subscriber === user.value.id)
