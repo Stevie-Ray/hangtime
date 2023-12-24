@@ -6785,7 +6785,19 @@ export default [
       {
         name: 'Easy Board',
         id: 4,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FRICTITIOUSEASY.svg',
+        sides: [
+          {
+            name: 'Default',
+            image: 'hangboards/FRICTITIOUSEASY.svg',
+            holds: 3
+          },
+          {
+            name: 'Rotated',
+            image: 'hangboards/FRICTITIOUSEASY-180.svg',
+            holds: 3
+          }
+        ],
         size: {
           x: 470,
           y: 102,
@@ -6793,7 +6805,7 @@ export default [
         },
         type: 'wood',
         url: 'https://frictitiousclimbing.com/products/the-easy-board-mountable-and-portable-hangboard',
-        holds: 0
+        holds: 3
       },
       {
         name: 'The Port-A-Board',
