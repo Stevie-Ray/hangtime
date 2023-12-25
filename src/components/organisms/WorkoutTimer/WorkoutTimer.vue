@@ -684,7 +684,6 @@ onMounted(() => {
                     icon="$check"
                     size="x-large"
                     class="rounded-circle"
-                    color="text"
                     variant="text"
                     @click="maxHold"
                   />
@@ -697,7 +696,6 @@ onMounted(() => {
                       icon="$skipPrevious"
                       size="x-large"
                       variant="text"
-                      color="text"
                       class="rounded-circle"
                       @click="hasExercise('prev')"
                     />
@@ -717,7 +715,6 @@ onMounted(() => {
                       class="rounded-circle"
                       icon="$skipNext"
                       variant="text"
-                      color="text"
                       @click="hasExercise('next')"
                     />
                   </div>
@@ -735,7 +732,6 @@ onMounted(() => {
                     size="x-large"
                     class="rounded-circle"
                     variant="text"
-                    color="text"
                     @click="skipRest"
                   />
                 </div>
