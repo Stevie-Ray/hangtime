@@ -9,9 +9,11 @@ import { useWorkouts } from '@/stores/workouts'
 import { useAuthentication } from '@/stores/authentication'
 import { useApp } from '@/stores/app'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
-import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
 import Walkthrough from '@/components/molecules/dialog/Walkthrough/Walkthrough.vue'
+import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+
 import { time } from '@/helpers'
 
 const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUser())
@@ -37,9 +39,6 @@ const setHangboard = () => {
   updateUser()
   fetchCommunityWorkouts()
 }
-
-const isHearted = (subscribers) =>
-  subscribers?.length && user.value && subscribers.includes(user.value.id)
 
 const levels = [
   { name: t('easy'), value: 1 },
@@ -181,14 +180,7 @@ useHead({
                         difficultyById(workout.level)
                       }}</v-chip>
                       <div class="subscribers">
-                        <v-btn
-                          variant="text"
-                          color="text"
-                          size="x-small"
-                          :append-icon="isHearted(workout.subscribers) ? '$heart' : '$heartOutline'"
-                        >
-                          {{ workout?.subscribers?.length - 1 }}
-                        </v-btn>
+                        <workout-subscribe size="x-small" :workout="workout" :clickable="false" />
                       </div>
                     </v-list-item-action>
                   </template>

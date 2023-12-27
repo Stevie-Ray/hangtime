@@ -15,6 +15,8 @@ import { useApp } from '@/stores/app'
 import { useWorkouts } from '@/stores/workouts'
 import { useAuthentication } from '@/stores/authentication'
 import { useUser } from '@/stores/user'
+import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
+import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
 
 const { t } = useI18n()
 
@@ -200,22 +202,8 @@ useHead({
     </template>
 
     <template #icons>
-      <v-btn
-        v-if="workout?.subscribers && !edit"
-        :append-icon="isHearted ? '$heart' : '$heartOutline'"
-        :disabled="!networkOnLine"
-        color="text"
-        size="x-large"
-        @click="workoutSubscriber"
-      >
-        {{ workout?.subscribers?.length - 1 }}
-      </v-btn>
-      <v-btn
-        v-if="workout?.share && navigatorShare && !edit"
-        color="text"
-        icon="$shareVariant"
-        @click="shareWorkout"
-      ></v-btn>
+      <workout-subscribe size="x-large" :workout="workout" />
+      <workout-share :workout="workout" />
       <v-btn
         v-if="workout?.user?.id === user?.id && !edit"
         :disabled="!networkOnLine"

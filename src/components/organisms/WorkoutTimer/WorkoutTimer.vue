@@ -3,7 +3,8 @@ import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
-import { useRouter } from 'vue-router'
+import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
+import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
@@ -16,27 +17,14 @@ import stopSound from '@/assets/sound/stop.wav'
 
 import { useAuthentication } from '@/stores/authentication'
 import { useActivities } from '@/stores/activities'
-import { useApp } from '@/stores/app'
-import { useWorkouts } from '@/stores/workouts'
-import { useUser } from '@/stores/user'
-
-const router = useRouter()
 
 const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthentication())
 
-const { workouts } = storeToRefs(useWorkouts())
-
-const { networkOnLine } = storeToRefs(useApp())
-
 const { updateUser } = useAuthentication()
 
 const { createUserActivity } = useActivities()
-
-const { updateWorkout } = useWorkouts()
-
-const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
 
 const props = defineProps({
   workout: {
@@ -69,60 +57,6 @@ const setupTime = 5
 const dialogWorkoutComplete = ref(false)
 const workoutCompleteTimeTotal = ref(0)
 const workoutCompleteTimeHanging = ref(0)
-
-// subscribe
-const isHearted = computed(() => {
-  if (!workout?.value?.subscribers?.length || !user.value) return false
-  return workout.value.subscribers.some((subscriber) => subscriber === user.value.id)
-})
-
-const workoutSubscriber = () => {
-  if (!isHearted.value) {
-    workout?.value.subscribers.unshift(user.value.id)
-    // push to workouts
-    workouts?.value.unshift(workout?.value)
-  } else {
-    // do not allow users to unsubscribe from self-created workouts
-    if (workout?.value?.user?.id === user?.value?.id) return
-    const userIndex = workout?.value.subscribers.indexOf(user.value.id)
-    workout?.value.subscribers.splice(userIndex, 1)
-    // remove from workouts
-    const index = workouts?.value.findIndex((item) => item.id === workout?.value.id)
-    workouts?.value.splice(index, 1)
-  }
-  if (workout.value?.user) {
-    updateWorkout({ userId: workout.value.user.id, workout: workout.value })
-  }
-}
-
-// share
-const navigatorShare = navigator.share
-
-const shareWorkout = async () => {
-  const path =
-    window.location.origin +
-    router.resolve({
-      name: 'WorkoutsDetailPage',
-      params: {
-        company: getUserHangboardCompany.value.id,
-        hangboard: getUserHangboard.value.id,
-        id: workout.value.id
-      }
-    }).href
-
-  const shareData = {
-    title: `${workout.value.name} | HangTime`,
-    text: `${workout.value.name} | HangTime - ${workout.value.description}`,
-    url: `${path}`
-  }
-
-  try {
-    await navigator.share(shareData)
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(`Error: ${err}`)
-  }
-}
 
 onBeforeUnmount(() => {
   // make sure timer is disabled and speech is stopped
@@ -690,24 +624,20 @@ onMounted(() => {
                   <v-btn
                     :disabled="disableMaxHold()"
                     :class="{ pulse: !disableMaxHold() }"
-                    :style="{
-                      visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                    }"
                     icon="$timerCheckOutline"
                     size="x-large"
                     class="rounded-circle"
                     variant="text"
+                    color="text"
                     @click="maxHold"
                   />
                   <div class="d-flex align-center justify-center ga-4">
                     <v-btn
                       :disabled="currentExercise <= 0"
-                      :style="{
-                        visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                      }"
                       icon="$skipPrevious"
                       size="x-large"
                       variant="text"
+                      color="text"
                       class="rounded-circle"
                       @click="hasExercise('prev')"
                     />
@@ -720,46 +650,27 @@ onMounted(() => {
                     ></v-btn>
                     <v-btn
                       :disabled="currentExercise >= workout?.exercises?.length - 1"
-                      :style="{
-                        visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                      }"
                       size="x-large"
                       class="rounded-circle"
                       icon="$skipNext"
                       variant="text"
+                      color="text"
                       @click="hasExercise('next')"
                     />
                   </div>
                   <v-btn
                     :disabled="disableSkipRest()"
-                    :style="{
-                      visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
-                    }"
                     icon="$skipForward"
                     size="x-large"
                     class="rounded-circle"
                     variant="text"
+                    color="text"
                     @click="skipRest"
                   />
                 </div>
                 <div class="d-flex justify-space-between align-center w-100 px-2">
-                  <v-btn
-                    v-if="workout?.subscribers"
-                    :append-icon="isHearted ? '$heart' : '$heartOutline'"
-                    :disabled="!networkOnLine"
-                    variant="text"
-                    @click="workoutSubscriber"
-                  >
-                    {{ workout?.subscribers?.length - 1 }}
-                  </v-btn>
-                  <v-btn
-                    v-if="workout?.share"
-                    :disabled="!networkOnLine || !navigatorShare"
-                    variant="text"
-                    size="small"
-                    icon="$shareVariant"
-                    @click="shareWorkout"
-                  ></v-btn>
+                  <workout-subscribe :workout="workout" />
+                  <workout-share size="small" :workout="workout" />
                 </div>
               </v-col>
             </v-row>
@@ -869,9 +780,9 @@ onMounted(() => {
 .timer {
   mix-blend-mode: difference;
   color: white;
-  &:deep(.v-icon, .v-btn) {
-    color: white;
-  }
+  //&:deep(.v-icon, .v-btn) {
+  //  color: white;
+  //}
 }
 
 .pulse {
