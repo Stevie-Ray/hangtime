@@ -19,7 +19,7 @@ export default {
           level: 1,
           pause: 30,
           pullups: 10,
-          repeat: 4,
+          repeat: 0,
           rest: 10,
           right: 0,
           time: 80,

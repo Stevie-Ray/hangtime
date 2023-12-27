@@ -850,26 +850,27 @@ onMounted(() => {
   width: 0;
   max-width: 100%;
   will-change: width, background-position;
+  //width: 50% !important;
 
   &.hang {
     animation: forwards 300s infinite linear;
-    background-color: rgb(var(--v-theme-secondary));
+    background-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
     width: 100%;
   }
 
   &.rest {
     animation: backwards 300s infinite linear;
-    background-color: rgb(var(--v-theme-tertiary));
+    background-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
     width: 0;
   }
 }
 
 .v-btn--variant-text,
 .timer {
-  mix-blend-mode: darken;
-  .v-theme--dark & {
-    mix-blend-mode: difference;
-    color: rgb(var(--v-theme-surface-variant));
+  mix-blend-mode: difference;
+  color: white;
+  &:deep(.v-icon, .v-btn) {
+    color: white;
   }
 }
 
