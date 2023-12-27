@@ -354,11 +354,24 @@ const hasExercise = (type) => {
 
 const skip = ref(false)
 
+const disableSkipRest = () => {
+  return (
+    !(
+      (clockText.value === t('Rest') || clockText.value === t('Pause')) &&
+      clock.value >= setupTime
+    ) || clockText.value === t('Go')
+  )
+}
 const skipRest = () => {
   clock.value = setupTime
   skip.value = true
 }
 
+const disableMaxHold = () => {
+  return (
+    clockText.value !== t('Go') || exercise.value.max === false || exercise.value.exercise === 0
+  )
+}
 const maxHold = () => {
   vibratePhone()
   playSound(stopSound, 'wav')
@@ -671,17 +684,16 @@ onMounted(() => {
               </v-card-text>
             </v-card>
 
-            <v-row>
+            <v-row class="blend">
               <v-col cols="12">
                 <div class="d-flex align-center justify-space-between w-100 ga-1 mb-2">
                   <v-btn
-                    :disabled="
-                      clockText !== t('Go') || exercise.max === false || exercise.exercise === 0
-                    "
+                    :disabled="disableMaxHold()"
+                    :class="{ pulse: !disableMaxHold() }"
                     :style="{
                       visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
                     }"
-                    icon="$check"
+                    icon="$timerCheckOutline"
                     size="x-large"
                     class="rounded-circle"
                     variant="text"
@@ -719,12 +731,7 @@ onMounted(() => {
                     />
                   </div>
                   <v-btn
-                    :disabled="
-                      !(
-                        (clockText === t('Rest') || clockText === t('Pause')) &&
-                        clock >= setupTime
-                      ) || clockText === t('Go')
-                    "
+                    :disabled="disableSkipRest()"
                     :style="{
                       visibility: workout?.exercises?.length > 1 ? 'visible' : 'hidden'
                     }"
@@ -857,16 +864,31 @@ onMounted(() => {
   }
 }
 
+.v-btn--variant-text,
 .timer {
-  color: rgba(var(--v-theme-on-primary));
-  mix-blend-mode: difference;
-
+  mix-blend-mode: darken;
   .v-theme--dark & {
+    mix-blend-mode: difference;
     color: rgb(var(--v-theme-surface-variant));
   }
 }
 
-.rounded-circle.v-btn--variant-text:deep(.v-icon) {
-  mix-blend-mode: difference;
+.pulse {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    scale: 1;
+    opacity: 0.9;
+  }
+  50% {
+    scale: 1.2;
+    opacity: 1;
+  }
+  100% {
+    scale: 1;
+    opacity: 0.9;
+  }
 }
 </style>

@@ -12,6 +12,21 @@ export default {
       company: 1,
       exercises: [
         {
+          exercise: 1,
+          grip: 0,
+          hold: 30,
+          left: 0,
+          level: 1,
+          pause: 30,
+          pullups: 10,
+          repeat: 4,
+          rest: 10,
+          right: 0,
+          time: 80,
+          weight: 10,
+          max: true
+        },
+        {
           exercise: 0,
           grip: 0,
           hold: 30,
