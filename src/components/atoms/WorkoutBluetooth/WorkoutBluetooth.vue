@@ -285,13 +285,20 @@ const connect = () => {
 </script>
 
 <template>
-  <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
+  <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
     <template v-slot:activator="{ props }">
-      <v-btn variant="text" color="text" icon="$bluetooth" :size="size" v-bind="props"></v-btn>
+      <v-btn
+        v-if="workout.company === 1"
+        :size="size"
+        color="text"
+        icon="$bluetooth"
+        v-bind="props"
+        variant="text"
+      ></v-btn>
     </template>
     <v-card>
       <v-toolbar>
-        <v-btn @click="dialog = false" color="text" icon="$close"></v-btn>
+        <v-btn color="text" icon="$close" @click="dialog = false"></v-btn>
         <v-toolbar-title>{{ t('The Griptonine Motherboard') }}</v-toolbar-title>
       </v-toolbar>
       <v-container>
@@ -316,19 +323,18 @@ const connect = () => {
               </v-card-text>
               <v-card-actions>
                 <v-btn
-                  v-if="workout.company === 1"
+                  :disabled="!isBluetoothEnabled"
+                  :prepend-icon="!motherboard ? '$bluetooth' : '$bluetoothOff'"
                   color="text"
                   variant="text"
-                  :prepend-icon="!motherboard ? '$bluetooth' : '$bluetoothOff'"
-                  :disabled="!isBluetoothEnabled"
                   @click="!motherboard ? connect() : disconnect()"
                 >
                   {{ !motherboard ? 'Connect' : 'Disconnect' }}
                 </v-btn>
                 <v-btn
+                  href="https://griptonite.io/motherboard/"
                   prepend-icon="$openInNew"
                   target="_blank"
-                  href="https://griptonite.io/motherboard/"
                 >
                   Get a Motherboard
                 </v-btn>
