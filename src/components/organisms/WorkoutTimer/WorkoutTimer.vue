@@ -3,6 +3,7 @@ import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
+import WorkoutBluetooth from '@/components/atoms/WorkoutBluetooth/WorkoutBluetooth.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
@@ -669,8 +670,13 @@ onMounted(() => {
                   />
                 </div>
                 <div class="d-flex justify-space-between align-center w-100 px-2">
-                  <workout-subscribe :workout="workout" />
-                  <workout-share size="small" :workout="workout" />
+                  <div class="d-flex">
+                    <workout-subscribe :workout="workout" />
+                  </div>
+                  <div class="d-flex">
+                    <workout-bluetooth size="small" :workout="workout" />
+                    <workout-share size="small" :workout="workout" />
+                  </div>
                 </div>
               </v-col>
             </v-row>
@@ -780,9 +786,6 @@ onMounted(() => {
 .timer {
   mix-blend-mode: difference;
   color: white;
-  //&:deep(.v-icon, .v-btn) {
-  //  color: white;
-  //}
 }
 
 .pulse {

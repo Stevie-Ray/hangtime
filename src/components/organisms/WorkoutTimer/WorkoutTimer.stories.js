@@ -10,6 +10,8 @@ export default {
     workout: {
       hangboard: 0,
       company: 1,
+      subscribers: ['userid', 'userid', 'userid'],
+      share: true,
       exercises: [
         {
           exercise: 1,

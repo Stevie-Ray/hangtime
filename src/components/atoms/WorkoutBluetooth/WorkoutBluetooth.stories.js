@@ -1,9 +1,9 @@
-import MotherboardConnect from './MotherboardConnect.vue'
+import WorkoutBluetooth from './WorkoutBluetooth.vue'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 export default {
-  title: 'Components/Molecules/MotherboardConnect',
-  component: MotherboardConnect,
+  title: 'Components/Atoms/WorkoutBluetooth',
+  component: WorkoutBluetooth,
   tags: ['autodocs'],
   argTypes: {},
   args: {}

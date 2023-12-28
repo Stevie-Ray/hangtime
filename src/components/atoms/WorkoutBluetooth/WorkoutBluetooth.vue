@@ -1,6 +1,29 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
+
+const props = defineProps({
+  workout: {
+    type: Object
+  },
+  size: {
+    type: String,
+    default: 'default'
+  }
+})
+
+const workout = ref(props.workout)
+
+watch(
+  () => props.workout,
+  (newValue) => {
+    workout.value = newValue
+  }
+)
+
+const dialog = ref(false)
 // B1:12:BE:07:1E:18 or e6:c4:d8:ee:66:ef (Motherboard)
 
 // Device service
@@ -81,9 +104,9 @@ const handleNotifications = (event) => {
     // Print the formatted string on the screen
     data.value = dataObject
   } else if (event.target.value.byteLength === 14) {
-    weight.value = decimalArray.join(', ')
+    weight.value = 255 - decimalArray[2]
   } else {
-    console.log(event.target.value.byteLength, decimalArray)
+    // console.log(event.target.value.byteLength, decimalArray)
   }
 }
 
@@ -154,29 +177,41 @@ const getCharacteristic = (service, uuid) => {
   })
 }
 
-const sequence = () => {
-  // Wait for 0.5 seconds
-  setTimeout(() => {
-    // Get battery level
-    read(motherboard.value.bat)
-    read(motherboard.value.devMn)
-    read(motherboard.value.devHr)
-    read(motherboard.value.devFr)
-    // Wait for 0.5 seconds
-    setTimeout(() => {
-      write(motherboard.value.led02, '1')
-      // Wait for 2 seconds
-      setTimeout(() => {
-        write(motherboard.value.led01, '1')
-        write(motherboard.value.led02, '1')
-        // Wait for another 2 seconds
-        setTimeout(() => {
-          // The value could be 'S1' to 'S30' or 'A', 'B', 'C'
-          write(motherboard.value.uartTx, 'S2')
-        }, 2000)
-      }, 2000)
-    }, 1000)
-  }, 500)
+const delay = (ms) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+
+// eslint-disable-next-line no-shadow
+const writeAndWait = async (device, data, duration) => {
+  write(device, data)
+  await delay(duration)
+}
+
+const readAndCalibrate = async () => {
+  // Wait for 1 second
+  await delay(1000)
+
+  // Get battery level
+  read(motherboard.value.bat)
+  read(motherboard.value.devMn)
+  read(motherboard.value.devHr)
+  read(motherboard.value.devFr)
+
+  // Wait for 2 second
+  await delay(2000)
+
+  // Calibration flow
+  await writeAndWait(motherboard.value.uartTx, 'C', 5000)
+  await writeAndWait(motherboard.value.led01, '1', 5000)
+  await writeAndWait(motherboard.value.led02, '0', 5000)
+  await writeAndWait(motherboard.value.uartTx, 'S8', 15000)
+  await writeAndWait(motherboard.value.led01, '0', 5000)
+  await writeAndWait(motherboard.value.led02, '1', 5000)
+  await writeAndWait(motherboard.value.uartTx, 'S8', 15000)
+
+  // End process for debugging
+  disconnect()
 }
 
 const connect = () => {
@@ -238,7 +273,8 @@ const connect = () => {
               break
           }
         }
-        sequence()
+        // Start the sequence
+        readAndCalibrate()
       }
     })
     .catch((error) => {
@@ -249,65 +285,116 @@ const connect = () => {
 </script>
 
 <template>
-  <div>
-    <v-btn
-      :disabled="!isBluetoothEnabled"
-      @click="!motherboard ? connect() : disconnect()"
-      :icon="!motherboard ? '$bluetooth' : '$bluetoothOff'"
-    />
-    <v-card v-if="weight" class="mb-4">
-      <v-card-title>Weight</v-card-title>
-      <v-card-subtitle>{{ weight }}</v-card-subtitle>
+  <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
+    <template v-slot:activator="{ props }">
+      <v-btn variant="text" color="text" icon="$bluetooth" :size="size" v-bind="props"></v-btn>
+    </template>
+    <v-card>
+      <v-toolbar>
+        <v-btn @click="dialog = false" color="text" icon="$close"></v-btn>
+        <v-toolbar-title>{{ t('The Griptonine Motherboard') }}</v-toolbar-title>
+      </v-toolbar>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
+            <v-card class="mb-4">
+              <v-card-title>Test, Train, Measure and More</v-card-title>
+              <v-card-subtitle>Realtime data over Bluetooth.</v-card-subtitle>
+              <v-card-text>
+                <p class="mb-4">
+                  Griptonite partnered with Beastmaker to create the Motherboard. This advanced
+                  system samples at a rate of hundreds of times per second, providing real-time
+                  feedback on applied force and hand bias. The Motherboard offers insights into grip
+                  compliance, completion, and, most importantly, facilitates progression.
+                </p>
+                <p class="mb-4">
+                  Excitingly, HangTime is now integrating Griptonite Motherboard support, enhancing
+                  climbers' training experiences. With the Motherboard's real-time feedback,
+                  HangTime users can seamlessly sync and analyze their performance metrics,
+                  revolutionizing climbing training for greater efficiency and progress.
+                </p>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  v-if="workout.company === 1"
+                  color="text"
+                  variant="text"
+                  :prepend-icon="!motherboard ? '$bluetooth' : '$bluetoothOff'"
+                  :disabled="!isBluetoothEnabled"
+                  @click="!motherboard ? connect() : disconnect()"
+                >
+                  {{ !motherboard ? 'Connect' : 'Disconnect' }}
+                </v-btn>
+                <v-btn
+                  prepend-icon="$openInNew"
+                  target="_blank"
+                  href="https://griptonite.io/motherboard/"
+                >
+                  Get a Motherboard
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+            <v-card v-if="weight" class="mb-4">
+              <v-card-title>Weight</v-card-title>
+              <v-card-subtitle>{{ weight }}</v-card-subtitle>
+            </v-card>
+            <v-card v-if="data" class="mb-4">
+              <v-card-title>Frames</v-card-title>
+              <v-card-subtitle>{{ data.frames }} / {{ data.cycle }}</v-card-subtitle>
+            </v-card>
+            <v-card v-if="data" class="mb-4">
+              <v-card-title>Unknown</v-card-title>
+              <v-card-subtitle>35: {{ data.unknown }} / 11: {{ data.eleven }}</v-card-subtitle>
+            </v-card>
+            <v-row v-if="data" class="mb-4">
+              <v-col cols="6">
+                <v-card
+                  :class="
+                    data.left === 7
+                      ? 'bg-grey'
+                      : data.left === 6
+                        ? 'bg-grey-lighten-1'
+                        : data.left === 5
+                          ? 'bg-grey-lighten-2'
+                          : data.left === 4
+                            ? 'bg-grey-lighten-3'
+                            : data.left === 5
+                              ? 'bg-grey-lighten-4'
+                              : 'bg-grey-lighten-5'
+                  "
+                >
+                  <v-card-text>
+                    {{ data.left }} / {{ data.pressure1 }} / {{ data.trippin1 }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="6">
+                <v-card
+                  :class="
+                    data.right === 1
+                      ? 'bg-grey'
+                      : data.right === 2
+                        ? 'bg-grey-lighten-1'
+                        : data.right === 3
+                          ? 'bg-grey-lighten-2'
+                          : data.right === 4
+                            ? 'bg-grey-lighten-3'
+                            : data.right === 5
+                              ? 'bg-grey-lighten-4'
+                              : 'bg-grey-lighten-5'
+                  "
+                >
+                  <v-card-text>
+                    {{ data.right }} / {{ data.pressure2 }} / {{ data.trippin2 }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card>
-    <v-card v-if="data" class="mb-4">
-      <v-card-title>Frames</v-card-title>
-      <v-card-subtitle>{{ data.frames }} / {{ data.cycle }}</v-card-subtitle>
-    </v-card>
-    <v-card v-if="data" class="mb-4">
-      <v-card-title>Unknown</v-card-title>
-      <v-card-subtitle>{{ data.unknown }} / {{ data.eleven }}</v-card-subtitle>
-    </v-card>
-    <v-row v-if="data" class="mb-4">
-      <v-col cols="6">
-        <v-card
-          :class="
-            data.left === 7
-              ? 'bg-grey'
-              : data.left === 6
-                ? 'bg-grey-lighten-1'
-                : data.left === 5
-                  ? 'bg-grey-lighten-2'
-                  : data.left === 4
-                    ? 'bg-grey-lighten-3'
-                    : data.left === 5
-                      ? 'bg-grey-lighten-4'
-                      : 'bg-grey-lighten-5'
-          "
-        >
-          <v-card-text> {{ data.left }} / {{ data.pressure1 }} / {{ data.trippin1 }} </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col cols="6">
-        <v-card
-          :class="
-            data.right === 1
-              ? 'bg-grey'
-              : data.right === 2
-                ? 'bg-grey-lighten-1'
-                : data.right === 3
-                  ? 'bg-grey-lighten-2'
-                  : data.right === 4
-                    ? 'bg-grey-lighten-3'
-                    : data.right === 5
-                      ? 'bg-grey-lighten-4'
-                      : 'bg-grey-lighten-5'
-          "
-        >
-          <v-card-text> {{ data.right }} / {{ data.pressure2 }} / {{ data.trippin2 }} </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+  </v-dialog>
 </template>
 
 <style lang="scss" scoped></style>
