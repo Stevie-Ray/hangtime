@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import Motherboard, { connect, read, write, disconnect } from '@hangtime/motherboard'
+import Motherboard, { connect, disconnect, read, write, notify } from '@hangtime/motherboard'
 
 const { t } = useI18n()
 
@@ -19,7 +19,9 @@ const props = defineProps({
 const workout = ref(props.workout)
 const dialog = ref(false)
 const motherboard = ref()
+const output = ref()
 const isBluetoothEnabled = ref()
+
 // check if device has bluetooth
 navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
   isBluetoothEnabled.value = !!isBluetoothAvailable
@@ -29,20 +31,30 @@ const onSuccess = async () => {
   // set the motherboard
   motherboard.value = Motherboard
 
-  // read device info
+  // Listen for notifications
+  notify((data) => {
+    console.log(data)
+    output.value = JSON.stringify(data)
+  })
+
+  // read battery + device info
   await read(Motherboard.bat)
   await read(Motherboard.devMn)
   await read(Motherboard.devHr)
   await read(Motherboard.devFr)
 
-  // get the stream info
+  // Calibrate?
   await write(Motherboard.uartTx, 'C', 5000)
-  await write(Motherboard.led01, '1', 5000)
-  await write(Motherboard.led02, '0', 5000)
-  await write(Motherboard.uartTx, 'S8', 15000)
-  await write(Motherboard.led01, '0', 5000)
-  await write(Motherboard.led02, '1', 5000)
-  await write(Motherboard.uartTx, 'S8', 15000)
+
+  // Read stream?
+  await write(Motherboard.led01, '1', 2500)
+  await write(Motherboard.led02, '0', 2500)
+  await write(Motherboard.uartTx, 'S30', 5000)
+
+  // Read stream (2x)?
+  await write(Motherboard.led01, '0', 2500)
+  await write(Motherboard.led02, '1', 2500)
+  await write(Motherboard.uartTx, 'S30', 5000)
 
   // disconnect from device after we are done
   disconnect()
@@ -112,6 +124,11 @@ watch(
                   Get a Motherboard
                 </v-btn>
               </v-card-actions>
+            </v-card>
+            <v-card v-if="output">
+              <v-card-text>
+                {{ output }}
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
