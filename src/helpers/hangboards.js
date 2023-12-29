@@ -3332,7 +3332,7 @@ export default [
     },
     hangboards: [
       {
-        name: 'Standard hangboard',
+        name: 'Hangboard',
         id: 0,
         image: 'hangboards/WHITEOAKSTAND.svg',
         size: {
@@ -3345,7 +3345,7 @@ export default [
         holds: 8
       },
       {
-        name: 'Portable hangboard',
+        name: 'Portable Hangboard',
         id: 1,
         image: 'hangboards/WHITEOAKPORT.svg',
         size: {
@@ -7116,6 +7116,133 @@ export default [
         type: 'wood',
         url: 'https://www.etsy.com/listing/1558792936/portable-mountain-and-rock-climbing?click_key=fefb8cd8f94696956098849b199a5d4a846bdd8f%3A1558792936&click_sum=8dae139d&ref=shop_home_feat_1',
         holds: 4
+      }
+    ]
+  },
+  {
+    name: 'Fixe',
+    description:
+      'Fixe was born in 1983, surrounded by mountains and great climbing areas such as Montserrat or Siurana. World reference in ropes and anchors for climbing.',
+    country: 'ES',
+    location: {
+      lat: '42.098745',
+      lon: '2.2157648'
+    },
+    id: 119,
+    url: 'https://www.fixeclimbing.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/fixeclimbing/',
+      instagram: 'https://www.instagram.com/fixe.climb/'
+    },
+    hangboards: [
+      {
+        name: 'Indoor 3',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Stone',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 0
+      }
+    ]
+  },
+  {
+    name: 'Top 30 Climbing Walls',
+    description:
+      'Top 30 is one of the first Spanish holds and walls manufacturers, founded in 1992 and acquired by Entre Prises in 2011',
+    country: 'ES',
+    location: {
+      lat: '43.6020439',
+      lon: '-5.9033777'
+    },
+    id: 120,
+    url: null,
+    socials: {
+      facebook: null,
+      instagram: null
+    },
+    hangboards: [
+      {
+        name: 'Campus',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Fingerboard',
+        id: 1,
+        image: 'hangboards/TOP30FINGERBOARD.svg',
+        size: {
+          x: 720,
+          y: 220,
+          z: 70
+        },
+        type: 'plastic',
+        url: null,
+        holds: 14
+      },
+      {
+        name: 'Kineboard',
+        id: 2,
+        image: 'hangboards/ENTREKINE.svg',
+        size: {
+          x: 600,
+          y: 150,
+          z: 120
+        },
+        type: 'plastic',
+        url: null,
+        holds: 6
+      },
+      {
+        name: 'Pinguin',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Space Invader',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 0
       }
     ]
   }
