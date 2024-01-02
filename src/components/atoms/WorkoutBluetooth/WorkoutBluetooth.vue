@@ -74,6 +74,7 @@ watch(
     <template v-slot:activator="{ props }">
       <v-btn
         v-if="workout.company === 1"
+        :disabled="!isBluetoothEnabled"
         :size="size"
         color="text"
         icon="$bluetooth"
@@ -137,4 +138,9 @@ watch(
   </v-dialog>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-btn--variant-text {
+  color: white;
+  mix-blend-mode: difference;
+}
+</style>

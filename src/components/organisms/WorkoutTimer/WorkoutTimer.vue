@@ -764,8 +764,8 @@ onMounted(() => {
   background-position: 0 0;
   background-repeat: repeat;
   height: calc(100% - 56px) !important; // header
-  width: 0;
   max-width: 100%;
+  width: 0;
   will-change: width, background-position;
   //width: 50% !important;
 
@@ -784,8 +784,8 @@ onMounted(() => {
 
 .v-btn--variant-text,
 .timer {
-  mix-blend-mode: difference;
   color: white;
+  mix-blend-mode: difference;
 }
 
 .pulse {
