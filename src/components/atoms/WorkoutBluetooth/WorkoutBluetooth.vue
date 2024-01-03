@@ -147,12 +147,7 @@ watch(
                   sync and analyze their performance metrics, revolutionizing climbing training for
                   greater efficiency and progress.
                 </p>
-                <v-select
-                  v-model="dropdown"
-                  :items="devices"
-                  :item-props="true"
-                  return-object
-                ></v-select>
+                <v-select v-model="dropdown" :items="devices" :item-props="true"></v-select>
               </v-card-text>
               <v-card-actions>
                 <v-btn
@@ -166,7 +161,8 @@ watch(
                 </v-btn>
                 <v-btn
                   href="https://github.com/Stevie-Ray/hangtime-grip-connect"
-                  prepend-icon="$openInNew"
+                  prepend-icon="$github"
+                  append-icon="$openInNew"
                   target="_blank"
                 >
                   Help development
