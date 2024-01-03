@@ -17,7 +17,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.0.8",
     "@googlemaps/js-api-loader": "^1.16.2",
-    "@hangtime/motherboard": "^0.0.3",
+    "@hangtime/grip-connect": "^0.0.5",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^1.8.9",
     "core-js": "^3.35.0",
@@ -49,7 +49,7 @@
     "eslint-plugin-vue": "^9.19.2",
     "prettier": "^3.1.1",
     "rollup-plugin-visualizer": "^5.12.0",
-    "sass": "^1.69.6",
+    "sass": "^1.69.7",
     "storybook": "^7.6.7",
     "storybook-dark-mode": "^3.0.3",
     "vite": "^5.0.10",

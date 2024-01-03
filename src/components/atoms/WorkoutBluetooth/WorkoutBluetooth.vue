@@ -2,7 +2,16 @@
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import Motherboard, { connect, disconnect, read, write, notify } from '@hangtime/motherboard'
+import {
+  Motherboard,
+  Tindeq,
+  Entralpi,
+  connect,
+  disconnect,
+  read,
+  write,
+  notify
+} from '@hangtime/grip-connect'
 
 const { t } = useI18n()
 
@@ -18,7 +27,23 @@ const props = defineProps({
 
 const workout = ref(props.workout)
 const dialog = ref(false)
-const motherboard = ref()
+const devices = [
+  {
+    title: 'Tindeq',
+    value: Tindeq
+  },
+  {
+    title: 'Entralpi',
+    value: Entralpi
+  },
+  {
+    title: 'Motherboard',
+    value: Motherboard,
+    disabled: workout.value.company !== 1
+  }
+]
+const dropdown = ref(workout.value.company === 1 ? Motherboard : Entralpi)
+const device = ref()
 const output = ref()
 const isBluetoothEnabled = ref()
 
@@ -28,37 +53,49 @@ navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
 })
 
 const onSuccess = async () => {
-  // set the motherboard
-  motherboard.value = Motherboard
-
+  // set the device
+  device.value = dropdown.value
   // Listen for notifications
   notify((data) => {
-    console.log(data)
-    output.value = JSON.stringify(data)
+    if (data && data.value) {
+      if (typeof data.value === 'object') {
+        output.value = JSON.stringify(data.value)
+      } else {
+        output.value = data.value
+      }
+    }
   })
 
-  // read battery + device info
-  await read(Motherboard.bat)
-  await read(Motherboard.devMn)
-  await read(Motherboard.devHr)
-  await read(Motherboard.devFr)
+  if (device.value.name === Motherboard.name) {
+    // read battery + device info
+    await read(Motherboard, 'battery', 'level')
+    await read(Motherboard, 'device', 'manufacturer')
+    await read(Motherboard, 'device', 'hardware')
+    await read(Motherboard, 'device', 'firmware')
 
-  // Calibrate?
-  await write(Motherboard.uartTx, 'C', 5000)
+    // Calibrate?
+    await write(Motherboard, 'uart', 'tx', 'C', 5000)
 
-  // Read stream?
-  await write(Motherboard.led01, '1', 2500)
-  await write(Motherboard.led02, '0', 2500)
-  await write(Motherboard.uartTx, 'S30', 5000)
+    // Read stream?
+    await write(Motherboard, 'unknown', '01', '1', 2500)
+    await write(Motherboard, 'unknown', '02', '0', 2500)
+    await write(Motherboard, 'uart', 'tx', 'S30', 5000)
 
-  // Read stream (2x)?
-  await write(Motherboard.led01, '0', 2500)
-  await write(Motherboard.led02, '1', 2500)
-  await write(Motherboard.uartTx, 'S30', 5000)
+    // Read stream (2x)?
+    await write(Motherboard, 'unknown', '01', '0', 2500)
+    await write(Motherboard, 'unknown', '02', '1', 2500)
+    await write(Motherboard, 'uart', 'tx', 'S30', 5000)
+  }
+
+  if (device.value.name === Tindeq.name) {
+    await write(Tindeq, 'progressor', 'tx', 'e', 10000)
+    await write(Tindeq, 'progressor', 'tx', 'f', 0)
+  }
 
   // disconnect from device after we are done
-  disconnect()
-  motherboard.value = null
+  disconnect(device.value)
+
+  device.value = null
 }
 
 watch(
@@ -73,7 +110,6 @@ watch(
   <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
     <template v-slot:activator="{ props }">
       <v-btn
-        v-if="workout.company === 1"
         :disabled="!isBluetoothEnabled"
         :size="size"
         color="text"
@@ -85,7 +121,7 @@ watch(
     <v-card>
       <v-toolbar>
         <v-btn color="text" icon="$close" @click="dialog = false"></v-btn>
-        <v-toolbar-title>{{ t('The Griptonine Motherboard') }}</v-toolbar-title>
+        <v-toolbar-title>{{ t('Force-Sensing Climbing Training') }}</v-toolbar-title>
       </v-toolbar>
       <v-container>
         <v-row>
@@ -95,34 +131,45 @@ watch(
               <v-card-subtitle>Realtime data over Bluetooth.</v-card-subtitle>
               <v-card-text>
                 <p class="mb-4">
-                  Griptonite partnered with Beastmaker to create the Motherboard. This advanced
-                  system samples at a rate of hundreds of times per second, providing real-time
-                  feedback on applied force and hand bias. The Motherboard offers insights into grip
-                  compliance, completion, and, most importantly, facilitates progression.
+                  Smart Bluetooth hangboards or plates revolutionize climbing training by
+                  integrating sensors and connectivity. Devices like
+                  <a href="https://griptonite.io/motherboard/" target="_blank">Motherboard</a>,
+                  <a href="https://climbro.com/" target="_blank">Climbro</a>,
+                  <a href="https://www.smartboard-climbing.com/" target="_blank">SmartBoard</a>,
+                  <a href="https://entralpi.com/" target="_blank">Entralpi</a>, and
+                  <a href="https://tindeq.com/" target="_blank">Tindeq Progressor</a> offer
+                  personalized workouts, performance tracking, and real-time feedback through mobile
+                  apps, enhancing climbers' strength and technique with data-driven insights.
                 </p>
                 <p class="mb-4">
-                  Excitingly, HangTime is now integrating Griptonite Motherboard support, enhancing
-                  climbers' training experiences. With the Motherboard's real-time feedback,
-                  HangTime users can seamlessly sync and analyze their performance metrics,
-                  revolutionizing climbing training for greater efficiency and progress.
+                  Excitingly, HangTime is now integrating bluetooth support, enhancing climbers'
+                  training experiences. With the real-time feedback, HangTime users can seamlessly
+                  sync and analyze their performance metrics, revolutionizing climbing training for
+                  greater efficiency and progress.
                 </p>
+                <v-select
+                  v-model="dropdown"
+                  :items="devices"
+                  :item-props="true"
+                  return-object
+                ></v-select>
               </v-card-text>
               <v-card-actions>
                 <v-btn
                   :disabled="!isBluetoothEnabled"
-                  :prepend-icon="!motherboard ? '$bluetooth' : '$bluetoothOff'"
+                  :prepend-icon="!device ? '$bluetooth' : '$bluetoothOff'"
                   color="text"
                   variant="text"
-                  @click="!motherboard ? connect(onSuccess) : disconnect()"
+                  @click="!device ? connect(dropdown, onSuccess) : disconnect(device)"
                 >
-                  {{ !motherboard ? 'Connect' : 'Disconnect' }}
+                  {{ !device ? 'Connect' : 'Disconnect' }}
                 </v-btn>
                 <v-btn
-                  href="https://griptonite.io/motherboard/"
+                  href="https://github.com/Stevie-Ray/hangtime-grip-connect"
                   prepend-icon="$openInNew"
                   target="_blank"
                 >
-                  Get a Motherboard
+                  Help development
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -139,6 +186,9 @@ watch(
 </template>
 
 <style lang="scss" scoped>
+a {
+  color: inherit;
+}
 .v-btn--variant-text {
   color: white;
   mix-blend-mode: difference;
