@@ -159,7 +159,7 @@ watch(
                   :prepend-icon="!device ? '$bluetooth' : '$bluetoothOff'"
                   color="text"
                   variant="text"
-                  @click="!device ? connect(dropdown, onSuccess) : reset()"
+                  @click="!device ? connect(Motherboard, onSuccess) : reset()"
                 >
                   {{ !device ? 'Connect' : 'Disconnect' }}
                 </v-btn>
