@@ -45,12 +45,19 @@ const devices = [
 const dropdown = ref(workout.value.company === 1 ? Motherboard : Entralpi)
 const device = ref()
 const output = ref()
-const isBluetoothEnabled = ref()
+const isBluetoothEnabled = ref(false)
 
 // check if device has bluetooth
-navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
-  isBluetoothEnabled.value = !!isBluetoothAvailable
-})
+if (navigator.bluetooth) {
+  navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
+    isBluetoothEnabled.value = !!isBluetoothAvailable
+  })
+}
+
+const reset = () => {
+  disconnect(device.value)
+  device.value = null
+}
 
 const onSuccess = async () => {
   // set the device
@@ -92,10 +99,7 @@ const onSuccess = async () => {
     await write(Tindeq, 'progressor', 'tx', 'f', 0)
   }
 
-  // disconnect from device after we are done
-  disconnect(device.value)
-
-  device.value = null
+  reset()
 }
 
 watch(
@@ -155,7 +159,7 @@ watch(
                   :prepend-icon="!device ? '$bluetooth' : '$bluetoothOff'"
                   color="text"
                   variant="text"
-                  @click="!device ? connect(dropdown, onSuccess) : disconnect(device)"
+                  @click="!device ? connect(dropdown, onSuccess) : reset()"
                 >
                   {{ !device ? 'Connect' : 'Disconnect' }}
                 </v-btn>
