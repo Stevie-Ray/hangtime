@@ -17,7 +17,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.0.8",
     "@googlemaps/js-api-loader": "^1.16.2",
-    "@hangtime/grip-connect": "^0.0.5",
+    "@hangtime/grip-connect": "^0.0.6",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^1.8.9",
     "core-js": "^3.35.0",

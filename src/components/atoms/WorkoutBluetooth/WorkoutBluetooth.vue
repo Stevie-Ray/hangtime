@@ -11,7 +11,7 @@ import {
   read,
   write,
   notify
-} from '@hangtime/grip-connect'
+} from '@hangtime/grip-connect/build'
 
 const { t } = useI18n()
 
@@ -159,7 +159,7 @@ watch(
                   :prepend-icon="!device ? '$bluetooth' : '$bluetoothOff'"
                   color="text"
                   variant="text"
-                  @click="!device ? connect(Motherboard, onSuccess) : reset()"
+                  @click="!device ? connect(dropdown, onSuccess) : reset()"
                 >
                   {{ !device ? 'Connect' : 'Disconnect' }}
                 </v-btn>
