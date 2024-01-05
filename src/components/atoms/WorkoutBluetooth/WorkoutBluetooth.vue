@@ -61,28 +61,28 @@ const reset = () => {
 
 const handleMotherboard = async () => {
   // read battery + device info
-  await read(Motherboard, 'battery', 'level')
-  await read(Motherboard, 'device', 'manufacturer')
-  await read(Motherboard, 'device', 'hardware')
-  await read(Motherboard, 'device', 'firmware')
+  await read(device.value, 'battery', 'level')
+  await read(device.value, 'device', 'manufacturer')
+  await read(device.value, 'device', 'hardware')
+  await read(device.value, 'device', 'firmware')
 
   // Calibrate?
-  await write(Motherboard, 'uart', 'tx', 'C', 5000)
+  await write(device.value, 'uart', 'tx', 'C', 5000)
 
   // Read stream?
-  await write(Motherboard, 'unknown', '01', '1', 2500)
-  await write(Motherboard, 'unknown', '02', '0', 2500)
-  await write(Motherboard, 'uart', 'tx', 'S30', 5000)
+  await write(device.value, 'unknown', '01', '1', 2500)
+  await write(device.value, 'unknown', '02', '0', 2500)
+  await write(device.value, 'uart', 'tx', 'S30', 5000)
 
   // Read stream (2x)?
-  await write(Motherboard, 'unknown', '01', '0', 2500)
-  await write(Motherboard, 'unknown', '02', '1', 2500)
-  await write(Motherboard, 'uart', 'tx', 'S30', 5000)
+  await write(device.value, 'unknown', '01', '0', 2500)
+  await write(device.value, 'unknown', '02', '1', 2500)
+  await write(device.value, 'uart', 'tx', 'S30', 5000)
 }
 
 const handleTindeq = async () => {
-  await write(Tindeq, 'progressor', 'tx', 'e', 10000)
-  await write(Tindeq, 'progressor', 'tx', 'f', 0)
+  await write(device.value, 'progressor', 'tx', 'e', 10000)
+  await write(device.value, 'progressor', 'tx', 'f', 0)
 }
 
 const onSuccess = async () => {
@@ -102,10 +102,12 @@ const onSuccess = async () => {
     })
 
     if (device.value?.name === Motherboard.name) {
+      console.log(device.value, Motherboard)
       await handleMotherboard()
     }
 
     if (device.value?.name === Tindeq.name) {
+      console.log(device.value, Tindeq)
       await handleTindeq()
     }
   } catch (error) {
