@@ -59,47 +59,60 @@ const reset = () => {
   device.value = null
 }
 
+const handleMotherboard = async () => {
+  // read battery + device info
+  await read(Motherboard, 'battery', 'level')
+  await read(Motherboard, 'device', 'manufacturer')
+  await read(Motherboard, 'device', 'hardware')
+  await read(Motherboard, 'device', 'firmware')
+
+  // Calibrate?
+  await write(Motherboard, 'uart', 'tx', 'C', 5000)
+
+  // Read stream?
+  await write(Motherboard, 'unknown', '01', '1', 2500)
+  await write(Motherboard, 'unknown', '02', '0', 2500)
+  await write(Motherboard, 'uart', 'tx', 'S30', 5000)
+
+  // Read stream (2x)?
+  await write(Motherboard, 'unknown', '01', '0', 2500)
+  await write(Motherboard, 'unknown', '02', '1', 2500)
+  await write(Motherboard, 'uart', 'tx', 'S30', 5000)
+}
+
+const handleTindeq = async () => {
+  await write(Tindeq, 'progressor', 'tx', 'e', 10000)
+  await write(Tindeq, 'progressor', 'tx', 'f', 0)
+}
+
 const onSuccess = async () => {
-  // set the device
-  device.value = dropdown.value
-  // Listen for notifications
-  notify((data) => {
-    if (data && data.value) {
-      if (typeof data.value === 'object') {
-        output.value = JSON.stringify(data.value)
-      } else {
-        output.value = data.value
+  try {
+    // set the device
+    device.value = dropdown.value
+
+    // Listen for notifications
+    notify((data) => {
+      if (data?.value) {
+        if (typeof data.value === 'object') {
+          output.value = JSON.stringify(data.value)
+        } else {
+          output.value = data.value
+        }
       }
+    })
+
+    if (device.value?.name === Motherboard.name) {
+      await handleMotherboard()
     }
-  })
 
-  if (device.value.name === Motherboard.name) {
-    // read battery + device info
-    await read(Motherboard, 'battery', 'level')
-    await read(Motherboard, 'device', 'manufacturer')
-    await read(Motherboard, 'device', 'hardware')
-    await read(Motherboard, 'device', 'firmware')
-
-    // Calibrate?
-    await write(Motherboard, 'uart', 'tx', 'C', 5000)
-
-    // Read stream?
-    await write(Motherboard, 'unknown', '01', '1', 2500)
-    await write(Motherboard, 'unknown', '02', '0', 2500)
-    await write(Motherboard, 'uart', 'tx', 'S30', 5000)
-
-    // Read stream (2x)?
-    await write(Motherboard, 'unknown', '01', '0', 2500)
-    await write(Motherboard, 'unknown', '02', '1', 2500)
-    await write(Motherboard, 'uart', 'tx', 'S30', 5000)
+    if (device.value?.name === Tindeq.name) {
+      await handleTindeq()
+    }
+  } catch (error) {
+    console.error(error)
+  } finally {
+    reset()
   }
-
-  if (device.value.name === Tindeq.name) {
-    await write(Tindeq, 'progressor', 'tx', 'e', 10000)
-    await write(Tindeq, 'progressor', 'tx', 'f', 0)
-  }
-
-  reset()
 }
 
 watch(
