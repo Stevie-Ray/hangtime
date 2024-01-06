@@ -61,13 +61,13 @@ const reset = () => {
 
 const handleMotherboard = async () => {
   // read battery + device info
-  await read(device.value, 'battery', 'level')
-  await read(device.value, 'device', 'manufacturer')
-  await read(device.value, 'device', 'hardware')
-  await read(device.value, 'device', 'firmware')
+  await read(device.value, 'battery', 'level', 1000)
+  await read(device.value, 'device', 'manufacturer', 1000)
+  await read(device.value, 'device', 'hardware', 1000)
+  await read(device.value, 'device', 'firmware', 1000)
 
   // Calibrate?
-  await write(device.value, 'uart', 'tx', 'C', 5000)
+  await write(device.value, 'uart', 'tx', 'C', 10000)
 
   // Read stream?
   await write(device.value, 'unknown', '01', '1', 2500)
@@ -82,7 +82,7 @@ const handleMotherboard = async () => {
 
 const handleTindeq = async () => {
   await write(device.value, 'progressor', 'tx', 'e', 10000)
-  await write(device.value, 'progressor', 'tx', 'f', 0)
+  await write(device.value, 'progressor', 'tx', 'f')
 }
 
 const onSuccess = async () => {
