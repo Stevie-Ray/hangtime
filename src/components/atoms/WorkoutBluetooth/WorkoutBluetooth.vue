@@ -45,12 +45,17 @@ const devices = [
 const dropdown = ref(workout.value.company === 1 ? Motherboard : Entralpi)
 const device = ref()
 const output = ref()
-const isBluetoothEnabled = ref(false)
+const isBluetoothAvailable = ref(false)
 
-// check if device has bluetooth
-if (navigator.bluetooth) {
-  navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
-    isBluetoothEnabled.value = !!isBluetoothAvailable
+// check if the browser supports bluetooth
+const isBluetoothSupported = () => {
+  return 'bluetooth' in navigator
+}
+
+// check if the device has a Bluetooth adapter
+if (isBluetoothSupported()) {
+  navigator.bluetooth.getAvailability().then((isAvailable) => {
+    isBluetoothAvailable.value = !!isAvailable
   })
 }
 
@@ -129,7 +134,8 @@ watch(
   <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
     <template v-slot:activator="{ props }">
       <v-btn
-        :disabled="!isBluetoothEnabled"
+        v-if="isBluetoothSupported"
+        :disabled="!isBluetoothAvailable"
         :size="size"
         color="text"
         icon="$bluetooth"
@@ -170,7 +176,7 @@ watch(
               </v-card-text>
               <v-card-actions>
                 <v-btn
-                  :disabled="!isBluetoothEnabled"
+                  :disabled="!isBluetoothAvailable"
                   :prepend-icon="!device ? '$bluetooth' : '$bluetoothOff'"
                   color="text"
                   variant="text"
