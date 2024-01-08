@@ -69,7 +69,7 @@ const workoutSubscriber = () => {
     color="text"
     variant="text"
     :size="size"
-    @click="clickable ? workoutSubscriber : null"
+    @click="clickable ? workoutSubscriber() : null"
   >
     {{ workout?.subscribers?.length - 1 }}
   </v-btn>
