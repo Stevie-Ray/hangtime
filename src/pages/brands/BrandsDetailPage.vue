@@ -63,50 +63,50 @@ useHead({
 
     <template #default>
       <v-container>
-        <v-row class="mb-4">
-          <v-col cols="12">
-            <v-card class="mx-auto" max-width="100%" theme="light">
-              <v-img :src="useRandomImage()" cover>
-                <v-card-text style="height: 112px">
-                  <div class="text-subtitle-1 mb-4">
-                    {{ getCompany?.description }}
-                  </div>
-                </v-card-text>
+        <v-row :class="!user ? 'mb-10' : 'mb-4'">
+          <v-col cols="12" md="5" order-md="last">
+            <div class="sticky">
+              <v-card class="mx-auto" max-width="100%" theme="light">
+                <v-img :src="useRandomImage()" cover>
+                  <v-card-text style="height: 112px">
+                    <div class="text-subtitle-1 mb-4">
+                      {{ getCompany?.description }}
+                    </div>
+                  </v-card-text>
 
-                <v-card-actions class="mt-auto">
-                  <v-btn
-                    v-if="getCompany?.url"
-                    color="text"
-                    variant="outlined"
-                    :href="getCompany?.url"
-                    target="_blank"
-                    prepend-icon="$web"
-                    :disabled="!networkOnLine"
-                  >
-                    Website
-                  </v-btn>
-                  <v-spacer v-if="getCompany?.socials" />
-                  <v-btn
-                    v-if="getCompany?.socials?.facebook"
-                    :href="getCompany?.socials?.facebook"
-                    target="_blank"
-                    icon="$facebook"
-                    :disabled="!networkOnLine"
-                  />
-                  <v-btn
-                    v-if="getCompany?.socials?.instagram"
-                    :href="getCompany?.socials?.instagram"
-                    target="_blank"
-                    icon="$instagram"
-                    :disabled="!networkOnLine"
-                  />
-                </v-card-actions>
-              </v-img>
-            </v-card>
+                  <v-card-actions class="mt-auto">
+                    <v-btn
+                      v-if="getCompany?.url"
+                      color="text"
+                      variant="outlined"
+                      :href="getCompany?.url"
+                      target="_blank"
+                      prepend-icon="$web"
+                      :disabled="!networkOnLine"
+                    >
+                      Website
+                    </v-btn>
+                    <v-spacer v-if="getCompany?.socials" />
+                    <v-btn
+                      v-if="getCompany?.socials?.facebook"
+                      :href="getCompany?.socials?.facebook"
+                      target="_blank"
+                      icon="$facebook"
+                      :disabled="!networkOnLine"
+                    />
+                    <v-btn
+                      v-if="getCompany?.socials?.instagram"
+                      :href="getCompany?.socials?.instagram"
+                      target="_blank"
+                      icon="$instagram"
+                      :disabled="!networkOnLine"
+                    />
+                  </v-card-actions>
+                </v-img>
+              </v-card>
+            </div>
           </v-col>
-        </v-row>
-        <v-row :class="{ 'mb-10': !user }">
-          <v-col cols="12">
+          <v-col cols="12" md="7" order-md="first">
             <v-card v-for="hangboard in sortedHangboards" :key="hangboard.id" class="mb-8">
               <v-card-text>
                 <exercise-hangboard
@@ -175,6 +175,12 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
+.sticky {
+  @media (min-width: 960px) {
+    position: sticky;
+    top: 68px;
+  }
+}
 .v-responsive:deep(.v-responsive__content) {
   display: flex;
   flex-direction: column;

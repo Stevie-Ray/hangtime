@@ -7138,28 +7138,28 @@ export default [
       {
         name: 'Indoor 3',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FIXEINDOOR3.svg',
         size: {
-          x: null,
-          y: null,
+          x: 810,
+          y: 260,
           z: null
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 16
       },
       {
         name: 'Stone',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FIXESTONE.svg',
         size: {
-          x: null,
-          y: null,
+          x: 830,
+          y: 120,
           z: null
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 6
       }
     ]
   },
