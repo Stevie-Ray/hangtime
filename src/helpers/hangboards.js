@@ -5917,7 +5917,7 @@ export default [
       {
         name: 'Verticalboard First',
         id: 5,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/YYVERTICALFIRST.svg',
         size: {
           x: 540,
           y: 130,
@@ -5925,7 +5925,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.yyvertical.com/products/verticalboard-first',
-        holds: 0
+        holds: 10
       },
       {
         name: 'Verticalboard Light',
