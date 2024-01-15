@@ -7245,5 +7245,35 @@ export default [
         holds: 0
       }
     ]
+  },
+  {
+    name: 'KONG Holds',
+    description: 'A designer and manufacturer of climbing holds based in the Lake District, UK',
+    country: 'GB',
+    location: {
+      lat: '54.6124245',
+      lon: '-3.047709'
+    },
+    id: 121,
+    url: 'https://www.kongholds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/kongclimbingholds',
+      instagram: 'https://www.instagram.com/kongholds/'
+    },
+    hangboards: [
+      {
+        name: 'Strong Mark II',
+        id: 0,
+        image: 'hangboards/KONGMARKII.svg',
+        size: {
+          x: 580,
+          y: 150,
+          z: 56
+        },
+        type: 'wood',
+        url: 'https://www.kongholds.com/training-equiptment/fingerboards/kong-strong-mark-ii-climbing-fingerboard__366',
+        holds: 7
+      }
+    ]
   }
 ]
