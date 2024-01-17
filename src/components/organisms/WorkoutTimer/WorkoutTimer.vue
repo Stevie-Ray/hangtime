@@ -65,7 +65,7 @@ const workoutCompleteTimeHanging = ref(0)
 
 // bluetooth
 const bluetoothOutput = ref(null)
-const bluetoothStream = 'S8'
+const bluetoothStream = 'S30'
 const notify = (data) => {
   if (data?.value) {
     if (typeof data.value === 'object') {

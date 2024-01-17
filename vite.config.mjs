@@ -1,4 +1,5 @@
 // Plugins
+import Components from 'unplugin-vue-components/vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -17,11 +18,11 @@ export default defineConfig({
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
-      autoImport: true,
       styles: {
         configFile: 'src/plugins/vuetify/settings.scss'
       }
     }),
+    Components(),
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'injectManifest',

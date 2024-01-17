@@ -76,6 +76,13 @@ const handleMotherboard = async () => {
   await read(device.value, 'device', 'manufacturer', 1000)
   await read(device.value, 'device', 'hardware', 1000)
   await read(device.value, 'device', 'firmware', 1000)
+
+  // recalibrate
+  await write(Motherboard, 'uart', 'tx', '', 0)
+  await write(Motherboard, 'uart', 'tx', '', 0)
+  await write(Motherboard, 'uart', 'tx', '', 1000)
+
+  await write(Motherboard, 'uart', 'tx', 'C3,0,0,0', 2000)
 }
 
 const handleTindeq = async () => {
@@ -166,6 +173,13 @@ watch(
                   training experiences. With the real-time feedback, HangTime users can seamlessly
                   sync and analyze their performance metrics, revolutionizing climbing training for
                   greater efficiency and progress.
+                </p>
+                <p>
+                  <v-alert class="mb-4">
+                    THIS SOFTWARE IS NOT OFFICIALLY SUPPORTED, SUPPLIED OR MAINTAINED BY THE DEVICE
+                    MANUFACTURER. BY USING THE SOFTWARE YOU ARE ACKNOWLEDGING THIS AND UNDERSTAND
+                    THAT USING THIS SOFTWARE WILL INVALIDATE THE MANUFACTURERS WARRANTY.
+                  </v-alert>
                 </p>
                 <v-select v-model="dropdown" :items="devices" :item-props="true"></v-select>
               </v-card-text>
