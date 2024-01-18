@@ -5917,7 +5917,7 @@ export default [
       {
         name: 'Verticalboard First',
         id: 5,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/YYVERTICALFIRST.svg',
         size: {
           x: 540,
           y: 130,
@@ -5925,7 +5925,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.yyvertical.com/products/verticalboard-first',
-        holds: 0
+        holds: 10
       },
       {
         name: 'Verticalboard Light',
@@ -7138,28 +7138,28 @@ export default [
       {
         name: 'Indoor 3',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FIXEINDOOR3.svg',
         size: {
-          x: null,
-          y: null,
+          x: 810,
+          y: 260,
           z: null
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 16
       },
       {
         name: 'Stone',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FIXESTONE.svg',
         size: {
-          x: null,
-          y: null,
+          x: 830,
+          y: 120,
           z: null
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 6
       }
     ]
   },
@@ -7243,6 +7243,36 @@ export default [
         type: 'plastic',
         url: null,
         holds: 0
+      }
+    ]
+  },
+  {
+    name: 'KONG Holds',
+    description: 'A designer and manufacturer of climbing holds based in the Lake District, UK',
+    country: 'GB',
+    location: {
+      lat: '54.6124245',
+      lon: '-3.047709'
+    },
+    id: 121,
+    url: 'https://www.kongholds.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/kongclimbingholds',
+      instagram: 'https://www.instagram.com/kongholds/'
+    },
+    hangboards: [
+      {
+        name: 'Strong Mark II',
+        id: 0,
+        image: 'hangboards/KONGMARKII.svg',
+        size: {
+          x: 580,
+          y: 150,
+          z: 56
+        },
+        type: 'wood',
+        url: 'https://www.kongholds.com/training-equiptment/fingerboards/kong-strong-mark-ii-climbing-fingerboard__366',
+        holds: 7
       }
     ]
   }

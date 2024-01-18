@@ -35,12 +35,12 @@ useHead({
     <template #default>
       <v-container>
         <v-row>
-          <v-col cols="12">
-            <map-container :markers="getCompanies" :zoom="1" />
+          <v-col cols="12" md="5" order-md="last">
+            <div class="sticky">
+              <map-container :markers="getCompanies" :zoom="1" />
+            </div>
           </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
+          <v-col cols="12" md="7" order-md="first">
             <v-list lines="two">
               <v-list-item
                 :to="
@@ -75,4 +75,11 @@ useHead({
   </app-container>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.sticky {
+  @media (min-width: 960px) {
+    position: sticky;
+    top: 68px;
+  }
+}
+</style>

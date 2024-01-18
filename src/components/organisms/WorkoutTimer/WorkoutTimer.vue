@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
+import { write, disconnect } from '@hangtime/grip-connect'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
@@ -18,6 +19,9 @@ import stopSound from '@/assets/sound/stop.wav'
 
 import { useAuthentication } from '@/stores/authentication'
 import { useActivities } from '@/stores/activities'
+import { useBluetooth } from '@/stores/bluetooth.js'
+
+const { device } = storeToRefs(useBluetooth())
 
 const { t } = useI18n()
 
@@ -58,6 +62,15 @@ const setupTime = 5
 const dialogWorkoutComplete = ref(false)
 const workoutCompleteTimeTotal = ref(0)
 const workoutCompleteTimeHanging = ref(0)
+
+// bluetooth
+const bluetoothOutput = ref(null)
+const bluetoothStream = 'S30'
+const notify = (data) => {
+  if (data?.value) {
+    bluetoothOutput.value = data.value
+  }
+}
 
 onBeforeUnmount(() => {
   // make sure timer is disabled and speech is stopped
@@ -170,7 +183,9 @@ const stopTimer = () => {
   noSleep.disable()
   clearInterval(timer)
   timerPaused.value = !timerPaused.value
-  // resetTimer()
+  if (device.value) {
+    disconnect(device.value)
+  }
 }
 
 const exercisePause = () => {
@@ -349,6 +364,9 @@ const exerciseSteps = () => {
         clock.value = 0
       } else {
         clock.value = exercise.value.hold - 1
+        if (device.value) {
+          write(device.value, 'uart', 'tx', bluetoothStream, exercise.value.hold - 1)
+        }
       }
       currentExerciseStep.value = 1
       exerciseHold()
@@ -393,6 +411,9 @@ const exerciseSteps = () => {
           clock.value = 0
         } else {
           clock.value = exercise.value.hold - 1
+          if (device.value) {
+            write(device.value, 'uart', 'tx', bluetoothStream, exercise.value.hold - 1)
+          }
         }
         currentExerciseStep.value = 3
         exerciseHold()
@@ -409,6 +430,9 @@ const exerciseSteps = () => {
       workoutCompleteTimeHanging.value += 1
       if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
         clock.value += 1
+        if (device.value) {
+          write(device.value, 'uart', 'tx', bluetoothStream)
+        }
         break
       }
       if (clock.value > 0) {
@@ -467,6 +491,9 @@ const setupWorkout = async () => {
           clock.value = 0
         } else {
           clock.value = exercise.value.hold - 1
+          if (device.value) {
+            write(device.value, 'uart', 'tx', bluetoothStream, exercise.value.hold - 1)
+          }
         }
         // start when setup is done
         startWorkout()
@@ -563,15 +590,32 @@ onMounted(() => {
   <v-container v-if="workout?.exercises" class="position-relative">
     <v-row align="start" justify="center">
       <v-col cols="12" md="7" class="d-flex flex-column" style="min-height: 85vh">
-        <v-row align="center" class="timer" justify="center">
+        <v-row align="center" justify="center">
           <v-col class="text-center pb-4" cols="12" sm="8">
-            <div class="text-h1">
-              {{ time(clock) }}
-            </div>
-            <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
-              {{ clockText }}
-            </div>
-            <v-row align="center" justify="space-evenly">
+            <v-row align="center">
+              <v-col cols="12" class="d-flex justify-space-between align-center">
+                <slider-bluetooth
+                  v-if="bluetoothOutput?.massLeft"
+                  :stream="bluetoothOutput.massLeft"
+                />
+                <div class="timer w-100">
+                  <div class="text-h1">
+                    {{ time(clock) }}
+                  </div>
+                  <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
+                    {{ clockText }}
+                  </div>
+                  <div v-if="bluetoothOutput?.massTotal" style="overflow: hidden">
+                    {{ bluetoothOutput.massTotal }} KG
+                  </div>
+                </div>
+                <slider-bluetooth
+                  v-if="bluetoothOutput?.massRight"
+                  :stream="bluetoothOutput.massRight * -1"
+                />
+              </v-col>
+            </v-row>
+            <v-row class="timer" align="center" justify="space-evenly">
               <v-col class="text-center">
                 <div class="text-caption text-uppercase">
                   {{ t('Time') }}
@@ -674,7 +718,12 @@ onMounted(() => {
                     <workout-subscribe :workout="workout" />
                   </div>
                   <div class="d-flex">
-                    <workout-bluetooth size="small" :workout="workout" />
+                    <workout-bluetooth
+                      size="small"
+                      :workout="workout"
+                      @start="timerPaused === null ? startTimer() : null"
+                      @notify="notify"
+                    />
                     <workout-share size="small" :workout="workout" />
                   </div>
                 </div>

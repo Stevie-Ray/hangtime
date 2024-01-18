@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 
 import {
@@ -11,7 +12,13 @@ import {
   read,
   write,
   notify
-} from '@hangtime/grip-connect/build'
+} from '@hangtime/grip-connect'
+
+import { useBluetooth } from '@/stores/bluetooth'
+
+const emit = defineEmits(['notify', 'start'])
+
+const { device } = storeToRefs(useBluetooth())
 
 const { t } = useI18n()
 
@@ -43,7 +50,6 @@ const devices = [
   }
 ]
 const dropdown = ref(workout.value.company === 1 ? Motherboard : Entralpi)
-const device = ref()
 const output = ref()
 const isBluetoothAvailable = ref(false)
 
@@ -71,18 +77,8 @@ const handleMotherboard = async () => {
   await read(device.value, 'device', 'hardware', 1000)
   await read(device.value, 'device', 'firmware', 1000)
 
-  // Calibrate?
-  await write(device.value, 'uart', 'tx', 'C', 10000)
-
-  // Read stream?
-  await write(device.value, 'unknown', '01', '1', 2500)
-  await write(device.value, 'unknown', '02', '0', 2500)
-  await write(device.value, 'uart', 'tx', 'S30', 5000)
-
-  // Read stream (2x)?
-  await write(device.value, 'unknown', '01', '0', 2500)
-  await write(device.value, 'unknown', '02', '1', 2500)
-  await write(device.value, 'uart', 'tx', 'S30', 5000)
+  // read calibration (required before reading data)
+  await write(device.value, 'uart', 'tx', 'C', 0)
 }
 
 const handleTindeq = async () => {
@@ -97,6 +93,7 @@ const onSuccess = async () => {
 
     // Listen for notifications
     notify((data) => {
+      emit('notify', data)
       if (data?.value) {
         if (typeof data.value === 'object') {
           output.value = JSON.stringify(data.value)
@@ -118,7 +115,8 @@ const onSuccess = async () => {
   } catch (error) {
     console.error(error)
   } finally {
-    reset()
+    dialog.value = false
+    emit('start')
   }
 }
 
@@ -138,7 +136,7 @@ watch(
         :disabled="!isBluetoothAvailable"
         :size="size"
         color="text"
-        icon="$bluetooth"
+        :icon="!device ? '$bluetooth' : '$bluetoothOff'"
         v-bind="props"
         variant="text"
       ></v-btn>
@@ -172,6 +170,13 @@ watch(
                   sync and analyze their performance metrics, revolutionizing climbing training for
                   greater efficiency and progress.
                 </p>
+                <p>
+                  <v-alert class="mb-4">
+                    THIS SOFTWARE IS NOT OFFICIALLY SUPPORTED, SUPPLIED OR MAINTAINED BY THE DEVICE
+                    MANUFACTURER. BY USING THE SOFTWARE YOU ARE ACKNOWLEDGING THIS AND UNDERSTAND
+                    THAT USING THIS SOFTWARE WILL INVALIDATE THE MANUFACTURERS WARRANTY.
+                  </v-alert>
+                </p>
                 <v-select v-model="dropdown" :items="devices" :item-props="true"></v-select>
               </v-card-text>
               <v-card-actions>
@@ -187,6 +192,8 @@ watch(
                 <v-btn
                   href="https://github.com/Stevie-Ray/hangtime-grip-connect"
                   prepend-icon="$github"
+                  color="text"
+                  variant="text"
                   append-icon="$openInNew"
                   target="_blank"
                 >

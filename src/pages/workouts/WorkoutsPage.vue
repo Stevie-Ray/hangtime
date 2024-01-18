@@ -135,7 +135,7 @@ useHead({
       <v-tabs grow>
         <v-tab to="/workouts" color="text">
           <v-icon class="mr-1">$account</v-icon>
-          <span>{{ t('Your Workouts') }}</span>
+          <span>{{ t('My Workouts') }}</span>
         </v-tab>
         <v-tab to="/workouts/community" color="text">
           <v-icon class="mr-1">$accountGroup</v-icon>

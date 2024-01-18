@@ -14,19 +14,18 @@ export default {
       share: true,
       exercises: [
         {
-          exercise: 1,
+          exercise: 0,
           grip: 0,
-          hold: 30,
+          hold: 300,
           left: 0,
           level: 1,
           pause: 30,
           pullups: 10,
-          repeat: 0,
+          repeat: 4,
           rest: 10,
           right: 0,
           time: 80,
-          weight: 10,
-          max: true
+          weight: 10
         },
         {
           exercise: 0,
