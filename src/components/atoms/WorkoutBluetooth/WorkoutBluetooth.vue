@@ -12,7 +12,7 @@ import {
   read,
   write,
   notify
-} from '@hangtime/grip-connect/build'
+} from '@hangtime/grip-connect'
 
 import { useBluetooth } from '@/stores/bluetooth'
 
@@ -77,12 +77,8 @@ const handleMotherboard = async () => {
   await read(device.value, 'device', 'hardware', 1000)
   await read(device.value, 'device', 'firmware', 1000)
 
-  // recalibrate
-  await write(Motherboard, 'uart', 'tx', '', 0)
-  await write(Motherboard, 'uart', 'tx', '', 0)
-  await write(Motherboard, 'uart', 'tx', '', 1000)
-
-  await write(Motherboard, 'uart', 'tx', 'C3,0,0,0', 2000)
+  // read calibration (required before reading data)
+  await write(device.value, 'uart', 'tx', 'C', 0)
 }
 
 const handleTindeq = async () => {
@@ -196,6 +192,8 @@ watch(
                 <v-btn
                   href="https://github.com/Stevie-Ray/hangtime-grip-connect"
                   prepend-icon="$github"
+                  color="text"
+                  variant="text"
                   append-icon="$openInNew"
                   target="_blank"
                 >

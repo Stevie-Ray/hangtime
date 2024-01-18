@@ -24,6 +24,7 @@ declare module 'vue' {
     NewsCards: typeof import('./src/components/molecules/NewsCards/NewsCards.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SliderBluetooth: typeof import('./src/components/atoms/SliderBluetooth/SliderBluetooth.vue')['default']
     SubscribeToApp: typeof import('./src/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue')['default']
     Walkthrough: typeof import('./src/components/molecules/dialog/Walkthrough/Walkthrough.vue')['default']
     WorkoutBluetooth: typeof import('./src/components/atoms/WorkoutBluetooth/WorkoutBluetooth.vue')['default']

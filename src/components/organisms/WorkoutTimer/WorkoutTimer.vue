@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
-import { write, disconnect } from '@hangtime/grip-connect/build'
+import { write, disconnect } from '@hangtime/grip-connect'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
@@ -68,11 +68,7 @@ const bluetoothOutput = ref(null)
 const bluetoothStream = 'S30'
 const notify = (data) => {
   if (data?.value) {
-    if (typeof data.value === 'object') {
-      bluetoothOutput.value = JSON.stringify(data.value)
-    } else {
-      bluetoothOutput.value = data.value
-    }
+    bluetoothOutput.value = data.value
   }
 }
 
@@ -594,18 +590,32 @@ onMounted(() => {
   <v-container v-if="workout?.exercises" class="position-relative">
     <v-row align="start" justify="center">
       <v-col cols="12" md="7" class="d-flex flex-column" style="min-height: 85vh">
-        <v-row align="center" class="timer" justify="center">
+        <v-row align="center" justify="center">
           <v-col class="text-center pb-4" cols="12" sm="8">
-            <div class="text-h1">
-              {{ time(clock) }}
-            </div>
-            <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
-              {{ clockText }}
-            </div>
-            <div v-if="bluetoothOutput" style="overflow: hidden">
-              {{ bluetoothOutput }}
-            </div>
-            <v-row align="center" justify="space-evenly">
+            <v-row align="center">
+              <v-col cols="12" class="d-flex justify-space-between align-center">
+                <slider-bluetooth
+                  v-if="bluetoothOutput?.massLeft"
+                  :stream="bluetoothOutput.massLeft"
+                />
+                <div class="timer w-100">
+                  <div class="text-h1">
+                    {{ time(clock) }}
+                  </div>
+                  <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
+                    {{ clockText }}
+                  </div>
+                  <div v-if="bluetoothOutput?.massCenter" style="overflow: hidden">
+                    {{ bluetoothOutput.massCenter }} KG
+                  </div>
+                </div>
+                <slider-bluetooth
+                  v-if="bluetoothOutput?.massRight"
+                  :stream="bluetoothOutput.massRight * -1"
+                />
+              </v-col>
+            </v-row>
+            <v-row class="timer" align="center" justify="space-evenly">
               <v-col class="text-center">
                 <div class="text-caption text-uppercase">
                   {{ t('Time') }}
