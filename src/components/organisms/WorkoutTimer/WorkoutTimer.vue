@@ -605,8 +605,8 @@ onMounted(() => {
                   <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
                     {{ clockText }}
                   </div>
-                  <div v-if="bluetoothOutput?.massCenter" style="overflow: hidden">
-                    {{ bluetoothOutput.massCenter }} KG
+                  <div v-if="bluetoothOutput?.massTotal" style="overflow: hidden">
+                    {{ bluetoothOutput.massTotal }} KG
                   </div>
                 </div>
                 <slider-bluetooth
