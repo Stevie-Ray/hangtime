@@ -7275,5 +7275,62 @@ export default [
         holds: 7
       }
     ]
+  },
+  {
+    name: 'GARMO',
+    description:
+      'Artisan and designer in accessories for climbers from Madrid / Majadahonda, Spain also known as CosmoCarpinteria',
+    country: 'ES',
+    location: {
+      lat: '40.4720416',
+      lon: '-3.8604697'
+    },
+    id: 122,
+    url: 'https://garmostore.com/',
+    socials: {
+      facebook: null,
+      instagram: 'https://www.instagram.com/cosmocarpinteria/'
+    },
+    hangboards: [
+      {
+        name: 'Acherito',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 680,
+          y: 60,
+          z: 35
+        },
+        type: 'wood',
+        url: 'https://garmostore.com/productos/hangboard-acherito/',
+        holds: 0
+      },
+      {
+        name: 'Riglos',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 680,
+          y: 210,
+          z: 35
+        },
+        type: 'wood',
+        url: 'https://garmostore.com/productos/hangboard-riglos/',
+        holds: 0
+      },
+      {
+        name: 'Urriellu',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 680,
+          y: 140,
+          z: 35
+        },
+        type: 'wood',
+        url: 'https://garmostore.com/productos/hangboard-urriellu/',
+        holds: 0
+      }
+    ]
   }
 ]
