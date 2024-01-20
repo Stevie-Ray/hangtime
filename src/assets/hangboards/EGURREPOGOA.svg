@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1667px" height="564px" viewBox="0 0 1667 564" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>EGURREPOGOA</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="EGURREPOGOA" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M1666,562 L130,562 C58.2029825,562 0,503.797017 0,432 L0,130 C0,58.2029825 58.2029825,0 130,0 L1666,0" id="board"></path>
+            <path d="M1666,451 L1386.5,451 C1338.17508,451 1299,411.824916 1299,363.5 C1299,315.175084 1338.17508,276 1386.5,276 L1666,276" id="h4"></path>
+            <rect id="h3" x="642.5" y="203.5" width="522" height="226" rx="113"></rect>
+            <rect id="h2" x="61.5" y="256.5" width="446" height="194" rx="97"></rect>
+            <path d="M1666,130 L0,130 C0,58.2029825 58.2029825,0 130,0 L1666,0" id="h1"></path>
+        </g>
+    </g>
+</svg>

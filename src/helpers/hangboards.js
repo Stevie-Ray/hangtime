@@ -4125,7 +4125,7 @@ export default [
       {
         name: 'Pagoa',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/EGURREPOGOA.svg',
         size: {
           x: 420,
           y: 47,
@@ -4133,7 +4133,7 @@ export default [
         },
         type: 'wood',
         url: 'https://egurreholds.com/producto/pagoa-hangboard/',
-        holds: 0
+        holds: 3
       }
     ]
   },
@@ -7308,7 +7308,7 @@ export default [
       {
         name: 'Riglos',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GARMORIGLOS.svg',
         size: {
           x: 680,
           y: 210,
@@ -7316,7 +7316,7 @@ export default [
         },
         type: 'wood',
         url: 'https://garmostore.com/productos/hangboard-riglos/',
-        holds: 0
+        holds: 21
       },
       {
         name: 'Urriellu',
