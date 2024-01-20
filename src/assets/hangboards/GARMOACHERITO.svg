@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1248px" height="249px" viewBox="0 0 1248 249" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>GARMOACHERITO</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="GARMOACHERITO" transform="translate(1.000000, 0.937381)" fill="#FFFFFF" stroke="#000000">
+            <path d="M1247,247.062619 L20,247.062619 C8.954305,247.062619 0,238.108314 0,227.062619 L0,49.0626194 C0,38.0169244 8.954305,29.0626194 20,29.0626194 L1247,29.0626194" id="board"></path>
+            <path d="M1247,-1.45519152e-11 C486.271628,-1.45519152e-11 88.6584889,-1.45519152e-11 54.1605829,-1.45519152e-11 C19.6626769,-1.45519152e-11 1.60914924,16.3542065 0,49.0626194 C0,38.0169244 8.954305,29.0626194 20,29.0626194 L1247,29.0626194" id="h1"></path>
+            <rect id="h2" x="130.5" y="85.5626194" width="350" height="103" rx="40"></rect>
+            <rect id="h3" x="535.5" y="85.5626194" width="582" height="103" rx="40"></rect>
+            <rect id="h4" x="535.5" y="85.5626194" width="303" height="103" rx="40"></rect>
+        </g>
+    </g>
+</svg>

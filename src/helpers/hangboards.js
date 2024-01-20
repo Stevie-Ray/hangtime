@@ -7295,7 +7295,7 @@ export default [
       {
         name: 'Acherito',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GARMOACHERITO.svg',
         size: {
           x: 680,
           y: 60,
@@ -7303,7 +7303,7 @@ export default [
         },
         type: 'wood',
         url: 'https://garmostore.com/productos/hangboard-acherito/',
-        holds: 0
+        holds: 3
       },
       {
         name: 'Riglos',
@@ -7321,7 +7321,7 @@ export default [
       {
         name: 'Urriellu',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GARMOURRIELLU.svg',
         size: {
           x: 680,
           y: 140,
@@ -7329,7 +7329,7 @@ export default [
         },
         type: 'wood',
         url: 'https://garmostore.com/productos/hangboard-urriellu/',
-        holds: 0
+        holds: 10
       }
     ]
   }
