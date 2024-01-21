@@ -20,7 +20,7 @@
     "@hangtime/grip-connect": "^0.0.9",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^1.8.10",
-    "core-js": "^3.35.0",
+    "core-js": "^3.35.1",
     "firebase": "^10.7.2",
     "ircra": "^2.2.4",
     "js-video-url-parser": "^0.5.1",
@@ -33,7 +33,7 @@
     "vue-inline-svg": "^3.1.2",
     "vue-router": "^4.2.5",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.5.0"
+    "vuetify": "^3.5.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.10",
