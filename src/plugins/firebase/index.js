@@ -1,14 +1,13 @@
 import { initializeApp } from 'firebase/app'
 
-// TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDkE4T_MphbbPVq8gdnZjyRcLCDcqrheW8',
-  authDomain: 'hangtime.stevie-ray.nl',
-  databaseURL: 'https://hangtime-app.firebaseio.com',
-  projectId: 'hangtime-app',
-  storageBucket: 'hangtime-app.appspot.com',
-  messagingSenderId: '292866814265',
-  appId: '1:292866814265:web:0a256263a11f5eed'
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
 
 export default initializeApp(firebaseConfig)
