@@ -5930,7 +5930,7 @@ export default [
       {
         name: 'Verticalboard Light',
         id: 6,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/YYVERTICALLIGHT.svg',
         size: {
           x: 540,
           y: 90,
@@ -5938,7 +5938,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.yyvertical.com/products/verticalboard-light',
-        holds: 0
+        holds: 7
       }
     ]
   },
