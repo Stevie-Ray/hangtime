@@ -611,7 +611,7 @@ onMounted(() => {
                 </div>
                 <slider-bluetooth
                   v-if="bluetoothOutput?.massRight"
-                  :stream="bluetoothOutput.massRight * -1"
+                  :stream="bluetoothOutput.massRight"
                 />
               </v-col>
             </v-row>
