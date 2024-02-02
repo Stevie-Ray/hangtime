@@ -7332,5 +7332,49 @@ export default [
         holds: 10
       }
     ]
+  },
+  {
+    name: 'Yes4All',
+    description:
+      'Brand on Amazon.com, Yes4All online shopping sports & outdoors, camping, garden & tools, pet supplies, health & grocery, electronic, tool & home improvement',
+    country: 'VN',
+    location: {
+      lat: '10.8098427',
+      lon: '106.6703547'
+    },
+    id: 123,
+    url: 'https://yes4all.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/profile.php?id=100068813231108',
+      instagram: null
+    },
+    hangboards: [
+      {
+        name: 'B08HR Series',
+        id: 0,
+        image: 'hangboards/YES4ALLB08HR.svg',
+        size: {
+          x: 560,
+          y: 180,
+          z: 78
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Yes4All-Advanced-Climbing-Fingerboard-Training/dp/B08HRTPQMK/',
+        holds: 13
+      },
+      {
+        name: 'B0871Z Series',
+        id: 1,
+        image: 'hangboards/BEAST1000.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 45
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Yes4All-Advanced-Climbing-Fingerboard-Training/dp/B0871ZP3PH/',
+        holds: 11
+      }
+    ]
   }
 ]
