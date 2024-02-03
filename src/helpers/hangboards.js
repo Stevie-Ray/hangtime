@@ -7376,5 +7376,61 @@ export default [
         holds: 11
       }
     ]
+  },
+  {
+    name: 'CrimpFactory',
+    description: 'Your partner for sports and leisure fitness equipment made of wood.',
+    country: 'DE',
+    location: {
+      lat: '47.6748161',
+      lon: '10.3658179'
+    },
+    id: 124,
+    url: 'https://crimpfactory.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/profile.php?id=100092160570392',
+      instagram: 'https://www.instagram.com/crimpfactory_climbing/'
+    },
+    hangboards: [
+      {
+        name: 'Catalyst',
+        id: 0,
+        image: 'hangboards/CRIMPFACTORYCATALYST.svg',
+        size: {
+          x: 650,
+          y: 210,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://crimpfactory.com/collections/hangboards/products/catalyst',
+        holds: 17
+      },
+      {
+        name: 'CrimpPimp',
+        id: 1,
+        image: 'hangboards/CRIMPFACTORYCRIMPPIMP.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 45
+        },
+        type: 'wood',
+        url: 'https://crimpfactory.com/collections/hangboards/products/crimppimp',
+        holds: 5
+      },
+      {
+        name: 'Equalizer',
+        id: 2,
+        image: 'hangboards/CRIMPFACTORYEQUALIZER.svg',
+        size: {
+          x: 600,
+          y: 180,
+          z: 55
+        },
+        type: 'wood',
+        url: 'https://crimpfactory.com/collections/hangboards/products/equalizer',
+        holds: 7
+      }
+    ]
   }
 ]

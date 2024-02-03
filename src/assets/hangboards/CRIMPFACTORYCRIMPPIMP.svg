@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1235px" height="368px" viewBox="0 0 1235 368" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 2</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(0.888098, 1.382110)" fill="#FFFFFF" stroke="#000000">
+            <polyline id="board" points="1233.1119 0 91.2257056 0 7.33600787e-15 92.688026 0 273.73484 91.2257056 365.664768 1233.1119 365.664768"></polyline>
+            <path d="M1233.5512,301.61789 L1065.1119,301.61789 C1037.49766,301.61789 1015.1119,279.232128 1015.1119,251.61789 C1015.1119,224.003653 1037.49766,201.61789 1065.1119,201.61789 L1233.5512,201.61789" id="h6"></path>
+            <rect id="h5" x="558.611902" y="202.11789" width="409" height="99" rx="49.5"></rect>
+            <rect id="h4" x="94.6119019" y="202.11789" width="409" height="99" rx="49.5"></rect>
+            <polyline id="h3" points="1233.1119 81.7475603 977.391887 81.7475603 946.363756 37.235296 946.363756 1.93636151e-15 1233.1119 0"></polyline>
+            <rect id="h2" x="558.611902" y="65.1178903" width="409" height="99" rx="49.5"></rect>
+            <rect id="h1" x="94.6119019" y="65.1178903" width="409" height="99" rx="49.5"></rect>
+        </g>
+    </g>
+</svg>
