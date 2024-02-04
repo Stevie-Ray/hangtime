@@ -4,7 +4,7 @@
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   stream: {
-    type: Number || undefined,
+    type: String || undefined,
     default: 0,
     required: true
   },

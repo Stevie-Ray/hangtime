@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
-import { write, disconnect } from '@hangtime/grip-connect'
+import { stream } from '@hangtime/grip-connect'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
@@ -65,7 +65,7 @@ const workoutCompleteTimeHanging = ref(0)
 
 // bluetooth
 const bluetoothOutput = ref(null)
-const bluetoothStream = 'S30'
+
 const notify = (data) => {
   if (data?.value) {
     bluetoothOutput.value = data.value
@@ -184,7 +184,7 @@ const stopTimer = () => {
   clearInterval(timer)
   timerPaused.value = !timerPaused.value
   if (device.value) {
-    disconnect(device.value)
+    // disconnect(device.value)
   }
 }
 
@@ -365,7 +365,7 @@ const exerciseSteps = () => {
       } else {
         clock.value = exercise.value.hold - 1
         if (device.value) {
-          write(device.value, 'uart', 'tx', bluetoothStream, exercise.value.hold - 1)
+          stream(device.value, exercise.value.hold - 1)
         }
       }
       currentExerciseStep.value = 1
@@ -412,7 +412,7 @@ const exerciseSteps = () => {
         } else {
           clock.value = exercise.value.hold - 1
           if (device.value) {
-            write(device.value, 'uart', 'tx', bluetoothStream, exercise.value.hold - 1)
+            stream(device.value, exercise.value.hold - 1)
           }
         }
         currentExerciseStep.value = 3
@@ -430,9 +430,6 @@ const exerciseSteps = () => {
       workoutCompleteTimeHanging.value += 1
       if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
         clock.value += 1
-        if (device.value) {
-          write(device.value, 'uart', 'tx', bluetoothStream)
-        }
         break
       }
       if (clock.value > 0) {
@@ -492,7 +489,7 @@ const setupWorkout = async () => {
         } else {
           clock.value = exercise.value.hold - 1
           if (device.value) {
-            write(device.value, 'uart', 'tx', bluetoothStream, exercise.value.hold - 1)
+            stream(device.value, exercise.value.hold - 1)
           }
         }
         // start when setup is done

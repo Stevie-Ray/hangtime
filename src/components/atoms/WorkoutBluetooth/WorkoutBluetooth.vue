@@ -7,10 +7,10 @@ import {
   Motherboard,
   Tindeq,
   Entralpi,
+  battery,
   connect,
   disconnect,
-  read,
-  write,
+  info,
   notify
 } from '@hangtime/grip-connect'
 
@@ -70,22 +70,6 @@ const reset = () => {
   device.value = null
 }
 
-const handleMotherboard = async () => {
-  // read battery + device info
-  await read(device.value, 'battery', 'level', 1000)
-  await read(device.value, 'device', 'manufacturer', 1000)
-  await read(device.value, 'device', 'hardware', 1000)
-  await read(device.value, 'device', 'firmware', 1000)
-
-  // read calibration (required before reading data)
-  await write(device.value, 'uart', 'tx', 'C', 0)
-}
-
-const handleTindeq = async () => {
-  await write(device.value, 'progressor', 'tx', 'e', 10000)
-  await write(device.value, 'progressor', 'tx', 'f')
-}
-
 const onSuccess = async () => {
   try {
     // set the device
@@ -104,13 +88,8 @@ const onSuccess = async () => {
     })
 
     if (device.value?.name === Motherboard.name) {
-      console.log(device.value, Motherboard)
-      await handleMotherboard()
-    }
-
-    if (device.value?.name === Tindeq.name) {
-      console.log(device.value, Tindeq)
-      await handleTindeq()
+      await battery(device.value)
+      await info(device.value)
     }
   } catch (error) {
     console.error(error)
