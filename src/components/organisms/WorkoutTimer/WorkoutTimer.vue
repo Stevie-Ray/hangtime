@@ -365,7 +365,7 @@ const exerciseSteps = () => {
       } else {
         clock.value = exercise.value.hold - 1
         if (device.value) {
-          stream(device.value, exercise.value.hold - 1)
+          stream(device.value, (exercise.value.hold - 1) * 1000)
         }
       }
       currentExerciseStep.value = 1
@@ -412,7 +412,7 @@ const exerciseSteps = () => {
         } else {
           clock.value = exercise.value.hold - 1
           if (device.value) {
-            stream(device.value, exercise.value.hold - 1)
+            stream(device.value, (exercise.value.hold - 1) * 1000)
           }
         }
         currentExerciseStep.value = 3
@@ -489,7 +489,7 @@ const setupWorkout = async () => {
         } else {
           clock.value = exercise.value.hold - 1
           if (device.value) {
-            stream(device.value, exercise.value.hold - 1)
+            stream(device.value, (exercise.value.hold - 1) * 1000)
           }
         }
         // start when setup is done
