@@ -331,6 +331,9 @@ const maxHold = () => {
     if (exercise.value.repeat > 0) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
+      if (device.value) {
+        bluetoothOutput.value = null
+      }
       return
     }
   }
@@ -339,6 +342,9 @@ const maxHold = () => {
     if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
+      if (device.value) {
+        bluetoothOutput.value = null
+      }
       return
     }
   }
@@ -364,9 +370,9 @@ const exerciseSteps = () => {
         clock.value = 0
       } else {
         clock.value = exercise.value.hold - 1
-        if (device.value) {
-          stream(device.value, (exercise.value.hold - 1) * 1000)
-        }
+      }
+      if (device.value) {
+        stream(device.value, (exercise.value.hold - 1) * 1000)
       }
       currentExerciseStep.value = 1
       exerciseHold()
@@ -388,6 +394,9 @@ const exerciseSteps = () => {
       if (exercise.value.repeat > 0) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
+        if (device.value) {
+          bluetoothOutput.value = null
+        }
         exerciseRest()
         break
       }
@@ -411,9 +420,9 @@ const exerciseSteps = () => {
           clock.value = 0
         } else {
           clock.value = exercise.value.hold - 1
-          if (device.value) {
-            stream(device.value, (exercise.value.hold - 1) * 1000)
-          }
+        }
+        if (device.value) {
+          stream(device.value, (exercise.value.hold - 1) * 1000)
         }
         currentExerciseStep.value = 3
         exerciseHold()
@@ -440,6 +449,9 @@ const exerciseSteps = () => {
       if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
+        if (device.value) {
+          bluetoothOutput.value = null
+        }
         exerciseRest()
         break
       }
