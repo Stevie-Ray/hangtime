@@ -7432,5 +7432,45 @@ export default [
         holds: 7
       }
     ]
+  },
+  {
+    name: 'BABY FUN',
+    description: 'Brand on Amazon.com. Professional Climbing Holds',
+    country: 'CN',
+    location: null,
+    id: 125,
+    url: 'https://www.amazon.com/stores/BABYFUNProfessionalClimbingSupply/page/CEBBE409-2A01-49AE-883C-999ED731D4D6',
+    socials: {
+      facebook: null,
+      instagram: null
+    },
+    hangboards: [
+      {
+        name: 'Black/White',
+        id: 0,
+        image: 'hangboards/BABYFUNBLACKWHITE.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 7
+      },
+      {
+        name: 'Butterfly',
+        id: 1,
+        image: 'hangboards/BABYFUNBUTTERFLY.svg',
+        size: {
+          x: 565,
+          y: 190,
+          z: null
+        },
+        type: 'plastic',
+        url: 'https://www.amazon.com/BABY-FUN-Climbing-Strengthener-Fingerboard/dp/B092VV854B/',
+        holds: 6
+      }
+    ]
   }
 ]
