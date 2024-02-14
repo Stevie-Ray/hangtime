@@ -4,9 +4,9 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 
 import {
-  Motherboard,
-  Tindeq,
   Entralpi,
+  Motherboard,
+  Progressor,
   battery,
   connect,
   disconnect,
@@ -36,10 +36,6 @@ const workout = ref(props.workout)
 const dialog = ref(false)
 const devices = [
   {
-    title: 'Tindeq',
-    value: Tindeq
-  },
-  {
     title: 'Entralpi',
     value: Entralpi
   },
@@ -47,6 +43,10 @@ const devices = [
     title: 'Motherboard',
     value: Motherboard,
     disabled: workout.value.company !== 1
+  },
+  {
+    title: 'Progressor',
+    value: Progressor
   }
 ]
 const dropdown = ref(workout.value.company === 1 ? Motherboard : Entralpi)
