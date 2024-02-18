@@ -6,7 +6,7 @@ const defaultLocale = 'en-US'
 const i18n = createI18n({
   legacy: false, // use composition mode
   locale: defaultLocale, // set locale
-  fallbackLocale: defaultLocale,
+  fallbackLocale: defaultLocale
   // If you need to specify other options, you can set other options
   // ...
   // missingWarn: false,

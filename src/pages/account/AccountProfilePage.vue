@@ -244,7 +244,9 @@ useHead({
             </v-list>
             <v-list lines="two">
               <v-list-item>
-                <v-list-item-title><strong>{{ t('Link Accounts') }} ({{ t('Beta')}})</strong></v-list-item-title>
+                <v-list-item-title>
+                  <strong>{{ t('Link Accounts') }} ({{ t('Beta') }})</strong>
+                </v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title>Google</v-list-item-title>

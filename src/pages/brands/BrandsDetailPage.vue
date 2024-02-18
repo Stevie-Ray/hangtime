@@ -84,7 +84,7 @@ useHead({
                       prepend-icon="$web"
                       :disabled="!networkOnLine"
                     >
-                      {{ t('Website')}}
+                      {{ t('Website') }}
                     </v-btn>
                     <v-spacer v-if="getCompany?.socials" />
                     <v-btn
