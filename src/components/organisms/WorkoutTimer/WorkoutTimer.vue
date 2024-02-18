@@ -151,7 +151,7 @@ const vibratePhone = () => {
 const countDown = () => {
   // if (clock.value === 15) {
   //   if (user.value?.settings?.speak) {
-  //     speakText(`${t('Get Ready')}!`)
+  //     speakText(`${t('Get ready')}!`)
   //   } else {
   //     playSound(countSound, 'wav')
   //   }

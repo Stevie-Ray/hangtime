@@ -24,7 +24,7 @@ const items = [
   {
     title: t('General'),
     icon: '$cog',
-    subtitle: t('Language, grading, weight, dark mode'),
+    subtitle: t('Language, grading, weight, theme'),
     link: '/account/general'
   },
   {

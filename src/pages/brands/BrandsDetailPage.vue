@@ -84,7 +84,7 @@ useHead({
                       prepend-icon="$web"
                       :disabled="!networkOnLine"
                     >
-                      Website
+                      {{ t('Website')}}
                     </v-btn>
                     <v-spacer v-if="getCompany?.socials" />
                     <v-btn
@@ -123,7 +123,7 @@ useHead({
               </v-card-text>
               <v-card-title class="d-flex justify-space-between">
                 <div v-if="hangboard.name">{{ hangboard.name }}</div>
-                <v-chip v-if="hangboard.type">{{ hangboard.type }}</v-chip>
+                <v-chip v-if="hangboard.type">{{ t(hangboard.type) }}</v-chip>
               </v-card-title>
               <v-card-subtitle>
                 {{ getCompany.name }}

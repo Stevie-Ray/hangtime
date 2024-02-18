@@ -9,9 +9,9 @@ const i18n = createI18n({
   fallbackLocale: defaultLocale,
   // If you need to specify other options, you can set other options
   // ...
-  missingWarn: false,
-  fallbackWarn: false,
-  silentTranslationWarn: true
+  // missingWarn: false,
+  // fallbackWarn: false,
+  // silentTranslationWarn: true
 })
 
 i18n.global.setLocaleMessage(defaultLocale, defaultMessages)

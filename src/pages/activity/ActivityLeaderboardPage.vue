@@ -46,7 +46,7 @@ useHead({
       <v-menu v-model="leaderboardMenu">
         <template v-slot:activator="{ props }">
           <div v-bind="props" class="leaderboard-select">
-            <span>{{ selectedHeader.text }}</span>
+            <span>{{ t(selectedHeader.text) }}</span>
             <span v-if="leaderboardMenu"><v-icon>$chevronUp</v-icon></span>
             <span v-else><v-icon>$chevronDown</v-icon></span>
           </div>
@@ -58,7 +58,7 @@ useHead({
               <v-radio
                 v-for="(header, index) in tableHeaders"
                 :key="index"
-                :label="header.text"
+                :label="t(header.text)"
                 :value="header.value"
               ></v-radio>
             </v-radio-group>

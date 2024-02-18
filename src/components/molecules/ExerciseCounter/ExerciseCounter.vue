@@ -88,8 +88,8 @@ function decrement() {
 <template>
   <v-row align="center" class="mb-4">
     <v-col cols="4">
-      <div class="text-h6 text-truncate">{{ t(title) }}</div>
-      <div class="text-caption">{{ t(subtitle) }}</div>
+      <div v-if="title" class="text-h6 text-truncate">{{ t(title) }}</div>
+      <div v-if="subtitle" class="text-caption">{{ t(subtitle) }}</div>
     </v-col>
 
     <v-col cols="8">

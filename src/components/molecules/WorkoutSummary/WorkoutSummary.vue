@@ -141,7 +141,7 @@ const parseVideo = (video) => {
       <v-card v-if="workout.exercises" class="py-4">
         <v-card-title class="text-center">
           <v-icon size="small">$repeat</v-icon>
-          {{ workout.exercises.length }} sets
+          {{ workout.exercises.length }} {{ t('Set', workout.exercises.length) }}
         </v-card-title>
       </v-card>
     </v-col>

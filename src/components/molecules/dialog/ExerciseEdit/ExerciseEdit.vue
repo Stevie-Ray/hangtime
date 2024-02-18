@@ -188,9 +188,7 @@ const rules = {
 
                   <v-row>
                     <v-col cols="6">
-                      <div class="text-caption">
-                        {{ t('Movement (Optional)') }}
-                      </div>
+                      <div class="text-caption">{{ t('Movement') }} ({{ t('Optional') }})</div>
                       <v-select
                         v-model="exerciseMovement"
                         :items="exerciseFilter('arms')"
@@ -270,7 +268,9 @@ const rules = {
                         {{ t('Time') }}
                       </span>
                     </v-btn>
-                    <v-btn class="flex-1-1" value="max" @click="exercise.max = true">Max</v-btn>
+                    <v-btn class="flex-1-1" value="max" @click="exercise.max = true">
+                      {{ t('Max') }}
+                    </v-btn>
                   </v-btn-toggle>
 
                   <exercise-counter
