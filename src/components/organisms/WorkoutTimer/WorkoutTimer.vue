@@ -67,9 +67,7 @@ const workoutCompleteTimeHanging = ref(0)
 const bluetoothOutput = ref(null)
 
 const notify = (data) => {
-  if (data?.value) {
-    bluetoothOutput.value = data.value
-  }
+  bluetoothOutput.value = data
 }
 
 onBeforeUnmount(() => {
@@ -615,7 +613,32 @@ onMounted(() => {
                     {{ clockText }}
                   </div>
                   <div v-if="bluetoothOutput?.massTotal" style="overflow: hidden">
-                    {{ bluetoothOutput.massTotal }} KG
+                    <v-row align="center" justify="space-evenly">
+                      <v-col class="text-center">
+                        <div class="text-caption text-uppercase">
+                          {{ t('Max') }}
+                        </div>
+                        <div class="text-h6">
+                          <span> {{ bluetoothOutput.massMax }} KG</span>
+                        </div>
+                      </v-col>
+                      <v-col v-if="workout?.exercises?.length > 1" class="text-center">
+                        <div class="text-caption text-uppercase">
+                          {{ t('Total') }}
+                        </div>
+                        <div class="text-h6">
+                          <span> {{ bluetoothOutput.massTotal }} KG</span>
+                        </div>
+                      </v-col>
+                      <v-col v-if="workout?.exercises" class="text-center">
+                        <div class="text-caption text-uppercase">
+                          {{ t('Average') }}
+                        </div>
+                        <div class="text-h6">
+                          <span> {{ bluetoothOutput.massAverage }} KG</span>
+                        </div>
+                      </v-col>
+                    </v-row>
                   </div>
                 </div>
                 <slider-bluetooth
