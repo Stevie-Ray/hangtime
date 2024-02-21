@@ -4,8 +4,10 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 
 import {
+  Climbro,
   Entralpi,
   Motherboard,
+  SmartBoard,
   Progressor,
   battery,
   connect,
@@ -36,6 +38,11 @@ const workout = ref(props.workout)
 const dialog = ref(false)
 const devices = [
   {
+    title: 'Climbro',
+    value: Climbro,
+    disabled: true
+  },
+  {
     title: 'Entralpi',
     value: Entralpi
   },
@@ -45,11 +52,16 @@ const devices = [
     disabled: workout.value.company !== 1
   },
   {
+    title: 'mySmartBoard',
+    value: SmartBoard,
+    disabled: true
+  },
+  {
     title: 'Progressor',
     value: Progressor
   }
 ]
-const dropdown = ref(workout.value.company === 1 ? Motherboard : Entralpi)
+const dropdown = ref(workout.value.company === 1 ? Motherboard : Progressor)
 const output = ref()
 const isBluetoothAvailable = ref(false)
 
@@ -134,9 +146,10 @@ watch(
               <v-card-text>
                 <p class="mb-4">
                   Smart Bluetooth hangboards or plates revolutionize climbing training by
-                  integrating sensors and connectivity. Devices like
-                  <a href="https://griptonite.io/motherboard/" target="_blank">Motherboard</a>,
-                  <a href="https://climbro.com/" target="_blank">Climbro</a>,
+                  integrating sensors and connectivity. Devices like the
+                  <a href="https://griptonite.io/motherboard/" target="_blank">
+                    Griptonite Motherboard </a
+                  >, <a href="https://climbro.com/" target="_blank">Climbro</a>,
                   <a href="https://www.smartboard-climbing.com/" target="_blank">SmartBoard</a>,
                   <a href="https://entralpi.com/" target="_blank">Entralpi</a>, and
                   <a href="https://tindeq.com/" target="_blank">Tindeq Progressor</a> offer
@@ -148,13 +161,6 @@ watch(
                   training experiences. With the real-time feedback, HangTime users can seamlessly
                   sync and analyze their performance metrics, revolutionizing climbing training for
                   greater efficiency and progress.
-                </p>
-                <p>
-                  <v-alert class="mb-4">
-                    THIS SOFTWARE IS NOT OFFICIALLY SUPPORTED, SUPPLIED OR MAINTAINED BY THE DEVICE
-                    MANUFACTURER. BY USING THE SOFTWARE YOU ARE ACKNOWLEDGING THIS AND UNDERSTAND
-                    THAT USING THIS SOFTWARE WILL INVALIDATE THE MANUFACTURERS WARRANTY.
-                  </v-alert>
                 </p>
                 <v-select v-model="dropdown" :items="devices" :item-props="true"></v-select>
               </v-card-text>
