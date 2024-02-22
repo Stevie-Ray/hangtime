@@ -7472,5 +7472,35 @@ export default [
         holds: 6
       }
     ]
+  },
+  {
+    name: 'LACD',
+    description: 'Mountain sports and climbing equipment from Bayern, Germany',
+    country: 'DE',
+    location: {
+      lat: '48.130822',
+      lon: '11.7349991'
+    },
+    id: 126,
+    url: 'https://www.lacd.de/',
+    socials: {
+      facebook: null,
+      instagram: null
+    },
+    hangboards: [
+      {
+        name: 'Training board',
+        id: 0,
+        image: 'hangboards/LACDTRAINING.svg',
+        size: {
+          x: 550,
+          y: 150,
+          z: 48
+        },
+        type: 'wood',
+        url: 'https://www.lacd.de/produkte/klettern/slacklines-training/trainingsboard/',
+        holds: 11
+      }
+    ]
   }
 ]
