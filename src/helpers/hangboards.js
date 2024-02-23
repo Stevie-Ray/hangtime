@@ -5398,7 +5398,7 @@ export default [
       {
         name: 'CJ-HB2101',
         id: 14,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/TWOSTONESHB2101.svg',
         size: {
           x: 580,
           y: 160,
@@ -5406,7 +5406,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.amazon.com/Hangboard-Climbing-Holder-Pinches-Pockets/dp/B099WB5253',
-        holds: 0
+        holds: 12
       },
       {
         name: 'CJ-HB2008',
