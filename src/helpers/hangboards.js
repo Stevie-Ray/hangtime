@@ -2601,6 +2601,32 @@ export default [
         type: 'wood',
         url: 'https://natureclimbing.com/collections/hangboards/products/stoak-board',
         holds: 3
+      },
+      {
+        name: 'STOAK board II',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 495,
+          y: 90,
+          z: 45
+        },
+        type: 'wood',
+        url: 'https://natureclimbing.com/products/stoakboard-ii',
+        holds: 0
+      },
+      {
+        name: 'Stone Hanger',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 100,
+          y: 110,
+          z: 23
+        },
+        type: 'wood',
+        url: 'https://natureclimbing.com/products/stone-hanger',
+        holds: 0
       }
     ]
   },
@@ -6653,8 +6679,8 @@ export default [
         },
         type: 'wood',
         url: 'https://trenirajznaravo.com/trening/fingerboard-2000/',
-        image: 'hangboards/NOTFOUND.svg',
-        holds: 0
+        image: 'hangboards/TRENIRAJZNARAVOFINGERBOARD.svg',
+        holds: 15
       }
     ]
   },
