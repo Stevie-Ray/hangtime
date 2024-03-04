@@ -754,6 +754,19 @@ export default [
         type: 'wood',
         url: 'https://www.metoliusclimbing.com/wood-rock-ring.html',
         holds: 2
+      },
+      {
+        name: 'Prime Rib',
+        id: 11,
+        image: 'hangboards/METOLIUSPRIMERIB.svg',
+        size: {
+          x: 508,
+          y: 106,
+          z: 38
+        },
+        type: 'wood',
+        url: 'https://www.metoliusclimbing.com/prime-rib.html',
+        holds: 2
       }
     ]
   },
