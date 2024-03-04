@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1331px" height="652px" viewBox="0 0 1331 652" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>PROBLEMSTATION</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PROBLEMSTATION" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M1330,650 L185,650 C94.9775858,650 22,577.022414 22,487 L22,163 C22,72.9775858 94.9775858,0 185,0 L1330,0" id="board"></path>
+            <path d="M1330,574 L1101,574 C1065.65378,574 1037,545.346224 1037,510 C1037,474.653776 1065.65378,446 1101,446 L1330,446" id="h6"></path>
+            <rect id="h5" x="692.5" y="446.5" width="283" height="127" rx="63.5"></rect>
+            <rect id="h4" x="113.5" y="446.5" width="517" height="127" rx="63.5"></rect>
+            <polyline id="h3" points="1330 446 0 446 0 299 1330 299"></polyline>
+            <rect id="h2" x="113.5" y="171.5" width="1005" height="127" rx="63.5"></rect>
+            <rect id="h1" x="113.5" y="171.5" width="541" height="127" rx="63.5"></rect>
+        </g>
+    </g>
+</svg>

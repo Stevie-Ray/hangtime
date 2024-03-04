@@ -925,7 +925,7 @@ export default [
       {
         name: 'Station',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/PROBLEMSTATION.svg',
         size: {
           x: 436,
           y: 112,
@@ -933,7 +933,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.problemsolver.rocks/shop/problemsolver-training-station',
-        holds: 0
+        holds: 5
       }
     ]
   },
@@ -2605,7 +2605,7 @@ export default [
       {
         name: 'STOAK board II',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/NATURESTOAKII.svg',
         size: {
           x: 495,
           y: 90,
@@ -2613,12 +2613,12 @@ export default [
         },
         type: 'wood',
         url: 'https://natureclimbing.com/products/stoakboard-ii',
-        holds: 0
+        holds: 1
       },
       {
         name: 'Stone Hanger',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/NATUREHANGER.svg',
         size: {
           x: 100,
           y: 110,
@@ -2626,7 +2626,7 @@ export default [
         },
         type: 'wood',
         url: 'https://natureclimbing.com/products/stone-hanger',
-        holds: 0
+        holds: 1
       }
     ]
   },

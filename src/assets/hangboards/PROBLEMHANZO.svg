@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="588px" height="316px" viewBox="0 0 588 316" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="1328px" height="712px" viewBox="0 0 1328 712" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>PROBLEMHANZO</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="PROBLEMHANZO" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
-            <path d="M587,314 L87.8624297,314 C39.3373497,314 0,274.670347 0,226.154762 L0,87.8452381 C0,39.3296527 39.3373497,0 87.8624297,0 L587,0" id="hangboard"></path>
-            <path d="M587,263 L86.5459695,263 C66.9144726,263 51,247.037016 51,227.345679 L51,222.654321 C51,202.962984 66.9144726,187 86.5459695,187 L587,187" id="h2"></path>
-            <path d="M587,263 L412.466667,263 C392.878968,263 377,247.037016 377,227.345679 L377,222.654321 C377,202.962984 392.878968,187 412.466667,187 L586.899739,187" id="h3"></path>
-            <rect id="h1" x="51" y="43" width="345" height="76" rx="38"></rect>
+            <path d="M1327,710 L198.62597,710 C88.9278757,710 0,621.069893 0,511.369048 L0,198.630952 C0,88.9301064 88.9278757,0 198.62597,0 L1327,0" id="hangboard"></path>
+            <path d="M1327,595 L195.376334,595 C150.98571,595 115,558.873247 115,514.308642 L115,503.691358 C115,459.126753 150.98571,423 195.376334,423 L1327,423" id="h2"></path>
+            <path d="M1327,595 L932.222223,595 C887.916713,595 852,558.873247 852,514.308642 L852,503.691358 C852,459.126753 887.916713,423 932.222223,423 L1326.77322,423" id="h3"></path>
+            <rect id="h1" x="115" y="97" width="780" height="172" rx="38"></rect>
         </g>
     </g>
 </svg>
