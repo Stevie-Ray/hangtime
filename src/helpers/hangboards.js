@@ -7541,5 +7541,36 @@ export default [
         holds: 11
       }
     ]
+  },
+  {
+    name: 'Rock Empire',
+    description:
+      'Production of outdoor equipment and personal protective equipment against falling from heights.',
+    country: 'CZ',
+    location: {
+      lat: '50.7597693',
+      lon: '14.1946131'
+    },
+    id: 127,
+    url: 'https://www.rockempire.cz/',
+    socials: {
+      facebook: 'https://www.facebook.com/rockempire.readytoclimb',
+      instagram: 'https://www.instagram.com/rockempire.readytoclimb/'
+    },
+    hangboards: [
+      {
+        name: 'Training board',
+        id: 0,
+        image: 'hangboards/MAKAKBOARD2.svg',
+        size: {
+          x: 720,
+          y: 220,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 13
+      }
+    ]
   }
 ]
