@@ -5459,6 +5459,19 @@ export default [
         type: 'wood',
         url: 'https://www.amazon.com/TWO-STONES-Hangboard-Fingerboard-CJ-HB2008BX/dp/B08WWMYC9Q',
         holds: 0
+      },
+      {
+        name: 'CJ-HB2106',
+        id: 16,
+        image: 'hangboards/TWOSTONESHB2106.svg',
+        size: {
+          x: 590,
+          y: 230,
+          z: 10
+        },
+        type: 'wood',
+        url: 'https://www.amazon.com/Hangboard-Climbing-Including-Pinches-Training/dp/B0C99SW7KW',
+        holds: 13
       }
     ]
   },

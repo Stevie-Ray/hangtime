@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1260px" height="721px" viewBox="0 0 1260 721" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>TWOSTONESHB2106</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="TWOSTONESHB2106" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <polyline id="board" points="1259 693 277 693 278 538 1259 538"></polyline>
+            <path d="M1259,538 L278,538 L278,689 C278,709 266.333333,719 243,719 C219.666667,719 148.333333,719 29,719 C9.66666667,719 0,709 0,689 C0,669 0,568 0,386 C3.33333333,152 114.333333,35 333,35 C551.666667,35 608,35 502,35 L565,117 C603.666667,117 627,89.6666667 635,35 C677,35 747.333333,35 846,35 L1259,35" id="board"></path>
+            <rect id="h4" x="133.5" y="157.5" width="360" height="108" rx="54"></rect>
+            <rect id="h5" x="547.5" y="222.5" width="360" height="108" rx="54"></rect>
+            <rect id="h9" x="461.5" y="377.5" width="360" height="108" rx="54"></rect>
+            <rect id="h7" transform="translate(144.435768, 413.564232) rotate(-45.000000) translate(-144.435768, -413.564232) " x="55.9357685" y="359.564232" width="177" height="108" rx="54"></rect>
+            <rect id="h8" x="260.5" y="312.5" width="144" height="127" rx="30"></rect>
+            <circle id="h11" cx="153.5" cy="609.5" r="54"></circle>
+            <rect id="h12" x="313.5" y="555.5" width="360" height="108" rx="54"></rect>
+            <rect id="h13" x="728.5" y="555.5" width="179" height="108" rx="54"></rect>
+            <rect id="h14" x="962.5" y="555.5" width="274" height="108" rx="54"></rect>
+            <rect id="h10" x="898.5" y="377.5" width="261" height="108" rx="54"></rect>
+            <rect id="h6" x="972.5" y="198.5" width="187" height="108" rx="54"></rect>
+            <polyline id="h3" points="1259 117 1050 117 1050 35 1259 35"></polyline>
+            <path d="M1050,117 L1050,35 C1050,11.6666667 1038,0 1014,0 C990,0 870.666667,0 656,0 C638.666667,0.666666667 630,12.3333333 630,35 C630,69 614,117 565,117" id="h2"></path>
+            <path d="M565,117 L565,58 C564.333333,19.3333333 549.666667,2.91038305e-11 521,2.91038305e-11 C478,2.91038305e-11 461,2.91038305e-11 299,2.91038305e-11 C197.649731,2.91038305e-11 180.541731,19.8731797 91.4055176,117" id="h1"></path>
+        </g>
+    </g>
+</svg>
