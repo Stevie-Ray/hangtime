@@ -7585,5 +7585,35 @@ export default [
         holds: 13
       }
     ]
+  },
+  {
+    name: 'DUSZCNC',
+    description: 'Cutting, CNC milling of wood and plastics',
+    country: 'PL',
+    location: {
+      lat: '52.2472748',
+      lon: '16.9027926'
+    },
+    id: 128,
+    url: 'https://www.duszcnc.com/',
+    socials: {
+      facebook: 'https://www.facebook.com/duszcnc',
+      instagram: 'https://www.instagram.com/duszcnc/'
+    },
+    hangboards: [
+      {
+        name: 'Grab board',
+        id: 0,
+        image: 'hangboards/DUSZCNCGRAB.svg',
+        size: {
+          x: 600,
+          y: 153,
+          z: 60
+        },
+        type: 'wood',
+        url: null,
+        holds: 15
+      }
+    ]
   }
 ]
