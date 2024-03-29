@@ -2873,7 +2873,7 @@ export default [
       {
         name: 'Classic',
         id: 0,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/HRTCLASSIC.svg',
         size: {
           x: null,
           y: null,
@@ -2881,7 +2881,7 @@ export default [
         },
         type: 'plastic',
         url: 'https://hrt-holds.com/hrt/training/training_boards/training_board_1__-_classic_-_pu',
-        holds: 0
+        holds: 3
       },
       {
         name: 'The Mask',
