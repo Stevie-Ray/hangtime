@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1328px" height="625px" viewBox="0 0 1328 625" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>GRIPWORKSPOWER</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="GRIPWORKSPOWER" transform="translate(1.000000, 1.000000)" fill="#FFFFFF" stroke="#000000">
+            <path d="M1327,623 L122,623 C54.6212605,623 0,568.378739 0,501 L0,122 C0,54.6212605 54.6212605,0 122,0 L1327,0" id="board"></path>
+            <path d="M1327,468 C1198.39047,468 1104.7238,468 1046,468 C1019,468 990,475 990,512 C989,624 868.03279,623.002688 841,623.002688 C681.222222,623.002688 441.555556,623.002688 122,623.002688 C54.6212605,623.002688 0,568.378739 0,501 L0,122 C0,54.6212605 54.6212605,0 122,0 L1327,0" id="board"></path>
+            <rect id="h7" x="65.5" y="306.5" width="899" height="92" rx="43"></rect>
+            <rect id="h6" x="65.5" y="306.5" width="598" height="92" rx="43"></rect>
+            <rect id="h5" x="65.5" y="306.5" width="304" height="92" rx="43"></rect>
+            <rect id="h12" x="65.5" y="468.5" width="596" height="92" rx="43"></rect>
+            <rect id="h11" x="65.5" y="468.5" width="304" height="92" rx="43"></rect>
+            <rect id="h13" x="716.5" y="468.5" width="195" height="92" rx="43"></rect>
+            <path d="M1327,561 L1033,561 C1009.25176,561 990,541.748244 990,518 L990,511 C990,487.251756 1009.25176,468 1033,468 L1327,468" id="h14"></path>
+            <path d="M1327,399 L1067,399 C1043.25176,399 1024,379.748244 1024,356 L1024,349 C1024,325.251756 1043.25176,306 1067,306 L1327,306" id="h9"></path>
+            <rect id="h8" x="1024.5" y="306.5" width="80" height="92" rx="40"></rect>
+            <path d="M1327,399 L1207,399 C1183.25176,399 1164,379.748244 1164,356 L1164,349 C1164,325.251756 1183.25176,306 1207,306 L1327,306" id="h10"></path>
+            <circle id="h1" cx="142" cy="174" r="76.5"></circle>
+            <circle id="h2" cx="481" cy="174" r="76.5"></circle>
+            <circle id="h3" cx="820" cy="174" r="76.5"></circle>
+            <circle id="h4" cx="1159" cy="174" r="76.5"></circle>
+        </g>
+    </g>
+</svg>

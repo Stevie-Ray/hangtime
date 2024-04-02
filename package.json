@@ -19,7 +19,7 @@
     "@googlemaps/js-api-loader": "^1.16.6",
     "@hangtime/grip-connect": "^0.3.1",
     "@mdi/js": "^7.4.47",
-    "@unhead/vue": "^1.9.3",
+    "@unhead/vue": "^1.9.4",
     "core-js": "^3.36.1",
     "firebase": "^10.10.0",
     "ircra": "^2.2.4",

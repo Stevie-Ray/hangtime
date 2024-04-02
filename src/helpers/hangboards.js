@@ -6824,7 +6824,19 @@ export default [
       {
         name: 'EZ Board',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/FRICTITIOUSEZ.svg',
+        sides: [
+          {
+            name: 'Default',
+            image: 'hangboards/FRICTITIOUSEZ.svg',
+            holds: 2
+          },
+          {
+            name: 'Rotated',
+            image: 'hangboards/FRICTITIOUSEZ-180.svg',
+            holds: 3
+          }
+        ],
         size: {
           x: 483,
           y: 89,
@@ -6832,7 +6844,7 @@ export default [
         },
         type: 'wood',
         url: 'https://frictitiousclimbing.com/products/ez-board',
-        holds: 0
+        holds: 2
       },
       {
         name: 'Easy Board',
@@ -7002,7 +7014,7 @@ export default [
       {
         name: 'Power v3.0',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GRIPWORKSPOWER.svg',
         size: {
           x: 660,
           y: 155,
@@ -7010,7 +7022,7 @@ export default [
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/power/',
-        holds: 0
+        holds: 13
       },
       {
         name: 'Base+ v3.0',
@@ -7613,6 +7625,62 @@ export default [
         type: 'wood',
         url: null,
         holds: 15
+      }
+    ]
+  },
+  {
+    name: 'Go Up Climb Solutions',
+    description: 'From climber to climber! Located in Barra Mansa, Rio de Janeiro',
+    country: 'BR',
+    location: {
+      lat: '-22.5291807',
+      lon: '-44.1448411'
+    },
+    id: 129,
+    url: null,
+    socials: {
+      facebook: null,
+      instagram: null
+    },
+    hangboards: [
+      {
+        name: 'Básico',
+        id: 0,
+        image: 'hangboards/GOUPBASIC.svg',
+        size: {
+          x: 600,
+          y: 140,
+          z: 40
+        },
+        type: 'wood',
+        url: null,
+        holds: 8
+      },
+      {
+        name: 'Móvel',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Transição',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
       }
     ]
   }
