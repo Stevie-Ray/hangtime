@@ -7654,7 +7654,7 @@ export default [
         },
         type: 'wood',
         url: null,
-        holds: 8
+        holds: 9
       },
       {
         name: 'Móvel',
