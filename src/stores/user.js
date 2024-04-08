@@ -81,10 +81,20 @@ export const useUser = defineStore('user', {
      * @return Object
      */
     getUserHangboard: (state) => {
-      if (!state.getUserHangboardCompany) return false
-      return state.getUserHangboardCompany.hangboards[
-        state.getUserHangboards[state.getUserHangboardSelectedId]?.hangboard
-      ]
+      const userHangboardCompany = state.getUserHangboardCompany
+      if (!userHangboardCompany) return false
+
+      const selectedHangboardId = state.getUserHangboardSelectedId
+      if (!selectedHangboardId) return false
+
+      const userHangboards = state.getUserHangboards
+      if (!userHangboards || !userHangboards[selectedHangboardId]) return false
+
+      const company = hangboardBrands[userHangboardCompany.id]
+      const hangboardId = userHangboards[selectedHangboardId].hangboard
+      const selectedHangboard = company.hangboards.find((hangboard) => hangboard.id === hangboardId)
+
+      return selectedHangboard
     }
   }
 })
