@@ -82,10 +82,10 @@ export const useUser = defineStore('user', {
      */
     getUserHangboard: (state) => {
       const userHangboardCompany = state.getUserHangboardCompany
-      if (!userHangboardCompany) return false
+      if (userHangboardCompany === null || userHangboardCompany === undefined) return false
 
       const selectedHangboardId = state.getUserHangboardSelectedId
-      if (!selectedHangboardId) return false
+      if (selectedHangboardId === null || selectedHangboardId === undefined) return false
 
       const userHangboards = state.getUserHangboards
       if (!userHangboards || !userHangboards[selectedHangboardId]) return false
