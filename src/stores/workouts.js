@@ -44,7 +44,7 @@ export const useWorkouts = defineStore('workouts', {
       if (user?.getUserHangboard) {
         constraints.push(['hangboard', '==', user.getUserHangboard.id])
       }
-      this.workoutsCommunity = await usersWorkoutsDb.readAll(constraints, null, 100)
+      this.workoutsCommunity = await usersWorkoutsDb.readAll(constraints, null, 200)
     },
     /**
      * Fetch leaderboard

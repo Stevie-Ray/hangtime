@@ -151,6 +151,7 @@ useHead({
             <v-list v-if="workoutsList.length">
               <template v-for="(workout, index) in workoutsList" :key="workout.id">
                 <v-list-item
+                  :class="`v-list-item-${index}`"
                   :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}`"
                 >
                   <template #prepend>
