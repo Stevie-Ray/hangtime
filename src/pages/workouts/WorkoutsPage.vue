@@ -22,7 +22,53 @@ const { t } = useI18n()
 const { user } = storeToRefs(useAuthentication())
 const { updateUser } = useAuthentication()
 const { networkOnLine } = storeToRefs(useApp())
-const { fetchCommunityWorkouts } = useWorkouts()
+const { fetchCommunityWorkouts, fetchUserWorkouts } = useWorkouts()
+
+let shouldFetchUserWorkouts = true
+let shouldFetchCommunityWorkouts = true
+
+const fetchMoreWorkouts = async ({ done }) => {
+  if (route.path === '/workouts') {
+    if (!shouldFetchUserWorkouts) {
+      done('empty')
+      return
+    }
+  } else {
+    if (!shouldFetchCommunityWorkouts) {
+      done('empty')
+      return
+    }
+  }
+
+  const initialLength = workoutsList.value.length
+
+  try {
+    if (route.path === '/workouts') {
+      await fetchUserWorkouts()
+    } else {
+      await fetchCommunityWorkouts()
+    }
+  } catch (error) {
+    // Something went wrong when adding content
+    done('error')
+    console.error('Error fetching workouts:', error.message)
+  } finally {
+    const updatedLength = workoutsList.value.length
+    if (updatedLength === initialLength) {
+      // There is no more content to fetch
+      done('empty')
+      if (route.path === '/workouts') {
+        shouldFetchUserWorkouts = false
+      } else {
+        shouldFetchCommunityWorkouts = false
+      }
+    } else {
+      // Content was added succesfully
+      done('ok')
+    }
+  }
+}
+
 const workouts = useWorkouts()
 const route = useRoute()
 
@@ -149,45 +195,50 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-list v-if="workoutsList.length">
-              <template v-for="(workout, index) in workoutsList" :key="workout.id">
-                <v-list-item
-                  :class="`v-list-item-${index}`"
-                  :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}`"
-                >
-                  <template #prepend>
-                    <v-avatar color="grey-darken-1">
-                      <v-img
-                        :src="workout.user.photoURL"
-                        :alt="workout.user.displayName"
-                        width="40"
-                        height="40"
-                      ></v-img>
-                    </v-avatar>
-                  </template>
+              <v-infinite-scroll :items="workoutsList" :onLoad="fetchMoreWorkouts">
+                <template v-for="(workout, index) in workoutsList" :key="workout.id">
+                  <v-list-item
+                    :class="`v-list-item-${index}`"
+                    :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}`"
+                  >
+                    <template #prepend>
+                      <v-avatar v-if="workout.user" color="grey-darken-1">
+                        <v-img
+                          :src="workout.user.photoURL"
+                          :alt="workout.user.displayName"
+                          width="40"
+                          height="40"
+                        ></v-img>
+                      </v-avatar>
+                    </template>
 
-                  <v-list-item-title>
-                    <span>{{ workout.name }}</span>
-                  </v-list-item-title>
+                    <v-list-item-title>
+                      <span>{{ workout.name }}</span>
+                    </v-list-item-title>
 
-                  <v-list-item-subtitle>
-                    <span>{{ time(workout.time) }} - </span>
-                    <span v-if="workout.video"><v-icon>$video</v-icon> - </span>
-                    <span>{{ workout.description }}</span>
-                  </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      <span>{{ time(workout.time) }} - </span>
+                      <span v-if="workout.video"><v-icon>$video</v-icon> - </span>
+                      <span>{{ workout.description }}</span>
+                    </v-list-item-subtitle>
 
-                  <template #append>
-                    <v-list-item-action end class="flex-column">
-                      <v-chip size="x-small" color="text" variant="outlined">{{
-                        difficultyById(workout.level)
-                      }}</v-chip>
-                      <div class="subscribers">
-                        <workout-subscribe size="x-small" :workout="workout" :clickable="false" />
-                      </div>
-                    </v-list-item-action>
-                  </template>
-                </v-list-item>
-                <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
-              </template>
+                    <template #append>
+                      <v-list-item-action end class="flex-column">
+                        <v-chip size="x-small" color="text" variant="outlined">{{
+                          difficultyById(workout.level)
+                        }}</v-chip>
+                        <div class="subscribers">
+                          <workout-subscribe size="x-small" :workout="workout" :clickable="false" />
+                        </div>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                  <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
+                </template>
+                <template v-slot:empty>
+                  <div>{{ t('No workouts found') }}</div>
+                </template>
+              </v-infinite-scroll>
             </v-list>
             <v-list v-else>
               <v-list-item v-if="workoutsList?.length === 0" to="/workouts/new">

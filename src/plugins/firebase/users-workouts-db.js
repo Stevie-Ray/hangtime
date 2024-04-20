@@ -5,7 +5,8 @@ import {
   query,
   where,
   orderBy,
-  limit
+  limit,
+  startAfter
 } from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
@@ -17,8 +18,16 @@ export default class UsersWorkoutsDB extends GenericDB {
     super('users')
   }
 
-  // Here you can extend UsersWorkoutsDB with custom methods
-  async readAll(constraints = null, sort = null, amount = null) {
+  /**
+   * Retrieves all documents from the Firestore collection.
+   *
+   * @param {Array|null} constraints - Array of constraints for the query.
+   * @param {string|null} sort - Field to sort the results by.
+   * @param {DocumentSnapshot|null} lastVisible - Last visible document from the previous query.
+   * @param {number|null} amount - Maximum number of documents to retrieve.
+   * @returns {Promise<Array>} - Array of documents retrieved.
+   */
+  async readAll(constraints = null, sort = null, lastVisible = null, amount = null) {
     const collectionRef = collectionGroup(db, 'workouts')
 
     let q = query(collectionRef)
@@ -33,9 +42,15 @@ export default class UsersWorkoutsDB extends GenericDB {
       combinedQuery.push(orderBy(sort, 'desc'))
     }
 
+    if (lastVisible) {
+      const { updateTimestamp } = lastVisible
+      combinedQuery.push(startAfter(updateTimestamp))
+    }
+
     if (amount) {
       combinedQuery.push(limit(amount))
     }
+
     // add params to query
     if (combinedQuery.length > 0) {
       q = query(collectionRef, ...combinedQuery)

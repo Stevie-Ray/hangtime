@@ -9,8 +9,8 @@ import UsersDB from '@/plugins/firebase/users-db'
 
 export const useWorkouts = defineStore('workouts', {
   state: () => ({
-    workouts: null,
-    workoutsCommunity: null,
+    workouts: [],
+    workoutsCommunity: [],
     leaderboards: []
   }),
   actions: {
@@ -19,24 +19,29 @@ export const useWorkouts = defineStore('workouts', {
      * @return Array
      */
     async fetchUserWorkouts() {
-      if (this.workouts?.length) return
-      const { user } = storeToRefs(useAuthentication())
-      const usersWorkoutsDb = new UsersWorkoutsDB(user.value.id)
-      this.workouts = await usersWorkoutsDb.readAll(
-        [['subscribers', 'array-contains', user.value.id]],
-        null,
-        100
+      const authentication = useAuthentication()
+      const usersWorkoutsDb = new UsersWorkoutsDB(authentication.user.id)
+      const lastVisible = this.workouts.length > 0 ? this.workouts[this.workouts.length - 1] : null
+      const newWorkouts = await usersWorkoutsDb.readAll(
+        [['subscribers', 'array-contains', authentication.user.id]],
+        'updateTimestamp',
+        lastVisible,
+        20
       )
+      this.workouts.push(...newWorkouts)
     },
     /**
      * Fetch community workouts
      * @return Array
      */
     async fetchCommunityWorkouts() {
-      // if (this.workoutsCommunity?.length) return
       const authentication = useAuthentication()
       const user = useUser()
       const usersWorkoutsDb = new UsersWorkoutsDB(authentication.user.id)
+      const lastVisible =
+        this.workoutsCommunity.length > 0
+          ? this.workoutsCommunity[this.workoutsCommunity.length - 1]
+          : null
       const constraints = [['share', '==', true]]
       if (user?.getUserHangboardCompany) {
         constraints.push(['company', '==', user.getUserHangboardCompany.id])
@@ -44,7 +49,13 @@ export const useWorkouts = defineStore('workouts', {
       if (user?.getUserHangboard) {
         constraints.push(['hangboard', '==', user.getUserHangboard.id])
       }
-      this.workoutsCommunity = await usersWorkoutsDb.readAll(constraints, null, 200)
+      const newWorkouts = await usersWorkoutsDb.readAll(
+        constraints,
+        'updateTimestamp',
+        lastVisible,
+        20
+      )
+      this.workoutsCommunity.push(...newWorkouts)
     },
     /**
      * Fetch leaderboard
