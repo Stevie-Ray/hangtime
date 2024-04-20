@@ -83,6 +83,8 @@ const hangboardMenu = ref(false)
 
 const setHangboard = () => {
   updateUser()
+  workouts.workoutsCommunity = []
+  shouldFetchCommunityWorkouts = true
   fetchCommunityWorkouts()
 }
 

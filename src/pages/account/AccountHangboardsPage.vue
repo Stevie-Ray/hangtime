@@ -26,9 +26,12 @@ const { updateUser } = useAuthentication()
 
 const { user } = storeToRefs(useAuthentication())
 
+const workouts = useWorkouts()
+
 const setHangboard = (index) => {
   user.value.settings.selected = index
   updateUser()
+  workouts.workoutsCommunity = []
   fetchCommunityWorkouts()
 }
 
