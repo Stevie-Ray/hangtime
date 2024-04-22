@@ -240,7 +240,7 @@ useHead({
         <v-row v-if="workout">
           <v-col cols="12" md="5" order-md="last">
             <div class="sticky">
-              <workout-summary :edit="edit" :workout="workout" />
+              <workout-summary :edit="edit" :workout="workout" @save="workoutSaveDialog = true" />
             </div>
           </v-col>
 

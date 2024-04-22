@@ -11,6 +11,8 @@ const { t } = useI18n()
 
 const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
 
+const emit = defineEmits(['save'])
+
 const props = defineProps({
   workout: {
     type: Object
@@ -95,7 +97,7 @@ const parseVideo = (video) => {
             color="text"
             size="large"
             variant="outlined"
-            @click="workoutSaveDialog = true"
+            @click="emit('save')"
           >
             {{ t('Save workout') }}
           </v-btn>

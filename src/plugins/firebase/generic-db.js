@@ -15,8 +15,28 @@ import {
   orderBy,
   limit
 } from 'firebase/firestore/lite'
-import { toRaw } from 'vue'
+import { toRaw, isRef, isReactive, isProxy } from 'vue'
 import firebaseApp from '@/plugins/firebase'
+
+export function deepToRaw(sourceObj) {
+  const objectIterator = (input) => {
+    if (Array.isArray(input)) {
+      return input.map((item) => objectIterator(item))
+    }
+    if (isRef(input) || isReactive(input) || isProxy(input)) {
+      return objectIterator(toRaw(input))
+    }
+    if (input && typeof input === 'object') {
+      return Object.keys(input).reduce((acc, key) => {
+        acc[key] = objectIterator(input[key])
+        return acc
+      }, {})
+    }
+    return input
+  }
+
+  return objectIterator(sourceObj)
+}
 
 const db = getFirestore(firebaseApp)
 
@@ -120,7 +140,7 @@ export default class GenericDB {
    */
   async update(data) {
     const { id } = data
-    const clonedData = structuredClone(toRaw(data))
+    const clonedData = structuredClone(deepToRaw(data))
     delete clonedData.id
 
     const docRef = doc(db, this.collectionPath, id)
