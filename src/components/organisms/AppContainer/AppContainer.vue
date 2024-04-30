@@ -50,6 +50,8 @@ const props = defineProps({
     <slot></slot>
   </v-main>
 
+  <slot name="fab"></slot>
+
   <v-footer v-if="user && !hideFooter" app class="py-0">
     <!-- bottom navigation -->
     <v-bottom-navigation grow mandatory style="bottom: 0">

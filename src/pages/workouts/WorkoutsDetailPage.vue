@@ -255,22 +255,6 @@ useHead({
                 @show="workoutSaveDialog = !workoutSaveDialog"
               />
             </div>
-
-            <div v-show="!edit" v-scroll="onScroll" class="fab text-end hidden-md-and-up">
-              <div class="mx-4">
-                <v-fab-transition>
-                  <v-btn
-                    v-show="startWorkoutButton"
-                    :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
-                    rounded="lg"
-                    size="x-large"
-                    @click="goToTimer"
-                  >
-                    {{ t('Start workout') }}
-                  </v-btn>
-                </v-fab-transition>
-              </div>
-            </div>
           </v-col>
         </v-row>
 
@@ -286,28 +270,28 @@ useHead({
         </v-row>
       </v-container>
     </template>
+
+    <template #fab>
+      <div v-show="!edit" v-scroll="onScroll" class="hidden-md-and-up">
+        <v-fab-transition>
+          <v-fab
+            :active="startWorkoutButton"
+            :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
+            location="bottom end"
+            position="fixed"
+            size="x-large"
+            extended
+            app
+            :text="t('Start workout')"
+            style="bottom: 56px"
+          ></v-fab>
+        </v-fab-transition>
+      </div>
+    </template>
   </app-container>
 </template>
 
 <style lang="scss" scoped>
-.fab {
-  bottom: 56px;
-  height: 80px;
-  left: 0;
-  pointer-events: none;
-  position: fixed;
-  transform: translateY(0%);
-  width: calc((100% - 0px) - 0px);
-  z-index: 1007;
-
-  .v-btn {
-    background-color: rgb(var(--v-theme-accent));
-    --v-btn-height: 56px;
-    pointer-events: initial;
-    z-index: 1008;
-  }
-}
-
 .sticky {
   @media (min-width: 960px) {
     position: sticky;
@@ -318,5 +302,16 @@ useHead({
 .v-toolbar .v-btn--size-x-large {
   min-width: 64px;
   padding: 0 12px;
+}
+</style>
+
+<style lang="scss">
+.v-fab__container {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  align-self: initial !important;
+  justify-content: flex-end;
 }
 </style>

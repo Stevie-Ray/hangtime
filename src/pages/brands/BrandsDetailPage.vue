@@ -160,16 +160,24 @@ useHead({
             <map-container v-if="getCompany.location" :markers="[getCompany]" :zoom="6" />
           </v-col>
         </v-row>
-        <div v-if="!user" v-scroll="onScroll" class="fab text-end">
-          <div class="mx-4">
-            <v-fab-transition>
-              <v-btn v-show="loginButton" to="/login" size="x-large" rounded="lg">
-                {{ t('Start training') }}
-              </v-btn>
-            </v-fab-transition>
-          </div>
-        </div>
       </v-container>
+    </template>
+
+    <template #fab>
+      <div v-if="!user" v-scroll="onScroll">
+        <v-fab-transition>
+          <v-fab
+            :active="loginButton"
+            to="/login"
+            location="bottom end"
+            position="fixed"
+            size="x-large"
+            extended
+            app
+            :text="t('Start training')"
+          ></v-fab>
+        </v-fab-transition>
+      </div>
     </template>
   </app-container>
 </template>
@@ -185,21 +193,15 @@ useHead({
   display: flex;
   flex-direction: column;
 }
+</style>
 
-.fab {
-  bottom: 0px;
-  z-index: 1007;
-  transform: translateY(0%);
-  position: fixed;
-  height: 80px;
+<style lang="scss">
+.v-fab__container {
+  top: 0;
+  bottom: 0;
+  right: 0;
   left: 0;
-  width: calc((100% - 0px) - 0px);
-  pointer-events: none;
-  .v-btn {
-    background-color: rgb(var(--v-theme-accent));
-    z-index: 1008;
-    --v-btn-height: 56px;
-    pointer-events: initial;
-  }
+  align-self: initial !important;
+  justify-content: flex-end;
 }
 </style>
