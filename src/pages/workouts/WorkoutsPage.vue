@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
@@ -13,6 +13,7 @@ import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscri
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
 import Walkthrough from '@/components/molecules/dialog/Walkthrough/Walkthrough.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import imgLogo from '@/assets/logo.svg'
 
 import { time } from '@/helpers'
 
@@ -24,23 +25,40 @@ const { updateUser } = useAuthentication()
 const { networkOnLine } = storeToRefs(useApp())
 const { fetchCommunityWorkouts, fetchUserWorkouts } = useWorkouts()
 
+const workouts = useWorkouts()
+const route = useRoute()
+const router = useRouter()
+
 let shouldFetchUserWorkouts = true
 let shouldFetchCommunityWorkouts = true
+
+const showEmptySlot = ref(true)
+
+const workoutsList = computed(() => {
+  if (route.path === '/workouts') {
+    return workouts.getWorkoutsBySelectedHangboard
+  }
+  return workouts.getWorkoutsByCommunity
+})
+
+const initialLength = workoutsList.value.length
 
 const fetchMoreWorkouts = async ({ done }) => {
   if (route.path === '/workouts') {
     if (!shouldFetchUserWorkouts) {
       done('empty')
+      // setTimeout(() => {
+      //   showEmptySlot.value = false
+      // }, 2000)
       return
     }
   } else {
+    // eslint-disable-next-line no-lonely-if
     if (!shouldFetchCommunityWorkouts) {
       done('empty')
       return
     }
   }
-
-  const initialLength = workoutsList.value.length
 
   try {
     if (route.path === '/workouts') {
@@ -62,22 +80,15 @@ const fetchMoreWorkouts = async ({ done }) => {
       } else {
         shouldFetchCommunityWorkouts = false
       }
+      // setTimeout(() => {
+      //   showEmptySlot.value = false
+      // }, 2000)
     } else {
       // Content was added succesfully
       done('ok')
     }
   }
 }
-
-const workouts = useWorkouts()
-const route = useRoute()
-
-const workoutsList = computed(() => {
-  if (route.path === '/workouts') {
-    return workouts.getWorkoutsBySelectedHangboard
-  }
-  return workouts.getWorkoutsByCommunity
-})
 
 const hangboardMenu = ref(false)
 
@@ -197,7 +208,7 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-list v-if="workoutsList.length">
-              <v-infinite-scroll :items="workoutsList" :onLoad="fetchMoreWorkouts">
+              <v-infinite-scroll :onLoad="fetchMoreWorkouts">
                 <template v-for="(workout, index) in workoutsList" :key="workout.id">
                   <v-list-item
                     :class="`v-list-item-${index}`"
@@ -238,23 +249,21 @@ useHead({
                   <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
                 </template>
                 <template v-slot:empty>
-                  <div>{{ t('No workouts found') }}</div>
+                  <div v-show="showEmptySlot">{{ t('No workouts found') }}</div>
                 </template>
               </v-infinite-scroll>
             </v-list>
-            <v-list v-else>
-              <v-list-item v-if="workoutsList?.length === 0" to="/workouts/new">
-                <v-list-item-title>
-                  {{ t('No workouts found') }}
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                  {{ t('Check the community or create your own') }}
-                </v-list-item-subtitle>
-                <template #append>
-                  <v-btn variant="text" color="text" icon="$plus"></v-btn>
-                </template>
-              </v-list-item>
-            </v-list>
+            <v-empty-state
+              v-else
+              to="/workouts/new"
+              headline="No workouts found"
+              title="Community-based hangboard app"
+              text="Our workouts are community-driven and unique for each hangboard. Explore the 'Community' tab or create your own to share with fellow climbers."
+              :image="imgLogo"
+              action-text="Create a Workout"
+              @click:action="router.push('/workouts/new')"
+            >
+            </v-empty-state>
           </v-col>
         </v-row>
       </v-container>
@@ -267,6 +276,13 @@ useHead({
 <style lang="scss" scoped>
 .hangboard-select {
   cursor: pointer;
+}
+.v-theme--dark {
+  .v-empty-state {
+    &:deep(.v-empty-state__media) {
+      filter: invert(100%);
+    }
+  }
 }
 .v-list-item {
   min-height: 64px;
