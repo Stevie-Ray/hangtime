@@ -317,7 +317,9 @@ const skipRest = () => {
 
 const disableMaxHold = () => {
   return (
-    clockText.value !== t('Go') || exercise.value.max === false || exercise.value.exercise === 0
+    clockText.value !== t('Go') ||
+    exercise.value.max === false ||
+    (exercise.value.exercise && exercise.value.exercise === 0)
   )
 }
 const maxHold = () => {
