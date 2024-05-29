@@ -6,48 +6,29 @@ import { useAuthentication } from '@/stores/authentication'
 // These can be imported from other files
 
 // Account
-const AccountPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPage.vue')
-const AccountGeneralPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountGeneralPage.vue')
-const AccountHangboardsPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHangboardsPage.vue')
-const AccountHelpPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountHelpPage.vue')
-const AccountPrivacyPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountPrivacyPage.vue')
-const AccountProfilePage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountProfilePage.vue')
-const AccountSubscriptionPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountSubscriptionPage.vue')
-const AccountWorkoutsPage = () =>
-  import(/* webpackChunkName: "page-account" */ '@/pages/account/AccountWorkoutsPage.vue')
+const AccountPage = () => import('@/views/account/AccountPage.vue')
+const AccountGeneralPage = () => import('@/views/account/AccountGeneralPage.vue')
+const AccountHangboardsPage = () => import('@/views/account/AccountHangboardsPage.vue')
+const AccountHelpPage = () => import('@/views/account/AccountHelpPage.vue')
+const AccountPrivacyPage = () => import('@/views/account/AccountPrivacyPage.vue')
+const AccountProfilePage = () => import('@/views/account/AccountProfilePage.vue')
+const AccountSubscriptionPage = () => import('@/views/account/AccountSubscriptionPage.vue')
+const AccountWorkoutsPage = () => import('@/views/account/AccountWorkoutsPage.vue')
 // Activity
-const ActivityPage = () =>
-  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityPage.vue')
-const ActivityLeaderboardPage = () =>
-  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityLeaderboardPage.vue')
-const ActivityNotificationsPage = () =>
-  import(/* webpackChunkName: "page-activity" */ '@/pages/activity/ActivityNotificationsPage.vue')
+const ActivityPage = () => import('@/views/activity/ActivityPage.vue')
+const ActivityLeaderboardPage = () => import('@/views/activity/ActivityLeaderboardPage.vue')
+const ActivityNotificationsPage = () => import('@/views/activity/ActivityNotificationsPage.vue')
 // Authentication
-const LoginPage = () =>
-  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/LoginPage.vue')
-const CheckLoginPage = () =>
-  import(/* webpackChunkName: "page-login" */ '@/pages/authentication/CheckLoginPage.vue')
+const LoginPage = () => import('@/views/authentication/LoginPage.vue')
+const CheckLoginPage = () => import('@/views/authentication/CheckLoginPage.vue')
 // Brands
-const BrandsPage = () =>
-  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsPage.vue')
-const BrandsDetailPage = () =>
-  import(/* webpackChunkName: "page-brands" */ '@/pages/brands/BrandsDetailPage.vue')
+const BrandsPage = () => import('@/views/brands/BrandsPage.vue')
+const BrandsDetailPage = () => import('@/views/brands/BrandsDetailPage.vue')
 // Brands
-const WorkoutsPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsPage.vue')
-const WorkoutsDetailPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsDetailPage.vue')
-const WorkoutsTimerPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsTimerPage.vue')
-const WorkoutsQuickPage = () =>
-  import(/* webpackChunkName: "page-workouts" */ '@/pages/workouts/WorkoutsQuickPage.vue')
+const WorkoutsPage = () => import('@/views/workouts/WorkoutsPage.vue')
+const WorkoutsDetailPage = () => import('@/views/workouts/WorkoutsDetailPage.vue')
+const WorkoutsTimerPage = () => import('@/views/workouts/WorkoutsTimerPage.vue')
+const WorkoutsQuickPage = () => import('@/views/workouts/WorkoutsQuickPage.vue')
 
 // 2. Define some routes
 // Each route should map to a component.

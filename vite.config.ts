@@ -1,9 +1,9 @@
 // Plugins
-import Components from 'unplugin-vue-components/vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { VitePWA } from 'vite-plugin-pwa'
 import { visualizer } from 'rollup-plugin-visualizer'
+import VueDevTools from 'vite-plugin-vue-devtools'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -16,13 +16,13 @@ export default defineConfig({
     vue({
       template: { transformAssetUrls }
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
+    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin
     vuetify({
+      autoImport: true,
       styles: {
         configFile: 'src/plugins/vuetify/settings.scss'
       }
     }),
-    Components(),
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'injectManifest',
@@ -42,6 +42,7 @@ export default defineConfig({
     visualizer({
       open: true
     })
+    // VueDevTools()
   ],
   define: {
     'import.meta.env.VITE_APP_VERSION': JSON.stringify(process.env.npm_package_version),

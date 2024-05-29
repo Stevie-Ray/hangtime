@@ -4,7 +4,7 @@ import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
-import { useUser } from '@/stores/user.js'
+import { useUser } from '@/stores/user'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
 
 const { t } = useI18n()

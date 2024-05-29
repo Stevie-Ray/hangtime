@@ -3,7 +3,7 @@ import { ref, watch, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useWorkouts } from '@/stores/workouts'
 import { useAuthentication } from '@/stores/authentication'
-import { useApp } from '@/stores/app.js'
+import { useApp } from '@/stores/app'
 
 const { workouts } = storeToRefs(useWorkouts())
 

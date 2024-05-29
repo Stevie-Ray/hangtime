@@ -19,7 +19,7 @@ import stopSound from '@/assets/sound/stop.wav'
 
 import { useAuthentication } from '@/stores/authentication'
 import { useActivities } from '@/stores/activities'
-import { useBluetooth } from '@/stores/bluetooth.js'
+import { useBluetooth } from '@/stores/bluetooth'
 
 const { device } = storeToRefs(useBluetooth())
 
