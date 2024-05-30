@@ -128,12 +128,12 @@ export const useWorkouts = defineStore('workouts', {
      * Get workout Id
      * @return Object
      */
-    getWorkoutById: (state) => (id) => {
+    getWorkoutById: (state) => (id: string) => {
       // eslint-disable-next-line no-shadow
-      let workout = state.workouts?.find((workout) => workout.id === id)
+      let workout = state.workouts?.find((workout: Workout) => workout.id === id)
       if (!workout)
         // eslint-disable-next-line no-shadow
-        workout = state.workoutsCommunity?.find((workout) => workout.id === id)
+        workout = state.workoutsCommunity?.find((workout: Workout) => workout.id === id)
       if (id === 'new') {
         const authentication = useAuthentication()
         const user = useUser()

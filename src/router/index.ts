@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw, RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAuthentication } from '@/stores/authentication'
 
@@ -33,12 +33,13 @@ const WorkoutsQuickPage = () => import('@/views/workouts/WorkoutsQuickPage.vue')
 // 2. Define some routes
 // Each route should map to a component.
 // We'll talk about nested routes later.
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: 'workouts',
     component: WorkoutsPage,
-    name: 'HomePage'
+    name: 'HomePage',
+    children: []
   },
   {
     path: '/login',
@@ -153,7 +154,7 @@ const router = createRouter({
   }
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach( (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   // ✅ This will work because the router starts its navigation after
   // the router is installed and pinia will be installed too
   const { user } = storeToRefs(useAuthentication())
