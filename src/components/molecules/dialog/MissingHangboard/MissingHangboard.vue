@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { event } from 'vue-gtag'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'

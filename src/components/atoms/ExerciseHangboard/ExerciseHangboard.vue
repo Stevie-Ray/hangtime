@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import InlineSvg from 'vue-inline-svg'
 import { useUser } from '@/stores/user'

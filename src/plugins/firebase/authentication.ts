@@ -4,6 +4,7 @@ import { onAuthStateChanged, getAuth, browserPopupRedirectResolver } from 'fireb
 // import { default as app } from '@/plugins/firebase'
 
 import { useAuthentication } from '@/stores/authentication'
+import { User as FirebaseUser } from "firebase/auth";
 
 const { login, logout } = useAuthentication()
 const auth = getAuth()
@@ -20,7 +21,7 @@ if (navigator.userAgent.indexOf('moto g power') > -1) {
 
 onAuthStateChanged(
   auth,
-  (user) => {
+  (user: FirebaseUser | null) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User

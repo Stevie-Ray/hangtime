@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { stream } from '@hangtime/grip-connect'
 import { useI18n } from 'vue-i18n'

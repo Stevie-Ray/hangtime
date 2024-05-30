@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useRandomImage } from '@/helpers'
 import { useUser } from '@/stores/user'
 import countries from '@/helpers/countries'

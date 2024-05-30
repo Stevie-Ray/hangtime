@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import urlParser from 'js-video-url-parser'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'

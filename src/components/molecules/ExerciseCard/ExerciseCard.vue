@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'

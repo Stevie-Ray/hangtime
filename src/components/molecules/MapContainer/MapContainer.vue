@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { Loader } from '@googlemaps/js-api-loader'
 
 // eslint-disable-next-line no-unused-vars

@@ -18,16 +18,16 @@ import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
  * @return {*}
  */
 // eslint-disable-next-line no-shadow
-function padTime(time) {
+function padTime(time: number) {
   return (time < 10 ? '0' : '') + time
 }
 
 /**
- *
- * @param item
- * @return {string}
+ * 
+ * @param item 
+ * @returns 
  */
-export function time(item) {
+export function time(item: number) {
   let hours
   let minutes = '00'
   let seconds = '00'
@@ -38,7 +38,7 @@ export function time(item) {
     seconds = padTime(item % 60)
   }
 
-  if (hours > 0) {
+  if (hours && Number(hours) > 0) {
     return `${hours}:${minutes}:${seconds}`
   }
 
@@ -489,8 +489,8 @@ export function useRandomImage(dark = false) {
 //     return `${day} ${month}, ${year}`
 // }
 
-export function weightConverter(weight, user) {
-  if (user && user.settings.weight === 1) {
+export function weightConverter(weight: number, user: User) {
+  if (user.settings.weight === 1) {
     return Math.round(weight * 2.2046)
   }
   return weight

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import draggable from 'vuedraggable'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'

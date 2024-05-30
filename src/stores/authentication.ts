@@ -1,17 +1,20 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import { loadLanguageAsync } from '@/plugins/i18n'
 import router from '@/router'
+import { User } from '@/interfaces/authentication.interface'
+import { User as FirebaseUser } from "firebase/auth"
+
 
 export const useAuthentication = defineStore('authentication', () => {
-  const user = ref(undefined)
-  const error = ref(undefined)
+  const user: Ref<User | null> = ref(null);
+  const error: Ref<string | null> = ref(null);
 
   // action
   /**
    * Create new user from firebase auth user infos
    */
-  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser) {
+  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser) {
     let providerData = firebaseAuthUser.providerData[0]
     if (firebaseAuthUser.isAnonymous) {
       // eslint-disable-next-line prefer-destructuring
@@ -52,7 +55,7 @@ export const useAuthentication = defineStore('authentication', () => {
    * @param firebaseUser
    * @return {Promise<void>}
    */
-  async function login(firebaseAuthUser) {
+  async function login(firebaseAuthUser: FirebaseUser) {
     try {
       const { default: UsersDB } = await import('@/plugins/firebase/users-db')
       const userFromFirebase = await new UsersDB().read(firebaseAuthUser.uid)
@@ -76,7 +79,7 @@ export const useAuthentication = defineStore('authentication', () => {
         workouts.fetchCommunityWorkouts()
         activities.fetchUserActivity()
       }
-    } catch (e) {
+    } catch (e: unknown) {
       error.value = e.toString()
       if (e.code?.toString() === 'resource-exhausted') {
         error.value = 'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.'

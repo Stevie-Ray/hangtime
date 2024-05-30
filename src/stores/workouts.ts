@@ -6,6 +6,7 @@ import i18n from '@/plugins/i18n'
 import UsersWorkoutsDB from '@/plugins/firebase/users-workouts-db'
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
+import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
 
 export const useWorkouts = defineStore('workouts', {
   state: () => ({
@@ -171,7 +172,7 @@ export const useWorkouts = defineStore('workouts', {
             workout?.company === user.getUserHangboardCompany?.id &&
             workout?.hangboard === user.getUserHangboard?.id
         )
-        ?.sort((a, b) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
+        ?.sort((a: Workout, b: Workout) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
         ?.slice(0, items)
     },
     getWorkoutsByCommunity(state) {
@@ -179,10 +180,10 @@ export const useWorkouts = defineStore('workouts', {
       const limit = 999
       const items = state.workoutsCommunity.length > limit ? limit : state.workoutsCommunity.length
       return state.workoutsCommunity
-        ?.sort((a, b) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
+        ?.sort((a: Workout, b: Workout) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
         ?.slice(0, items)
     },
-    getLeaderboard: (state) => (rank) =>
-      state.leaderboards.find((leaderboard) => leaderboard.rank === rank)
+    getLeaderboard: (state) => (rank: string) =>
+      state.leaderboards.find((leaderboard: Leaderboard) => leaderboard.rank === rank)
   }
 })

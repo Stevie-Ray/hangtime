@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'

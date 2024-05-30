@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useExercises, useGrip } from '@/helpers'
 
 const grip = useGrip()
