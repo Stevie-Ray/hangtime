@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { stream } from '@hangtime/grip-connect'
 import { massObject } from '@hangtime/grip-connect/src/notify'
 import { useI18n } from 'vue-i18n'
@@ -47,9 +47,9 @@ watch(
   }
 )
 
-let timer = null
-const timerPaused = ref(null)
-const clock = ref(0)
+let timer: NodeJS.Timeout | null = null
+const timerPaused: Ref<boolean|null> = ref(null)
+const clock: Ref<number> = ref(0);
 const clockText = ref(t('Press Play'))
 const currentExercise = ref(0)
 const currentExerciseStep = ref(0)
@@ -60,7 +60,7 @@ const noSleep = new NoSleep()
 const setupTime = 5
 
 // complete
-const dialogWorkoutComplete = ref(false)
+const dialogWorkoutComplete: Ref<boolean> = ref(false)
 const workoutCompleteTimeTotal = ref(0)
 const workoutCompleteTimeHanging = ref(0)
 
@@ -101,7 +101,7 @@ const requestWakeLock = () => {
   }
 }
 
-const speak = (text) => {
+const speak = (text: SpeechSynthesisUtterance) => {
   try {
     window.speechSynthesis.speak(text)
   } catch (ex) {
@@ -110,7 +110,7 @@ const speak = (text) => {
   }
 }
 
-const speakText = (text) => {
+const speakText = (text: string) => {
   if (user.value?.settings?.speak && 'speechSynthesis' in window) {
     let voiceList = window.speechSynthesis.getVoices()
     if (user.value?.settings.locale) {
@@ -127,7 +127,7 @@ const speakText = (text) => {
   }
 }
 
-const playSound = (path, type) => {
+const playSound = (path: string, type: 'wav'|'mp3') => {
   if (user.value?.settings?.sound && audio) {
     // workaround for iOS / Safari
     if (path) {
@@ -157,7 +157,7 @@ const countDown = () => {
   // }
   if (clock.value <= 3 && clock.value > 1) {
     if (user.value?.settings?.speak) {
-      speakText(clock.value - 1)
+      speakText(`${clock.value - 1}`)
     } else {
       playSound(countSound, 'wav')
     }
@@ -268,7 +268,7 @@ const exerciseDone = () => {
   stopTimer()
 }
 
-const hasExercise = (type) => {
+const hasExercise = (type: 'prev'|'next') => {
   const setupTimers = () => {
     nextTick(() => {
       if (currentExercise.value === 0) {

@@ -142,7 +142,7 @@ const closeModal = () => {
         </v-row>
       </v-card-text>
       <v-card-actions class="justify-end px-4">
-        <v-btn color="text" @click="router.go()">{{ t('Restart') }}</v-btn>
+        <v-btn color="text" @click="router.go(0)">{{ t('Restart') }}</v-btn>
         <v-btn color="text" to="/activity">{{ t('Activity') }}</v-btn>
       </v-card-actions>
     </v-card>

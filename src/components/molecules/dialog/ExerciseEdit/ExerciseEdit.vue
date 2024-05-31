@@ -117,7 +117,7 @@ const weightLabel = computed(() => {
 })
 
 const rules = {
-  length: (length) => (v) => (v || '').length <= length || `Max ${length} characters`
+  length: (length: number) => (v) => (v || '').length <= length || `Max ${length} characters`
 }
 </script>
 

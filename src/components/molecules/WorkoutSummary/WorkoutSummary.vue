@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import urlParser from 'js-video-url-parser'
-import { ref, watch } from 'vue'
+import { ref, Ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
@@ -25,7 +25,7 @@ const props = defineProps({
 
 const workout = ref(props.workout)
 const edit = ref(props.edit)
-const contentToggle = ref(true)
+const contentToggle: Ref<boolean> = ref(true)
 
 watch(
   () => props.workout,
@@ -43,7 +43,7 @@ watch(
 )
 
 // workout - video
-const parseVideo = (video) => {
+const parseVideo = (video: string) => {
   const videoData = urlParser.parse(video)
   if (videoData) {
     return urlParser.create({
@@ -58,7 +58,7 @@ const parseVideo = (video) => {
 <template>
   <v-row v-if="workout">
     <v-col cols="12">
-      <v-card class="mx-auto" :image="contentToggle ? useRandomImage() : null" theme="light">
+      <v-card class="mx-auto" :image="contentToggle ? useRandomImage() : undefined" theme="light">
         <v-card-text v-if="contentToggle" style="min-height: 72px">
           <div
             class="text-subtitle-1 mb-4"

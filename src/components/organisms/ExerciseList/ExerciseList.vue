@@ -44,7 +44,7 @@ watch(
 const exerciseEditDialog = ref(false)
 const exerciseIndex = ref(0)
 
-const openExerciseEditDialog = (index) => {
+const openExerciseEditDialog = (index: number) => {
   if (edit.value === true) {
     exerciseIndex.value = index
     exerciseEditDialog.value = true

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/// <reference types="digital-goods-browser" />
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
@@ -31,7 +32,7 @@ let item = null
 
 let buyStatus = ''
 let logField = ''
-let purchasesList = []
+let purchasesList: [] = []
 
 const progressValue = computed(() => {
   // eslint-disable-next-line no-shadow

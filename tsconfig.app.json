@@ -10,7 +10,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["web-bluetooth"],
+    "types": ["digital-goods-browser","web-bluetooth"],
     "verbatimModuleSyntax": false,
     "noEmit": true,
     "skipLibCheck": true
