@@ -27,7 +27,7 @@ function padTime(time: number) {
  * @param item 
  * @returns 
  */
-export function time(item: number) {
+export function time(item: number | undefined) {
   let hours
   let minutes = '00'
   let seconds = '00'
@@ -444,7 +444,7 @@ export function useExercises() {
  * @param dark
  * @return {string}
  */
-export function useRandomImage(dark = false) {
+export function useRandomImage(dark:boolean = false) {
   /* eslint-disable global-require */
   let images = []
   if (!dark) {
