@@ -1,14 +1,16 @@
+import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'node:url'
+
 // Plugins
 import vue from '@vitejs/plugin-vue'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA, ManifestOptions } from 'vite-plugin-pwa'
 import { visualizer } from 'rollup-plugin-visualizer'
-import VueDevTools from 'vite-plugin-vue-devtools'
+// import VueDevTools from 'vite-plugin-vue-devtools'
 
 // Utilities
-import { defineConfig } from 'vite'
-import { fileURLToPath, URL } from 'node:url'
-import manifest from './manifest.json'
+import manifest from './manifest.json' assert { type: 'json' }
+const manifestTyped = manifest as Partial<ManifestOptions>
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -29,7 +31,7 @@ export default defineConfig({
       injectRegister: null, // register the service workbox manually
       srcDir: 'public', // .
       filename: 'service-worker.js',
-      manifest,
+      manifest: manifestTyped,
       workbox: {
         globPatterns: ['**/*.{js,css}'],
         navigateFallback: null
