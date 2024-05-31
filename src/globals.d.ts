@@ -5,6 +5,31 @@ declare module '@/plugins/firebase/authentication' {
   export default value
 }
 
+declare module '@/plugins/firebase/generic-db' {
+  const value: any
+  export default value
+}
+
+declare module '@/plugins/firebase/user-activities-db' {
+  const value: any
+  export default value
+}
+
+declare module '@/plugins/firebase/user-workouts-db' {
+  const value: any
+  export default value
+}
+
+declare module '@/plugins/firebase/users-db' {
+  const value: any
+  export default value
+}
+
+declare module '@/plugins/firebase/users-workouts-db' {
+  const value: any
+  export default value
+}
+
 declare module '@/plugins/head' {
   const value: any
   export default value
