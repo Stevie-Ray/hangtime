@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { stream } from '@hangtime/grip-connect'
+import { massObject } from '@hangtime/grip-connect/src/notify'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
@@ -64,9 +65,9 @@ const workoutCompleteTimeTotal = ref(0)
 const workoutCompleteTimeHanging = ref(0)
 
 // bluetooth
-const bluetoothOutput = ref(null)
+const bluetoothOutput = ref<massObject | null>(null)
 
-const notify = (data) => {
+const notify = (data: massObject) => {
   bluetoothOutput.value = data
 }
 
