@@ -46,9 +46,9 @@ const workoutSave = () => {
 const rules = {
   number: (v) => !v.isNaN || 'NaN',
   required: (v) => !!v || 'This field is required',
-  length: (length) => (v) => (v || '').length <= length || `Max ${length} characters`,
-  min: (min) => (v) => v >= min || `A minimun of  ${min} is allowed`,
-  max: (max) => (v) => v <= max || `A maximum of  ${max} is allowed`
+  length: (length: number) => (v) => (v || '').length <= length || `Max ${length} characters`,
+  min: (min: number) => (v) => v >= min || `A minimun of  ${min} is allowed`,
+  max: (max: number) => (v) => v <= max || `A maximum of  ${max} is allowed`
 }
 </script>
 

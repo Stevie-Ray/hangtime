@@ -12,14 +12,14 @@ const props = defineProps({
 
 const emit = defineEmits(['left', 'right'])
 
-const toggleFinger = (hand, action, finger) => {
-  if (props.edit) {
+const toggleFinger = (hand: string, action: 'left' | 'right', finger: string) => {
+  if (props.edit && props.exercise) {
     const handArray = props.exercise[hand]
     console.log(props)
     console.log(handArray)
     if (finger.startsWith('f') && finger.length <= 2) {
       const fingerNumber = parseInt(finger.substr(1), 10)
-      let updatedHand = []
+      let updatedHand: number[] = []
       if (handArray) {
         if (handArray.length > 3) return
         updatedHand = [...handArray]
@@ -76,7 +76,7 @@ const resetHands = () => {
     >
       <div class="hand__left">
         <inline-svg
-          @click="(e) => toggleFinger('leftHand', 'left', e.target.id)"
+          @click="(e: Event) => toggleFinger('leftHand', 'left', e.target.id)"
           v-if="exercise.left !== null"
           :class="[getHandClass('leftHand'), { large: edit }]"
           :src="imgIconHang"
