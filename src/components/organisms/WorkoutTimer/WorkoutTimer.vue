@@ -50,19 +50,19 @@ watch(
 let timer: NodeJS.Timeout | null = null
 const timerPaused: Ref<boolean|null> = ref(null)
 const clock: Ref<number> = ref(0);
-const clockText = ref(t('Press Play'))
-const currentExercise = ref(0)
-const currentExerciseStep = ref(0)
-const currentExerciseStepRepeat = ref(0)
+const clockText: Ref<string> = ref(t('Press Play'))
+const currentExercise: Ref<number> = ref(0)
+const currentExerciseStep: Ref<number> = ref(0)
+const currentExerciseStepRepeat: Ref<number> = ref(0)
 
-const audio = new Audio()
-const noSleep = new NoSleep()
-const setupTime = 5
+const audio: HTMLAudioElement = new Audio();
+const noSleep: NoSleep = new NoSleep();
+const setupTime: number = 5;
 
 // complete
 const dialogWorkoutComplete: Ref<boolean> = ref(false)
-const workoutCompleteTimeTotal = ref(0)
-const workoutCompleteTimeHanging = ref(0)
+const workoutCompleteTimeTotal: Ref<number> = ref(0)
+const workoutCompleteTimeHanging: Ref<number> = ref(0)
 
 // bluetooth
 const bluetoothOutput = ref<massObject | null>(null)
@@ -495,7 +495,7 @@ const setupWorkout = async () => {
       countDown()
       clock.value -= 1
       if (clock.value === 0) {
-        clearInterval(timer)
+        clearInterval(timer as NodeJS.Timeout)
         // max exercise or movement
         if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
           clock.value = 0

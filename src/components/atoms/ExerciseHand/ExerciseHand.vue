@@ -31,14 +31,17 @@ const toggleFinger = (hand: string, action: 'left' | 'right', finger: string) =>
   }
 }
 
-const getHandClass = (hand) => {
-  const handArray = props.exercise[hand]
-  if (handArray) {
-    if (handArray.length) {
-      return handArray.map((finger) => `f${finger}`).join(' ')
+const getHandClass = (hand: string) => {
+  if (props.exercise) {
+    const handArray = props.exercise[hand]
+    if (handArray) {
+      if (handArray.length) {
+        return handArray.map((finger: string) => `f${finger}`).join(' ')
+      }
+      return `f${handArray}`
     }
-    return `f${handArray}`
   }
+
   return ''
 }
 
