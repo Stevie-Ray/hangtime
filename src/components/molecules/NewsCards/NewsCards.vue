@@ -80,7 +80,7 @@ for (const newCompany of newCompanies) {
     hide-delimiters
     class="rounded-lg"
   >
-    <v-carousel-item v-for="(slide, i) in slides" :key="i" v-once>
+    <v-carousel-item v-for="(slide, i) in slides" :key="i">
       <v-card class="mx-auto" max-width="100%">
         <v-img :src="slide.image" cover>
           <v-card-title v-if="slide.title" class="text-white">
