@@ -8,7 +8,6 @@
     "ms-playwright.playwright"
     "dbaeumer.vscode-eslint"
     "esbenp.prettier-vscode"
-    "github.vscode-github-actions"
   ];
   idx.previews = {
     previews = {

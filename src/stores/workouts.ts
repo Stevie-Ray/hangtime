@@ -128,7 +128,7 @@ export const useWorkouts = defineStore('workouts', {
      * Get workout Id
      * @return Object
      */
-    getWorkoutById: (state) => (id: string) => {
+    getWorkoutById: (state) => (id: string | string[]): Workout => {
       // eslint-disable-next-line no-shadow
       let workout = state.workouts?.find((workout: Workout) => workout.id === id)
       if (!workout)
