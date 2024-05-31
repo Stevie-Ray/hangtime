@@ -17,6 +17,7 @@ import { useAuthentication } from '@/stores/authentication'
 import { useUser } from '@/stores/user'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
+import { Excercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
@@ -48,7 +49,7 @@ const workoutSaveDialog = ref(false)
 
 const exerciseAdd = () => {
   // create in function
-  const exerciseNew = {
+  const exerciseNew: Excercise = {
     exercise: 0,
     grip: 0,
     level: 0,
@@ -96,8 +97,8 @@ const missingHangboardDialog = computed(() => {
   if (!route.params.company || !route.params.hangboard) {
     return false
   }
-  const company = parseInt(route.params.company, 10)
-  const hangboard = parseInt(route.params.hangboard, 10)
+  const company = parseInt(route.params.company.toString(), 10)
+  const hangboard = parseInt(route.params.hangboard.toString(), 10)
   const exists = getUserHangboards.value.some(
     (el) => el.company === company && el.hangboard === hangboard
   )

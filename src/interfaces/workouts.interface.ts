@@ -1,3 +1,19 @@
+export interface Excercise {
+  exercise: number;
+  grip: number;
+  level: number;
+  left: number;
+  right: number;
+  pause: number;
+  hold: number;
+  pullups: number;
+  repeat: number;
+  rest: number;
+  weight: number;
+  time?: number;
+  max?: boolean
+  notes: string;
+}
 /**
  * Represents a hangboard workout
  */
@@ -15,7 +31,7 @@ export interface Workout {
   /** Company that created the workout */
   company: string;
   /** List of exercises included in the workout */
-  exercises: Array<any>;
+  exercises: Excercise[];
   /** Duration of the workout in minutes */
   time: number;
   /** Indicates if the workout is shared publicly */

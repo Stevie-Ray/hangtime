@@ -10,9 +10,9 @@ import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
 
 export const useWorkouts = defineStore('workouts', {
   state: () => ({
-    workouts: [],
-    workoutsCommunity: [],
-    leaderboards: []
+    workouts: [] as Workout[],
+    workoutsCommunity: [] as Workout[],
+    leaderboards: [] as Leaderboard[]
   }),
   actions: {
     /**
