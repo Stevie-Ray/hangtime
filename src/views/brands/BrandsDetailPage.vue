@@ -15,6 +15,7 @@ import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 import { useAuthentication } from '@/stores/authentication'
 
 import { useApp } from '@/stores/app'
+import { Hangboard } from '@/interfaces/user.interface'
 
 const { t } = useI18n()
 
@@ -28,9 +29,9 @@ const { getCompanyByUrlKey, getHangboardByIds } = useUser()
 const route = useRoute()
 const router = useRouter()
 
-const getCompany = computed(() => getCompanyByUrlKey(route.params.id))
+const getCompany = computed(() => getCompanyByUrlKey(route.params.id.toString()))
 
-const sortedHangboards = getCompany.value?.hangboards.sort((a, b) => a.name.localeCompare(b.name))
+const sortedHangboards = getCompany.value?.hangboards.sort((a: Hangboard, b: Hangboard) => a.name.localeCompare(b.name))
 
 const loginButton = ref(true)
 

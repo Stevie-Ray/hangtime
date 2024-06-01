@@ -1,4 +1,9 @@
 // Plugins
+declare module '@/plugins/firebase' {
+  const value: any
+  export default value
+}
+
 declare module '@/plugins/firebase/authentication' {
   const value: any
   export default value

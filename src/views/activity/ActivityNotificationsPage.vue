@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref, Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 
-import { getMessaging, getToken, deleteToken, onMessage } from 'firebase/messaging'
+import { getMessaging, getToken, deleteToken, onMessage, MessagePayload } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
 import { useAuthentication } from '@/stores/authentication'
+
+const { updateUser } = useAuthentication()
 
 const { user } = storeToRefs(useAuthentication())
 
@@ -18,7 +20,7 @@ const router = useRouter()
 const { t } = useI18n()
 
 const currentToken = ref('')
-const messages = reactive([])
+const messages: Ref<MessagePayload[]> = ref([])
 const copyAPI = navigator.clipboard
 const messaging = getMessaging(firebaseApp)
 const hasToken = ref(false)
@@ -37,7 +39,7 @@ function clearMessages() {
  * Show token in console and UI.
  * @param currentToken
  */
-function showToken(token) {
+function showToken(token: string) {
   //
   currentToken.value = token
 }
@@ -46,7 +48,7 @@ function isTokenSentToServer() {
   return window.localStorage.getItem('sentToServer') === '1'
 }
 
-function setTokenSentToServer(sent) {
+function setTokenSentToServer(sent: boolean) {
   window.localStorage.setItem('sentToServer', sent ? '1' : '0')
 }
 
@@ -57,12 +59,14 @@ function setTokenSentToServer(sent) {
  * @param currentToken
  */
 // eslint-disable-next-line no-shadow
-function sendTokenToServer(currentToken) {
+function sendTokenToServer(currentToken: string) {
   if (!isTokenSentToServer()) {
     // eslint-disable-next-line no-console
     console.log('Sending token to server...', currentToken)
-    user.value.settings.token = currentToken
-    // TODO: triggerUpdateUser()
+    if (user.value) {
+      user.value.settings.token = currentToken
+      updateUser()
+    }
     setTokenSentToServer(true)
   } else {
     // eslint-disable-next-line no-console
@@ -70,7 +74,7 @@ function sendTokenToServer(currentToken) {
   }
 }
 // eslint-disable-next-line no-shadow
-function updateUIForPushEnabled(currentToken) {
+function updateUIForPushEnabled(currentToken: string) {
   hasToken.value = true
   needsPermission.value = false
   showToken(currentToken)
@@ -109,7 +113,7 @@ function resetUI() {
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log('An error occurred while retrieving token. ', err)
-        showToken('Error retrieving registration token. ', err)
+        showToken('Error retrieving registration token.')
         setTokenSentToServer(false)
       })
     // [END get_token]
@@ -168,7 +172,7 @@ function deleteTokens() {
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log('Error retrieving registration token. ', err)
-        showToken('Error retrieving registration token. ', err)
+        showToken('Error retrieving registration token.')
       })
   }
 }
@@ -179,13 +183,13 @@ function copyText() {
   }
 }
 
-function appendMessage(payload) {
+function appendMessage(payload: MessagePayload) {
   const obj = { ...payload, ...{ show: true } }
-  messages.push(obj)
+  messages.value.push(obj)
 }
 
 if (messaging) {
-  onMessage(messaging, (payload) => {
+  onMessage(messaging, (payload: MessagePayload) => {
     // eslint-disable-next-line no-console
     console.log('Message received. ', payload)
     // [START_EXCLUDE]
@@ -258,7 +262,7 @@ useHead({
 
             <v-snackbar
               v-for="(message, index) in messages.filter((m) => m.show)"
-              :key="message.collapse_key"
+              :key="message.collapseKey"
               v-model="message.show"
               :style="`bottom: ${index * 68 + index * 10}px`"
               :timeout="-1"
@@ -266,14 +270,14 @@ useHead({
               multi-line
             >
               <div>
-                <strong>{{ message.notification.title }}</strong>
+                <strong>{{ message.notification?.title }}</strong>
               </div>
               <div>
-                {{ message.notification.body }}
+                {{ message.notification?.body }}
               </div>
 
-              <template #actions="{ attrs }">
-                <v-btn text v-bind="attrs" @click="message.show = false">
+              <template v-slot:actions>
+                <v-btn variant="text" @click="message.show = false">
                   {{ t('Close') }}
                 </v-btn>
               </template>

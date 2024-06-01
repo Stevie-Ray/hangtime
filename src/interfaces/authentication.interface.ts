@@ -26,6 +26,8 @@ interface UserSettings {
   locale?: string
   /** User's weight (optional) */
   weight?: number
+  /** Firebase Cloud Messaging Token */
+  token?: string
 }
 
 /**
