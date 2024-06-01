@@ -54,7 +54,7 @@ const theme = useTheme()
 const prefersDark: MediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
 
 prefersDark.addEventListener('change', (): void => {
-  if (user.value?.settings?.theme && user.value.settings.theme > 0) {
+  if (user.value.settings.theme > 0) {
     theme.global.name.value = user.value.settings.theme === 2 ? 'dark' : 'light'
   } else {
     theme.global.name.value = prefersDark.matches ? 'dark' : 'light'

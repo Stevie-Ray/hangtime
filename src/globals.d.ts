@@ -40,7 +40,7 @@ declare module '@/plugins/head' {
 }
 
 declare module '@/plugins/i18n' {
-  export function loadLanguageAsync(locale: string): Promise<void>;
+  export function loadLanguageAsync(locale: string): Promise<void>
   const value: any
   export default value
 }

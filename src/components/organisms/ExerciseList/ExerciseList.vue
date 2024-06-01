@@ -95,7 +95,11 @@ const openExerciseEditDialog = (index: number) => {
     v-model="exerciseEditDialog"
     :workout="workout"
     :index="exerciseIndex"
-    @time="(time: number) => { if (workout?.time) workout.time = time }"
+    @time="
+      (time: number) => {
+        if (workout?.time) workout.time = time
+      }
+    "
     @index="(index: number) => (exerciseIndex = index)"
     @show="exerciseEditDialog = !exerciseEditDialog"
   />

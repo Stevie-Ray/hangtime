@@ -128,36 +128,38 @@ export const useWorkouts = defineStore('workouts', {
      * Get workout Id
      * @return Object
      */
-    getWorkoutById: (state) => (id: string | string[]): Workout => {
-      // eslint-disable-next-line no-shadow
-      let workout = state.workouts?.find((workout: Workout) => workout.id === id)
-      if (!workout)
+    getWorkoutById:
+      (state) =>
+      (id: string | string[]): Workout => {
         // eslint-disable-next-line no-shadow
-        workout = state.workoutsCommunity?.find((workout: Workout) => workout.id === id)
-      if (id === 'new') {
-        const authentication = useAuthentication()
-        const user = useUser()
-        workout = reactive({
-          name: i18n.global.t('New workout'),
-          description: '',
-          level: 1,
-          hangboard: user.getUserHangboard.id,
-          company: user.getUserHangboardCompany.id,
-          exercises: [],
-          time: 0,
-          share: false,
-          video: '',
-          subscribers: [authentication.user.id],
-          user: {
-            displayName: authentication.user.displayName,
-            grade: authentication.user.settings.grade,
-            id: authentication.user.id,
-            photoURL: authentication.user.photoURL
-          }
-        })
-      }
-      return workout
-    },
+        let workout = state.workouts?.find((workout: Workout) => workout.id === id)
+        if (!workout)
+          // eslint-disable-next-line no-shadow
+          workout = state.workoutsCommunity?.find((workout: Workout) => workout.id === id)
+        if (id === 'new') {
+          const authentication = useAuthentication()
+          const user = useUser()
+          workout = reactive({
+            name: i18n.global.t('New workout'),
+            description: '',
+            level: 1,
+            hangboard: user.getUserHangboard.id,
+            company: user.getUserHangboardCompany.id,
+            exercises: [],
+            time: 0,
+            share: false,
+            video: '',
+            subscribers: [authentication.user.id],
+            user: {
+              displayName: authentication.user.displayName,
+              grade: authentication.user.settings.grade,
+              id: authentication.user.id,
+              photoURL: authentication.user.photoURL
+            }
+          })
+        }
+        return workout
+      },
     /**
      * Get workouts for the currently selected hangboard
      */

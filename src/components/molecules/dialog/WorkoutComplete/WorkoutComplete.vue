@@ -74,7 +74,12 @@ const closeModal = () => {
         <v-toolbar-title>{{ t('Well done') }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn v-if="shareAPI !== undefined" icon="$exportVariant" color="text" @click="shareExternal"></v-btn>
+          <v-btn
+            v-if="shareAPI !== undefined"
+            icon="$exportVariant"
+            color="text"
+            @click="shareExternal"
+          ></v-btn>
           <v-btn icon="$close" color="text" @click="closeModal"></v-btn>
         </v-toolbar-items>
       </v-toolbar>

@@ -70,7 +70,7 @@ const exerciseEditTime = (timer: string, time: number) => {
   }
 }
 
-const exerciseByType = (typeId: 'arms'|'legs') =>
+const exerciseByType = (typeId: 'arms' | 'legs') =>
   // eslint-disable-next-line no-shadow
   exercises.filter((exercise) => exercise.type === typeId)
 
@@ -122,7 +122,8 @@ const weightLabel = computed(() => {
 })
 
 const rules = {
-  length: (length: number) => (v: string) => (v || '').length <= length || `Max ${length} characters`,
+  length: (length: number) => (v: string) =>
+    (v || '').length <= length || `Max ${length} characters`
 }
 </script>
 

@@ -118,11 +118,11 @@ const speak = (text: SpeechSynthesisUtterance) => {
 }
 
 const speakText = (text: string) => {
-  if (user.value?.settings?.speak && 'speechSynthesis' in window) {
+  if (user.value.settings.speak && 'speechSynthesis' in window) {
     let voiceList = window.speechSynthesis.getVoices()
-    if (user.value?.settings.locale) {
+    if (user.value.settings.locale) {
       voiceList = voiceList.filter((voice) => {
-        if (user.value?.settings?.locale) {
+        if (user.value.settings.locale) {
           return voice.lang.includes(user.value.settings.locale.substring(0, 2))
         }
         return voice.lang
@@ -132,13 +132,13 @@ const speakText = (text: string) => {
     }
     const utterance = new window.SpeechSynthesisUtterance()
     utterance.text = text
-    utterance.voice = voiceList[user.value?.settings?.voice]
+    utterance.voice = voiceList[user.value.settings.voice]
     speak(utterance)
   }
 }
 
 const playSound = (path: string, type: 'wav' | 'mp3') => {
-  if (user.value?.settings?.sound && audio) {
+  if (user.value.settings.sound && audio) {
     // workaround for iOS / Safari
     if (path) {
       audio.src = path
@@ -153,20 +153,20 @@ const playSound = (path: string, type: 'wav' | 'mp3') => {
 }
 const vibratePhone = () => {
   if ('vibrate' in navigator) {
-    if (user.value?.settings?.vibrate) navigator.vibrate([80, 40, 120])
+    if (user.value.settings?.vibrate) navigator.vibrate([80, 40, 120])
   }
 }
 
 const countDown = () => {
   // if (clock.value === 15) {
-  //   if (user.value?.settings?.speak) {
+  //   if (user.value.settings?.speak) {
   //     speakText(`${t('Get ready')}!`)
   //   } else {
   //     playSound(countSound, 'wav')
   //   }
   // }
   if (clock.value <= 3 && clock.value > 1) {
-    if (user.value?.settings?.speak) {
+    if (user.value.settings?.speak) {
       speakText(`${clock.value - 1}`)
     } else {
       playSound(countSound, 'wav')

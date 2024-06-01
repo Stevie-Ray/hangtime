@@ -23,9 +23,9 @@ function padTime(time: number) {
 }
 
 /**
- * 
- * @param item 
- * @returns 
+ *
+ * @param item
+ * @returns
  */
 export function time(item: number | undefined) {
   let hours
@@ -444,7 +444,7 @@ export function useExercises() {
  * @param dark
  * @return {string}
  */
-export function useRandomImage(dark:boolean = false) {
+export function useRandomImage(dark: boolean = false) {
   /* eslint-disable global-require */
   let images = []
   if (!dark) {

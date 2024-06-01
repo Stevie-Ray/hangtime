@@ -29,23 +29,10 @@ interface UserSettings {
   /** Firebase Cloud Messaging Token */
   token?: string
 }
-
-/**
- * Represents the workouts completed by a user.
- */
-interface UserWorkoutsCompleted {
-  /** Number of workouts done */
-  amount: number
-  /** Time spent working out in seconds */
-  time: number
-  /** Time spent on hangboard in seconds */
-  hold: number
-}
-
 /**
  * Represents a user profile.
  */
-interface User {
+export interface User {
   /** Display name of the user (nullable) */
   displayName: string | null
   /** URL to the user's profile photo (nullable) */
@@ -59,5 +46,12 @@ interface User {
   /** Set if the user has paid (optional) */
   subscribed?: boolean
   /** Set if the user has completed a workout (optional) */
-  completed?: UserWorkoutsCompleted
+  completed?: {
+    /** Number of workouts done */
+    amount: number
+    /** Time spent working out in seconds */
+    time: number
+    /** Time spent on hangboard in seconds */
+    hold: number
+  }
 }

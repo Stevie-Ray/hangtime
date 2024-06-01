@@ -1,4 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw, RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  RouteRecordRaw,
+  RouteLocationNormalized,
+  NavigationGuardNext
+} from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAuthentication } from '@/stores/authentication'
 
@@ -154,21 +160,23 @@ const router = createRouter({
   }
 })
 
-router.beforeEach( (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  // ✅ This will work because the router starts its navigation after
-  // the router is installed and pinia will be installed too
-  const { user } = storeToRefs(useAuthentication())
+router.beforeEach(
+  (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    // ✅ This will work because the router starts its navigation after
+    // the router is installed and pinia will be installed too
+    const { user } = storeToRefs(useAuthentication())
 
-  if (
-    !(to.meta && to.meta.public) &&
-    (user.value === null || user.value === undefined) &&
-    to.path !== '/iframe.html'
-  ) {
-    const path = user.value === null ? '/login' : '/check-login'
-    next(`${path}?redirectUrl=${to.path}`)
-  } else {
-    next()
+    if (
+      !(to.meta && to.meta.public) &&
+      (user.value === null || user.value === undefined) &&
+      to.path !== '/iframe.html'
+    ) {
+      const path = user.value === null ? '/login' : '/check-login'
+      next(`${path}?redirectUrl=${to.path}`)
+    } else {
+      next()
+    }
   }
-})
+)
 
 export default router

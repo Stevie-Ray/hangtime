@@ -106,9 +106,9 @@ const levels = [
 ]
 
 const difficultyById = (id: 1 | 2 | 3): string | undefined => {
-  const level = levels.find((level) => level.value === id);
-  return level ? level.name : undefined;
-};
+  const level = levels.find((level) => level.value === id)
+  return level ? level.name : undefined
+}
 
 useHead({
   title: 'Workouts',

@@ -39,10 +39,10 @@ const hangboardImage = computed(() => {
     : ''
 })
 
-const classHold = (hand: "left" | "right") =>
+const classHold = (hand: 'left' | 'right') =>
   props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand] + 1}` : null
 
-const toggleHold = (hand: "left" | "right", e: Event) => {
+const toggleHold = (hand: 'left' | 'right', e: Event) => {
   if (props.edit) {
     const hold = e.target.id
     const n = hold.startsWith('h')

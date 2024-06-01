@@ -16,7 +16,7 @@ const emit = defineEmits(['show'])
 const props = defineProps({
   workout: {
     type: Object as () => Workout
-  },
+  }
 })
 
 const workout = ref(props.workout)
@@ -47,10 +47,11 @@ const workoutSave = () => {
 const rules = {
   number: (v: any) => !isNaN(v) || 'NaN',
   required: (v: any) => !!v || 'This field is required',
-  length: (length: number) => (v: string) => (v || '').length <= length || `Max ${length} characters`,
+  length: (length: number) => (v: string) =>
+    (v || '').length <= length || `Max ${length} characters`,
   min: (min: number) => (v: number) => v >= min || `A minimum of ${min} is allowed`,
   max: (max: number) => (v: number) => v <= max || `A maximum of ${max} is allowed`
-};
+}
 </script>
 
 <template>
@@ -77,7 +78,7 @@ const rules = {
       </v-toolbar>
       <v-container>
         <v-row>
-          <v-col cols="12"  v-if="workout">
+          <v-col cols="12" v-if="workout">
             <v-label>{{ t('Name your workout and get going') }}.</v-label>
 
             <v-divider class="mb-4" thickness="0"></v-divider>

@@ -23,9 +23,9 @@ const voices = reactive([])
 const filterVoices = computed(() => {
   if (!voices) return []
 
-  if (user.value?.settings?.locale) {
+  if (user.value.settings.locale) {
     return voices.filter((voice) =>
-      voice.lang.includes(user.value?.settings?.locale.substring(0, 2))
+      voice.lang.includes(user.value.settings.locale?.substring(0, 2))
     )
   }
   return voices.filter((voice) => /^(en|EN|US)/.test(voice.lang))

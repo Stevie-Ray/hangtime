@@ -31,8 +31,9 @@ const router = useRouter()
 const ircra = new IRCRA()
 
 const rules = {
-  length: (length: number) => (v: string) => (v || '').length <= length || `Max ${length} characters`,
-  required: (v: any) => !!v || 'This field is required',
+  length: (length: number) => (v: string) =>
+    (v || '').length <= length || `Max ${length} characters`,
+  required: (v: any) => !!v || 'This field is required'
 }
 
 const grades = computed(() => ircra.get(user.value.settings?.scale).filter((item) => item))

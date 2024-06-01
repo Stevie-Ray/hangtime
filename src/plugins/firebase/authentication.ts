@@ -2,7 +2,7 @@ import { onAuthStateChanged, getAuth, browserPopupRedirectResolver } from 'fireb
 // import { default as app } from '@/plugins/firebase'
 
 import { useAuthentication } from '@/stores/authentication'
-import { User as FirebaseUser } from "firebase/auth";
+import { User as FirebaseUser } from 'firebase/auth'
 
 const { login, logout } = useAuthentication()
 const auth = getAuth()
@@ -12,9 +12,9 @@ const auth = getAuth()
 if (navigator.userAgent.indexOf('moto g power') > -1) {
   Object.defineProperty(browserPopupRedirectResolver, '_shouldInitProactively', {
     get() {
-      return false;
+      return false
     }
-  });
+  })
 }
 
 onAuthStateChanged(

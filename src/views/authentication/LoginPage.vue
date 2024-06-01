@@ -125,7 +125,8 @@ const usps = [
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 const rules = {
-  length: (length: number) => (v: string) => (v || '').length <= length || `Max ${length} characters`,
+  length: (length: number) => (v: string) =>
+    (v || '').length <= length || `Max ${length} characters`,
   required: (v: any) => !!v || 'This field is required',
   email: (v: string) =>
     !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',

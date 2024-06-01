@@ -31,7 +31,9 @@ const router = useRouter()
 
 const getCompany = computed(() => getCompanyByUrlKey(route.params.id.toString()))
 
-const sortedHangboards = getCompany.value?.hangboards.sort((a: Hangboard, b: Hangboard) => a.name.localeCompare(b.name))
+const sortedHangboards = getCompany.value?.hangboards.sort((a: Hangboard, b: Hangboard) =>
+  a.name.localeCompare(b.name)
+)
 
 const loginButton = ref(true)
 

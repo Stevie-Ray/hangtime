@@ -78,7 +78,7 @@ const selected = reactive({
 const getHangboard = computed(() => getHangboardByIds(selected.company, selected.hangboard))
 
 const updateSelected = () => {
-  const exists = user.value?.settings.hangboards.some(
+  const exists = user.value.settings.hangboards.some(
     (item) => item.company === selected.company && item.hangboard === selected.hangboard
   )
   if (!exists) {
@@ -87,15 +87,15 @@ const updateSelected = () => {
       hangboard: getHangboardNameByIds(selected.company, selected.hangboard)
     })
     // add the newly selected board and set it
-    if (user.value){
+    if (user.value) {
       user.value.settings.hangboards.push(selected)
-    user.value.settings.selected = user.value.settings.hangboards.length - 1
+      user.value.settings.selected = user.value.settings.hangboards.length - 1
     }
   }
 }
 
 const finishWalkthrough = (addWorkout: boolean) => {
-  if (user.value && networkOnLine) {
+  if (networkOnLine) {
     user.value.settings.walkthrough = true
     if (getHangboard.value?.holds !== 0) {
       updateSelected()
@@ -121,7 +121,7 @@ const settingsLocale = computed({
     return i18n.locale
   },
   set(value) {
-    if (user.value){
+    if (user.value) {
       user.value.settings.locale = value
     }
     loadLanguageAsync(value)
@@ -139,7 +139,7 @@ const settingsGrade = computed({
   },
   set(value) {
     const ircraGrade = ircra.convert(user?.value?.settings?.scale, value).to('ircra').ircra
-    if (user.value){
+    if (user.value) {
       user.value.settings.grade = ircraGrade
     }
   }

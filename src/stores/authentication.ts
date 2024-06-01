@@ -2,12 +2,11 @@ import { defineStore } from 'pinia'
 import { ref, Ref } from 'vue'
 import { loadLanguageAsync } from '@/plugins/i18n'
 import router from '@/router'
-import { User as FirebaseUser } from "firebase/auth"
-
+import { User as FirebaseUser } from 'firebase/auth'
 
 export const useAuthentication = defineStore('authentication', () => {
-  const user: Ref<User | null> = ref(null);
-  const error: Ref<string | null> = ref(null);
+  const user: Ref<User | null> = ref(null)
+  const error: Ref<string | null> = ref(null)
 
   /**
    * Create new user from firebase auth user infos
@@ -79,16 +78,16 @@ export const useAuthentication = defineStore('authentication', () => {
       }
     } catch (e: unknown) {
       if (e instanceof Error) {
-        error.value = e.message;
+        error.value = e.message
         if ((e as any).code?.toString() === 'resource-exhausted') {
-          error.value = 'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.';
+          error.value = 'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.'
         }
         // eslint-disable-next-line no-console
-        console.error(e);
+        console.error(e)
       } else {
-        error.value = 'An unknown error occurred';
+        error.value = 'An unknown error occurred'
         // eslint-disable-next-line no-console
-        console.error('An unknown error occurred', e);
+        console.error('An unknown error occurred', e)
       }
     }
   }

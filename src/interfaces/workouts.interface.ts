@@ -3,39 +3,39 @@
  */
 export interface Exercise {
   /** Number representing the exercise. */
-  exercise: number;
+  exercise: number
   /** Number representing the grip used in the exercise. */
-  grip: number;
+  grip: number
   /** Difficulty level of the exercise. */
-  level: number;
+  level: number
   /** Number of repetitions for the left side. */
-  left: number | null;
+  left: number | null
   /** Number of repetitions for the right side. */
-  right: number | null;
+  right: number | null
   /** Array with finger indexes */
-  leftHand?: Array<any>;
+  leftHand?: Array<any>
   /** Array with finger indexes */
-  rightHand?: Array<any>; 
+  rightHand?: Array<any>
   /** Rotate */
-  rotate?: number;
+  rotate?: number
   /** Pause duration between repetitions. */
-  pause: number;
+  pause: number
   /** Duration of the hold. */
-  hold: number;
+  hold: number
   /** Number of pull-ups performed during the exercise. */
-  pullups: number;
+  pullups: number
   /** Number of repetitions. */
-  repeat: number;
+  repeat: number
   /** Rest duration between sets. */
-  rest: number;
+  rest: number
   /** Additional weight used in the exercise (if any). */
-  weight: number;
+  weight: number
   /** Optional: Duration of the exercise in seconds. */
-  time?: number;
+  time?: number
   /** Optional: Indicates if it's the maximum effort exercise. */
-  max?: boolean;
+  max?: boolean
   /** Notes or additional information about the exercise. */
-  notes: string;
+  notes: string
 }
 
 /**
@@ -43,40 +43,40 @@ export interface Exercise {
  */
 export interface Workout {
   /** Unique identifier for the workout (optional). */
-  id?: string;
+  id?: string
   /** Name of the workout. */
-  name: string;
+  name: string
   /** Description of the workout. */
-  description: string;
+  description: string
   /** Difficulty level of the workout. */
-  level: number;
+  level: number
   /** The hangboard used in the workout. */
-  hangboard: number;
+  hangboard: number
   /** Company that created the workout. */
-  company: number;
+  company: number
   /** List of exercises included in the workout. */
-  exercises: Exercise[];
+  exercises: Exercise[]
   /** Duration of the workout in minutes. */
-  time: number;
+  time: number
   /** Indicates if the workout is shared publicly. */
-  share: boolean;
+  share: boolean
   /** URL to a video demonstrating the workout. */
-  video: string;
+  video: string
   /** List of subscriber IDs who follow the workout. */
-  subscribers: Array<string>;
+  subscribers: Array<string>
   /** User information of the workout creator. */
   user: {
     /** Display name of the user. */
-    displayName: string;
+    displayName: string
     /** Climbing grade of the user. */
-    grade: number;
+    grade: number
     /** Unique identifier for the user. */
-    id: string;
+    id: string
     /** URL to the user's profile photo. */
-    photoURL: string;
-  };
+    photoURL: string
+  }
   /** Timestamp of the last update (optional). */
-  updateTimestamp?: any;
+  updateTimestamp?: any
 }
 
 /**
@@ -84,7 +84,7 @@ export interface Workout {
  */
 export interface Leaderboard {
   /** Rank of the leaderboard entry. */
-  rank: string;
+  rank: string
   /** List of entries in the leaderboard. */
-  leaderboard: Array<any>;
+  leaderboard: Array<any>
 }
