@@ -49,16 +49,16 @@ watch(
 )
 
 let timer: number | null = null
-const timerPaused: Ref<boolean|null> = ref(null)
-const clock: Ref<number> = ref(0);
+const timerPaused: Ref<boolean | null> = ref(null)
+const clock: Ref<number> = ref(0)
 const clockText: Ref<string> = ref(t('Press Play'))
 const currentExercise: Ref<number> = ref(0)
 const currentExerciseStep: Ref<number> = ref(0)
 const currentExerciseStepRepeat: Ref<number> = ref(0)
 
-const audio: HTMLAudioElement = new Audio();
-const noSleep: NoSleep = new NoSleep();
-const setupTime: number = 5;
+const audio: HTMLAudioElement = new Audio()
+const noSleep: NoSleep = new NoSleep()
+const setupTime: number = 5
 
 // complete
 const dialogWorkoutComplete: Ref<boolean> = ref(false)
@@ -79,19 +79,23 @@ onBeforeUnmount(() => {
 })
 
 const exercise = computed<Excercise | undefined>(() => {
-  if (workout.value?.exercises) return workout.value.exercises[currentExercise.value];
-  return undefined;
-});
-
-const exerciseNext = computed<Excercise | undefined>(() => {
-  if (workout.value?.exercises) return workout.value.exercises[currentExercise.value + 1];
-  return undefined;
+  if (workout.value?.exercises) return workout.value.exercises[currentExercise.value]
+  return undefined
 })
 
-const exerciseTime = computed(
-  () =>
-    (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) - exercise.value.rest
-)
+const exerciseNext = computed<Excercise | undefined>(() => {
+  if (workout.value?.exercises) return workout?.value?.exercises[currentExercise.value + 1]
+  return undefined
+})
+
+const exerciseTime = computed<number>(() => {
+  if (exercise.value)
+    return (
+      (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
+      exercise.value.rest
+    )
+  return 0
+})
 
 const requestWakeLock = () => {
   try {
@@ -99,7 +103,7 @@ const requestWakeLock = () => {
   } catch (err: unknown) {
     if (err instanceof Error) {
       // eslint-disable-next-line no-console
-      console.error(`${err.name}, ${err.message}`);
+      console.error(`${err.name}, ${err.message}`)
     }
   }
 }
@@ -118,7 +122,7 @@ const speakText = (text: string) => {
     let voiceList = window.speechSynthesis.getVoices()
     if (user.value?.settings.locale) {
       voiceList = voiceList.filter((voice) => {
-        if (user.value?.settings?.locale){
+        if (user.value?.settings?.locale) {
           return voice.lang.includes(user.value.settings.locale.substring(0, 2))
         }
         return voice.lang
@@ -133,7 +137,7 @@ const speakText = (text: string) => {
   }
 }
 
-const playSound = (path: string, type: 'wav'|'mp3') => {
+const playSound = (path: string, type: 'wav' | 'mp3') => {
   if (user.value?.settings?.sound && audio) {
     // workaround for iOS / Safari
     if (path) {
@@ -187,8 +191,8 @@ const pauseWorkout = () => {
 const stopTimer = () => {
   noSleep.disable()
   if (timer !== null) {
-    clearInterval(timer);
-    timer = null;
+    clearInterval(timer)
+    timer = null
   }
   timerPaused.value = !timerPaused.value
   if (device.value) {
@@ -206,14 +210,20 @@ const exercisePause = () => {
 }
 
 const exerciseHold = () => {
-  if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+  if (
+    exercise.value &&
+    (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+  ) {
     clockText.value = t('Go')
   } else {
     clockText.value = t('Hold')
   }
   if (
     clock.value === 1 &&
-    !(exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+    !(
+      exercise.value &&
+      (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+    )
   ) {
     vibratePhone()
     playSound(stopSound, 'wav')
@@ -228,7 +238,7 @@ const exerciseRest = () => {
   }
   countDown()
   if (clock.value === 1) {
-    if (currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
+    if (exercise.value && currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
       currentExerciseStepRepeat.value += 1
     }
   }
@@ -236,23 +246,23 @@ const exerciseRest = () => {
 
 const updateUserCompleted = () => {
   if (user.value) {
-  // check if completed object exists
-  if (!user?.value?.completed) {
-    user.value.completed = {
-      time: 0,
-      hold: 0,
-      amount: 0
+    // check if completed object exists
+    if (!user?.value?.completed) {
+      user.value.completed = {
+        time: 0,
+        hold: 0,
+        amount: 0
+      }
     }
-  }
-  // resolve bug
-  if (Number.isNaN(user.value.completed.time)) user.value.completed.time = 0
-  if (Number.isNaN(user.value.completed.hold)) user.value.completed.hold = 0
-  if (Number.isNaN(user.value.completed.amount)) user.value.completed.amount = 0
-  // update values
-  user.value.completed.time += workoutCompleteTimeTotal.value
-  user.value.completed.hold += workoutCompleteTimeHanging.value
-  user.value.completed.amount += 1
-  updateUser()
+    // resolve bug
+    if (Number.isNaN(user.value.completed.time)) user.value.completed.time = 0
+    if (Number.isNaN(user.value.completed.hold)) user.value.completed.hold = 0
+    if (Number.isNaN(user.value.completed.amount)) user.value.completed.amount = 0
+    // update values
+    user.value.completed.time += workoutCompleteTimeTotal.value
+    user.value.completed.hold += workoutCompleteTimeHanging.value
+    user.value.completed.amount += 1
+    updateUser()
   }
 }
 
@@ -279,13 +289,13 @@ const exerciseDone = () => {
   stopTimer()
 }
 
-const hasExercise = (type: 'prev'|'next') => {
+const hasExercise = (type: 'prev' | 'next') => {
   const setupTimers = () => {
     nextTick(() => {
       if (currentExercise.value === 0) {
         clock.value = 0
       }
-      if (currentExercise.value !== 0) {
+      if (currentExercise.value !== 0 && exercise.value) {
         clock.value = exercise.value.pause - 1
       }
       currentExerciseStep.value = 0
@@ -298,7 +308,7 @@ const hasExercise = (type: 'prev'|'next') => {
   if (type === 'next') {
     // if there is another exercise
     // eslint-disable-next-line no-unsafe-optional-chaining
-    if (currentExercise.value !== workout?.value?.exercises.length - 1) {
+    if (workout?.value?.exercises && currentExercise.value !== workout.value.exercises.length - 1) {
       currentExercise.value += 1
       setupTimers()
     }
@@ -330,8 +340,8 @@ const skipRest = () => {
 const disableMaxHold = () => {
   return (
     clockText.value !== t('Go') ||
-    exercise.value.max === false ||
-    (exercise.value.exercise && exercise.value.exercise === 0)
+    exercise.value?.max === false ||
+    (exercise.value?.exercise && exercise.value.exercise === 0)
   )
 }
 const maxHold = () => {
@@ -340,7 +350,7 @@ const maxHold = () => {
   // HOLD
   if (currentExerciseStep.value === 1) {
     // check if exercise has to repeat
-    if (exercise.value.repeat > 0) {
+    if (exercise.value && exercise.value.repeat > 0) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
       if (device.value) {
@@ -351,7 +361,7 @@ const maxHold = () => {
   }
   // REPEAT
   if (currentExerciseStep.value === 3) {
-    if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
+    if (exercise.value && currentExerciseStepRepeat.value !== exercise.value.repeat) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
       if (device.value) {
@@ -378,12 +388,17 @@ const exerciseSteps = () => {
         break
       }
       skip.value = false
-      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+      if (
+        exercise.value &&
+        (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+      ) {
         clock.value = 0
       } else {
-        clock.value = exercise.value.hold - 1
+        if (exercise.value) {
+          clock.value = exercise.value.hold - 1
+        }
       }
-      if (device.value) {
+      if (device.value && exercise.value) {
         stream(device.value, (exercise.value.hold - 1) * 1000)
       }
       currentExerciseStep.value = 1
@@ -393,7 +408,10 @@ const exerciseSteps = () => {
     case 1:
       workoutCompleteTimeTotal.value += 1
       workoutCompleteTimeHanging.value += 1
-      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+      if (
+        exercise.value &&
+        (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+      ) {
         exerciseHold()
         clock.value += 1
         break
@@ -403,7 +421,7 @@ const exerciseSteps = () => {
         break
       }
       // check if exercise has to repeat
-      if (exercise.value.repeat > 0) {
+      if (exercise.value && exercise.value.repeat > 0) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
         if (device.value) {
@@ -427,13 +445,15 @@ const exerciseSteps = () => {
       }
       skip.value = false
       // repeat exercise
-      if (exercise.value.repeat > 0) {
+      if (exercise.value && exercise.value.repeat > 0) {
         if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
           clock.value = 0
         } else {
-          clock.value = exercise.value.hold - 1
+          if (exercise.value) {
+            clock.value = exercise.value.hold - 1
+          }
         }
-        if (device.value) {
+        if (device.value && exercise.value) {
           stream(device.value, (exercise.value.hold - 1) * 1000)
         }
         currentExerciseStep.value = 3
@@ -449,7 +469,10 @@ const exerciseSteps = () => {
     case 3:
       workoutCompleteTimeTotal.value += 1
       workoutCompleteTimeHanging.value += 1
-      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+      if (
+        exercise.value &&
+        (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+      ) {
         clock.value += 1
         break
       }
@@ -458,7 +481,7 @@ const exerciseSteps = () => {
         clock.value -= 1
         break
       }
-      if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
+      if (exercise.value && currentExerciseStepRepeat.value !== exercise.value.repeat) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
         if (device.value) {
@@ -488,7 +511,10 @@ const startWorkout = async () => {
   timer = window.setInterval(() => {
     if (!timerPaused.value) exerciseSteps()
   }, 1000)
-  if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+  if (
+    exercise.value &&
+    (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+  ) {
     clock.value -= 1
   } else {
     clock.value += 1
@@ -507,16 +533,21 @@ const setupWorkout = async () => {
       clock.value -= 1
       if (clock.value === 0) {
         if (timer !== null) {
-          clearInterval(timer);
-          timer = null;
+          clearInterval(timer)
+          timer = null
         }
         // max exercise or movement
-        if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+        if (
+          exercise.value &&
+          (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+        ) {
           clock.value = 0
         } else {
-          clock.value = exercise.value.hold - 1
-          if (device.value) {
-            stream(device.value, (exercise.value.hold - 1) * 1000)
+          if (exercise.value) {
+            clock.value = exercise.value.hold - 1
+            if (device.value) {
+              stream(device.value, (exercise.value.hold - 1) * 1000)
+            }
           }
         }
         // start when setup is done
@@ -684,7 +715,7 @@ onMounted(() => {
                 <div class="text-caption text-uppercase">
                   {{ t('Repeat') }}
                 </div>
-                <div class="text-h6">
+                <div v-if="exercise" class="text-h6">
                   {{ currentExerciseStepRepeat + 1 }}/{{ exercise.repeat + 1 }}
                 </div>
               </v-col>
@@ -716,7 +747,7 @@ onMounted(() => {
               <v-col cols="12">
                 <div class="d-flex align-center justify-space-between w-100 ga-1 mb-2">
                   <v-btn
-                    :disabled="disableMaxHold()"
+                    :disabled="!!disableMaxHold()"
                     :class="{ pulse: !disableMaxHold() }"
                     icon="$timerCheckOutline"
                     size="x-large"
