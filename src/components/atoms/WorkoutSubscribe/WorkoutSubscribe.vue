@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useWorkouts } from '@/stores/workouts'
 import { useAuthentication } from '@/stores/authentication'
 import { useApp } from '@/stores/app'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { workouts } = storeToRefs(useWorkouts())
 
@@ -15,7 +16,7 @@ const { user } = storeToRefs(useAuthentication())
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   size: {
     type: String,

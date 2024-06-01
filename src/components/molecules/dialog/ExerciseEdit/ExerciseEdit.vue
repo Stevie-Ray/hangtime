@@ -7,6 +7,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import { useAuthentication } from '@/stores/authentication'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { user } = storeToRefs(useAuthentication())
 
@@ -20,7 +21,7 @@ const repType = ref('original')
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   index: {
     type: Number,

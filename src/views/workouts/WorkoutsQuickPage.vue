@@ -2,16 +2,17 @@
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { reactive } from 'vue'
+import { reactive} from 'vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer.vue'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
 const router = useRouter()
 
-const workout = reactive({
+const workout: Workout = reactive({
   name: 'Quick workout',
   description: 'Just a simple timer go get you going',
   exercises: [

@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
 import { useUser } from '@/stores/user'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
@@ -15,7 +16,7 @@ const emit = defineEmits(['save'])
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   edit: {
     type: Boolean,

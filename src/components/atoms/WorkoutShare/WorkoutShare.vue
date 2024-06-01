@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const router = useRouter()
 
@@ -13,7 +14,7 @@ const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   size: {
     type: String,

@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ref, watch } from 'vue'
 import { useWorkouts } from '@/stores/workouts'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { createUserWorkout, updateUserWorkout } = useWorkouts()
 
@@ -14,8 +15,8 @@ const emit = defineEmits(['show'])
 
 const props = defineProps({
   workout: {
-    type: Object
-  }
+    type: Object as () => Workout
+  },
 })
 
 const workout = ref(props.workout)

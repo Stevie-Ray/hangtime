@@ -12,6 +12,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
+import { Workout, Excercise } from '@/interfaces/workouts.interface'
 import { time } from '@/helpers'
 
 import countSound from '@/assets/sound/count.wav'
@@ -34,7 +35,7 @@ const { createUserActivity } = useActivities()
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   }
 })
 
@@ -77,14 +78,14 @@ onBeforeUnmount(() => {
   if (window.speechSynthesis) window.speechSynthesis.cancel()
 })
 
-const exercise = computed(() => {
-  if (workout?.value?.exercises) return workout?.value?.exercises[currentExercise.value]
-  return {}
-})
+const exercise = computed<Excercise | undefined>(() => {
+  if (workout.value?.exercises) return workout.value.exercises[currentExercise.value];
+  return undefined;
+});
 
-const exerciseNext = computed(() => {
-  if (workout?.value?.exercises) return workout?.value?.exercises[currentExercise.value + 1]
-  return {}
+const exerciseNext = computed<Excercise | undefined>(() => {
+  if (workout.value?.exercises) return workout.value.exercises[currentExercise.value + 1];
+  return undefined;
 })
 
 const exerciseTime = computed(
