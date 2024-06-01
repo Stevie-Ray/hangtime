@@ -62,7 +62,7 @@ const resetHands = () => {
         <template #append>
           <v-list-item-action end>
             <v-btn
-              v-if="exercise.leftHand?.length || exercise.rightHand?.length"
+              v-if="exercise?.leftHand?.length || exercise?.rightHand?.length"
               icon="$undo"
               color="text"
               variant="text"
@@ -80,7 +80,7 @@ const resetHands = () => {
       <div class="hand__left">
         <inline-svg
           @click="(e: Event) => toggleFinger('leftHand', 'left', e.target.id)"
-          v-if="exercise.left !== null"
+          v-if="exercise?.left !== null"
           :class="[getHandClass('leftHand'), { large: edit }]"
           :src="imgIconHang"
           class="w-100"
@@ -88,7 +88,7 @@ const resetHands = () => {
       </div>
       <div class="hand__right">
         <inline-svg
-          @click="(e) => toggleFinger('rightHand', 'right', e.target.id)"
+          @click="(e: Event) => toggleFinger('rightHand', 'right', e.target.id)"
           v-if="exercise?.right !== null"
           :class="[getHandClass('rightHand'), { large: edit }]"
           :src="imgIconHang"

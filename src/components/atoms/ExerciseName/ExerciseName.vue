@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useExercises, useGrip } from '@/helpers'
+import { Exercise } from '@/interfaces/workouts.interface';
 
 const grip = useGrip()
 const exercises = useExercises()
@@ -7,7 +8,7 @@ const exercises = useExercises()
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   exercise: {
-    type: Object
+    type: Object as () => Exercise
   },
   hideRepeat: {
     type: Boolean,
@@ -29,7 +30,7 @@ const props = defineProps({
         {{ grip[exercise.grip].name }}
       </span>
       <!-- fallback-->
-      <span v-else-if="grip[exercise.exercise] !== 0">{{ grip[exercise.exercise].name }}</span>
+      <span v-else-if="grip[exercise.exercise].id !== 0">{{ grip[exercise.exercise].name }}</span>
     </span>
     <span v-else-if="exercise.grip !== 0">
       <span v-if="exercise.grip"> {{ grip[exercise.grip].short }}&nbsp;</span>

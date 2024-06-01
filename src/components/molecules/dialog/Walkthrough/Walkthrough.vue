@@ -78,7 +78,7 @@ const selected = reactive({
 const getHangboard = computed(() => getHangboardByIds(selected.company, selected.hangboard))
 
 const updateSelected = () => {
-  const exists = user.value.settings.hangboards.some(
+  const exists = user.value?.settings.hangboards.some(
     (item) => item.company === selected.company && item.hangboard === selected.hangboard
   )
   if (!exists) {
@@ -87,12 +87,14 @@ const updateSelected = () => {
       hangboard: getHangboardNameByIds(selected.company, selected.hangboard)
     })
     // add the newly selected board and set it
-    user.value.settings.hangboards.push(selected)
+    if (user.value){
+      user.value.settings.hangboards.push(selected)
     user.value.settings.selected = user.value.settings.hangboards.length - 1
+    }
   }
 }
 
-const finishWalkthrough = (addWorkout) => {
+const finishWalkthrough = (addWorkout: boolean) => {
   if (user.value && networkOnLine) {
     user.value.settings.walkthrough = true
     if (getHangboard.value?.holds !== 0) {
@@ -108,7 +110,7 @@ const finishWalkthrough = (addWorkout) => {
   }
 }
 
-const grades = computed(() => ircra.get(user?.value.settings?.scale).filter((item) => item))
+const grades = computed(() => ircra.get(user?.value?.settings?.scale).filter((item) => item))
 
 const settingsLocale = computed({
   get() {
@@ -119,7 +121,9 @@ const settingsLocale = computed({
     return i18n.locale
   },
   set(value) {
-    user.value.settings.locale = value
+    if (user.value){
+      user.value.settings.locale = value
+    }
     loadLanguageAsync(value)
   }
 })
@@ -135,7 +139,9 @@ const settingsGrade = computed({
   },
   set(value) {
     const ircraGrade = ircra.convert(user?.value?.settings?.scale, value).to('ircra').ircra
-    user.value.settings.grade = ircraGrade
+    if (user.value){
+      user.value.settings.grade = ircraGrade
+    }
   }
 })
 </script>
@@ -257,7 +263,7 @@ const settingsGrade = computed({
                 >
                   {{ $t('Add a workout') }}
                 </v-btn>
-                <v-btn text @click="finishWalkthrough(false)">
+                <v-btn variant="text" @click="finishWalkthrough(false)">
                   {{ $t('Close') }}
                 </v-btn>
               </v-card-actions>
