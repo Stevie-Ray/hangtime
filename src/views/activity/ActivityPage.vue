@@ -11,11 +11,11 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
 
 import { useActivities } from '@/stores/activities'
-
 import { useAuthentication } from '@/stores/authentication'
 
-const { activities } = storeToRefs(useActivities())
+import { Activity } from '@/interfaces/activities.interface'
 
+const { activities } = storeToRefs(useActivities())
 const { user } = storeToRefs(useAuthentication())
 
 const { t } = useI18n()
@@ -28,47 +28,36 @@ const levels = [
   { name: t('hard'), value: 3 }
 ]
 
-const difficultyById = (id) => levels.find((level) => level.value === id).name
+const difficultyById = (id: number): string | undefined =>
+  levels.find((level) => level.value === id)?.name
 
-const activitiesByDay = computed(() =>
-  activities.value.reduce((days, activity) => {
-    // Get the date of the current card as a string in the format "YYYY-MM-DD"
-    const dateString = activity.start_date_local?.toLocaleDateString(
-      user?.value?.settings?.locale ? user.value.settings.locale : 'en-US'
-    )
-    // Check if we have already added a sub-array for the current date
+const activitiesByDay = computed(() => {
+  return activities.value.reduce((days: Record<string, Activity[]>, activity: Activity) => {
+    const dateString =
+      activity.start_date_local?.toLocaleDateString(user?.value?.settings?.locale ?? 'en-US') || ''
     if (!days[dateString]) {
-      // If not, create a new sub-array for the current date
       days[dateString] = []
     }
-    // Add the current card to the sub-array for its date
     days[dateString].push(activity)
-    // Return the modified days object
     return days
   }, {})
-)
+})
 
-const activityDate = (date) => {
+const activityDate = (date: string): string => {
   const timestamp = Date.parse(date)
-  // eslint-disable-next-line no-restricted-globals
-  if (isNaN(timestamp) === false) {
+  if (!isNaN(timestamp)) {
     return new Date(timestamp).toLocaleDateString('default')
   }
   return date
 }
-const activityUrl = (activity) => {
-  if (
-    activity.company !== null &&
-    activity.company !== '' &&
-    activity.hangboard !== null &&
-    activity.hangboard !== '' &&
-    activity.workout !== null &&
-    activity.workout !== ''
-  ) {
+
+const activityUrl = (activity: Activity): string => {
+  if (activity.company && activity.hangboard && activity.workout) {
     return `/workouts/${activity.company}/${activity.hangboard}/${activity.workout}`
   }
   return ''
 }
+
 useHead({
   title: 'Activity',
   meta: [{ name: 'description', content: '' }]

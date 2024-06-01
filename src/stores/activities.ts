@@ -1,10 +1,11 @@
 import { defineStore, storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import UserActivitiesDB from '@/plugins/firebase/user-activities-db'
 import { useAuthentication } from '@/stores/authentication'
+import { Activity } from '@/interfaces/activities.interface'
 
 export const useActivities = defineStore('activities', () => {
-  const activities = ref([])
+  const activities: Ref<Activity[]> = ref([]);
   // action
   /**
    * Fetch user activity
@@ -13,7 +14,7 @@ export const useActivities = defineStore('activities', () => {
   async function fetchUserActivity() {
     if (activities.value.length) return
     const { user } = storeToRefs(useAuthentication())
-    const userActivitiesDb = new UserActivitiesDB(user.value.id)
+    const userActivitiesDb = new UserActivitiesDB(user.value?.id)
     activities.value = await userActivitiesDb.readAll(null, 'createTimestamp', 20)
   }
   /**
@@ -21,9 +22,9 @@ export const useActivities = defineStore('activities', () => {
    * @param workout
    * @return {Promise<void>}
    */
-  async function createUserActivity(activity) {
+  async function createUserActivity(activity: Activity) {
     const { user } = storeToRefs(useAuthentication())
-    const userActivitiesDb = new UserActivitiesDB(user.value.id)
+    const userActivitiesDb = new UserActivitiesDB(user.value?.id)
 
     const createdActivity = await userActivitiesDb.create(activity)
 
