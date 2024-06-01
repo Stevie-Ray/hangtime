@@ -12,6 +12,10 @@ export interface Exercise {
   left: number | null;
   /** Number of repetitions for the right side. */
   right: number | null;
+  /** Array with finger indexes */
+  leftHand?: Array<any>;
+  /** Array with finger indexes */
+  rightHand?: Array<any>; 
   /** Rotate */
   rotate?: number;
   /** Pause duration between repetitions. */

@@ -7,7 +7,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import { useAuthentication } from '@/stores/authentication'
-import { Workout } from '@/interfaces/workouts.interface'
+import { Workout, Exercise } from '@/interfaces/workouts.interface'
 
 const { user } = storeToRefs(useAuthentication())
 
@@ -50,7 +50,7 @@ const emit = defineEmits(['time', 'show'])
 
 const dialog = ref(true)
 
-const exercise = computed(() => workout.value.exercises[index.value])
+const exercise = computed<Exercise>(() => workout.value.exercises[index.value])
 
 // eslint-disable-next-line no-shadow
 const exerciseEditTime = (timer, time) => {

@@ -5,6 +5,7 @@ import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import { time } from '@/helpers'
+import { Exercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
@@ -17,7 +18,7 @@ const props = defineProps({
     default: 'elevated'
   },
   exercise: {
-    type: Object
+    type: Object as () => Exercise
   },
   hangboard: {
     type: Object
