@@ -3,27 +3,41 @@
  */
 interface UserSettings {
   /** Index of the selected hangboard */
-  selected: number;
+  selected: number
   /** List of hangboards, each defined by a company and hangboard number */
-  hangboards: Array<{ company: number; hangboard: number }>;
+  hangboards: Array<{ company: number; hangboard: number }>
   /** Scale used for measurement (e.g., metric or imperial) */
-  scale: string;
+  scale: string
   /** Climbing grade of the user */
-  grade: number;
+  grade: number
   /** Indicates if sound is enabled */
-  sound: boolean;
+  sound: boolean
   /** Indicates if voice guidance is enabled */
-  speak: boolean;
+  speak: boolean
   /** Voice profile number for voice guidance */
-  voice: number;
+  voice: number
   /** Indicates if vibration feedback is enabled */
-  vibrate: boolean;
+  vibrate: boolean
   /** Indicates if the walkthrough/tutorial is enabled */
-  walkthrough: boolean;
+  walkthrough: boolean
+  /** Theme ID for the app (optional) */
+  theme?: number
   /** User's locale/language setting (optional) */
-  locale?: string;
+  locale?: string
   /** User's weight (optional) */
-  weight?: number;
+  weight?: number
+}
+
+/**
+ * Represents the workouts completed by a user.
+ */
+interface UserWorkoutsCompleted {
+  /** Number of workouts done */
+  amount: number
+  /** Time spent working out in seconds */
+  time: number
+  /** Time spent on hangboard in seconds */
+  hold: number
 }
 
 /**
@@ -31,13 +45,17 @@ interface UserSettings {
  */
 interface User {
   /** Display name of the user (nullable) */
-  displayName: string | null;
+  displayName: string | null
   /** URL to the user's profile photo (nullable) */
-  photoURL: string | null;
+  photoURL: string | null
   /** Email address of the user (nullable) */
-  email: string | null;
+  email: string | null
   /** Settings configured by the user */
-  settings: UserSettings;
+  settings: UserSettings
   /** Unique identifier for the user (optional) */
-  id?: string;
+  id?: string
+  /** Set if the user has paid (optional) */
+  subscribed?: boolean
+  /** Set if the user has completed a workout (optional) */
+  completed?: UserWorkoutsCompleted
 }

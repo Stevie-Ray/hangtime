@@ -47,7 +47,7 @@ watch(
   }
 )
 
-let timer: NodeJS.Timeout | null = null
+let timer: number | null = null
 const timerPaused: Ref<boolean|null> = ref(null)
 const clock: Ref<number> = ref(0);
 const clockText: Ref<string> = ref(t('Press Play'))
@@ -95,9 +95,11 @@ const exerciseTime = computed(
 const requestWakeLock = () => {
   try {
     noSleep.enable()
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(`${err.name}, ${err.message}`)
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      // eslint-disable-next-line no-console
+      console.error(`${err.name}, ${err.message}`);
+    }
   }
 }
 
@@ -115,7 +117,10 @@ const speakText = (text: string) => {
     let voiceList = window.speechSynthesis.getVoices()
     if (user.value?.settings.locale) {
       voiceList = voiceList.filter((voice) => {
-        return voice.lang.includes(user.value?.settings?.locale.substring(0, 2))
+        if (user.value?.settings?.locale){
+          return voice.lang.includes(user.value.settings.locale.substring(0, 2))
+        }
+        return voice.lang
       })
     } else {
       voiceList = voiceList.filter((voice) => /^(en|EN|US)/.test(voice.lang))
@@ -134,7 +139,7 @@ const playSound = (path: string, type: 'wav'|'mp3') => {
       audio.src = path
     }
     if (type) {
-      audio.type = `audio/${type}`
+      // audio.type = `audio/${type}`
     }
     audio.addEventListener('canplaythrough', () => {
       audio.play()
@@ -180,7 +185,10 @@ const pauseWorkout = () => {
 
 const stopTimer = () => {
   noSleep.disable()
-  clearInterval(timer)
+  if (timer !== null) {
+    clearInterval(timer);
+    timer = null;
+  }
   timerPaused.value = !timerPaused.value
   if (device.value) {
     // disconnect(device.value)
@@ -226,7 +234,8 @@ const exerciseRest = () => {
 }
 
 const updateUserCompleted = () => {
-  // check if object exists
+  if (user.value) {
+  // check if completed object exists
   if (!user?.value?.completed) {
     user.value.completed = {
       time: 0,
@@ -243,6 +252,7 @@ const updateUserCompleted = () => {
   user.value.completed.hold += workoutCompleteTimeHanging.value
   user.value.completed.amount += 1
   updateUser()
+  }
 }
 
 const exerciseDone = () => {
@@ -474,7 +484,7 @@ const startWorkout = async () => {
   await requestWakeLock()
   // start with hold
   currentExerciseStep.value = 1
-  timer = setInterval(() => {
+  timer = window.setInterval(() => {
     if (!timerPaused.value) exerciseSteps()
   }, 1000)
   if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
@@ -490,12 +500,15 @@ const setupWorkout = async () => {
 
   // give the user some time to get ready
   clock.value = setupTime
-  timer = setInterval(() => {
+  timer = window.setInterval(() => {
     if (!timerPaused.value) {
       countDown()
       clock.value -= 1
       if (clock.value === 0) {
-        clearInterval(timer as NodeJS.Timeout)
+        if (timer !== null) {
+          clearInterval(timer);
+          timer = null;
+        }
         // max exercise or movement
         if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
           clock.value = 0
@@ -524,7 +537,7 @@ const startTimer = () => {
     }
     audio.autoplay = true
     audio.preload = 'auto'
-    audio.type = 'audio/wav'
+    // audio.type = 'audio/wav'
     audio.crossOrigin = 'anonymous'
     audio.src =
       'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA'
@@ -799,7 +812,8 @@ onMounted(() => {
     v-if="
       canSubscribePlayBilling &&
       !user?.subscribed &&
-      user?.completed?.time / 60 > (subscribeLimit / 4) * 3
+      user?.completed &&
+      user?.completed.time / 60 > (subscribeLimit / 4) * 3
     "
     v-model="dialogWorkoutSubscribe"
     :limit="subscribeLimit"

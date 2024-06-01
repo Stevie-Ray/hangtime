@@ -1,6 +1,4 @@
 import { onAuthStateChanged, getAuth, browserPopupRedirectResolver } from 'firebase/auth'
-
-// eslint-disable-next-line import/no-named-default
 // import { default as app } from '@/plugins/firebase'
 
 import { useAuthentication } from '@/stores/authentication'
@@ -12,11 +10,11 @@ const auth = getAuth()
 // https://github.com/firebase/firebase-js-sdk/issues/4946
 // https://github.com/GoogleChrome/lighthouse/blob/main/core/config/constants.js#L83
 if (navigator.userAgent.indexOf('moto g power') > -1) {
-  Object.defineProperty(browserPopupRedirectResolver.prototype, '_shouldInitProactively', {
+  Object.defineProperty(browserPopupRedirectResolver, '_shouldInitProactively', {
     get() {
-      return false
+      return false;
     }
-  })
+  });
 }
 
 onAuthStateChanged(

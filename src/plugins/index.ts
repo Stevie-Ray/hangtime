@@ -1,7 +1,7 @@
 /**
- * plugins/index.js
+ * plugins/index.ts
  *
- * Automatically included in `./src/main.js`
+ * Automatically included in `./src/main.ts`
  */
 
 // Plugins
@@ -25,6 +25,7 @@ export function registerPlugins(app: App): void {
       {
         appName: 'HangTime',
         config: { id: 'G-D2DR5GPWS3' },
+        // @ts-expect-error Missing in third party code
         deferScriptLoad: true,
         pageTrackerScreenviewEnabled: true
       },
