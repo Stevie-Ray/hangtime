@@ -55,6 +55,7 @@ const openExerciseEditDialog = (index: number) => {
 
 <template>
   <draggable
+    v-if="workout"
     v-model="workout.exercises"
     item-key="id"
     class="draggable"
@@ -69,8 +70,8 @@ const openExerciseEditDialog = (index: number) => {
       <exercise-card
         :exercise="element"
         :hangboard="{
-          hangboard: workout.hangboard,
-          company: workout.company
+          hangboard: workout?.hangboard,
+          company: workout?.company
         }"
         :index="index"
         :key="index"
@@ -94,8 +95,8 @@ const openExerciseEditDialog = (index: number) => {
     v-model="exerciseEditDialog"
     :workout="workout"
     :index="exerciseIndex"
-    @time="(time) => (workout.time = time)"
-    @index="(index) => (exerciseIndex = index)"
+    @time="(time: number) => { if (workout?.time) workout.time = time }"
+    @index="(index: number) => (exerciseIndex = index)"
     @show="exerciseEditDialog = !exerciseEditDialog"
   />
 </template>
