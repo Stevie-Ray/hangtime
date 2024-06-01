@@ -2,15 +2,16 @@
 import { computed } from 'vue'
 import InlineSvg from 'vue-inline-svg'
 import { useUser } from '@/stores/user'
+import { Exercise } from '@/interfaces/workouts.interface'
 
 const { getHangboardByIds } = useUser()
 
 const props = defineProps({
   exercise: {
-    type: Object
+    type: Object as () => Exercise
   },
   hangboard: {
-    type: Object,
+    type: Object as () => { hangboard: number; company: number },
     required: true
   },
   edit: {
@@ -38,10 +39,10 @@ const hangboardImage = computed(() => {
     : ''
 })
 
-const classHold = (hand) =>
+const classHold = (hand: "left" | "right") =>
   props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand] + 1}` : null
 
-const toggleHold = (hand, e) => {
+const toggleHold = (hand: "left" | "right", e: Event) => {
   if (props.edit) {
     const hold = e.target.id
     const n = hold.startsWith('h')
@@ -53,9 +54,9 @@ const toggleHold = (hand, e) => {
 }
 
 const nextImage = () => {
-  if (props.exercise.rotate === undefined) {
+  if (props.exercise?.rotate === undefined) {
     emit('rotate', 1)
-  } else if (props.exercise.rotate + 1 !== getHangboard.value.sides.length) {
+  } else if (props.exercise.rotate + 1 !== getHangboard.value?.sides?.length) {
     emit('rotate', props.exercise.rotate + 1)
   } else {
     emit('rotate', 0)
