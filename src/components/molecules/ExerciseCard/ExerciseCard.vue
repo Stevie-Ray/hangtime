@@ -14,7 +14,7 @@ const emit = defineEmits(['left', 'right', 'rotate'])
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   variant: {
-    type: String,
+    type: String as () => 'elevated' | 'flat' | 'text' | 'tonal' | 'outlined' | 'plain',
     default: 'elevated'
   },
   exercise: {
@@ -56,7 +56,7 @@ const props = defineProps({
 
     <v-card :variant="variant" class="mb-8">
       <v-card-title v-if="exercise" class="d-flex justify-space-between">
-        <div>
+        <div v-if="index">
           <v-chip class="mr-2" color="primary">{{ index + 1 }}.</v-chip>
         </div>
 

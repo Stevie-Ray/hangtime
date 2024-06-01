@@ -29,7 +29,7 @@ const props = defineProps({
       </v-expansion-panels>
     </div>
     <!-- fallback-->
-    <div v-else-if="exercise && grip[exercise.exercise] !== 0">
+    <div v-else-if="exercise && grip[exercise.exercise].id !== 0">
       <div class="mb-8">
         {{ grip[exercise.exercise].description }}
       </div>

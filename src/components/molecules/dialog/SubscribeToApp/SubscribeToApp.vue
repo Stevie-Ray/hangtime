@@ -39,8 +39,8 @@ const progressValue = computed(() => {
   let time = 60
   // eslint-disable-next-line no-unsafe-optional-chaining
   if (!user || user?.value?.subscribed) time = 0
-  const comletedTime = user?.value?.completed?.time ? user.value.completed.time : 0
-  const value = ((comletedTime / time) * 100) / props.limit
+  const completedTime = user?.value?.completed?.time ? user.value.completed.time : 0
+  const value = ((completedTime / time) * 100) / props.limit
   return value < 100 ? value : 100
 })
 
