@@ -53,20 +53,24 @@ const dialog = ref(true)
 const exercise = computed<Exercise>(() => workout.value.exercises[index.value])
 
 // eslint-disable-next-line no-shadow
-const exerciseEditTime = (timer, time) => {
+const exerciseEditTime = (timer: string, time: number) => {
   // set time of timer value
   exercise.value[timer] = time
   // remove old value
-  emit('time', workout.value.time - exercise.value.time)
+  if (workout.value?.time && exercise.value?.time) {
+    emit('time', workout.value.time - exercise.value.time)
+  }
   exercise.value.time =
     (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
     exercise.value.rest +
     exercise.value.pause
   // add new value
-  emit('time', workout.value.time + exercise.value.time)
+  if (workout.value?.time && exercise.value?.time) {
+    emit('time', workout.value.time + exercise.value.time)
+  }
 }
 
-const exerciseByType = (typeId) =>
+const exerciseByType = (typeId: 'arms'|'legs') =>
   // eslint-disable-next-line no-shadow
   exercises.filter((exercise) => exercise.type === typeId)
 
@@ -93,16 +97,16 @@ const exerciseMovement = computed({
 })
 
 const exerciseRemove = () => {
-  workout.value.exercises.splice(index.value, 1)
+  workout.value?.exercises.splice(index.value, 1)
   index.value = 0
   emit('show', false)
 }
 
 const exerciseCopy = () => {
-  workout.value.exercises.splice(
+  workout.value?.exercises.splice(
     index.value,
     0,
-    structuredClone(toRaw(workout.value.exercises[index.value]))
+    structuredClone(toRaw(workout.value?.exercises[index.value]))
   )
   index.value = 0
   emit('show', false)
@@ -110,9 +114,9 @@ const exerciseCopy = () => {
 
 // workout - weight
 const weightLabel = computed(() => {
-  if (user?.value?.weight && exercise.value.weight !== 0) {
-    return `Your weight: ${user.value.weight}kg.
-     Training weight: ${user.value.weight + exercise.value.weight}kg.`
+  if (user?.value?.settings?.weight && exercise.value.weight !== 0) {
+    return `Your weight: ${user.value.settings.weight}kg.
+     Training weight: ${user.value.settings.weight + exercise.value.weight}kg.`
   }
   return 'Adjust using kettle/dumb-bells or pulley system'
 })
@@ -142,6 +146,7 @@ const rules = {
           <v-col cols="12">
             <v-expansion-panels variant="accordion">
               <exercise-card
+                v-if="workout"
                 :exercise="exercise"
                 :hangboard="{
                   hangboard: workout.hangboard,

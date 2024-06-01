@@ -27,9 +27,10 @@ const addHangboard = () => {
     hangboard: getHangboardNameByIds(company, hangboard)
   })
   // add the newly selected board and set it
-  user.value.settings.hangboards.push({ company, hangboard })
-  user.value.settings.selected = user.value.settings.hangboards.length - 1
-
+  if (user.value) {
+    user.value.settings.hangboards.push({ company, hangboard })
+    user.value.settings.selected = user.value.settings.hangboards.length - 1
+  }
   emit('show', false)
 }
 </script>

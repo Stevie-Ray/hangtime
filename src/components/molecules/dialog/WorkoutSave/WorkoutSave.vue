@@ -31,7 +31,7 @@ watch(
 const dialog = ref(true)
 
 const workoutSave = () => {
-  if (!workout.value.id) {
+  if (!workout.value?.id) {
     // new workout
     createUserWorkout(workout.value)
   } else {
@@ -45,12 +45,12 @@ const workoutSave = () => {
 }
 
 const rules = {
-  number: (v) => !v.isNaN || 'NaN',
-  required: (v) => !!v || 'This field is required',
-  length: (length: number) => (v) => (v || '').length <= length || `Max ${length} characters`,
-  min: (min: number) => (v) => v >= min || `A minimun of  ${min} is allowed`,
-  max: (max: number) => (v) => v <= max || `A maximum of  ${max} is allowed`
-}
+  number: (v: any) => !isNaN(v) || 'NaN',
+  required: (v: any) => !!v || 'This field is required',
+  length: (length: number) => (v: string) => (v || '').length <= length || `Max ${length} characters`,
+  min: (min: number) => (v: number) => v >= min || `A minimum of ${min} is allowed`,
+  max: (max: number) => (v: number) => v <= max || `A maximum of ${max} is allowed`
+};
 </script>
 
 <template>
@@ -62,6 +62,7 @@ const rules = {
 
         <v-toolbar-items>
           <v-btn
+            v-if="workout"
             :disabled="
               workout.name === '' ||
               typeof workout.name === 'undefined' ||
@@ -76,7 +77,7 @@ const rules = {
       </v-toolbar>
       <v-container>
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12"  v-if="workout">
             <v-label>{{ t('Name your workout and get going') }}.</v-label>
 
             <v-divider class="mb-4" thickness="0"></v-divider>
