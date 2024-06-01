@@ -99,7 +99,7 @@ const missingHangboardDialog = computed(() => {
   }
   const company = parseInt(route.params.company.toString(), 10)
   const hangboard = parseInt(route.params.hangboard.toString(), 10)
-  const exists = getUserHangboards.value.some(
+  const exists = getUserHangboards.value?.some(
     (el) => el.company === company && el.hangboard === hangboard
   )
   if (!exists) {
@@ -107,14 +107,16 @@ const missingHangboardDialog = computed(() => {
     return true
   }
   // if hangboard exists but is not selected, switch hangboard
-  if (company !== getUserHangboardCompany && hangboard !== getUserHangboard) {
+  if (company !== getUserHangboardCompany.id && hangboard !== getUserHangboard.id) {
     const index = getUserHangboards.value.findIndex(
       (list) => list.company === company && list.hangboard === hangboard
     )
-    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-    user.value.settings.selected = index
-    updateUser()
-    fetchCommunityWorkouts()
+    if (user.value) {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      user.value.settings.selected = index
+      updateUser()
+      fetchCommunityWorkouts()
+    }
   }
   // do nothing
   return false

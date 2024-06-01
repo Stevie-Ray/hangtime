@@ -1,6 +1,7 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { useAuthentication } from '@/stores/authentication'
 import hangboardBrands from '@/helpers/hangboards'
+import { Company, Hangboard  } from '@/interfaces/user.interface'
 
 export const useUser = defineStore('user', {
   state: () => ({}),
@@ -10,21 +11,21 @@ export const useUser = defineStore('user', {
      * Get a hangboard object by company & hangboard ID
      * @return {function(*, *): string}
      */
-    getHangboardByIds: () => (companyId, hangboardId) =>
+    getHangboardByIds: () => (companyId: number, hangboardId:number): Hangboard =>
       hangboardBrands
-        .find((company) => company.id === companyId)
-        .hangboards.find((hangboard) => hangboard.id === hangboardId),
+        .find((company: Company) => company.id === companyId)
+        .hangboards.find((hangboard: Hangboard) => hangboard.id === hangboardId),
     /**
      * Get a company Name by  ID
      * @return Object
      */
-    getCompanyById: () => (companyId) =>
-      hangboardBrands.find((company) => company.id === companyId),
+    getCompanyById: () => (companyId: number) =>
+      hangboardBrands.find((company: Company) => company.id === companyId),
     /**
      * Get a hangboard Name by company & hangboard ID
      * @return {function(*, *): string}
      */
-    getHangboardNameByIds: (getters) => (company, hangboard) =>
+    getHangboardNameByIds: (getters) => (company: number, hangboard: number) =>
       `${getters.getCompanyById(company).name} -  ${
         getters.getHangboardByIds(company, hangboard).name
       }`,
@@ -32,7 +33,7 @@ export const useUser = defineStore('user', {
      * Get all companies sorted by name
      * @return {({country: string, hangboards: [{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},null], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: null}, name: string, holds: number, id: number, type: string, url: null}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: string},null,null], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string}|{country: string, hangboards: [{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: number, y: number, z: number}, name: string, holds: number, id: number, type: string, url: null},{image: string, size: {x: null, y: null, z: null}, name: string, holds: number, id: number, type: string, url: null}], name: string, description: string, location: {lon: string, lat: string}, id: number, socials: {facebook: string, instagram: string}, url: string})[]}
      */
-    getCompanies: () => [...hangboardBrands].sort((a, b) => a.name.localeCompare(b.name)),
+    getCompanies: () => [...hangboardBrands].sort((a: Company, b: Company) => a.name.localeCompare(b.name)),
     /**
      *
      */
@@ -50,8 +51,8 @@ export const useUser = defineStore('user', {
      * Get company by its url key
      * @return Array
      */
-    getCompanyByUrlKey: () => (url) =>
-      hangboardBrands.find((company) => company.name.replace(/\s+/g, '-').toLowerCase() === url),
+    getCompanyByUrlKey: () => (url: string) =>
+      hangboardBrands.find((company: Company) => company.name.replace(/\s+/g, '-').toLowerCase() === url),
     /**
      * Get the users hangboards
      * @return Array
@@ -72,7 +73,7 @@ export const useUser = defineStore('user', {
      * Get the selected Hangboard Company
      * @return Object
      */
-    getUserHangboardCompany: (state) => {
+    getUserHangboardCompany: (state): Company | boolean => {
       if (!state.getUserHangboards && !state.getUserHangboardSelectedId) return false
       return hangboardBrands[state.getUserHangboards[state.getUserHangboardSelectedId]?.company]
     },
@@ -80,7 +81,7 @@ export const useUser = defineStore('user', {
      * Get the selected Hangboard
      * @return Object
      */
-    getUserHangboard: (state) => {
+    getUserHangboard: (state): Hangboard | boolean => {
       const userHangboardCompany = state.getUserHangboardCompany
       if (userHangboardCompany === null || userHangboardCompany === undefined) return false
 
@@ -92,7 +93,7 @@ export const useUser = defineStore('user', {
 
       const company = hangboardBrands[userHangboardCompany.id]
       const hangboardId = userHangboards[selectedHangboardId].hangboard
-      const selectedHangboard = company.hangboards.find((hangboard) => hangboard.id === hangboardId)
+      const selectedHangboard = company.hangboards.find((hangboard: Hangboard) => hangboard.id === hangboardId)
 
       return selectedHangboard
     }
