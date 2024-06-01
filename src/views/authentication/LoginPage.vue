@@ -125,15 +125,15 @@ const usps = [
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 const rules = {
-  length: (len) => (v) => (v || '').length <= len || `A maximum of  ${len} characters is allowed`,
-  required: (v) => !!v || 'This field is required',
-  email: (v) =>
+  length: (length: number) => (v: string) => (v || '').length <= length || `Max ${length} characters`,
+  required: (v: any) => !!v || 'This field is required',
+  email: (v: string) =>
     !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
-  password: (value) => {
+  password: (v: string) => {
     // eslint-disable-next-line
     const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/
     return (
-      pattern.test(value) ||
+      pattern.test(v) ||
       'Min. 8 characters with at least one capital letter, a number and a special character.'
     )
   }
