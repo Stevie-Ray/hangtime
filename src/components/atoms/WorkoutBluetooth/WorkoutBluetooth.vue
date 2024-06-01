@@ -53,7 +53,7 @@ const devices = [
   {
     title: 'Motherboard',
     value: Motherboard,
-    disabled: workout.value.company !== 1
+    disabled: workout.value?.company !== 1
   },
   {
     title: 'Muscle Meter',
@@ -70,7 +70,7 @@ const devices = [
     value: Progressor
   }
 ]
-const dropdown = ref(workout.value.company === 1 ? Motherboard : Progressor)
+const dropdown = ref(workout.value?.company === 1 ? Motherboard : Progressor)
 const output = ref()
 const isBluetoothAvailable = ref(false)
 

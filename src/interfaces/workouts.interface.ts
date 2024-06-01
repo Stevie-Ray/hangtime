@@ -47,9 +47,9 @@ export interface Workout {
   /** Difficulty level of the workout. */
   level: number;
   /** The hangboard used in the workout. */
-  hangboard: string;
+  hangboard: number;
   /** Company that created the workout. */
-  company: string;
+  company: number;
   /** List of exercises included in the workout. */
   exercises: Exercise[];
   /** Duration of the workout in minutes. */

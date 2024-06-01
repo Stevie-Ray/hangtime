@@ -32,15 +32,15 @@ let item: DigitalGoodsProductDetails | null = null
 
 let buyStatus = ''
 let logField = ''
-let purchasesList = []
+let purchasesList: PurchaseDetails[] = []
 
 const progressValue = computed(() => {
   // eslint-disable-next-line no-shadow
   let time = 60
   // eslint-disable-next-line no-unsafe-optional-chaining
   if (!user || user?.value?.subscribed) time = 0
-  // eslint-disable-next-line no-unsafe-optional-chaining
-  const value = ((user?.value?.completed?.time / time) * 100) / props.limit
+  const comletedTime = user?.value?.completed?.time ? user.value.completed.time : 0
+  const value = ((comletedTime / time) * 100) / props.limit
   return value < 100 ? value : 100
 })
 
@@ -103,7 +103,9 @@ async function populatePrice(sku: string): Promise<boolean> {
     return true
   } catch (error: unknown) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
   return false
 }
@@ -137,11 +139,13 @@ async function listPurchases() {
   } catch (error: unknown) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
     log('Play Billing is not available.')
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
 }
 
-async function acknowledge(token, type = 'repeatable', onComplete = () => {}) {
+async function acknowledge(token: string, type = 'repeatable', onComplete = () => {}) {
   if (canSubscribe === undefined) {
     // Digital Goods API is not supported in this context.
     log("window doesn't have getDigitalGoodsService.")
@@ -158,12 +162,14 @@ async function acknowledge(token, type = 'repeatable', onComplete = () => {}) {
     await service.consume(token)
     log('Purchase acknowledged.')
     onComplete()
-  } catch (error) {
+  } catch (error: unknown) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
 }
-function trigger(sku, onToken = () => {}) {
+function trigger(sku: string, onToken: (token: any) => void = () => {}) {
   // The PaymentRequest() constructor creates a new PaymentRequest object which will be used to handle the process of generating, validating, and submitting a payment request.
   if (!window.PaymentRequest) {
     log('No PaymentRequest object.')
@@ -200,7 +206,7 @@ function trigger(sku, onToken = () => {}) {
 
   const request = new PaymentRequest(supportedInstruments, details)
 
-  function handlePaymentResponse(response) {
+  function handlePaymentResponse(response: PaymentResponse) {
     window.setTimeout(() => {
       response
         .complete('success')
@@ -214,8 +220,10 @@ function trigger(sku, onToken = () => {}) {
           }
         })
         // eslint-disable-next-line func-names
-        .catch((e) => {
-          log(e.message)
+        .catch((error: unknown) => {
+          if (error instanceof Error) {
+            log(error.message)
+          }
           log(JSON.stringify(response, undefined, 2))
         })
       // request = buildPaymentRequest();
@@ -230,49 +238,53 @@ function trigger(sku, onToken = () => {}) {
         log(result ? 'Can make payment' : 'Cannot make payment')
       })
       // eslint-disable-next-line func-names
-      .catch((e) => {
-        log(e.message)
+      .catch((error: unknown) => {
+        if (error instanceof Error) {
+          log(error.message)
+        }
       })
   }
 
   // Checking for instrument presence.
-  if (request.hasEnrolledInstrument) {
-    request
-      .hasEnrolledInstrument()
-      // eslint-disable-next-line func-names
-      .then((result) => {
-        if (result) {
-          log('Has enrolled instrument')
-        } else {
-          log('No enrolled instrument')
-        }
+  // if (request.hasEnrolledInstrument) {
+  //   request
+  //     .hasEnrolledInstrument()
+  //     // eslint-disable-next-line func-names
+  //     .then((result) => {
+  //       if (result) {
+  //         log('Has enrolled instrument')
+  //       } else {
+  //         log('No enrolled instrument')
+  //       }
 
-        // Call show even if we don't have any enrolled instruments.
-        request
-          .show()
-          .then(handlePaymentResponse)
-          // eslint-disable-next-line func-names
-          .catch((e) => {
-            // log(JSON.stringify(e, undefined, 2));
-            log(e)
-            log("Maybe you've already purchased the item (try acknowledging first).")
-          })
-      })
-      // eslint-disable-next-line func-names
-      .catch((e) => {
-        log(e.message)
+  //       // Call show even if we don't have any enrolled instruments.
+  //       request
+  //         .show()
+  //         .then(handlePaymentResponse)
+  //         // eslint-disable-next-line func-names
+  //         .catch((e) => {
+  //           // log(JSON.stringify(e, undefined, 2));
+  //           log(e)
+  //           log("Maybe you've already purchased the item (try acknowledging first).")
+  //         })
+  //     })
+  //     // eslint-disable-next-line func-names
+  //     .catch((error: unknown) => {
+  //       if (error instanceof Error) {
+  //         log(error.message)
+  //       }
 
-        // Also call show if hasEnrolledInstrument throws.
-        request
-          .show()
-          .then(handlePaymentResponse)
-          // eslint-disable-next-line no-shadow,func-names
-          .catch((e) => {
-            log(JSON.stringify(e, undefined, 2))
-            log(e)
-          })
-      })
-  }
+  //       // Also call show if hasEnrolledInstrument throws.
+  //       request
+  //         .show()
+  //         .then(handlePaymentResponse)
+  //         // eslint-disable-next-line no-shadow,func-names
+  //         .catch((e) => {
+  //           log(JSON.stringify(e, undefined, 2))
+  //           log(e)
+  //         })
+  //     })
+  // }
 }
 function buySubscription() {
   trigger('subscription', (token) => {

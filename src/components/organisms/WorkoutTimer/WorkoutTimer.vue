@@ -12,7 +12,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
-import { Workout, Excercise } from '@/interfaces/workouts.interface'
+import { Workout, Exercise } from '@/interfaces/workouts.interface'
 import { time } from '@/helpers'
 
 import countSound from '@/assets/sound/count.wav'
@@ -78,12 +78,12 @@ onBeforeUnmount(() => {
   if (window.speechSynthesis) window.speechSynthesis.cancel()
 })
 
-const exercise = computed<Excercise | undefined>(() => {
+const exercise = computed<Exercise | undefined>(() => {
   if (workout.value?.exercises) return workout.value.exercises[currentExercise.value]
   return undefined
 })
 
-const exerciseNext = computed<Excercise | undefined>(() => {
+const exerciseNext = computed<Exercise | undefined>(() => {
   if (workout.value?.exercises) return workout?.value?.exercises[currentExercise.value + 1]
   return undefined
 })
