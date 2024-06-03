@@ -100,7 +100,12 @@ const missingHangboardDialog = computed(() => {
   const company = parseInt(route.params.company.toString(), 10)
   const hangboard = parseInt(route.params.hangboard.toString(), 10)
   // if hangboard exists but is not selected, switch hangboard
-  if (getUserHangboardCompany.value && company !== getUserHangboardCompany.value.id && getUserHangboard.value && hangboard !== getUserHangboard.value.id) {
+  if (
+    getUserHangboardCompany.value &&
+    company !== getUserHangboardCompany.value.id &&
+    getUserHangboard.value &&
+    hangboard !== getUserHangboard.value.id
+  ) {
     const index = getUserHangboards.value?.findIndex(
       (list) => list.company === company && list.hangboard === hangboard
     )
@@ -218,7 +223,7 @@ useHead({
             v-if="getUserHangboard && getUserHangboardCompany && workout"
             :active="startWorkoutButton"
             :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
-            location="bottom"
+            location="end"
             position="fixed"
             size="x-large"
             extended

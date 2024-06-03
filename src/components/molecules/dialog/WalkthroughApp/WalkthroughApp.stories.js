@@ -1,9 +1,9 @@
-import Walkthrough from './Walkthrough.vue'
+import WalkthroughApp from './WalkthroughApp.vue'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 export default {
-  title: 'Components/Molecules/Dialog/Walkthrough',
-  component: Walkthrough,
+  title: 'Components/Molecules/Dialog/WalkthroughApp',
+  component: WalkthroughApp,
   tags: ['autodocs'],
   argTypes: {},
   args: {

@@ -78,7 +78,7 @@ const selected = reactive({
 const getHangboard = computed(() => getHangboardByIds(selected.company, selected.hangboard))
 
 const updateSelected = () => {
-  const exists = user.value.settings.hangboards.some(
+  const exists = user.value?.settings.hangboards.some(
     (item) => item.company === selected.company && item.hangboard === selected.hangboard
   )
   if (!exists) {
@@ -95,7 +95,7 @@ const updateSelected = () => {
 }
 
 const finishWalkthrough = (addWorkout: boolean) => {
-  if (networkOnLine) {
+  if (networkOnLine && user.value) {
     user.value.settings.walkthrough = true
     if (getHangboard.value?.holds !== 0) {
       updateSelected()
@@ -114,13 +114,13 @@ const grades = computed(() => ircra.get(user?.value?.settings?.scale).filter((it
 
 const settingsLocale = computed({
   get() {
-    if (!user.value) return
+    if (!user.value) return ''
     // eslint-disable-next-line consistent-return
     if (user?.value?.settings?.locale) return user.value.settings.locale
     // eslint-disable-next-line consistent-return
-    return i18n.locale
+    return i18n.locale.toString()
   },
-  set(value) {
+  set(value: string) {
     if (user.value) {
       user.value.settings.locale = value
     }

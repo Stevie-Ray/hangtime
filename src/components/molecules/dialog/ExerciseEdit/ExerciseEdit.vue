@@ -51,8 +51,7 @@ const emit = defineEmits(['time', 'show'])
 const dialog = ref(true)
 
 // const exercise = computed<Exercise | null>(() => workout.value?.exercises[index.value] ?? null)
-  const exercise = computed<Exercise | undefined>(() => workout.value?.exercises[index.value])
-
+const exercise = computed<Exercise | undefined>(() => workout.value?.exercises[index.value])
 
 // eslint-disable-next-line no-shadow
 const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', time: number) => {
@@ -81,7 +80,9 @@ const exerciseFilter = (type: 'arms' | 'legs') => {
   if (exercise.value && grip[exercise.value.grip].disabledExercises) {
     return exerciseByType(type).map((obj) => ({
       ...obj,
-      disabled: exercise.value ? grip[exercise.value.grip].disabledExercises?.includes(obj.id) : null
+      disabled: exercise.value
+        ? grip[exercise.value.grip].disabledExercises?.includes(obj.id)
+        : null
     }))
   }
   return exerciseByType(type)
@@ -91,7 +92,7 @@ const exerciseMovement = computed({
   // getter
   get() {
     if (exercise.value && exercise.value.exercise === 0) return null
-    return  exercise.value ? exercise.value.exercise : null
+    return exercise.value ? exercise.value.exercise : null
   },
   // setter
   set(newValue) {
@@ -152,7 +153,7 @@ const rules = {
       <v-container>
         <v-row>
           <v-col cols="12">
-            <v-expansion-panels  v-if="exercise" variant="accordion">
+            <v-expansion-panels v-if="exercise" variant="accordion">
               <exercise-card
                 v-if="workout"
                 :exercise="exercise"
@@ -167,15 +168,19 @@ const rules = {
                   (hold) =>
                     exercise && exercise.left === hold && exercise.right !== null
                       ? (exercise.left = null)
-                      : (exercise ? exercise.right = hold : null)
+                      : exercise
+                        ? (exercise.right = hold)
+                        : null
                 "
                 @right="
                   (hold) =>
                     exercise && exercise.right === hold && exercise.left !== null
                       ? (exercise.right = null)
-                      : (exercise ? exercise.right = hold : null)
+                      : exercise
+                        ? (exercise.right = hold)
+                        : null
                 "
-                @rotate="(rotate) => (exercise ? exercise.rotate = rotate : null)"
+                @rotate="(rotate) => (exercise ? (exercise.rotate = rotate) : null)"
               ></exercise-card>
 
               <v-expansion-panel>
@@ -305,7 +310,7 @@ const rules = {
                     :timer="false"
                     :title="`${exercises[exercise.exercise - 1].name}s`"
                     :value="exercise.pullups"
-                    @input="(value: number) => (exercise ? exercise.pullups = value : null)"
+                    @input="(value: number) => (exercise ? (exercise.pullups = value) : null)"
                   >
                   </exercise-counter>
 
@@ -364,8 +369,8 @@ const rules = {
                   <exercise-hand
                     :exercise="exercise"
                     edit
-                    @left="(finger: number[]) => (exercise ? exercise.leftHand = finger : null)"
-                    @right="(finger: number[]) => (exercise ? exercise.rightHand = finger : null)"
+                    @left="(finger: number[]) => (exercise ? (exercise.leftHand = finger) : null)"
+                    @right="(finger: number[]) => (exercise ? (exercise.rightHand = finger) : null)"
                   ></exercise-hand>
                 </v-expansion-panel-text>
               </v-expansion-panel>
@@ -393,7 +398,7 @@ const rules = {
                     :value="exercise.weight"
                     suffix="kg"
                     title="Weight"
-                    @input="(value: number) => (exercise ? exercise.weight = value : null)"
+                    @input="(value: number) => (exercise ? (exercise.weight = value) : null)"
                   >
                     <template #default>{{ weightConverter(exercise.weight, user) }}kg</template>
                   </exercise-counter>

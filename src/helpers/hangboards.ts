@@ -1,4 +1,6 @@
-export default [
+import { Company } from '@/interfaces/user.interface';
+
+const companies: Company[] = [
   {
     name: 'Antworks',
     description: 'Training devices for climber, crossfitter, ninja warrior- made in Austria',
@@ -524,7 +526,8 @@ export default [
             image: 'hangboards/MAXSPINCHSOLO-HARD.svg',
             holds: 13
           }
-        ]
+        ],
+        holds: 10
       },
       {
         name: 'Maxgrip',
@@ -7685,3 +7688,5 @@ export default [
     ]
   }
 ]
+
+export default companies

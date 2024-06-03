@@ -57,7 +57,7 @@ useHead({
       {{
         `${
           getCompany?.country
-            ? countries.find((country) => country.alpha2 === getCompany.country)?.emoji
+            ? countries.find((country) => country.alpha2 === getCompany?.country)?.emoji
             : ''
         }`
       }}
@@ -114,8 +114,10 @@ useHead({
               <v-card-text>
                 <exercise-hangboard
                   v-if="
-                    getHangboardByIds(getCompany.id, hangboard.id).image !==
-                    'hangboards/NOTFOUND.svg'
+                    getCompany &&
+                    hangboard &&
+                    getHangboardByIds(getCompany.id, hangboard.id)?.image !==
+                      'hangboards/NOTFOUND.svg'
                   "
                   :hangboard="{
                     company: getCompany.id,
@@ -128,7 +130,7 @@ useHead({
                 <div v-if="hangboard.name">{{ hangboard.name }}</div>
                 <v-chip v-if="hangboard.type">{{ t(hangboard.type) }}</v-chip>
               </v-card-title>
-              <v-card-subtitle>
+              <v-card-subtitle v-if="getCompany?.name">
                 {{ getCompany.name }}
               </v-card-subtitle>
               <v-card-actions>
@@ -160,7 +162,7 @@ useHead({
               </v-card-actions>
             </v-card>
             <!-- company map -->
-            <map-container v-if="getCompany.location" :markers="[getCompany]" :zoom="6" />
+            <map-container v-if="getCompany?.location" :markers="[getCompany]" :zoom="6" />
           </v-col>
         </v-row>
       </v-container>
@@ -172,7 +174,7 @@ useHead({
           <v-fab
             :active="loginButton"
             to="/login"
-            location="bottom end"
+            location="end"
             position="fixed"
             size="x-large"
             extended

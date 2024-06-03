@@ -62,14 +62,33 @@ declare module '@/plugins/vuetify' {
 
 // Helpers
 declare module '@/helpers/countries' {
-  const value: any
+  const value: {
+    /** ISO 3166-1 alpha-2 code */
+    alpha2: string
+    /** ISO 3166-1 alpha-3 code */
+    alpha3: string
+    /** International dialing codes */
+    countryCallingCodes: string[]
+    /** Currency codes */
+    currencies: string[]
+    /** Emoji flag */
+    emoji: string
+    /** International Olympic Committee code */
+    ioc: string
+    /** Language codes */
+    languages: string[]
+    /** Country name */
+    name: string
+    /** Status of the country */
+    status: string
+  }[]
   export default value
 }
 
-declare module '@/helpers/hangboards' {
-  const value: any
-  export default value
-}
+// declare module '@/helpers/hangboards' {
+//   const value: Company[]
+//   export default value
+// }
 
 declare module '@/helpers/online' {
   const value: any

@@ -36,17 +36,17 @@ export interface Company {
   country: string
   /** The geographical location of the company. */
   location: {
-    lat: string
-    lon: string
-  }
+    lat: string | null
+    lon: string | null
+  } | null
   /** The unique identifier of the company. */
   id: number
   /** The website URL of the company. */
-  url: string
+  url: string | null
   /** The social media links of the company (Facebook, Instagram). */
   socials: {
-    facebook: string
-    instagram: string
+    facebook: string | null
+    instagram: string | null
   }
   /** The list of hangboards offered by the company. */
   hangboards: Hangboard[]

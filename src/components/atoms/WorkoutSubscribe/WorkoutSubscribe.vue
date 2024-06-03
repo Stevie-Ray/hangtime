@@ -39,25 +39,31 @@ watch(
 
 const isHearted = computed(() => {
   if (!workout?.value?.subscribers?.length || !user.value) return false
-  return workout.value.subscribers.some((subscriber) => subscriber === user.value.id)
+  return workout.value.subscribers.some((subscriber) => subscriber === user.value?.id)
 })
 
 const workoutSubscriber = () => {
-  if (!isHearted.value) {
-    workout?.value.subscribers.unshift(user.value.id)
-    // push to workouts
-    workouts?.value.unshift(workout?.value)
-  } else {
-    // do not allow users to unsubscribe from self-created workouts
-    if (workout?.value?.user?.id === user?.value?.id) return
-    const userIndex = workout?.value.subscribers.indexOf(user.value.id)
-    workout?.value.subscribers.splice(userIndex, 1)
-    // remove from workouts
-    const index = workouts?.value.findIndex((item) => item.id === workout?.value.id)
-    workouts?.value.splice(index, 1)
-  }
-  if (workout.value?.user) {
-    updateWorkout({ userId: workout.value.user.id, workout: workout.value })
+  if (workout.value) {
+    if (!isHearted.value) {
+      if (user.value) {
+        workout.value.subscribers.unshift(user.value.id)
+      }
+      // push to workouts
+      workouts.value.unshift(workout.value)
+    } else {
+      // do not allow users to unsubscribe from self-created workouts
+      if (workout.value?.user?.id === user?.value?.id) return
+      if (user.value) {
+        const userIndex = workout?.value.subscribers.indexOf(user.value.id)
+        workout?.value.subscribers.splice(userIndex, 1)
+      }
+      // remove from workouts
+      const index = workouts?.value.findIndex((item) => item.id === workout.value?.id)
+      workouts.value.splice(index, 1)
+    }
+    if (workout.value?.user) {
+      updateWorkout({ userId: workout.value.user.id, workout: workout.value })
+    }
   }
 }
 </script>

@@ -44,7 +44,7 @@ export const useUser = defineStore('user', () => {
    * Get all companies sorted by name
    * @return An array of companies sorted by name
    */
-  const getCompanies = () => {
+  const getCompanies = (): Company[] => {
     return [...hangboardBrands].sort((a: Company, b: Company) => a.name.localeCompare(b.name))
   }
 
@@ -52,7 +52,7 @@ export const useUser = defineStore('user', () => {
    * Get all hangboards
    * @return An array of all hangboards
    */
-  const getHangboards = () => {
+  const getHangboards = (): Hangboard[] => {
     const allHangboards: Hangboard[] = []
     for (const brand of hangboardBrands) {
       if (brand.hangboards && Array.isArray(brand.hangboards)) {
@@ -112,9 +112,11 @@ export const useUser = defineStore('user', () => {
     if (!company || selectedId === undefined) return null
     const userHangboards = getUserHangboards.value
     if (!userHangboards || !userHangboards[selectedId]) return null
-    return company.hangboards.find(
-      (hangboard: Hangboard) => hangboard.id === userHangboards[selectedId].hangboard
-    ) || null
+    return (
+      company.hangboards.find(
+        (hangboard: Hangboard) => hangboard.id === userHangboards[selectedId].hangboard
+      ) || null
+    )
   })
 
   return {

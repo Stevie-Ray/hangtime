@@ -11,7 +11,7 @@ import { useApp } from '@/stores/app'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
-import Walkthrough from '@/components/molecules/dialog/Walkthrough/Walkthrough.vue'
+import WalkthroughApp from '@/components/molecules/dialog/WalkthroughApp/WalkthroughApp.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import imgLogo from '@/assets/logo.svg'
 
@@ -187,17 +187,15 @@ useHead({
         icon="$timerPlayOutline"
         color="text"
         to="/workouts/quick"
-      ></v-btn>
+      />
       <v-btn
         v-if="route.path === '/workouts'"
         :disabled="!networkOnLine"
         icon="$plus"
         color="text"
         to="/workouts/new"
-      ></v-btn>
-      <workout-community-filter
-        v-if="route.path === '/workouts/community'"
-      ></workout-community-filter>
+      />
+      <workout-community-filter v-if="route.path === '/workouts/community'" />
     </template>
 
     <template #extension>
@@ -273,13 +271,12 @@ useHead({
               :image="imgLogo"
               action-text="Create a Workout"
               @click:action="router.push('/workouts/new')"
-            >
-            </v-empty-state>
+            />
           </v-col>
         </v-row>
       </v-container>
 
-      <walkthrough v-if="!user?.settings?.walkthrough" ref="walkthrough"></walkthrough>
+      <walkthrough-app v-if="!user?.settings?.walkthrough" ref="walkthrough" />
     </template>
   </app-container>
 </template>

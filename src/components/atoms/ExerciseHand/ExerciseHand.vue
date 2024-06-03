@@ -85,7 +85,9 @@ const resetHands = () => {
       </div>
       <div class="hand__right">
         <inline-svg
-          @click="(e: MouseEvent) => toggleFinger('rightHand', 'right', (e.target as HTMLElement).id)"
+          @click="
+            (e: MouseEvent) => toggleFinger('rightHand', 'right', (e.target as HTMLElement).id)
+          "
           v-if="exercise?.right !== null"
           :class="[getHandClass('rightHand'), { large: edit }]"
           :src="imgIconHang"

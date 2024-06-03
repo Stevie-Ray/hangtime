@@ -10,7 +10,10 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["digital-goods-browser","web-bluetooth"],
+    "typeRoots": [
+      "node_modules/@types",
+  ],
+    "types": ["digital-goods-browser","web-bluetooth","google.maps"],
     "verbatimModuleSyntax": false,
     "noEmit": true,
     "skipLibCheck": true

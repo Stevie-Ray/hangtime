@@ -42,7 +42,7 @@ const slides = [
 
 let newCompanies = []
 // eslint-disable-next-line no-restricted-syntax
-for (const company of getCompanies) {
+for (const company of getCompanies()) {
   if (company?.id >= getCompanies.length - 5) {
     newCompanies.push(company)
   }

@@ -192,8 +192,9 @@ export const useWorkouts = defineStore('workouts', () => {
       ?.slice(0, items)
   })
 
-  const getLeaderboard = computed(() => (rank: string) =>
-    leaderboards.value.find((leaderboard: Leaderboard) => leaderboard.rank === rank)
+  const getLeaderboard = computed(
+    () => (rank: string) =>
+      leaderboards.value.find((leaderboard: Leaderboard) => leaderboard.rank === rank)
   )
 
   return {

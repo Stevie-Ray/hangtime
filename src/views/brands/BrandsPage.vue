@@ -8,6 +8,8 @@ import countries from '@/helpers/countries'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
+import { Company } from '@/interfaces/user.interface'
+
 const { t } = useI18n()
 
 const { getCompanies } = useUser()
@@ -37,21 +39,22 @@ useHead({
         <v-row>
           <v-col cols="12" md="5" order-md="last">
             <div class="sticky">
-              <map-container :markers="getCompanies" :zoom="1" />
+              <map-container :markers="getCompanies()" :zoom="1" />
             </div>
           </v-col>
           <v-col cols="12" md="7" order-md="first">
             <v-list lines="two">
               <v-list-item
+                v-for="company in getCompanies()"
+                :key="company.id"
                 :to="
                   company.name
                     ? `/brands/${encodeURIComponent(
                         company.name.replace(/\s+/g, '-').toLowerCase()
                       )}`
-                    : null
+                    : ''
                 "
-                v-for="company in getCompanies"
-                :key="company.id"
+                
               >
                 <v-list-item-title>
                   {{
@@ -59,7 +62,7 @@ useHead({
                       ? countries.find((country) => country.alpha2 === company.country)?.emoji
                       : ''
                   }}&nbsp;{{ company.name }}
-                  <v-chip class="mx-2" size="x-small" v-if="company.id >= getCompanies.length - 5">
+                  <v-chip class="mx-2" size="x-small" v-if="company.id >= getCompanies().length - 5">
                     {{ $t('new') }}
                   </v-chip>
                 </v-list-item-title>

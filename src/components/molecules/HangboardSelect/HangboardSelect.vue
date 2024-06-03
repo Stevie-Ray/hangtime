@@ -53,7 +53,7 @@ const subject = computed(() =>
 <template>
   <v-select
     v-model="selected.company"
-    :items="getCompanies"
+    :items="getCompanies()"
     :label="t('Hangboard manufacturer')"
     item-title="name"
     item-value="id"
