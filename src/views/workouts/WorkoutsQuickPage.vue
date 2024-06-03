@@ -12,16 +12,38 @@ const { t } = useI18n()
 
 const router = useRouter()
 
-const workout: Workout = reactive({
+const workout = reactive<Workout>({
   name: 'Quick workout',
   description: 'Just a simple timer go get you going',
   exercises: [
     {
       hold: 7,
       rest: 3,
-      repeat: 9
+      repeat: 9,
+      exercise: 0,
+      grip: 0,
+      level: 0,
+      left: 0,
+      right: 0,
+      pause: 0,
+      pullups: 0,
+      weight: 0,
+      notes: ''
     }
-  ]
+  ],
+  level: 1,
+  hangboard: 0,
+  company: 0,
+  time: 0,
+  share: false,
+  video: '',
+  subscribers: [],
+  user: {
+    displayName: '',
+    grade: 0,
+    id: '',
+    photoURL: ''
+  }
 })
 
 useHead({

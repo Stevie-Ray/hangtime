@@ -70,15 +70,17 @@ const language = [
 
 const settingsLocale = computed({
   get() {
-    if (!user) return
+    if (!user.value) return ''
     // eslint-disable-next-line consistent-return
-    if (user?.value.settings?.locale) return user.value.settings.locale
+    if (user?.value?.settings?.locale) return user.value.settings.locale
     // eslint-disable-next-line consistent-return
-    return i18n.locale
+    return i18n.locale.toString()
   },
-  set(value) {
-    user.value.settings.locale = value
-    loadLanguageAsync(value)
+  set(value: string) {
+    if (user.value) {
+      user.value.settings.locale = value
+      loadLanguageAsync(value)
+    }
   }
 })
 
@@ -110,9 +112,11 @@ const themes = [
   }
 ]
 
-const setTheme = (value) => {
-  user.value.settings.theme = value
+const setTheme = (value: number) => {
+  if (user.value){
+    user.value.settings.theme = value
   updateUser()
+  }
 }
 
 useHead({
@@ -141,6 +145,7 @@ useHead({
                   <v-icon>$chartGantt</v-icon>
                 </template>
                 <v-select
+                  v-if="user"
                   v-model="user.settings.scale"
                   :disabled="!networkOnLine"
                   :items="scale"
@@ -157,6 +162,7 @@ useHead({
                 </template>
 
                 <v-select
+                  v-if="user"
                   v-model="settingsLocale"
                   :disabled="!networkOnLine"
                   :items="language"
@@ -172,7 +178,8 @@ useHead({
                 </template>
 
                 <v-select
-                  v-model="user.settings.weight"
+                  v-if="user"
+                  v-model="user.weight"
                   :disabled="!networkOnLine"
                   :items="weight"
                   :label="t('Weight system')"
@@ -187,6 +194,7 @@ useHead({
                 </template>
 
                 <v-select
+                  v-if="user"
                   v-model="user.settings.theme"
                   :disabled="!networkOnLine"
                   :items="themes"

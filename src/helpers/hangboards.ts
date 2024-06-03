@@ -1,4 +1,4 @@
-import { Company } from '@/interfaces/user.interface';
+import { Company } from '@/interfaces/user.interface'
 
 const companies: Company[] = [
   {
@@ -3662,7 +3662,8 @@ const companies: Company[] = [
             image: 'hangboards/WORK1950POCKET-HARD.svg',
             holds: 3
           }
-        ]
+        ],
+        holds: 3
       }
     ]
   },

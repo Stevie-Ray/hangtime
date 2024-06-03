@@ -19,7 +19,7 @@ export const useApp = defineStore('app', () => {
       return
     }
     refreshingApp.value = true
-    SWRegistrationForNewContent.value.waiting?.postMessage('skipWaiting')
+    SWRegistrationForNewContent.value?.waiting?.postMessage('skipWaiting')
   }
 
   // getter

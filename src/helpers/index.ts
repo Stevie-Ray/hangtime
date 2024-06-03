@@ -11,6 +11,7 @@ import imgBackgroundDark4 from '@/assets/backgrounds/background-d4.png'
 import imgBackgroundDark5 from '@/assets/backgrounds/background-d5.png'
 import imgBackgroundDark6 from '@/assets/backgrounds/background-d6.png'
 import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
+import { User } from '@/interfaces/authentication.interface'
 
 /**
  *
@@ -490,7 +491,7 @@ export function useRandomImage(dark: boolean = false) {
 // }
 
 export function weightConverter(weight: number, user: User) {
-  if (user.settings.weight === 1) {
+  if (user.weight === 1) {
     return Math.round(weight * 2.2046)
   }
   return weight

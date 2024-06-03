@@ -18,25 +18,29 @@ const { updateUser } = useAuthentication()
 
 const synth = window.speechSynthesis
 const greetingSpeech = new window.SpeechSynthesisUtterance()
-const voices = reactive([])
+const voices = reactive<SpeechSynthesisVoice[]>([])
 
 const filterVoices = computed(() => {
-  if (!voices) return []
+  if (!voices || !user.value || !user.value.settings || !user.value.settings.locale) return []
 
-  if (user.value.settings.locale) {
-    return voices.filter((voice) =>
-      voice.lang.includes(user.value.settings.locale?.substring(0, 2))
-    )
+  const locale = user.value.settings.locale
+  if (locale) {
+    return voices.filter((voice) => voice.lang.includes(locale.substring(0, 2)))
   }
   return voices.filter((voice) => /^(en|EN|US)/.test(voice.lang))
 })
 
 const selectedVoice = computed({
   get() {
-    return voices[user.value.settings.voice]
+    return user.value && voices[user.value.settings.voice]
   },
   set(value) {
-    user.value.settings.voice = filterVoices.value.findIndex((v) => v.name === value.name)
+    if (user.value) {
+      const index = value ? filterVoices.value.findIndex((v) => v.name === value.name) : -1
+      if (index !== -1) {
+        user.value.settings.voice = index
+      }
+    }
   }
 })
 
@@ -47,12 +51,17 @@ onMounted(() => {
   }
 })
 
-function greet(item) {
+function greet(item: SpeechSynthesisVoice | undefined) {
+  if (!item) return
+
   greetingSpeech.text = `${t('You chose {voice}, this is my new voice', {
     voice: item.name
   })}
       `
-  greetingSpeech.voice = voices.find((v) => v.name === item.name)
+  const selectedVoice = voices.find((v) => v.name === item.name)
+  if (!selectedVoice) return
+
+  greetingSpeech.voice = selectedVoice
   try {
     synth.speak(greetingSpeech)
     updateUser()
@@ -97,6 +106,7 @@ useHead({
 
                 <template #append>
                   <v-checkbox
+                    v-if="user"
                     v-model="user.settings.sound"
                     color="text"
                     :disabled="!networkOnLine"
@@ -119,6 +129,7 @@ useHead({
 
                 <template #append>
                   <v-checkbox
+                    v-if="user"
                     v-model="user.settings.speak"
                     color="text"
                     :disabled="!networkOnLine"
@@ -127,7 +138,7 @@ useHead({
                 </template>
               </v-list-item>
 
-              <v-list-item v-if="user.settings.speak && voices.length">
+              <v-list-item v-if="user?.settings.speak && voices.length">
                 <template #prepend>
                   <v-icon>$accountMultiple</v-icon>
                 </template>
@@ -159,6 +170,7 @@ useHead({
 
                 <template #append>
                   <v-checkbox
+                    v-if="user"
                     v-model="user.settings.vibrate"
                     color="text"
                     :disabled="!networkOnLine"

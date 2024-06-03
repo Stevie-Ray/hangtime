@@ -1,4 +1,6 @@
-export default [
+import { Country } from '@/interfaces/authentication.interface'
+
+const countries: Country[] = [
   {
     alpha2: 'AC',
     alpha3: '',
@@ -3150,3 +3152,5 @@ export default [
     status: 'assigned'
   }
 ]
+
+export default countries

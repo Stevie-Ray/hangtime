@@ -142,7 +142,7 @@ export const useWorkouts = defineStore('workouts', () => {
       const authentication = useAuthentication()
       const user = useUser()
       if (authentication.user && user.getUserHangboard && user.getUserHangboardCompany) {
-        workout = reactive({
+        workout = reactive<Workout>({
           name: i18n.global.t('New workout'),
           description: '',
           level: 1,

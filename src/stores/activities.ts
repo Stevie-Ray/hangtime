@@ -14,7 +14,7 @@ export const useActivities = defineStore('activities', () => {
   async function fetchUserActivity() {
     if (activities.value.length) return
     const { user } = storeToRefs(useAuthentication())
-    const userActivitiesDb = new UserActivitiesDB(user.value.id)
+    const userActivitiesDb = new UserActivitiesDB(user.value?.id)
     activities.value = await userActivitiesDb.readAll(null, 'createTimestamp', 20)
   }
   /**
@@ -24,7 +24,7 @@ export const useActivities = defineStore('activities', () => {
    */
   async function createUserActivity(activity: Activity) {
     const { user } = storeToRefs(useAuthentication())
-    const userActivitiesDb = new UserActivitiesDB(user.value.id)
+    const userActivitiesDb = new UserActivitiesDB(user.value?.id)
 
     const createdActivity = await userActivitiesDb.create(activity)
 

@@ -28,16 +28,20 @@ const { user } = storeToRefs(useAuthentication())
 
 const workouts = useWorkouts()
 
-const setHangboard = (index) => {
-  user.value.settings.selected = index
-  updateUser()
-  workouts.workoutsCommunity = []
-  fetchCommunityWorkouts()
+const setHangboard = (index: number) => {
+  if (user.value) {
+    user.value.settings.selected = index
+    updateUser()
+    workouts.workoutsCommunity = []
+    fetchCommunityWorkouts()
+  }
 }
 
-const removeHangboard = (index) => {
-  user.value.settings.hangboards.splice(index, 1)
-  setHangboard(0)
+const removeHangboard = (index: number) => {
+  if (user.value) {
+    user.value.settings.hangboards.splice(index, 1)
+    setHangboard(0)
+  }
 }
 
 const router = useRouter()
@@ -84,46 +88,54 @@ useHead({
                   </exercise-hangboard>
                 </v-card-text>
                 <v-card-title class="d-flex justify-space-between">
-                  <div v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).name">
-                    {{ getHangboardByIds(hangboard.company, hangboard.hangboard).name }}
+                  <div v-if="getHangboardByIds(hangboard.company, hangboard.hangboard)?.name">
+                    {{ getHangboardByIds(hangboard.company, hangboard.hangboard)?.name }}
                   </div>
-                  <v-chip v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).type">
-                    {{ getHangboardByIds(hangboard.company, hangboard.hangboard).type }}
+                  <v-chip v-if="getHangboardByIds(hangboard.company, hangboard.hangboard)?.type">
+                    {{ getHangboardByIds(hangboard.company, hangboard.hangboard)?.type }}
                   </v-chip>
                 </v-card-title>
                 <v-card-subtitle>
                   {{
-                    getCompanyById(hangboard.company).country
+                    getCompanyById(hangboard.company)?.country
                       ? countries.find(
-                          (country) => country.alpha2 === getCompanyById(hangboard.company).country
+                          (country) => country.alpha2 === getCompanyById(hangboard.company)?.country
                         )?.emoji
                       : ''
-                  }}&nbsp;{{ getCompanyById(hangboard.company).name }}
+                  }}&nbsp;{{ getCompanyById(hangboard.company)?.name }}
                 </v-card-subtitle>
                 <v-card-actions>
                   <v-btn
-                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size"
+                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard)?.size"
                     color="text"
                     disabled
                   >
                     <div class="text-caption">
-                      <span v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size.x">
-                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard).size.x }}mm
+                      <span
+                        v-if="getHangboardByIds(hangboard.company, hangboard.hangboard)?.size.x"
+                      >
+                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard)?.size.x }}mm
                       </span>
-                      <span v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size.y">
+                      <span
+                        v-if="getHangboardByIds(hangboard.company, hangboard.hangboard)?.size.y"
+                      >
                         &nbsp;x
-                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard).size.y }}mm
+                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard)?.size.y }}mm
                       </span>
-                      <span v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).size.z">
+                      <span
+                        v-if="getHangboardByIds(hangboard.company, hangboard.hangboard)?.size.z"
+                      >
                         &nbsp;x
-                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard).size.z }}mm
+                        {{ getHangboardByIds(hangboard.company, hangboard.hangboard)?.size.z }}mm
                       </span>
                     </div>
                   </v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
-                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard).url"
-                    :href="getHangboardByIds(hangboard.company, hangboard.hangboard).url"
+                    v-if="getHangboardByIds(hangboard.company, hangboard.hangboard)?.url !== null"
+                    :href="
+                      getHangboardByIds(hangboard.company, hangboard.hangboard)?.url ?? undefined
+                    "
                     color="text"
                     icon="$openInNew"
                     size="small"

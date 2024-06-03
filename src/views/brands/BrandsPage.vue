@@ -54,7 +54,6 @@ useHead({
                       )}`
                     : ''
                 "
-                
               >
                 <v-list-item-title>
                   {{
@@ -62,7 +61,11 @@ useHead({
                       ? countries.find((country) => country.alpha2 === company.country)?.emoji
                       : ''
                   }}&nbsp;{{ company.name }}
-                  <v-chip class="mx-2" size="x-small" v-if="company.id >= getCompanies().length - 5">
+                  <v-chip
+                    class="mx-2"
+                    size="x-small"
+                    v-if="company.id >= getCompanies().length - 5"
+                  >
                     {{ $t('new') }}
                   </v-chip>
                 </v-list-item-title>

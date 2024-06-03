@@ -5,7 +5,17 @@ import countries from '@/helpers/countries'
 
 const { getCompanies } = useUser()
 
-const slides = [
+interface Slide {
+  title: string
+  subtitle: string
+  image: string
+  text: string
+  button_text: string
+  internal_link?: string
+  external_link?: string
+}
+
+const slides: Slide[] = [
   {
     title: '🏆 Check the leaderboard',
     subtitle: 'Who trained longest or hung longest?',
@@ -65,7 +75,7 @@ for (const newCompany of newCompanies) {
     button_text: 'View Hangboards',
     internal_link: newCompany.name
       ? `/brands/${encodeURIComponent(newCompany.name.replace(/\s+/g, '-').toLowerCase())}`
-      : null
+      : undefined
   })
   index += 2
 }

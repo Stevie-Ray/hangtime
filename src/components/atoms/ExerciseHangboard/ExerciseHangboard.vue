@@ -39,12 +39,15 @@ const hangboardImage = computed(() => {
     : ''
 })
 
-const classHold = (hand: 'left' | 'right') =>
-  props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand] + 1}` : null
+const classHold = (hand: 'left' | 'right'): string | null => {
+  return props.exercise && props.exercise[hand] !== null 
+    ? `h${props.exercise[hand]! + 1}` 
+    : null;
+}
 
 const toggleHold = (hand: 'left' | 'right', e: Event) => {
   if (props.edit) {
-    const hold = e.target.id
+    const hold = (e.target as HTMLElement).id
     const n = hold.startsWith('h')
     if (n && hold.length <= 3) {
       const number = parseInt(hold.substr(1), 10) - 1

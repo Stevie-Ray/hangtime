@@ -27,7 +27,7 @@ watch(
     const redirectUrl =
       user.value === null || user.value === undefined
         ? `/login?redirectUrl=${route.query.redirectUrl}`
-        : route.query.redirectUrl
+        : `${route.query.redirectUrl}`
     // go to redirect url
     router.push(redirectUrl)
   },

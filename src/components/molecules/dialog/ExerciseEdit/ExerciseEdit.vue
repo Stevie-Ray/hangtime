@@ -122,9 +122,9 @@ const exerciseCopy = () => {
 
 // workout - weight
 const weightLabel = computed(() => {
-  if (user.value?.settings?.weight && exercise.value && exercise.value.weight !== 0) {
-    return `Your weight: ${user.value.settings.weight}kg.
-     Training weight: ${user.value.settings.weight + exercise.value.weight}kg.`
+  if (user.value?.weight && exercise.value && exercise.value.weight !== 0) {
+    return `Your weight: ${user.value.weight}kg.
+     Training weight: ${user.value.weight + exercise.value.weight}kg.`
   }
   return 'Adjust using kettle/dumb-bells or pulley system'
 })

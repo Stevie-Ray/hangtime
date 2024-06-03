@@ -31,17 +31,19 @@ const selected = reactive({
 const getHangboard = computed(() => getHangboardByIds(selected.company, selected.hangboard))
 
 const updateSelected = () => {
-  const exists = user.value.settings.hangboards.some(
-    (item) => item.company === selected.company && item.hangboard === selected.hangboard
-  )
-  if (!exists) {
-    // measure selected hangboard data
-    event('add_hangboard', {
-      hangboard: getHangboardNameByIds(selected.company, selected.hangboard)
-    })
-    // add the newly selected board and set it
-    user.value.settings.hangboards.push(selected)
-    user.value.settings.selected = user.value.settings.hangboards.length - 1
+  if (user.value) {
+    const exists = user.value.settings.hangboards.some(
+      (item) => item.company === selected.company && item.hangboard === selected.hangboard
+    )
+    if (!exists) {
+      // measure selected hangboard data
+      event('add_hangboard', {
+        hangboard: getHangboardNameByIds(selected.company, selected.hangboard)
+      })
+      // add the newly selected board and set it
+      user.value.settings.hangboards.push(selected)
+      user.value.settings.selected = user.value.settings.hangboards.length - 1
+    }
   }
 }
 

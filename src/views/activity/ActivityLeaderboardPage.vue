@@ -46,7 +46,7 @@ useHead({
       <v-menu v-model="leaderboardMenu">
         <template v-slot:activator="{ props }">
           <div v-bind="props" class="leaderboard-select">
-            <span>{{ t(selectedHeader.text) }}</span>
+            <span v-if="selectedHeader">{{ t(selectedHeader.text) }}</span>
             <span v-if="leaderboardMenu"><v-icon>$chevronUp</v-icon></span>
             <span v-else><v-icon>$chevronDown</v-icon></span>
           </div>

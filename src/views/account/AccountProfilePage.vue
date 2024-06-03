@@ -10,7 +10,7 @@ import {
   OAuthProvider
 } from 'firebase/auth'
 import IRCRA from 'ircra'
-import { computed, ref } from 'vue'
+import { Ref, computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuthentication } from '@/stores/authentication'
 import { weightConverter } from '@/helpers'
@@ -36,11 +36,11 @@ const rules = {
   required: (v: any) => !!v || 'This field is required'
 }
 
-const grades = computed(() => ircra.get(user.value.settings?.scale).filter((item) => item))
+const grades = computed(() => ircra.get(user.value?.settings?.scale).filter((item) => item))
 
-const error = ref(undefined)
+const error: Ref<null | string> = ref(null)
 
-const login = async (method) => {
+const login = async (method: string) => {
   let provider = null
   const auth = getAuth()
 
@@ -55,15 +55,13 @@ const login = async (method) => {
     provider.addScope('email')
     provider.addScope('name')
   }
-  if (provider !== null) {
+  if (provider !== null && auth.currentUser !== null) {
     try {
       await linkWithPopup(auth.currentUser, provider).then(
         (result) => {
-          const { credential } = result
-          // eslint-disable-next-line no-shadow
           const { user } = result
           // eslint-disable-next-line no-console
-          console.log(credential, user)
+          console.log(user)
         },
         (err) => {
           // eslint-disable-next-line no-console
@@ -72,23 +70,29 @@ const login = async (method) => {
         }
       )
     } catch (err) {
-      error.value = err
+      if (err instanceof Error) {
+        // eslint-disable-next-line no-console
+        console.log(err)
+        error.value = err.message
+      }
     }
   }
 }
 
 const deleteAccount = async () => {
   const auth = getAuth()
-  await auth.currentUser
-    .delete()
-    .then(() => {
-      router.push('/')
-    })
-    .catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err)
-      error.value = err
-    })
+  if (auth.currentUser !== null) {
+    await auth.currentUser
+      .delete()
+      .then(() => {
+        router.push('/')
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err)
+        error.value = err
+      })
+  }
 }
 
 useHead({
@@ -146,6 +150,7 @@ useHead({
                 </template>
 
                 <v-radio-group
+                  v-if="user"
                   v-model="user.gender"
                   :disabled="!networkOnLine"
                   row
@@ -163,6 +168,7 @@ useHead({
                 </template>
 
                 <v-autocomplete
+                  v-if="user"
                   v-model="user.country"
                   :disabled="!networkOnLine"
                   :items="countries"
@@ -195,7 +201,7 @@ useHead({
                   @update:modelValue="updateUser"
                 >
                   <template #thumb-label="props">
-                    {{ weightConverter(props.value, user) }}kg
+                    {{ weightConverter(props.modelValue, user) }}kg
                   </template>
                   <template #append>
                     <v-label v-if="user && user.weight">
@@ -230,7 +236,7 @@ useHead({
                 </template>
 
                 <v-text-field
-                  v-if="user"
+                  v-if="user && user.status"
                   v-model="user.status"
                   :disabled="!networkOnLine"
                   :label="t('Status')"

@@ -20,7 +20,7 @@ const router = useRouter()
 const { t } = useI18n()
 
 const currentToken = ref('')
-const messages: Ref<MessagePayload[]> = ref([])
+const messages: Ref<ExtendedMessagePayload[]> = ref([])
 const copyAPI = navigator.clipboard
 const messaging = getMessaging(firebaseApp)
 const hasToken = ref(false)
@@ -183,8 +183,12 @@ function copyText() {
   }
 }
 
+interface ExtendedMessagePayload extends MessagePayload {
+  show: boolean
+}
+
 function appendMessage(payload: MessagePayload) {
-  const obj = { ...payload, ...{ show: true } }
+  const obj: ExtendedMessagePayload = { ...payload, ...{ show: true } }
   messages.value.push(obj)
 }
 

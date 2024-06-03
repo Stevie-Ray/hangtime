@@ -53,7 +53,7 @@ watch(
       const redirectUrl =
         route.query.redirectUrl === null || route.query.redirectUrl === undefined
           ? '/workouts'
-          : route.query.redirectUrl
+          : `${route.query.redirectUrl}`
       // push redirectUrl
       router.push(redirectUrl)
     }
@@ -140,15 +140,15 @@ const rules = {
   }
 }
 
-const getCookieValue = (name) => {
+const getCookieValue = (name: string) => {
   const value = `; ${document.cookie}`
   const parts = value.split(`; ${name}=`)
-  if (parts.length === 2) return parts.pop().split(';').shift()
+  if (parts.length === 2) return parts.pop()?.split(';').shift()
   return ''
 }
 
-const connect = async (method) => {
-  error.value = undefined
+const connect = async (method: string) => {
+  error.value = null
   resetPassword.value = false
   let provider = null
 
@@ -234,20 +234,28 @@ const connect = async (method) => {
         await signInWithPopup(auth, provider)
       }
     } catch (err) {
-      error.value = err.toString()
+      if (err instanceof Error) {
+        error.value = err.message
+      }
     }
   }
 }
 
 const validateLogin = () => {
-  login.value.validate()
+  if (login.value) {
+    // @ts-expect-error Vuetify
+    login.value.validate()
+  }
   if (valid.value) {
     connect('login')
   }
 }
 
 const validateRegister = () => {
-  register.value.validate()
+  if (register.value) {
+    // @ts-expect-error Vuetify
+    register.value.validate()
+  }
   if (valid.value) {
     connect('register')
   }
@@ -417,7 +425,7 @@ useHead({
                     block
                     size="large"
                     class="mt-2 mb-4"
-                    :prepend-icon="$key"
+                    prepend-icon="$key"
                     @click="validateRegister"
                   >
                     {{ t('Register') }}
@@ -439,7 +447,7 @@ useHead({
               <v-col cols="12" md="12">
                 <v-btn
                   v-show="user !== undefined && !user && networkOnLine"
-                  text
+                  variant="text"
                   disabled
                   x-small
                   prepend-icon="$incognito"

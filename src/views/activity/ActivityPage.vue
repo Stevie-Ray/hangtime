@@ -89,7 +89,7 @@ useHead({
         color="text"
         :disabled="!notifications"
         icon
-        :to="notifications ? '/activity/notifications' : null"
+        :to="notifications ? '/activity/notifications' : undefined"
       >
         <v-badge dot color="secondary">
           <v-icon>$bellOutline</v-icon>
