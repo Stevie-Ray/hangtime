@@ -89,7 +89,7 @@ onMounted(() => {
 
 // workout - remove
 const removeWorkout = () => {
-  removeUserWorkoutById(route.params.id)
+  removeUserWorkoutById(route.params.id.toString())
   router.push('/workouts')
 }
 
@@ -99,81 +99,24 @@ const missingHangboardDialog = computed(() => {
   }
   const company = parseInt(route.params.company.toString(), 10)
   const hangboard = parseInt(route.params.hangboard.toString(), 10)
-  const exists = getUserHangboards.value?.some(
-    (el) => el.company === company && el.hangboard === hangboard
-  )
-  if (!exists) {
-    // show dialog to add new hangboard
-    return true
-  }
   // if hangboard exists but is not selected, switch hangboard
-  if (company !== getUserHangboardCompany.id && hangboard !== getUserHangboard.id) {
-    const index = getUserHangboards.value.findIndex(
+  if (getUserHangboardCompany.value && company !== getUserHangboardCompany.value.id && getUserHangboard.value && hangboard !== getUserHangboard.value.id) {
+    const index = getUserHangboards.value?.findIndex(
       (list) => list.company === company && list.hangboard === hangboard
     )
     if (user.value) {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      user.value.settings.selected = index
-      updateUser()
-      fetchCommunityWorkouts()
+      // Ensure that index is defined before setting user settings
+      if (index !== undefined) {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        user.value.settings.selected = index
+        updateUser()
+        fetchCommunityWorkouts()
+      }
     }
   }
   // do nothing
   return false
 })
-
-// workout - subscribe
-const isHearted = computed(() => {
-  if (!workout?.value?.subscribers?.length || !user.value) return false
-  return workout.value.subscribers.some((subscriber) => subscriber === user.value.id)
-})
-
-const workoutSubscriber = () => {
-  if (!isHearted.value) {
-    workout?.value.subscribers.unshift(user.value.id)
-    // push to workouts
-    workouts?.value.unshift(workout?.value)
-  } else {
-    if (workout?.value?.user?.id === user?.value?.id) return
-    const userIndex = workout?.value.subscribers.indexOf(user.value.id)
-    workout?.value.subscribers.splice(userIndex, 1)
-    // remove from workouts
-    const index = workouts?.value.findIndex((item) => item.id === workout?.value.id)
-    workouts?.value.splice(index, 1)
-  }
-  if (workout.value?.user) {
-    updateWorkout({ userId: workout.value.user.id, workout: workout.value })
-  }
-}
-
-// workout - share
-const navigatorShare = navigator.share
-
-const shareWorkout = async () => {
-  const path =
-    window.location.origin +
-    router.resolve({
-      name: 'WorkoutsDetailPage',
-      params: {
-        company: getUserHangboardCompany.value.id,
-        hangboard: getUserHangboard.value.id,
-        id: workout.value.id
-      }
-    }).href
-
-  const shareData = {
-    title: `${workout.value.name} | HangTime`,
-    text: `${workout.value.name} | HangTime - ${workout.value.description}`,
-    url: `${path}`
-  }
-
-  try {
-    await navigator.share(shareData)
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(`Error: ${err}`)
-  }
-}
 
 const startWorkoutButton = ref(false)
 
@@ -181,14 +124,8 @@ const onScroll = () => {
   startWorkoutButton.value = window.scrollY > 250
 }
 
-const goToTimer = () => {
-  router.push(
-    `/workouts/${getUserHangboard.value.id}/${getUserHangboardCompany.value.id}/${workout.value.id}/timer`
-  )
-}
-
 useHead({
-  title: () => workout?.value?.name,
+  title: () => workout.value?.name ?? '',
   meta: [{ name: 'description', content: () => workout?.value?.description }]
 })
 </script>
@@ -278,9 +215,10 @@ useHead({
       <div v-show="!edit" v-scroll="onScroll" class="hidden-md-and-up">
         <v-fab-transition>
           <v-fab
+            v-if="getUserHangboard && getUserHangboardCompany && workout"
             :active="startWorkoutButton"
             :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
-            location="bottom end"
+            location="bottom"
             position="fixed"
             size="x-large"
             extended

@@ -3,6 +3,7 @@ import { ref, Ref } from 'vue'
 import { loadLanguageAsync } from '@/plugins/i18n'
 import router from '@/router'
 import { User as FirebaseUser } from 'firebase/auth'
+import { User } from '@/interfaces/authentication.interface'
 
 export const useAuthentication = defineStore('authentication', () => {
   const user: Ref<User | null> = ref(null)

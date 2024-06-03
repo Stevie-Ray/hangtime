@@ -74,11 +74,11 @@ const exerciseByType = (typeId: 'arms' | 'legs') =>
   // eslint-disable-next-line no-shadow
   exercises.filter((exercise) => exercise.type === typeId)
 
-const exerciseFilter = (type) => {
+const exerciseFilter = (type: 'arms' | 'legs') => {
   if (exercise.value.grip && grip[exercise.value.grip].disabledExercises) {
     return exerciseByType(type).map((obj) => ({
       ...obj,
-      disabled: grip[exercise.value.grip].disabledExercises.includes(obj.id)
+      disabled: grip[exercise.value?.grip]?.disabledExercises?.includes(obj.id)
     }))
   }
   return exerciseByType(type)
@@ -87,12 +87,12 @@ const exerciseFilter = (type) => {
 const exerciseMovement = computed({
   // getter
   get() {
-    if (exercise.value.exercise === 0) return null
+    if (exercise.value?.exercise === 0) return null
     return exercise.value.exercise
   },
   // setter
   set(newValue) {
-    exercise.value.exercise = newValue
+    exercise.value?.exercise = newValue
   }
 })
 

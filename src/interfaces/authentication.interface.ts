@@ -34,15 +34,15 @@ interface UserSettings {
  */
 export interface User {
   /** Display name of the user (nullable) */
-  displayName: string | null
+  displayName: string
   /** URL to the user's profile photo (nullable) */
-  photoURL: string | null
+  photoURL: string
   /** Email address of the user (nullable) */
-  email: string | null
+  email: string
   /** Settings configured by the user */
   settings: UserSettings
   /** Unique identifier for the user (optional) */
-  id?: string
+  id: string
   /** Set if the user has paid (optional) */
   subscribed?: boolean
   /** Set if the user has completed a workout (optional) */

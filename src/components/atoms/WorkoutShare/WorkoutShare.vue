@@ -39,15 +39,15 @@ const shareWorkout = async () => {
     router.resolve({
       name: 'WorkoutsDetailPage',
       params: {
-        company: getUserHangboardCompany.value.id,
-        hangboard: getUserHangboard.value.id,
-        id: workout.value.id
+        company: getUserHangboardCompany.value?.id,
+        hangboard: getUserHangboard.value?.id,
+        id: workout.value?.id
       }
     }).href
 
   const shareData = {
-    title: `${workout.value.name} | HangTime`,
-    text: `${workout.value.name} | HangTime - ${workout.value.description}`,
+    title: `${workout.value?.name} | HangTime`,
+    text: `${workout.value?.name} | HangTime - ${workout.value?.description}`,
     url: `${path}`
   }
 

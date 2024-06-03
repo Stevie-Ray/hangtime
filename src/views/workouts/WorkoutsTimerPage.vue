@@ -14,7 +14,7 @@ const { getWorkoutById } = useWorkouts()
 const workout = computed(() => getWorkoutById(route.params.id))
 
 useHead({
-  title: () => workout?.value?.name,
+  title: () => workout.value?.name ?? '',
   meta: [{ name: 'description', content: '' }]
 })
 </script>
