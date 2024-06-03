@@ -43,7 +43,11 @@ const workoutsList = computed(() => {
 
 const initialLength = workoutsList.value.length
 
-const fetchMoreWorkouts = async ({ done }) => {
+const fetchMoreWorkouts = async ({
+  done
+}: {
+  done: (status: 'ok' | 'empty' | 'loading' | 'error') => void
+}) => {
   if (route.path === '/workouts') {
     if (!shouldFetchUserWorkouts) {
       done('empty')
@@ -69,7 +73,9 @@ const fetchMoreWorkouts = async ({ done }) => {
   } catch (error) {
     // Something went wrong when adding content
     done('error')
-    console.error('Error fetching workouts:', error.message)
+    if (error instanceof Error) {
+      console.error('Error fetching workouts:', error.message)
+    }
   } finally {
     const updatedLength = workoutsList.value.length
     if (updatedLength === initialLength) {
@@ -122,7 +128,7 @@ useHead({
       <v-menu v-model="hangboardMenu">
         <template v-slot:activator="{ props }">
           <div v-bind="props" class="hangboard-select">
-            <span v-if="getUserHangboardCompany">
+            <span v-if="getUserHangboardCompany && getUserHangboard">
               {{ `${getUserHangboardCompany.name} - ${getUserHangboard.name}` }}
             </span>
             <span v-if="hangboardMenu && getUserHangboards?.length > 1"
@@ -137,6 +143,7 @@ useHead({
         <v-card v-if="getUserHangboards?.length > 1" :max-width="600">
           <v-card-text>
             <exercise-hangboard
+              v-if="getUserHangboard && getUserHangboardCompany"
               :hangboard="{
                 hangboard: getUserHangboard.id,
                 company: getUserHangboardCompany.id
@@ -145,7 +152,7 @@ useHead({
             <v-divider class="my-4" />
 
             <v-radio-group
-              v-if="getUserHangboards?.length > 0"
+              v-if="user && getUserHangboards?.length > 0"
               v-model="user.settings.selected"
               :disabled="!networkOnLine"
               @update:modelValue="setHangboard"
@@ -214,6 +221,7 @@ useHead({
               <v-infinite-scroll :onLoad="fetchMoreWorkouts">
                 <template v-for="(workout, index) in workoutsList" :key="workout.id">
                   <v-list-item
+                    v-if="getUserHangboard && getUserHangboardCompany && workout"
                     :class="`v-list-item-${index}`"
                     :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}`"
                   >

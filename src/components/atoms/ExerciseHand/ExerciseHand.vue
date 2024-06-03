@@ -15,8 +15,6 @@ const emit = defineEmits(['left', 'right'])
 const toggleFinger = (hand: string, action: 'left' | 'right', finger: string) => {
   if (props.edit && props.exercise) {
     const handArray = props.exercise[hand]
-    console.log(props)
-    console.log(handArray)
     if (finger.startsWith('f') && finger.length <= 2) {
       const fingerNumber = parseInt(finger.substr(1), 10)
       let updatedHand: number[] = []
@@ -25,7 +23,6 @@ const toggleFinger = (hand: string, action: 'left' | 'right', finger: string) =>
         updatedHand = [...handArray]
       }
       updatedHand.push(fingerNumber)
-      console.log(action, updatedHand)
       emit(action, updatedHand)
     }
   }
@@ -79,7 +76,7 @@ const resetHands = () => {
     >
       <div class="hand__left">
         <inline-svg
-          @click="(e: Event) => toggleFinger('leftHand', 'left', e.target.id)"
+          @click="(e: MouseEvent) => toggleFinger('leftHand', 'left', (e.target as HTMLElement).id)"
           v-if="exercise?.left !== null"
           :class="[getHandClass('leftHand'), { large: edit }]"
           :src="imgIconHang"
@@ -88,7 +85,7 @@ const resetHands = () => {
       </div>
       <div class="hand__right">
         <inline-svg
-          @click="(e: Event) => toggleFinger('rightHand', 'right', e.target.id)"
+          @click="(e: MouseEvent) => toggleFinger('rightHand', 'right', (e.target as HTMLElement).id)"
           v-if="exercise?.right !== null"
           :class="[getHandClass('rightHand'), { large: edit }]"
           :src="imgIconHang"

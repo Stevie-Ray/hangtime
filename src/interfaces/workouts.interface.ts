@@ -49,7 +49,7 @@ export interface Workout {
   /** Description of the workout. */
   description: string
   /** Difficulty level of the workout. */
-  level: number
+  level: 1 | 2 | 3
   /** The hangboard used in the workout. */
   hangboard: number
   /** Company that created the workout. */

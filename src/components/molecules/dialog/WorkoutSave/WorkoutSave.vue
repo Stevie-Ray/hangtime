@@ -33,10 +33,10 @@ const dialog = ref(true)
 const workoutSave = () => {
   if (!workout.value?.id) {
     // new workout
-    createUserWorkout(workout.value)
+    workout.value ? createUserWorkout(workout.value) : null
   } else {
     // existing workout
-    updateUserWorkout(workout.value)
+    workout.value ? updateUserWorkout(workout.value) : null
   }
 
   emit('show', false)
