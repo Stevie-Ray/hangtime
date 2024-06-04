@@ -45,10 +45,10 @@ export const useWorkouts = defineStore('workouts', () => {
         : null
     const constraints = [['share', '==', true]]
     if (user?.getUserHangboardCompany) {
-      constraints.push(['company', '==', user.getUserHangboardCompany.id])
+      constraints.push(['company', '==', user.getUserHangboardCompany.id.toString()])
     }
     if (user?.getUserHangboard) {
-      constraints.push(['hangboard', '==', user.getUserHangboard.id])
+      constraints.push(['hangboard', '==', user.getUserHangboard.id.toString()])
     }
     const newWorkouts = await usersWorkoutsDb.readAll(
       constraints,
@@ -98,7 +98,7 @@ export const useWorkouts = defineStore('workouts', () => {
    */
   async function updateUserWorkout(payload: Workout) {
     const { user } = storeToRefs(useAuthentication())
-    const userWorkoutsDb = new UserWorkoutsDB(user.value.id)
+    const userWorkoutsDb = new UserWorkoutsDB(user.value?.id)
     await userWorkoutsDb.update(payload)
   }
 

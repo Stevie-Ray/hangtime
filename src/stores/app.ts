@@ -2,11 +2,10 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
 export const useApp = defineStore('app', () => {
-  const networkOnLine = ref(true)
-  const SWRegistrationForNewContent = ref(null)
-  const refreshingApp = ref(false)
+  const networkOnLine = ref<boolean>(true)
+  const SWRegistrationForNewContent = ref<ServiceWorkerRegistration | null>(null)
+  const refreshingApp = ref<boolean>(false)
 
-  // action
   /**
    * Trigger service worker skipWating so the new service worker can take over.
    * This will also trigger a window refresh (see /src/helpers/register-service-worker.js)
@@ -19,10 +18,11 @@ export const useApp = defineStore('app', () => {
       return
     }
     refreshingApp.value = true
-    SWRegistrationForNewContent.value?.waiting?.postMessage('skipWaiting')
+    if (SWRegistrationForNewContent.value.waiting !== null) {
+      SWRegistrationForNewContent.value.waiting.postMessage('skipWaiting')
+    }
   }
 
-  // getter
   const newAppContent = computed(
     () =>
       !(

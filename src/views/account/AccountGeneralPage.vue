@@ -113,9 +113,9 @@ const themes = [
 ]
 
 const setTheme = (value: number) => {
-  if (user.value){
+  if (user.value) {
     user.value.settings.theme = value
-  updateUser()
+    updateUser()
   }
 }
 

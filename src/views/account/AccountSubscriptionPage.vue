@@ -141,7 +141,7 @@ async function listPurchases() {
   }
 }
 
-async function acknowledge(token: string, type = 'repeatable', onComplete = () => {}) {
+async function acknowledge(token: string, onComplete = () => {}) {
   if (canSubscribe === undefined) {
     // Digital Goods API is not supported in this context.
     log("window doesn't have getDigitalGoodsService.")
@@ -202,6 +202,7 @@ function trigger(sku: string, onToken: (token: any) => void = () => {}) {
 
   const request = new PaymentRequest(supportedInstruments, details)
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function handlePaymentResponse(response: PaymentResponse) {
     window.setTimeout(() => {
       response
@@ -280,7 +281,7 @@ function buySubscription() {
   trigger('subscription', (token) => {
     buyStatus = 'Purchase processing..'
 
-    acknowledge(token, 'repeatable', () => {
+    acknowledge(token, () => {
       if (user.value) {
         user.value.subscribed = true
         updateUser()
@@ -409,7 +410,7 @@ useHead({
                   purchaseToken: {{ purchase.purchaseToken }}
                 </v-list-item-subtitle>
                 <v-list-item-action>
-                  <v-btn icon @click="acknowledge(purchase.purchaseToken, 'repeatable')">
+                  <v-btn icon @click="acknowledge(purchase.purchaseToken)">
                     <v-icon>$delete</v-icon>
                   </v-btn>
                 </v-list-item-action>

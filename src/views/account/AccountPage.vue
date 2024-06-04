@@ -14,7 +14,15 @@ const { user } = storeToRefs(useAuthentication())
 
 const { networkOnLine } = storeToRefs(useApp())
 
-const items = [
+interface Item {
+  title: string
+  icon: string
+  subtitle: string
+  link: string
+  external?: boolean
+}
+
+const items: Item[] = [
   {
     title: t('Profile'),
     icon: '$account',
@@ -97,9 +105,9 @@ async function canUsePlayBilling() {
   }
 }
 
-function showAccountLink(item) {
+function showAccountLink(item: Item) {
   if (item.title !== t('Subscription')) return true
-  if (canSubscribePlayBilling.value && !user?.value?.subscribed) return true
+  if (canSubscribePlayBilling.value && !user.value?.subscribed) return true
   return false
 }
 
@@ -156,9 +164,9 @@ useHead({
               <template v-for="(item, i) in items" :key="i">
                 <v-list-item
                   v-if="showAccountLink(item)"
-                  :to="!item.external ? item.link : null"
-                  :href="item.external ? item.link : null"
-                  :target="item.external ? '_blank' : null"
+                  :to="!item.external ? item.link : undefined"
+                  :href="item.external ? item.link : undefined"
+                  :target="item.external ? '_blank' : undefined"
                 >
                   <template #prepend>
                     <v-icon :icon="item.icon"></v-icon>

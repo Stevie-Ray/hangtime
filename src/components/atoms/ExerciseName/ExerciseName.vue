@@ -5,8 +5,7 @@ import { Exercise } from '@/interfaces/workouts.interface'
 const grip = useGrip()
 const exercises = useExercises()
 
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
+defineProps({
   exercise: {
     type: Object as () => Exercise
   },

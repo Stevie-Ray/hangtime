@@ -40,9 +40,7 @@ const hangboardImage = computed(() => {
 })
 
 const classHold = (hand: 'left' | 'right'): string | null => {
-  return props.exercise && props.exercise[hand] !== null 
-    ? `h${props.exercise[hand]! + 1}` 
-    : null;
+  return props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand]! + 1}` : null
 }
 
 const toggleHold = (hand: 'left' | 'right', e: Event) => {

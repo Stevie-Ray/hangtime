@@ -400,7 +400,9 @@ const rules = {
                     title="Weight"
                     @input="(value: number) => (exercise ? (exercise.weight = value) : null)"
                   >
-                    <template #default>{{ weightConverter(exercise.weight, user) }}kg</template>
+                    <template #default>
+                      <span v-if="user">{{ weightConverter(exercise.weight, user) }}kg</span>
+                    </template>
                   </exercise-counter>
                 </v-expansion-panel-text>
               </v-expansion-panel>

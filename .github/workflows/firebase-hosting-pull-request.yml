@@ -26,10 +26,12 @@ jobs:
         run: npm run format:check
       - name: Check linter
         run: npm run lint
- #     - name: Check unit tests
- #       run: npm run test:unit
- #    - name: Check e2e tests
- #       run: npm run test:e2e:headless
+      - name: Check types
+        run: npm run type-check
+#      - name: Check unit tests
+#        run: npm run test:unit
+#      - name: Check e2e tests
+#        run: npm run test:e2e
 
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'

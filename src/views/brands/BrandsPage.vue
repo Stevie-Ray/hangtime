@@ -8,8 +8,6 @@ import countries from '@/helpers/countries'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
-import { Company } from '@/interfaces/user.interface'
-
 const { t } = useI18n()
 
 const { getCompanies } = useUser()

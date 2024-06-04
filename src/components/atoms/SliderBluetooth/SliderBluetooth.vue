@@ -1,8 +1,7 @@
 <script setup lang="ts">
 // import { computed } from 'vue'
 
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
+defineProps({
   stream: {
     type: String || undefined,
     default: 0,

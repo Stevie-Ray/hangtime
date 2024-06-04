@@ -6,8 +6,7 @@ import { useAuthentication } from '@/stores/authentication'
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthentication())
 
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
+defineProps({
   extension: {
     type: Boolean,
     default: false

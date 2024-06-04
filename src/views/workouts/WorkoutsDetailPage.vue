@@ -23,15 +23,12 @@ const { t } = useI18n()
 
 const { networkOnLine } = storeToRefs(useApp())
 
-const { workouts } = storeToRefs(useWorkouts())
-
 // router
 const route = useRoute()
 const router = useRouter()
 
 // workout
-const { fetchCommunityWorkouts, getWorkoutById, removeUserWorkoutById, updateWorkout } =
-  useWorkouts()
+const { fetchCommunityWorkouts, getWorkoutById, removeUserWorkoutById } = useWorkouts()
 
 const { getUserHangboards, getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
 

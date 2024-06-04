@@ -98,6 +98,7 @@ loader.load().then(async () => {
 
   let marker
   if (props.markers) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const [i, item] of props.markers.entries()) {
       if (item?.location?.lat && item?.location?.lon) {
         const icon = {
