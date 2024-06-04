@@ -10,8 +10,7 @@ import {
   startAfter,
   Firestore,
   DocumentSnapshot,
-  QueryConstraint,
-  Timestamp
+  QueryConstraint
 } from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
