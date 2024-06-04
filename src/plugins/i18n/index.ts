@@ -18,10 +18,8 @@ i18n.global.setLocaleMessage(defaultLocale, defaultMessages)
 
 const loadedLanguages = ['en-US'] // our default language that is preloaded
 
-function setI18nLanguage(locale) {
-  if (i18n.mode === 'legacy') {
-    i18n.global.locale = locale
-  } else {
+function setI18nLanguage(locale: string) {
+  if (i18n.mode !== 'legacy') {
     i18n.global.locale.value = locale
   }
   const htmlLang = locale.slice(0, 2)
@@ -30,14 +28,14 @@ function setI18nLanguage(locale) {
 
 export async function loadLanguageAsync(locale: string) {
   // If the same language or already loaded
-  if (i18n.global.locale === locale || loadedLanguages.includes(locale)) {
+  if (i18n.global.locale?.value === locale || loadedLanguages.includes(locale)) {
     return setI18nLanguage(locale)
   }
   // If the language hasn't been loaded yet
   const modules = import.meta.glob('@/i18n/*.json')
-  const loadLanguage = async (path) => {
+  const loadLanguage = async (path: string) => {
     try {
-      const messages = await modules[path]()
+      const messages = (await modules[path]()) as { default: Record<string, any> }
       i18n.global.setLocaleMessage(locale, messages.default)
       loadedLanguages.push(locale)
       return setI18nLanguage(locale)

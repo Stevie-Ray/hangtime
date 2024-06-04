@@ -65,10 +65,15 @@ export default class GenericDB {
       updateTimestamp: serverTimestampA
     }
 
-    const docId: string =
-      id === null || id === undefined
-        ? (await addDoc(collectionRef, dataToCreate)).id
-        : (await setDoc(doc(db, this.collectionPath, id), dataToCreate)).then(() => id)
+    let docId: string
+
+    if (id === null || id === undefined) {
+      const docRef = await addDoc(collectionRef, dataToCreate)
+      docId = docRef.id
+    } else {
+      await setDoc(doc(db, this.collectionPath, id), dataToCreate)
+      docId = id
+    }
 
     return {
       id: docId,
@@ -180,7 +185,7 @@ export default class GenericDB {
       .filter((prop) => obj[prop] instanceof Object)
       .forEach((prop) => {
         if (obj[prop] instanceof Timestamp) {
-          newObj[prop] = obj[prop].toDate()
+          obj[prop] = obj[prop].toDate()
         } else {
           this.convertObjectTimestampPropertiesToDate(obj[prop])
         }
