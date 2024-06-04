@@ -213,9 +213,9 @@ function trigger(sku: string, onToken = (token: string) => {}) {
       // eslint-disable-next-line func-names
       .then((result) => {
         log(result ? 'Can make payment' : 'Cannot make payment')
-        if (result) {
-          request.show().then(handlePaymentResponse)
-        }
+        // if (result) {
+        //   request.show().then(handlePaymentResponse)
+        // }
       })
       // eslint-disable-next-line func-names
       .catch((e) => {
@@ -223,41 +223,45 @@ function trigger(sku: string, onToken = (token: string) => {}) {
       })
   }
   // Checking for instrument presence.
-  // if (request.hasEnrolledInstrument) {
-  //   request
-  //     .hasEnrolledInstrument()
-  //     // eslint-disable-next-line func-names
-  //     .then((result) => {
-  //       if (result) {
-  //         log('Has enrolled instrument')
-  //       } else {
-  //         log('No enrolled instrument')
-  //       }
-  //       // Call show even if we don't have any enrolled instruments.
-  //       request
-  //         .show()
-  //         .then(handlePaymentResponse)
-  //         // eslint-disable-next-line func-names
-  //         .catch((e) => {
-  //           // log(JSON.stringify(e, undefined, 2));
-  //           log(e)
-  //           log("Maybe you've already purchased the item (try acknowledging first).")
-  //         })
-  //     })
-  //     // eslint-disable-next-line func-names
-  //     .catch((e) => {
-  //       log(e.message)
-  //       // Also call show if hasEnrolledInstrument throws.
-  //       request
-  //         .show()
-  //         .then(handlePaymentResponse)
-  //         // eslint-disable-next-line no-shadow,func-names
-  //         .catch((e) => {
-  //           log(JSON.stringify(e, undefined, 2))
-  //           log(e)
-  //         })
-  //     })
-  // }
+  // @ts-expect-error Chrome only
+  if (request.hasEnrolledInstrument) {
+    request
+      // @ts-expect-error Chrome only
+      .hasEnrolledInstrument()
+      // eslint-disable-next-line func-names
+      .then((result: any) => {
+        if (result) {
+          log('Has enrolled instrument')
+        } else {
+          log('No enrolled instrument')
+        }
+        // Call show even if we don't have any enrolled instruments.
+        request
+          .show()
+          .then(handlePaymentResponse)
+          // eslint-disable-next-line func-names
+          .catch((e) => {
+            // log(JSON.stringify(e, undefined, 2));
+            log(e)
+            log("Maybe you've already purchased the item (try acknowledging first).")
+          })
+      })
+      // eslint-disable-next-line func-names
+      .catch((error: unknown) => {
+        if (error instanceof Error) {
+          log(error.message)
+        }
+        // Also call show if hasEnrolledInstrument throws.
+        request
+          .show()
+          .then(handlePaymentResponse)
+          // eslint-disable-next-line no-shadow,func-names
+          .catch((e) => {
+            log(JSON.stringify(e, undefined, 2))
+            log(e)
+          })
+      })
+  }
 }
 function buySubscription() {
   trigger('subscription', (token: any) => {
