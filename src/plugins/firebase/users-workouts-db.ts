@@ -53,10 +53,8 @@ export default class UsersWorkoutsDB extends GenericDB {
     }
 
     if (lastVisible) {
-      const data = lastVisible.data() as { updateTimestamp: Timestamp }
-      if (data && data.updateTimestamp) {
-        combinedQuery.push(startAfter(data.updateTimestamp))
-      }
+      const { updateTimestamp } = lastVisible
+      combinedQuery.push(startAfter(updateTimestamp))
     }
 
     if (amount !== null) {
