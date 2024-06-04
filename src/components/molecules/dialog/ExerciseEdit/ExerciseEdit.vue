@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch, toRaw } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
@@ -7,6 +7,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import { useAuthentication } from '@/stores/authentication'
+import { Workout, Exercise } from '@/interfaces/workouts.interface'
 
 const { user } = storeToRefs(useAuthentication())
 
@@ -20,7 +21,7 @@ const repType = ref('original')
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   index: {
     type: Number,
@@ -49,31 +50,39 @@ const emit = defineEmits(['time', 'show'])
 
 const dialog = ref(true)
 
-const exercise = computed(() => workout.value.exercises[index.value])
+// const exercise = computed<Exercise | null>(() => workout.value?.exercises[index.value] ?? null)
+const exercise = computed<Exercise | undefined>(() => workout.value?.exercises[index.value])
 
 // eslint-disable-next-line no-shadow
-const exerciseEditTime = (timer, time) => {
+const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', time: number) => {
+  if (!exercise.value) return
   // set time of timer value
   exercise.value[timer] = time
   // remove old value
-  emit('time', workout.value.time - exercise.value.time)
+  if (workout.value?.time && exercise.value?.time) {
+    emit('time', workout.value.time - exercise.value.time)
+  }
   exercise.value.time =
     (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
     exercise.value.rest +
     exercise.value.pause
   // add new value
-  emit('time', workout.value.time + exercise.value.time)
+  if (workout.value?.time && exercise.value?.time) {
+    emit('time', workout.value.time + exercise.value.time)
+  }
 }
 
-const exerciseByType = (typeId) =>
+const exerciseByType = (typeId: 'arms' | 'legs') =>
   // eslint-disable-next-line no-shadow
   exercises.filter((exercise) => exercise.type === typeId)
 
-const exerciseFilter = (type) => {
-  if (exercise.value.grip && grip[exercise.value.grip].disabledExercises) {
+const exerciseFilter = (type: 'arms' | 'legs') => {
+  if (exercise.value && grip[exercise.value.grip].disabledExercises) {
     return exerciseByType(type).map((obj) => ({
       ...obj,
-      disabled: grip[exercise.value.grip].disabledExercises.includes(obj.id)
+      disabled: exercise.value
+        ? grip[exercise.value.grip].disabledExercises?.includes(obj.id)
+        : null
     }))
   }
   return exerciseByType(type)
@@ -82,34 +91,38 @@ const exerciseFilter = (type) => {
 const exerciseMovement = computed({
   // getter
   get() {
-    if (exercise.value.exercise === 0) return null
-    return exercise.value.exercise
+    if (exercise.value && exercise.value.exercise === 0) return null
+    return exercise.value ? exercise.value.exercise : null
   },
   // setter
   set(newValue) {
-    exercise.value.exercise = newValue
+    if (exercise.value && newValue !== null) {
+      exercise.value.exercise = newValue
+    }
   }
 })
 
 const exerciseRemove = () => {
-  workout.value.exercises.splice(index.value, 1)
+  workout.value?.exercises.splice(index.value, 1)
   index.value = 0
   emit('show', false)
 }
 
 const exerciseCopy = () => {
-  workout.value.exercises.splice(
-    index.value,
-    0,
-    structuredClone(toRaw(workout.value.exercises[index.value]))
-  )
-  index.value = 0
-  emit('show', false)
+  if (workout.value) {
+    workout.value.exercises.splice(
+      index.value,
+      0,
+      structuredClone(toRaw(workout.value.exercises[index.value]))
+    )
+    index.value = 0
+    emit('show', false)
+  }
 }
 
 // workout - weight
 const weightLabel = computed(() => {
-  if (user?.value?.weight && exercise.value.weight !== 0) {
+  if (user.value?.weight && exercise.value && exercise.value.weight !== 0) {
     return `Your weight: ${user.value.weight}kg.
      Training weight: ${user.value.weight + exercise.value.weight}kg.`
   }
@@ -117,7 +130,8 @@ const weightLabel = computed(() => {
 })
 
 const rules = {
-  length: (length) => (v) => (v || '').length <= length || `Max ${length} characters`
+  length: (length: number) => (v: string) =>
+    (v || '').length <= length || `Max ${length} characters`
 }
 </script>
 
@@ -139,8 +153,9 @@ const rules = {
       <v-container>
         <v-row>
           <v-col cols="12">
-            <v-expansion-panels variant="accordion">
+            <v-expansion-panels v-if="exercise" variant="accordion">
               <exercise-card
+                v-if="workout"
                 :exercise="exercise"
                 :hangboard="{
                   hangboard: workout.hangboard,
@@ -151,17 +166,21 @@ const rules = {
                 edit-hangboard
                 @left="
                   (hold) =>
-                    exercise.left === hold && exercise.right !== null
+                    exercise && exercise.left === hold && exercise.right !== null
                       ? (exercise.left = null)
-                      : (exercise.left = hold)
+                      : exercise
+                        ? (exercise.right = hold)
+                        : null
                 "
                 @right="
                   (hold) =>
-                    exercise.right === hold && exercise.left !== null
+                    exercise && exercise.right === hold && exercise.left !== null
                       ? (exercise.right = null)
-                      : (exercise.right = hold)
+                      : exercise
+                        ? (exercise.right = hold)
+                        : null
                 "
-                @rotate="(rotate) => (exercise.rotate = rotate)"
+                @rotate="(rotate) => (exercise ? (exercise.rotate = rotate) : null)"
               ></exercise-card>
 
               <v-expansion-panel>
@@ -210,7 +229,7 @@ const rules = {
                     <v-col cols="6">
                       <div class="text-caption text-right">
                         <span
-                          v-if="exercise.exercise !== 0"
+                          v-if="exercise && exercise.exercise !== 0"
                           @click="
                             ;(exercise.exercise = 0), (exercise.pullups = 1), (exercise.max = false)
                           "
@@ -291,7 +310,7 @@ const rules = {
                     :timer="false"
                     :title="`${exercises[exercise.exercise - 1].name}s`"
                     :value="exercise.pullups"
-                    @input="(value) => (exercise.pullups = value)"
+                    @input="(value: number) => (exercise ? (exercise.pullups = value) : null)"
                   >
                   </exercise-counter>
 
@@ -350,8 +369,8 @@ const rules = {
                   <exercise-hand
                     :exercise="exercise"
                     edit
-                    @left="(finger) => (exercise.leftHand = finger)"
-                    @right="(finger) => (exercise.rightHand = finger)"
+                    @left="(finger: number[]) => (exercise ? (exercise.leftHand = finger) : null)"
+                    @right="(finger: number[]) => (exercise ? (exercise.rightHand = finger) : null)"
                   ></exercise-hand>
                 </v-expansion-panel-text>
               </v-expansion-panel>
@@ -379,9 +398,11 @@ const rules = {
                     :value="exercise.weight"
                     suffix="kg"
                     title="Weight"
-                    @input="(value) => (exercise.weight = value)"
+                    @input="(value: number) => (exercise ? (exercise.weight = value) : null)"
                   >
-                    <template #default>{{ weightConverter(exercise.weight, user) }}kg</template>
+                    <template #default>
+                      <span v-if="user">{{ weightConverter(exercise.weight, user) }}kg</span>
+                    </template>
                   </exercise-counter>
                 </v-expansion-panel-text>
               </v-expansion-panel>

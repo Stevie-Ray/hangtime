@@ -1,11 +1,21 @@
-<script setup>
+<script setup lang="ts">
 import { useRandomImage } from '@/helpers'
 import { useUser } from '@/stores/user'
 import countries from '@/helpers/countries'
 
 const { getCompanies } = useUser()
 
-const slides = [
+interface Slide {
+  title: string
+  subtitle: string
+  image: string
+  text: string
+  button_text: string
+  internal_link?: string
+  external_link?: string
+}
+
+const slides: Slide[] = [
   {
     title: '🏆 Check the leaderboard',
     subtitle: 'Who trained longest or hung longest?',
@@ -42,7 +52,7 @@ const slides = [
 
 let newCompanies = []
 // eslint-disable-next-line no-restricted-syntax
-for (const company of getCompanies) {
+for (const company of getCompanies()) {
   if (company?.id >= getCompanies.length - 5) {
     newCompanies.push(company)
   }
@@ -65,7 +75,7 @@ for (const newCompany of newCompanies) {
     button_text: 'View Hangboards',
     internal_link: newCompany.name
       ? `/brands/${encodeURIComponent(newCompany.name.replace(/\s+/g, '-').toLowerCase())}`
-      : null
+      : undefined
   })
   index += 2
 }
@@ -80,7 +90,7 @@ for (const newCompany of newCompanies) {
     hide-delimiters
     class="rounded-lg"
   >
-    <v-carousel-item v-for="(slide, i) in slides" :key="i" v-once>
+    <v-carousel-item v-for="(slide, i) in slides" :key="i">
       <v-card class="mx-auto" max-width="100%">
         <v-img :src="slide.image" cover>
           <v-card-title v-if="slide.title" class="text-white">

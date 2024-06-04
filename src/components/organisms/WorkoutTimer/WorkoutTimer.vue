@@ -1,6 +1,7 @@
-<script setup>
-import { computed, ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
+<script setup lang="ts">
+import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { stream } from '@hangtime/grip-connect'
+import { massObject } from '@hangtime/grip-connect/src/notify'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
@@ -11,6 +12,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
+import { Workout, Exercise } from '@/interfaces/workouts.interface'
 import { time } from '@/helpers'
 
 import countSound from '@/assets/sound/count.wav'
@@ -19,7 +21,7 @@ import stopSound from '@/assets/sound/stop.wav'
 
 import { useAuthentication } from '@/stores/authentication'
 import { useActivities } from '@/stores/activities'
-import { useBluetooth } from '@/stores/bluetooth.js'
+import { useBluetooth } from '@/stores/bluetooth'
 
 const { device } = storeToRefs(useBluetooth())
 
@@ -33,7 +35,12 @@ const { createUserActivity } = useActivities()
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
+  },
+  /** Quick Workout */
+  quick: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -46,27 +53,27 @@ watch(
   }
 )
 
-let timer = null
-const timerPaused = ref(null)
-const clock = ref(0)
-const clockText = ref(t('Press Play'))
-const currentExercise = ref(0)
-const currentExerciseStep = ref(0)
-const currentExerciseStepRepeat = ref(0)
+let timer: number | null = null
+const timerPaused: Ref<boolean | null> = ref(null)
+const clock: Ref<number> = ref(0)
+const clockText: Ref<string> = ref(t('Press Play'))
+const currentExercise: Ref<number> = ref(0)
+const currentExerciseStep: Ref<number> = ref(0)
+const currentExerciseStepRepeat: Ref<number> = ref(0)
 
-const audio = new Audio()
-const noSleep = new NoSleep()
-const setupTime = 5
+const audio: HTMLAudioElement = new Audio()
+const noSleep: NoSleep = new NoSleep()
+const setupTime: number = 5
 
 // complete
-const dialogWorkoutComplete = ref(false)
-const workoutCompleteTimeTotal = ref(0)
-const workoutCompleteTimeHanging = ref(0)
+const dialogWorkoutComplete: Ref<boolean> = ref(false)
+const workoutCompleteTimeTotal: Ref<number> = ref(0)
+const workoutCompleteTimeHanging: Ref<number> = ref(0)
 
 // bluetooth
-const bluetoothOutput = ref(null)
+const bluetoothOutput = ref<massObject | null>(null)
 
-const notify = (data) => {
+const notify = (data: massObject) => {
   bluetoothOutput.value = data
 }
 
@@ -76,31 +83,37 @@ onBeforeUnmount(() => {
   if (window.speechSynthesis) window.speechSynthesis.cancel()
 })
 
-const exercise = computed(() => {
-  if (workout?.value?.exercises) return workout?.value?.exercises[currentExercise.value]
-  return {}
+const exercise = computed<Exercise | undefined>(() => {
+  if (workout.value?.exercises) return workout.value.exercises[currentExercise.value]
+  return undefined
 })
 
-const exerciseNext = computed(() => {
-  if (workout?.value?.exercises) return workout?.value?.exercises[currentExercise.value + 1]
-  return {}
+const exerciseNext = computed<Exercise | undefined>(() => {
+  if (workout.value?.exercises) return workout?.value?.exercises[currentExercise.value + 1]
+  return undefined
 })
 
-const exerciseTime = computed(
-  () =>
-    (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) - exercise.value.rest
-)
+const exerciseTime = computed<number>(() => {
+  if (exercise.value)
+    return (
+      (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
+      exercise.value.rest
+    )
+  return 0
+})
 
 const requestWakeLock = () => {
   try {
     noSleep.enable()
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(`${err.name}, ${err.message}`)
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      // eslint-disable-next-line no-console
+      console.error(`${err.name}, ${err.message}`)
+    }
   }
 }
 
-const speak = (text) => {
+const speak = (text: SpeechSynthesisUtterance) => {
   try {
     window.speechSynthesis.speak(text)
   } catch (ex) {
@@ -109,31 +122,34 @@ const speak = (text) => {
   }
 }
 
-const speakText = (text) => {
-  if (user.value?.settings?.speak && 'speechSynthesis' in window) {
+const speakText = (text: string) => {
+  if (user.value?.settings.speak && 'speechSynthesis' in window) {
     let voiceList = window.speechSynthesis.getVoices()
-    if (user.value?.settings.locale) {
+    if (user.value.settings.locale) {
       voiceList = voiceList.filter((voice) => {
-        return voice.lang.includes(user.value?.settings?.locale.substring(0, 2))
+        if (user.value?.settings.locale) {
+          return voice.lang.includes(user.value?.settings.locale.substring(0, 2))
+        }
+        return voice.lang
       })
     } else {
       voiceList = voiceList.filter((voice) => /^(en|EN|US)/.test(voice.lang))
     }
     const utterance = new window.SpeechSynthesisUtterance()
     utterance.text = text
-    utterance.voice = voiceList[user.value?.settings?.voice]
+    utterance.voice = voiceList[user.value?.settings.voice]
     speak(utterance)
   }
 }
 
-const playSound = (path, type) => {
-  if (user.value?.settings?.sound && audio) {
+const playSound = (path: string, type: 'wav' | 'mp3') => {
+  if (user.value?.settings.sound && audio) {
     // workaround for iOS / Safari
     if (path) {
       audio.src = path
     }
     if (type) {
-      audio.type = `audio/${type}`
+      // audio.type = `audio/${type}`
     }
     audio.addEventListener('canplaythrough', () => {
       audio.play()
@@ -142,21 +158,21 @@ const playSound = (path, type) => {
 }
 const vibratePhone = () => {
   if ('vibrate' in navigator) {
-    if (user.value?.settings?.vibrate) navigator.vibrate([80, 40, 120])
+    if (user.value?.settings.vibrate) navigator.vibrate([80, 40, 120])
   }
 }
 
 const countDown = () => {
   // if (clock.value === 15) {
-  //   if (user.value?.settings?.speak) {
+  //   if (user.value.settings?.speak) {
   //     speakText(`${t('Get ready')}!`)
   //   } else {
   //     playSound(countSound, 'wav')
   //   }
   // }
   if (clock.value <= 3 && clock.value > 1) {
-    if (user.value?.settings?.speak) {
-      speakText(clock.value - 1)
+    if (user.value?.settings.speak) {
+      speakText(`${clock.value - 1}`)
     } else {
       playSound(countSound, 'wav')
     }
@@ -179,7 +195,10 @@ const pauseWorkout = () => {
 
 const stopTimer = () => {
   noSleep.disable()
-  clearInterval(timer)
+  if (timer !== null) {
+    clearInterval(timer)
+    timer = null
+  }
   timerPaused.value = !timerPaused.value
   if (device.value) {
     // disconnect(device.value)
@@ -196,14 +215,20 @@ const exercisePause = () => {
 }
 
 const exerciseHold = () => {
-  if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+  if (
+    exercise.value &&
+    (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+  ) {
     clockText.value = t('Go')
   } else {
     clockText.value = t('Hold')
   }
   if (
     clock.value === 1 &&
-    !(exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+    !(
+      exercise.value &&
+      (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+    )
   ) {
     vibratePhone()
     playSound(stopSound, 'wav')
@@ -218,30 +243,32 @@ const exerciseRest = () => {
   }
   countDown()
   if (clock.value === 1) {
-    if (currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
+    if (exercise.value && currentExerciseStepRepeat.value - 1 !== exercise.value.repeat) {
       currentExerciseStepRepeat.value += 1
     }
   }
 }
 
 const updateUserCompleted = () => {
-  // check if object exists
-  if (!user?.value?.completed) {
-    user.value.completed = {
-      time: 0,
-      hold: 0,
-      amount: 0
+  if (user.value) {
+    // check if completed object exists
+    if (!user?.value?.completed) {
+      user.value.completed = {
+        time: 0,
+        hold: 0,
+        amount: 0
+      }
     }
+    // resolve bug
+    if (Number.isNaN(user.value.completed.time)) user.value.completed.time = 0
+    if (Number.isNaN(user.value.completed.hold)) user.value.completed.hold = 0
+    if (Number.isNaN(user.value.completed.amount)) user.value.completed.amount = 0
+    // update values
+    user.value.completed.time += workoutCompleteTimeTotal.value
+    user.value.completed.hold += workoutCompleteTimeHanging.value
+    user.value.completed.amount += 1
+    updateUser()
   }
-  // resolve bug
-  if (Number.isNaN(user.value.completed.time)) user.value.completed.time = 0
-  if (Number.isNaN(user.value.completed.hold)) user.value.completed.hold = 0
-  if (Number.isNaN(user.value.completed.amount)) user.value.completed.amount = 0
-  // update values
-  user.value.completed.time += workoutCompleteTimeTotal.value
-  user.value.completed.hold += workoutCompleteTimeHanging.value
-  user.value.completed.amount += 1
-  updateUser()
 }
 
 const exerciseDone = () => {
@@ -253,10 +280,10 @@ const exerciseDone = () => {
     elapsed_time: workoutCompleteTimeTotal.value,
     elapsed_time_hanging: workoutCompleteTimeHanging.value,
     description: workout?.value?.description ? workout.value.description : '',
-    difficulty: workout?.value?.level !== undefined ? workout.value.level : '',
+    difficulty: workout?.value?.level !== undefined ? workout.value.level : null,
     type: 'Hangboarding',
-    company: workout?.value?.company !== undefined ? workout.value.company : '',
-    hangboard: workout?.value?.hangboard !== undefined ? workout.value.hangboard : '',
+    company: workout?.value?.company !== undefined ? workout.value.company : null,
+    hangboard: workout?.value?.hangboard !== undefined ? workout.value.hangboard : null,
     user: workout?.value?.user?.id ? workout.value.user.id : '',
     workout: workout?.value?.id ? workout.value.id : ''
   })
@@ -267,13 +294,13 @@ const exerciseDone = () => {
   stopTimer()
 }
 
-const hasExercise = (type) => {
+const hasExercise = (type: 'prev' | 'next') => {
   const setupTimers = () => {
     nextTick(() => {
       if (currentExercise.value === 0) {
         clock.value = 0
       }
-      if (currentExercise.value !== 0) {
+      if (currentExercise.value !== 0 && exercise.value) {
         clock.value = exercise.value.pause - 1
       }
       currentExerciseStep.value = 0
@@ -286,7 +313,7 @@ const hasExercise = (type) => {
   if (type === 'next') {
     // if there is another exercise
     // eslint-disable-next-line no-unsafe-optional-chaining
-    if (currentExercise.value !== workout?.value?.exercises.length - 1) {
+    if (workout?.value?.exercises && currentExercise.value !== workout.value.exercises.length - 1) {
       currentExercise.value += 1
       setupTimers()
     }
@@ -318,8 +345,8 @@ const skipRest = () => {
 const disableMaxHold = () => {
   return (
     clockText.value !== t('Go') ||
-    exercise.value.max === false ||
-    (exercise.value.exercise && exercise.value.exercise === 0)
+    exercise.value?.max === false ||
+    (exercise.value?.exercise && exercise.value.exercise === 0)
   )
 }
 const maxHold = () => {
@@ -328,7 +355,7 @@ const maxHold = () => {
   // HOLD
   if (currentExerciseStep.value === 1) {
     // check if exercise has to repeat
-    if (exercise.value.repeat > 0) {
+    if (exercise.value && exercise.value.repeat > 0) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
       if (device.value) {
@@ -339,7 +366,7 @@ const maxHold = () => {
   }
   // REPEAT
   if (currentExerciseStep.value === 3) {
-    if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
+    if (exercise.value && currentExerciseStepRepeat.value !== exercise.value.repeat) {
       clock.value = exercise.value.rest - 1
       currentExerciseStep.value = 2
       if (device.value) {
@@ -366,12 +393,17 @@ const exerciseSteps = () => {
         break
       }
       skip.value = false
-      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+      if (
+        exercise.value &&
+        (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+      ) {
         clock.value = 0
       } else {
-        clock.value = exercise.value.hold - 1
+        if (exercise.value) {
+          clock.value = exercise.value.hold - 1
+        }
       }
-      if (device.value) {
+      if (device.value && exercise.value) {
         stream(device.value, (exercise.value.hold - 1) * 1000)
       }
       currentExerciseStep.value = 1
@@ -381,7 +413,10 @@ const exerciseSteps = () => {
     case 1:
       workoutCompleteTimeTotal.value += 1
       workoutCompleteTimeHanging.value += 1
-      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+      if (
+        exercise.value &&
+        (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+      ) {
         exerciseHold()
         clock.value += 1
         break
@@ -391,7 +426,7 @@ const exerciseSteps = () => {
         break
       }
       // check if exercise has to repeat
-      if (exercise.value.repeat > 0) {
+      if (exercise.value && exercise.value.repeat > 0) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
         if (device.value) {
@@ -415,13 +450,15 @@ const exerciseSteps = () => {
       }
       skip.value = false
       // repeat exercise
-      if (exercise.value.repeat > 0) {
+      if (exercise.value && exercise.value.repeat > 0) {
         if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
           clock.value = 0
         } else {
-          clock.value = exercise.value.hold - 1
+          if (exercise.value) {
+            clock.value = exercise.value.hold - 1
+          }
         }
-        if (device.value) {
+        if (device.value && exercise.value) {
           stream(device.value, (exercise.value.hold - 1) * 1000)
         }
         currentExerciseStep.value = 3
@@ -437,7 +474,10 @@ const exerciseSteps = () => {
     case 3:
       workoutCompleteTimeTotal.value += 1
       workoutCompleteTimeHanging.value += 1
-      if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+      if (
+        exercise.value &&
+        (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+      ) {
         clock.value += 1
         break
       }
@@ -446,7 +486,7 @@ const exerciseSteps = () => {
         clock.value -= 1
         break
       }
-      if (currentExerciseStepRepeat.value !== exercise.value.repeat) {
+      if (exercise.value && currentExerciseStepRepeat.value !== exercise.value.repeat) {
         clock.value = exercise.value.rest - 1
         currentExerciseStep.value = 2
         if (device.value) {
@@ -473,10 +513,13 @@ const startWorkout = async () => {
   await requestWakeLock()
   // start with hold
   currentExerciseStep.value = 1
-  timer = setInterval(() => {
+  timer = window.setInterval(() => {
     if (!timerPaused.value) exerciseSteps()
   }, 1000)
-  if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+  if (
+    exercise.value &&
+    (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+  ) {
     clock.value -= 1
   } else {
     clock.value += 1
@@ -489,19 +532,27 @@ const setupWorkout = async () => {
 
   // give the user some time to get ready
   clock.value = setupTime
-  timer = setInterval(() => {
+  timer = window.setInterval(() => {
     if (!timerPaused.value) {
       countDown()
       clock.value -= 1
       if (clock.value === 0) {
-        clearInterval(timer)
+        if (timer !== null) {
+          clearInterval(timer)
+          timer = null
+        }
         // max exercise or movement
-        if (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0)) {
+        if (
+          exercise.value &&
+          (exercise.value.max || (exercise.value.exercise && exercise.value.exercise !== 0))
+        ) {
           clock.value = 0
         } else {
-          clock.value = exercise.value.hold - 1
-          if (device.value) {
-            stream(device.value, (exercise.value.hold - 1) * 1000)
+          if (exercise.value) {
+            clock.value = exercise.value.hold - 1
+            if (device.value) {
+              stream(device.value, (exercise.value.hold - 1) * 1000)
+            }
           }
         }
         // start when setup is done
@@ -523,7 +574,7 @@ const startTimer = () => {
     }
     audio.autoplay = true
     audio.preload = 'auto'
-    audio.type = 'audio/wav'
+    // audio.type = 'audio/wav'
     audio.crossOrigin = 'anonymous'
     audio.src =
       'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA'
@@ -669,7 +720,7 @@ onMounted(() => {
                 <div class="text-caption text-uppercase">
                   {{ t('Repeat') }}
                 </div>
-                <div class="text-h6">
+                <div v-if="exercise" class="text-h6">
                   {{ currentExerciseStepRepeat + 1 }}/{{ exercise.repeat + 1 }}
                 </div>
               </v-col>
@@ -701,7 +752,7 @@ onMounted(() => {
               <v-col cols="12">
                 <div class="d-flex align-center justify-space-between w-100 ga-1 mb-2">
                   <v-btn
-                    :disabled="disableMaxHold()"
+                    :disabled="!!disableMaxHold()"
                     :class="{ pulse: !disableMaxHold() }"
                     icon="$timerCheckOutline"
                     size="x-large"
@@ -749,7 +800,7 @@ onMounted(() => {
                 </div>
                 <div class="d-flex justify-space-between align-center w-100 px-2">
                   <div class="d-flex">
-                    <workout-subscribe :workout="workout" />
+                    <workout-subscribe v-if="!quick" :workout="workout" />
                   </div>
                   <div class="d-flex">
                     <workout-bluetooth
@@ -784,7 +835,7 @@ onMounted(() => {
             </exercise-card>
           </v-card-text>
         </v-card>
-        <v-card v-if="exercise?.exercise !== undefined" class="mb-8">
+        <v-card v-if="exercise?.exercise !== null && !quick" class="mb-8">
           <v-card-title>{{ $t('About the exercise') }}</v-card-title>
           <v-card-text>
             <exercise-about :exercise="exercise" />
@@ -798,7 +849,8 @@ onMounted(() => {
     v-if="
       canSubscribePlayBilling &&
       !user?.subscribed &&
-      user?.completed?.time / 60 > (subscribeLimit / 4) * 3
+      user?.completed &&
+      user?.completed.time / 60 > (subscribeLimit / 4) * 3
     "
     v-model="dialogWorkoutSubscribe"
     :limit="subscribeLimit"

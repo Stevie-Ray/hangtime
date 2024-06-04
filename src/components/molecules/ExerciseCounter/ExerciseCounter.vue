@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { time } from '@/helpers'
@@ -53,7 +53,7 @@ const count = computed({
 const steps = [1, 5, 15, 60, 180, 300]
 
 function increment() {
-  if (count.value >= props.max) return
+  if (!count.value || count.value >= props.max) return
   if (count.value < steps[2] || !props.timer) {
     count.value += steps[0]
   }
@@ -69,7 +69,7 @@ function increment() {
 }
 
 function decrement() {
-  if (count.value <= props.min) return
+  if (!count.value || count.value <= props.min) return
   if (count.value <= steps[2] || !props.timer) {
     count.value -= steps[0]
   }

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import draggable from 'vuedraggable'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import { useApp } from '@/stores/app'
 import ExerciseEdit from '@/components/molecules/dialog/ExerciseEdit/ExerciseEdit.vue'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
@@ -15,7 +16,7 @@ const emit = defineEmits(['add'])
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   edit: {
     type: Boolean,
@@ -44,7 +45,7 @@ watch(
 const exerciseEditDialog = ref(false)
 const exerciseIndex = ref(0)
 
-const openExerciseEditDialog = (index) => {
+const openExerciseEditDialog = (index: number) => {
   if (edit.value === true) {
     exerciseIndex.value = index
     exerciseEditDialog.value = true
@@ -54,6 +55,7 @@ const openExerciseEditDialog = (index) => {
 
 <template>
   <draggable
+    v-if="workout"
     v-model="workout.exercises"
     item-key="id"
     class="draggable"
@@ -68,8 +70,8 @@ const openExerciseEditDialog = (index) => {
       <exercise-card
         :exercise="element"
         :hangboard="{
-          hangboard: workout.hangboard,
-          company: workout.company
+          hangboard: workout?.hangboard,
+          company: workout?.company
         }"
         :index="index"
         :key="index"
@@ -93,8 +95,12 @@ const openExerciseEditDialog = (index) => {
     v-model="exerciseEditDialog"
     :workout="workout"
     :index="exerciseIndex"
-    @time="(time) => (workout.time = time)"
-    @index="(index) => (exerciseIndex = index)"
+    @time="
+      (time: number) => {
+        if (workout?.time) workout.time = time
+      }
+    "
+    @index="(index: number) => (exerciseIndex = index)"
     @show="exerciseEditDialog = !exerciseEditDialog"
   />
 </template>

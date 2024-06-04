@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import imgIconHang from '@/assets/icons/hand.svg'
@@ -12,33 +12,33 @@ const props = defineProps({
 
 const emit = defineEmits(['left', 'right'])
 
-const toggleFinger = (hand, action, finger) => {
-  if (props.edit) {
+const toggleFinger = (hand: string, action: 'left' | 'right', finger: string) => {
+  if (props.edit && props.exercise) {
     const handArray = props.exercise[hand]
-    console.log(props)
-    console.log(handArray)
     if (finger.startsWith('f') && finger.length <= 2) {
       const fingerNumber = parseInt(finger.substr(1), 10)
-      let updatedHand = []
+      let updatedHand: number[] = []
       if (handArray) {
         if (handArray.length > 3) return
         updatedHand = [...handArray]
       }
       updatedHand.push(fingerNumber)
-      console.log(action, updatedHand)
       emit(action, updatedHand)
     }
   }
 }
 
-const getHandClass = (hand) => {
-  const handArray = props.exercise[hand]
-  if (handArray) {
-    if (handArray.length) {
-      return handArray.map((finger) => `f${finger}`).join(' ')
+const getHandClass = (hand: string) => {
+  if (props.exercise) {
+    const handArray = props.exercise[hand]
+    if (handArray) {
+      if (handArray.length) {
+        return handArray.map((finger: string) => `f${finger}`).join(' ')
+      }
+      return `f${handArray}`
     }
-    return `f${handArray}`
   }
+
   return ''
 }
 
@@ -59,7 +59,7 @@ const resetHands = () => {
         <template #append>
           <v-list-item-action end>
             <v-btn
-              v-if="exercise.leftHand?.length || exercise.rightHand?.length"
+              v-if="exercise?.leftHand?.length || exercise?.rightHand?.length"
               icon="$undo"
               color="text"
               variant="text"
@@ -76,8 +76,8 @@ const resetHands = () => {
     >
       <div class="hand__left">
         <inline-svg
-          @click="(e) => toggleFinger('leftHand', 'left', e.target.id)"
-          v-if="exercise.left !== null"
+          @click="(e: MouseEvent) => toggleFinger('leftHand', 'left', (e.target as HTMLElement).id)"
+          v-if="exercise?.left !== null"
           :class="[getHandClass('leftHand'), { large: edit }]"
           :src="imgIconHang"
           class="w-100"
@@ -85,7 +85,9 @@ const resetHands = () => {
       </div>
       <div class="hand__right">
         <inline-svg
-          @click="(e) => toggleFinger('rightHand', 'right', e.target.id)"
+          @click="
+            (e: MouseEvent) => toggleFinger('rightHand', 'right', (e.target as HTMLElement).id)
+          "
           v-if="exercise?.right !== null"
           :class="[getHandClass('rightHand'), { large: edit }]"
           :src="imgIconHang"

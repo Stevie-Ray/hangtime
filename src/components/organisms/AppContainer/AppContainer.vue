@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useAuthentication } from '@/stores/authentication'
@@ -6,8 +6,7 @@ import { useAuthentication } from '@/stores/authentication'
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthentication())
 
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
+defineProps({
   extension: {
     type: Boolean,
     default: false

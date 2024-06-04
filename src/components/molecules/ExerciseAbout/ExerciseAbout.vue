@@ -1,18 +1,19 @@
-<script setup>
+<script setup lang="ts">
 import { useExercises, useGrip } from '@/helpers'
+import { Exercise } from '@/interfaces/workouts.interface'
 
 const grip = useGrip()
 const exercises = useExercises()
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
+
+defineProps({
   exercise: {
-    type: Object
+    type: Object as () => Exercise
   }
 })
 </script>
 
 <template>
-  <div v-if="exercise.exercise === 0">
+  <div v-if="exercise && exercise.exercise === 0">
     <div v-if="exercise.grip">
       <div class="mb-8">
         {{ grip[exercise.grip].description }}
@@ -28,7 +29,7 @@ const props = defineProps({
       </v-expansion-panels>
     </div>
     <!-- fallback-->
-    <div v-else-if="grip[exercise.exercise] !== 0">
+    <div v-else-if="exercise && grip[exercise.exercise].id !== 0">
       <div class="mb-8">
         {{ grip[exercise.exercise].description }}
       </div>
@@ -43,7 +44,7 @@ const props = defineProps({
       </v-expansion-panels>
     </div>
   </div>
-  <div v-else-if="exercise.grip !== 0">
+  <div v-else-if="exercise && exercise.grip !== 0">
     <div v-if="exercise.grip">
       <div class="mb-8">
         {{ grip[exercise.grip].description }}
@@ -74,7 +75,7 @@ const props = defineProps({
       </v-expansion-panels>
     </div>
   </div>
-  <div v-if="exercise.pullups > 0 && exercise.exercise > 0">
+  <div v-if="exercise && exercise.pullups > 0 && exercise.exercise > 0">
     <div class="mb-8">
       {{ exercises[exercise.exercise - 1].description }}
     </div>

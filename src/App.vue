@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { watch } from 'vue'
 import { useTheme } from 'vuetify'
 import { storeToRefs } from 'pinia'
@@ -51,19 +51,19 @@ const { user } = storeToRefs(useAuthentication())
 
 const theme = useTheme()
 
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+const prefersDark: MediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
 
-prefersDark.addEventListener('change', () => {
-  if (user.value.settings.theme > 0) {
-    theme.global.name.value = user.value.settings.theme === 2 ? 'dark' : 'light'
+prefersDark.addEventListener('change', (): void => {
+  if (user.value?.settings?.theme && user.value.settings.theme > 0) {
+    theme.global.name.value = user.value?.settings.theme === 2 ? 'dark' : 'light'
   } else {
     theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
   }
 })
 
 // watch works directly on a ref
-watch(user, async (updatedUser) => {
-  if (updatedUser?.settings?.theme > 0) {
+watch(user, async (updatedUser): Promise<void> => {
+  if (updatedUser?.settings?.theme && updatedUser.settings.theme > 0) {
     theme.global.name.value = updatedUser.settings.theme === 2 ? 'dark' : 'light'
   } else {
     theme.global.name.value = prefersDark.matches ? 'dark' : 'light'

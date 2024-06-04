@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import router from '@/router'
 import { time, useRandomImage } from '@/helpers'
 import { useAuthentication } from '@/stores/authentication'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
@@ -15,7 +16,7 @@ const { user } = storeToRefs(useAuthentication())
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   timeTotal: {
     type: Number
@@ -73,12 +74,17 @@ const closeModal = () => {
         <v-toolbar-title>{{ t('Well done') }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn v-if="shareAPI" icon="$exportVariant" color="text" @click="shareExternal"></v-btn>
+          <v-btn
+            v-if="shareAPI !== undefined"
+            icon="$exportVariant"
+            color="text"
+            @click="shareExternal"
+          ></v-btn>
           <v-btn icon="$close" color="text" @click="closeModal"></v-btn>
         </v-toolbar-items>
       </v-toolbar>
 
-      <v-img class="align-end" height="50" :src="useRandomImage('dark')" cover>
+      <v-img class="align-end" height="50" :src="useRandomImage(true)" cover>
         <v-card-subtitle v-if="workout?.name">
           {{ t('You completed {name}') }}
         </v-card-subtitle>
@@ -103,7 +109,7 @@ const closeModal = () => {
             <v-divider v-if="user?.completed" class="my-4"></v-divider>
 
             <v-list>
-              <v-list-item v-if="user && user?.completed?.time !== null" class="px-0">
+              <v-list-item v-if="user?.completed && user.completed.time !== null" class="px-0">
                 <v-list-item-title>
                   {{ t('Total time worked out') }}
                 </v-list-item-title>
@@ -114,7 +120,7 @@ const closeModal = () => {
                   {{ time(user.completed.time) }}
                 </template>
               </v-list-item>
-              <v-list-item v-if="user && user?.completed?.hold !== null" class="px-0">
+              <v-list-item v-if="user?.completed && user.completed.hold !== null" class="px-0">
                 <v-list-item-title>
                   {{ t('Total time hangboarding') }}
                 </v-list-item-title>
@@ -125,7 +131,7 @@ const closeModal = () => {
                   {{ time(user.completed.hold) }}
                 </template>
               </v-list-item>
-              <v-list-item v-if="user && user?.completed?.amount !== null" class="px-0">
+              <v-list-item v-if="user?.completed && user.completed.amount !== null" class="px-0">
                 <v-list-item-title>
                   {{ t('Workouts done') }}
                 </v-list-item-title>
@@ -142,7 +148,7 @@ const closeModal = () => {
         </v-row>
       </v-card-text>
       <v-card-actions class="justify-end px-4">
-        <v-btn color="text" @click="router.go()">{{ t('Restart') }}</v-btn>
+        <v-btn color="text" @click="router.go(0)">{{ t('Restart') }}</v-btn>
         <v-btn color="text" to="/activity">{{ t('Activity') }}</v-btn>
       </v-card-actions>
     </v-card>

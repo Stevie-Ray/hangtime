@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { event } from 'vue-gtag'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
@@ -21,15 +21,16 @@ const route = useRoute()
 const dialog = ref(true)
 
 const addHangboard = () => {
-  const company = parseInt(route.params.company, 10)
-  const hangboard = parseInt(route.params.hangboard, 10)
+  const company = parseInt(route.params.company.toString(), 10)
+  const hangboard = parseInt(route.params.hangboard.toString(), 10)
   event('add_hangboard', {
     hangboard: getHangboardNameByIds(company, hangboard)
   })
   // add the newly selected board and set it
-  user.value.settings.hangboards.push({ company, hangboard })
-  user.value.settings.selected = user.value.settings.hangboards.length - 1
-
+  if (user.value) {
+    user.value.settings.hangboards.push({ company, hangboard })
+    user.value.settings.selected = user.value.settings.hangboards.length - 1
+  }
   emit('show', false)
 }
 </script>

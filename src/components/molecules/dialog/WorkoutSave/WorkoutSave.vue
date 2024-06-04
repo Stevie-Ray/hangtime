@@ -1,8 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ref, watch } from 'vue'
 import { useWorkouts } from '@/stores/workouts'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const { createUserWorkout, updateUserWorkout } = useWorkouts()
 
@@ -14,7 +15,7 @@ const emit = defineEmits(['show'])
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   }
 })
 
@@ -30,12 +31,12 @@ watch(
 const dialog = ref(true)
 
 const workoutSave = () => {
-  if (!workout.value.id) {
+  if (!workout.value?.id) {
     // new workout
-    createUserWorkout(workout.value)
+    workout.value ? createUserWorkout(workout.value) : null
   } else {
     // existing workout
-    updateUserWorkout(workout.value)
+    workout.value ? updateUserWorkout(workout.value) : null
   }
 
   emit('show', false)
@@ -44,11 +45,12 @@ const workoutSave = () => {
 }
 
 const rules = {
-  number: (v) => !v.isNaN || 'NaN',
-  required: (v) => !!v || 'This field is required',
-  length: (length) => (v) => (v || '').length <= length || `Max ${length} characters`,
-  min: (min) => (v) => v >= min || `A minimun of  ${min} is allowed`,
-  max: (max) => (v) => v <= max || `A maximum of  ${max} is allowed`
+  number: (v: any) => !isNaN(v) || 'NaN',
+  required: (v: any) => !!v || 'This field is required',
+  length: (length: number) => (v: string) =>
+    (v || '').length <= length || `Max ${length} characters`,
+  min: (min: number) => (v: number) => v >= min || `A minimum of ${min} is allowed`,
+  max: (max: number) => (v: number) => v <= max || `A maximum of ${max} is allowed`
 }
 </script>
 
@@ -61,6 +63,7 @@ const rules = {
 
         <v-toolbar-items>
           <v-btn
+            v-if="workout"
             :disabled="
               workout.name === '' ||
               typeof workout.name === 'undefined' ||
@@ -75,7 +78,7 @@ const rules = {
       </v-toolbar>
       <v-container>
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" v-if="workout">
             <v-label>{{ t('Name your workout and get going') }}.</v-label>
 
             <v-divider class="mb-4" thickness="0"></v-divider>

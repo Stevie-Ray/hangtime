@@ -1,18 +1,19 @@
-<script setup>
+<script setup lang="ts">
+import { Company } from '@/interfaces/user.interface'
 import { Loader } from '@googlemaps/js-api-loader'
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   markers: {
-    type: Array
+    type: Array as () => Company[]
   },
   height: {
     type: Number,
     default: 300
   },
   zoom: {
-    type: Number || null,
-    default: null
+    type: Number,
+    default: 0
   }
 })
 
@@ -23,16 +24,16 @@ const loader = new Loader({
 
 /* eslint no-undef: 0 */
 loader.load().then(async () => {
-  const { Map } = await google.maps.importLibrary('maps')
+  const { Map } = (await google.maps.importLibrary('maps')) as google.maps.MapsLibrary
 
-  const map = new Map(document.querySelector('.map'), {
+  const map = new Map(document.querySelector('.map') as HTMLElement, {
     zoom: props.zoom,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
     streetViewControl: false,
     scaleControl: false,
     zoomControlOptions: {
-      style: google.maps.ZoomControlStyle.LARGE
+      // style: google.maps.ZoomControlStyle.LARGE
     },
     styles: [
       {
@@ -96,30 +97,34 @@ loader.load().then(async () => {
   const infowindow = new google.maps.InfoWindow()
 
   let marker
-  // eslint-disable-next-line no-restricted-syntax,no-unused-vars
-  for (const [i, item] of props.markers.entries()) {
-    if (item.location) {
-      const icon = {
-        url: '/img/icons/favicon.svg',
-        scaledSize: new google.maps.Size(20, 20),
-        anchor: new google.maps.Point(10, 10)
-      }
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(item.location.lat, item.location.lon),
-        map,
-        title: item.name,
-        icon
-      })
+  if (props.markers) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    for (const [i, item] of props.markers.entries()) {
+      if (item?.location?.lat && item?.location?.lon) {
+        const icon = {
+          url: '/img/icons/favicon.svg',
+          scaledSize: new google.maps.Size(20, 20),
+          anchor: new google.maps.Point(10, 10)
+        }
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(Number(item.location.lat), Number(item.location.lon)),
+          map,
+          title: item.name,
+          icon
+        })
 
-      bounds.extend(marker.position)
+        const postion = marker.getPosition()
+        if (postion) {
+          bounds.extend(postion)
+        }
 
-      google.maps.event.addListener(
-        marker,
-        'click',
-        // eslint-disable-next-line no-shadow
-        ((marker) => () => {
-          infowindow.setContent(
-            `<a href="
+        google.maps.event.addListener(
+          marker,
+          'click',
+          // eslint-disable-next-line no-shadow
+          ((marker) => () => {
+            infowindow.setContent(
+              `<a href="
                   ${
                     item.name
                       ? `/brands/${encodeURIComponent(
@@ -128,12 +133,14 @@ loader.load().then(async () => {
                       : null
                   }
                 ">${item.name}</a>`
-          )
-          infowindow.open(map, marker)
-        })(marker)
-      )
+            )
+            infowindow.open(map, marker)
+          })(marker)
+        )
+      }
     }
   }
+
   // now fit the map to the newly inclusive bounds
   map.fitBounds(bounds)
   // restore the zoom level after the map is done scaling

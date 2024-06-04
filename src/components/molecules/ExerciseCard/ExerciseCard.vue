@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import { time } from '@/helpers'
+import { Exercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
@@ -13,11 +14,11 @@ const emit = defineEmits(['left', 'right', 'rotate'])
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   variant: {
-    type: String,
+    type: String as () => 'elevated' | 'flat' | 'text' | 'tonal' | 'outlined' | 'plain',
     default: 'elevated'
   },
   exercise: {
-    type: Object
+    type: Object as () => Exercise
   },
   hangboard: {
     type: Object
@@ -55,7 +56,7 @@ const props = defineProps({
 
     <v-card :variant="variant" class="mb-8">
       <v-card-title v-if="exercise" class="d-flex justify-space-between">
-        <div>
+        <div v-if="index">
           <v-chip class="mr-2" color="primary">{{ index + 1 }}.</v-chip>
         </div>
 

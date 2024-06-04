@@ -1,7 +1,9 @@
-<script setup>
+<script setup lang="ts">
+/// <reference types="web-bluetooth" />
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import { Workout } from '@/interfaces/workouts.interface'
 
 import {
   Climbro,
@@ -16,6 +18,7 @@ import {
   info,
   notify
 } from '@hangtime/grip-connect'
+import type { massObject } from '@hangtime/grip-connect/src/notify'
 
 import { useBluetooth } from '@/stores/bluetooth'
 
@@ -27,7 +30,7 @@ const { t } = useI18n()
 
 const props = defineProps({
   workout: {
-    type: Object
+    type: Object as () => Workout
   },
   size: {
     type: String,
@@ -50,7 +53,7 @@ const devices = [
   {
     title: 'Motherboard',
     value: Motherboard,
-    disabled: workout.value.company !== 1
+    disabled: workout.value?.company !== 1
   },
   {
     title: 'Muscle Meter',
@@ -67,7 +70,7 @@ const devices = [
     value: Progressor
   }
 ]
-const dropdown = ref(workout.value.company === 1 ? Motherboard : Progressor)
+const dropdown = ref(workout.value?.company === 1 ? Motherboard : Progressor)
 const output = ref()
 const isBluetoothAvailable = ref(false)
 
@@ -94,15 +97,9 @@ const onSuccess = async () => {
     device.value = dropdown.value
 
     // Listen for notifications
-    notify((data) => {
+    notify((data: massObject) => {
       emit('notify', data)
-      if (data?.value) {
-        if (typeof data.value === 'object') {
-          output.value = JSON.stringify(data.value)
-        } else {
-          output.value = data.value
-        }
-      }
+      output.value = JSON.stringify(data)
     })
 
     if (device.value?.name === Motherboard.name) {
@@ -129,7 +126,7 @@ watch(
   <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
     <template v-slot:activator="{ props }">
       <v-btn
-        v-if="isBluetoothSupported"
+        v-if="isBluetoothSupported()"
         :disabled="!isBluetoothAvailable"
         :size="size"
         color="text"
