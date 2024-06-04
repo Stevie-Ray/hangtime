@@ -73,7 +73,6 @@ export const useAuthentication = defineStore('authentication', () => {
       }
 
       if (user.value?.id) {
-        
         workouts.fetchUserWorkouts()
         workouts.fetchCommunityWorkouts()
         activities.fetchUserActivity()

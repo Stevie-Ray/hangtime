@@ -25,10 +25,10 @@ function setI18nLanguage(locale) {
     i18n.global.locale.value = locale
   }
   const htmlLang = locale.slice(0, 2)
-  document.querySelector('html').setAttribute('lang', htmlLang)
+  document.querySelector('html')?.setAttribute('lang', htmlLang)
 }
 
-export async function loadLanguageAsync(locale) {
+export async function loadLanguageAsync(locale: string) {
   // If the same language or already loaded
   if (i18n.global.locale === locale || loadedLanguages.includes(locale)) {
     return setI18nLanguage(locale)

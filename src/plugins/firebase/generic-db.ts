@@ -13,13 +13,17 @@ import {
   query,
   where,
   orderBy,
-  limit
+  limit,
+  Firestore,
+  CollectionReference,
+  DocumentReference,
+  WhereFilterOp
 } from 'firebase/firestore/lite'
 import { toRaw, isRef, isReactive, isProxy } from 'vue'
 import firebaseApp from '@/plugins/firebase'
 
-export function deepToRaw(sourceObj) {
-  const objectIterator = (input) => {
+export function deepToRaw(sourceObj: any): any {
+  const objectIterator = (input: any): any => {
     if (Array.isArray(input)) {
       return input.map((item) => objectIterator(item))
     }
@@ -30,7 +34,7 @@ export function deepToRaw(sourceObj) {
       return Object.keys(input).reduce((acc, key) => {
         acc[key] = objectIterator(input[key])
         return acc
-      }, {})
+      }, {} as any)
     }
     return input
   }
@@ -38,20 +42,21 @@ export function deepToRaw(sourceObj) {
   return objectIterator(sourceObj)
 }
 
-const db = getFirestore(firebaseApp)
+const db: Firestore = getFirestore(firebaseApp)
 
 export default class GenericDB {
-  constructor(collectionPath) {
+  private collectionPath: string
+
+  constructor(collectionPath: string) {
     this.collectionPath = collectionPath
   }
-
   /**
    * Create a document in the collection
    * @param data
    * @param id
    */
-  async create(data, id = null) {
-    const collectionRef = collection(db, this.collectionPath)
+  async create(data: any, id: string | null = null): Promise<{ id: string; [key: string]: any }> {
+    const collectionRef: CollectionReference = collection(db, this.collectionPath)
     const serverTimestampA = serverTimestamp()
 
     const dataToCreate = {
@@ -60,13 +65,10 @@ export default class GenericDB {
       updateTimestamp: serverTimestampA
     }
 
-    // Create doc with generated id or create doc with custom id
-    const createPromise =
+    const docId: string =
       id === null || id === undefined
-        ? await addDoc(collectionRef, dataToCreate).then((result) => result.id)
-        : await setDoc(doc(db, this.collectionPath, id), dataToCreate).then(() => id)
-
-    const docId = await createPromise
+        ? (await addDoc(collectionRef, dataToCreate)).id
+        : (await setDoc(doc(db, this.collectionPath, id), dataToCreate)).then(() => id)
 
     return {
       id: docId,
@@ -80,8 +82,8 @@ export default class GenericDB {
    * Read a document in the collection
    * @param id
    */
-  async read(id) {
-    const docRef = doc(db, this.collectionPath, id)
+  async read(id: string): Promise<{ id: string; [key: string]: any } | null> {
+    const docRef: DocumentReference = doc(db, this.collectionPath, id)
     const result = await getDoc(docRef)
 
     const data = result.exists() ? result.data() : null
@@ -94,21 +96,27 @@ export default class GenericDB {
   }
 
   /**
-   * Read all documents in the collection following constraints
-   * @param constraints {array}
-   * @param sort {null|string}
-   * @param amount {null|number}
-   * @return {Promise<*>}
+   * Retrieves all documents from the Firestore collection.
+   *
+   * @param {Array<[string, WhereFilterOp, any]> | null} constraints - Array of constraints for the query.
+   * @param {string | null} sort - Field to sort the results by.
+   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
+   * @param {number | null} amount - Maximum number of documents to retrieve.
+   * @returns {Promise<any[]>} - Array of documents retrieved.
    */
-  async readAll(constraints = null, sort = null, amount = null) {
-    const collectionRef = collection(db, this.collectionPath)
+  async readAll(
+    constraints: Array<[string, WhereFilterOp, any]> | null = null,
+    sort: string | null = null,
+    amount: number | null = null
+  ): Promise<any[]> {
+    const collectionRef: CollectionReference = collection(db, this.collectionPath)
 
     let q = query(collectionRef)
 
     const combinedQuery = []
 
     if (constraints) {
-      constraints.forEach((constraint) => combinedQuery.push(where(...constraint)))
+      constraints.forEach(([field, op, value]) => combinedQuery.push(where(field, op, value)))
     }
 
     if (sort) {
@@ -118,13 +126,13 @@ export default class GenericDB {
     if (amount) {
       combinedQuery.push(limit(amount))
     }
-    // add params to query
+
     if (combinedQuery.length > 0) {
       q = query(collectionRef, ...combinedQuery)
     }
 
-    const formatResult = (result) =>
-      result.docs.map((ref) =>
+    const formatResult = (result: any) =>
+      result.docs.map((ref: any) =>
         this.convertObjectTimestampPropertiesToDate({
           id: ref.id,
           ...ref.data()
@@ -138,12 +146,12 @@ export default class GenericDB {
    * Update a document in the collection
    * @param data
    */
-  async update(data) {
+  async update(data: any): Promise<string> {
     const { id } = data
     const clonedData = structuredClone(deepToRaw(data))
     delete clonedData.id
 
-    const docRef = doc(db, this.collectionPath, id)
+    const docRef: DocumentReference = doc(db, this.collectionPath, id)
     await updateDoc(docRef, {
       ...clonedData,
       updateTimestamp: serverTimestamp()
@@ -156,16 +164,16 @@ export default class GenericDB {
    * Delete a document in the collection
    * @param id
    */
-  async delete(id) {
-    const docRef = doc(db, this.collectionPath, id)
-    return await deleteDoc(docRef)
+  async delete(id: string): Promise<void> {
+    const docRef: DocumentReference = doc(db, this.collectionPath, id)
+    await deleteDoc(docRef)
   }
 
   /**
    * Convert all object Timestamp properties to date
    * @param obj
    */
-  convertObjectTimestampPropertiesToDate(obj) {
+  convertObjectTimestampPropertiesToDate(obj: any): any {
     const newObj = {}
 
     Object.keys(obj)

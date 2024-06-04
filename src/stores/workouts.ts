@@ -1,5 +1,6 @@
 import { ref, computed, reactive } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
+import { WhereFilterOp } from 'firebase/firestore/lite'
 import { useAuthentication } from '@/stores/authentication'
 import { useUser } from '@/stores/user'
 import i18n from '@/plugins/i18n'
@@ -43,12 +44,12 @@ export const useWorkouts = defineStore('workouts', () => {
       workoutsCommunity.value.length > 0
         ? workoutsCommunity.value[workoutsCommunity.value.length - 1]
         : null
-    const constraints = [['share', '==', true]]
+    const constraints: [string, WhereFilterOp, any][] = [['share', '==', true]]
     if (user?.getUserHangboardCompany) {
-      constraints.push(['company', '==', user.getUserHangboardCompany.id.toString()])
+      constraints.push(['company', '==', user.getUserHangboardCompany.id])
     }
     if (user?.getUserHangboard) {
-      constraints.push(['hangboard', '==', user.getUserHangboard.id.toString()])
+      constraints.push(['hangboard', '==', user.getUserHangboard.id])
     }
     const newWorkouts = await usersWorkoutsDb.readAll(
       constraints,
