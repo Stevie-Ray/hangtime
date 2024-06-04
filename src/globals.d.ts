@@ -75,3 +75,13 @@ declare module '@/helpers/online' {
   const value: any
   export default value
 }
+
+declare module '@/views/account/AccountSubscriptionPage.vue' {
+  const value: any
+  export default value
+}
+
+declare module '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue' {
+  const value: any
+  export default value
+}

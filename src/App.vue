@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/// <reference types="digital-goods-browser" />
 import { watch } from 'vue'
 import { useTheme } from 'vuetify'
 import { storeToRefs } from 'pinia'
