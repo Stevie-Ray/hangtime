@@ -36,6 +36,11 @@ const { createUserActivity } = useActivities()
 const props = defineProps({
   workout: {
     type: Object as () => Workout
+  },
+  /** Quick Workout */
+  quick: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -795,7 +800,7 @@ onMounted(() => {
                 </div>
                 <div class="d-flex justify-space-between align-center w-100 px-2">
                   <div class="d-flex">
-                    <workout-subscribe :workout="workout" />
+                    <workout-subscribe v-if="!quick" :workout="workout" />
                   </div>
                   <div class="d-flex">
                     <workout-bluetooth
@@ -830,7 +835,7 @@ onMounted(() => {
             </exercise-card>
           </v-card-text>
         </v-card>
-        <v-card v-if="exercise?.exercise !== undefined" class="mb-8">
+        <v-card v-if="exercise?.exercise !== null && !quick" class="mb-8">
           <v-card-title>{{ $t('About the exercise') }}</v-card-title>
           <v-card-text>
             <exercise-about :exercise="exercise" />

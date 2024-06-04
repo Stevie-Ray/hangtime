@@ -61,7 +61,7 @@ useHead({
     <template #title>{{ t('Quick workout') }}</template>
 
     <template #default>
-      <workout-timer v-if="workout?.exercises?.length" :workout="workout">
+      <workout-timer v-if="workout?.exercises?.length" :workout="workout" :quick="true">
         <template #default>
           <exercise-counter
             title="Hang"
