@@ -1,12 +1,11 @@
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { defineStore, storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import { useAuthentication } from '@/stores/authentication'
 import hangboardBrands from '@/helpers/hangboards'
 import { Company, Hangboard } from '@/interfaces/user.interface'
 
 export const useUser = defineStore('user', () => {
-  const { user } = useAuthentication()
-  const userRef = ref(user)
+  const { user } = storeToRefs(useAuthentication())
 
   /**
    * Get a hangboard object by company & hangboard ID
@@ -78,7 +77,7 @@ export const useUser = defineStore('user', () => {
    * @return An array of the user's hangboards
    */
   const getUserHangboards = computed(() => {
-    return userRef.value?.settings?.hangboards || []
+    return user.value?.settings?.hangboards || []
   })
 
   /**
@@ -86,7 +85,7 @@ export const useUser = defineStore('user', () => {
    * @return The ID of the selected hangboard
    */
   const getUserHangboardSelectedId = computed(() => {
-    return userRef.value?.settings?.selected
+    return user.value?.settings?.selected
   })
 
   /**

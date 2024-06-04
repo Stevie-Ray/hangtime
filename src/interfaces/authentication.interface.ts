@@ -1,7 +1,7 @@
 /**
  * Represents the settings configured by a user.
  */
-interface UserSettings {
+export interface UserSettings {
   /** Climbing grade of the user */
   grade: number
   /** the selected hangboard */

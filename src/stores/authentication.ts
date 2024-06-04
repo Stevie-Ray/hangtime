@@ -3,7 +3,7 @@ import { ref, Ref } from 'vue'
 import { loadLanguageAsync } from '@/plugins/i18n'
 import router from '@/router'
 import { User as FirebaseUser } from 'firebase/auth'
-import { User } from '@/interfaces/authentication.interface'
+import { User, UserSettings } from '@/interfaces/authentication.interface'
 
 export const useAuthentication = defineStore('authentication', () => {
   const user: Ref<User | null> = ref(null)
@@ -22,7 +22,7 @@ export const useAuthentication = defineStore('authentication', () => {
     const { default: UsersDB } = await import('@/plugins/firebase/users-db')
     const userDb = new UsersDB()
     // default user settings
-    const settings = {
+    const settings: UserSettings = {
       selected: 0,
       hangboards: [
         {
@@ -73,6 +73,7 @@ export const useAuthentication = defineStore('authentication', () => {
       }
 
       if (user.value?.id) {
+        
         workouts.fetchUserWorkouts()
         workouts.fetchCommunityWorkouts()
         activities.fetchUserActivity()
