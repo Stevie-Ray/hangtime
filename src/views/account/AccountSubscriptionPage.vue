@@ -90,8 +90,6 @@ async function populatePrice(sku: string): Promise<boolean> {
     const { value } = item.price
     const { currency } = item.price
 
-    // item.value = item.price.value
-    // item.currency = item.price.currency
     price = new Intl.NumberFormat(navigator.language, {
       style: 'currency',
       currency
@@ -173,7 +171,7 @@ function trigger(sku: string, onToken: (token: any) => void = () => {}) {
   }
 
   // Contains an array of identifiers for the payment methods the merchant web site accepts and any associated payment method specific data.
-  const supportedInstruments = [
+  const supportedInstruments: PaymentMethodData[] = [
     {
       // For example, the basic card payment method is selected by specifying the string basic-card here.
       supportedMethods: PAYMENT_METHOD,
@@ -196,9 +194,9 @@ function trigger(sku: string, onToken: (token: any) => void = () => {}) {
     }
   }
 
+  console.log(supportedInstruments, details)
   const request = new PaymentRequest(supportedInstruments, details)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function handlePaymentResponse(response: PaymentResponse) {
     window.setTimeout(() => {
       response
@@ -227,51 +225,24 @@ function trigger(sku: string, onToken: (token: any) => void = () => {}) {
       // eslint-disable-next-line func-names
       .then((result) => {
         log(result ? 'Can make payment' : 'Cannot make payment')
+        if (result) {
+          // Proceed with showing the payment request
+          request
+            .show()
+            .then(handlePaymentResponse)
+            // eslint-disable-next-line func-names
+            .catch((e) => {
+              // log(JSON.stringify(e, undefined, 2));
+              log(e)
+              log("Maybe you've already purchased the item (try acknowledging first).")
+            })
+        }
       })
       // eslint-disable-next-line func-names
       .catch((e) => {
         log(e.message)
       })
   }
-
-  // Checking for instrument presence.
-  // if (request.hasEnrolledInstrument) {
-  //   request
-  //     .hasEnrolledInstrument()
-  //     // eslint-disable-next-line func-names
-  //     .then((result) => {
-  //       if (result) {
-  //         log('Has enrolled instrument')
-  //       } else {
-  //         log('No enrolled instrument')
-  //       }
-
-  //       // Call show even if we don't have any enrolled instruments.
-  //       request
-  //         .show()
-  //         .then(handlePaymentResponse)
-  //         // eslint-disable-next-line func-names
-  //         .catch((e) => {
-  //           // log(JSON.stringify(e, undefined, 2));
-  //           log(e)
-  //           log("Maybe you've already purchased the item (try acknowledging first).")
-  //         })
-  //     })
-  //     // eslint-disable-next-line func-names
-  //     .catch((e) => {
-  //       log(e.message)
-
-  //       // Also call show if hasEnrolledInstrument throws.
-  //       request
-  //         .show()
-  //         .then(handlePaymentResponse)
-  //         // eslint-disable-next-line no-shadow,func-names
-  //         .catch((e) => {
-  //           log(JSON.stringify(e, undefined, 2))
-  //           log(e)
-  //         })
-  //     })
-  // }
 }
 function buySubscription() {
   trigger('subscription', (token) => {
