@@ -52,6 +52,7 @@ export default class UsersWorkoutsDB extends GenericDB {
     }
 
     if (lastVisible) {
+      // @ts-expect-error Custom field on DocumentSnapshot
       const { updateTimestamp } = lastVisible
       combinedQuery.push(startAfter(updateTimestamp))
     }
