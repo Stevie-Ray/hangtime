@@ -192,13 +192,13 @@ function trigger(sku: string, onToken: (token: any) => void = () => {}) {
   const details: PaymentDetailsInit = {
     total: {
       label: 'Subscription',
-        // The total amount of the payment request.
+      // The total amount of the payment request.
       amount: {
         currency: item ? item.price.currency : '',
         value: item ? item.price.value : ''
       }
     }
-  };
+  }
 
   const request = new PaymentRequest(supportedInstruments, details)
 
