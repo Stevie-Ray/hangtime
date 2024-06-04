@@ -179,7 +179,9 @@ useHead({
             size="x-large"
             extended
             app
+            class="v-fab--bottom"
             :text="t('Start training')"
+            style="bottom: 56px; top: auto"
           ></v-fab>
         </v-fab-transition>
       </div>
