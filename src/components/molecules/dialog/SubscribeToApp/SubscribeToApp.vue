@@ -234,14 +234,15 @@ function trigger(sku: string, onToken: (token: any) => void = () => {}) {
         log(result ? 'Can make payment' : 'Cannot make payment')
         if (result) {
           // Proceed with showing the payment request
-          request.show()
-          .then(handlePaymentResponse)
-          // eslint-disable-next-line func-names
-          .catch((e) => {
-            // log(JSON.stringify(e, undefined, 2));
-            log(e)
-            log("Maybe you've already purchased the item (try acknowledging first).")
-          })
+          request
+            .show()
+            .then(handlePaymentResponse)
+            // eslint-disable-next-line func-names
+            .catch((e) => {
+              // log(JSON.stringify(e, undefined, 2));
+              log(e)
+              log("Maybe you've already purchased the item (try acknowledging first).")
+            })
         }
       })
       // eslint-disable-next-line func-names
