@@ -185,20 +185,16 @@ function trigger(sku: string, onToken: (token: any) => void = () => {}) {
   ]
 
   // Provides information about the requested transaction.
-  let details = {
+  const details: PaymentDetailsInit = {
     total: {
       label: 'Subscription',
+        // The total amount of the payment request.
       amount: {
-        currency: '',
-        value: ''
+        currency: item ? item.price.currency : '',
+        value: item ? item.price.value : ''
       }
     }
-  }
-
-  if (item) {
-    // The total amount of the payment request.
-    details.total.amount = { currency: item.price.currency, value: item.price.value }
-  }
+  };
 
   const request = new PaymentRequest(supportedInstruments, details)
 
