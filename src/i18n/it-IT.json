@@ -162,5 +162,9 @@
   "You chose {voice}, this is my new voice": "Hai scelto {voice}, questa è la mia nuova voce",
   "You completed {name}": "Hai completato {name}",
   "You're almost there": "Ci sei quasi",
-  "{appTitle} lets you create your own training sequences, do community workouts and track your hangboarding progress": "{appTitle} ti consente di creare le tue sequenze di allenamento, fare allenamenti della community e monitorare i tuoi progressi nell'hangboard"
+  "{appTitle} lets you create your own training sequences, do community workouts and track your hangboarding progress": "{appTitle} ti consente di creare le tue sequenze di allenamento, fare allenamenti della community e monitorare i tuoi progressi nell'hangboard",
+  "Donate": "Donare",
+  "Support development": "Sostenere lo sviluppo",
+  "Source Code": "Codice sorgente",
+  "Code, feature requests, discussions": "Codice, richieste di funzionalità, discussioni"
 }

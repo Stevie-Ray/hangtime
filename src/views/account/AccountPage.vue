@@ -54,6 +54,20 @@ const items: Item[] = [
     link: '/account/subscription'
   },
   {
+    title: t('Donate'),
+    icon: '$gift',
+    subtitle: t('Support development'),
+    link: 'https://www.paypal.com/donate/?hosted_button_id=PZSN7JBXRWVDA',
+    external: true
+  },
+  {
+    title: t('Source Code'),
+    icon: '$github',
+    subtitle: t('Code, feature requests, discussions'),
+    link: 'https://github.com/Stevie-Ray/hangtime',
+    external: true
+  },
+  {
     title: t('Follow {appTitle}', { appTitle: 'HangTime' }),
     icon: '$facebook',
     subtitle: t('App and hangboard updates'),

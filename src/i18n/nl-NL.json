@@ -162,5 +162,9 @@
   "You chose {voice}, this is my new voice": "Je koos {voice}, dit is mijn nieuwe stem",
   "You completed {name}": "Je hebt {name} voltooid",
   "You're almost there": "Je bent er bijna",
-  "{appTitle} lets you create your own training sequences, do community workouts and track your hangboarding progress": "Met {appTitle} kun je je eigen workoutschema's maken, community-workouts doen en je voortgang bijhouden"
+  "{appTitle} lets you create your own training sequences, do community workouts and track your hangboarding progress": "Met {appTitle} kun je je eigen workoutschema's maken, community-workouts doen en je voortgang bijhouden",
+  "Donate": "Doneer",
+  "Support development": "Ondersteun ontwikkeling",
+  "Source Code": "Broncode",
+  "Code, feature requests, discussions": "Code, functieverzoeken, discussies"
 }
