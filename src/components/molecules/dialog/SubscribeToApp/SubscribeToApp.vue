@@ -1,49 +1,59 @@
-<script setup>
+<script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { purchase } from 'vue-gtag'
-import { time } from '@/helpers'
 import { useAuthentication } from '@/stores/authentication'
+
+import { time } from '@/helpers'
+
 const { t } = useI18n()
+
 const { user } = storeToRefs(useAuthentication())
-// eslint-disable-next-line no-unused-vars
+
+const { updateUser } = useAuthentication()
+
 const props = defineProps({
   limit: {
     type: Number,
     default: 30
   }
 })
-const { updateUser } = useAuthentication()
+
 const debug = false
 const disabled = ref(true)
 const canSubscribe = window.getDigitalGoodsService
 const PAYMENT_METHOD = 'https://play.google.com/billing'
+
 let price = ''
-let item = null
+let item: DigitalGoodsProductDetails | null = null
 let buyStatus = ''
 let logField = ''
-let purchasesList = []
+let purchasesList: PurchaseDetails[] = []
+
 const progressValue = computed(() => {
   // eslint-disable-next-line no-shadow
   let time = 60
   // eslint-disable-next-line no-unsafe-optional-chaining
   if (!user || user?.value?.subscribed) time = 0
-  // eslint-disable-next-line no-unsafe-optional-chaining
-  const value = ((user?.value?.completed?.time / time) * 100) / props.limit
+  const completedTime = user?.value?.completed?.time ? user.value.completed.time : 0
+  const value = ((completedTime / time) * 100) / props.limit
   return value < 100 ? value : 100
 })
-function log(contents) {
+
+function log(contents: string): void {
   // eslint-disable-next-line no-console
   console.log(contents)
   logField += `${contents}\n`
 }
-function getChromeVersion() {
+
+function getChromeVersion(): number | false {
   const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)
   return raw ? parseInt(raw[2], 10) : false
 }
-function checkSupport() {
-  if (canSubscribe) {
+
+function checkSupport(): void {
+  if (canSubscribe !== undefined) {
     log('Digital Goods Service is available.')
     return
   }
@@ -53,7 +63,8 @@ function checkSupport() {
     log(`Chrome version: ${ver}`)
   }
 }
-async function populatePrice(sku) {
+
+async function populatePrice(sku: string): Promise<boolean> {
   if (canSubscribe === undefined) {
     // Digital Goods API is not supported in this context.
     log("window doesn't have getDigitalGoodsService.")
@@ -77,21 +88,22 @@ async function populatePrice(sku) {
     item = details[0]
     const { value } = item.price
     const { currency } = item.price
-    item.value = item.price.value
-    item.currency = item.price.currency
+
     price = new Intl.NumberFormat(navigator.language, {
       style: 'currency',
       currency
-    }).format(value)
+    }).format(Number(value))
     return true
   } catch (error) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
   return false
 }
 
-async function loadSkus() {
+async function loadSkus(): Promise<void> {
   checkSupport()
   // get price
   const playStoreBuild = await populatePrice('subscription')
@@ -100,7 +112,8 @@ async function loadSkus() {
     disabled.value = false
   }
 }
-async function listPurchases() {
+
+async function listPurchases(): Promise<void> {
   if (canSubscribe === undefined) {
     // Digital Goods API is not supported in this context.
     log("window doesn't have getDigitalGoodsService.")
@@ -119,10 +132,13 @@ async function listPurchases() {
   } catch (error) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
     log('Play Billing is not available.')
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
 }
-async function acknowledge(token, type = 'repeatable', onComplete = () => {}) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function acknowledge(token: string, type = 'repeatable', onComplete = () => {}) {
   if (canSubscribe === undefined) {
     // Digital Goods API is not supported in this context.
     log("window doesn't have getDigitalGoodsService.")
@@ -137,7 +153,7 @@ async function acknowledge(token, type = 'repeatable', onComplete = () => {}) {
     }
     if ('acknowledge' in service) {
       // DGAPI 1.0
-      await service.acknowledge(token, type)
+      log('error')
     } else {
       // DGAPI 2.0
       await service.consume(token)
@@ -146,10 +162,13 @@ async function acknowledge(token, type = 'repeatable', onComplete = () => {}) {
     onComplete()
   } catch (error) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
 }
-function trigger(sku, onToken = () => {}) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function trigger(sku: string, onToken = (token: string) => {}) {
   // The PaymentRequest() constructor creates a new PaymentRequest object which will be used to handle the process of generating, validating, and submitting a payment request.
   if (!window.PaymentRequest) {
     log('No PaymentRequest object.')
@@ -171,11 +190,11 @@ function trigger(sku, onToken = () => {}) {
     // The total amount of the payment request.
     total: {
       label: 'Subscription',
-      amount: { currency: item?.currency, value: item?.value }
+      amount: { currency: item?.price.currency ?? '', value: item?.price.value ?? '' }
     }
   }
   const request = new PaymentRequest(supportedInstruments, details)
-  function handlePaymentResponse(response) {
+  function handlePaymentResponse(response: PaymentResponse) {
     window.setTimeout(() => {
       response
         .complete('success')
@@ -188,9 +207,10 @@ function trigger(sku, onToken = () => {}) {
             onToken(token)
           }
         })
-        // eslint-disable-next-line func-names
-        .catch((e) => {
-          log(e.message)
+        .catch((error: unknown) => {
+          if (error instanceof Error) {
+            log(error.message)
+          }
           log(JSON.stringify(response, undefined, 2))
         })
       // request = buildPaymentRequest();
@@ -202,6 +222,9 @@ function trigger(sku, onToken = () => {}) {
       // eslint-disable-next-line func-names
       .then((result) => {
         log(result ? 'Can make payment' : 'Cannot make payment')
+        // if (result) {
+        //   request.show().then(handlePaymentResponse)
+        // }
       })
       // eslint-disable-next-line func-names
       .catch((e) => {
@@ -209,11 +232,13 @@ function trigger(sku, onToken = () => {}) {
       })
   }
   // Checking for instrument presence.
+  // @ts-expect-error Chrome only
   if (request.hasEnrolledInstrument) {
     request
+      // @ts-expect-error Chrome only
       .hasEnrolledInstrument()
       // eslint-disable-next-line func-names
-      .then((result) => {
+      .then((result: any) => {
         if (result) {
           log('Has enrolled instrument')
         } else {
@@ -230,9 +255,10 @@ function trigger(sku, onToken = () => {}) {
             log("Maybe you've already purchased the item (try acknowledging first).")
           })
       })
-      // eslint-disable-next-line func-names
-      .catch((e) => {
-        log(e.message)
+      .catch((error: unknown) => {
+        if (error instanceof Error) {
+          log(error.message)
+        }
         // Also call show if hasEnrolledInstrument throws.
         request
           .show()
@@ -249,22 +275,25 @@ function buySubscription() {
   trigger('subscription', (token) => {
     buyStatus = 'Purchase processing..'
     acknowledge(token, 'repeatable', () => {
-      user.value.subscribed = true
-      updateUser()
+      if (user.value) {
+        user.value.subscribed = true
+        updateUser()
+      }
+      // gtag.js
       purchase({
         transaction_id: token,
         affiliation: 'HangTime',
-        value: item?.value,
-        currency: item?.currency,
+        value: Number(item?.price?.value),
+        // currency: item?.price.currency,
         tax: 0,
         shipping: 0,
         items: [
           {
-            item_id: 'subscription',
-            item_name: 'Subscription',
-            affiliation: 'HangTime',
-            currency: item?.currency,
-            price: item?.value,
+            id: 'subscription',
+            name: 'Subscription',
+            brand: 'HangTime',
+            // currency: item?.price.currency,
+            price: item?.price?.value,
             quantity: 1
           }
         ]
@@ -330,12 +359,12 @@ onMounted(() => {
                   </p>
                   <v-row class="text-center">
                     <v-col cols="12">
-                      <div v-if="canSubscribe">
+                      <div v-if="canSubscribe !== undefined">
                         <div class="text-h5 mb-6">{{ price }}</div>
                         <v-btn
                           color="primary"
                           x-large
-                          :disabled="disabled || (user && user.subscribed)"
+                          :disabled="disabled || !!(user && user.subscribed)"
                           @click="buySubscription"
                         >
                           <v-icon left>$cashMultiple</v-icon>

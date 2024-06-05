@@ -1,32 +1,32 @@
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { computed, onMounted, ref } from 'vue'
 import { purchase } from 'vue-gtag'
 import { useAuthentication } from '@/stores/authentication'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
 import { time } from '@/helpers'
+
 const { t } = useI18n()
+
 const { user } = storeToRefs(useAuthentication())
 const { updateUser } = useAuthentication()
+
 const debug = false
 const disabled = ref(true)
 const canSubscribe = window.getDigitalGoodsService
 const limit = 30
 const PAYMENT_METHOD = 'https://play.google.com/billing'
+
 let price = ''
-let item: {
-  price?: { value: string; currency: string }
-  value?: string
-  currency?: string
-  [key: string]: any
-} = {}
+let item: DigitalGoodsProductDetails | null = null
 let buyStatus = ''
 let logField = ''
 let purchasesList: PurchaseDetails[] = []
+
 const progressValue = computed(() => {
   // eslint-disable-next-line no-shadow
   let time = 60
@@ -36,16 +36,19 @@ const progressValue = computed(() => {
   const value = ((completedTime / time) * 100) / limit
   return value < 100 ? value : 100
 })
-function log(contents: any) {
+
+function log(contents: string): void {
   // eslint-disable-next-line no-console
   console.log(contents)
   logField += `${contents}\n`
 }
-function getChromeVersion() {
+
+function getChromeVersion(): number | false {
   const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)
   return raw ? parseInt(raw[2], 10) : false
 }
-function checkSupport() {
+
+function checkSupport(): void {
   if (canSubscribe !== undefined) {
     log('Digital Goods Service is available.')
     return
@@ -78,25 +81,24 @@ async function populatePrice(sku: string): Promise<boolean> {
     log(JSON.stringify(details, null, 2))
     // eslint-disable-next-line prefer-destructuring
     item = details[0]
-    if (item.price) {
-      const { value } = item.price
-      const { currency } = item.price
-      item.value = item.price?.value
-      item.currency = item.price?.currency
-      price = new Intl.NumberFormat(navigator.language, {
-        style: 'currency',
-        currency
-      }).format(Number(value))
-    }
+    const { value } = item.price
+    const { currency } = item.price
+
+    price = new Intl.NumberFormat(navigator.language, {
+      style: 'currency',
+      currency
+    }).format(Number(value))
     return true
   } catch (error) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
   return false
 }
 
-async function loadSkus() {
+async function loadSkus(): Promise<void> {
   checkSupport()
   // get price
   const playStoreBuild = await populatePrice('subscription')
@@ -105,7 +107,7 @@ async function loadSkus() {
     disabled.value = false
   }
 }
-async function listPurchases() {
+async function listPurchases(): Promise<void> {
   if (canSubscribe === undefined) {
     // Digital Goods API is not supported in this context.
     log("window doesn't have getDigitalGoodsService.")
@@ -124,11 +126,13 @@ async function listPurchases() {
   } catch (error) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
     log('Play Billing is not available.')
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function acknowledge(token: any, type = 'repeatable', onComplete = () => {}) {
+async function acknowledge(token: string, type = 'repeatable', onComplete = () => {}) {
   if (canSubscribe === undefined) {
     // Digital Goods API is not supported in this context.
     log("window doesn't have getDigitalGoodsService.")
@@ -153,7 +157,9 @@ async function acknowledge(token: any, type = 'repeatable', onComplete = () => {
     onComplete()
   } catch (error) {
     // DGAPI 2.0 - Play Billing is not available. Use another payment flow.
-    log(error)
+    if (error instanceof Error) {
+      log(error.message)
+    }
   }
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -180,11 +186,11 @@ function trigger(sku: string, onToken = (token: string) => {}) {
     // The total amount of the payment request.
     total: {
       label: 'Subscription',
-      amount: { currency: item.currency ?? '', value: item.value ?? '' }
+      amount: { currency: item?.price.currency ?? '', value: item?.price.value ?? '' }
     }
   }
   const request = new PaymentRequest(supportedInstruments, details)
-  function handlePaymentResponse(response: any) {
+  function handlePaymentResponse(response: PaymentResponse) {
     window.setTimeout(() => {
       response
         .complete('success')
@@ -197,7 +203,6 @@ function trigger(sku: string, onToken = (token: string) => {}) {
             onToken(token)
           }
         })
-        // eslint-disable-next-line func-names
         .catch((error: unknown) => {
           if (error instanceof Error) {
             log(error.message)
@@ -246,7 +251,6 @@ function trigger(sku: string, onToken = (token: string) => {}) {
             log("Maybe you've already purchased the item (try acknowledging first).")
           })
       })
-      // eslint-disable-next-line func-names
       .catch((error: unknown) => {
         if (error instanceof Error) {
           log(error.message)
@@ -264,7 +268,7 @@ function trigger(sku: string, onToken = (token: string) => {}) {
   }
 }
 function buySubscription() {
-  trigger('subscription', (token: any) => {
+  trigger('subscription', (token: string) => {
     buyStatus = 'Purchase processing..'
     acknowledge(token, 'repeatable', () => {
       if (user.value) {
