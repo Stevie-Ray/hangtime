@@ -18,7 +18,7 @@ import {
   info,
   notify
 } from '@hangtime/grip-connect'
-import type { massObject } from '@hangtime/grip-connect/src/notify'
+import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 
 import { useBluetooth } from '@/stores/bluetooth'
 

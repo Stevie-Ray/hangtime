@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 import { stream } from '@hangtime/grip-connect'
-import { massObject } from '@hangtime/grip-connect/src/notify'
+import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import NoSleep from 'nosleep.js'
