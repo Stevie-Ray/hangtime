@@ -30,6 +30,8 @@ jobs:
         run: npm run type-check
 #      - name: Check unit tests
 #        run: npm run test:unit
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Check e2e tests
         run: npm run test:e2e
 
