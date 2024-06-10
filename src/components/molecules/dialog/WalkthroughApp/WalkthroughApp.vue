@@ -6,20 +6,20 @@ import { useI18n } from 'vue-i18n'
 import { event } from 'vue-gtag'
 import IRCRA from 'ircra'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect.vue'
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
-import { useAuthentication } from '@/stores/authentication'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
+import { useAuthenticationStore } from '@/stores/authentication'
 import { loadLanguageAsync } from '@/plugins/i18n'
 
 const ircra = new IRCRA()
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { getHangboardNameByIds, getHangboardByIds } = useUser()
+const { getHangboardNameByIds, getHangboardByIds } = useUserStore()
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
 const router = useRouter()
 

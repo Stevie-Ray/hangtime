@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-export const useApp = defineStore('app', () => {
+export const useAppStore = defineStore('app', () => {
   const networkOnLine = ref<boolean>(true)
   const SWRegistrationForNewContent = ref<ServiceWorkerRegistration | null>(null)
   const refreshingApp = ref<boolean>(false)

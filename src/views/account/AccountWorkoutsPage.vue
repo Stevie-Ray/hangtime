@@ -4,17 +4,17 @@ import { useRouter } from 'vue-router'
 import { onMounted, reactive, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
 const synth = window.speechSynthesis
 const greetingSpeech = new window.SpeechSynthesisUtterance()

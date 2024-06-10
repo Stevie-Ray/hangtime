@@ -4,22 +4,22 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { event } from 'vue-gtag'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect.vue'
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
-import { useAuthentication } from '@/stores/authentication'
-import { useWorkouts } from '@/stores/workouts'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useWorkoutsStore } from '@/stores/workouts'
 
 const { t } = useI18n()
 
-const { networkOnLine } = storeToRefs(useApp())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { user } = storeToRefs(useAuthentication())
+const { fetchCommunityWorkouts } = useWorkoutsStore()
 
-const { fetchCommunityWorkouts } = useWorkouts()
+const { getHangboardByIds, getHangboardNameByIds } = useUserStore()
 
-const { getHangboardByIds, getHangboardNameByIds } = useUser()
+const { updateUser } = useAuthenticationStore()
 
-const { updateUser } = useAuthentication()
+const { networkOnLine } = storeToRefs(useAppStore())
 
 const dialog = ref(false)
 

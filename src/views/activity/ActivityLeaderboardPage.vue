@@ -3,14 +3,14 @@ import { ref, watch, computed } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useWorkouts } from '@/stores/workouts'
+import { useWorkoutsStore } from '@/stores/workouts'
 import { time } from '@/helpers'
 
 const { t } = useI18n()
 
-const { fetchLeaderboard } = useWorkouts()
+const { fetchLeaderboard } = useWorkoutsStore()
 
-const { getLeaderboard } = useWorkouts()
+const { getLeaderboard } = useWorkoutsStore()
 
 const rank = ref('completed.amount')
 

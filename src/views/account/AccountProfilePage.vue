@@ -12,19 +12,19 @@ import {
 import IRCRA from 'ircra'
 import { Ref, computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 import { weightConverter } from '@/helpers'
 import countries from '@/helpers/countries'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
 const router = useRouter()
 

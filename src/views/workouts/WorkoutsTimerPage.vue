@@ -4,12 +4,12 @@ import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
 import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useWorkouts } from '@/stores/workouts'
+import { useWorkoutsStore } from '@/stores/workouts'
 
 const route = useRoute()
 const router = useRouter()
 
-const { getWorkoutById } = useWorkouts()
+const { getWorkoutById } = useWorkoutsStore()
 
 const workout = computed(() => getWorkoutById(route.params.id))
 

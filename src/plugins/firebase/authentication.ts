@@ -1,10 +1,10 @@
 import { onAuthStateChanged, getAuth, browserPopupRedirectResolver } from 'firebase/auth'
 // import { default as app } from '@/plugins/firebase'
 
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 import { User as FirebaseUser } from 'firebase/auth'
 
-const { login, logout } = useAuthentication()
+const { login, logout } = useAuthenticationStore()
 const auth = getAuth()
 
 // https://github.com/firebase/firebase-js-sdk/issues/4946

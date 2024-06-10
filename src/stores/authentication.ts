@@ -5,7 +5,7 @@ import router from '@/router'
 import { User as FirebaseUser } from 'firebase/auth'
 import { User, UserSettings } from '@/interfaces/authentication.interface'
 
-export const useAuthentication = defineStore('authentication', () => {
+export const useAuthenticationStore = defineStore('authentication', () => {
   const user: Ref<User | null> = ref(null)
   const error: Ref<string | null> = ref(null)
 
@@ -63,10 +63,10 @@ export const useAuthentication = defineStore('authentication', () => {
           ? await createNewUserFromFirebaseAuthUser(firebaseAuthUser)
           : userFromFirebase
 
-      const { useWorkouts } = await import('@/stores/workouts')
-      const workouts = useWorkouts()
-      const { useActivities } = await import('@/stores/activities')
-      const activities = useActivities()
+      const { useWorkoutsStore } = await import('@/stores/workouts')
+      const workouts = useWorkoutsStore()
+      const { useActivitiesStore } = await import('@/stores/activities')
+      const activities = useActivitiesStore()
 
       if (user.value?.settings?.locale) {
         loadLanguageAsync(user.value.settings.locale)

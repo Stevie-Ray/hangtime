@@ -4,14 +4,14 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import router from '@/router'
 import { time, useRandomImage } from '@/helpers'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
 const emit = defineEmits(['show'])
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({

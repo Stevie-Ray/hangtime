@@ -2,7 +2,7 @@
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import countries from '@/helpers/countries'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
@@ -10,7 +10,7 @@ import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
 const { t } = useI18n()
 
-const { getCompanies } = useUser()
+const { getCompanies } = useUserStore()
 
 const router = useRouter()
 

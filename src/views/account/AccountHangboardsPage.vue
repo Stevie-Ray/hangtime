@@ -4,29 +4,29 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useUser } from '@/stores/user'
-import { useAuthentication } from '@/stores/authentication'
-import { useWorkouts } from '@/stores/workouts'
+import { useUserStore } from '@/stores/user'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useWorkoutsStore } from '@/stores/workouts'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import HangboardAdd from '@/components/molecules/dialog/HangboardAdd/HangboardAdd.vue'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 import countries from '@/helpers/countries'
 
 const { t } = useI18n()
 
-const { getUserHangboards, getUserHangboardSelectedId } = storeToRefs(useUser())
+const { getUserHangboards, getUserHangboardSelectedId } = storeToRefs(useUserStore())
 
-const { getHangboardByIds, getCompanyById } = useUser()
+const { getHangboardByIds, getCompanyById } = useUserStore()
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { fetchCommunityWorkouts } = useWorkouts()
+const { fetchCommunityWorkouts } = useWorkoutsStore()
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const workouts = useWorkouts()
+const workouts = useWorkoutsStore()
 
 const setHangboard = (index: number) => {
   if (user.value) {

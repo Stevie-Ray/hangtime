@@ -1,15 +1,15 @@
 import { ref, computed, reactive } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 import { WhereFilterOp } from 'firebase/firestore/lite'
-import { useAuthentication } from '@/stores/authentication'
-import { useUser } from '@/stores/user'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useUserStore } from '@/stores/user'
 import i18n from '@/plugins/i18n'
 import UsersWorkoutsDB from '@/plugins/firebase/users-workouts-db'
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
 import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
 
-export const useWorkouts = defineStore('workouts', () => {
+export const useWorkoutsStore = defineStore('workouts', () => {
   const workouts = ref<Workout[]>([])
   const workoutsCommunity = ref<Workout[]>([])
   const leaderboards = ref<Leaderboard[]>([])
@@ -20,7 +20,7 @@ export const useWorkouts = defineStore('workouts', () => {
    * @return Array
    */
   async function fetchUserWorkouts() {
-    const authentication = useAuthentication()
+    const authentication = useAuthenticationStore()
     const usersWorkoutsDb = new UsersWorkoutsDB(authentication.user?.id)
     const lastVisible = workouts.value.length > 0 ? workouts.value[workouts.value.length - 1] : null
     const newWorkouts = await usersWorkoutsDb.readAll(
@@ -37,8 +37,8 @@ export const useWorkouts = defineStore('workouts', () => {
    * @return Array
    */
   async function fetchCommunityWorkouts() {
-    const authentication = useAuthentication()
-    const user = useUser()
+    const authentication = useAuthenticationStore()
+    const user = useUserStore()
     const usersWorkoutsDb = new UsersWorkoutsDB(authentication.user?.id)
     const lastVisible =
       workoutsCommunity.value.length > 0
@@ -78,7 +78,7 @@ export const useWorkouts = defineStore('workouts', () => {
    * @return {Promise<void>}
    */
   async function createUserWorkout(workout: Workout) {
-    const { user } = storeToRefs(useAuthentication())
+    const { user } = storeToRefs(useAuthenticationStore())
     const userWorkoutDb = new UserWorkoutsDB(user.value?.id)
 
     const createdWorkout = await userWorkoutDb.create(workout)
@@ -98,7 +98,7 @@ export const useWorkouts = defineStore('workouts', () => {
    * @return {Promise<void>}
    */
   async function updateUserWorkout(payload: Workout) {
-    const { user } = storeToRefs(useAuthentication())
+    const { user } = storeToRefs(useAuthenticationStore())
     const userWorkoutsDb = new UserWorkoutsDB(user.value?.id)
     await userWorkoutsDb.update(payload)
   }
@@ -109,7 +109,7 @@ export const useWorkouts = defineStore('workouts', () => {
    * @return {Promise<void>}
    */
   async function removeUserWorkoutById(id: string) {
-    const { user } = storeToRefs(useAuthentication())
+    const { user } = storeToRefs(useAuthenticationStore())
     const userWorkoutsDb = new UserWorkoutsDB(user.value?.id)
 
     await userWorkoutsDb.delete(id)
@@ -140,8 +140,8 @@ export const useWorkouts = defineStore('workouts', () => {
       // eslint-disable-next-line no-shadow
       workout = workoutsCommunity.value?.find((workout: Workout) => workout.id === id)
     if (id === 'new') {
-      const authentication = useAuthentication()
-      const user = useUser()
+      const authentication = useAuthenticationStore()
+      const user = useUserStore()
       if (authentication.user && user.getUserHangboard && user.getUserHangboardCompany) {
         workout = reactive<Workout>({
           name: i18n.global.t('New workout'),
@@ -170,7 +170,7 @@ export const useWorkouts = defineStore('workouts', () => {
    * Get workouts for the currently selected hangboard
    */
   const getWorkoutsBySelectedHangboard = computed(() => {
-    const user = useUser()
+    const user = useUserStore()
     if (workouts.value === null) return []
     const limit = 999
     const items = workouts.value.length > limit ? limit : workouts.value.length

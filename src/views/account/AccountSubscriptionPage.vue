@@ -5,15 +5,15 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { purchase } from 'vue-gtag'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
 import { time } from '@/helpers'
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useAuthentication())
-const { updateUser } = useAuthentication()
+const { user } = storeToRefs(useAuthenticationStore())
+const { updateUser } = useAuthenticationStore()
 
 const debug = false
 const disabled = ref(true)

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useBluetooth = defineStore('bluetooth', () => {
+export const useBluetoothStore = defineStore('bluetooth', () => {
   const device = ref()
 
   return {

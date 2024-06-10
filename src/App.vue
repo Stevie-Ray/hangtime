@@ -9,10 +9,10 @@ import roboto400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff2'
 import roboto500 from '@fontsource/roboto/files/roboto-latin-500-normal.woff2'
 import roboto700 from '@fontsource/roboto/files/roboto-latin-700-normal.woff2'
 
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable.vue'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 
 // router
 const route = useRoute()
@@ -44,11 +44,11 @@ useHead({
   ]
 })
 
-const { serviceWorkerSkipWaiting } = useApp()
+const { serviceWorkerSkipWaiting } = useAppStore()
 
-const { newAppContent, refreshingApp } = storeToRefs(useApp())
+const { newAppContent, refreshingApp } = storeToRefs(useAppStore())
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
 const theme = useTheme()
 

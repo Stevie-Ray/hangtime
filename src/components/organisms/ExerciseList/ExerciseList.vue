@@ -4,13 +4,13 @@ import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 import ExerciseEdit from '@/components/molecules/dialog/ExerciseEdit/ExerciseEdit.vue'
 import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
 const emit = defineEmits(['add'])
 

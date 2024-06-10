@@ -3,15 +3,15 @@ import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { purchase } from 'vue-gtag'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 
 import { time } from '@/helpers'
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
 const props = defineProps({
   limit: {

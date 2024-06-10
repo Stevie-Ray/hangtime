@@ -6,7 +6,7 @@ import {
   NavigationGuardNext
 } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 
 // 1. Define route components.
 // These can be imported from other files
@@ -164,7 +164,7 @@ router.beforeEach(
   (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     // ✅ This will work because the router starts its navigation after
     // the router is installed and pinia will be installed too
-    const { user } = storeToRefs(useAuthentication())
+    const { user } = storeToRefs(useAuthenticationStore())
 
     if (
       !(to.meta && to.meta.public) &&

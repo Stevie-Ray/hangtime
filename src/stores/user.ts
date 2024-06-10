@@ -1,11 +1,11 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { computed } from 'vue'
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 import hangboardBrands from '@/helpers/hangboards'
 import { Company, Hangboard } from '@/interfaces/user.interface'
 
-export const useUser = defineStore('user', () => {
-  const { user } = storeToRefs(useAuthentication())
+export const useUserStore = defineStore('user', () => {
+  const { user } = storeToRefs(useAuthenticationStore())
 
   /**
    * Get a hangboard object by company & hangboard ID

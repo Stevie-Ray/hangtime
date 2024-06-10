@@ -7,8 +7,8 @@ import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import IRCRA from 'ircra'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useAuthentication } from '@/stores/authentication'
-import { useApp } from '@/stores/app'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useAppStore } from '@/stores/app'
 import { loadLanguageAsync } from '@/plugins/i18n'
 
 const scale = new IRCRA().scale()
@@ -17,11 +17,11 @@ const { t } = useI18n()
 
 const i18n = useI18n({ useScope: 'global' })
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
 // const theme = useTheme()
 

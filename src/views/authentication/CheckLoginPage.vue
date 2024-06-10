@@ -5,11 +5,11 @@ import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useHead } from '@unhead/vue'
 
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 
 const { t } = useI18n()
 
-const { user, error } = storeToRefs(useAuthentication())
+const { user, error } = storeToRefs(useAuthenticationStore())
 
 const route = useRoute()
 const router = useRouter()

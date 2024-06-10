@@ -1,6 +1,6 @@
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 
-const app = useApp()
+const app = useAppStore()
 
 app.networkOnLine = navigator.onLine
 

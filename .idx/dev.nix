@@ -2,7 +2,12 @@
   channel = "stable-23.11";
   packages = [
     pkgs.nodejs_20
+    pkgs.playwright-driver.browsers
   ];
+  env = {
+    PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+    PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true;
+  };
   idx.extensions = [
     "Vue.volar"
     "ms-playwright.playwright"

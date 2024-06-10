@@ -2,10 +2,10 @@
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ref, watch } from 'vue'
-import { useWorkouts } from '@/stores/workouts'
+import { useWorkoutsStore } from '@/stores/workouts'
 import { Workout } from '@/interfaces/workouts.interface'
 
-const { createUserWorkout, updateUserWorkout } = useWorkouts()
+const { createUserWorkout, updateUserWorkout } = useWorkoutsStore()
 
 const router = useRouter()
 

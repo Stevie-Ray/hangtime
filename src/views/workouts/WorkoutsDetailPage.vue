@@ -11,30 +11,30 @@ import MissingHangboard from '@/components/molecules/dialog/MissingHangboard/Mis
 import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
-import { useApp } from '@/stores/app'
-import { useWorkouts } from '@/stores/workouts'
-import { useAuthentication } from '@/stores/authentication'
-import { useUser } from '@/stores/user'
+import { useAppStore } from '@/stores/app'
+import { useWorkoutsStore } from '@/stores/workouts'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useUserStore } from '@/stores/user'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
 import { Exercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
 // router
 const route = useRoute()
 const router = useRouter()
 
 // workout
-const { fetchCommunityWorkouts, getWorkoutById, removeUserWorkoutById } = useWorkouts()
+const { fetchCommunityWorkouts, getWorkoutById, removeUserWorkoutById } = useWorkoutsStore()
 
-const { getUserHangboards, getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
+const { getUserHangboards, getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
 const workout = computed(() => getWorkoutById(route.params.id ? route.params.id : 'new'))
 

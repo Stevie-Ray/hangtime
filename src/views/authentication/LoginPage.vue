@@ -19,18 +19,18 @@ import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { event } from 'vue-gtag'
-import { useAuthentication } from '@/stores/authentication'
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 import imgLogo from '@/assets/logo.svg'
 
 const { t } = useI18n()
 
-const { getCompanies, getHangboards } = useUser()
+const { getCompanies, getHangboards } = useUserStore()
 
-const { user, error } = storeToRefs(useAuthentication())
+const { user, error } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
 // single ref
 watch(networkOnLine, (status) => {

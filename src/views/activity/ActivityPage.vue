@@ -10,13 +10,13 @@ import imgLogo from '@/assets/logo.svg'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
 
-import { useActivities } from '@/stores/activities'
-import { useAuthentication } from '@/stores/authentication'
+import { useActivitiesStore } from '@/stores/activities'
+import { useAuthenticationStore } from '@/stores/authentication'
 
 import { Activity } from '@/interfaces/activities.interface'
 
-const { activities } = storeToRefs(useActivities())
-const { user } = storeToRefs(useAuthentication())
+const { activities } = storeToRefs(useActivitiesStore())
+const { user } = storeToRefs(useAuthenticationStore())
 
 const { t } = useI18n()
 

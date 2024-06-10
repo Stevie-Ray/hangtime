@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRandomImage } from '@/helpers'
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import countries from '@/helpers/countries'
 
-const { getCompanies } = useUser()
+const { getCompanies } = useUserStore()
 
 interface Slide {
   title: string

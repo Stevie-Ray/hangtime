@@ -2,15 +2,15 @@
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 import { Workout } from '@/interfaces/workouts.interface'
 
 const router = useRouter()
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
+const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
 const props = defineProps({
   workout: {

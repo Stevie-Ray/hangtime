@@ -4,10 +4,10 @@ import { computed, ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { useUser } from '@/stores/user'
-import { useWorkouts } from '@/stores/workouts'
-import { useAuthentication } from '@/stores/authentication'
-import { useApp } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
+import { useWorkoutsStore } from '@/stores/workouts'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useAppStore } from '@/stores/app'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
@@ -17,15 +17,15 @@ import imgLogo from '@/assets/logo.svg'
 
 import { time } from '@/helpers'
 
-const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUser())
-const { getHangboardNameByIds } = useUser()
+const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUserStore())
+const { getHangboardNameByIds } = useUserStore()
 const { t } = useI18n()
-const { user } = storeToRefs(useAuthentication())
-const { updateUser } = useAuthentication()
-const { networkOnLine } = storeToRefs(useApp())
-const { fetchCommunityWorkouts, fetchUserWorkouts } = useWorkouts()
+const { user } = storeToRefs(useAuthenticationStore())
+const { updateUser } = useAuthenticationStore()
+const { networkOnLine } = storeToRefs(useAppStore())
+const { fetchCommunityWorkouts, fetchUserWorkouts } = useWorkoutsStore()
 
-const workouts = useWorkouts()
+const workouts = useWorkoutsStore()
 const route = useRoute()
 const router = useRouter()
 

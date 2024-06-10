@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import InlineSvg from 'vue-inline-svg'
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import { Exercise } from '@/interfaces/workouts.interface'
 
-const { getHangboardByIds } = useUser()
+const { getHangboardByIds } = useUserStore()
 
 const props = defineProps({
   exercise: {

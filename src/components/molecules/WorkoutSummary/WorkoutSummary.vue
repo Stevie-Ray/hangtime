@@ -4,13 +4,13 @@ import { ref, Ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
 import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
-const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUser())
+const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
 const emit = defineEmits(['save'])
 

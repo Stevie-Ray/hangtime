@@ -19,19 +19,19 @@ import countSound from '@/assets/sound/count.wav'
 import startSound from '@/assets/sound/start.wav'
 import stopSound from '@/assets/sound/stop.wav'
 
-import { useAuthentication } from '@/stores/authentication'
-import { useActivities } from '@/stores/activities'
-import { useBluetooth } from '@/stores/bluetooth'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useActivitiesStore } from '@/stores/activities'
+import { useBluetoothStore } from '@/stores/bluetooth'
 
-const { device } = storeToRefs(useBluetooth())
+const { device } = storeToRefs(useBluetoothStore())
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { updateUser } = useAuthentication()
+const { updateUser } = useAuthenticationStore()
 
-const { createUserActivity } = useActivities()
+const { createUserActivity } = useActivitiesStore()
 
 const props = defineProps({
   workout: {

@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import { register } from 'register-service-worker'
 import { storeToRefs } from 'pinia'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 
-const { SWRegistrationForNewContent } = storeToRefs(useApp())
+const { SWRegistrationForNewContent } = storeToRefs(useAppStore())
 const path = import.meta.env.MODE === 'production' ? '/service-worker.js' : '/dev-sw.js?dev-sw'
 
 register(path, {

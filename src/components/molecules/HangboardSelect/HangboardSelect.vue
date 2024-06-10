@@ -2,12 +2,12 @@
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import countries from '@/helpers/countries'
 
 const { t } = useI18n()
 
-const { getHangboardByIds, getCompanyById, getHangboardNameByIds, getCompanies } = useUser()
+const { getHangboardByIds, getCompanyById, getHangboardNameByIds, getCompanies } = useUserStore()
 
 const props = defineProps({
   selectedHangboard: {

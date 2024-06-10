@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useWorkouts } from '@/stores/workouts'
-import { useAuthentication } from '@/stores/authentication'
-import { useApp } from '@/stores/app'
+import { useWorkoutsStore } from '@/stores/workouts'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { useAppStore } from '@/stores/app'
 import { Workout } from '@/interfaces/workouts.interface'
 
-const { workouts } = storeToRefs(useWorkouts())
+const { updateWorkout } = useWorkoutsStore()
 
-const { updateWorkout } = useWorkouts()
+const { workouts } = storeToRefs(useWorkoutsStore())
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
 const props = defineProps({
   workout: {

@@ -4,7 +4,7 @@ import { useHead } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import { useRandomImage } from '@/helpers'
 import countries from '@/helpers/countries'
 
@@ -12,18 +12,18 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
-import { useAuthentication } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication'
 
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 import { Hangboard } from '@/interfaces/user.interface'
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useAuthentication())
+const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useApp())
+const { networkOnLine } = storeToRefs(useAppStore())
 
-const { getCompanyByUrlKey, getHangboardByIds } = useUser()
+const { getCompanyByUrlKey, getHangboardByIds } = useUserStore()
 
 // router
 const route = useRoute()
