@@ -4,7 +4,7 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 env:
-  CI: false
+  CI: true
 jobs:
   tests:
     runs-on: ubuntu-latest

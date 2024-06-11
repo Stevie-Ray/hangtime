@@ -53,34 +53,38 @@ const count = computed({
 const steps = [1, 5, 15, 60, 180, 300]
 
 function increment() {
-  if (!count.value || count.value >= props.max) return
-  if (count.value < steps[2] || !props.timer) {
-    count.value += steps[0]
-  }
-  if (count.value >= steps[2] && count.value < steps[3] && props.timer) {
-    count.value += steps[1]
-  }
-  if (count.value >= steps[3] && count.value < steps[4] && props.timer) {
-    count.value += steps[2]
-  }
-  if (count.value >= steps[4] && count.value < steps[5] && props.timer) {
-    count.value += steps[3]
+  if (count.value !== undefined) {
+    if (count.value >= props.max) return
+    if (count.value < steps[2] || !props.timer) {
+      count.value += steps[0]
+    }
+    if (count.value >= steps[2] && count.value < steps[3] && props.timer) {
+      count.value += steps[1]
+    }
+    if (count.value >= steps[3] && count.value < steps[4] && props.timer) {
+      count.value += steps[2]
+    }
+    if (count.value >= steps[4] && count.value < steps[5] && props.timer) {
+      count.value += steps[3]
+    }
   }
 }
 
 function decrement() {
-  if (!count.value || count.value <= props.min) return
-  if (count.value <= steps[2] || !props.timer) {
-    count.value -= steps[0]
-  }
-  if (count.value > steps[2] && count.value <= steps[3] && props.timer) {
-    count.value -= steps[1]
-  }
-  if (count.value > steps[3] && count.value <= steps[4] && props.timer) {
-    count.value -= steps[2]
-  }
-  if (count.value > steps[4] && count.value <= steps[5] && props.timer) {
-    count.value -= steps[3]
+  if (count.value !== undefined) {
+    if (count.value <= props.min) return
+    if (count.value <= steps[2] || !props.timer) {
+      count.value -= steps[0]
+    }
+    if (count.value > steps[2] && count.value <= steps[3] && props.timer) {
+      count.value -= steps[1]
+    }
+    if (count.value > steps[3] && count.value <= steps[4] && props.timer) {
+      count.value -= steps[2]
+    }
+    if (count.value > steps[4] && count.value <= steps[5] && props.timer) {
+      count.value -= steps[3]
+    }
   }
 }
 </script>
