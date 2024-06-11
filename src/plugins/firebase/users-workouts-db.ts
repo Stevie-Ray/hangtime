@@ -10,7 +10,8 @@ import {
   startAfter,
   Firestore,
   DocumentSnapshot,
-  QueryConstraint
+  QueryConstraint,
+  OrderByDirection
 } from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
@@ -26,14 +27,16 @@ export default class UsersWorkoutsDB extends GenericDB {
    * Retrieves all documents from the Firestore collection.
    *
    * @param {Array<[string, WhereFilterOp, any]> | null} constraints - Array of constraints for the query.
-   * @param {string | null} sort - Field to sort the results by.
+   * @param {string | null} order - Field to sort the results by.
+   * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
    * @param {number | null} amount - Maximum number of documents to retrieve.
    * @returns {Promise<any[]>} - Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, any]> | null = null,
-    sort: string | null = null,
+    order: string | null = null,
+    direction: OrderByDirection = 'desc',
     lastVisible: DocumentSnapshot | null = null,
     amount: number | null = null
   ): Promise<any[]> {
@@ -47,8 +50,8 @@ export default class UsersWorkoutsDB extends GenericDB {
       constraints.forEach(([field, op, value]) => combinedQuery.push(where(field, op, value)))
     }
 
-    if (sort) {
-      combinedQuery.push(orderBy(sort, 'desc'))
+    if (order) {
+      combinedQuery.push(orderBy(order, direction))
     }
 
     if (lastVisible) {
@@ -65,6 +68,9 @@ export default class UsersWorkoutsDB extends GenericDB {
     if (combinedQuery.length > 0) {
       q = query(collectionRef, ...combinedQuery)
     }
+
+    console.log(combinedQuery)
+    console.log(q)
 
     const formatResult = (result: any) =>
       result.docs.map((ref: any) =>

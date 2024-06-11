@@ -17,7 +17,8 @@ import {
   Firestore,
   CollectionReference,
   DocumentReference,
-  WhereFilterOp
+  WhereFilterOp,
+  OrderByDirection
 } from 'firebase/firestore/lite'
 import { toRaw, isRef, isReactive, isProxy } from 'vue'
 import firebaseApp from '@/plugins/firebase'
@@ -104,14 +105,15 @@ export default class GenericDB {
    * Retrieves all documents from the Firestore collection.
    *
    * @param {Array<[string, WhereFilterOp, any]> | null} constraints - Array of constraints for the query.
-   * @param {string | null} sort - Field to sort the results by.
-   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
+   * @param {string | null} order - Field to sort the results by.
+   * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {number | null} amount - Maximum number of documents to retrieve.
    * @returns {Promise<any[]>} - Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, any]> | null = null,
-    sort: string | null = null,
+    order: string | null = null,
+    direction: OrderByDirection = 'desc',
     amount: number | null = null
   ): Promise<any[]> {
     const collectionRef: CollectionReference = collection(db, this.collectionPath)
@@ -124,8 +126,8 @@ export default class GenericDB {
       constraints.forEach(([field, op, value]) => combinedQuery.push(where(field, op, value)))
     }
 
-    if (sort) {
-      combinedQuery.push(orderBy(sort, 'desc'))
+    if (order) {
+      combinedQuery.push(orderBy(order, direction))
     }
 
     if (amount) {

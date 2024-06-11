@@ -12,6 +12,10 @@ import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
 export const useWorkoutsStore = defineStore('workouts', () => {
   const workouts = ref<Workout[]>([])
   const workoutsCommunity = ref<Workout[]>([])
+  const workoutsCommunityFilter = ref<{ filter: string; value: string }>({
+    filter: 'Last Modified',
+    value: 'updateTimestamp'
+  })
   const leaderboards = ref<Leaderboard[]>([])
 
   // Actions
@@ -21,11 +25,13 @@ export const useWorkoutsStore = defineStore('workouts', () => {
    */
   async function fetchUserWorkouts() {
     const authentication = useAuthenticationStore()
-    const usersWorkoutsDb = new UsersWorkoutsDB(authentication.user?.id)
+    const usersWorkoutsDb = new UsersWorkoutsDB()
     const lastVisible = workouts.value.length > 0 ? workouts.value[workouts.value.length - 1] : null
     const newWorkouts = await usersWorkoutsDb.readAll(
       [['subscribers', 'array-contains', authentication.user?.id]],
       'updateTimestamp',
+      'desc',
+      // @ts-expect-error DocumentSnapshot
       lastVisible,
       20
     )
@@ -37,9 +43,8 @@ export const useWorkoutsStore = defineStore('workouts', () => {
    * @return Array
    */
   async function fetchCommunityWorkouts() {
-    const authentication = useAuthenticationStore()
     const user = useUserStore()
-    const usersWorkoutsDb = new UsersWorkoutsDB(authentication.user?.id)
+    const usersWorkoutsDb = new UsersWorkoutsDB()
     const lastVisible =
       workoutsCommunity.value.length > 0
         ? workoutsCommunity.value[workoutsCommunity.value.length - 1]
@@ -53,7 +58,9 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     }
     const newWorkouts = await usersWorkoutsDb.readAll(
       constraints,
-      'updateTimestamp',
+      workoutsCommunityFilter.value.value,
+      'desc',
+      // @ts-expect-error DocumentSnapshot
       lastVisible,
       20
     )
@@ -201,6 +208,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   return {
     workouts,
     workoutsCommunity,
+    workoutsCommunityFilter,
     leaderboards,
     fetchUserWorkouts,
     fetchCommunityWorkouts,

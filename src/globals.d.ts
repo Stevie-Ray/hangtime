@@ -29,10 +29,10 @@ declare module '@/plugins/firebase/users-db' {
   export default value
 }
 
-declare module '@/plugins/firebase/users-workouts-db' {
-  const value: any
-  export default value
-}
+// declare module '@/plugins/firebase/users-workouts-db' {
+//   const value: any
+//   export default value
+// }
 
 declare module '@/plugins/head' {
   const value: any

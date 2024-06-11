@@ -15,7 +15,7 @@ export const useActivitiesStore = defineStore('activities', () => {
     if (activities.value.length) return
     const { user } = storeToRefs(useAuthenticationStore())
     const userActivitiesDb = new UserActivitiesDB(user.value?.id)
-    activities.value = await userActivitiesDb.readAll(null, 'createTimestamp', 20)
+    activities.value = await userActivitiesDb.readAll(null, 'createTimestamp', 'desc', 20)
   }
   /**
    * Add a new workout for the user
