@@ -14,7 +14,7 @@ defineProps({
 
 <template>
   <div v-if="exercise && exercise.exercise === 0">
-    <div v-if="exercise.grip">
+    <div v-if="exercise.grip !== undefined">
       <div class="mb-8">
         {{ grip[exercise.grip].description }}
       </div>
@@ -45,7 +45,7 @@ defineProps({
     </div>
   </div>
   <div v-else-if="exercise && exercise.grip !== 0">
-    <div v-if="exercise.grip">
+    <div v-if="exercise.grip !== undefined">
       <div class="mb-8">
         {{ grip[exercise.grip].description }}
       </div>

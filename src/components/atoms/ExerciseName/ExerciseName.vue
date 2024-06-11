@@ -25,14 +25,14 @@ defineProps({
     <span v-if="exercise.pullups > 1 && !exercise.max"> {{ exercise.pullups }}&nbsp;</span>
     <span v-if="exercise.left === null || exercise.right === null">One-Arm </span>
     <span v-if="exercise.exercise === 0">
-      <span v-if="exercise.grip">
+      <span v-if="exercise.grip !== undefined">
         {{ grip[exercise.grip].name }}
       </span>
       <!-- fallback-->
       <span v-else-if="grip[exercise.exercise].id !== 0">{{ grip[exercise.exercise].name }}</span>
     </span>
     <span v-else-if="exercise.grip !== 0">
-      <span v-if="exercise.grip"> {{ grip[exercise.grip].short }}&nbsp;</span>
+      <span v-if="exercise.grip !== undefined">{{ grip[exercise.grip].short }}&nbsp;</span>
       <!-- fallback-->
       <span v-else-if="grip[exercise.exercise]">{{ grip[exercise.exercise].name }}</span>
     </span>
