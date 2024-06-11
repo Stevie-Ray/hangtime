@@ -69,9 +69,6 @@ export default class UsersWorkoutsDB extends GenericDB {
       q = query(collectionRef, ...combinedQuery)
     }
 
-    console.log(combinedQuery)
-    console.log(q)
-
     const formatResult = (result: any) =>
       result.docs.map((ref: any) =>
         this.convertObjectTimestampPropertiesToDate({

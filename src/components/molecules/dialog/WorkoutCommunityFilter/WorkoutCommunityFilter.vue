@@ -24,11 +24,8 @@ watch(
   workoutsCommunityFilter,
   async (newFilter, oldFilter) => {
     if (newFilter !== oldFilter) {
-      console.log(workoutsCommunity.value)
       workoutsCommunity.value = []
-      console.log(workoutsCommunity.value)
       await fetchCommunityWorkouts()
-      console.log(workoutsCommunity.value)
     }
   },
   { deep: true }

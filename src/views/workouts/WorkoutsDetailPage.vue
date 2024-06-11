@@ -220,14 +220,12 @@ useHead({
             v-if="getUserHangboard && getUserHangboardCompany && workout"
             :active="startWorkoutButton"
             :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
-            location="end"
+            location="bottom end"
             position="fixed"
             size="x-large"
             extended
             app
-            class="v-fab--bottom"
             :text="t('Start workout')"
-            style="bottom: 56px; top: auto"
           ></v-fab>
         </v-fab-transition>
       </div>
