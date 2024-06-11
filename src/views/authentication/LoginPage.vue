@@ -364,9 +364,7 @@ useHead({
                     :type="passwordToggle ? 'text' : 'password'"
                     required
                     @click:append-inner="passwordToggle = !passwordToggle"
-                    @keyup.enter="
-                      user == undefined && !user && online ? validateLogin() : null
-                    "
+                    @keyup.enter="user == undefined && !user && online ? validateLogin() : null"
                   ></v-text-field>
 
                   <v-btn
