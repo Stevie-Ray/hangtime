@@ -21,7 +21,7 @@ const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { getCompanyByUrlKey, getHangboardByIds } = useUserStore()
 
@@ -85,7 +85,7 @@ useHead({
                       :href="getCompany?.url"
                       target="_blank"
                       prepend-icon="$web"
-                      :disabled="!networkOnLine"
+                      :disabled="!online"
                     >
                       {{ t('Website') }}
                     </v-btn>
@@ -95,14 +95,14 @@ useHead({
                       :href="getCompany?.socials?.facebook"
                       target="_blank"
                       icon="$facebook"
-                      :disabled="!networkOnLine"
+                      :disabled="!online"
                     />
                     <v-btn
                       v-if="getCompany?.socials?.instagram"
                       :href="getCompany?.socials?.instagram"
                       target="_blank"
                       icon="$instagram"
-                      :disabled="!networkOnLine"
+                      :disabled="!online"
                     />
                   </v-card-actions>
                 </v-img>

@@ -19,7 +19,7 @@ const { getHangboardByIds, getHangboardNameByIds } = useUserStore()
 
 const { updateUser } = useAuthenticationStore()
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const dialog = ref(false)
 
@@ -69,7 +69,7 @@ const addHangboard = () => {
         <v-toolbar-items>
           <v-btn
             icon="$contentSaveOutline"
-            :disabled="!networkOnLine || (getHangboard && getHangboard.holds === 0)"
+            :disabled="!online || (getHangboard && getHangboard.holds === 0)"
             @click="addHangboard"
           ></v-btn>
         </v-toolbar-items>

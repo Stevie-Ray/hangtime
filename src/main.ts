@@ -20,6 +20,5 @@ app.mount('#app')
 // make sure app is ready
 if (app) {
   import('@/plugins/firebase/authentication')
-  import('@/helpers/online')
   import('@/plugins/register-service-worker')
 }

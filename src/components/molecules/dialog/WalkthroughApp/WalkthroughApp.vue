@@ -15,7 +15,7 @@ const ircra = new IRCRA()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { getHangboardNameByIds, getHangboardByIds } = useUserStore()
 
@@ -95,7 +95,7 @@ const updateSelected = () => {
 }
 
 const finishWalkthrough = (addWorkout: boolean) => {
-  if (networkOnLine && user.value) {
+  if (online && user.value) {
     user.value.settings.walkthrough = true
     if (getHangboard.value?.holds !== 0) {
       updateSelected()
@@ -103,7 +103,7 @@ const finishWalkthrough = (addWorkout: boolean) => {
     updateUser()
   }
   dialog.value = false
-  if (addWorkout && networkOnLine) {
+  if (addWorkout && online) {
     router.push('/workouts/new')
   } else {
     router.push('/workouts/community')

@@ -59,19 +59,3 @@ declare module '@/plugins/vuetify' {
   const value: any
   export default value
 }
-
-// Helpers
-// declare module '@/helpers/countries' {
-//   const value: []
-//   export default value
-// }
-
-// declare module '@/helpers/hangboards' {
-//   const value: Company[]
-//   export default value
-// }
-
-declare module '@/helpers/online' {
-  const value: any
-  export default value
-}

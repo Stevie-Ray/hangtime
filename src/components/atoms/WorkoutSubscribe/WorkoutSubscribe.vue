@@ -10,7 +10,7 @@ const { updateWorkout } = useWorkoutsStore()
 
 const { workouts } = storeToRefs(useWorkoutsStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { user } = storeToRefs(useAuthenticationStore())
 
@@ -72,7 +72,7 @@ const workoutSubscriber = () => {
   <v-btn
     v-if="workout?.subscribers"
     :append-icon="isHearted ? '$heart' : '$heartOutline'"
-    :disabled="!networkOnLine"
+    :disabled="!online"
     color="text"
     variant="text"
     :size="size"

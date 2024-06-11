@@ -19,7 +19,7 @@ const i18n = useI18n({ useScope: 'global' })
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { updateUser } = useAuthenticationStore()
 
@@ -147,7 +147,7 @@ useHead({
                 <v-select
                   v-if="user"
                   v-model="user.settings.scale"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :items="scale"
                   :label="t('Grading system')"
                   item-title="name"
@@ -164,7 +164,7 @@ useHead({
                 <v-select
                   v-if="user"
                   v-model="settingsLocale"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :items="language"
                   :item-props="true"
                   :label="t('Language')"
@@ -180,7 +180,7 @@ useHead({
                 <v-select
                   v-if="user"
                   v-model="user.weight"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :items="weight"
                   :label="t('Weight system')"
                   @update:modelValue="updateUser"
@@ -196,7 +196,7 @@ useHead({
                 <v-select
                   v-if="user"
                   v-model="user.settings.theme"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :items="themes"
                   :label="t('Theme')"
                   @update:modelValue="setTheme"

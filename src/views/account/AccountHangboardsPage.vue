@@ -18,7 +18,7 @@ const { getUserHangboards, getUserHangboardSelectedId } = storeToRefs(useUserSto
 
 const { getHangboardByIds, getCompanyById } = useUserStore()
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { fetchCommunityWorkouts } = useWorkoutsStore()
 
@@ -143,7 +143,7 @@ useHead({
                   >
                   </v-btn>
                   <v-btn
-                    :disabled="!networkOnLine || getUserHangboardSelectedId === index"
+                    :disabled="!online || getUserHangboardSelectedId === index"
                     color="text"
                     icon="$delete"
                     size="small"

@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { useOnline } from '@vueuse/core'
 
 export const useAppStore = defineStore('app', () => {
-  const networkOnLine = ref<boolean>(true)
+  const online = useOnline()
   const SWRegistrationForNewContent = ref<ServiceWorkerRegistration | null>(null)
   const refreshingApp = ref<boolean>(false)
 
@@ -32,7 +33,7 @@ export const useAppStore = defineStore('app', () => {
   )
 
   return {
-    networkOnLine,
+    online,
     SWRegistrationForNewContent,
     refreshingApp,
     serviceWorkerSkipWaiting,

@@ -21,7 +21,7 @@ import { Exercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 // router
 const route = useRoute()
@@ -148,7 +148,7 @@ useHead({
       <workout-share :workout="workout" />
       <v-btn
         v-if="workout?.user?.id === user?.id && !edit"
-        :disabled="!networkOnLine"
+        :disabled="!online"
         color="text"
         icon="$pencil"
         @click="edit = true"

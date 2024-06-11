@@ -8,7 +8,7 @@ import { Workout } from '@/interfaces/workouts.interface'
 
 const router = useRouter()
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
@@ -63,7 +63,7 @@ const shareWorkout = async () => {
 <template>
   <v-btn
     v-if="workout?.share"
-    :disabled="!networkOnLine || !navigatorShare"
+    :disabled="!online || !navigatorShare"
     color="text"
     variant="text"
     :size="size"

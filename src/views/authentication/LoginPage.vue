@@ -30,10 +30,10 @@ const { getCompanies, getHangboards } = useUserStore()
 
 const { user, error } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 // single ref
-watch(networkOnLine, (status) => {
+watch(online, (status) => {
   if (error) {
     if (!status) error.value = 'Please check your connection, HangTime is not available offline.'
     else error.value = null
@@ -315,7 +315,7 @@ useHead({
                 <v-btn
                   v-show="!user"
                   :color="social.color"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   class="text-white"
                   block
                   size="large"
@@ -365,7 +365,7 @@ useHead({
                     required
                     @click:append-inner="passwordToggle = !passwordToggle"
                     @keyup.enter="
-                      user == undefined && !user && networkOnLine ? validateLogin() : null
+                      user == undefined && !user && online ? validateLogin() : null
                     "
                   ></v-text-field>
 
@@ -375,7 +375,7 @@ useHead({
                     data-test="login-btn"
                     class="mt-2 mb-4"
                     prepend-icon="$key"
-                    :disabled="!(user == undefined && !user && networkOnLine)"
+                    :disabled="!(user == undefined && !user && online)"
                     @click="validateLogin"
                   >
                     {{ t('Login') }}
@@ -421,7 +421,7 @@ useHead({
                     required
                   ></v-text-field>
                   <v-btn
-                    v-show="user !== undefined && !user && networkOnLine"
+                    v-show="user !== undefined && !user && online"
                     block
                     size="large"
                     class="mt-2 mb-4"
@@ -446,7 +446,7 @@ useHead({
             <v-row class="d-none">
               <v-col cols="12" md="12">
                 <v-btn
-                  v-show="user !== undefined && !user && networkOnLine"
+                  v-show="user !== undefined && !user && online"
                   variant="text"
                   disabled
                   x-small

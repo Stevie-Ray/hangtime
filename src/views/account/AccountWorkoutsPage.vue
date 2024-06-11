@@ -12,7 +12,7 @@ const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { updateUser } = useAuthenticationStore()
 
@@ -109,7 +109,7 @@ useHead({
                     v-if="user"
                     v-model="user.settings.sound"
                     color="text"
-                    :disabled="!networkOnLine"
+                    :disabled="!online"
                     @change="updateUser"
                   ></v-checkbox>
                 </template>
@@ -132,7 +132,7 @@ useHead({
                     v-if="user"
                     v-model="user.settings.speak"
                     color="text"
-                    :disabled="!networkOnLine"
+                    :disabled="!online"
                     @change="updateUser"
                   ></v-checkbox>
                 </template>
@@ -146,7 +146,7 @@ useHead({
                 <v-select
                   id="voices"
                   v-model="selectedVoice"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :items="filterVoices"
                   :item-title="(item) => `${item.name} (${item.lang})`"
                   :item-value="(item) => item.name"
@@ -173,7 +173,7 @@ useHead({
                     v-if="user"
                     v-model="user.settings.vibrate"
                     color="text"
-                    :disabled="!networkOnLine"
+                    :disabled="!online"
                     @change="updateUser"
                   ></v-checkbox>
                 </template>

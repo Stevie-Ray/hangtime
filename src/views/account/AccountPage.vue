@@ -12,7 +12,7 @@ const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 interface Item {
   title: string
@@ -167,7 +167,7 @@ useHead({
     </template>
 
     <template #icons>
-      <v-btn icon="$logout" color="text" :disabled="!networkOnLine" @click="signOutUser"></v-btn>
+      <v-btn icon="$logout" color="text" :disabled="!online" @click="signOutUser"></v-btn>
     </template>
 
     <template #default>

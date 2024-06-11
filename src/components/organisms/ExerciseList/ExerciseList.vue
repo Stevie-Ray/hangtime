@@ -10,7 +10,7 @@ import { Workout } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const emit = defineEmits(['add'])
 
@@ -63,7 +63,7 @@ const openExerciseEditDialog = (index: number) => {
     :animation="0"
     :scroll="true"
     :scrollSensitivity="120"
-    :disabled="!networkOnLine"
+    :disabled="!online"
     handle=".handle"
   >
     <template #item="{ element, index }">

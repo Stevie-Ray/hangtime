@@ -22,7 +22,7 @@ const { getHangboardNameByIds } = useUserStore()
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
 const { updateUser } = useAuthenticationStore()
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 const { fetchCommunityWorkouts, fetchUserWorkouts } = useWorkoutsStore()
 
 const workouts = useWorkoutsStore()
@@ -154,7 +154,7 @@ useHead({
             <v-radio-group
               v-if="user && getUserHangboards?.length > 0"
               v-model="user.settings.selected"
-              :disabled="!networkOnLine"
+              :disabled="!online"
               @update:modelValue="setHangboard"
               mandatory
             >
@@ -190,7 +190,7 @@ useHead({
       />
       <v-btn
         v-if="route.path === '/workouts'"
-        :disabled="!networkOnLine"
+        :disabled="!online"
         icon="$plus"
         color="text"
         to="/workouts/new"

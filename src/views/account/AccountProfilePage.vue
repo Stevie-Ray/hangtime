@@ -22,7 +22,7 @@ const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { networkOnLine } = storeToRefs(useAppStore())
+const { online } = storeToRefs(useAppStore())
 
 const { updateUser } = useAuthenticationStore()
 
@@ -152,7 +152,7 @@ useHead({
                 <v-radio-group
                   v-if="user"
                   v-model="user.gender"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   row
                   @update:modelValue="updateUser"
                 >
@@ -170,7 +170,7 @@ useHead({
                 <v-autocomplete
                   v-if="user"
                   v-model="user.country"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :items="countries"
                   :label="t('Country')"
                   class="mt-1 pt-0"
@@ -188,7 +188,7 @@ useHead({
 
                 <v-slider
                   v-model="user.weight"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :hint="t('Set your weight to use with a kettle/dumb-bells or pulley system')"
                   :label="t('Weight')"
                   :max="150"
@@ -219,7 +219,7 @@ useHead({
                 <v-select
                   v-if="user"
                   v-model="user.settings.grade"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :hint="t('What grade are you currently climbing?')"
                   :item-title="user.settings.scale"
                   :items="grades"
@@ -238,7 +238,7 @@ useHead({
                 <v-text-field
                   v-if="user && user.status"
                   v-model="user.status"
-                  :disabled="!networkOnLine"
+                  :disabled="!online"
                   :label="t('Status')"
                   :placeholder="t('In the climbing gym')"
                   :rules="[rules.required, rules.length(24)]"
@@ -259,7 +259,7 @@ useHead({
                 <v-list-item-title>Google</v-list-item-title>
                 <template #append>
                   <v-btn
-                    :disabled="!networkOnLine"
+                    :disabled="!online"
                     size="small"
                     variant="outlined"
                     color="text"
@@ -272,7 +272,7 @@ useHead({
                 <v-list-item-title>Facebook</v-list-item-title>
                 <template #append>
                   <v-btn
-                    :disabled="!networkOnLine"
+                    :disabled="!online"
                     size="small"
                     variant="outlined"
                     color="text"
@@ -285,7 +285,7 @@ useHead({
                 <v-list-item-title>Apple</v-list-item-title>
                 <template #append>
                   <v-btn
-                    :disabled="!networkOnLine"
+                    :disabled="!online"
                     size="small"
                     variant="outlined"
                     color="text"
@@ -306,7 +306,7 @@ useHead({
                       }}
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn color="error" :disabled="!networkOnLine" @click="deleteAccount">
+                      <v-btn color="error" :disabled="!online" @click="deleteAccount">
                         {{ t('Delete your account') }}
                       </v-btn>
                     </v-card-actions>
