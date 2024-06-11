@@ -22,7 +22,6 @@ import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 
 import { useBluetoothStore } from '@/stores/bluetooth'
 
-
 const emit = defineEmits(['notify', 'start'])
 
 const { device } = storeToRefs(useBluetoothStore())
