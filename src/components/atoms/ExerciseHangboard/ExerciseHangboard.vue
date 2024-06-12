@@ -48,7 +48,7 @@ const toggleHold = (hand: 'left' | 'right', e: Event) => {
     const hold = (e.target as HTMLElement).id
     const n = hold.startsWith('h')
     if (n && hold.length <= 3) {
-      const number = parseInt(hold.substr(1), 10) - 1
+      const number = parseInt(hold.slice(1), 10) - 1;
       emit(hand, number)
     }
   }

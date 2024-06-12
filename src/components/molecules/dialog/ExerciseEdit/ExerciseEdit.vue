@@ -169,7 +169,7 @@ const rules = {
                     exercise && exercise.left === hold && exercise.right !== null
                       ? (exercise.left = null)
                       : exercise
-                        ? (exercise.right = hold)
+                        ? (exercise.left = hold)
                         : null
                 "
                 @right="
