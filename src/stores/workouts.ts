@@ -31,9 +31,9 @@ export const useWorkoutsStore = defineStore('workouts', () => {
       [['subscribers', 'array-contains', authentication.user?.id]],
       'updateTimestamp',
       'desc',
+      20,
       // @ts-expect-error DocumentSnapshot
-      lastVisible,
-      20
+      lastVisible
     )
     workouts.value.push(...newWorkouts)
   }
@@ -60,9 +60,9 @@ export const useWorkoutsStore = defineStore('workouts', () => {
       constraints,
       workoutsCommunityFilter.value.value,
       'desc',
+      20,
       // @ts-expect-error DocumentSnapshot
-      lastVisible,
-      20
+      lastVisible
     )
     workoutsCommunity.value.push(...newWorkouts)
   }
@@ -75,7 +75,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   async function fetchLeaderboard(rank = 'completed.amount') {
     if (leaderboards.value.find((leaderboard) => leaderboard.rank === rank)) return
     const usersDb = new UsersDB()
-    const leaderboard = await usersDb.readAll([[rank, '>', 0]], rank, 15)
+    const leaderboard = await usersDb.readAll([[rank, '>', 0]], rank, 'desc', 15)
     leaderboards.value.push({ rank, leaderboard })
   }
 
@@ -86,16 +86,18 @@ export const useWorkoutsStore = defineStore('workouts', () => {
    */
   async function createUserWorkout(workout: Workout) {
     const { user } = storeToRefs(useAuthenticationStore())
-    const userWorkoutDb = new UserWorkoutsDB(user.value?.id)
+    if (user.value) {
+      const userWorkoutDb = new UserWorkoutsDB(user.value.id)
 
-    const createdWorkout = await userWorkoutDb.create(workout)
+      const createdWorkout = await userWorkoutDb.create(workout)
 
-    // push to beginning of workouts
-    workouts.value.unshift(createdWorkout)
+      // push to beginning of workouts
+      workouts.value.unshift(createdWorkout)
 
-    // also add the workout as a community workout
-    if (createdWorkout.share === true) {
-      workoutsCommunity.value.unshift(createdWorkout)
+      // also add the workout as a community workout
+      if (createdWorkout.share === true) {
+        workoutsCommunity.value.unshift(createdWorkout)
+      }
     }
   }
 
@@ -106,8 +108,10 @@ export const useWorkoutsStore = defineStore('workouts', () => {
    */
   async function updateUserWorkout(payload: Workout) {
     const { user } = storeToRefs(useAuthenticationStore())
-    const userWorkoutsDb = new UserWorkoutsDB(user.value?.id)
-    await userWorkoutsDb.update(payload)
+    if (user.value) {
+      const userWorkoutsDb = new UserWorkoutsDB(user.value.id)
+      await userWorkoutsDb.update(payload)
+    }
   }
 
   /**
@@ -117,13 +121,15 @@ export const useWorkoutsStore = defineStore('workouts', () => {
    */
   async function removeUserWorkoutById(id: string) {
     const { user } = storeToRefs(useAuthenticationStore())
-    const userWorkoutsDb = new UserWorkoutsDB(user.value?.id)
+    if (user.value) {
+      const userWorkoutsDb = new UserWorkoutsDB(user.value.id)
 
-    await userWorkoutsDb.delete(id)
+      await userWorkoutsDb.delete(id)
 
-    const index = workouts.value.findIndex((workout) => workout.id === id)
+      const index = workouts.value.findIndex((workout) => workout.id === id)
 
-    workouts.value.splice(index, 1)
+      workouts.value.splice(index, 1)
+    }
   }
 
   /**

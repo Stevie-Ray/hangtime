@@ -14,8 +14,10 @@ export const useActivitiesStore = defineStore('activities', () => {
   async function fetchUserActivity() {
     if (activities.value.length) return
     const { user } = storeToRefs(useAuthenticationStore())
-    const userActivitiesDb = new UserActivitiesDB(user.value?.id)
-    activities.value = await userActivitiesDb.readAll(null, 'createTimestamp', 'desc', 20)
+    if (user.value) {
+      const userActivitiesDb = new UserActivitiesDB(user.value?.id)
+      activities.value = await userActivitiesDb.readAll(null, 'createTimestamp', 'desc', 20)
+    }
   }
   /**
    * Add a new workout for the user
@@ -24,12 +26,14 @@ export const useActivitiesStore = defineStore('activities', () => {
    */
   async function createUserActivity(activity: Activity) {
     const { user } = storeToRefs(useAuthenticationStore())
-    const userActivitiesDb = new UserActivitiesDB(user.value?.id)
+    if (user.value) {
+      const userActivitiesDb = new UserActivitiesDB(user.value.id)
 
-    const createdActivity = await userActivitiesDb.create(activity)
+      const createdActivity = await userActivitiesDb.create(activity)
 
-    // push to beginning of  workouts
-    activities.value.unshift(createdActivity)
+      // push to beginning of  workouts
+      activities.value.unshift(createdActivity)
+    }
   }
 
   return {

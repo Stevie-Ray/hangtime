@@ -2,6 +2,7 @@
  * Represents an activity done by a user.
  */
 export interface Activity {
+  id?: string
   /** The name of the activity */
   name: string
   /** The local start date and time of the activity */

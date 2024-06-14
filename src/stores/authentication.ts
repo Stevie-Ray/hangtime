@@ -12,7 +12,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
   /**
    * Create new user from firebase auth user infos
    */
-  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser) {
+  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser): Promise<User> {
     let providerData = firebaseAuthUser.providerData[0]
     if (firebaseAuthUser.isAnonymous) {
       // eslint-disable-next-line prefer-destructuring
@@ -20,7 +20,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     }
     const { displayName, photoURL, email } = providerData
     const { default: UsersDB } = await import('@/plugins/firebase/users-db')
-    const userDb = new UsersDB()
+    const usersDb = new UsersDB()
     // default user settings
     const settings: UserSettings = {
       selected: 0,
@@ -46,7 +46,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
       settings
     }
 
-    return userDb.create(user, firebaseAuthUser.uid)
+    return usersDb.create(user, firebaseAuthUser.uid)
   }
   /**
    * Callback fired when user login

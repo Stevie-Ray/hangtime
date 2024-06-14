@@ -15,10 +15,11 @@ import {
 } from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
+import { Workout } from '@/interfaces/workouts.interface'
 
 const db: Firestore = getFirestore(firebaseApp)
 
-export default class UsersWorkoutsDB extends GenericDB {
+export default class UsersWorkoutsDB extends GenericDB<Workout> {
   constructor() {
     super('users')
   }
@@ -29,16 +30,16 @@ export default class UsersWorkoutsDB extends GenericDB {
    * @param {Array<[string, WhereFilterOp, any]> | null} constraints - Array of constraints for the query.
    * @param {string | null} order - Field to sort the results by.
    * @param {OrderByDirection} direction - Field to manage the order direction.
-   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
    * @param {number | null} amount - Maximum number of documents to retrieve.
+   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
    * @returns {Promise<any[]>} - Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, any]> | null = null,
     order: string | null = null,
     direction: OrderByDirection = 'desc',
-    lastVisible: DocumentSnapshot | null = null,
-    amount: number | null = null
+    amount: number | null = null,
+    lastVisible: DocumentSnapshot | null = null
   ): Promise<any[]> {
     const collectionRef = collectionGroup(db, 'workouts')
 

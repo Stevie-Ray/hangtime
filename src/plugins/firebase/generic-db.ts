@@ -18,7 +18,9 @@ import {
   CollectionReference,
   DocumentReference,
   WhereFilterOp,
-  OrderByDirection
+  OrderByDirection,
+  DocumentSnapshot,
+  startAfter
 } from 'firebase/firestore/lite'
 import { toRaw, isRef, isReactive, isProxy } from 'vue'
 import firebaseApp from '@/plugins/firebase'
@@ -45,8 +47,8 @@ export function deepToRaw(sourceObj: any): any {
 
 const db: Firestore = getFirestore(firebaseApp)
 
-export default class GenericDB {
-  private collectionPath: string
+export default class GenericDB<T> {
+  public collectionPath: string
 
   constructor(collectionPath: string) {
     this.collectionPath = collectionPath
@@ -56,7 +58,7 @@ export default class GenericDB {
    * @param data
    * @param id
    */
-  async create(data: any, id: string | null = null): Promise<{ id: string; [key: string]: any }> {
+  async create(data: any, id?: string | null): Promise<T> {
     const collectionRef: CollectionReference = collection(db, this.collectionPath)
     const serverTimestampA = serverTimestamp()
 
@@ -81,14 +83,14 @@ export default class GenericDB {
       ...data,
       createTimestamp: new Date(),
       updateTimestamp: new Date()
-    }
+    } as T
   }
 
   /**
    * Read a document in the collection
    * @param id
    */
-  async read(id: string): Promise<{ id: string; [key: string]: any } | null> {
+  async read(id: string): Promise<(T & { id: string }) | null> {
     const docRef: DocumentReference = doc(db, this.collectionPath, id)
     const result = await getDoc(docRef)
 
@@ -98,7 +100,7 @@ export default class GenericDB {
 
     this.convertObjectTimestampPropertiesToDate(data)
 
-    return { id, ...data }
+    return { id, ...data } as T & { id: string }
   }
 
   /**
@@ -108,13 +110,15 @@ export default class GenericDB {
    * @param {string | null} order - Field to sort the results by.
    * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {number | null} amount - Maximum number of documents to retrieve.
+   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
    * @returns {Promise<any[]>} - Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, any]> | null = null,
     order: string | null = null,
     direction: OrderByDirection = 'desc',
-    amount: number | null = null
+    amount: number | null = null,
+    lastVisible: DocumentSnapshot | null = null
   ): Promise<any[]> {
     const collectionRef: CollectionReference = collection(db, this.collectionPath)
 
@@ -130,7 +134,11 @@ export default class GenericDB {
       combinedQuery.push(orderBy(order, direction))
     }
 
-    if (amount) {
+    if (lastVisible) {
+      combinedQuery.push(startAfter(lastVisible))
+    }
+
+    if (amount !== null) {
       combinedQuery.push(limit(amount))
     }
 
@@ -138,7 +146,7 @@ export default class GenericDB {
       q = query(collectionRef, ...combinedQuery)
     }
 
-    const formatResult = (result: any) =>
+    const formatResult = (result: any): any =>
       result.docs.map((ref: any) =>
         this.convertObjectTimestampPropertiesToDate({
           id: ref.id,
