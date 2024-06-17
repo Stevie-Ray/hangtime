@@ -6,7 +6,7 @@ import { User as FirebaseUser } from 'firebase/auth'
 import { User, UserSettings } from '@/interfaces/authentication.interface'
 
 export const useAuthenticationStore = defineStore('authentication', () => {
-  const user: Ref<User | null> = ref(null)
+  const user: Ref<User | null | undefined> = ref(undefined)
   const error: Ref<string | null> = ref(null)
 
   /**
