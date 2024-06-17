@@ -29,7 +29,7 @@ const { user } = storeToRefs(useAuthenticationStore())
 const workouts = useWorkoutsStore()
 
 const setHangboard = (index: number) => {
-  if (user.value) {
+  if (user.value && index >= 0) {
     user.value.settings.selected = index
     updateUser()
     workouts.workoutsCommunity = []

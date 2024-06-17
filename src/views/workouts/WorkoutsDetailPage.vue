@@ -108,7 +108,7 @@ const missingHangboardDialog = computed(() => {
     )
     if (user.value) {
       // Ensure that index is defined before setting user settings
-      if (index !== undefined) {
+      if (index !== undefined && index !== null && index >= 0) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         user.value.settings.selected = index
         updateUser()
