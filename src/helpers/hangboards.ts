@@ -5738,22 +5738,22 @@ const companies: Company[] = [
         holds: 4
       },
       {
-        name: 'Medium Beam',
+        name: 'Medium (large) Beam',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/SMOGMEDIUM.svg',
         size: {
-          x: 640,
+          x: 550,
           y: 200,
           z: null
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 8
       },
       {
         name: 'Large Beam',
         id: 2,
-        image: 'hangboards/SMOGGRANDE.svg',
+        image: 'hangboards/NOTFOUND.svg',
         size: {
           x: 850,
           y: 300,
@@ -5761,7 +5761,7 @@ const companies: Company[] = [
         },
         type: 'plastic',
         url: null,
-        holds: 7
+        holds: 0
       },
       {
         name: 'The Change',
