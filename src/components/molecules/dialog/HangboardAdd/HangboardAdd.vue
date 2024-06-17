@@ -42,7 +42,9 @@ const updateSelected = () => {
       })
       // add the newly selected board and set it
       user.value.settings.hangboards.push(selected)
-      user.value.settings.selected = user.value.settings.hangboards.length - 1
+      if (user.value.settings.hangboards.length > 0) {
+        user.value.settings.selected = user.value.settings.hangboards.length - 1
+      }
     }
   }
 }
