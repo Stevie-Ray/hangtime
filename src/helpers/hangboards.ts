@@ -5753,7 +5753,7 @@ const companies: Company[] = [
       {
         name: 'Large Beam',
         id: 2,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/SMOGLARGE.svg',
         size: {
           x: 850,
           y: 300,
@@ -5761,7 +5761,7 @@ const companies: Company[] = [
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 10
       },
       {
         name: 'The Change',
