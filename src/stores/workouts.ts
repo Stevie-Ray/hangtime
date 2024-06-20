@@ -4,10 +4,15 @@ import { WhereFilterOp } from 'firebase/firestore/lite'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useUserStore } from '@/stores/user'
 import i18n from '@/plugins/i18n'
-import UsersWorkoutsDB from '@/plugins/firebase/users-workouts-db'
+import { CommunityWorkoutsDB, UserSubscribedDB } from '@/plugins/firebase/users-workouts-db'
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
 import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
+
+// Create instances once and reuse them
+const userSubscribedDB = new UserSubscribedDB()
+const communityWorkoutsDB = new CommunityWorkoutsDB()
+const usersDB = new UsersDB()
 
 export const useWorkoutsStore = defineStore('workouts', () => {
   const workouts = ref<Workout[]>([])
@@ -19,37 +24,39 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   const workoutsCommunityFilterDirection = ref<'desc' | 'asc'>('desc')
   const leaderboards = ref<Leaderboard[]>([])
 
-  // Actions
   /**
-   * Fetch user workouts
-   * @return Array
+   * Fetch user workouts.
    */
   async function fetchUserWorkouts() {
     const authentication = useAuthenticationStore()
-    const usersWorkoutsDb = new UsersWorkoutsDB()
-    const lastVisible = workouts.value.length > 0 ? workouts.value[workouts.value.length - 1] : null
-    const newWorkouts = await usersWorkoutsDb.readAll(
+    const newWorkouts = await userSubscribedDB.readAll(
       [['subscribers', 'array-contains', authentication.user?.id]],
       'updateTimestamp',
       'desc',
-      20,
-      // @ts-expect-error DocumentSnapshot
-      lastVisible
+      20
     )
     workouts.value.push(...newWorkouts)
   }
 
   /**
-   * Fetch community workouts
-   * @return Array
+   * Reset last visible.
+   */
+  function resetUserWorkouts() {
+    userSubscribedDB.resetLastVisible()
+  }
+
+  /**
+   * Reset last visible.
+   */
+  function resetCommunityWorkouts() {
+    communityWorkoutsDB.resetLastVisible()
+  }
+
+  /**
+   * Fetch community workouts.
    */
   async function fetchCommunityWorkouts() {
     const user = useUserStore()
-    const usersWorkoutsDb = new UsersWorkoutsDB()
-    const lastVisible =
-      workoutsCommunity.value.length > 0
-        ? workoutsCommunity.value[workoutsCommunity.value.length - 1]
-        : null
     const constraints: [string, WhereFilterOp, any][] = [['share', '==', true]]
     if (user?.getUserHangboardCompany) {
       constraints.push(['company', '==', user.getUserHangboardCompany.id])
@@ -57,31 +64,28 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     if (user?.getUserHangboard) {
       constraints.push(['hangboard', '==', user.getUserHangboard.id])
     }
-    const newWorkouts = await usersWorkoutsDb.readAll(
+    const newWorkouts = await communityWorkoutsDB.readAll(
       constraints,
       workoutsCommunityFilter.value.value,
       workoutsCommunityFilterDirection.value,
-      20,
-      // @ts-expect-error DocumentSnapshot
-      lastVisible
+      20
     )
     workoutsCommunity.value.push(...newWorkouts)
   }
 
   /**
-   * Fetch leaderboard
+   * Fetch leaderboard.
    * @param rank
    * @return {Promise<void>}
    */
   async function fetchLeaderboard(rank = 'completed.amount') {
     if (leaderboards.value.find((leaderboard) => leaderboard.rank === rank)) return
-    const usersDb = new UsersDB()
-    const leaderboard = await usersDb.readAll([[rank, '>', 0]], rank, 'desc', 15)
+    const leaderboard = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
     leaderboards.value.push({ rank, leaderboard })
   }
 
   /**
-   * Add a new workout for the user
+   * Add a new workout for the user.
    * @param workout
    * @return {Promise<void>}
    */
@@ -116,7 +120,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   /**
-   * Delete a user workout by ID
+   * Delete a user workout by ID.
    * @param id
    * @return {Promise<void>}
    */
@@ -134,7 +138,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   /**
-   * Update another users workout
+   * Update another users workout.
    * @param payload
    * @return {Promise<void>}
    */
@@ -144,7 +148,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   /**
-   * Get workout by ID
+   * Get workout by ID.
    * @return Object
    */
   const getWorkoutById = computed(() => (id: string | string[]): Workout | undefined => {
@@ -181,7 +185,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   })
 
   /**
-   * Get workouts for the currently selected hangboard
+   * Get workouts for the currently selected hangboard.
    */
   const getWorkoutsBySelectedHangboard = computed(() => {
     const user = useUserStore()
@@ -228,6 +232,8 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     getWorkoutById,
     getWorkoutsBySelectedHangboard,
     getWorkoutsByCommunity,
-    getLeaderboard
+    getLeaderboard,
+    resetUserWorkouts,
+    resetCommunityWorkouts
   }
 })

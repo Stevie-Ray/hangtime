@@ -48,11 +48,27 @@ export function deepToRaw(sourceObj: any): any {
 const db: Firestore = getFirestore(firebaseApp)
 
 export default class GenericDB<T> {
+  /**
+   * Path of the collection.
+   */
   public collectionPath: string
+
+  /**
+   * Stores the last visible document for pagination.
+   */
+  protected lastVisible: DocumentSnapshot | null = null
 
   constructor(collectionPath: string) {
     this.collectionPath = collectionPath
   }
+
+  /**
+   * Resets the last visible document for pagination.
+   */
+  resetLastVisible(): void {
+    this.lastVisible = null
+  }
+
   /**
    * Create a document in the collection
    * @param data
@@ -110,15 +126,13 @@ export default class GenericDB<T> {
    * @param {string | null} order - Field to sort the results by.
    * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {number | null} amount - Maximum number of documents to retrieve.
-   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
    * @returns {Promise<any[]>} - Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, any]> | null = null,
     order: string | null = null,
     direction: OrderByDirection = 'desc',
-    amount: number | null = null,
-    lastVisible: DocumentSnapshot | null = null
+    amount: number | null = null
   ): Promise<any[]> {
     const collectionRef: CollectionReference = collection(db, this.collectionPath)
 
@@ -134,8 +148,8 @@ export default class GenericDB<T> {
       combinedQuery.push(orderBy(order, direction))
     }
 
-    if (lastVisible) {
-      combinedQuery.push(startAfter(lastVisible))
+    if (this.lastVisible) {
+      combinedQuery.push(startAfter(this.lastVisible))
     }
 
     if (amount !== null) {
@@ -146,6 +160,10 @@ export default class GenericDB<T> {
       q = query(collectionRef, ...combinedQuery)
     }
 
+    const querySnapshot = await getDocs(q)
+
+    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
+
     const formatResult = (result: any): any =>
       result.docs.map((ref: any) =>
         this.convertObjectTimestampPropertiesToDate({
@@ -154,7 +172,7 @@ export default class GenericDB<T> {
         })
       )
 
-    return await getDocs(q).then(formatResult)
+    return formatResult(querySnapshot)
   }
 
   /**

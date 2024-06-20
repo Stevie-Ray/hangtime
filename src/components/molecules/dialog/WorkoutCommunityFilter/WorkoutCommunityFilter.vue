@@ -7,7 +7,7 @@ import { useI18n } from 'vue-i18n'
 const { workoutsCommunity, workoutsCommunityFilter, workoutsCommunityFilterDirection } =
   storeToRefs(useWorkoutsStore())
 
-const { fetchCommunityWorkouts } = useWorkoutsStore()
+const { fetchCommunityWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
 
 const { t } = useI18n()
 
@@ -21,11 +21,12 @@ const items: { filter: string; value: string }[] = [
   { filter: 'Level', value: 'level' }
 ]
 
-const toggleDirection = () => {
+const toggleDirection = async () => {
   workoutsCommunityFilterDirection.value =
     workoutsCommunityFilterDirection.value === 'asc' ? 'desc' : 'asc'
   workoutsCommunity.value = []
-  fetchCommunityWorkouts()
+  resetCommunityWorkouts()
+  await fetchCommunityWorkouts()
 }
 
 watch(
@@ -33,6 +34,7 @@ watch(
   async (newFilter, oldFilter) => {
     if (newFilter !== oldFilter) {
       workoutsCommunity.value = []
+      resetCommunityWorkouts()
       await fetchCommunityWorkouts()
     }
   },
