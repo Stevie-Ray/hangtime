@@ -4,7 +4,8 @@ import { storeToRefs } from 'pinia'
 import { useWorkoutsStore } from '@/stores/workouts'
 import { useI18n } from 'vue-i18n'
 
-const { workoutsCommunityFilter, workoutsCommunity } = storeToRefs(useWorkoutsStore())
+const { workoutsCommunity, workoutsCommunityFilter, workoutsCommunityFilterDirection } =
+  storeToRefs(useWorkoutsStore())
 
 const { fetchCommunityWorkouts } = useWorkoutsStore()
 
@@ -20,6 +21,13 @@ const items: { filter: string; value: string }[] = [
   { filter: 'Level', value: 'level' }
 ]
 
+const toggleDirection = () => {
+  workoutsCommunityFilterDirection.value =
+    workoutsCommunityFilterDirection.value === 'asc' ? 'desc' : 'asc'
+  workoutsCommunity.value = []
+  fetchCommunityWorkouts()
+}
+
 watch(
   workoutsCommunityFilter,
   async (newFilter, oldFilter) => {
@@ -30,8 +38,6 @@ watch(
   },
   { deep: true }
 )
-
-// const sortOrder = ref('desc')
 </script>
 
 <template>
@@ -51,7 +57,7 @@ watch(
       <v-container>
         <v-row>
           <v-col cols="12">
-            <div class="d-flex flex-column">
+            <div class="d-flex align-center justify-center">
               <v-select
                 v-model="workoutsCommunityFilter"
                 :items="items"
@@ -60,8 +66,14 @@ watch(
                 item-value="value"
                 single-line
                 return-object
-              >
-              </v-select>
+                class="mr-2"
+              />
+              <v-btn
+                variant="text"
+                class="mb-4"
+                @click="toggleDirection"
+                :icon="workoutsCommunityFilterDirection === 'asc' ? '$arrowUp' : '$arrowDown'"
+              />
             </div>
           </v-col>
         </v-row>

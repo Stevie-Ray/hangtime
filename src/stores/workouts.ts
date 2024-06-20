@@ -16,6 +16,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     filter: 'Last Modified',
     value: 'updateTimestamp'
   })
+  const workoutsCommunityFilterDirection = ref<'desc' | 'asc'>('desc')
   const leaderboards = ref<Leaderboard[]>([])
 
   // Actions
@@ -59,7 +60,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     const newWorkouts = await usersWorkoutsDb.readAll(
       constraints,
       workoutsCommunityFilter.value.value,
-      'desc',
+      workoutsCommunityFilterDirection.value,
       20,
       // @ts-expect-error DocumentSnapshot
       lastVisible
@@ -215,6 +216,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     workouts,
     workoutsCommunity,
     workoutsCommunityFilter,
+    workoutsCommunityFilterDirection,
     leaderboards,
     fetchUserWorkouts,
     fetchCommunityWorkouts,
