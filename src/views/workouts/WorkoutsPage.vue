@@ -23,7 +23,12 @@ const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
 const { updateUser } = useAuthenticationStore()
 const { online } = storeToRefs(useAppStore())
-const { fetchCommunityWorkouts, fetchUserWorkouts } = useWorkoutsStore()
+const {
+  fetchCommunityWorkouts,
+  fetchUserWorkouts,
+  reachedLastUserWorkouts,
+  reachedLastCommunityWorkouts
+} = useWorkoutsStore()
 
 const workouts = useWorkoutsStore()
 const route = useRoute()
@@ -41,8 +46,6 @@ const workoutsList = computed(() => {
   return workouts.getWorkoutsByCommunity
 })
 
-const initialLength = workoutsList.value.length
-
 const fetchMoreWorkouts = async ({
   done
 }: {
@@ -51,9 +54,6 @@ const fetchMoreWorkouts = async ({
   if (route.path === '/workouts') {
     if (!shouldFetchUserWorkouts) {
       done('empty')
-      // setTimeout(() => {
-      //   showEmptySlot.value = false
-      // }, 2000)
       return
     }
   } else {
@@ -77,18 +77,13 @@ const fetchMoreWorkouts = async ({
       console.error('Error fetching workouts:', error.message)
     }
   } finally {
-    const updatedLength = workoutsList.value.length
-    if (updatedLength === initialLength) {
-      // There is no more content to fetch
+    // There is no more content to fetch
+    if (route.path === '/workouts' && reachedLastUserWorkouts) {
+      shouldFetchUserWorkouts = false
       done('empty')
-      if (route.path === '/workouts') {
-        shouldFetchUserWorkouts = false
-      } else {
-        shouldFetchCommunityWorkouts = false
-      }
-      // setTimeout(() => {
-      //   showEmptySlot.value = false
-      // }, 2000)
+    } else if (reachedLastCommunityWorkouts) {
+      shouldFetchCommunityWorkouts = false
+      done('empty')
     } else {
       // Content was added succesfully
       done('ok')
