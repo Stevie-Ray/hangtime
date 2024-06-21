@@ -18,56 +18,50 @@ import imgLogo from '@/assets/logo.svg'
 import { time } from '@/helpers'
 
 const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUserStore())
+const {
+  workoutsCommunity,
+  getWorkoutsBySelectedHangboard,
+  reachedLastUserWorkouts,
+  reachedLastCommunityWorkouts
+} = storeToRefs(useWorkoutsStore())
 const { getHangboardNameByIds } = useUserStore()
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
 const { updateUser } = useAuthenticationStore()
 const { online } = storeToRefs(useAppStore())
-const { fetchCommunityWorkouts, fetchUserWorkouts } = useWorkoutsStore()
+const { fetchCommunityWorkouts, fetchUserWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
 
-const workouts = useWorkoutsStore()
 const route = useRoute()
 const router = useRouter()
 
-let shouldFetchUserWorkouts = true
-let shouldFetchCommunityWorkouts = true
-
 const showEmptySlot = ref(true)
 
-const workoutsList = computed(() => {
-  if (route.path === '/workouts') {
-    return workouts.getWorkoutsBySelectedHangboard
-  }
-  return workouts.getWorkoutsByCommunity
+const isWorkoutsRoute = computed(() => {
+  return route.path === '/workouts'
 })
 
-const initialLength = workoutsList.value.length
+const isWorkoutsCommunityRoute = computed(() => {
+  return route.path === '/workouts/community'
+})
+
+const workoutsList = computed(() => {
+  if (isWorkoutsRoute.value) {
+    return getWorkoutsBySelectedHangboard.value
+  } else if (isWorkoutsCommunityRoute.value) {
+    return workoutsCommunity.value
+  }
+  return []
+})
 
 const fetchMoreWorkouts = async ({
   done
 }: {
   done: (status: 'ok' | 'empty' | 'loading' | 'error') => void
 }) => {
-  if (route.path === '/workouts') {
-    if (!shouldFetchUserWorkouts) {
-      done('empty')
-      // setTimeout(() => {
-      //   showEmptySlot.value = false
-      // }, 2000)
-      return
-    }
-  } else {
-    // eslint-disable-next-line no-lonely-if
-    if (!shouldFetchCommunityWorkouts) {
-      done('empty')
-      return
-    }
-  }
-
   try {
-    if (route.path === '/workouts') {
+    if (isWorkoutsRoute.value) {
       await fetchUserWorkouts()
-    } else {
+    } else if (isWorkoutsCommunityRoute.value) {
       await fetchCommunityWorkouts()
     }
   } catch (error) {
@@ -77,18 +71,16 @@ const fetchMoreWorkouts = async ({
       console.error('Error fetching workouts:', error.message)
     }
   } finally {
-    const updatedLength = workoutsList.value.length
-    if (updatedLength === initialLength) {
-      // There is no more content to fetch
-      done('empty')
-      if (route.path === '/workouts') {
-        shouldFetchUserWorkouts = false
-      } else {
-        shouldFetchCommunityWorkouts = false
-      }
-      // setTimeout(() => {
-      //   showEmptySlot.value = false
-      // }, 2000)
+    // There is no more content to fetch
+    if (
+      (isWorkoutsRoute.value && reachedLastUserWorkouts.value) ||
+      (isWorkoutsCommunityRoute.value && reachedLastCommunityWorkouts.value)
+    ) {
+      // BUG: done('empty')
+      done('ok')
+      setTimeout(() => {
+        showEmptySlot.value = false
+      }, 2000)
     } else {
       // Content was added succesfully
       done('ok')
@@ -98,11 +90,11 @@ const fetchMoreWorkouts = async ({
 
 const hangboardMenu = ref(false)
 
-const setHangboard = () => {
+const setHangboard = async () => {
   updateUser()
-  workouts.workoutsCommunity = []
-  shouldFetchCommunityWorkouts = true
-  fetchCommunityWorkouts()
+  workoutsCommunity.value = []
+  resetCommunityWorkouts()
+  await fetchCommunityWorkouts()
 }
 
 const levels = [
@@ -182,20 +174,15 @@ useHead({
     </template>
 
     <template #icons>
+      <v-btn v-if="isWorkoutsRoute" icon="$timerPlayOutline" color="text" to="/workouts/quick" />
       <v-btn
-        v-if="route.path === '/workouts'"
-        icon="$timerPlayOutline"
-        color="text"
-        to="/workouts/quick"
-      />
-      <v-btn
-        v-if="route.path === '/workouts'"
+        v-if="isWorkoutsRoute"
         :disabled="!online"
         icon="$plus"
         color="text"
         to="/workouts/new"
       />
-      <workout-community-filter v-if="route.path === '/workouts/community'" />
+      <workout-community-filter v-if="isWorkoutsCommunityRoute" />
     </template>
 
     <template #extension>
@@ -258,7 +245,7 @@ useHead({
                   <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
                 </template>
                 <template v-slot:empty>
-                  <div v-show="showEmptySlot">{{ t('No workouts found') }}</div>
+                  <div v-if="showEmptySlot">{{ t('No workouts found') }}</div>
                 </template>
               </v-infinite-scroll>
             </v-list>
@@ -290,6 +277,11 @@ useHead({
     &:deep(.v-empty-state__media) {
       filter: invert(100%);
     }
+  }
+}
+.v-infinite-scroll {
+  &:deep(.v-infinite-scroll-intersect) {
+    height: auto;
   }
 }
 .v-list-item {

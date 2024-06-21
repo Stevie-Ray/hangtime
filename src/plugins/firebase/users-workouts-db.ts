@@ -9,7 +9,6 @@ import {
   limit,
   startAfter,
   Firestore,
-  DocumentSnapshot,
   QueryConstraint,
   OrderByDirection
 } from 'firebase/firestore/lite'
@@ -23,7 +22,6 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
   constructor() {
     super('users')
   }
-
   /**
    * Retrieves all documents from the Firestore collection.
    *
@@ -31,16 +29,18 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
    * @param {string | null} order - Field to sort the results by.
    * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {number | null} amount - Maximum number of documents to retrieve.
-   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
    * @returns {Promise<any[]>} - Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, any]> | null = null,
     order: string | null = null,
     direction: OrderByDirection = 'desc',
-    amount: number | null = null,
-    lastVisible: DocumentSnapshot | null = null
+    amount: number | null = null
   ): Promise<any[]> {
+    // Do not fetch data if lastResult is true
+    if (this.lastResult.value) {
+      return []
+    }
     const collectionRef = collectionGroup(db, 'workouts')
 
     let q = query(collectionRef)
@@ -55,20 +55,23 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
       combinedQuery.push(orderBy(order, direction))
     }
 
-    if (lastVisible) {
-      // @ts-expect-error Custom field on DocumentSnapshot
-      const { updateTimestamp } = lastVisible
-      combinedQuery.push(startAfter(updateTimestamp))
+    if (this.lastVisible) {
+      combinedQuery.push(startAfter(this.lastVisible))
     }
 
     if (amount !== null) {
       combinedQuery.push(limit(amount))
     }
 
-    // Add params to query
     if (combinedQuery.length > 0) {
       q = query(collectionRef, ...combinedQuery)
     }
+
+    const querySnapshot = await getDocs(q)
+
+    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
+
+    this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
     const formatResult = (result: any) =>
       result.docs.map((ref: any) =>
@@ -78,6 +81,24 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
         })
       )
 
-    return await getDocs(q).then(formatResult)
+    return formatResult(querySnapshot)
+  }
+}
+
+/**
+ * Class for managing user subscribed workouts.
+ */
+export class UserSubscribedDB extends UsersWorkoutsDB {
+  constructor() {
+    super()
+  }
+}
+
+/**
+ * Class for managing community workouts.
+ */
+export class CommunityWorkoutsDB extends UsersWorkoutsDB {
+  constructor() {
+    super()
   }
 }

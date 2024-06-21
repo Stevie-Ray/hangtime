@@ -4,175 +4,139 @@ import { WhereFilterOp } from 'firebase/firestore/lite'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useUserStore } from '@/stores/user'
 import i18n from '@/plugins/i18n'
-import UsersWorkoutsDB from '@/plugins/firebase/users-workouts-db'
+import { CommunityWorkoutsDB, UserSubscribedDB } from '@/plugins/firebase/users-workouts-db'
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
 import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
 
+const userSubscribedDB = new UserSubscribedDB()
+const communityWorkoutsDB = new CommunityWorkoutsDB()
+const usersDB = new UsersDB()
+
 export const useWorkoutsStore = defineStore('workouts', () => {
   const workouts = ref<Workout[]>([])
   const workoutsCommunity = ref<Workout[]>([])
-  const workoutsCommunityFilter = ref<{ filter: string; value: string }>({
-    filter: 'Last Modified',
-    value: 'updateTimestamp'
-  })
+  const workoutsCommunityFilter = ref({ filter: 'Last Modified', value: 'updateTimestamp' })
   const workoutsCommunityFilterDirection = ref<'desc' | 'asc'>('desc')
   const leaderboards = ref<Leaderboard[]>([])
 
-  // Actions
-  /**
-   * Fetch user workouts
-   * @return Array
-   */
-  async function fetchUserWorkouts() {
-    const authentication = useAuthenticationStore()
-    const usersWorkoutsDb = new UsersWorkoutsDB()
-    const lastVisible = workouts.value.length > 0 ? workouts.value[workouts.value.length - 1] : null
-    const newWorkouts = await usersWorkoutsDb.readAll(
-      [['subscribers', 'array-contains', authentication.user?.id]],
+  const { user } = storeToRefs(useAuthenticationStore())
+
+  const fetchUserWorkouts = async () => {
+    const newWorkouts = await userSubscribedDB.readAll(
+      [['subscribers', 'array-contains', user.value?.id]],
       'updateTimestamp',
       'desc',
-      20,
-      // @ts-expect-error DocumentSnapshot
-      lastVisible
+      20
     )
     workouts.value.push(...newWorkouts)
   }
 
-  /**
-   * Fetch community workouts
-   * @return Array
-   */
-  async function fetchCommunityWorkouts() {
-    const user = useUserStore()
-    const usersWorkoutsDb = new UsersWorkoutsDB()
-    const lastVisible =
-      workoutsCommunity.value.length > 0
-        ? workoutsCommunity.value[workoutsCommunity.value.length - 1]
-        : null
+  const reachedLastUserWorkouts = computed(() => {
+    return userSubscribedDB.lastResult.value
+  })
+
+  const reachedLastCommunityWorkouts = computed(() => {
+    return communityWorkoutsDB.lastResult.value
+  })
+
+  const resetUserWorkouts = () => {
+    userSubscribedDB.resetLastVisible()
+  }
+
+  const resetCommunityWorkouts = () => {
+    communityWorkoutsDB.resetLastVisible()
+  }
+
+  const fetchCommunityWorkouts = async () => {
+    const userStore = useUserStore()
     const constraints: [string, WhereFilterOp, any][] = [['share', '==', true]]
-    if (user?.getUserHangboardCompany) {
-      constraints.push(['company', '==', user.getUserHangboardCompany.id])
+
+    if (userStore?.getUserHangboardCompany) {
+      constraints.push(['company', '==', userStore.getUserHangboardCompany.id])
     }
-    if (user?.getUserHangboard) {
-      constraints.push(['hangboard', '==', user.getUserHangboard.id])
+    if (userStore?.getUserHangboard) {
+      constraints.push(['hangboard', '==', userStore.getUserHangboard.id])
     }
-    const newWorkouts = await usersWorkoutsDb.readAll(
+
+    const newWorkouts = await communityWorkoutsDB.readAll(
       constraints,
       workoutsCommunityFilter.value.value,
       workoutsCommunityFilterDirection.value,
-      20,
-      // @ts-expect-error DocumentSnapshot
-      lastVisible
+      20
     )
     workoutsCommunity.value.push(...newWorkouts)
   }
 
-  /**
-   * Fetch leaderboard
-   * @param rank
-   * @return {Promise<void>}
-   */
-  async function fetchLeaderboard(rank = 'completed.amount') {
-    if (leaderboards.value.find((leaderboard) => leaderboard.rank === rank)) return
-    const usersDb = new UsersDB()
-    const leaderboard = await usersDb.readAll([[rank, '>', 0]], rank, 'desc', 15)
+  const fetchLeaderboard = async (rank = 'completed.amount') => {
+    if (leaderboards.value.some((leaderboard) => leaderboard.rank === rank)) return
+
+    const leaderboard = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
     leaderboards.value.push({ rank, leaderboard })
   }
 
-  /**
-   * Add a new workout for the user
-   * @param workout
-   * @return {Promise<void>}
-   */
-  async function createUserWorkout(workout: Workout) {
-    const { user } = storeToRefs(useAuthenticationStore())
+  const createUserWorkout = async (workout: Workout) => {
     if (user.value) {
       const userWorkoutDb = new UserWorkoutsDB(user.value.id)
-
       const createdWorkout = await userWorkoutDb.create(workout)
 
-      // push to beginning of workouts
       workouts.value.unshift(createdWorkout)
 
-      // also add the workout as a community workout
-      if (createdWorkout.share === true) {
+      if (createdWorkout.share) {
         workoutsCommunity.value.unshift(createdWorkout)
       }
     }
   }
 
-  /**
-   * Update the users workout
-   * @param payload
-   * @return {Promise<void>}
-   */
-  async function updateUserWorkout(payload: Workout) {
-    const { user } = storeToRefs(useAuthenticationStore())
+  const updateUserWorkout = async (workout: Workout) => {
     if (user.value) {
       const userWorkoutsDb = new UserWorkoutsDB(user.value.id)
-      await userWorkoutsDb.update(payload)
+      await userWorkoutsDb.update(workout)
     }
   }
 
-  /**
-   * Delete a user workout by ID
-   * @param id
-   * @return {Promise<void>}
-   */
-  async function removeUserWorkoutById(id: string) {
-    const { user } = storeToRefs(useAuthenticationStore())
+  const removeUserWorkoutById = async (id: string) => {
     if (user.value) {
       const userWorkoutsDb = new UserWorkoutsDB(user.value.id)
-
       await userWorkoutsDb.delete(id)
 
       const index = workouts.value.findIndex((workout) => workout.id === id)
-
-      workouts.value.splice(index, 1)
+      if (index !== -1) {
+        workouts.value.splice(index, 1)
+      }
     }
   }
 
-  /**
-   * Update another users workout
-   * @param payload
-   * @return {Promise<void>}
-   */
-  async function updateWorkout(payload: { userId: string; workout: Workout }) {
-    const userWorkoutsDb = new UserWorkoutsDB(payload.userId)
-    await userWorkoutsDb.update(payload.workout)
+  const updateWorkout = async ({ userId, workout }: { userId: string; workout: Workout }) => {
+    const userWorkoutsDb = new UserWorkoutsDB(userId)
+    await userWorkoutsDb.update(workout)
   }
 
-  /**
-   * Get workout by ID
-   * @return Object
-   */
   const getWorkoutById = computed(() => (id: string | string[]): Workout | undefined => {
-    // eslint-disable-next-line no-shadow
-    let workout = workouts.value?.find((workout: Workout) => workout.id === id)
-    if (!workout)
-      // eslint-disable-next-line no-shadow
-      workout = workoutsCommunity.value?.find((workout: Workout) => workout.id === id)
+    let workout = workouts.value.find((workout) => workout.id === id)
+    if (!workout) {
+      workout = workoutsCommunity.value.find((workout) => workout.id === id)
+    }
     if (id === 'new') {
-      const authentication = useAuthenticationStore()
-      const user = useUserStore()
-      if (authentication.user && user.getUserHangboard && user.getUserHangboardCompany) {
+      const { getUserHangboard, getUserHangboardCompany } = useUserStore()
+
+      if (user.value && getUserHangboard && getUserHangboardCompany) {
         workout = reactive<Workout>({
           name: i18n.global.t('New workout'),
           description: '',
           level: 1,
-          hangboard: user.getUserHangboard.id,
-          company: user.getUserHangboardCompany.id,
+          hangboard: getUserHangboard.id,
+          company: getUserHangboardCompany.id,
           exercises: [],
           time: 0,
           share: false,
           video: '',
-          subscribers: [authentication.user.id],
+          subscribers: [user.value.id],
           user: {
-            displayName: authentication.user.displayName,
-            grade: authentication.user?.settings.grade,
-            id: authentication.user.id,
-            photoURL: authentication.user.photoURL
+            displayName: user.value.displayName,
+            grade: user.value.settings?.grade,
+            id: user.value.id,
+            photoURL: user.value.photoURL
           }
         })
       }
@@ -181,35 +145,20 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   })
 
   /**
-   * Get workouts for the currently selected hangboard
+   * Get the Users hangboards of a certain hangboard / company.
    */
   const getWorkoutsBySelectedHangboard = computed(() => {
-    const user = useUserStore()
-    if (workouts.value === null) return []
-    const limit = 999
-    const items = workouts.value.length > limit ? limit : workouts.value.length
-    return workouts.value
-      ?.filter(
-        (workout) =>
-          workout?.company === user.getUserHangboardCompany?.id &&
-          workout?.hangboard === user.getUserHangboard?.id
-      )
-      ?.sort((a: Workout, b: Workout) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
-      ?.slice(0, items)
-  })
+    const { getUserHangboard, getUserHangboardCompany } = useUserStore()
 
-  const getWorkoutsByCommunity = computed(() => {
-    if (workoutsCommunity.value === null) return []
-    const limit = 999
-    const items = workoutsCommunity.value.length > limit ? limit : workoutsCommunity.value.length
-    return workoutsCommunity.value
-      ?.sort((a: Workout, b: Workout) => (a.updateTimestamp > b.updateTimestamp ? -1 : 1))
-      ?.slice(0, items)
+    return workouts.value.filter(
+      (workout) =>
+        workout?.company === getUserHangboardCompany?.id &&
+        workout?.hangboard === getUserHangboard?.id
+    )
   })
 
   const getLeaderboard = computed(
-    () => (rank: string) =>
-      leaderboards.value.find((leaderboard: Leaderboard) => leaderboard.rank === rank)
+    () => (rank: string) => leaderboards.value.find((leaderboard) => leaderboard.rank === rank)
   )
 
   return {
@@ -227,7 +176,10 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     updateWorkout,
     getWorkoutById,
     getWorkoutsBySelectedHangboard,
-    getWorkoutsByCommunity,
-    getLeaderboard
+    getLeaderboard,
+    resetUserWorkouts,
+    resetCommunityWorkouts,
+    reachedLastUserWorkouts,
+    reachedLastCommunityWorkouts
   }
 })

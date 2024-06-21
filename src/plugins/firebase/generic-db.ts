@@ -22,7 +22,7 @@ import {
   DocumentSnapshot,
   startAfter
 } from 'firebase/firestore/lite'
-import { toRaw, isRef, isReactive, isProxy } from 'vue'
+import { toRaw, isRef, isReactive, isProxy, ref } from 'vue'
 import firebaseApp from '@/plugins/firebase'
 
 export function deepToRaw(sourceObj: any): any {
@@ -48,13 +48,35 @@ export function deepToRaw(sourceObj: any): any {
 const db: Firestore = getFirestore(firebaseApp)
 
 export default class GenericDB<T> {
+  /**
+   * Path of the collection.
+   */
   public collectionPath: string
+
+  /**
+   * Stores the last visible document for pagination.
+   */
+  protected lastVisible: DocumentSnapshot | null = null
+
+  /**
+   * Indicates if the last result set is smaller than the requested amount.
+   */
+  public lastResult = ref<boolean>(false)
 
   constructor(collectionPath: string) {
     this.collectionPath = collectionPath
   }
+
   /**
-   * Create a document in the collection
+   * Resets the last visible document for pagination.
+   */
+  resetLastVisible(): void {
+    this.lastVisible = null
+    this.lastResult.value = false
+  }
+
+  /**
+   * Create a document in the collection.
    * @param data
    * @param id
    */
@@ -110,34 +132,41 @@ export default class GenericDB<T> {
    * @param {string | null} order - Field to sort the results by.
    * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {number | null} amount - Maximum number of documents to retrieve.
-   * @param {DocumentSnapshot | null} lastVisible - Last visible document from the previous query.
    * @returns {Promise<any[]>} - Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, any]> | null = null,
     order: string | null = null,
     direction: OrderByDirection = 'desc',
-    amount: number | null = null,
-    lastVisible: DocumentSnapshot | null = null
+    amount: number | null = null
   ): Promise<any[]> {
+    // Do not fetch data if lastResult is true
+    if (this.lastResult.value) {
+      return []
+    }
+
     const collectionRef: CollectionReference = collection(db, this.collectionPath)
 
     let q = query(collectionRef)
 
     const combinedQuery = []
 
+    // Add query constraints if set
     if (constraints) {
       constraints.forEach(([field, op, value]) => combinedQuery.push(where(field, op, value)))
     }
 
+    // Order query by if set
     if (order) {
       combinedQuery.push(orderBy(order, direction))
     }
 
-    if (lastVisible) {
-      combinedQuery.push(startAfter(lastVisible))
+    // Start query at if set
+    if (this.lastVisible) {
+      combinedQuery.push(startAfter(this.lastVisible))
     }
 
+    // limit query if set
     if (amount !== null) {
       combinedQuery.push(limit(amount))
     }
@@ -145,6 +174,14 @@ export default class GenericDB<T> {
     if (combinedQuery.length > 0) {
       q = query(collectionRef, ...combinedQuery)
     }
+
+    const querySnapshot = await getDocs(q)
+
+    // Return the last document
+    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
+
+    // Check if fewer results than requested are returned
+    this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
     const formatResult = (result: any): any =>
       result.docs.map((ref: any) =>
@@ -154,7 +191,7 @@ export default class GenericDB<T> {
         })
       )
 
-    return await getDocs(q).then(formatResult)
+    return formatResult(querySnapshot)
   }
 
   /**
