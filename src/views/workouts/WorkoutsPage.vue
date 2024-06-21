@@ -18,24 +18,17 @@ import imgLogo from '@/assets/logo.svg'
 import { time } from '@/helpers'
 
 const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUserStore())
+const { reachedLastUserWorkouts, reachedLastCommunityWorkouts } = storeToRefs(useWorkoutsStore())
 const { getHangboardNameByIds } = useUserStore()
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
 const { updateUser } = useAuthenticationStore()
 const { online } = storeToRefs(useAppStore())
-const {
-  fetchCommunityWorkouts,
-  fetchUserWorkouts,
-  reachedLastUserWorkouts,
-  reachedLastCommunityWorkouts
-} = useWorkoutsStore()
+const { fetchCommunityWorkouts, fetchUserWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
 
 const workouts = useWorkoutsStore()
 const route = useRoute()
 const router = useRouter()
-
-let shouldFetchUserWorkouts = true
-let shouldFetchCommunityWorkouts = true
 
 const showEmptySlot = ref(true)
 
@@ -51,19 +44,6 @@ const fetchMoreWorkouts = async ({
 }: {
   done: (status: 'ok' | 'empty' | 'loading' | 'error') => void
 }) => {
-  if (route.path === '/workouts') {
-    if (!shouldFetchUserWorkouts) {
-      done('empty')
-      return
-    }
-  } else {
-    // eslint-disable-next-line no-lonely-if
-    if (!shouldFetchCommunityWorkouts) {
-      done('empty')
-      return
-    }
-  }
-
   try {
     if (route.path === '/workouts') {
       await fetchUserWorkouts()
@@ -78,12 +58,18 @@ const fetchMoreWorkouts = async ({
     }
   } finally {
     // There is no more content to fetch
-    if (route.path === '/workouts' && reachedLastUserWorkouts) {
-      shouldFetchUserWorkouts = false
+    console.log(reachedLastUserWorkouts.value, reachedLastCommunityWorkouts.value)
+    if (route.path === '/workouts' && reachedLastUserWorkouts.value) {
       done('empty')
-    } else if (reachedLastCommunityWorkouts) {
-      shouldFetchCommunityWorkouts = false
+      setTimeout(() => {
+        showEmptySlot.value = false
+      }, 2000)
+    } else if (reachedLastCommunityWorkouts.value) {
+      console.log(reachedLastCommunityWorkouts.value)
       done('empty')
+      setTimeout(() => {
+        showEmptySlot.value = false
+      }, 2000)
     } else {
       // Content was added succesfully
       done('ok')
@@ -96,7 +82,7 @@ const hangboardMenu = ref(false)
 const setHangboard = () => {
   updateUser()
   workouts.workoutsCommunity = []
-  shouldFetchCommunityWorkouts = true
+  resetCommunityWorkouts()
   fetchCommunityWorkouts()
 }
 
@@ -253,7 +239,10 @@ useHead({
                   <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
                 </template>
                 <template v-slot:empty>
-                  <div v-show="showEmptySlot">{{ t('No workouts found') }}</div>
+                  <div>
+                    <span v-if="showEmptySlot">{{ t('No workouts found') }}</span>
+                    <span v-else>&nbsp;</span>
+                  </div>
                 </template>
               </v-infinite-scroll>
             </v-list>

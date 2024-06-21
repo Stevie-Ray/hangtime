@@ -9,7 +9,6 @@ import {
   limit,
   startAfter,
   Firestore,
-  DocumentSnapshot,
   QueryConstraint,
   OrderByDirection
 } from 'firebase/firestore/lite'
@@ -40,7 +39,7 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
   ): Promise<any[]> {
     // Do not fetch data if lastResult is true
     if (this.lastResult) {
-      return []
+            return []
     }
     const collectionRef = collectionGroup(db, 'workouts')
 

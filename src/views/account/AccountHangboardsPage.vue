@@ -20,7 +20,7 @@ const { getHangboardByIds, getCompanyById } = useUserStore()
 
 const { online } = storeToRefs(useAppStore())
 
-const { fetchCommunityWorkouts } = useWorkoutsStore()
+const { fetchCommunityWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
 
 const { updateUser } = useAuthenticationStore()
 
@@ -33,6 +33,7 @@ const setHangboard = (index: number) => {
     user.value.settings.selected = index
     updateUser()
     workouts.workoutsCommunity = []
+    resetCommunityWorkouts()
     fetchCommunityWorkouts()
   }
 }

@@ -33,7 +33,13 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   const reachedLastUserWorkouts = computed(() => {
+    console.log("reachedLastUserWorkouts", userSubscribedDB.lastResult)
     return userSubscribedDB.lastResult
+  })
+
+  const reachedLastCommunityWorkouts = computed(() => {
+    console.log("reachedLastCommunityWorkouts ", communityWorkoutsDB.lastResult)
+    return communityWorkoutsDB.lastResult
   })
 
   const resetUserWorkouts = () => {
@@ -43,10 +49,6 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   const resetCommunityWorkouts = () => {
     communityWorkoutsDB.resetLastVisible()
   }
-
-  const reachedLastCommunityWorkouts = computed(() => {
-    return communityWorkoutsDB.lastResult
-  })
 
   const fetchCommunityWorkouts = async () => {
     const userStore = useUserStore()
