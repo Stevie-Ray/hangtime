@@ -90,7 +90,7 @@ const fetchMoreWorkouts = async ({
 
 const hangboardMenu = ref(false)
 
-const setHangboard = () => {
+const setHangboard = async () => {
   updateUser()
   workoutsCommunity.value = []
   resetCommunityWorkouts()
