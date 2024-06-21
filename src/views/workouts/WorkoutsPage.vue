@@ -94,7 +94,7 @@ const setHangboard = () => {
   updateUser()
   workoutsCommunity.value = []
   resetCommunityWorkouts()
-  fetchCommunityWorkouts()
+  await fetchCommunityWorkouts()
 }
 
 const levels = [
@@ -174,12 +174,7 @@ useHead({
     </template>
 
     <template #icons>
-      <v-btn
-        v-if="isWorkoutsRoute"
-        icon="$timerPlayOutline"
-        color="text"
-        to="/workouts/quick"
-      />
+      <v-btn v-if="isWorkoutsRoute" icon="$timerPlayOutline" color="text" to="/workouts/quick" />
       <v-btn
         v-if="isWorkoutsRoute"
         :disabled="!online"

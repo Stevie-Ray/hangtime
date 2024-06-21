@@ -28,13 +28,13 @@ const { updateUser } = useAuthenticationStore()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const setHangboard = (index: number) => {
+const setHangboard = async (index: number) => {
   if (user.value && index >= 0) {
     user.value.settings.selected = index
     updateUser()
     workoutsCommunity.value = []
     resetCommunityWorkouts()
-    fetchCommunityWorkouts()
+    await fetchCommunityWorkouts()
   }
 }
 

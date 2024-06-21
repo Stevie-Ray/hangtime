@@ -49,11 +49,11 @@ const updateSelected = () => {
   }
 }
 
-const addHangboard = () => {
+const addHangboard = async () => {
   if (user.value) {
     updateSelected()
     updateUser()
-    fetchCommunityWorkouts()
+    await fetchCommunityWorkouts()
   }
   dialog.value = false
 }
