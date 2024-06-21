@@ -18,7 +18,12 @@ import imgLogo from '@/assets/logo.svg'
 import { time } from '@/helpers'
 
 const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUserStore())
-const { reachedLastUserWorkouts, reachedLastCommunityWorkouts } = storeToRefs(useWorkoutsStore())
+const {
+  workoutsCommunity,
+  getWorkoutsBySelectedHangboard,
+  reachedLastUserWorkouts,
+  reachedLastCommunityWorkouts
+} = storeToRefs(useWorkoutsStore())
 const { getHangboardNameByIds } = useUserStore()
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
@@ -26,17 +31,26 @@ const { updateUser } = useAuthenticationStore()
 const { online } = storeToRefs(useAppStore())
 const { fetchCommunityWorkouts, fetchUserWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
 
-const workouts = useWorkoutsStore()
 const route = useRoute()
 const router = useRouter()
 
 const showEmptySlot = ref(true)
 
+const isWorkoutsRoute = computed(() => {
+  return route.path === '/workouts'
+})
+
+const isWorkoutsCommunityRoute = computed(() => {
+  return route.path === '/workouts/community'
+})
+
 const workoutsList = computed(() => {
-  if (route.path === '/workouts') {
-    return workouts.getWorkoutsBySelectedHangboard
+  if (isWorkoutsRoute.value) {
+    return getWorkoutsBySelectedHangboard.value
+  } else if (isWorkoutsCommunityRoute.value) {
+    return workoutsCommunity.value
   }
-  return workouts.getWorkoutsByCommunity
+  return []
 })
 
 const fetchMoreWorkouts = async ({
@@ -45,9 +59,9 @@ const fetchMoreWorkouts = async ({
   done: (status: 'ok' | 'empty' | 'loading' | 'error') => void
 }) => {
   try {
-    if (route.path === '/workouts') {
+    if (isWorkoutsRoute.value) {
       await fetchUserWorkouts()
-    } else {
+    } else if (isWorkoutsCommunityRoute.value) {
       await fetchCommunityWorkouts()
     }
   } catch (error) {
@@ -58,15 +72,12 @@ const fetchMoreWorkouts = async ({
     }
   } finally {
     // There is no more content to fetch
-    console.log(reachedLastUserWorkouts.value, reachedLastCommunityWorkouts.value)
-    if (route.path === '/workouts' && reachedLastUserWorkouts.value) {
-      done('empty')
-      setTimeout(() => {
-        showEmptySlot.value = false
-      }, 2000)
-    } else if (reachedLastCommunityWorkouts.value) {
-      console.log(reachedLastCommunityWorkouts.value)
-      done('empty')
+    if (
+      (isWorkoutsRoute.value && reachedLastUserWorkouts.value) ||
+      (isWorkoutsCommunityRoute.value && reachedLastCommunityWorkouts.value)
+    ) {
+      // BUG: done('empty')
+      done('ok')
       setTimeout(() => {
         showEmptySlot.value = false
       }, 2000)
@@ -81,7 +92,7 @@ const hangboardMenu = ref(false)
 
 const setHangboard = () => {
   updateUser()
-  workouts.workoutsCommunity = []
+  workoutsCommunity.value = []
   resetCommunityWorkouts()
   fetchCommunityWorkouts()
 }
@@ -164,19 +175,19 @@ useHead({
 
     <template #icons>
       <v-btn
-        v-if="route.path === '/workouts'"
+        v-if="isWorkoutsRoute"
         icon="$timerPlayOutline"
         color="text"
         to="/workouts/quick"
       />
       <v-btn
-        v-if="route.path === '/workouts'"
+        v-if="isWorkoutsRoute"
         :disabled="!online"
         icon="$plus"
         color="text"
         to="/workouts/new"
       />
-      <workout-community-filter v-if="route.path === '/workouts/community'" />
+      <workout-community-filter v-if="isWorkoutsCommunityRoute" />
     </template>
 
     <template #extension>
@@ -239,10 +250,7 @@ useHead({
                   <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
                 </template>
                 <template v-slot:empty>
-                  <div>
-                    <span v-if="showEmptySlot">{{ t('No workouts found') }}</span>
-                    <span v-else>&nbsp;</span>
-                  </div>
+                  <div v-if="showEmptySlot">{{ t('No workouts found') }}</div>
                 </template>
               </v-infinite-scroll>
             </v-list>
@@ -274,6 +282,11 @@ useHead({
     &:deep(.v-empty-state__media) {
       filter: invert(100%);
     }
+  }
+}
+.v-infinite-scroll {
+  &:deep(.v-infinite-scroll-intersect) {
+    height: auto;
   }
 }
 .v-list-item {

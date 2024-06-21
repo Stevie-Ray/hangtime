@@ -22,7 +22,7 @@ import {
   DocumentSnapshot,
   startAfter
 } from 'firebase/firestore/lite'
-import { toRaw, isRef, isReactive, isProxy } from 'vue'
+import { toRaw, isRef, isReactive, isProxy, ref } from 'vue'
 import firebaseApp from '@/plugins/firebase'
 
 export function deepToRaw(sourceObj: any): any {
@@ -61,7 +61,7 @@ export default class GenericDB<T> {
   /**
    * Indicates if the last result set is smaller than the requested amount.
    */
-  public lastResult: boolean | null = null
+  public lastResult = ref<boolean>(false)
 
   constructor(collectionPath: string) {
     this.collectionPath = collectionPath
@@ -72,7 +72,7 @@ export default class GenericDB<T> {
    */
   resetLastVisible(): void {
     this.lastVisible = null
-    this.lastResult = null
+    this.lastResult.value = false
   }
 
   /**
@@ -141,7 +141,7 @@ export default class GenericDB<T> {
     amount: number | null = null
   ): Promise<any[]> {
     // Do not fetch data if lastResult is true
-    if (this.lastResult) {
+    if (this.lastResult.value) {
       return []
     }
 
@@ -181,7 +181,7 @@ export default class GenericDB<T> {
     this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
 
     // Check if fewer results than requested are returned
-    this.lastResult = amount !== null ? querySnapshot.docs.length < amount : null
+    this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
     const formatResult = (result: any): any =>
       result.docs.map((ref: any) =>

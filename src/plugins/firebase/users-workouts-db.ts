@@ -38,8 +38,8 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
     amount: number | null = null
   ): Promise<any[]> {
     // Do not fetch data if lastResult is true
-    if (this.lastResult) {
-            return []
+    if (this.lastResult.value) {
+      return []
     }
     const collectionRef = collectionGroup(db, 'workouts')
 
@@ -54,8 +54,6 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
     if (order) {
       combinedQuery.push(orderBy(order, direction))
     }
-
-    console.log(this.lastVisible)
 
     if (this.lastVisible) {
       combinedQuery.push(startAfter(this.lastVisible))
@@ -73,9 +71,7 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
 
     this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
 
-    this.lastResult = amount !== null ? querySnapshot.docs.length < amount : null
-
-    console.log(this.lastVisible)
+    this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
     const formatResult = (result: any) =>
       result.docs.map((ref: any) =>

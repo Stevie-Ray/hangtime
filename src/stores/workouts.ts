@@ -33,13 +33,11 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   const reachedLastUserWorkouts = computed(() => {
-    console.log("reachedLastUserWorkouts", userSubscribedDB.lastResult)
-    return userSubscribedDB.lastResult
+    return userSubscribedDB.lastResult.value
   })
 
   const reachedLastCommunityWorkouts = computed(() => {
-    console.log("reachedLastCommunityWorkouts ", communityWorkoutsDB.lastResult)
-    return communityWorkoutsDB.lastResult
+    return communityWorkoutsDB.lastResult.value
   })
 
   const resetUserWorkouts = () => {
@@ -146,32 +144,17 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     return workout
   })
 
+  /**
+   * Get the Users hangboards of a certain hangboard / company.
+   */
   const getWorkoutsBySelectedHangboard = computed(() => {
     const { getUserHangboard, getUserHangboardCompany } = useUserStore()
-    if (!workouts.value) return []
 
-    const limit = 999
-    const items = Math.min(workouts.value.length, limit)
-
-    return workouts.value
-      .filter(
-        (workout) =>
-          workout?.company === getUserHangboardCompany?.id &&
-          workout?.hangboard === getUserHangboard?.id
-      )
-      .sort((a, b) => b.updateTimestamp - a.updateTimestamp)
-      .slice(0, items)
-  })
-
-  const getWorkoutsByCommunity = computed(() => {
-    if (!workoutsCommunity.value) return []
-
-    const limit = 999
-    const items = Math.min(workoutsCommunity.value.length, limit)
-
-    return workoutsCommunity.value
-      .sort((a, b) => b.updateTimestamp - a.updateTimestamp)
-      .slice(0, items)
+    return workouts.value.filter(
+      (workout) =>
+        workout?.company === getUserHangboardCompany?.id &&
+        workout?.hangboard === getUserHangboard?.id
+    )
   })
 
   const getLeaderboard = computed(
@@ -193,11 +176,10 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     updateWorkout,
     getWorkoutById,
     getWorkoutsBySelectedHangboard,
-    getWorkoutsByCommunity,
     getLeaderboard,
     resetUserWorkouts,
     resetCommunityWorkouts,
     reachedLastUserWorkouts,
-    reachedLastCommunityWorkouts 
+    reachedLastCommunityWorkouts
   }
 })

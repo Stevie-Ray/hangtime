@@ -22,17 +22,17 @@ const { online } = storeToRefs(useAppStore())
 
 const { fetchCommunityWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
 
+const { workoutsCommunity } = storeToRefs(useWorkoutsStore())
+
 const { updateUser } = useAuthenticationStore()
 
 const { user } = storeToRefs(useAuthenticationStore())
-
-const workouts = useWorkoutsStore()
 
 const setHangboard = (index: number) => {
   if (user.value && index >= 0) {
     user.value.settings.selected = index
     updateUser()
-    workouts.workoutsCommunity = []
+    workoutsCommunity.value = []
     resetCommunityWorkouts()
     fetchCommunityWorkouts()
   }

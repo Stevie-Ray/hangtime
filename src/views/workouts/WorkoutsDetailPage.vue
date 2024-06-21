@@ -27,16 +27,17 @@ const { online } = storeToRefs(useAppStore())
 const route = useRoute()
 const router = useRouter()
 
-// workout
-const { fetchCommunityWorkouts, resetCommunityWorkouts, getWorkoutById, removeUserWorkoutById } = useWorkoutsStore()
-
 const { getUserHangboards, getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
+
+const { workoutsCommunity } = storeToRefs(useWorkoutsStore())
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { updateUser } = useAuthenticationStore()
+// workout
+const { fetchCommunityWorkouts, resetCommunityWorkouts, getWorkoutById, removeUserWorkoutById } =
+  useWorkoutsStore()
 
-const workouts = useWorkoutsStore()
+const { updateUser } = useAuthenticationStore()
 
 const workout = computed(() => getWorkoutById(route.params.id ? route.params.id : 'new'))
 
@@ -115,7 +116,7 @@ const missingHangboardDialog = computed(() => {
         user.value.settings.selected = index
         updateUser()
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        workouts.workoutsCommunity = []
+        workoutsCommunity.value = []
         resetCommunityWorkouts()
         fetchCommunityWorkouts()
       }
