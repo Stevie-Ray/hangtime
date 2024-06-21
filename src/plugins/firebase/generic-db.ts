@@ -58,6 +58,11 @@ export default class GenericDB<T> {
    */
   protected lastVisible: DocumentSnapshot | null = null
 
+  /**
+   * Indicates if the last result set is smaller than the requested amount.
+   */
+  public lastResult: boolean | null = null
+
   constructor(collectionPath: string) {
     this.collectionPath = collectionPath
   }
@@ -67,10 +72,11 @@ export default class GenericDB<T> {
    */
   resetLastVisible(): void {
     this.lastVisible = null
+    this.lastResult = null
   }
 
   /**
-   * Create a document in the collection
+   * Create a document in the collection.
    * @param data
    * @param id
    */
@@ -134,24 +140,33 @@ export default class GenericDB<T> {
     direction: OrderByDirection = 'desc',
     amount: number | null = null
   ): Promise<any[]> {
+    // Do not fetch data if lastResult is true
+    if (this.lastResult) {
+      return []
+    }
+
     const collectionRef: CollectionReference = collection(db, this.collectionPath)
 
     let q = query(collectionRef)
 
     const combinedQuery = []
 
+    // Add query constraints if set
     if (constraints) {
       constraints.forEach(([field, op, value]) => combinedQuery.push(where(field, op, value)))
     }
 
+    // Order query by if set
     if (order) {
       combinedQuery.push(orderBy(order, direction))
     }
 
+    // Start query at if set
     if (this.lastVisible) {
       combinedQuery.push(startAfter(this.lastVisible))
     }
 
+    // limit query if set
     if (amount !== null) {
       combinedQuery.push(limit(amount))
     }
@@ -162,7 +177,11 @@ export default class GenericDB<T> {
 
     const querySnapshot = await getDocs(q)
 
+    // Return the last document
     this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
+
+    // Check if fewer results than requested are returned
+    this.lastResult = amount !== null ? querySnapshot.docs.length < amount : null
 
     const formatResult = (result: any): any =>
       result.docs.map((ref: any) =>

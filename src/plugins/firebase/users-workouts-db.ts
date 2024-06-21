@@ -38,6 +38,10 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
     direction: OrderByDirection = 'desc',
     amount: number | null = null
   ): Promise<any[]> {
+    // Do not fetch data if lastResult is true
+    if (this.lastResult) {
+      return []
+    }
     const collectionRef = collectionGroup(db, 'workouts')
 
     let q = query(collectionRef)
@@ -69,6 +73,8 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
     const querySnapshot = await getDocs(q)
 
     this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
+
+    this.lastResult = amount !== null ? querySnapshot.docs.length < amount : null
 
     console.log(this.lastVisible)
 
