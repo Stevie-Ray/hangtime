@@ -14,10 +14,9 @@ const { t } = useI18n()
 const dialog = ref(false)
 
 const items: { filter: string; value: string }[] = [
-  { filter: 'Name', value: 'name' },
   { filter: 'Last Modified', value: 'updateTimestamp' },
+  { filter: 'Name', value: 'name' },
   { filter: 'Time', value: 'time' },
-  { filter: 'Stars', value: '' },
   { filter: 'Level', value: 'level' }
 ]
 
@@ -64,7 +63,7 @@ watch(
                 v-model="workoutsCommunityFilter"
                 :items="items"
                 :label="t('Sort workouts by')"
-                item-title="filter"
+                :item-title="(option) => $t(option.filter)"
                 item-value="value"
                 single-line
                 return-object
