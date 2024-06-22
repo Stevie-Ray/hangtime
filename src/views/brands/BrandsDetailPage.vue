@@ -180,6 +180,7 @@ useHead({
             extended
             app
             :text="t('Start training')"
+            style="bottom: 56px"
           ></v-fab>
         </v-fab-transition>
       </div>

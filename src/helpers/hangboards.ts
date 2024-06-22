@@ -554,6 +554,31 @@ const companies: Company[] = [
         type: 'wood',
         url: 'https://www.maxclimbing.com/products/one-finger-trainer',
         holds: 6
+      },
+      {
+        name: 'La Baguette',
+        id: 3,
+        image: 'hangboards/YYVERTICALBAGUETTE.svg',
+        size: {
+          x: 470,
+          y: 40,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://www.maxclimbing.com/products/one-finger-trainer',
+        holds: 2,
+        sides: [
+          {
+            name: 'Front',
+            image: 'hangboards/YYVERTICALBAGUETTE.svg',
+            holds: 2
+          },
+          {
+            name: 'Back',
+            image: 'hangboards/YYVERTICALBAGUETTEBACK.svg',
+            holds: 3
+          }
+        ]
       }
     ]
   },
@@ -5903,8 +5928,20 @@ const companies: Company[] = [
           z: 40
         },
         type: 'wood',
-        url: null,
-        holds: 3
+        url: 'https://www.yyvertical.com/collections/tous-les-produits/products/la-baguette-poutre-escalade',
+        holds: 2,
+        sides: [
+          {
+            name: 'Front',
+            image: 'hangboards/YYVERTICALBAGUETTE.svg',
+            holds: 2
+          },
+          {
+            name: 'Back',
+            image: 'hangboards/YYVERTICALBAGUETTEBACK.svg',
+            holds: 3
+          }
+        ]
       },
       {
         name: 'Travelboard',
@@ -5916,7 +5953,7 @@ const companies: Company[] = [
           z: 30
         },
         type: 'wood',
-        url: null,
+        url: 'https://www.yyvertical.com/collections/tous-les-produits/products/la-travelboard-poutre-dentrainement',
         sides: [
           {
             name: 'Default',

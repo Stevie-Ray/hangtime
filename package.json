@@ -48,7 +48,7 @@
     "@types/digital-goods-browser": "^2.0.3",
     "@types/google.maps": "^3.55.10",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^20.14.7",
+    "@types/node": "^20.14.8",
     "@types/web-bluetooth": "^0.0.20",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",
@@ -74,6 +74,6 @@
     "vite-plugin-vue-devtools": "^7.3.3",
     "vite-plugin-vuetify": "^2.0.3",
     "vitest": "^1.6.0",
-    "vue-tsc": "^2.0.21"
+    "vue-tsc": "^2.0.22"
   }
 }

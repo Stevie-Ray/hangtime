@@ -232,6 +232,7 @@ useHead({
             extended
             app
             :text="t('Start workout')"
+            style="bottom: 56px"
           ></v-fab>
         </v-fab-transition>
       </div>

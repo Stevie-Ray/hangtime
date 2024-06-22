@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="599.5px" height="116.691217px" viewBox="0 0 599.5 116.691217" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>YYVERTICALBAGUETTEBACK</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="YYVERTICALBAGUETTEBACK" transform="translate(0.5, 0.5)" fill="#FFFFFF" fill-rule="nonzero" stroke="#000000">
+            <path d="M599,115.691217 L48,115.691217 C21.490332,115.691217 0,94.2008846 0,67.6912166 C0,41.1815486 21.490332,19.6912166 48,19.6912166 L599,19.6912166" id="board"></path>
+            <path d="M599,0 C294.860972,0 120.192218,0 74.9937396,0 C29.7952607,0 4.79734747,22.5637389 0,67.6912166 C0,41.1815486 21.490332,19.6912166 48,19.6912166 L599,19.6912166" id="h1"></path>
+            <rect id="h3" x="325.5" y="38.1912166" width="165" height="50" rx="25"></rect>
+            <path d="M599,88.1912166 L527.5,88.1912166 C513.692881,88.1912166 502.5,76.9983353 502.5,63.1912166 C502.5,49.3840979 513.692881,38.1912166 527.5,38.1912166 L599,38.1912166" id="h4"></path>
+            <rect id="h2" x="84.5" y="38.1912166" width="207" height="50" rx="25"></rect>
+        </g>
+    </g>
+</svg>

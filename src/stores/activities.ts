@@ -6,6 +6,12 @@ import { Activity } from '@/interfaces/activities.interface'
 
 export const useActivitiesStore = defineStore('activities', () => {
   const activities: Ref<Activity[]> = ref([])
+  const { user } = storeToRefs(useAuthenticationStore())
+  let activitiesDB: UserActivitiesDB | null = null
+
+  if (user.value) {
+    activitiesDB = new UserActivitiesDB(user.value?.id)
+  }
   // action
   /**
    * Fetch user activity
@@ -13,10 +19,8 @@ export const useActivitiesStore = defineStore('activities', () => {
    */
   async function fetchUserActivity() {
     if (activities.value.length) return
-    const { user } = storeToRefs(useAuthenticationStore())
-    if (user.value) {
-      const userActivitiesDb = new UserActivitiesDB(user.value?.id)
-      activities.value = await userActivitiesDb.readAll(null, 'createTimestamp', 'desc', 20)
+    if (activitiesDB) {
+      activities.value = await activitiesDB.readAll(null, 'createTimestamp', 'desc', 20)
     }
   }
   /**
@@ -25,12 +29,8 @@ export const useActivitiesStore = defineStore('activities', () => {
    * @return {Promise<void>}
    */
   async function createUserActivity(activity: Activity) {
-    const { user } = storeToRefs(useAuthenticationStore())
-    if (user.value) {
-      const userActivitiesDb = new UserActivitiesDB(user.value.id)
-
-      const createdActivity = await userActivitiesDb.create(activity)
-
+    if (activitiesDB) {
+      const createdActivity = await activitiesDB.create(activity)
       // push to beginning of  workouts
       activities.value.unshift(createdActivity)
     }

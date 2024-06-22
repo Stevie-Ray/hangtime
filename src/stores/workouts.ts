@@ -19,8 +19,13 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   const workoutsCommunityFilter = ref({ filter: 'Last Modified', value: 'updateTimestamp' })
   const workoutsCommunityFilterDirection = ref<'desc' | 'asc'>('desc')
   const leaderboards = ref<Leaderboard[]>([])
+  let workoutDB: UserWorkoutsDB | null = null
 
   const { user } = storeToRefs(useAuthenticationStore())
+
+  if (user.value) {
+    workoutDB = new UserWorkoutsDB(user.value.id)
+  }
 
   const fetchUserWorkouts = async () => {
     const newWorkouts = await userSubscribedDB.readAll(
@@ -76,9 +81,8 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   const createUserWorkout = async (workout: Workout) => {
-    if (user.value) {
-      const userWorkoutDb = new UserWorkoutsDB(user.value.id)
-      const createdWorkout = await userWorkoutDb.create(workout)
+    if (workoutDB) {
+      const createdWorkout = await workoutDB.create(workout)
 
       workouts.value.unshift(createdWorkout)
 
@@ -89,16 +93,14 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   const updateUserWorkout = async (workout: Workout) => {
-    if (user.value) {
-      const userWorkoutsDb = new UserWorkoutsDB(user.value.id)
-      await userWorkoutsDb.update(workout)
+    if (workoutDB) {
+      await workoutDB.update(workout)
     }
   }
 
   const removeUserWorkoutById = async (id: string) => {
-    if (user.value) {
-      const userWorkoutsDb = new UserWorkoutsDB(user.value.id)
-      await userWorkoutsDb.delete(id)
+    if (workoutDB) {
+      await workoutDB.delete(id)
 
       const index = workouts.value.findIndex((workout) => workout.id === id)
       if (index !== -1) {
@@ -107,6 +109,9 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     }
   }
 
+  /**
+   * Updates a workout of a gven user.
+   */
   const updateWorkout = async ({ userId, workout }: { userId: string; workout: Workout }) => {
     const userWorkoutsDb = new UserWorkoutsDB(userId)
     await userWorkoutsDb.update(workout)

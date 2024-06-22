@@ -13,13 +13,15 @@ const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { fetchCommunityWorkouts } = useWorkoutsStore()
+const { workoutsCommunity } = storeToRefs(useWorkoutsStore())
+
+const { online } = storeToRefs(useAppStore())
+
+const { fetchCommunityWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
 
 const { getHangboardByIds, getHangboardNameByIds } = useUserStore()
 
 const { updateUser } = useAuthenticationStore()
-
-const { online } = storeToRefs(useAppStore())
 
 const dialog = ref(false)
 
@@ -53,6 +55,8 @@ const addHangboard = async () => {
   if (user.value) {
     updateSelected()
     updateUser()
+    workoutsCommunity.value = []
+    resetCommunityWorkouts()
     await fetchCommunityWorkouts()
   }
   dialog.value = false

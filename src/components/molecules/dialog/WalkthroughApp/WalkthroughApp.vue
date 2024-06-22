@@ -8,6 +8,7 @@ import IRCRA from 'ircra'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect.vue'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
+import { useWorkoutsStore } from '@/stores/workouts'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { loadLanguageAsync } from '@/plugins/i18n'
 
@@ -17,7 +18,11 @@ const { user } = storeToRefs(useAuthenticationStore())
 
 const { online } = storeToRefs(useAppStore())
 
+const { workoutsCommunity } = storeToRefs(useWorkoutsStore())
+
 const { getHangboardNameByIds, getHangboardByIds } = useUserStore()
+
+const { resetCommunityWorkouts } = useWorkoutsStore()
 
 const { updateUser } = useAuthenticationStore()
 
@@ -101,6 +106,8 @@ const finishWalkthrough = (addWorkout: boolean) => {
     user.value.settings.walkthrough = true
     if (getHangboard.value?.holds !== 0) {
       updateSelected()
+      workoutsCommunity.value = []
+      resetCommunityWorkouts()
     }
     updateUser()
   }
