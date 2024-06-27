@@ -64,6 +64,8 @@ export interface Workout {
   video: string
   /** List of subscriber IDs who follow the workout. */
   subscribers: Array<string>
+  /** Number of subscribers who follow the workout. */
+  subscribers_count?: number
   /** User information of the workout creator. */
   user: {
     /** Display name of the user. */

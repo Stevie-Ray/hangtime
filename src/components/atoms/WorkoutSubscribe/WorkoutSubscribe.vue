@@ -52,16 +52,17 @@ const workoutSubscriber = () => {
       workouts.value.unshift(workout.value)
     } else {
       // do not allow users to unsubscribe from self-created workouts
-      if (workout.value?.user?.id === user?.value?.id) return
+      if (workout.value.user?.id === user.value?.id) return
       if (user.value) {
-        const userIndex = workout?.value.subscribers.indexOf(user.value.id)
-        workout?.value.subscribers.splice(userIndex, 1)
+        const userIndex = workout.value.subscribers.indexOf(user.value.id)
+        workout.value.subscribers.splice(userIndex, 1)
       }
       // remove from workouts
       const index = workouts?.value.findIndex((item) => item.id === workout.value?.id)
       workouts.value.splice(index, 1)
     }
-    if (workout.value?.user) {
+    if (workout.value.user) {
+      workout.value.subscribers_count = workout.value.subscribers.length - 1
       updateWorkout({ userId: workout.value.user.id, workout: workout.value })
     }
   }
@@ -78,6 +79,6 @@ const workoutSubscriber = () => {
     :size="size"
     @click="clickable ? workoutSubscriber() : null"
   >
-    {{ workout?.subscribers?.length - 1 }}
+    {{ workout.subscribers_count ? workout.subscribers_count : workout.subscribers.length - 1 }}
   </v-btn>
 </template>
