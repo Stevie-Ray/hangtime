@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { getAuth, signOut } from 'firebase/auth'
 import { useI18n } from 'vue-i18n'
@@ -22,7 +22,7 @@ interface Item {
   external?: boolean
 }
 
-const items: Item[] = [
+const items = computed<Item[]>(() => [
   {
     title: t('Profile'),
     icon: '$account',
@@ -80,7 +80,7 @@ const items: Item[] = [
     subtitle: t('FAQ, exercises, privacy, contact'),
     link: '/account/help'
   }
-]
+])
 
 const canSubscribePlayBilling = ref(false)
 const PAYMENT_METHOD = 'https://play.google.com/billing'

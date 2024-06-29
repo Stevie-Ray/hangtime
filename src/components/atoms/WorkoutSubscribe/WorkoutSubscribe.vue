@@ -38,33 +38,35 @@ watch(
 )
 
 const isHearted = computed(() => {
-  if (!workout?.value?.subscribers?.length || !user.value) return false
-  return workout.value.subscribers.some((subscriber) => subscriber === user.value?.id)
+  if (!workout.value || !workout.value.subscribers || !user.value) return false
+  return workout.value.subscribers.includes(user.value.id)
 })
 
 const workoutSubscriber = () => {
-  if (workout.value) {
-    if (!isHearted.value) {
-      if (user.value) {
-        workout.value.subscribers.unshift(user.value.id)
-      }
-      // push to workouts
-      workouts.value.unshift(workout.value)
-    } else {
-      // do not allow users to unsubscribe from self-created workouts
-      if (workout.value.user?.id === user.value?.id) return
-      if (user.value) {
-        const userIndex = workout.value.subscribers.indexOf(user.value.id)
-        workout.value.subscribers.splice(userIndex, 1)
-      }
-      // remove from workouts
-      const index = workouts?.value.findIndex((item) => item.id === workout.value?.id)
-      workouts.value.splice(index, 1)
+  if (!workout.value || !user.value) return
+
+  const subscribers = [...workout.value.subscribers] // Create a copy for modification
+  const userId = user.value.id
+
+  if (!isHearted.value) {
+    subscribers.unshift(userId)
+  } else {
+    // Prevent users from unsubscribing from their own workouts
+    if (workout.value.user?.id === userId) return
+
+    const userIndex = subscribers.indexOf(userId)
+    if (userIndex !== -1) {
+      subscribers.splice(userIndex, 1)
     }
-    if (workout.value.user) {
-      workout.value.subscribers_count = workout.value.subscribers.length - 1
-      updateWorkout({ userId: workout.value.user.id, workout: workout.value })
-    }
+  }
+
+  // Update workout value and trigger reactivity
+  workout.value.subscribers = subscribers
+  workouts.value = workouts.value.slice()
+
+  if (workout.value.user) {
+    workout.value.subscribers_count = workout.value.subscribers.length - 1
+    updateWorkout({ userId: workout.value.user.id, workout: workout.value })
   }
 }
 </script>

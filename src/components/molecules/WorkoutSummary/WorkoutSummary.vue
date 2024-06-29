@@ -75,6 +75,7 @@ const parseVideo = (video: string) => {
                 <v-img
                   :alt="workout.user.displayName"
                   :src="workout.user.photoURL"
+                  :title="workout.user.id"
                   height="40"
                   width="40"
                 ></v-img>

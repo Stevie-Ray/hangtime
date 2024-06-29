@@ -97,14 +97,14 @@ const setHangboard = async () => {
   await fetchCommunityWorkouts()
 }
 
-const levels = [
+const levels = computed(() => [
   { name: t('easy'), value: 1 },
   { name: t('normal'), value: 2 },
   { name: t('hard'), value: 3 }
-]
+])
 
 const difficultyById = (id: 1 | 2 | 3): string | undefined => {
-  const level = levels.find((level) => level.value === id)
+  const level = levels.value.find((level) => level.value === id)
   return level ? level.name : undefined
 }
 
@@ -215,6 +215,7 @@ useHead({
                         <v-img
                           :src="workout.user.photoURL"
                           :alt="workout.user.displayName"
+                          :title="workout.user.id"
                           width="40"
                           height="40"
                         ></v-img>

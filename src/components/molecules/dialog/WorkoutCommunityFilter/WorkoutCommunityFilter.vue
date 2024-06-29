@@ -13,8 +13,9 @@ const { t } = useI18n()
 
 const dialog = ref(false)
 
-const items: { filter: string; value: string }[] = [
+const items: { filter: string; value: string; disabled?: boolean }[] = [
   { filter: 'Last Modified', value: 'updateTimestamp' },
+  { filter: 'Likes', value: 'subscribers_count', disabled: true },
   { filter: 'Name', value: 'name' },
   { filter: 'Time', value: 'time' },
   { filter: 'Level', value: 'level' }
@@ -65,6 +66,7 @@ watch(
                 :label="t('Sort workouts by')"
                 :item-title="(option) => $t(option.filter)"
                 item-value="value"
+                :item-props="true"
                 single-line
                 return-object
                 class="mr-2"
