@@ -7068,7 +7068,7 @@ const companies: Company[] = [
       {
         name: 'Base+ v3.0',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/GRIPWORKSBASEPLUS.svg',
         size: {
           x: 660,
           y: 135,
@@ -7076,7 +7076,7 @@ const companies: Company[] = [
         },
         type: 'wood',
         url: 'https://www.gripworks.cz/baseplus/',
-        holds: 0
+        holds: 12
       },
       {
         name: 'Base v3.5',
