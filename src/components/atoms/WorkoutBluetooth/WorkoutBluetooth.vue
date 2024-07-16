@@ -102,7 +102,7 @@ const onSuccess = async () => {
       output.value = JSON.stringify(data)
     })
 
-    if (device.value?.name === Motherboard.name) {
+    if (device.value?.name === Motherboard.filters.some((filter) => filter.name)) {
       await battery(device.value)
       await info(device.value)
     }
