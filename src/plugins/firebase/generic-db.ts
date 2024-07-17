@@ -81,24 +81,23 @@ export default class GenericDB<T> {
    * @param id
    */
   async create(data: any, id?: string | null): Promise<T> {
-    const collectionRef: CollectionReference = collection(db, this.collectionPath)
-    const serverTimestampA = serverTimestamp()
+    const collectionRef = collection(db, this.collectionPath)
+    const serverTimestampValue = serverTimestamp()
 
     const dataToCreate = {
       ...data,
-      createTimestamp: serverTimestampA,
-      updateTimestamp: serverTimestampA
+      createTimestamp: serverTimestampValue,
+      updateTimestamp: serverTimestampValue
     }
 
-    let docId: string
+    const createPromise =
+      id === null || id === undefined
+        ? // Create doc with generated id
+          addDoc(collectionRef, dataToCreate).then((doc) => doc.id)
+        : // Create doc with custom id
+          setDoc(doc(collectionRef, id), dataToCreate).then(() => id)
 
-    if (id === null || id === undefined) {
-      const docRef = await addDoc(collectionRef, dataToCreate)
-      docId = docRef.id
-    } else {
-      await setDoc(doc(db, this.collectionPath, id), dataToCreate)
-      docId = id
-    }
+    const docId = await createPromise
 
     return {
       id: docId,
