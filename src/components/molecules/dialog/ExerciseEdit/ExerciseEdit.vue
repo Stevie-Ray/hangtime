@@ -103,18 +103,27 @@ const exerciseMovement = computed({
 })
 
 const exerciseRemove = () => {
-  workout.value?.exercises.splice(index.value, 1)
-  index.value = 0
-  emit('show', false)
+  if (workout.value && workout.value.exercises[index.value]) {
+    const removedExercise = workout.value.exercises.splice(index.value, 1)[0]
+
+    if (workout.value?.time && removedExercise?.time) {
+      emit('time', workout.value.time - removedExercise.time)
+    }
+
+    index.value = 0
+    emit('show', false)
+  }
 }
 
 const exerciseCopy = () => {
   if (workout.value) {
-    workout.value.exercises.splice(
-      index.value,
-      0,
-      structuredClone(toRaw(workout.value.exercises[index.value]))
-    )
+    const newExercise = structuredClone(toRaw(workout.value.exercises[index.value]))
+    workout.value.exercises.splice(index.value, 0, newExercise)
+
+    if (workout.value?.time && newExercise?.time) {
+      emit('time', workout.value.time + newExercise.time)
+    }
+
     index.value = 0
     emit('show', false)
   }
@@ -139,15 +148,15 @@ const rules = {
   <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
     <v-card>
       <v-toolbar>
-        <v-btn color="text" icon="$close" @click="emit('show', false)"></v-btn>
+        <v-btn color="text" icon="$close" @click="emit('show', false)" />
         <v-toolbar-title>
           {{ t('Edit exercise') }}
         </v-toolbar-title>
 
         <v-toolbar-items>
-          <v-btn v-if="index !== 0" icon="$deleteOutline" @click="exerciseRemove"></v-btn>
-          <v-btn icon="$contentCopy" @click="exerciseCopy"></v-btn>
-          <v-btn icon="$contentSaveOutline" @click="emit('show', false)"></v-btn>
+          <v-btn v-if="index !== 0" icon="$deleteOutline" @click="exerciseRemove" />
+          <v-btn icon="$contentCopy" @click="exerciseCopy" />
+          <v-btn icon="$contentSaveOutline" @click="emit('show', false)" />
         </v-toolbar-items>
       </v-toolbar>
       <v-container>
