@@ -59,7 +59,7 @@ const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', 
   // set time of timer value
   exercise.value[timer] = time
   // remove old value
-  if (workout.value?.time && exercise.value?.time) {
+  if (workout.value?.time !== undefined && exercise.value?.time !== undefined) {
     emit('time', workout.value.time - exercise.value.time)
   }
   exercise.value.time =
@@ -67,7 +67,7 @@ const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', 
     exercise.value.rest +
     exercise.value.pause
   // add new value
-  if (workout.value?.time && exercise.value?.time) {
+  if (workout.value?.time !== undefined && exercise.value?.time !== undefined) {
     emit('time', workout.value.time + exercise.value.time)
   }
 }
