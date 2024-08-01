@@ -7724,6 +7724,62 @@ const companies: Company[] = [
         holds: 0
       }
     ]
+  },
+  {
+    name: 'Crux Agarras',
+    description: 'The best brand of holds in Brazil.',
+    country: 'BR',
+    location: {
+      lat: '-23.3051367',
+      lon: '-51.2243895'
+    },
+    id: 130,
+    url: 'https://www.cruxagarras.com.br/',
+    socials: {
+      facebook: 'https://www.facebook.com/cruxagarras',
+      instagram: 'https://www.instagram.com/cruxagarras/'
+    },
+    hangboards: [
+      {
+        name: 'Deja-Vu',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 605,
+          y: 105,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://www.cruxagarras.com.br/produtos/deja-vu/',
+        holds: 0
+      },
+      {
+        name: 'Fênix',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 675,
+          y: 190,
+          z: 40
+        },
+        type: 'wood',
+        url: 'https://www.cruxagarras.com.br/produtos/fenix/',
+        holds: 0
+      },
+      {
+        name: 'FINGER CRUX 2.0',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: 640,
+          y: 200,
+          z: 60
+        },
+        type: 'wood',
+        url: 'https://www.cruxagarras.com.br/produtos/finger-crux-2-0/',
+        holds: 0
+      }
+    ]
   }
 ]
 
