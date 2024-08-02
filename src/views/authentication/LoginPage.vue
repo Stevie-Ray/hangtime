@@ -97,7 +97,7 @@ const socials = [
 const usps = [
   {
     title: `Personalized Hangboard Training Plans`,
-    subtitle: `Unlock the power of hangboard training with HangTime the #1 hangboard training app. Tailor your workouts, target specific finger strength, and track progress over time for optimized hangboard training. Join the largest hangboard training community with access to ${getHangboards?.length} hangboards from ${getCompanies?.length} top brands. Elevate your climbing game with precision.`,
+    subtitle: `Unlock the power of hangboard training with HangTime the #1 hangboard training app. Tailor your workouts, target specific finger strength, and track progress over time for optimized hangboard training. Join the largest hangboard training community with access to ${getHangboards().length} hangboards from ${getCompanies().length} top brands. Elevate your climbing game with precision.`,
     prependIcon: `$podiumGold`
   },
   {
@@ -117,7 +117,7 @@ const usps = [
   },
   {
     title: `Extensive Hangboard Catalog`,
-    subtitle: `Access the most extensive hangboard catalog available, featuring ${getHangboards?.length} hangboards from ${getCompanies?.length} trusted brands. No matter your hangboard training preference, our app provides the variety you need to reach your peak climbing potential.`,
+    subtitle: `Access the most extensive hangboard catalog available, featuring ${getHangboards().length} hangboards from ${getCompanies().length} trusted brands. No matter your hangboard training preference, our app provides the variety you need to reach your peak climbing potential.`,
     prependIcon: `$trophy`
   }
 ]

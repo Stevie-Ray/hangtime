@@ -7756,7 +7756,7 @@ const companies: Company[] = [
       {
         name: 'Fênix',
         id: 1,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/CRUXFENIX.svg',
         size: {
           x: 675,
           y: 190,
@@ -7764,7 +7764,7 @@ const companies: Company[] = [
         },
         type: 'wood',
         url: 'https://www.cruxagarras.com.br/produtos/fenix/',
-        holds: 0
+        holds: 8
       },
       {
         name: 'FINGER CRUX 2.0',

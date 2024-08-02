@@ -70,7 +70,7 @@ const subject = computed(() =>
                 : ''
             }}&nbsp;{{ item.title }}</span
           >
-          <v-chip class="mx-2" size="x-small" v-if="item.value >= getCompanies.length - 5">
+          <v-chip class="mx-2" size="x-small" v-if="item.value >= getCompanies().length - 5">
             {{ $t('new') }}
           </v-chip>
         </template>
