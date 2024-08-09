@@ -14,6 +14,7 @@ import { useActivitiesStore } from '@/stores/activities'
 import { useAuthenticationStore } from '@/stores/authentication'
 
 import { Activity } from '@/interfaces/activities.interface'
+import { Levels } from '@/interfaces/workouts.interface'
 
 const { activities } = storeToRefs(useActivitiesStore())
 const { user } = storeToRefs(useAuthenticationStore())
@@ -23,9 +24,9 @@ const { t } = useI18n()
 const notifications = ref(false)
 
 const levels = [
-  { name: t('easy'), value: 1 },
-  { name: t('normal'), value: 2 },
-  { name: t('hard'), value: 3 }
+  { name: t('easy'), value: Levels.Easy },
+  { name: t('normal'), value: Levels.Normal },
+  { name: t('hard'), value: Levels.Hard }
 ]
 
 const difficultyById = (id: number): string | undefined =>

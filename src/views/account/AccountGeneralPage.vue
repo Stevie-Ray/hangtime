@@ -10,6 +10,7 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useAppStore } from '@/stores/app'
 import { loadLanguageAsync } from '@/plugins/i18n'
+import { Theme } from '@/interfaces/authentication.interface'
 
 const scale = new IRCRA().scale()
 
@@ -100,19 +101,19 @@ const weight = [
 const themes = [
   {
     title: t('System'),
-    value: 0
+    value: Theme.System
   },
   {
     title: t('Light'),
-    value: 1
+    value: Theme.Light
   },
   {
     title: t('Dark'),
-    value: 2
+    value: Theme.Dark
   }
 ]
 
-const setTheme = (value: number) => {
+const setTheme = (value: Theme) => {
   if (user.value) {
     user.value.settings.theme = value
     updateUser()

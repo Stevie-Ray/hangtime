@@ -13,6 +13,7 @@ import { useAppStore } from '@/stores/app'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
+import { Theme } from '@/interfaces/authentication.interface'
 
 // router
 const route = useRoute()
@@ -55,8 +56,8 @@ const theme = useTheme()
 const prefersDark: MediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
 
 prefersDark.addEventListener('change', (): void => {
-  if (user.value?.settings?.theme && user.value.settings.theme > 0) {
-    theme.global.name.value = user.value?.settings.theme === 2 ? 'dark' : 'light'
+  if (user.value?.settings?.theme && user.value.settings.theme > Theme.System) {
+    theme.global.name.value = user.value?.settings.theme === Theme.Dark ? 'dark' : 'light'
   } else {
     theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
   }
@@ -64,8 +65,8 @@ prefersDark.addEventListener('change', (): void => {
 
 // watch works directly on a ref
 watch(user, async (updatedUser): Promise<void> => {
-  if (updatedUser?.settings?.theme && updatedUser.settings.theme > 0) {
-    theme.global.name.value = updatedUser.settings.theme === 2 ? 'dark' : 'light'
+  if (updatedUser?.settings?.theme && updatedUser.settings.theme > Theme.System) {
+    theme.global.name.value = updatedUser.settings.theme === Theme.Dark ? 'dark' : 'light'
   } else {
     theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
   }
