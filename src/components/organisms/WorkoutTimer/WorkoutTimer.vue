@@ -4,7 +4,7 @@ import { stream } from '@hangtime/grip-connect'
 import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
-import NoSleep from 'nosleep.js'
+import { useWakeLock } from '@vueuse/core'
 import WorkoutBluetooth from '@/components/atoms/WorkoutBluetooth/WorkoutBluetooth.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
@@ -12,6 +12,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
+import SliderBluetooth from '@/components/atoms/SliderBluetooth/SliderBluetooth.vue'
 import { Workout, Exercise } from '@/interfaces/workouts.interface'
 import { time } from '@/helpers'
 
@@ -32,6 +33,8 @@ const { user } = storeToRefs(useAuthenticationStore())
 const { updateUser } = useAuthenticationStore()
 
 const { createUserActivity } = useActivitiesStore()
+
+const { isSupported, isActive, request, release } = useWakeLock()
 
 const props = defineProps({
   workout: {
@@ -62,7 +65,6 @@ const currentExerciseStep: Ref<number> = ref(0)
 const currentExerciseStepRepeat: Ref<number> = ref(0)
 
 const audio: HTMLAudioElement = new Audio()
-const noSleep: NoSleep = new NoSleep()
 const setupTime: number = 5
 
 // complete
@@ -104,7 +106,7 @@ const exerciseTime = computed<number>(() => {
 
 const requestWakeLock = () => {
   try {
-    noSleep.enable()
+    isSupported && !isActive ? request('screen') : null
   } catch (err: unknown) {
     if (err instanceof Error) {
       // eslint-disable-next-line no-console
@@ -184,17 +186,13 @@ const countDown = () => {
   }
 }
 
-const pauseWorkout = () => {
-  if (!timerPaused.value) {
-    noSleep.disable()
-  } else {
-    requestWakeLock()
-  }
+const toggleWorkout = () => {
+  !timerPaused.value && isSupported && isActive ? release() : request('screen')
   timerPaused.value = !timerPaused.value
 }
 
 const stopTimer = () => {
-  noSleep.disable()
+  isActive ? release() : null
   if (timer !== null) {
     clearInterval(timer)
     timer = null
@@ -776,7 +774,7 @@ onMounted(() => {
                       size="x-large"
                       variant="flat"
                       class="rounded-circle"
-                      @click="timerPaused === null ? startTimer() : pauseWorkout()"
+                      @click="timerPaused === null ? startTimer() : toggleWorkout()"
                     ></v-btn>
                     <v-btn
                       :disabled="currentExercise >= workout?.exercises?.length - 1"
@@ -820,7 +818,7 @@ onMounted(() => {
 
       <v-col cols="12" md="5">
         <v-card v-if="exerciseNext" class="mb-8">
-          <v-card-title>{{ $t('Next exercise') }}</v-card-title>
+          <v-card-title>{{ t('Next exercise') }}</v-card-title>
           <v-card-text>
             <exercise-card
               :exercise="exerciseNext"
@@ -836,7 +834,7 @@ onMounted(() => {
           </v-card-text>
         </v-card>
         <v-card v-if="exercise?.exercise !== null && !quick" class="mb-8">
-          <v-card-title>{{ $t('About the exercise') }}</v-card-title>
+          <v-card-title>{{ t('About the exercise') }}</v-card-title>
           <v-card-text>
             <exercise-about :exercise="exercise" />
           </v-card-text>

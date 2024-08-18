@@ -270,10 +270,10 @@ const settingsGrade = computed({
                   :disabled="getHangboard && getHangboard.holds === 0"
                   @click="finishWalkthrough(true)"
                 >
-                  {{ $t('Add a workout') }}
+                  {{ t('Add a workout') }}
                 </v-btn>
                 <v-btn variant="text" @click="finishWalkthrough(false)">
-                  {{ $t('Close') }}
+                  {{ t('Close') }}
                 </v-btn>
               </v-card-actions>
             </v-card>

@@ -78,7 +78,7 @@ const props = defineProps({
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn :text="$t('Close')" @click="isActive.value = false"></v-btn>
+                  <v-btn :text="t('Close')" @click="isActive.value = false"></v-btn>
                 </v-card-actions>
               </v-card>
             </template>

@@ -64,7 +64,7 @@ useHead({
                     size="x-small"
                     v-if="company.id >= getCompanies().length - 5"
                   >
-                    {{ $t('new') }}
+                    {{ t('new') }}
                   </v-chip>
                 </v-list-item-title>
                 <v-list-item-subtitle>

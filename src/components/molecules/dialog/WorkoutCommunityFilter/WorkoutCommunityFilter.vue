@@ -64,7 +64,7 @@ watch(
                 v-model="workoutsCommunityFilter"
                 :items="items"
                 :label="t('Sort workouts by')"
-                :item-title="(option) => $t(option.filter)"
+                :item-title="(option) => t(option.filter)"
                 item-value="value"
                 :item-props="true"
                 single-line
