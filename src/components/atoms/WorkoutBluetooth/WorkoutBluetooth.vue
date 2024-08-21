@@ -9,7 +9,7 @@ import {
   Climbro,
   Entralpi,
   Motherboard,
-  MuscleMeter,
+  WHC06,
   mySmartBoard,
   Progressor,
   battery,
@@ -56,8 +56,8 @@ const devices = [
     disabled: workout.value?.company !== 1
   },
   {
-    title: 'Muscle Meter',
-    value: MuscleMeter,
+    title: 'WH-CO6',
+    value: WHC06,
     disabled: true
   },
   {
