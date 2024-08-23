@@ -106,7 +106,7 @@ const exerciseTime = computed<number>(() => {
 
 const requestWakeLock = () => {
   try {
-    isSupported && !isActive ? request('screen') : null
+    isSupported.value && !isActive.value ? request('screen') : null
   } catch (err: unknown) {
     if (err instanceof Error) {
       // eslint-disable-next-line no-console
@@ -187,12 +187,12 @@ const countDown = () => {
 }
 
 const toggleWorkout = () => {
-  !timerPaused.value && isSupported && isActive ? release() : request('screen')
+  !timerPaused.value && isSupported.value && isActive.value ? release() : request('screen')
   timerPaused.value = !timerPaused.value
 }
 
 const stopTimer = () => {
-  isActive ? release() : null
+  isActive.value ? release() : null
   if (timer !== null) {
     clearInterval(timer)
     timer = null
