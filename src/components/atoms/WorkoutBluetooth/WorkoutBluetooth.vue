@@ -12,6 +12,7 @@ import {
   WHC06,
   mySmartBoard,
   Progressor,
+  active,
   battery,
   connect,
   disconnect,
@@ -22,7 +23,7 @@ import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 
 import { useBluetoothStore } from '@/stores/bluetooth'
 
-const emit = defineEmits(['notify', 'start'])
+const emit = defineEmits(['notify', 'active', 'start'])
 
 const { device } = storeToRefs(useBluetoothStore())
 
@@ -102,6 +103,10 @@ const onSuccess = async () => {
       output.value = JSON.stringify(data)
     })
 
+    active((value: boolean) => {
+      emit('active', value)
+    })
+
     if (device.value?.name === Motherboard.filters.some((filter) => filter.name)) {
       await battery(device.value)
       await info(device.value)
@@ -138,7 +143,7 @@ watch(
     <v-card>
       <v-toolbar>
         <v-btn color="text" icon="$close" @click="dialog = false"></v-btn>
-        <v-toolbar-title>{{ t('Force-Sensing Climbing Training') }}</v-toolbar-title>
+        <v-toolbar-title>Force-Sensing Climbing Training</v-toolbar-title>
       </v-toolbar>
       <v-container>
         <v-row>

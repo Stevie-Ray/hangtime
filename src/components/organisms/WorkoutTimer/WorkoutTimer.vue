@@ -74,9 +74,14 @@ const workoutCompleteTimeHanging: Ref<number> = ref(0)
 
 // bluetooth
 const bluetoothOutput = ref<massObject | null>(null)
+const deviceInUse = ref(false)
 
 const notify = (data: massObject) => {
   bluetoothOutput.value = data
+}
+
+const active = (value: boolean) => {
+  deviceInUse.value = value
 }
 
 onBeforeUnmount(() => {
@@ -806,6 +811,7 @@ onMounted(() => {
                       :workout="workout"
                       @start="timerPaused === null ? startTimer() : null"
                       @notify="notify"
+                      @active="active"
                     />
                     <workout-share size="small" :workout="workout" />
                   </div>

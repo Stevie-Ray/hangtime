@@ -20,10 +20,10 @@
   "dependencies": {
     "@fontsource/roboto": "^5.0.14",
     "@googlemaps/js-api-loader": "^1.16.8",
-    "@hangtime/grip-connect": "^0.3.7",
+    "@hangtime/grip-connect": "^0.3.8",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^1.10.0",
-    "@vueuse/core": "^11.0.1",
+    "@vueuse/core": "^11.0.3",
     "core-js": "^3.38.1",
     "firebase": "^10.13.0",
     "ircra": "^2.2.4",
