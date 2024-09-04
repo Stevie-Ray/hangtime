@@ -115,14 +115,14 @@ useHead({
       <v-container>
         <v-row>
           <v-col cols="12">
-            <news-cards></news-cards>
+            <news-cards />
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="12">
             <v-card v-for="(dates, date) in activitiesByDay" :key="date" class="mb-4 pb-2">
-              <v-list>
+              <v-list lines="two">
                 <v-list-subheader>{{ activityDate(date) }}</v-list-subheader>
                 <template v-for="(activity, j) in dates" :key="j">
                   <v-list-item :to="activityUrl(activity)">

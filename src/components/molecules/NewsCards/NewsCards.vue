@@ -50,20 +50,16 @@ const slides: Slide[] = [
   }
 ]
 
-let newCompanies = []
-// eslint-disable-next-line no-restricted-syntax
-for (const company of getCompanies()) {
-  if (company?.id >= getCompanies.length - 5) {
-    newCompanies.push(company)
-  }
-}
-
-newCompanies = newCompanies.sort((a, b) => (a.id > b.id ? 1 : -1)).reverse()
+let newCompanies = getCompanies()
+  .filter((company) => company?.id >= getCompanies.length - 5)
+  .sort((a, b) => (a.id > b.id ? 1 : -1))
+  .reverse()
+  .slice(0, 5)
 
 let index = 0
 // eslint-disable-next-line no-restricted-syntax
 for (const newCompany of newCompanies) {
-  slides.splice(index, 0, {
+  const newSlide: Slide = {
     title: `${
       newCompany?.country
         ? countries.find((country) => country.alpha2 === newCompany.country)?.emoji
@@ -76,7 +72,8 @@ for (const newCompany of newCompanies) {
     internal_link: newCompany.name
       ? `/brands/${encodeURIComponent(newCompany.name.replace(/\s+/g, '-').toLowerCase())}`
       : undefined
-  })
+  }
+  slides.splice(index, 0, newSlide)
   index += 2
 }
 </script>

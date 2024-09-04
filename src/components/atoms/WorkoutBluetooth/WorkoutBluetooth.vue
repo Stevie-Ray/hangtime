@@ -27,8 +27,6 @@ const emit = defineEmits(['notify', 'active', 'start'])
 
 const { device } = storeToRefs(useBluetoothStore())
 
-const { t } = useI18n()
-
 const props = defineProps({
   workout: {
     type: Object as () => Workout

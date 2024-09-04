@@ -202,8 +202,8 @@ useHead({
       <v-container>
         <v-row>
           <v-col cols="12">
-            <v-list v-if="workoutsList.length">
-              <v-infinite-scroll :onLoad="fetchMoreWorkouts">
+            <v-list lines="two" v-if="workoutsList.length">
+              <v-infinite-scroll :onLoad="fetchMoreWorkouts" side="end">
                 <template v-for="(workout, index) in workoutsList" :key="workout.id">
                   <v-list-item
                     v-if="getUserHangboard && getUserHangboardCompany && workout"
