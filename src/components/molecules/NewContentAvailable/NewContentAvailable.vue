@@ -6,12 +6,9 @@ const { t } = useI18n()
 
 const snackbar = ref(true)
 
-defineProps({
-  refreshingApp: {
-    type: Boolean,
-    default: false
-  }
-})
+const { refreshingApp = false } = defineProps<{
+  refreshingApp?: boolean
+}>()
 
 const emit = defineEmits(['refresh'])
 

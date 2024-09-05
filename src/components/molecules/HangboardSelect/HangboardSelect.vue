@@ -9,20 +9,22 @@ const { t } = useI18n()
 
 const { getHangboardByIds, getCompanyById, getHangboardNameByIds, getCompanies } = useUserStore()
 
-const props = defineProps({
-  selectedHangboard: {
-    type: Object,
-    default: () => ({
-      company: 1,
-      hangboard: 0
-    })
+const {
+  selectedHangboard = {
+    company: 1,
+    hangboard: 0
   }
-})
+} = defineProps<{
+  selectedHangboard?: {
+    company: number
+    hangboard: number
+  }
+}>()
 
 const emit = defineEmits(['update-selected'])
 
 // eslint-disable-next-line vue/no-setup-props-destructure
-const selected = ref(props.selectedHangboard)
+const selected = ref(selectedHangboard)
 
 watch(selected, (item) => {
   emit('update-selected', item)

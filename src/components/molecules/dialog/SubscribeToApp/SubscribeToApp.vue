@@ -13,12 +13,9 @@ const { user } = storeToRefs(useAuthenticationStore())
 
 const { updateUser } = useAuthenticationStore()
 
-const props = defineProps({
-  limit: {
-    type: Number,
-    default: 30
-  }
-})
+const { limit = 30 } = defineProps<{
+  limit?: number
+}>()
 
 const debug = false
 const disabled = ref(true)
@@ -37,7 +34,7 @@ const progressValue = computed(() => {
   // eslint-disable-next-line no-unsafe-optional-chaining
   if (!user || user?.value?.subscribed) time = 0
   const completedTime = user?.value?.completed?.time ? user.value.completed.time : 0
-  const value = ((completedTime / time) * 100) / props.limit
+  const value = ((completedTime / time) * 100) / limit
   return value < 100 ? value : 100
 })
 

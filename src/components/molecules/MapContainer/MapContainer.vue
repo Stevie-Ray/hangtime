@@ -2,20 +2,15 @@
 import { Company } from '@/interfaces/user.interface'
 import { Loader } from '@googlemaps/js-api-loader'
 
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
-  markers: {
-    type: Array as () => Company[]
-  },
-  height: {
-    type: Number,
-    default: 300
-  },
-  zoom: {
-    type: Number,
-    default: 0
-  }
-})
+const {
+  markers,
+  height = 300,
+  zoom = 0
+} = defineProps<{
+  markers?: Company[]
+  height?: number
+  zoom?: number
+}>()
 
 const loader = new Loader({
   apiKey: 'AIzaSyAR46a4_gq6kCubEmnCvwcLfuaR8DIHOp8',
@@ -27,7 +22,7 @@ loader.load().then(async () => {
   const { Map } = (await google.maps.importLibrary('maps')) as google.maps.MapsLibrary
 
   const map = new Map(document.querySelector('.map') as HTMLElement, {
-    zoom: props.zoom,
+    zoom: zoom,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
     streetViewControl: false,
@@ -97,9 +92,9 @@ loader.load().then(async () => {
   const infowindow = new google.maps.InfoWindow()
 
   let marker
-  if (props.markers) {
+  if (markers) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    for (const [i, item] of props.markers.entries()) {
+    for (const [i, item] of markers.entries()) {
       if (item?.location?.lat && item?.location?.lon) {
         const icon = {
           url: '/img/icons/favicon.svg',
@@ -145,7 +140,7 @@ loader.load().then(async () => {
   map.fitBounds(bounds)
   // restore the zoom level after the map is done scaling
   const listener = google.maps.event.addListener(map, 'idle', () => {
-    map.setZoom(props.zoom)
+    map.setZoom(zoom)
     google.maps.event.removeListener(listener)
   })
 })

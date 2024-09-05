@@ -12,15 +12,15 @@ const { online } = storeToRefs(useAppStore())
 
 const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  },
-  size: {
-    type: String,
-    default: 'default'
+const props = withDefaults(
+  defineProps<{
+    workout?: Workout
+    size?: string
+  }>(),
+  {
+    size: 'default'
   }
-})
+)
 
 const workout = ref(props.workout)
 

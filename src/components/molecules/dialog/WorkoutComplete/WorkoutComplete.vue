@@ -13,18 +13,11 @@ const emit = defineEmits(['show'])
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  },
-  timeTotal: {
-    type: Number
-  },
-  timeHanging: {
-    type: Number
-  }
-})
+const { workout, timeTotal, timeHanging } = defineProps<{
+  workout?: Workout
+  timeTotal?: number
+  timeHanging?: number
+}>()
 
 const dialog = ref(true)
 
@@ -32,16 +25,16 @@ const shareAPI = navigator.share
 
 const shareExternal = () => {
   let title = t('I just did a quick workout for {time}', {
-    time: time(props.timeTotal)
+    time: time(timeTotal)
   })
   let text = `${title}. ${t('Where I hung for {time}', {
-    time: time(props.timeHanging)
+    time: time(timeHanging)
   })}. ${t('Join {appTitle}', { appTitle: 'HangTime' })}!`
-  if (props.workout) {
-    title = `${props.workout.name} | HangTime`
+  if (workout) {
+    title = `${workout.name} | HangTime`
     text = `${t('I just completed {name}', {
-      name: props.workout.name
-    })}. ${t('Description')}: "${props.workout.description}". ${t('Join {appTitle}', {
+      name: workout.name
+    })}. ${t('Description')}: "${workout.description}". ${t('Join {appTitle}', {
       appTitle: 'HangTime'
     })}!`
   }

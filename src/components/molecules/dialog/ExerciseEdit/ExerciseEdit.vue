@@ -19,15 +19,15 @@ const { t } = useI18n()
 
 const repType = ref('original')
 
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  },
-  index: {
-    type: Number,
-    default: 1
+const props = withDefaults(
+  defineProps<{
+    workout?: Workout
+    index?: number
+  }>(),
+  {
+    index: 1
   }
-})
+)
 
 const workout = ref(props.workout)
 const index = ref(props.index)

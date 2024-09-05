@@ -11,38 +11,25 @@ const { t } = useI18n()
 
 const emit = defineEmits(['left', 'right', 'rotate'])
 
-// eslint-disable-next-line no-unused-vars
-const props = defineProps({
-  variant: {
-    type: String as () => 'elevated' | 'flat' | 'text' | 'tonal' | 'outlined' | 'plain',
-    default: 'elevated'
-  },
-  exercise: {
-    type: Object as () => Exercise
-  },
-  hangboard: {
-    type: Object
-  },
-  index: {
-    type: Number
-  },
-  editHangboard: {
-    type: Boolean,
-    default: false
-  },
-  sort: {
-    type: Boolean,
-    default: false
-  },
-  editHand: {
-    type: Boolean,
-    default: false
-  },
-  hideRest: {
-    type: Boolean,
-    default: false
-  }
-})
+const {
+  variant = 'elevated',
+  exercise,
+  hangboard,
+  index,
+  editHangboard = false,
+  editHand = false,
+  sort = false,
+  hideRest = false
+} = defineProps<{
+  variant?: 'elevated' | 'flat' | 'text' | 'tonal' | 'outlined' | 'plain'
+  exercise?: Exercise
+  hangboard?: { hangboard: number; company: number }
+  index?: number
+  editHangboard?: boolean
+  editHand?: boolean
+  sort?: boolean
+  hideRest?: boolean
+}>()
 </script>
 
 <template>
@@ -63,13 +50,13 @@ const props = defineProps({
         <div class="flex-grow-1 text-truncate" style="overflow: hidden">
           <v-dialog width="500" v-if="!sort">
             <template v-slot:activator="{ props }">
-              <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
+              <exercise-name :exercise="exercise" v-bind="props" hide-repeat />
             </template>
 
             <template v-slot:default="{ isActive }">
               <v-card class="help">
                 <v-card-title>
-                  <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
+                  <exercise-name :exercise="exercise" hide-repeat />
                 </v-card-title>
                 <v-card-text>
                   <exercise-about :exercise="exercise" />
@@ -84,7 +71,7 @@ const props = defineProps({
             </template>
           </v-dialog>
           <template v-else>
-            <exercise-name :exercise="exercise" v-bind="props" hide-repeat></exercise-name>
+            <exercise-name :exercise="exercise" hide-repeat></exercise-name>
           </template>
         </div>
 

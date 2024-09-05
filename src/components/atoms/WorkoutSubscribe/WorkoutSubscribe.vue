@@ -14,19 +14,17 @@ const { online } = storeToRefs(useAppStore())
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  },
-  size: {
-    type: String,
-    default: 'default'
-  },
-  clickable: {
-    type: Boolean,
-    default: true
+const props = withDefaults(
+  defineProps<{
+    workout?: Workout
+    size?: string
+    clickable?: boolean
+  }>(),
+  {
+    size: 'default',
+    clickable: true
   }
-})
+)
 
 const workout = ref(props.workout)
 

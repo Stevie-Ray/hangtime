@@ -2,7 +2,6 @@
 /// <reference types="web-bluetooth" />
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useI18n } from 'vue-i18n'
 import { Workout } from '@/interfaces/workouts.interface'
 
 import {
@@ -27,15 +26,15 @@ const emit = defineEmits(['notify', 'active', 'start'])
 
 const { device } = storeToRefs(useBluetoothStore())
 
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  },
-  size: {
-    type: String,
-    default: 'default'
+const props = withDefaults(
+  defineProps<{
+    workout?: Workout
+    size?: string
+  }>(),
+  {
+    size: 'default'
   }
-})
+)
 
 const workout = ref(props.workout)
 const dialog = ref(false)

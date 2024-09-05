@@ -36,16 +36,16 @@ const { createUserActivity } = useActivitiesStore()
 
 const { isSupported, isActive, request, release } = useWakeLock()
 
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  },
-  /** Quick Workout */
-  quick: {
-    type: Boolean,
-    default: false
+const props = withDefaults(
+  defineProps<{
+    workout?: Workout
+    /** Quick Workout */
+    quick?: boolean
+  }>(),
+  {
+    quick: false
   }
-})
+)
 
 const workout = ref(props.workout)
 

@@ -6,29 +6,23 @@ import { Exercise } from '@/interfaces/workouts.interface'
 
 const { getHangboardByIds } = useUserStore()
 
-const props = defineProps({
-  exercise: {
-    type: Object as () => Exercise
-  },
-  hangboard: {
-    type: Object as () => { hangboard: number; company: number },
-    required: true
-  },
-  edit: {
-    type: Boolean,
-    default: false
-  }
-})
+const {
+  exercise,
+  hangboard,
+  edit = false
+} = defineProps<{
+  exercise?: Exercise
+  hangboard: { hangboard: number; company: number }
+  edit?: boolean
+}>()
 
 const emit = defineEmits(['left', 'right', 'rotate'])
 
-const getHangboard = computed(() =>
-  getHangboardByIds(props.hangboard.company, props.hangboard.hangboard)
-)
+const getHangboard = computed(() => getHangboardByIds(hangboard.company, hangboard.hangboard))
 
 const hangboardImage = computed(() => {
   const sides = getHangboard.value?.sides || []
-  const rotateIndex = props.exercise?.rotate || 0
+  const rotateIndex = exercise?.rotate || 0
 
   if (sides.length) {
     return new URL(`/src/assets/${sides[rotateIndex].image}`, import.meta.url).href
@@ -40,11 +34,11 @@ const hangboardImage = computed(() => {
 })
 
 const classHold = (hand: 'left' | 'right'): string | null => {
-  return props.exercise && props.exercise[hand] !== null ? `h${props.exercise[hand]! + 1}` : null
+  return exercise && exercise[hand] !== null ? `h${exercise[hand]! + 1}` : null
 }
 
 const toggleHold = (hand: 'left' | 'right', e: Event) => {
-  if (props.edit) {
+  if (edit) {
     const hold = (e.target as HTMLElement).id
     const n = hold.startsWith('h')
     if (n && hold.length <= 3) {
@@ -55,10 +49,10 @@ const toggleHold = (hand: 'left' | 'right', e: Event) => {
 }
 
 const nextImage = () => {
-  if (props.exercise?.rotate === undefined) {
+  if (exercise?.rotate === undefined) {
     emit('rotate', 1)
-  } else if (props.exercise.rotate + 1 !== getHangboard.value?.sides?.length) {
-    emit('rotate', props.exercise.rotate + 1)
+  } else if (exercise.rotate + 1 !== getHangboard.value?.sides?.length) {
+    emit('rotate', exercise.rotate + 1)
   } else {
     emit('rotate', 0)
   }

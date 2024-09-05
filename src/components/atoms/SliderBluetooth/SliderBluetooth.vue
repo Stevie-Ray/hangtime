@@ -1,21 +1,15 @@
 <script setup lang="ts">
 // import { computed } from 'vue'
 
-defineProps({
-  stream: {
-    type: String || undefined,
-    default: 0,
-    required: true
-  },
-  min: {
-    type: Number,
-    default: 0
-  },
-  max: {
-    type: Number,
-    default: 100
-  }
-})
+const {
+  stream = '0',
+  min = 0,
+  max = 100
+} = defineProps<{
+  stream?: string
+  min?: number
+  max?: number
+}>()
 
 // const color = computed(() => {
 //   if (props.stream <= 100 && props.stream > 80) return '#F44336'

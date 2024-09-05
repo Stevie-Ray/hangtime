@@ -2,19 +2,20 @@
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import imgIconHang from '@/assets/icons/hand.svg'
+import { Exercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
-const props = defineProps({
-  exercise: { type: Object },
-  edit: { type: Boolean, default: false }
-})
+const { exercise, edit = false } = defineProps<{
+  exercise?: Exercise
+  edit?: boolean
+}>()
 
 const emit = defineEmits(['left', 'right'])
 
-const toggleFinger = (hand: string, action: 'left' | 'right', finger: string) => {
-  if (props.edit && props.exercise) {
-    const handArray = props.exercise[hand]
+const toggleFinger = (hand: 'leftHand' | 'rightHand', action: 'left' | 'right', finger: string) => {
+  if (edit && exercise) {
+    const handArray = exercise[hand]
     if (finger.startsWith('f') && finger.length <= 2) {
       const fingerNumber = parseInt(finger.substr(1), 10)
       let updatedHand: number[] = []
@@ -28,9 +29,9 @@ const toggleFinger = (hand: string, action: 'left' | 'right', finger: string) =>
   }
 }
 
-const getHandClass = (hand: string) => {
-  if (props.exercise) {
-    const handArray = props.exercise[hand]
+const getHandClass = (hand: 'leftHand' | 'rightHand') => {
+  if (exercise) {
+    const handArray = exercise[hand]
     if (handArray) {
       if (handArray.length) {
         return handArray.map((finger: string) => `f${finger}`).join(' ')

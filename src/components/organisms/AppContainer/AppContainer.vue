@@ -6,20 +6,15 @@ import { useAuthenticationStore } from '@/stores/authentication'
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
 
-defineProps({
-  extension: {
-    type: Boolean,
-    default: false
-  },
-  prepend: {
-    type: Boolean,
-    default: false
-  },
-  hideFooter: {
-    type: Boolean,
-    default: false
-  }
-})
+const {
+  extension = false,
+  prepend = false,
+  hideFooter = false
+} = defineProps<{
+  extension?: boolean
+  prepend?: boolean
+  hideFooter?: boolean
+}>()
 </script>
 
 <template>

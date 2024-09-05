@@ -13,11 +13,12 @@ const { t } = useI18n()
 
 const emit = defineEmits(['show'])
 
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  }
-})
+const props = withDefaults(
+  defineProps<{
+    workout?: Workout
+  }>(),
+  {}
+)
 
 const workout = ref(props.workout)
 

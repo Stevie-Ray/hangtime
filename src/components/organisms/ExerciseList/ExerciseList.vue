@@ -14,15 +14,15 @@ const { online } = storeToRefs(useAppStore())
 
 const emit = defineEmits(['add'])
 
-const props = defineProps({
-  workout: {
-    type: Object as () => Workout
-  },
-  edit: {
-    type: Boolean,
-    default: false
+const props = withDefaults(
+  defineProps<{
+    workout?: Workout
+    edit?: boolean
+  }>(),
+  {
+    edit: false
   }
-})
+)
 
 const workout = ref(props.workout)
 const edit = ref(props.edit)

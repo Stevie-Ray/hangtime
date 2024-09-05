@@ -5,11 +5,9 @@ import { Exercise } from '@/interfaces/workouts.interface'
 const grip = useGrip()
 const exercises = useExercises()
 
-defineProps({
-  exercise: {
-    type: Object as () => Exercise
-  }
-})
+const { exercise } = defineProps<{
+  exercise?: Exercise
+}>()
 </script>
 
 <template>
