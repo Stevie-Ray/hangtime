@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import { useAppStore } from '@/stores/app'
@@ -12,41 +12,19 @@ const { t } = useI18n()
 
 const { online } = storeToRefs(useAppStore())
 
+const workout = defineModel<Workout>({ required: true })
+
+const { edit = false } = defineProps<{
+  edit?: boolean
+}>()
+
 const emit = defineEmits(['add'])
-
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-    edit?: boolean
-  }>(),
-  {
-    edit: false
-  }
-)
-
-const workout = ref(props.workout)
-const edit = ref(props.edit)
-
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
-
-watch(
-  () => props.edit,
-  (newValue) => {
-    edit.value = newValue
-  },
-  { immediate: true }
-)
 
 const exerciseEditDialog = ref(false)
 const exerciseIndex = ref(0)
 
 const openExerciseEditDialog = (index: number) => {
-  if (edit.value === true) {
+  if (edit === true) {
     exerciseIndex.value = index
     exerciseEditDialog.value = true
   }
@@ -68,7 +46,7 @@ const openExerciseEditDialog = (index: number) => {
   >
     <template #item="{ element, index }">
       <exercise-card
-        :exercise="element"
+        :model-value="element"
         :hangboard="{
           hangboard: workout?.hangboard,
           company: workout?.company
@@ -92,16 +70,16 @@ const openExerciseEditDialog = (index: number) => {
 
   <!-- edit dialog -->
   <exercise-edit
-    v-model="exerciseEditDialog"
-    :workout="workout"
+    v-model="workout"
+    :show-dialog="exerciseEditDialog"
     :index="exerciseIndex"
-    @time="
+    @update-time="
       (time: number) => {
         if (workout?.time !== undefined) workout.time = time
       }
     "
-    @index="(index: number) => (exerciseIndex = index)"
-    @show="exerciseEditDialog = !exerciseEditDialog"
+    @update-index="(index: number) => (exerciseIndex = index)"
+    @show-dialog="exerciseEditDialog = !exerciseEditDialog"
   />
 </template>
 

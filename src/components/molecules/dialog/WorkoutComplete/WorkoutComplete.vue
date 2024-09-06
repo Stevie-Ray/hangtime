@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
 import router from '@/router'
 import { time, useRandomImage } from '@/helpers'
 import { useAuthenticationStore } from '@/stores/authentication'
@@ -13,13 +12,17 @@ const emit = defineEmits(['show'])
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const { workout, timeTotal, timeHanging } = defineProps<{
-  workout?: Workout
+const workout = defineModel<Workout>({ required: true })
+
+const {
+  showDialog = false,
+  timeTotal,
+  timeHanging
+} = defineProps<{
+  showDialog?: boolean
   timeTotal?: number
   timeHanging?: number
 }>()
-
-const dialog = ref(true)
 
 const shareAPI = navigator.share
 
@@ -30,11 +33,11 @@ const shareExternal = () => {
   let text = `${title}. ${t('Where I hung for {time}', {
     time: time(timeHanging)
   })}. ${t('Join {appTitle}', { appTitle: 'HangTime' })}!`
-  if (workout) {
-    title = `${workout.name} | HangTime`
+  if (workout.value) {
+    title = `${workout.value.name} | HangTime`
     text = `${t('I just completed {name}', {
-      name: workout.name
-    })}. ${t('Description')}: "${workout.description}". ${t('Join {appTitle}', {
+      name: workout.value.name
+    })}. ${t('Description')}: "${workout.value.description}". ${t('Join {appTitle}', {
       appTitle: 'HangTime'
     })}!`
   }
@@ -61,7 +64,12 @@ const closeModal = () => {
 </script>
 
 <template>
-  <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
+  <v-dialog
+    :model-value="showDialog"
+    fullscreen
+    :scrim="false"
+    transition="dialog-bottom-transition"
+  >
     <v-card>
       <v-toolbar>
         <v-toolbar-title>{{ t('Well done') }}</v-toolbar-title>

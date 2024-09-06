@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { stream } from '@hangtime/grip-connect'
 import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 import { useI18n } from 'vue-i18n'
@@ -36,25 +36,11 @@ const { createUserActivity } = useActivitiesStore()
 
 const { isSupported, isActive, request, release } = useWakeLock()
 
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-    /** Quick Workout */
-    quick?: boolean
-  }>(),
-  {
-    quick: false
-  }
-)
+const workout = defineModel<Workout>({ required: true })
 
-const workout = ref(props.workout)
-
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
+const { quick = false } = defineProps<{
+  quick?: boolean
+}>()
 
 let timer: number | null = null
 const timerPaused: Ref<boolean | null> = ref(null)
@@ -73,6 +59,7 @@ const workoutCompleteTimeTotal: Ref<number> = ref(0)
 const workoutCompleteTimeHanging: Ref<number> = ref(0)
 
 // bluetooth
+const workoutBluetoothDialog = ref(false)
 const bluetoothOutput = ref<massObject | null>(null)
 const deviceInUse = ref(false)
 
@@ -90,14 +77,12 @@ onBeforeUnmount(() => {
   if (window.speechSynthesis) window.speechSynthesis.cancel()
 })
 
-const exercise = computed<Exercise | undefined>(() => {
-  if (workout.value?.exercises) return workout.value.exercises[currentExercise.value]
-  return undefined
+const exercise = computed<Exercise>(() => {
+  return workout.value.exercises[currentExercise.value]
 })
 
-const exerciseNext = computed<Exercise | undefined>(() => {
-  if (workout.value?.exercises) return workout?.value?.exercises[currentExercise.value + 1]
-  return undefined
+const exerciseNext = computed<Exercise>(() => {
+  return workout.value.exercises[currentExercise.value + 1]
 })
 
 const exerciseTime = computed<number>(() => {
@@ -737,7 +722,7 @@ onMounted(() => {
                 <slot>
                   <exercise-card
                     v-if="workout"
-                    :exercise="exercise"
+                    v-model="exercise"
                     :hangboard="{
                       hangboard: workout.hangboard,
                       company: workout.company
@@ -803,17 +788,19 @@ onMounted(() => {
                 </div>
                 <div class="d-flex justify-space-between align-center w-100 px-2">
                   <div class="d-flex">
-                    <workout-subscribe v-if="!quick" :workout="workout" />
+                    <workout-subscribe v-if="!quick" v-model="workout" />
                   </div>
                   <div class="d-flex">
                     <workout-bluetooth
+                      v-model="workout"
                       size="small"
-                      :workout="workout"
+                      :show-dialog="workoutBluetoothDialog"
                       @start="timerPaused === null ? startTimer() : null"
                       @notify="notify"
                       @active="active"
+                      @show-dialog="workoutBluetoothDialog = !workoutBluetoothDialog"
                     />
-                    <workout-share size="small" :workout="workout" />
+                    <workout-share v-model="workout" size="small" />
                   </div>
                 </div>
               </v-col>
@@ -827,7 +814,7 @@ onMounted(() => {
           <v-card-title>{{ t('Next exercise') }}</v-card-title>
           <v-card-text>
             <exercise-card
-              :exercise="exerciseNext"
+              v-model="exerciseNext"
               :hangboard="{
                 hangboard: workout.hangboard,
                 company: workout.company
@@ -835,14 +822,13 @@ onMounted(() => {
               :index="currentExercise + 1"
               hide-rest
               variant="flat"
-            >
-            </exercise-card>
+            />
           </v-card-text>
         </v-card>
         <v-card v-if="exercise?.exercise !== null && !quick" class="mb-8">
           <v-card-title>{{ t('About the exercise') }}</v-card-title>
           <v-card-text>
-            <exercise-about :exercise="exercise" />
+            <exercise-about v-model="exercise" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -858,17 +844,15 @@ onMounted(() => {
     "
     v-model="dialogWorkoutSubscribe"
     :limit="subscribeLimit"
-  >
-  </subscribe-to-app>
+  />
   <workout-complete
     v-if="workout"
-    v-model="dialogWorkoutComplete"
+    v-model="workout"
+    :show-dialog="dialogWorkoutComplete"
     :time-hanging="workoutCompleteTimeHanging"
     :time-total="workoutCompleteTimeTotal"
-    :workout="workout"
     @show="dialogWorkoutComplete = !dialogWorkoutComplete"
-  >
-  </workout-complete>
+  />
 </template>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useWorkoutsStore } from '@/stores/workouts'
 import { useAuthenticationStore } from '@/stores/authentication'
@@ -14,26 +14,12 @@ const { online } = storeToRefs(useAppStore())
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-    size?: string
-    clickable?: boolean
-  }>(),
-  {
-    size: 'default',
-    clickable: true
-  }
-)
+const workout = defineModel<Workout>({ required: true })
 
-const workout = ref(props.workout)
-
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
+const { size = 'default', clickable = true } = defineProps<{
+  size?: string
+  clickable?: boolean
+}>()
 
 const isHearted = computed(() => {
   if (!workout.value || !workout.value.subscribers || !user.value) return false

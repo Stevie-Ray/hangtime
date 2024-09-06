@@ -6,16 +6,17 @@ import { Exercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
-const { exercise, edit = false } = defineProps<{
-  exercise?: Exercise
+const exercise = defineModel<Exercise>({ required: true })
+
+const { edit = false } = defineProps<{
   edit?: boolean
 }>()
 
 const emit = defineEmits(['left', 'right'])
 
 const toggleFinger = (hand: 'leftHand' | 'rightHand', action: 'left' | 'right', finger: string) => {
-  if (edit && exercise) {
-    const handArray = exercise[hand]
+  if (edit) {
+    const handArray = exercise.value[hand]
     if (finger.startsWith('f') && finger.length <= 2) {
       const fingerNumber = parseInt(finger.substr(1), 10)
       let updatedHand: number[] = []
@@ -30,14 +31,12 @@ const toggleFinger = (hand: 'leftHand' | 'rightHand', action: 'left' | 'right', 
 }
 
 const getHandClass = (hand: 'leftHand' | 'rightHand') => {
-  if (exercise) {
-    const handArray = exercise[hand]
-    if (handArray) {
-      if (handArray.length) {
-        return handArray.map((finger: string) => `f${finger}`).join(' ')
-      }
-      return `f${handArray}`
+  const handArray = exercise.value[hand]
+  if (handArray) {
+    if (handArray.length) {
+      return handArray.map((finger: string) => `f${finger}`).join(' ')
     }
+    return `f${handArray}`
   }
 
   return ''

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { ref, watch } from 'vue'
 import { useWorkoutsStore } from '@/stores/workouts'
 import { Workout } from '@/interfaces/workouts.interface'
 
@@ -11,25 +10,13 @@ const router = useRouter()
 
 const { t } = useI18n()
 
-const emit = defineEmits(['show'])
+const workout = defineModel<Workout>({ required: true })
 
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-  }>(),
-  {}
-)
+const { showDialog = false } = defineProps<{
+  showDialog?: boolean
+}>()
 
-const workout = ref(props.workout)
-
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
-
-const dialog = ref(true)
+const emit = defineEmits(['toggle-dialog'])
 
 const workoutSave = () => {
   if (!workout.value?.id) {
@@ -40,7 +27,7 @@ const workoutSave = () => {
     workout.value ? updateUserWorkout(workout.value) : null
   }
 
-  emit('show', false)
+  emit('toggle-dialog')
 
   router.push('/workouts')
 }
@@ -56,10 +43,15 @@ const rules = {
 </script>
 
 <template>
-  <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
+  <v-dialog
+    :model-value="showDialog"
+    :scrim="false"
+    fullscreen
+    transition="dialog-bottom-transition"
+  >
     <v-card>
       <v-toolbar>
-        <v-btn color="text" icon="$close" @click="emit('show', false)"></v-btn>
+        <v-btn color="text" icon="$close" @click="emit('toggle-dialog')"></v-btn>
         <v-toolbar-title> {{ t("You're almost there") }}!</v-toolbar-title>
 
         <v-toolbar-items>

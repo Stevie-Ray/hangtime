@@ -5,13 +5,11 @@ import { Exercise } from '@/interfaces/workouts.interface'
 const grip = useGrip()
 const exercises = useExercises()
 
-const { exercise } = defineProps<{
-  exercise?: Exercise
-}>()
+const exercise = defineModel<Exercise>({ required: true })
 </script>
 
 <template>
-  <div v-if="exercise && exercise.exercise === 0">
+  <div v-if="exercise.exercise === 0">
     <div v-if="exercise.grip !== undefined">
       <div class="mb-8">
         {{ grip[exercise.grip].description }}
@@ -27,7 +25,7 @@ const { exercise } = defineProps<{
       </v-expansion-panels>
     </div>
     <!-- fallback-->
-    <div v-else-if="exercise && grip[exercise.exercise].id !== 0">
+    <div v-else-if="grip[exercise.exercise] !== null">
       <div class="mb-8">
         {{ grip[exercise.exercise].description }}
       </div>
@@ -42,7 +40,7 @@ const { exercise } = defineProps<{
       </v-expansion-panels>
     </div>
   </div>
-  <div v-else-if="exercise && exercise.grip !== 0">
+  <div v-else-if="exercise.grip !== 0">
     <div v-if="exercise.grip !== undefined">
       <div class="mb-8">
         {{ grip[exercise.grip].description }}
@@ -58,7 +56,7 @@ const { exercise } = defineProps<{
       </v-expansion-panels>
     </div>
     <!-- fallback-->
-    <div v-else-if="grip[exercise.exercise]">
+    <div v-else-if="grip[exercise.exercise] !== null">
       <div class="mb-8">
         {{ grip[exercise.exercise].description }}
       </div>
@@ -73,7 +71,7 @@ const { exercise } = defineProps<{
       </v-expansion-panels>
     </div>
   </div>
-  <div v-if="exercise && exercise.pullups > 0 && exercise.exercise > 0">
+  <div v-if="exercise.pullups > 0 && exercise.exercise > 0">
     <div class="mb-8">
       {{ exercises[exercise.exercise - 1].description }}
     </div>

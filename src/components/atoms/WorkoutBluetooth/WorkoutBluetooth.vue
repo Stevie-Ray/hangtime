@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /// <reference types="web-bluetooth" />
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { Workout } from '@/interfaces/workouts.interface'
 
@@ -22,22 +22,17 @@ import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 
 import { useBluetoothStore } from '@/stores/bluetooth'
 
-const emit = defineEmits(['notify', 'active', 'start'])
+const workout = defineModel<Workout>()
+
+const { showDialog = false, size = 'default' } = defineProps<{
+  showDialog?: boolean
+  size?: string
+}>()
+
+const emit = defineEmits(['notify', 'active', 'start', 'show-dialog'])
 
 const { device } = storeToRefs(useBluetoothStore())
 
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-    size?: string
-  }>(),
-  {
-    size: 'default'
-  }
-)
-
-const workout = ref(props.workout)
-const dialog = ref(false)
 const devices = [
   {
     title: 'Climbro',
@@ -111,21 +106,19 @@ const onSuccess = async () => {
   } catch (error) {
     console.error(error)
   } finally {
-    dialog.value = false
+    emit('show-dialog', false)
     emit('start')
   }
 }
-
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
 </script>
 
 <template>
-  <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
+  <v-dialog
+    :model-value="showDialog"
+    :scrim="false"
+    fullscreen
+    transition="dialog-bottom-transition"
+  >
     <template v-slot:activator="{ props }">
       <v-btn
         v-if="isBluetoothSupported()"
@@ -139,7 +132,7 @@ watch(
     </template>
     <v-card>
       <v-toolbar>
-        <v-btn color="text" icon="$close" @click="dialog = false"></v-btn>
+        <v-btn color="text" icon="$close" @click="emit('show-dialog', false)"></v-btn>
         <v-toolbar-title>Force-Sensing Climbing Training</v-toolbar-title>
       </v-toolbar>
       <v-container>

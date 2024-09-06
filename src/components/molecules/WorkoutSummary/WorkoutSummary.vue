@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import urlParser from 'js-video-url-parser'
-import { ref, Ref, watch } from 'vue'
+import { ref, Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
@@ -12,36 +12,15 @@ const { t } = useI18n()
 
 const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
+const workout = defineModel<Workout>({ required: true })
+
+const { edit = false } = defineProps<{
+  edit?: boolean
+}>()
+
 const emit = defineEmits(['save'])
 
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-    edit?: boolean
-  }>(),
-  {
-    edit: false
-  }
-)
-
-const workout = ref(props.workout)
-const edit = ref(props.edit)
 const contentToggle: Ref<boolean> = ref(true)
-
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
-
-watch(
-  () => props.edit,
-  (newValue) => {
-    edit.value = newValue
-  },
-  { immediate: true }
-)
 
 // workout - video
 const parseVideo = (video: string) => {
@@ -162,7 +141,7 @@ const parseVideo = (video: string) => {
               </template>
               <template #title>
                 <strong>
-                  <exercise-name :exercise="exercise" />
+                  <exercise-name :model-value="exercise" />
                 </strong>
               </template>
               <template #append>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import { useUserStore } from '@/stores/user'
@@ -9,26 +9,7 @@ const { t } = useI18n()
 
 const { getHangboardByIds, getCompanyById, getHangboardNameByIds, getCompanies } = useUserStore()
 
-const {
-  selectedHangboard = {
-    company: 1,
-    hangboard: 0
-  }
-} = defineProps<{
-  selectedHangboard?: {
-    company: number
-    hangboard: number
-  }
-}>()
-
-const emit = defineEmits(['update-selected'])
-
-// eslint-disable-next-line vue/no-setup-props-destructure
-const selected = ref(selectedHangboard)
-
-watch(selected, (item) => {
-  emit('update-selected', item)
-})
+const selected = defineModel<{ hangboard: number; company: number }>({ required: true })
 
 const getHangboards = computed(() => {
   return getCompanyById(selected.value.company)?.hangboards.sort((a, b) =>

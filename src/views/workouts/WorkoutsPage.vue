@@ -238,7 +238,11 @@ useHead({
                           difficultyById(workout.level)
                         }}</v-chip>
                         <div class="subscribers">
-                          <workout-subscribe size="x-small" :workout="workout" :clickable="false" />
+                          <workout-subscribe
+                            :model-value="workout"
+                            size="x-small"
+                            :clickable="false"
+                          />
                         </div>
                       </v-list-item-action>
                     </template>

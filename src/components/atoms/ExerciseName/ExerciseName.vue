@@ -5,8 +5,9 @@ import { Exercise } from '@/interfaces/workouts.interface'
 const grip = useGrip()
 const exercises = useExercises()
 
-const { exercise, hideRepeat = false } = defineProps<{
-  exercise?: Exercise
+const exercise = defineModel<Exercise>({ required: true })
+
+const { hideRepeat = false } = defineProps<{
   hideRepeat?: boolean
 }>()
 </script>
@@ -24,7 +25,7 @@ const { exercise, hideRepeat = false } = defineProps<{
         {{ grip[exercise.grip].name }}
       </span>
       <!-- fallback-->
-      <span v-else-if="grip[exercise.exercise].id !== 0">{{ grip[exercise.exercise].name }}</span>
+      <span v-else-if="grip[exercise.exercise] !== null">{{ grip[exercise.exercise].name }}</span>
     </span>
     <span v-else-if="exercise.grip !== 0">
       <span v-if="exercise.grip !== undefined">{{ grip[exercise.grip].short }}&nbsp;</span>

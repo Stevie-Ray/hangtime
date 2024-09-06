@@ -39,7 +39,7 @@
     "vuetify": "^3.7.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.46.1",
+    "@playwright/test": "^1.47.0",
     "@rushstack/eslint-patch": "^1.10.4",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/vue3-vite": "^8.2.9",

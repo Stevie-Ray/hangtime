@@ -203,10 +203,7 @@ const settingsGrade = computed({
                 </a>
               </v-card-subtitle>
               <v-card-text>
-                <hangboard-select
-                  :selected-hangboard="selected"
-                  @update-selected="(item) => (selected = item)"
-                ></hangboard-select>
+                <hangboard-select v-model="selected" />
               </v-card-text>
             </v-card>
 

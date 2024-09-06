@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, toRaw } from 'vue'
+import { computed, ref, toRaw } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useExercises, useGrip, weightConverter } from '@/helpers'
@@ -19,39 +19,17 @@ const { t } = useI18n()
 
 const repType = ref('original')
 
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-    index?: number
-  }>(),
-  {
-    index: 1
-  }
-)
+const workout = defineModel<Workout>({ required: true })
 
-const workout = ref(props.workout)
-const index = ref(props.index)
+const { showDialog = false, index = 1 } = defineProps<{
+  showDialog?: boolean
+  index?: number
+}>()
 
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
-
-watch(
-  () => props.index,
-  (newValue) => {
-    index.value = newValue
-  }
-)
-
-const emit = defineEmits(['time', 'show'])
-
-const dialog = ref(true)
+const emit = defineEmits(['update-time', 'update-index', 'show-dialog'])
 
 // const exercise = computed<Exercise | null>(() => workout.value?.exercises[index.value] ?? null)
-const exercise = computed<Exercise | undefined>(() => workout.value?.exercises[index.value])
+const exercise = computed<Exercise | undefined>(() => workout.value?.exercises[index])
 
 // eslint-disable-next-line no-shadow
 const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', time: number) => {
@@ -60,7 +38,7 @@ const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', 
   exercise.value[timer] = time
   // remove old value
   if (workout.value?.time !== undefined && exercise.value?.time !== undefined) {
-    emit('time', workout.value.time - exercise.value.time)
+    emit('update-time', workout.value.time - exercise.value.time)
   }
   exercise.value.time =
     (exercise.value.hold + exercise.value.rest) * (exercise.value.repeat + 1) -
@@ -68,7 +46,7 @@ const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', 
     exercise.value.pause
   // add new value
   if (workout.value?.time !== undefined && exercise.value?.time !== undefined) {
-    emit('time', workout.value.time + exercise.value.time)
+    emit('update-time', workout.value.time + exercise.value.time)
   }
 }
 
@@ -103,29 +81,29 @@ const exerciseMovement = computed({
 })
 
 const exerciseRemove = () => {
-  if (workout.value && workout.value.exercises[index.value]) {
-    const removedExercise = workout.value.exercises.splice(index.value, 1)[0]
+  if (workout.value && workout.value.exercises[index]) {
+    const removedExercise = workout.value.exercises.splice(index, 1)[0]
 
     if (workout.value?.time && removedExercise?.time) {
-      emit('time', workout.value.time - removedExercise.time)
+      emit('update-time', workout.value.time - removedExercise.time)
     }
 
-    index.value = 0
-    emit('show', false)
+    emit('update-index', 0)
+    emit('show-dialog', false)
   }
 }
 
 const exerciseCopy = () => {
   if (workout.value) {
-    const newExercise = structuredClone(toRaw(workout.value.exercises[index.value]))
-    workout.value.exercises.splice(index.value, 0, newExercise)
+    const newExercise = structuredClone(toRaw(workout.value.exercises[index]))
+    workout.value.exercises.splice(index, 0, newExercise)
 
     if (workout.value?.time && newExercise?.time) {
-      emit('time', workout.value.time + newExercise.time)
+      emit('update-time', workout.value.time + newExercise.time)
     }
 
-    index.value = 0
-    emit('show', false)
+    emit('update-index', 0)
+    emit('show-dialog', false)
   }
 }
 
@@ -145,10 +123,15 @@ const rules = {
 </script>
 
 <template>
-  <v-dialog v-model="dialog" :scrim="false" fullscreen transition="dialog-bottom-transition">
+  <v-dialog
+    :model-value="showDialog"
+    :scrim="false"
+    fullscreen
+    transition="dialog-bottom-transition"
+  >
     <v-card>
       <v-toolbar>
-        <v-btn color="text" icon="$close" @click="emit('show', false)" />
+        <v-btn color="text" icon="$close" @click="emit('show-dialog', false)" />
         <v-toolbar-title>
           {{ t('Edit exercise') }}
         </v-toolbar-title>
@@ -156,7 +139,7 @@ const rules = {
         <v-toolbar-items>
           <v-btn v-if="index !== 0" icon="$deleteOutline" @click="exerciseRemove" />
           <v-btn icon="$contentCopy" @click="exerciseCopy" />
-          <v-btn icon="$contentSaveOutline" @click="emit('show', false)" />
+          <v-btn icon="$contentSaveOutline" @click="emit('show-dialog', false)" />
         </v-toolbar-items>
       </v-toolbar>
       <v-container>
@@ -165,7 +148,7 @@ const rules = {
             <v-expansion-panels v-if="exercise" variant="accordion">
               <exercise-card
                 v-if="workout"
-                :exercise="exercise"
+                v-model="exercise"
                 :hangboard="{
                   hangboard: workout.hangboard,
                   company: workout.company
@@ -376,7 +359,7 @@ const rules = {
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
                   <exercise-hand
-                    :exercise="exercise"
+                    v-model="exercise"
                     edit
                     @left="(finger: number[]) => (exercise ? (exercise.leftHand = finger) : null)"
                     @right="(finger: number[]) => (exercise ? (exercise.rightHand = finger) : null)"

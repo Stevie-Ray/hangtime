@@ -150,8 +150,8 @@ useHead({
     </template>
 
     <template #icons>
-      <workout-subscribe size="x-large" :workout="workout" />
-      <workout-share :workout="workout" />
+      <workout-subscribe v-if="workout" size="x-large" v-model="workout" />
+      <workout-share v-if="workout" v-model="workout" />
       <v-btn
         v-if="workout?.user?.id === user?.id && !edit"
         :disabled="!online"
@@ -188,19 +188,19 @@ useHead({
         <v-row v-if="workout">
           <v-col cols="12" md="5" order-md="last">
             <div class="sticky">
-              <workout-summary :edit="edit" :workout="workout" @save="workoutSaveDialog = true" />
+              <workout-summary v-model="workout" :edit="edit" @save="workoutSaveDialog = true" />
             </div>
           </v-col>
 
           <v-col cols="12" md="7" order-md="first">
             <div class="workout">
-              <exercise-list :edit="edit" :workout="workout" @add="exerciseAdd" />
+              <exercise-list v-model="workout" :edit="edit" @add="exerciseAdd" />
 
               <!-- save dialog -->
               <workout-save
-                v-model="workoutSaveDialog"
-                :workout="workout"
-                @show="workoutSaveDialog = !workoutSaveDialog"
+                :show-dialog="workoutSaveDialog"
+                v-model="workout"
+                @toggle-dialog="workoutSaveDialog = !workoutSaveDialog"
               />
             </div>
           </v-col>

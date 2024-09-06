@@ -83,10 +83,7 @@ const addHangboard = async () => {
       <v-container>
         <v-row>
           <v-col cols="12">
-            <hangboard-select
-              :selected-hangboard="selected"
-              @update-selected="(item) => (selected = item)"
-            ></hangboard-select>
+            <hangboard-select v-model="selected" />
           </v-col>
         </v-row>
       </v-container>

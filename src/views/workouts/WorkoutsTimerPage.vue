@@ -30,7 +30,7 @@ useHead({
     </template>
 
     <template #default>
-      <workout-timer :workout="workout" />
+      <workout-timer v-if="workout" v-model="workout" />
     </template>
   </app-container>
 </template>

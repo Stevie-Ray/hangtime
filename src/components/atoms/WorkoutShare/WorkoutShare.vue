@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/app'
@@ -12,24 +11,11 @@ const { online } = storeToRefs(useAppStore())
 
 const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
-const props = withDefaults(
-  defineProps<{
-    workout?: Workout
-    size?: string
-  }>(),
-  {
-    size: 'default'
-  }
-)
+const workout = defineModel<Workout>({ required: true })
 
-const workout = ref(props.workout)
-
-watch(
-  () => props.workout,
-  (newValue) => {
-    workout.value = newValue
-  }
-)
+const { size = 'default' } = defineProps<{
+  size?: string
+}>()
 
 const navigatorShare = navigator.share
 

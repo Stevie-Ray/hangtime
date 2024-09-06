@@ -9,11 +9,12 @@ import { Exercise } from '@/interfaces/workouts.interface'
 
 const { t } = useI18n()
 
+const exercise = defineModel<Exercise>({ required: true })
+
 const emit = defineEmits(['left', 'right', 'rotate'])
 
 const {
   variant = 'elevated',
-  exercise,
   hangboard,
   index,
   editHangboard = false,
@@ -22,7 +23,6 @@ const {
   hideRest = false
 } = defineProps<{
   variant?: 'elevated' | 'flat' | 'text' | 'tonal' | 'outlined' | 'plain'
-  exercise?: Exercise
   hangboard?: { hangboard: number; company: number }
   index?: number
   editHangboard?: boolean
@@ -50,28 +50,28 @@ const {
         <div class="flex-grow-1 text-truncate" style="overflow: hidden">
           <v-dialog width="500" v-if="!sort">
             <template v-slot:activator="{ props }">
-              <exercise-name :exercise="exercise" v-bind="props" hide-repeat />
+              <exercise-name v-model="exercise" v-bind="props" hide-repeat />
             </template>
 
             <template v-slot:default="{ isActive }">
               <v-card class="help">
                 <v-card-title>
-                  <exercise-name :exercise="exercise" hide-repeat />
+                  <exercise-name v-model="exercise" hide-repeat />
                 </v-card-title>
                 <v-card-text>
-                  <exercise-about :exercise="exercise" />
+                  <exercise-about v-model="exercise" />
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-spacer></v-spacer>
+                  <v-spacer />
 
-                  <v-btn :text="t('Close')" @click="isActive.value = false"></v-btn>
+                  <v-btn :text="t('Close')" @click="isActive.value = false" />
                 </v-card-actions>
               </v-card>
             </template>
           </v-dialog>
           <template v-else>
-            <exercise-name :exercise="exercise" hide-repeat></exercise-name>
+            <exercise-name v-model="exercise" hide-repeat />
           </template>
         </div>
 
@@ -80,13 +80,7 @@ const {
             {{ exercise.repeat + 1 }}x
           </v-chip>
           <v-chip v-else variant="outlined">1x</v-chip>
-          <v-icon
-            v-if="sort"
-            size="x-large"
-            class="handle"
-            style="cursor: grab"
-            icon="$drag"
-          ></v-icon>
+          <v-icon v-if="sort" size="x-large" class="handle" style="cursor: grab" icon="$drag" />
         </div>
       </v-card-title>
 
@@ -120,7 +114,7 @@ const {
           <v-col cols="12">
             <exercise-hangboard
               v-if="hangboard && exercise"
-              :exercise="exercise"
+              v-model="exercise"
               :hangboard="{
                 hangboard: hangboard.hangboard,
                 company: hangboard.company
@@ -133,7 +127,7 @@ const {
             </exercise-hangboard>
             <exercise-hand
               v-if="exercise"
-              :exercise="exercise"
+              v-model="exercise"
               :edit="editHand"
               :style="{ 'pointer-events': editHand ? 'auto' : 'none' }"
             ></exercise-hand>

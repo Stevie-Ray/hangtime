@@ -6,12 +6,10 @@ import { Exercise } from '@/interfaces/workouts.interface'
 
 const { getHangboardByIds } = useUserStore()
 
-const {
-  exercise,
-  hangboard,
-  edit = false
-} = defineProps<{
-  exercise?: Exercise
+// not required
+const exercise = defineModel<Exercise>()
+
+const { hangboard, edit = false } = defineProps<{
   hangboard: { hangboard: number; company: number }
   edit?: boolean
 }>()
@@ -22,7 +20,7 @@ const getHangboard = computed(() => getHangboardByIds(hangboard.company, hangboa
 
 const hangboardImage = computed(() => {
   const sides = getHangboard.value?.sides || []
-  const rotateIndex = exercise?.rotate || 0
+  const rotateIndex = exercise.value?.rotate || 0
 
   if (sides.length) {
     return new URL(`/src/assets/${sides[rotateIndex].image}`, import.meta.url).href
@@ -34,7 +32,7 @@ const hangboardImage = computed(() => {
 })
 
 const classHold = (hand: 'left' | 'right'): string | null => {
-  return exercise && exercise[hand] !== null ? `h${exercise[hand]! + 1}` : null
+  return exercise.value && exercise.value[hand] !== null ? `h${exercise.value[hand]! + 1}` : null
 }
 
 const toggleHold = (hand: 'left' | 'right', e: Event) => {
@@ -49,10 +47,10 @@ const toggleHold = (hand: 'left' | 'right', e: Event) => {
 }
 
 const nextImage = () => {
-  if (exercise?.rotate === undefined) {
+  if (exercise.value?.rotate === undefined) {
     emit('rotate', 1)
-  } else if (exercise.rotate + 1 !== getHangboard.value?.sides?.length) {
-    emit('rotate', exercise.rotate + 1)
+  } else if (exercise.value.rotate + 1 !== getHangboard.value?.sides?.length) {
+    emit('rotate', exercise.value.rotate + 1)
   } else {
     emit('rotate', 0)
   }
