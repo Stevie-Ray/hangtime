@@ -50,8 +50,7 @@ const devices = [
   },
   {
     title: 'WH-CO6',
-    value: WHC06,
-    disabled: true
+    value: WHC06
   },
   {
     title: 'mySmartBoard',
@@ -65,6 +64,7 @@ const devices = [
 ]
 const dropdown = ref(workout.value?.company === 1 ? Motherboard : Progressor)
 const output = ref()
+const errorElm = ref<Error | undefined>()
 const isBluetoothAvailable = ref(false)
 
 // check if the browser supports bluetooth
@@ -109,6 +109,10 @@ const onSuccess = async () => {
     emit('show-dialog', false)
     emit('start')
   }
+}
+
+const onError = (error: Error) => {
+  errorElm.value = error
 }
 </script>
 
@@ -161,6 +165,7 @@ const onSuccess = async () => {
                   greater efficiency and progress.
                 </p>
                 <v-select v-model="dropdown" :items="devices" :item-props="true"></v-select>
+                <v-alert v-if="errorElm" closable type="error" :text="errorElm.message"></v-alert>
               </v-card-text>
               <v-card-actions>
                 <v-btn
@@ -168,7 +173,7 @@ const onSuccess = async () => {
                   :prepend-icon="!device ? '$bluetooth' : '$bluetoothOff'"
                   color="text"
                   variant="text"
-                  @click="!device ? connect(dropdown, async () => onSuccess()) : reset()"
+                  @click="!device ? connect(dropdown, async () => onSuccess(), onError) : reset()"
                 >
                   {{ !device ? 'Connect' : 'Disconnect' }}
                 </v-btn>
