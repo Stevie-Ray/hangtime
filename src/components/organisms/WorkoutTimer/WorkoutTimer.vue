@@ -59,7 +59,6 @@ const workoutCompleteTimeTotal: Ref<number> = ref(0)
 const workoutCompleteTimeHanging: Ref<number> = ref(0)
 
 // bluetooth
-const workoutBluetoothDialog = ref(false)
 const bluetoothOutput = ref<massObject | null>(null)
 const deviceInUse = ref(false)
 
@@ -794,11 +793,9 @@ onMounted(() => {
                     <workout-bluetooth
                       v-model="workout"
                       size="small"
-                      :show-dialog="workoutBluetoothDialog"
                       @start="timerPaused === null ? startTimer() : null"
                       @notify="notify"
                       @active="active"
-                      @show-dialog="workoutBluetoothDialog = !workoutBluetoothDialog"
                     />
                     <workout-share v-model="workout" size="small" />
                   </div>
