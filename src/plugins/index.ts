@@ -13,6 +13,12 @@ import vuetify from '@/plugins/vuetify'
 import router from '@/router'
 import { App } from 'vue'
 
+declare module 'vue-gtag' {
+  interface PluginOptions {
+    deferScriptLoad?: boolean
+  }
+}
+
 export function registerPlugins(app: App): void {
   app
     .use(head)
@@ -25,7 +31,6 @@ export function registerPlugins(app: App): void {
       {
         appName: 'HangTime',
         config: { id: 'G-D2DR5GPWS3' },
-        // @ts-expect-error Missing in third party code
         deferScriptLoad: true,
         pageTrackerScreenviewEnabled: true
       },

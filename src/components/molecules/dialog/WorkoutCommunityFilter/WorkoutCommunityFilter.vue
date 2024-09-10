@@ -15,7 +15,7 @@ const dialog = ref(false)
 
 const items: { filter: string; value: string; disabled?: boolean }[] = [
   { filter: 'Last Modified', value: 'updateTimestamp' },
-  { filter: 'Likes', value: 'subscribers_count', disabled: true },
+  { filter: 'Likes', value: 'subscribers_count' },
   { filter: 'Name', value: 'name' },
   { filter: 'Time', value: 'time' },
   { filter: 'Level', value: 'level' }
