@@ -95,9 +95,12 @@ const setup = () => {
         // output.value = JSON.stringify(data)
       })
 
-      active((value: boolean) => {
-        emit('active', value)
-      })
+      active(
+        (isActive: boolean) => {
+          emit('active', isActive)
+        },
+        { threshold: 2.5, duration: 1000 }
+      )
 
       // Close Dialog
       dialog.value = false
