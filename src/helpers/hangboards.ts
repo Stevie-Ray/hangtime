@@ -7780,6 +7780,88 @@ const companies: Company[] = [
         holds: 0
       }
     ]
+  },
+  {
+    name: 'ArcadiC',
+    description: 'Training, climbing, outdoor 🇦🇷 Born in Argentina 🇦🇺 Now in Wanaka, New Zealand',
+    country: 'NZ',
+    location: {
+      lat: '-44.7203419',
+      lon: '169.0504867'
+    },
+    id: 131,
+    url: null,
+    socials: {
+      facebook: 'https://www.facebook.com/cruxagarras',
+      instagram: 'https://www.instagram.com/arcadic.climb/'
+    },
+    hangboards: [
+      {
+        name: 'Hang N°1',
+        id: 0,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Hang N°2',
+        id: 1,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'Monster Of Rock',
+        id: 2,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'plastic',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'TitanBoard',
+        id: 3,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
+      },
+      {
+        name: 'TravelTrainer',
+        id: 4,
+        image: 'hangboards/NOTFOUND.svg',
+        size: {
+          x: null,
+          y: null,
+          z: null
+        },
+        type: 'wood',
+        url: null,
+        holds: 0
+      }
+    ]
   }
 ]
 
