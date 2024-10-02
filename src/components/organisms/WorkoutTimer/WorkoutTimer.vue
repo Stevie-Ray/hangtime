@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
-import { stream } from '@hangtime/grip-connect'
+import { Motherboard, Progressor } from '@hangtime/grip-connect'
 import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
@@ -390,8 +390,12 @@ const exerciseSteps = () => {
           clock.value = exercise.value.hold - 1
         }
       }
-      if (device.value && exercise.value) {
-        stream(device.value, (exercise.value.hold - 1) * 1000)
+      if (
+        device.value &&
+        (device.value instanceof Motherboard || device.value instanceof Progressor) &&
+        exercise.value
+      ) {
+        device.value.stream((exercise.value.hold - 1) * 1000)
       }
       currentExerciseStep.value = 1
       exerciseHold()
@@ -445,8 +449,12 @@ const exerciseSteps = () => {
             clock.value = exercise.value.hold - 1
           }
         }
-        if (device.value && exercise.value) {
-          stream(device.value, (exercise.value.hold - 1) * 1000)
+        if (
+          device.value &&
+          (device.value instanceof Motherboard || device.value instanceof Progressor) &&
+          exercise.value
+        ) {
+          device.value.stream((exercise.value.hold - 1) * 1000)
         }
         currentExerciseStep.value = 3
         exerciseHold()
@@ -537,8 +545,11 @@ const setupWorkout = async () => {
         } else {
           if (exercise.value) {
             clock.value = exercise.value.hold - 1
-            if (device.value) {
-              stream(device.value, (exercise.value.hold - 1) * 1000)
+            if (
+              device.value &&
+              (device.value instanceof Motherboard || device.value instanceof Progressor)
+            ) {
+              device.value.stream((exercise.value.hold - 1) * 1000)
             }
           }
         }

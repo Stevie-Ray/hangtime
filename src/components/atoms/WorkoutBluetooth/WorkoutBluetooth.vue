@@ -7,13 +7,12 @@ import { Workout } from '@/interfaces/workouts.interface'
 import {
   Climbro,
   Entralpi,
+  ForceBoard,
   Motherboard,
   WHC06,
   mySmartBoard,
   Progressor,
   active,
-  connect,
-  disconnect,
   notify
 } from '@hangtime/grip-connect'
 import type { massObject } from '@hangtime/grip-connect/src/types/notify'
@@ -35,33 +34,38 @@ const dialog = ref(false)
 const devices = [
   {
     title: 'Climbro',
-    value: Climbro,
+    type: 'Climbro',
     disabled: true
   },
   {
     title: 'Entralpi',
-    value: Entralpi
+    type: 'Entralpi'
+  },
+  {
+    title: 'ForceBoard',
+    type: 'ForceBoard',
+    disabled: true
   },
   {
     title: 'Motherboard',
-    value: Motherboard,
+    type: 'Motherboard',
     disabled: workout.value?.company !== 1
   },
   {
-    title: 'WH-CO6',
-    value: WHC06
-  },
-  {
     title: 'mySmartBoard',
-    value: mySmartBoard,
+    type: 'mySmartBoard',
     disabled: true
   },
   {
     title: 'Progressor',
-    value: Progressor
+    type: 'Progressor'
+  },
+  {
+    title: 'WH-CO6',
+    type: 'WHC06'
   }
 ]
-const dropdown = ref(workout.value?.company === 1 ? Motherboard : Progressor)
+const dropdown = ref(workout.value?.company === 1 ? 'Motherboard' : 'Progressor')
 const output = ref()
 const errorElm = ref<Error | undefined>()
 const isBluetoothAvailable = ref(false)
@@ -79,15 +83,28 @@ if (isBluetoothSupported()) {
 }
 
 const reset = () => {
-  disconnect(device.value)
+  device.value?.disconnect()
   device.value = null
 }
 
 const setup = () => {
-  connect(
-    dropdown.value,
+  const selectedDeviceClass = {
+    Climbro: Climbro,
+    Entralpi: Entralpi,
+    ForceBoard: ForceBoard,
+    Motherboard: Motherboard,
+    mySmartBoard: mySmartBoard,
+    Progressor: Progressor,
+    WHC06: WHC06
+  }[dropdown.value]
+
+  if (!selectedDeviceClass) return
+
+  const selectedDevice = new selectedDeviceClass()
+
+  selectedDevice.connect(
     async () => {
-      device.value = dropdown.value
+      device.value = selectedDevice
 
       // Listen for notifications
       notify((data: massObject) => {
@@ -146,22 +163,29 @@ const setup = () => {
                       target="_blank"
                       rel="nofollow"
                     >
-                      Griptonite Motherboard </a
-                    >, <a href="https://climbro.com/" target="_blank" rel="nofollow">Climbro</a>,
-                    <a href="https://www.smartboard-climbing.com/" target="_blank" rel="nofollow">
-                      mySmartBoard </a
-                    >, <a href="https://entralpi.com/" target="_blank" rel="nofollow">Entralpi</a>,
+                      Griptonite Motherboard</a
+                    >,
                     <a href="https://tindeq.com/" target="_blank" rel="nofollow">
-                      Tindeq Progressor
-                    </a>
-                    or
+                      Tindeq Progressor</a
+                    >,
+                    <a
+                      href="https://pitchsix.com/products/force-board-portable"
+                      target="_blank"
+                      rel="nofollow"
+                    >
+                      PitchSix Force Board</a
+                    >,
                     <a
                       href="https://weihengmanufacturer.com/products/wh-c06-bluetooth-300kg-hanging-scale/"
                       target="_blank"
                       rel="nofollow"
                     >
-                      Weiheng WH-C06
-                    </a>
+                      Weiheng WH-C06</a
+                    >, <a href="https://entralpi.com/" target="_blank" rel="nofollow">Entralpi</a>,
+                    <a href="https://climbro.com/" target="_blank" rel="nofollow">Climbro</a> or
+                    <a href="https://www.smartboard-climbing.com/" target="_blank" rel="nofollow"
+                      >mySmartBoard</a
+                    >
                     offer performance tracking, and real-time feedback enhancing climbers' strength
                     and technique with data-driven insights.
                   </p>
