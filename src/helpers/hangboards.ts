@@ -7648,10 +7648,10 @@ const companies: Company[] = [
       lon: '16.9027926'
     },
     id: 128,
-    url: 'https://www.duszcnc.com/',
+    url: 'https://duszcnc.shop/',
     socials: {
-      facebook: 'https://www.facebook.com/duszcnc',
-      instagram: 'https://www.instagram.com/duszcnc/'
+      facebook: 'https://www.facebook.com/profile.php?id=61565803897795',
+      instagram: 'https://www.instagram.com/duszcnc.shop/'
     },
     hangboards: [
       {
