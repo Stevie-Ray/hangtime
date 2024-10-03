@@ -2953,7 +2953,7 @@ const companies: Company[] = [
       {
         name: 'Butterfly',
         id: 4,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/HRTBUTTERFLY.svg',
         size: {
           x: null,
           y: null,
@@ -2961,7 +2961,7 @@ const companies: Company[] = [
         },
         type: 'plastic',
         url: 'https://hrt-holds.com/hrt/training/training_boards/training_board_5_-__butterfly',
-        holds: 0
+        holds: 4
       }
     ]
   },
@@ -5791,7 +5791,7 @@ const companies: Company[] = [
       {
         name: 'The Change',
         id: 3,
-        image: 'hangboards/NOTFOUND.svg',
+        image: 'hangboards/SMOGCHANGE.svg',
         size: {
           x: 600,
           y: 180,
@@ -5799,7 +5799,7 @@ const companies: Company[] = [
         },
         type: 'plastic',
         url: null,
-        holds: 0
+        holds: 8
       },
       {
         name: 'Pump',
