@@ -12,8 +12,7 @@ import {
   WHC06,
   mySmartBoard,
   Progressor,
-  active,
-  notify
+  active
 } from '@hangtime/grip-connect'
 import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 
