@@ -107,7 +107,7 @@ const setup = () => {
       device.value = selectedDevice
 
       // Listen for notifications
-      notify((data: massObject) => {
+      selectedDevice.notify((data: massObject) => {
         emit('notify', data)
         // output.value = JSON.stringify(data)
       })
