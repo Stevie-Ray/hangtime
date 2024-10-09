@@ -14,7 +14,6 @@ import {
   Progressor,
   active
 } from '@hangtime/grip-connect'
-import type { massObject } from '@hangtime/grip-connect/src/types/notify'
 
 import { useBluetoothStore } from '@/stores/bluetooth'
 
@@ -106,7 +105,7 @@ const setup = () => {
       device.value = selectedDevice
 
       // Listen for notifications
-      selectedDevice.notify((data: massObject) => {
+      selectedDevice.notify((data) => {
         emit('notify', data)
         // output.value = JSON.stringify(data)
       })

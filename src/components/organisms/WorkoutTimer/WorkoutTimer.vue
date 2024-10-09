@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { Motherboard, Progressor } from '@hangtime/grip-connect'
-import type { massObject } from '@hangtime/grip-connect/src/types/notify'
+import type { massObject } from '@hangtime/grip-connect/src/interfaces/callback.interface'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useWakeLock } from '@vueuse/core'
