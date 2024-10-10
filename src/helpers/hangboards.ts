@@ -5273,7 +5273,10 @@ const companies: Company[] = [
     description:
       'Amazon / AliExpress brand mainly specialized in Rock Climbing gears, sports, training and fitness supplies.',
     country: 'US',
-    location: null,
+    location: {
+      lat: null,
+      lon: null
+    },
     id: 87,
     url: 'https://www.amazon.com/stores/TWOSTONESSPORTS/page/5B0DA811-7FB3-4C55-A8AC-4B3AC7BB2EF4',
     socials: {
@@ -5552,7 +5555,10 @@ const companies: Company[] = [
     name: 'N8',
     description: 'Brand on Amazon.com',
     country: 'CN',
-    location: null,
+    location: {
+      lat: null,
+      lon: null
+    },
     id: 89,
     url: null,
     socials: {
@@ -6212,7 +6218,10 @@ const companies: Company[] = [
     name: 'Get Out!',
     description: 'Provides premium outdoor games and fitness accessories',
     country: 'US',
-    location: null,
+    location: {
+      lat: null,
+      lon: null
+    },
     id: 102,
     url: 'https://www.amazon.com/stores/page/13F4502E-65B8-4372-947D-89E1090DB80D/',
     socials: {
@@ -6494,7 +6503,10 @@ const companies: Company[] = [
       instagram: null
     },
     country: 'US',
-    location: null,
+    location: {
+      lat: null,
+      lon: null
+    },
     id: 107,
     url: 'https://www.amazon.com/stores/POWERGUIDANCE/page/2702B694-0CF6-439A-9E2F-9FC8F8F67976',
     hangboards: [
@@ -7542,7 +7554,10 @@ const companies: Company[] = [
     name: 'BABY FUN',
     description: 'Brand on Amazon.com. Professional Climbing Holds',
     country: 'CN',
-    location: null,
+    location: {
+      lat: null,
+      lon: null
+    },
     id: 125,
     url: 'https://www.amazon.com/stores/BABYFUNProfessionalClimbingSupply/page/CEBBE409-2A01-49AE-883C-999ED731D4D6',
     socials: {

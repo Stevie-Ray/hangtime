@@ -87,7 +87,7 @@ export interface Company {
   location: {
     lat: string | null
     lon: string | null
-  } | null
+  }
 
   /**
    * The unique identifier of the company.
