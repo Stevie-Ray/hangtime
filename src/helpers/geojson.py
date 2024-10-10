@@ -7899,7 +7899,10 @@ for company in data:
             "id": company['id'],
             "url": company['url'],
             "socials": company['socials'],
-            "hangboards": hangboards
+            "hangboards": hangboards,
+            "marker-color": "#012E40",
+            "marker-size": "medium",
+            "marker-symbol": "commercial"
         },
         "geometry": {
             "type": "Point",

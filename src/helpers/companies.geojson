@@ -92,7 +92,10 @@
             "url": null,
             "holds": 5
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -138,7 +141,10 @@
             "url": "https://www.beastmaker.co.uk/collections/fingerboards/products/beastmaker-2000-series",
             "holds": 14
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -171,7 +177,10 @@
             "url": null,
             "holds": 15
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -282,7 +291,10 @@
             "url": "https://crusherholds.co.uk/product/crusher-recruit-portable-fingerboard/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -367,7 +379,10 @@
             "url": null,
             "holds": 14
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -413,7 +428,10 @@
             "url": "https://www.holdz.co.uk/products/fingerboard-2",
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -498,7 +516,10 @@
             "url": "https://www.kraxl-board.com/products/kraxlboard-to-go",
             "holds": 9
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -570,7 +591,10 @@
             "url": "https://www.maxclimbing.com/products/one-finger-trainer",
             "holds": 2
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -603,7 +627,10 @@
             "url": null,
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -779,7 +806,10 @@
             "url": "https://www.metoliusclimbing.com/prime-rib.html",
             "holds": 2
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -851,7 +881,10 @@
             "url": "https://moonclimbing.com/training-equipment/training/deadhanging-rungs.html",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -884,7 +917,10 @@
             "url": "https://www.ocun.com/product/finger-board",
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -956,7 +992,10 @@
             "url": "https://www.problemsolver.rocks/shop/problemsolver-training-station",
             "holds": 5
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1106,7 +1145,10 @@
             "url": "https://soillholds.com/collections/hangboards/products/training-tiles-so-ill-x-meagan-martin",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1191,7 +1233,10 @@
             "url": "https://www.target10a.com/en/linebreaker-boards/410-linebreaker-air.html",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1315,7 +1360,10 @@
             "url": "https://tensionclimbing.com/product/simple-board/",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1374,7 +1422,10 @@
             "url": "https://trango.com/products/rock-prodigy-pivot",
             "holds": 12
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1420,7 +1471,10 @@
             "url": "https://witchholds.com/en/sklep/tab/",
             "holds": 13
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1492,7 +1546,10 @@
             "url": "https://shop.vertical-life.info/en/zlagboard-pro-2.0",
             "holds": 14
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1525,7 +1582,10 @@
             "url": "https://www.decathlon.co.uk/p/climbing-training-beam-vertika-r-black/_/R-p-345145",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1610,7 +1670,10 @@
             "url": "https://crimptonite.com/product/mobile-nano-limited-edition/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1643,7 +1706,10 @@
             "url": "https://captainfingerfood.rocks/products/180-hangboard",
             "holds": 4
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1702,7 +1768,10 @@
             "url": "https://www.surfacesforclimbing.com/shop/es-tabla-wood-dolmen/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1735,7 +1804,10 @@
             "url": "https://wataaah.de/product/kurt/",
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1807,7 +1879,10 @@
             "url": "https://www.fingerschinder.com/store/",
             "holds": 2
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1853,7 +1928,10 @@
             "url": "http://jk-meisterschreiner.de/gripmonster---griffbretter.html",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1899,7 +1977,10 @@
             "url": "https://www.thevola.com/product/moody-hangboard/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -1945,7 +2026,10 @@
             "url": "https://www.alpidex.com/klettern/training/trainingsboard-higher-2-0-griffbrett-in-verschiedenen-farben-von-alpidex_15065",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2004,7 +2088,10 @@
             "url": "https://erzi.de/shop/en/Fit-Healthy/Equipment/Trainings-Board-large.html",
             "holds": 21
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2037,7 +2124,10 @@
             "url": "https://shop.smartrock.de/komp/product/griptonite.html",
             "holds": 14
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2109,7 +2199,10 @@
             "url": null,
             "holds": 9
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2194,7 +2287,10 @@
             "url": "https://www.conceptclimbing.com/contents/en-us/p55015_Cragboard.html",
             "holds": 4
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2240,7 +2336,10 @@
             "url": null,
             "holds": 4
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2299,7 +2398,10 @@
             "url": "https://euroholds.com/en/fingerboards/1058-basic-wood-board-8435561579160.html",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2358,7 +2460,10 @@
             "url": null,
             "holds": 16
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2417,7 +2522,10 @@
             "url": "https://lyons-edge.myshopify.com/collections/hangboards/products/the-hideout",
             "holds": 4
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2476,7 +2584,10 @@
             "url": "https://escapeclimbing.com/collections/training/products/ec72200",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2509,7 +2620,10 @@
             "url": "https://www.climb-holds.com/en/product/training-board-product",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2555,7 +2669,10 @@
             "url": "https://www.atomikclimbingholds.com/advanced-grip-training-hangboard-one-piece",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2601,7 +2718,10 @@
             "url": "https://www.ar\u00eate.com/product/horizon/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2660,7 +2780,10 @@
             "url": "https://natureclimbing.com/products/stone-hanger",
             "holds": 1
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2719,7 +2842,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2765,7 +2891,10 @@
             "url": "https://volxholds.com/en/catalogue/holds/holds-v-training/training-dingo/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2837,7 +2966,10 @@
             "url": "https://aix.cz/holds/wood-board/",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2883,7 +3015,10 @@
             "url": "https://www.360holds.com/en/Online-Store/HANGBOARDS%2C-HOME-WALL-SETS-and-ACCESSORIES/HANGBOARDS/360-Shift-Bar",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -2968,7 +3103,10 @@
             "url": "https://hrt-holds.com/hrt/training/training_boards/training_board_5_-__butterfly",
             "holds": 4
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3001,7 +3139,10 @@
             "url": "https://www.gecko-holds.com/p/training-board-movember-plain/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3073,7 +3214,10 @@
             "url": "https://owlclimb.com/index.php/en/prds-2/portable/",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3106,7 +3250,10 @@
             "url": "https://www.bam-products.com/#cc-m-product-14287314133",
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3139,7 +3286,10 @@
             "url": "https://www.davemacleod.com/blog/category/Edge+hangboards",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3172,7 +3322,10 @@
             "url": "https://www.expression-holds.com/en/training/1930-72517-comix-club-board.html",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3205,7 +3358,10 @@
             "url": "https://www.dewoodstok.nl/product/hangboard-woodbord/",
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3290,7 +3446,10 @@
             "url": "https://awesomewoodys.com/collections/cliffboards/products/home-boy",
             "holds": 9
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3349,7 +3508,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3395,7 +3557,10 @@
             "url": "https://whiteoak.com.pl/en/produkt/wooden-hangboard/",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3428,7 +3593,10 @@
             "url": "https://www.acornclimbing.com/midnight",
             "holds": 11
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3461,7 +3629,10 @@
             "url": "https://www.artline-holds.com/produit/artboard/",
             "holds": 9
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3494,7 +3665,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3553,7 +3727,10 @@
             "url": "https://www.woodmboard.cz/p/wood-board-profi2/",
             "holds": 15
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3664,7 +3841,10 @@
             "url": "https://workshop1950.ru/fingerbordy-ru/PocketMaster",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3749,7 +3929,10 @@
             "url": "https://www.2climb.cz/hangboardy/onsight/",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3795,7 +3978,10 @@
             "url": "https://www.facebook.com/commerce/products/tarry/3482163018560029/",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3867,7 +4053,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3952,7 +4141,10 @@
             "url": "https://www.canigo.eu/en/tienda/valhalla-hybrid-hangboard-by-edu-marin/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -3998,7 +4190,10 @@
             "url": null,
             "holds": 17
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4044,7 +4239,10 @@
             "url": "https://www.dangerbuddies.com/product-page/buddyboard-plus",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4129,7 +4327,10 @@
             "url": "https://shop.makak.cz/training-board-tb05.html",
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4201,7 +4402,10 @@
             "url": "https://egurreholds.com/producto/pagoa-hangboard/",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4273,7 +4477,10 @@
             "url": "https://mountainrocks.com.au/products/mountain-rocks-hangboard-wildwood-2003",
             "holds": 12
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4332,7 +4539,10 @@
             "url": "https://craftyclimbing.com/hangboard-topaz",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4391,7 +4601,10 @@
             "url": "https://customclimbsofficial.com/products/slimboard-hangboard",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4476,7 +4689,10 @@
             "url": "https://www.didaks.com/holds/training/amazing-table",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4548,7 +4764,10 @@
             "url": "https://www.exploreclimbing.it/product/xc-tsaranoro/",
             "holds": 9
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4594,7 +4813,10 @@
             "url": null,
             "holds": 9
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4640,7 +4862,10 @@
             "url": null,
             "holds": 14
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4738,7 +4963,10 @@
             "url": "https://rustamclimbing.com/shop/hangboards/playmate/",
             "holds": 2
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4784,7 +5012,10 @@
             "url": "https://dudesvsgravity.com/product/gravitystick-portable-hangboard/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4830,7 +5061,10 @@
             "url": "https://latticetraining.com/product/lattice-triple-rung-wooden-hangboard/",
             "holds": 2
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4863,7 +5097,10 @@
             "url": "https://pucseries.myshopify.com/products/il-domani",
             "holds": 1
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -4948,7 +5185,10 @@
             "url": "https://www.woodrock.fr/fr/produit/poutre-descalade-varappe-mutant/",
             "holds": 16
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5020,7 +5260,10 @@
             "url": null,
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5066,7 +5309,10 @@
             "url": null,
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5099,7 +5345,10 @@
             "url": "https://manuvaclimbing.com/products/the-manuva-board",
             "holds": 4
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5132,7 +5381,10 @@
             "url": null,
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5165,7 +5417,10 @@
             "url": "https://www.evolvsports.com/int/basic-training-board-short-66-0000082100",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5211,7 +5466,10 @@
             "url": "https://www.scallywagsclimbing.com/product/swank-board/",
             "holds": 2
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5244,7 +5502,10 @@
             "url": "https://gripmonkeys.co.uk/product/gripmonkeys-climbing-hangboard/",
             "holds": 14
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5485,7 +5746,10 @@
             "url": "https://www.amazon.com/Hangboard-Climbing-Including-Pinches-Training/dp/B0C99SW7KW",
             "holds": 13
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5531,7 +5795,10 @@
             "url": "https://shop.altissimo.fr/poutre-papillon.html",
             "holds": 8
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5564,7 +5831,10 @@
             "url": "https://www.amazon.com/hangboard%EF%BC%8Changboard-climbing-fingerboard-hangboard-strength/dp/B08TCBWT3Q",
             "holds": 15
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5623,7 +5893,10 @@
             "url": "https://www.climbingshop.pl/pl/p/CHWYTOTABLICA-ZYWICZNA-MRoc/879",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5656,7 +5929,10 @@
             "url": "https://iura.pl/en/home/46-warm-up-hangboard.html",
             "holds": 2
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5689,7 +5965,10 @@
             "url": "https://ucraftclimbing.com/evo-rings-3d.html",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5722,7 +6001,10 @@
             "url": "https://www.nonmollo-climbing.com/product-page/il-trave-nonmollo",
             "holds": 13
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5807,7 +6089,10 @@
             "url": null,
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5866,7 +6151,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -5899,7 +6187,10 @@
             "url": null,
             "holds": 11
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6010,7 +6301,10 @@
             "url": "https://www.yyvertical.com/products/verticalboard-light",
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6082,7 +6376,10 @@
             "url": "https://www.sanpower.info/multipresas-fijas/#cc-m-product-13919604227",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6128,7 +6425,10 @@
             "url": "https://t-wall.com.pl/produkt/tw0101-chwytotablica-t-bone/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6161,7 +6461,10 @@
             "url": "http://www.entropyholds.com/training/85-fingerboard.html",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6194,7 +6497,10 @@
             "url": "https://rockrun.com/products/rock-run-praxis-fingerboard",
             "holds": 12
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6279,7 +6585,10 @@
             "url": "https://www.amazon.com/Get-Out-Climbing-Fingerboard-Hangboard/dp/B08Z66L44K",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6338,7 +6647,10 @@
             "url": "http://www.spinagarras.com.br/p-5268957-Agarra-de-escalada-Fingerboard-Grande",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6384,7 +6696,10 @@
             "url": "https://www.lamaholds.cz/en/lama-totem/",
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6417,7 +6732,10 @@
             "url": "https://batholds.com/en/produkt/fat-bat-board/",
             "holds": 15
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6489,7 +6807,10 @@
             "url": "https://freerock.mercadoshops.com.ar/MLA-859901643-multipresa-portable-madera-entrenamiento-escalada-shantala-_JM",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6548,7 +6869,10 @@
             "url": "https://www.amazon.com/POWER-GUIDANCE-Hangboard-Strengthener-Double-Sided/dp/B09VTG6RZN/",
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6646,7 +6970,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6679,7 +7006,10 @@
             "url": "https://clevo-climbing.com/en/products/hangboard",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6725,7 +7055,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6771,7 +7104,10 @@
             "url": "https://trenirajznaravo.com/trening/fingerboard-2000/",
             "holds": 15
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6830,7 +7166,10 @@
             "url": "https://cafekraft.shop/products/https-cafekraft-shop-collections-gimmekraft-products-hangboard-fingerhakler",
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -6928,7 +7267,10 @@
             "url": "https://frictitiousclimbing.com/products/the-port-a-board-portable-and-mountable-portable-hangboard",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7013,7 +7355,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7137,7 +7482,10 @@
             "url": "https://www.gripworks.cz/bajt/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7170,7 +7518,10 @@
             "url": "https://www.roots-climbing.com/product/2519429/baseline-fingerboard-includes-uk-shipping-contact-us-for-overseas-sales",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7203,7 +7554,10 @@
             "url": "https://redgeclimbing.com/product/redge-port-portable-hangboard/",
             "holds": 3
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7236,7 +7590,10 @@
             "url": "https://www.etsy.com/listing/1558792936/portable-mountain-and-rock-climbing?click_key=fefb8cd8f94696956098849b199a5d4a846bdd8f%3A1558792936&click_sum=8dae139d&ref=shop_home_feat_1",
             "holds": 4
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7282,7 +7639,10 @@
             "url": null,
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7367,7 +7727,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7400,7 +7763,10 @@
             "url": "https://www.kongholds.com/training-equiptment/fingerboards/kong-strong-mark-ii-climbing-fingerboard__366",
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7459,7 +7825,10 @@
             "url": "https://garmostore.com/productos/hangboard-urriellu/",
             "holds": 10
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7505,7 +7874,10 @@
             "url": "https://www.amazon.com/Yes4All-Advanced-Climbing-Fingerboard-Training/dp/B0871ZP3PH/",
             "holds": 11
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7564,7 +7936,10 @@
             "url": "https://crimpfactory.com/collections/hangboards/products/equalizer",
             "holds": 7
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7610,7 +7985,10 @@
             "url": "https://www.amazon.com/BABY-FUN-Climbing-Strengthener-Fingerboard/dp/B092VV854B/",
             "holds": 6
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7643,7 +8021,10 @@
             "url": "https://www.lacd.de/produkte/klettern/slacklines-training/trainingsboard/",
             "holds": 11
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7676,7 +8057,10 @@
             "url": null,
             "holds": 13
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7709,7 +8093,10 @@
             "url": null,
             "holds": 15
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7768,7 +8155,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7827,7 +8217,10 @@
             "url": "https://www.cruxagarras.com.br/produtos/finger-crux-2-0/",
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
@@ -7912,7 +8305,10 @@
             "url": null,
             "holds": 0
           }
-        ]
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
       },
       "geometry": {
         "type": "Point",
