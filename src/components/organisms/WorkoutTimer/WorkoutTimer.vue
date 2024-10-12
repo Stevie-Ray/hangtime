@@ -453,7 +453,9 @@ const exerciseSteps = () => {
         }
         if (
           device.value &&
-          (device.value instanceof Motherboard || device.value instanceof Progressor) &&
+          (device.value instanceof ForceBoard ||
+            device.value instanceof Motherboard ||
+            device.value instanceof Progressor) &&
           exercise.value
         ) {
           device.value.stream((exercise.value.hold - 1) * 1000)
@@ -549,7 +551,9 @@ const setupWorkout = async () => {
             clock.value = exercise.value.hold - 1
             if (
               device.value &&
-              (device.value instanceof Motherboard || device.value instanceof Progressor)
+              (device.value instanceof ForceBoard ||
+                device.value instanceof Motherboard ||
+                device.value instanceof Progressor)
             ) {
               device.value.stream((exercise.value.hold - 1) * 1000)
             }
