@@ -162,7 +162,7 @@ useHead({
               </v-card-actions>
             </v-card>
             <!-- company map -->
-            <map-container v-if="getCompany?.location" :markers="[getCompany]" :zoom="6" />
+            <map-container v-if="getCompany" :company-id="getCompany.id" :zoom="6" />
           </v-col>
         </v-row>
       </v-container>

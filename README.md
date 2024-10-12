@@ -1,6 +1,6 @@
 # HangTime
 
-This template should help get you started developing with Vue 3 in Vite.
+**NEW!** Discover hangboard makers on the map: [Explore our dataset on GeoJSON.io](http://geojson.io/#data=data:text/x-url,https%3a%2f%2fraw.githubusercontent.com%2fStevie-Ray%2fhangtime%2frefs%2fheads%2fmain%2fsrc%2fhelpers%2fcompanies.geojson)
 
 ## Recommended IDE Setup
 

@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { Loader } from '@googlemaps/js-api-loader'
+import rawCompanyGeoJSON from '@/helpers/companies.geojson?raw'
+const companyGeoJSON = JSON.parse(rawCompanyGeoJSON)
 
-const { height = 300, zoom = 0 } = defineProps<{
+const {
+  companyId,
+  height = 300,
+  zoom = 0
+} = defineProps<{
+  companyId?: number
   height?: number
   zoom?: number
 }>()
@@ -85,7 +92,26 @@ loader.load().then(async () => {
   const bounds = new google.maps.LatLngBounds()
   const infowindow = new google.maps.InfoWindow()
 
-  map.data.loadGeoJson('/src/helpers/companies.geojson')
+  // Apply the filter only if companyId is defined, otherwise show all features
+  const filteredGeoJSON = {
+    type: 'FeatureCollection',
+    features: companyId
+      ? companyGeoJSON.features.filter((feature: any) => feature.properties.id === companyId)
+      : companyGeoJSON.features
+  }
+
+  // Add the filtered or full GeoJSON to the map
+  map.data.addGeoJson(filteredGeoJSON)
+
+  // Extend bounds for each feature to ensure the map fits all data
+  map.data.forEach((feature) => {
+    const geometry = feature.getGeometry()
+    if (geometry) {
+      geometry.forEachLatLng((latLng) => {
+        bounds.extend(latLng)
+      })
+    }
+  })
 
   map.data.setStyle({
     icon: {

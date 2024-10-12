@@ -37,7 +37,7 @@ useHead({
         <v-row>
           <v-col cols="12" md="5" order-md="last">
             <div class="sticky">
-              <map-container :markers="getCompanies()" :zoom="1" />
+              <map-container :zoom="1" />
             </div>
           </v-col>
           <v-col cols="12" md="7" order-md="first">
