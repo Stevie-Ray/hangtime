@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
-import { Motherboard, Progressor } from '@hangtime/grip-connect'
+import { ForceBoard, Motherboard, Progressor } from '@hangtime/grip-connect'
 import type { massObject } from '@hangtime/grip-connect/src/interfaces/callback.interface'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
@@ -392,7 +392,9 @@ const exerciseSteps = () => {
       }
       if (
         device.value &&
-        (device.value instanceof Motherboard || device.value instanceof Progressor) &&
+        (device.value instanceof ForceBoard ||
+          device.value instanceof Motherboard ||
+          device.value instanceof Progressor) &&
         exercise.value
       ) {
         device.value.stream((exercise.value.hold - 1) * 1000)
