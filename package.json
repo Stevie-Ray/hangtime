@@ -20,7 +20,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.1.0",
     "@googlemaps/js-api-loader": "^1.16.8",
-    "@hangtime/grip-connect": "^0.5.3",
+    "@hangtime/grip-connect": "^0.5.4",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^1.11.7",
     "@vueuse/core": "^11.1.0",

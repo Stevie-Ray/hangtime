@@ -41,8 +41,7 @@ const devices = [
   },
   {
     title: 'ForceBoard',
-    type: 'ForceBoard',
-    disabled: true
+    type: 'ForceBoard'
   },
   {
     title: 'Motherboard',
