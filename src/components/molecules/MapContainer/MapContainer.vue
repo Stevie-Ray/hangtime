@@ -1,13 +1,7 @@
 <script setup lang="ts">
-import { Company } from '@/interfaces/user.interface'
 import { Loader } from '@googlemaps/js-api-loader'
 
-const {
-  markers,
-  height = 300,
-  zoom = 0
-} = defineProps<{
-  markers?: Company[]
+const { height = 300, zoom = 0 } = defineProps<{
   height?: number
   zoom?: number
 }>()
@@ -91,52 +85,35 @@ loader.load().then(async () => {
   const bounds = new google.maps.LatLngBounds()
   const infowindow = new google.maps.InfoWindow()
 
-  let marker
-  if (markers) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    for (const [i, item] of markers.entries()) {
-      if (item?.location?.lat && item?.location?.lon) {
-        const icon = {
-          url: '/img/icons/favicon.svg',
-          scaledSize: new google.maps.Size(20, 20),
-          anchor: new google.maps.Point(10, 10)
-        }
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(Number(item.location.lat), Number(item.location.lon)),
-          map,
-          title: item.name,
-          icon
-        })
+  map.data.loadGeoJson('/src/helpers/companies.geojson')
 
-        const postion = marker.getPosition()
-        if (postion) {
-          bounds.extend(postion)
-        }
-
-        google.maps.event.addListener(
-          marker,
-          'click',
-          // eslint-disable-next-line no-shadow
-          ((marker) => () => {
-            infowindow.setContent(
-              `<a href="
-                  ${
-                    item.name
-                      ? `/brands/${encodeURIComponent(
-                          item.name.replace(/\s+/g, '-').toLowerCase()
-                        )}`
-                      : null
-                  }
-                ">${item.name}</a>`
-            )
-            infowindow.open(map, marker)
-          })(marker)
-        )
-      }
+  map.data.setStyle({
+    icon: {
+      url: '/img/icons/favicon.svg',
+      scaledSize: new google.maps.Size(20, 20),
+      anchor: new google.maps.Point(10, 10)
     }
-  }
+  })
 
-  // now fit the map to the newly inclusive bounds
+  map.data.addListener('click', (event: google.maps.Data.MouseEvent) => {
+    const feature: google.maps.Data.Feature = event.feature
+
+    const name: string | undefined = feature.getProperty('name') as string
+    const latLng = event.latLng
+
+    if (!latLng || !name) {
+      return
+    }
+    bounds.extend(latLng)
+
+    const infoWindowContent = `<a href="/brands/${encodeURIComponent(
+      name.replace(/\s+/g, '-').toLowerCase()
+    )}">${name}</a>`
+
+    infowindow.setContent(infoWindowContent)
+    infowindow.setPosition(latLng)
+    infowindow.open(map)
+  })
   map.fitBounds(bounds)
   // restore the zoom level after the map is done scaling
   const listener = google.maps.event.addListener(map, 'idle', () => {

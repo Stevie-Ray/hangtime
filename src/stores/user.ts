@@ -1,8 +1,19 @@
-import { defineStore, storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import { defineStore, storeToRefs } from 'pinia'
+import type { FeatureCollection } from 'geojson'
 import { useAuthenticationStore } from '@/stores/authentication'
-import hangboardBrands from '@/helpers/hangboards'
 import { Company, Hangboard } from '@/interfaces/user.interface'
+
+// Handle GeoJSON data
+import rawCompanyGeoJSON from '@/helpers/companies.geojson?raw'
+const companyGeoJSON = JSON.parse(rawCompanyGeoJSON)
+
+// Get GeoJsonProperties from GeoJSON Object
+function getPropertiesFromFeatures(geoJSON: FeatureCollection) {
+  return geoJSON.features.map((feature) => feature.properties)
+}
+
+const companies = getPropertiesFromFeatures(companyGeoJSON) as Company[]
 
 export const useUserStore = defineStore('user', () => {
   const { user } = storeToRefs(useAuthenticationStore())
@@ -14,7 +25,7 @@ export const useUserStore = defineStore('user', () => {
    * @return The hangboard object
    */
   const getHangboardByIds = (companyId: number, hangboardId: number): Hangboard | undefined => {
-    const company = hangboardBrands.find((company: Company) => company.id === companyId)
+    const company = companies.find((company: Company) => company.id === companyId)
     return company?.hangboards.find((hangboard: Hangboard) => hangboard.id === hangboardId)
   }
 
@@ -24,7 +35,7 @@ export const useUserStore = defineStore('user', () => {
    * @return The company object
    */
   const getCompanyById = (companyId: number): Company | undefined => {
-    return hangboardBrands.find((company: Company) => company.id === companyId)
+    return companies.find((company: Company) => company.id === companyId)
   }
 
   /**
@@ -44,7 +55,7 @@ export const useUserStore = defineStore('user', () => {
    * @return An array of companies sorted by name
    */
   const getCompanies = (): Company[] => {
-    return [...hangboardBrands].sort((a: Company, b: Company) => a.name.localeCompare(b.name))
+    return [...companies].sort((a: Company, b: Company) => a.name.localeCompare(b.name))
   }
 
   /**
@@ -53,7 +64,7 @@ export const useUserStore = defineStore('user', () => {
    */
   const getHangboards = (): Hangboard[] => {
     const allHangboards: Hangboard[] = []
-    for (const brand of hangboardBrands) {
+    for (const brand of companies) {
       if (brand.hangboards && Array.isArray(brand.hangboards)) {
         allHangboards.push(...brand.hangboards)
       }
@@ -67,7 +78,7 @@ export const useUserStore = defineStore('user', () => {
    * @return The company object
    */
   const getCompanyByUrlKey = (url: string): Company | undefined => {
-    return hangboardBrands.find(
+    return companies.find(
       (company: Company) => company.name.replace(/\s+/g, '-').toLowerCase() === url
     )
   }
@@ -98,7 +109,7 @@ export const useUserStore = defineStore('user', () => {
     if (!hangboards || selectedId === undefined) return null
     const selectedHangboard = hangboards[selectedId]
     if (!selectedHangboard) return null
-    return hangboardBrands[selectedHangboard.company] || null
+    return companies[selectedHangboard.company] || null
   })
 
   /**
