@@ -1,6 +1,6 @@
 # HangTime
 
-**NEW!** Discover hangboard makers on the map: [Explore our dataset on GeoJSON.io](http://geojson.io/#data=data:text/x-url,https%3a%2f%2fraw.githubusercontent.com%2fStevie-Ray%2fhangtime%2frefs%2fheads%2fmain%2fsrc%2fhelpers%2fcompanies.geojson)
+**NEW!** Discover hangboard makers on the map: Explore our dataset on [GeoJSON.io](https://geojson.io/#id=github:Stevie-Ray/hangtime/blob/main/src/helpers/companies.geojson) or [Github](https://github.com/Stevie-Ray/hangtime/blob/main/src/helpers/companies.geojson).
 
 ## Recommended IDE Setup
 
