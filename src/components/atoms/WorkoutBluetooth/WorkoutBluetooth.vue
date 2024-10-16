@@ -11,8 +11,7 @@ import {
   Motherboard,
   WHC06,
   mySmartBoard,
-  Progressor,
-  active
+  Progressor
 } from '@hangtime/grip-connect'
 
 import { useBluetoothStore } from '@/stores/bluetooth'
@@ -109,7 +108,7 @@ const setup = () => {
         // output.value = JSON.stringify(data)
       })
 
-      active(
+      selectedDevice.active(
         (isActive: boolean) => {
           emit('active', isActive)
         },
