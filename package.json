@@ -20,7 +20,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.1.0",
     "@googlemaps/js-api-loader": "^1.16.8",
-    "@hangtime/grip-connect": "^0.5.7",
+    "@hangtime/grip-connect": "^0.5.8",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^1.11.10",
     "@vueuse/core": "^11.1.0",
@@ -36,7 +36,7 @@
     "vue-inline-svg": "^3.1.4",
     "vue-router": "^4.4.5",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.7.2"
+    "vuetify": "^3.7.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.1",
@@ -48,7 +48,7 @@
     "@types/geojson": "^7946.0.14",
     "@types/google.maps": "^3.58.1",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^20.16.11",
+    "@types/node": "^20.16.12",
     "@types/web-bluetooth": "^0.0.20",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/eslint-config-prettier": "^9.0.0",
@@ -64,10 +64,10 @@
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-vue": "^9.29.0",
     "jsdom": "^25.0.1",
-    "npm-run-all2": "^6.2.3",
+    "npm-run-all2": "^6.2.4",
     "prettier": "^3.3.3",
     "rollup-plugin-visualizer": "^5.12.0",
-    "sass": "^1.79.5",
+    "sass": "^1.80.2",
     "typescript": "^5.6.3",
     "vite": "^5.4.9",
     "vite-plugin-pwa": "^0.20.5",
