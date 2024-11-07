@@ -1421,6 +1421,19 @@
             "type": "plastic",
             "url": "https://trango.com/products/rock-prodigy-pivot",
             "holds": 12
+          },
+          {
+            "name": "Rock Prodigy Natural",
+            "id": 3,
+            "image": "hangboards/TRANGOROCKNATURAL.svg",
+            "size": {
+              "x": 190,
+              "y": 152,
+              "z": 38
+            },
+            "type": "wood",
+            "url": "https://trango.com/products/rock-prodigy-natural",
+            "holds": 12
           }
         ],
         "marker-color": "#012E40",
