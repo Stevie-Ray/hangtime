@@ -2,13 +2,7 @@
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import {
-  getAuth,
-  linkWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  OAuthProvider
-} from 'firebase/auth'
+import { getAuth, linkWithPopup, GoogleAuthProvider, OAuthProvider } from 'firebase/auth'
 import IRCRA from 'ircra'
 import { Ref, computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -46,9 +40,6 @@ const login = async (method: string) => {
 
   if (method === 'google') {
     provider = new GoogleAuthProvider()
-  }
-  if (method === 'facebook') {
-    provider = new FacebookAuthProvider()
   }
   if (method === 'apple') {
     provider = new OAuthProvider('apple.com')
@@ -265,19 +256,6 @@ useHead({
                     color="text"
                     icon="$account"
                     @click="login('google')"
-                  ></v-btn>
-                </template>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Facebook</v-list-item-title>
-                <template #append>
-                  <v-btn
-                    :disabled="!online"
-                    size="small"
-                    variant="outlined"
-                    color="text"
-                    icon="$account"
-                    @click="login('facebook')"
                   ></v-btn>
                 </template>
               </v-list-item>

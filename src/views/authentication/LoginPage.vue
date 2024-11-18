@@ -10,7 +10,6 @@ import {
   signInWithRedirect,
   updateProfile,
   GoogleAuthProvider,
-  FacebookAuthProvider,
   OAuthProvider
 } from 'firebase/auth'
 import { ref, watch } from 'vue'
@@ -78,19 +77,16 @@ const displayName = ref('')
 
 const socials = [
   {
-    id: 'facebook',
-    name: 'Facebook',
-    color: '#1877F2'
-  },
-  {
     id: 'google',
     name: 'Google',
-    color: '#DB4437'
+    color: '#DB4437',
+    disabled: false
   },
   {
     id: 'apple',
     name: 'Apple',
-    color: '#000000'
+    color: '#000000',
+    disabled: false
   }
 ]
 
@@ -154,10 +150,6 @@ const connect = async (method: string) => {
 
   if (method === 'google') {
     provider = new GoogleAuthProvider()
-  }
-
-  if (method === 'facebook') {
-    provider = new FacebookAuthProvider()
   }
 
   if (method === 'apple') {
@@ -304,7 +296,7 @@ useHead({
               </v-col>
             </v-row>
 
-            <v-row>
+            <v-row justify="center">
               <v-col
                 cols="12"
                 md="4"
@@ -315,7 +307,7 @@ useHead({
                 <v-btn
                   v-show="!user"
                   :color="social.color"
-                  :disabled="!online"
+                  :disabled="social.disabled || !online"
                   class="text-white"
                   block
                   size="large"

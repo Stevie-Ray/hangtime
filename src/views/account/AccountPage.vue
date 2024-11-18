@@ -68,13 +68,6 @@ const items = computed<Item[]>(() => [
     external: true
   },
   {
-    title: t('Follow {appTitle}', { appTitle: 'HangTime' }),
-    icon: '$facebook',
-    subtitle: t('App and hangboard updates'),
-    link: 'https://www.facebook.com/hangtime.hangboarding',
-    external: true
-  },
-  {
     title: t('Help'),
     icon: '$helpCircle',
     subtitle: t('FAQ, exercises, privacy, contact'),
