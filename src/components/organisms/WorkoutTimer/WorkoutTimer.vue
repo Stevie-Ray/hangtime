@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
+import { computed, ref, Ref, nextTick, onBeforeUnmount, onMounted, useTemplateRef } from 'vue'
 import { ForceBoard, Motherboard, Progressor } from '@hangtime/grip-connect'
 import type { massObject } from '@hangtime/grip-connect/src/interfaces/callback.interface'
 import { useI18n } from 'vue-i18n'
@@ -72,8 +72,14 @@ const active = (value: boolean) => {
 
 onBeforeUnmount(() => {
   // make sure timer is disabled and speech is stopped
-  if (timer !== null) clearInterval(timer)
-  if (window.speechSynthesis) window.speechSynthesis.cancel()
+  if (timer !== null) {
+    clearInterval(timer)
+    timer = null
+  }
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel()
+    window.speechSynthesis.resume()
+  }
 })
 
 const exercise = computed<Exercise>(() => {
@@ -135,16 +141,17 @@ const speakText = (text: string) => {
 
 const playSound = (path: string, type: 'wav' | 'mp3') => {
   if (user.value?.settings.sound && audio) {
-    // workaround for iOS / Safari
-    if (path) {
-      audio.src = path
+    // Add error handling and remove event listener after play
+    const playHandler = () => {
+      audio.play().catch((err) => console.warn('Audio playback failed:', err))
+      audio.removeEventListener('canplaythrough', playHandler)
     }
-    if (type) {
-      // audio.type = `audio/${type}`
-    }
-    audio.addEventListener('canplaythrough', () => {
-      audio.play()
-    })
+    audio.src = path
+    audio.addEventListener('canplaythrough', playHandler)
+    // Add timeout to prevent hanging
+    setTimeout(() => {
+      audio.removeEventListener('canplaythrough', playHandler)
+    }, 2000)
   }
 }
 const vibratePhone = () => {
@@ -175,7 +182,23 @@ const countDown = () => {
   }
 }
 
+const progress = useTemplateRef('progress')
+
 const toggleWorkout = () => {
+  if (!timerPaused.value) {
+    if (progress.value?.$el) {
+      const computedStyle = window.getComputedStyle(progress.value.$el)
+      const currentWidth = computedStyle.getPropertyValue('width')
+      progress.value.$el.style.width = currentWidth
+      progress.value.$el.style.transition = 'none'
+    }
+  } else {
+    if (progress.value?.$el) {
+      progress.value.$el.style.removeProperty('width')
+      progress.value.$el.style.transition = progressTransition.value
+    }
+  }
+
   !timerPaused.value && isSupported.value && isActive.value ? release() : request('screen')
   timerPaused.value = !timerPaused.value
 }
@@ -627,6 +650,18 @@ async function canUsePlayBilling() {
   }
 }
 
+const progressTransition = computed(() => {
+  if (clock.value === 0) return 'none'
+  if (skip.value) return 'none'
+  if (
+    clockText.value === t('Go') &&
+    (currentExerciseStep.value === 1 || currentExerciseStep.value === 3)
+  ) {
+    return 'width 0s linear, background-color 0.5s ease'
+  }
+  return `width ${clock.value}s linear, background-color 0.5s ease`
+})
+
 onMounted(() => {
   canUsePlayBilling()
 })
@@ -634,21 +669,14 @@ onMounted(() => {
 
 <template>
   <v-container
+    ref="progress"
     v-if="workout?.exercises"
     :class="{
-      rest: !timerPaused && !(currentExerciseStep === 1 || currentExerciseStep === 3),
-      hang: !timerPaused && (currentExerciseStep === 1 || currentExerciseStep === 3)
+      rest: currentExerciseStep !== 1 && currentExerciseStep !== 3,
+      hang: currentExerciseStep === 1 || currentExerciseStep === 3,
+      pause: timerPaused
     }"
-    :style="{
-      transition:
-        clock !== 0
-          ? skip
-            ? 'none'
-            : clockText === t('Go') && (currentExerciseStep === 1 || currentExerciseStep === 3)
-              ? `width 0s linear`
-              : `width ${clock}s linear`
-          : 'none'
-    }"
+    :style="{ transition: progressTransition }"
     class="position-absolute h-100 px-0 py-0 progress"
   ></v-container>
   <v-container v-if="workout?.exercises" class="position-relative">
@@ -903,7 +931,7 @@ onMounted(() => {
   height: calc(100% - 56px) !important; // header
   max-width: 100%;
   width: 0;
-  will-change: width, background-position;
+  will-change: width, background-position, background-color;
   //width: 50% !important;
 
   &.hang {
@@ -916,6 +944,11 @@ onMounted(() => {
     animation: backwards 300s infinite linear;
     background-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
     width: 0;
+  }
+
+  &.pause {
+    background-color: transparent;
+    animation-play-state: paused;
   }
 }
 
