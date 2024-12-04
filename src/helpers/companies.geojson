@@ -8327,6 +8327,42 @@
         "type": "Point",
         "coordinates": [169.0504867, -44.7203419]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OnSite",
+        "description": "Design and production of block walls for climbing from Montreal, Quebec, Canada",
+        "country": "CA",
+        "id": 132,
+        "url": "https://www.theonsite.com/",
+        "socials": {
+          "facebook": "https://www.facebook.com/theonsite",
+          "instagram": "https://www.instagram.com/onsite.climbing/"
+        },
+        "hangboards": [
+          {
+            "name": "Woody Hangboard",
+            "id": 0,
+            "image": "hangboards/ONSITEWOODY.svg",
+            "size": {
+              "x": 673,
+              "y": 152,
+              "z": 3
+            },
+            "type": "wood",
+            "url": "https://store.theonsite.com/products/woody-hangboard",
+            "holds": 0
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.58532, 45.47027]
+      }
     }
   ]
 }
