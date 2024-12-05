@@ -8348,11 +8348,11 @@
             "size": {
               "x": 673,
               "y": 152,
-              "z": 3
+              "z": 32
             },
             "type": "wood",
             "url": "https://store.theonsite.com/products/woody-hangboard",
-            "holds": 0
+            "holds": 7
           }
         ],
         "marker-color": "#012E40",
