@@ -18,7 +18,7 @@ import { User } from '@/interfaces/authentication.interface'
  * @param time
  * @return {*}
  */
-// eslint-disable-next-line no-shadow
+
 function padTime(time: number) {
   return (time < 10 ? '0' : '') + time
 }
@@ -446,7 +446,6 @@ export function useExercises() {
  * @return {string}
  */
 export function useRandomImage(dark: boolean = false) {
-  /* eslint-disable global-require */
   let images = []
   if (!dark) {
     images = [
@@ -468,7 +467,7 @@ export function useRandomImage(dark: boolean = false) {
       imgBackgroundDark7
     ]
   }
-  /* eslint-enable global-require */
+
   return images[Math.floor(Math.random() * images.length)]
 }
 

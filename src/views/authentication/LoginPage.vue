@@ -123,11 +123,10 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 const rules = {
   length: (length: number) => (v: string) =>
     (v || '').length <= length || `Max ${length} characters`,
-  required: (v: any) => !!v || 'This field is required',
+  required: (v: unknown) => !!v || 'This field is required',
   email: (v: string) =>
     !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
   password: (v: string) => {
-    // eslint-disable-next-line
     const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/
     return (
       pattern.test(v) ||
@@ -163,12 +162,12 @@ const connect = async (method: string) => {
       .then((userCredential) => {
         // Signed in
         const firebaseUser = userCredential.user
-        // eslint-disable-next-line no-console
+
         console.log(firebaseUser)
       })
       .catch((err) => {
         error.value = err.message
-        // eslint-disable-next-line no-console
+
         console.log(err)
         valid.value = false
       })
@@ -186,7 +185,7 @@ const connect = async (method: string) => {
       })
       .catch((err) => {
         error.value = err.message
-        // eslint-disable-next-line no-console
+
         console.log(err)
         valid.value = false
       })

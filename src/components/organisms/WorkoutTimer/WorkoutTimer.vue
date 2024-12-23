@@ -101,10 +101,11 @@ const exerciseTime = computed<number>(() => {
 
 const requestWakeLock = () => {
   try {
-    isSupported.value && !isActive.value ? request('screen') : null
+    if (isSupported.value && !isActive.value) {
+      request('screen')
+    }
   } catch (err: unknown) {
     if (err instanceof Error) {
-      // eslint-disable-next-line no-console
       console.error(`${err.name}, ${err.message}`)
     }
   }
@@ -114,7 +115,6 @@ const speak = (text: SpeechSynthesisUtterance) => {
   try {
     window.speechSynthesis.speak(text)
   } catch (ex) {
-    // eslint-disable-next-line no-console
     console.log('speechSynthesis not available', ex)
   }
 }
@@ -139,11 +139,11 @@ const speakText = (text: string) => {
   }
 }
 
-const playSound = (path: string, type: 'wav' | 'mp3') => {
+const playSound = (path: string) => {
   if (user.value?.settings.sound && audio) {
     // Add error handling and remove event listener after play
     const playHandler = () => {
-      audio.play().catch((err) => console.warn('Audio playback failed:', err))
+      audio.play().catch((err: Error) => console.warn('Audio playback failed:', err))
       audio.removeEventListener('canplaythrough', playHandler)
     }
     audio.src = path
@@ -154,6 +154,7 @@ const playSound = (path: string, type: 'wav' | 'mp3') => {
     }, 2000)
   }
 }
+
 const vibratePhone = () => {
   if ('vibrate' in navigator) {
     if (user.value?.settings.vibrate) navigator.vibrate([80, 40, 120])
@@ -165,19 +166,19 @@ const countDown = () => {
   //   if (user.value.settings?.speak) {
   //     speakText(`${t('Get ready')}!`)
   //   } else {
-  //     playSound(countSound, 'wav')
+  //     playSound(countSound)
   //   }
   // }
   if (clock.value <= 3 && clock.value > 1) {
     if (user.value?.settings.speak) {
       speakText(`${clock.value - 1}`)
     } else {
-      playSound(countSound, 'wav')
+      playSound(countSound)
     }
   }
   if (clock.value === 1) {
     vibratePhone()
-    playSound(startSound, 'wav')
+    playSound(startSound)
     speakText(`${t('Go')}!`)
   }
 }
@@ -199,12 +200,18 @@ const toggleWorkout = () => {
     }
   }
 
-  !timerPaused.value && isSupported.value && isActive.value ? release() : request('screen')
+  if (!timerPaused.value && isSupported.value && isActive.value) {
+    release()
+  } else {
+    request('screen')
+  }
   timerPaused.value = !timerPaused.value
 }
 
 const stopTimer = () => {
-  isActive.value ? release() : null
+  if (isActive.value) {
+    release()
+  }
   if (timer !== null) {
     clearInterval(timer)
     timer = null
@@ -241,7 +248,7 @@ const exerciseHold = () => {
     )
   ) {
     vibratePhone()
-    playSound(stopSound, 'wav')
+    playSound(stopSound)
   }
 }
 
@@ -322,7 +329,7 @@ const hasExercise = (type: 'prev' | 'next') => {
 
   if (type === 'next') {
     // if there is another exercise
-    // eslint-disable-next-line no-unsafe-optional-chaining
+
     if (workout?.value?.exercises && currentExercise.value !== workout.value.exercises.length - 1) {
       currentExercise.value += 1
       setupTimers()
@@ -361,7 +368,7 @@ const disableMaxHold = () => {
 }
 const maxHold = () => {
   vibratePhone()
-  playSound(stopSound, 'wav')
+  playSound(stopSound)
   // HOLD
   if (currentExerciseStep.value === 1) {
     // check if exercise has to repeat
@@ -617,35 +624,29 @@ const canSubscribe = window.getDigitalGoodsService
 
 async function canUsePlayBilling() {
   if (canSubscribe === undefined) {
-    // eslint-disable-next-line no-console
     console.log("window doesn't have getDigitalGoodsService.")
     return
   }
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
-    // eslint-disable-next-line no-console
+
     console.log(service)
     if (service === null) {
-      // eslint-disable-next-line no-console
       console.log('Play Billing is not available.')
     } else {
-      // eslint-disable-next-line no-shadow
       const items = ['subscription']
       const details = await service.getDetails(items)
-      // eslint-disable-next-line no-console
+
       console.log(details)
       if (details === null) {
-        // eslint-disable-next-line no-console
         console.log('Are you running a Play Store build?')
       } else if (details.length === 0) {
-        // eslint-disable-next-line no-console
         console.log('Are you running a Play Store build? 2')
       } else {
         canSubscribePlayBilling.value = true
       }
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.log(error)
   }
 }

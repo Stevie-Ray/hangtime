@@ -1,7 +1,7 @@
 /**
  * Represents an activity done by a user.
  */
-export interface Activity {
+export interface Activity extends Record<string, unknown> {
   /**
    * Unique identifier for the activity.
    * Optional, may not be set if the activity has not been persisted.

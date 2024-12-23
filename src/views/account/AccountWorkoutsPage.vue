@@ -66,7 +66,6 @@ function greet(item: SpeechSynthesisVoice | undefined) {
     synth.speak(greetingSpeech)
     updateUser()
   } catch (e) {
-    // eslint-disable-next-line no-console
     console.log('speechSynthesis not available', e)
   }
 }

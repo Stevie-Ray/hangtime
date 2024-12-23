@@ -1,9 +1,9 @@
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here. Other Firebase libraries
 // are not available in the service worker.
-// eslint-disable-next-line no-undef
+ 
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js')
-// eslint-disable-next-line no-undef
+ 
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js')
 
 const config = {
@@ -16,10 +16,10 @@ const config = {
   appId: '1:292866814265:web:0a256263a11f5eed'
 }
 
-// eslint-disable-next-line no-undef
+ 
 firebase.initializeApp(config)
 
-// eslint-disable-next-line no-undef
+ 
 const messaging = firebase.messaging()
 
 // If you would like to customize notifications that are received in the
@@ -35,7 +35,7 @@ messaging.onBackgroundMessage((payload) => {
     icon: 'img/icons/android-chrome-512x512.png'
   }
 
-  // eslint-disable-next-line no-restricted-globals
+   
   self.registration.showNotification(notificationTitle, notificationOptions)
 })
 // [END on_background_message]

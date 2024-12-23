@@ -23,12 +23,10 @@ const hangboardImage = computed(() => {
   const rotateIndex = exercise.value?.rotate || 0
 
   if (sides.length) {
-    return new URL(`/src/assets/${sides[rotateIndex].image}`, import.meta.url).href
+    return `/${sides[rotateIndex].image}`
   }
 
-  return getHangboard.value
-    ? new URL(`/src/assets/${getHangboard.value.image}`, import.meta.url).href
-    : ''
+  return `/${getHangboard.value ? getHangboard.value.image : ''}`
 })
 
 const classHold = (hand: 'left' | 'right'): string | null => {

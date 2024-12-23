@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Loader } from '@googlemaps/js-api-loader'
 import rawCompanyGeoJSON from '@/helpers/companies.geojson?raw'
-const companyGeoJSON = JSON.parse(rawCompanyGeoJSON)
+const companyGeoJSON = JSON.parse(rawCompanyGeoJSON) as GeoJSON.FeatureCollection
 
 const {
   companyId,
@@ -96,7 +96,7 @@ loader.load().then(async () => {
   const filteredGeoJSON = {
     type: 'FeatureCollection',
     features: companyId
-      ? companyGeoJSON.features.filter((feature: any) => feature.properties.id === companyId)
+      ? companyGeoJSON.features.filter((feature) => feature.properties?.id === companyId)
       : companyGeoJSON.features
   }
 

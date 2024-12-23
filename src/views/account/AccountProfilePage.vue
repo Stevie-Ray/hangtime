@@ -27,7 +27,7 @@ const ircra = new IRCRA()
 const rules = {
   length: (length: number) => (v: string) =>
     (v || '').length <= length || `Max ${length} characters`,
-  required: (v: any) => !!v || 'This field is required'
+  required: (v: unknown) => !!v || 'This field is required'
 }
 
 const grades = computed(() => ircra.get(user.value?.settings?.scale).filter((item) => item))
@@ -51,18 +51,16 @@ const login = async (method: string) => {
       await linkWithPopup(auth.currentUser, provider).then(
         (result) => {
           const { user } = result
-          // eslint-disable-next-line no-console
+
           console.log(user)
         },
         (err) => {
-          // eslint-disable-next-line no-console
           console.log(err)
           error.value = err.code.toString()
         }
       )
     } catch (err) {
       if (err instanceof Error) {
-        // eslint-disable-next-line no-console
         console.log(err)
         error.value = err.message
       }
@@ -79,7 +77,6 @@ const deleteAccount = async () => {
         router.push('/')
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
         console.log(err)
         error.value = err
       })

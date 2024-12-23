@@ -19,12 +19,14 @@ const { showDialog = false } = defineProps<{
 const emit = defineEmits(['toggle-dialog'])
 
 const workoutSave = () => {
-  if (!workout.value?.id) {
-    // new workout
-    workout.value ? createUserWorkout(workout.value) : null
-  } else {
-    // existing workout
-    workout.value ? updateUserWorkout(workout.value) : null
+  if (workout.value) {
+    if (!workout.value.id) {
+      // Create new workout
+      createUserWorkout(workout.value)
+    } else {
+      // Update existing workout
+      updateUserWorkout(workout.value)
+    }
   }
 
   emit('toggle-dialog')
@@ -33,8 +35,8 @@ const workoutSave = () => {
 }
 
 const rules = {
-  number: (v: any) => !isNaN(v) || 'NaN',
-  required: (v: any) => !!v || 'This field is required',
+  number: (v: number | string) => !isNaN(Number(v)) || 'NaN',
+  required: (v: unknown) => !!v || 'This field is required',
   length: (length: number) => (v: string) =>
     (v || '').length <= length || `Max ${length} characters`,
   min: (min: number) => (v: number) => v >= min || `A minimum of ${min} is allowed`,

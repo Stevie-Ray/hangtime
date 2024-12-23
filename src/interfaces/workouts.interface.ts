@@ -1,3 +1,5 @@
+import { User } from './authentication.interface'
+
 /**
  * Represents an exercise in a hangboard workout.
  */
@@ -36,13 +38,13 @@ export interface Exercise {
    * Array representing the fingers used on the left hand.
    * Typically an array of indexes indicating which fingers are involved.
    */
-  leftHand?: Array<any>
+  leftHand?: Array<1 | 2 | 3 | 4 | 5>
 
   /**
    * Array representing the fingers used on the right hand.
    * Typically an array of indexes indicating which fingers are involved.
    */
-  rightHand?: Array<any>
+  rightHand?: Array<1 | 2 | 3 | 4 | 5>
 
   /**
    * Rotation angle applied during the exercise.
@@ -108,7 +110,7 @@ export interface Exercise {
 /**
  * Represents a hangboard workout.
  */
-export interface Workout {
+export interface Workout extends Record<string, unknown> {
   /**
    * Unique identifier for the workout.
    * Optional, may not be present if the workout is not yet saved.
@@ -200,7 +202,7 @@ export interface Workout {
    * Timestamp of the last update.
    * Optional field indicating when the workout was last modified.
    */
-  updateTimestamp?: any
+  updateTimestamp?: Date
 }
 
 /**
@@ -217,7 +219,7 @@ export interface Leaderboard {
    * List of entries in the leaderboard.
    * An array of objects representing the participants and their scores.
    */
-  leaderboard: Array<any>
+  leaderboard: User[]
 }
 
 /**

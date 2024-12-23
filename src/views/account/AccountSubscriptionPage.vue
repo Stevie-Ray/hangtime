@@ -28,9 +28,8 @@ let logField = ''
 let purchasesList: PurchaseDetails[] = []
 
 const progressValue = computed(() => {
-  // eslint-disable-next-line no-shadow
   let time = 60
-  // eslint-disable-next-line no-unsafe-optional-chaining
+
   if (!user || user?.value?.subscribed) time = 0
   const completedTime = user?.value?.completed?.time ? user.value.completed.time : 0
   const value = ((completedTime / time) * 100) / limit
@@ -38,7 +37,6 @@ const progressValue = computed(() => {
 })
 
 function log(contents: string): void {
-  // eslint-disable-next-line no-console
   console.log(contents)
   logField += `${contents}\n`
 }
@@ -79,7 +77,7 @@ async function populatePrice(sku: string): Promise<boolean> {
       return false
     }
     log(JSON.stringify(details, null, 2))
-    // eslint-disable-next-line prefer-destructuring
+
     item = details[0]
     const { value } = item.price
     const { currency } = item.price
@@ -194,7 +192,7 @@ function trigger(sku: string, onToken = (token: string) => {}) {
     window.setTimeout(() => {
       response
         .complete('success')
-        // eslint-disable-next-line func-names
+
         .then(() => {
           log(`Payment done: ${JSON.stringify(response, undefined, 2)}`)
           if (response.details && response.details.token) {
@@ -215,14 +213,14 @@ function trigger(sku: string, onToken = (token: string) => {}) {
   if (request.canMakePayment) {
     request
       .canMakePayment()
-      // eslint-disable-next-line func-names
+
       .then((result) => {
         log(result ? 'Can make payment' : 'Cannot make payment')
         // if (result) {
         //   request.show().then(handlePaymentResponse)
         // }
       })
-      // eslint-disable-next-line func-names
+
       .catch((e) => {
         log(e.message)
       })
@@ -233,8 +231,8 @@ function trigger(sku: string, onToken = (token: string) => {}) {
     request
       // @ts-expect-error Chrome only
       .hasEnrolledInstrument()
-      // eslint-disable-next-line func-names
-      .then((result: any) => {
+
+      .then((result: unknown) => {
         if (result) {
           log('Has enrolled instrument')
         } else {
@@ -244,7 +242,7 @@ function trigger(sku: string, onToken = (token: string) => {}) {
         request
           .show()
           .then(handlePaymentResponse)
-          // eslint-disable-next-line func-names
+
           .catch((e) => {
             // log(JSON.stringify(e, undefined, 2));
             log(e)
@@ -259,7 +257,7 @@ function trigger(sku: string, onToken = (token: string) => {}) {
         request
           .show()
           .then(handlePaymentResponse)
-          // eslint-disable-next-line no-shadow,func-names
+
           .catch((e) => {
             log(JSON.stringify(e, undefined, 2))
             log(e)

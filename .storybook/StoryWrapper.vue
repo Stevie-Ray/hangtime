@@ -6,10 +6,10 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
-    themeName: String,
-  },
-};
+    themeName: String
+  }
+}
 </script>

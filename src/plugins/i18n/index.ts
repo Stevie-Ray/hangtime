@@ -35,7 +35,7 @@ export async function loadLanguageAsync(locale: string) {
   const modules = import.meta.glob('@/i18n/*.json')
   const loadLanguage = async (path: string) => {
     try {
-      const messages = (await modules[path]()) as { default: Record<string, any> }
+      const messages = (await modules[path]()) as { default: Record<string, string> }
       i18n.global.setLocaleMessage(locale, messages.default)
       loadedLanguages.push(locale)
       return setI18nLanguage(locale)

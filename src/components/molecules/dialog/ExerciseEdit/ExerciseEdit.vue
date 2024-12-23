@@ -31,7 +31,6 @@ const emit = defineEmits(['update-time', 'update-index', 'show-dialog'])
 // const exercise = computed<Exercise | null>(() => workout.value?.exercises[index.value] ?? null)
 const exercise = computed<Exercise | undefined>(() => workout.value?.exercises[index])
 
-// eslint-disable-next-line no-shadow
 const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', time: number) => {
   if (!exercise.value) return
   // set time of timer value
@@ -51,7 +50,6 @@ const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', 
 }
 
 const exerciseByType = (typeId: 'arms' | 'legs') =>
-  // eslint-disable-next-line no-shadow
   exercises.filter((exercise) => exercise.type === typeId)
 
 const exerciseFilter = (type: 'arms' | 'legs') => {
@@ -361,8 +359,14 @@ const rules = {
                   <exercise-hand
                     v-model="exercise"
                     edit
-                    @left="(finger: number[]) => (exercise ? (exercise.leftHand = finger) : null)"
-                    @right="(finger: number[]) => (exercise ? (exercise.rightHand = finger) : null)"
+                    @left="
+                      (finger: (1 | 2 | 3 | 4 | 5)[]) =>
+                        exercise ? (exercise.leftHand = finger) : null
+                    "
+                    @right="
+                      (finger: (1 | 2 | 3 | 4 | 5)[]) =>
+                        exercise ? (exercise.rightHand = finger) : null
+                    "
                   ></exercise-hand>
                 </v-expansion-panel-text>
               </v-expansion-panel>

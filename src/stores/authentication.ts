@@ -4,6 +4,7 @@ import { loadLanguageAsync } from '@/plugins/i18n'
 import router from '@/router'
 import { User as FirebaseUser } from 'firebase/auth'
 import { User, UserSettings } from '@/interfaces/authentication.interface'
+import { FirebaseError } from 'firebase/app'
 
 export const useAuthenticationStore = defineStore('authentication', () => {
   const user: Ref<User | null | undefined> = ref(undefined)
@@ -15,7 +16,6 @@ export const useAuthenticationStore = defineStore('authentication', () => {
   async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser): Promise<User> {
     let providerData = firebaseAuthUser.providerData[0]
     if (firebaseAuthUser.isAnonymous) {
-      // eslint-disable-next-line prefer-destructuring
       providerData = firebaseAuthUser
     }
     const { displayName, photoURL, email } = providerData
@@ -38,7 +38,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
       vibrate: false,
       walkthrough: false
     }
-    // eslint-disable-next-line
+
     const user = {
       displayName,
       photoURL,
@@ -46,7 +46,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
       settings
     }
 
-    return usersDb.create(user, firebaseAuthUser.uid)
+    return usersDb.create(user as User, firebaseAuthUser.uid)
   }
   /**
    * Callback fired when user login
@@ -80,14 +80,14 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     } catch (e: unknown) {
       if (e instanceof Error) {
         error.value = e.message
-        if ((e as any).code?.toString() === 'resource-exhausted') {
+        if ((e as FirebaseError).code?.toString() === 'resource-exhausted') {
           error.value = 'Unfortunately our daily usage limit exceeded. Check back with us tomorrow.'
         }
-        // eslint-disable-next-line no-console
+
         console.error(e)
       } else {
         error.value = 'An unknown error occurred'
-        // eslint-disable-next-line no-console
+
         console.error('An unknown error occurred', e)
       }
     }
@@ -111,8 +111,8 @@ export const useAuthenticationStore = defineStore('authentication', () => {
    */
   async function updateUser() {
     if (!user.value) return
-    const { default: UsersWorkoutsDB } = await import('@/plugins/firebase/users-workouts-db')
-    const usersDb = new UsersWorkoutsDB()
+    const { default: UsersDB } = await import('@/plugins/firebase/users-db')
+    const usersDb = new UsersDB()
     await usersDb.update(user.value)
   }
 

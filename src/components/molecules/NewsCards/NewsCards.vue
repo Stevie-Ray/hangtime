@@ -50,14 +50,14 @@ const slides: Slide[] = [
   }
 ]
 
-let newCompanies = getCompanies()
+const newCompanies = getCompanies()
   .filter((company) => company?.id >= getCompanies.length - 5)
   .sort((a, b) => (a.id > b.id ? 1 : -1))
   .reverse()
   .slice(0, 5)
 
 let index = 0
-// eslint-disable-next-line no-restricted-syntax
+
 for (const newCompany of newCompanies) {
   const newSlide: Slide = {
     title: `${

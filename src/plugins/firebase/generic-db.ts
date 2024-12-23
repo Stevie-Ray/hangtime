@@ -20,13 +20,15 @@ import {
   WhereFilterOp,
   OrderByDirection,
   DocumentSnapshot,
-  startAfter
+  startAfter,
+  QuerySnapshot,
+  DocumentData
 } from 'firebase/firestore/lite'
 import { toRaw, isRef, isReactive, isProxy, ref } from 'vue'
 import firebaseApp from '@/plugins/firebase'
 
-export function deepToRaw(sourceObj: any): any {
-  const objectIterator = (input: any): any => {
+export function deepToRaw(sourceObj: unknown): unknown {
+  const objectIterator = (input: unknown): unknown => {
     if (Array.isArray(input)) {
       return input.map((item) => objectIterator(item))
     }
@@ -34,10 +36,13 @@ export function deepToRaw(sourceObj: any): any {
       return objectIterator(toRaw(input))
     }
     if (input && typeof input === 'object') {
-      return Object.keys(input).reduce((acc, key) => {
-        acc[key] = objectIterator(input[key])
-        return acc
-      }, {} as any)
+      return Object.keys(input as object).reduce(
+        (acc, key) => {
+          acc[key] = objectIterator((input as Record<string, unknown>)[key])
+          return acc
+        },
+        {} as Record<string, unknown>
+      )
     }
     return input
   }
@@ -80,7 +85,7 @@ export default class GenericDB<T> {
    * @param data
    * @param id
    */
-  async create(data: any, id?: string | null): Promise<T> {
+  async create(data: Partial<T>, id?: string | null): Promise<T & { id: string }> {
     const collectionRef = collection(db, this.collectionPath)
     const serverTimestampValue = serverTimestamp()
 
@@ -104,7 +109,7 @@ export default class GenericDB<T> {
       ...data,
       createTimestamp: new Date(),
       updateTimestamp: new Date()
-    } as T
+    } as unknown as T & { id: string }
   }
 
   /**
@@ -127,18 +132,18 @@ export default class GenericDB<T> {
   /**
    * Retrieves all documents from the Firestore collection.
    *
-   * @param {Array<[string, WhereFilterOp, any]> | null} constraints - Array of constraints for the query.
+   * @param {Array<[string, WhereFilterOp, unknown]> | null} constraints - Array of constraints for the query.
    * @param {string | null} order - Field to sort the results by.
    * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {number | null} amount - Maximum number of documents to retrieve.
-   * @returns {Promise<any[]>} - Array of documents retrieved.
+   * @returns {Promise<(T & { id: string })[]>} - Array of documents retrieved.
    */
   async readAll(
-    constraints: Array<[string, WhereFilterOp, any]> | null = null,
+    constraints: Array<[string, WhereFilterOp, unknown]> | null = null,
     order: string | null = null,
     direction: OrderByDirection = 'desc',
     amount: number | null = null
-  ): Promise<any[]> {
+  ): Promise<(T & { id: string })[]> {
     // Do not fetch data if lastResult is true
     if (this.lastResult.value) {
       return []
@@ -182,12 +187,13 @@ export default class GenericDB<T> {
     // Check if fewer results than requested are returned
     this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
-    const formatResult = (result: any): any =>
-      result.docs.map((ref: any) =>
-        this.convertObjectTimestampPropertiesToDate({
-          id: ref.id,
-          ...ref.data()
-        })
+    const formatResult = (result: QuerySnapshot<DocumentData>): (T & { id: string })[] =>
+      result.docs.map(
+        (ref: DocumentSnapshot<DocumentData>) =>
+          this.convertObjectTimestampPropertiesToDate({
+            id: ref.id,
+            ...ref.data()
+          }) as T & { id: string }
       )
 
     return formatResult(querySnapshot)
@@ -197,14 +203,14 @@ export default class GenericDB<T> {
    * Update a document in the collection
    * @param data
    */
-  async update(data: any): Promise<string> {
+  async update(data: T & { id: string }): Promise<string> {
     const { id } = data
     const clonedData = structuredClone(deepToRaw(data))
-    delete clonedData.id
+    delete (clonedData as Partial<T & { id: string }>).id
 
     const docRef: DocumentReference = doc(db, this.collectionPath, id)
     await updateDoc(docRef, {
-      ...clonedData,
+      ...(clonedData as object),
       updateTimestamp: serverTimestamp()
     })
 
@@ -224,16 +230,16 @@ export default class GenericDB<T> {
    * Convert all object Timestamp properties to date
    * @param obj
    */
-  convertObjectTimestampPropertiesToDate(obj: any): any {
-    const newObj = {}
+  convertObjectTimestampPropertiesToDate(obj: Record<string, unknown>): Record<string, unknown> {
+    const newObj: Record<string, unknown> = {}
 
     Object.keys(obj)
       .filter((prop) => obj[prop] instanceof Object)
       .forEach((prop) => {
         if (obj[prop] instanceof Timestamp) {
-          obj[prop] = obj[prop].toDate()
+          obj[prop] = (obj[prop] as Timestamp).toDate()
         } else {
-          this.convertObjectTimestampPropertiesToDate(obj[prop])
+          this.convertObjectTimestampPropertiesToDate(obj[prop] as Record<string, unknown>)
         }
       })
 

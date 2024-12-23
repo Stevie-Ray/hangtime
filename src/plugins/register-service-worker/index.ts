@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { register } from 'register-service-worker'
 import { storeToRefs } from 'pinia'
 import { useAppStore } from '@/stores/app'

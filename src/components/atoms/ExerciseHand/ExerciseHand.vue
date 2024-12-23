@@ -34,7 +34,7 @@ const getHandClass = (hand: 'leftHand' | 'rightHand') => {
   const handArray = exercise.value[hand]
   if (handArray) {
     if (handArray.length) {
-      return handArray.map((finger: string) => `f${finger}`).join(' ')
+      return handArray.map((finger: number) => `f${finger}`).join(' ')
     }
     return `f${handArray}`
   }

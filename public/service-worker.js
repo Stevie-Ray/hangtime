@@ -17,7 +17,7 @@ cleanupOutdatedCaches()
  * requests for URLs in the manifest.
  * See https://goo.gl/S9QRab
  */
-// eslint-disable-next-line no-restricted-globals,no-underscore-dangle
+ 
 precacheAndRoute(self.__WB_MANIFEST)
 
 // Redirect to index.html if sw cannot find matching route
@@ -60,8 +60,8 @@ registerRoute(
   }),
   'GET'
 )
-// eslint-disable-next-line no-restricted-globals,consistent-return
+ 
 addEventListener('message', (messageEvent) => {
-  // eslint-disable-next-line no-restricted-globals
+   
   if (messageEvent.data === 'skipWaiting') return self.skipWaiting()
 })

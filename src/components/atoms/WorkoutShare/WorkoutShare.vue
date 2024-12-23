@@ -40,7 +40,6 @@ const shareWorkout = async () => {
   try {
     await navigator.share(shareData)
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.log(`Error: ${err}`)
   }
 }

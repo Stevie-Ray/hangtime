@@ -58,10 +58,9 @@ function setTokenSentToServer(sent: boolean) {
  * - subscribe/unsubscribe the token from topics
  * @param currentToken
  */
-// eslint-disable-next-line no-shadow
+
 function sendTokenToServer(currentToken: string) {
   if (!isTokenSentToServer()) {
-    // eslint-disable-next-line no-console
     console.log('Sending token to server...', currentToken)
     if (user.value) {
       user.value.settings.token = currentToken
@@ -69,11 +68,10 @@ function sendTokenToServer(currentToken: string) {
     }
     setTokenSentToServer(true)
   } else {
-    // eslint-disable-next-line no-console
     console.log("Token already sent to server so won't send it again unless it changes")
   }
 }
-// eslint-disable-next-line no-shadow
+
 function updateUIForPushEnabled(currentToken: string) {
   hasToken.value = true
   needsPermission.value = false
@@ -96,14 +94,13 @@ function resetUI() {
     // Get registration token. Initially this makes a network call, once retrieved
     // subsequent calls to getToken will return from cache.
     getToken(messaging, { vapidKey })
-      // eslint-disable-next-line no-shadow
       .then((currentToken) => {
         if (currentToken) {
           sendTokenToServer(currentToken)
           updateUIForPushEnabled(currentToken)
         } else {
           // Show permission request.
-          // eslint-disable-next-line no-console
+
           console.log('No registration token available. Request permission to generate one.')
           // Show permission UI.
           updateUIForPushPermissionRequired()
@@ -111,7 +108,6 @@ function resetUI() {
         }
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
         console.log('An error occurred while retrieving token. ', err)
         showToken('Error retrieving registration token.')
         setTokenSentToServer(false)
@@ -121,12 +117,10 @@ function resetUI() {
 }
 
 function requestPermission() {
-  // eslint-disable-next-line no-console
   console.log('Requesting permission...')
   // [START request_permission]
   Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
-      // eslint-disable-next-line no-console
       console.log('Notification permission granted.')
       // Retrieve a registration token for use with FCM.
       if (user?.value?.settings?.token) {
@@ -139,7 +133,6 @@ function requestPermission() {
       resetUI()
       // [END_EXCLUDE]
     } else {
-      // eslint-disable-next-line no-console
       console.log('Unable to get permission to notify.')
     }
   })
@@ -151,11 +144,9 @@ function deleteTokens() {
   // [START delete_token]
   if (messaging) {
     getToken(messaging)
-      // eslint-disable-next-line no-shadow
       .then((currentToken) => {
         deleteToken(messaging)
           .then(() => {
-            // eslint-disable-next-line no-console
             console.log('Token deleted.', currentToken)
             setTokenSentToServer(false)
             // [START_EXCLUDE]
@@ -164,13 +155,11 @@ function deleteTokens() {
             // [END_EXCLUDE]
           })
           .catch((err) => {
-            // eslint-disable-next-line no-console
             console.log('Unable to delete token. ', err)
           })
         // [END delete_token]
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
         console.log('Error retrieving registration token. ', err)
         showToken('Error retrieving registration token.')
       })
@@ -194,7 +183,6 @@ function appendMessage(payload: MessagePayload) {
 
 if (messaging) {
   onMessage(messaging, (payload: MessagePayload) => {
-    // eslint-disable-next-line no-console
     console.log('Message received. ', payload)
     // [START_EXCLUDE]
     // Update the UI to include the received message.

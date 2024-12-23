@@ -1,6 +1,6 @@
 import { ref, computed, reactive } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
-import { WhereFilterOp } from 'firebase/firestore/lite'
+import { FieldPath, WhereFilterOp } from 'firebase/firestore/lite'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useUserStore } from '@/stores/user'
 import i18n from '@/plugins/i18n'
@@ -8,6 +8,7 @@ import { CommunityWorkoutsDB, UserSubscribedDB } from '@/plugins/firebase/users-
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
 import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
+import { User } from '@/interfaces/authentication.interface'
 
 const userSubscribedDB = new UserSubscribedDB()
 const communityWorkoutsDB = new CommunityWorkoutsDB()
@@ -55,7 +56,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
 
   const fetchCommunityWorkouts = async () => {
     const userStore = useUserStore()
-    const constraints: [string, WhereFilterOp, any][] = [['share', '==', true]]
+    const constraints: [string | FieldPath, WhereFilterOp, unknown][] = [['share', '==', true]]
 
     if (userStore?.getUserHangboardCompany) {
       constraints.push(['company', '==', userStore.getUserHangboardCompany.id])
@@ -76,7 +77,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   const fetchLeaderboard = async (rank = 'completed.amount') => {
     if (leaderboards.value.some((leaderboard) => leaderboard.rank === rank)) return
 
-    const leaderboard = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
+    const leaderboard: User[] = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
     leaderboards.value.push({ rank, leaderboard })
   }
 
@@ -94,7 +95,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
 
   const updateUserWorkout = async (workout: Workout) => {
     if (workoutDB) {
-      await workoutDB.update(workout)
+      await workoutDB.update(workout as Workout & { id: string })
     }
   }
 
@@ -114,7 +115,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
    */
   const updateWorkout = async ({ userId, workout }: { userId: string; workout: Workout }) => {
     const userWorkoutsDb = new UserWorkoutsDB(userId)
-    await userWorkoutsDb.update(workout)
+    await userWorkoutsDb.update(workout as Workout & { id: string })
   }
 
   const getWorkoutById = computed(() => (id: string | string[]): Workout | undefined => {

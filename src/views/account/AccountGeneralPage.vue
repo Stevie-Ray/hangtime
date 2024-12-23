@@ -72,9 +72,9 @@ const language = [
 const settingsLocale = computed({
   get() {
     if (!user.value) return ''
-    // eslint-disable-next-line consistent-return
+
     if (user?.value?.settings?.locale) return user.value.settings.locale
-    // eslint-disable-next-line consistent-return
+
     return i18n.locale.toString()
   },
   set(value: string) {

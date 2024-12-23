@@ -10,7 +10,9 @@ import {
   startAfter,
   Firestore,
   QueryConstraint,
-  OrderByDirection
+  OrderByDirection,
+  QueryDocumentSnapshot,
+  FieldPath
 } from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
@@ -25,18 +27,18 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
   /**
    * Retrieves all documents from the Firestore collection.
    *
-   * @param {Array<[string, WhereFilterOp, any]> | null} constraints - Array of constraints for the query.
+   * @param {Array<[string, WhereFilterOp, unknown]> | null} constraints - Array of constraints for the query.
    * @param {string | null} order - Field to sort the results by.
    * @param {OrderByDirection} direction - Field to manage the order direction.
    * @param {number | null} amount - Maximum number of documents to retrieve.
-   * @returns {Promise<any[]>} - Array of documents retrieved.
+   * @returns {Promise<Workout[]>} - Array of documents retrieved.
    */
   async readAll(
-    constraints: Array<[string, WhereFilterOp, any]> | null = null,
+    constraints: Array<[string | FieldPath, WhereFilterOp, unknown]> | null = null,
     order: string | null = null,
     direction: OrderByDirection = 'desc',
     amount: number | null = null
-  ): Promise<any[]> {
+  ): Promise<(Workout & { id: string })[]> {
     // Do not fetch data if lastResult is true
     if (this.lastResult.value) {
       return []
@@ -73,15 +75,16 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
 
     this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
-    const formatResult = (result: any) =>
-      result.docs.map((ref: any) =>
-        this.convertObjectTimestampPropertiesToDate({
-          id: ref.id,
-          ...ref.data()
-        })
+    const formatResult = (result: { docs: QueryDocumentSnapshot[] }) =>
+      result.docs.map(
+        (ref) =>
+          this.convertObjectTimestampPropertiesToDate({
+            id: ref.id,
+            ...ref.data()
+          }) as Workout
       )
 
-    return formatResult(querySnapshot)
+    return formatResult(querySnapshot) as (Workout & { id: string })[]
   }
 }
 

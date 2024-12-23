@@ -48,13 +48,9 @@ const shareExternal = () => {
       url: document.location.href
     })
     .then(() => {
-      // eslint-disable-next-line no-console
       console.log('Thanks for sharing!')
     })
-    .catch(
-      // eslint-disable-next-line no-console
-      console.error
-    )
+    .catch(console.error)
 }
 
 const closeModal = () => {
