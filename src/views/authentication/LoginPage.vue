@@ -22,6 +22,8 @@ import { useAuthenticationStore } from '@/stores/authentication'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
 import imgLogo from '@/assets/logo.svg'
+import { VForm } from 'vuetify/components'
+import { SubmitEventPromise } from 'vuetify'
 
 const { t } = useI18n()
 
@@ -66,9 +68,6 @@ const appVersion = import.meta.env.VITE_APP_VERSION
 const formDisabled = ref(false)
 const switchForm = ref(false)
 const passwordToggle = ref(false)
-const valid = ref(true)
-const login = ref(null)
-const register = ref(null)
 
 // form fields
 const email = ref('')
@@ -169,7 +168,6 @@ const connect = async (method: string) => {
         error.value = err.message
 
         console.log(err)
-        valid.value = false
       })
   }
 
@@ -187,7 +185,6 @@ const connect = async (method: string) => {
         error.value = err.message
 
         console.log(err)
-        valid.value = false
       })
   }
 
@@ -232,22 +229,16 @@ const connect = async (method: string) => {
   }
 }
 
-const validateLogin = () => {
-  if (login.value) {
-    // @ts-expect-error Vuetify
-    login.value.validate()
-  }
-  if (valid.value) {
+const validateLogin = async (event: SubmitEventPromise) => {
+  const results = await event
+  if (results.valid) {
     connect('login')
   }
 }
 
-const validateRegister = () => {
-  if (register.value) {
-    // @ts-expect-error Vuetify
-    register.value.validate()
-  }
-  if (valid.value) {
+const validateRegister = async (event: SubmitEventPromise) => {
+  const results = await event
+  if (results.valid) {
     connect('register')
   }
 }
@@ -329,13 +320,7 @@ useHead({
             <v-row class="form-sign-in">
               <v-col cols="12">
                 <!-- Login -->
-                <v-form
-                  v-if="!switchForm"
-                  ref="login"
-                  v-model="valid"
-                  :disabled="formDisabled"
-                  lazy-validation
-                >
+                <v-form v-if="!switchForm" :disabled="formDisabled" @submit.prevent="validateLogin">
                   <v-text-field
                     v-model="email"
                     label="E-mail"
@@ -355,7 +340,7 @@ useHead({
                     :type="passwordToggle ? 'text' : 'password'"
                     required
                     @click:append-inner="passwordToggle = !passwordToggle"
-                    @keyup.enter="user == undefined && !user && online ? validateLogin() : null"
+                    @keyup.enter="user == undefined && !user && online ? validateLogin : null"
                   ></v-text-field>
 
                   <v-btn
@@ -365,7 +350,7 @@ useHead({
                     class="mt-2 mb-4"
                     prepend-icon="$key"
                     :disabled="!(user == undefined && !user && online)"
-                    @click="validateLogin"
+                    type="submit"
                   >
                     {{ t('Login') }}
                   </v-btn>
@@ -376,10 +361,8 @@ useHead({
                 <!-- Register -->
                 <v-form
                   v-if="switchForm"
-                  ref="register"
-                  v-model="valid"
                   :disabled="formDisabled"
-                  lazy-validation
+                  @submit.prevent="validateRegister"
                 >
                   <v-text-field
                     v-model="displayName"
@@ -415,7 +398,7 @@ useHead({
                     size="large"
                     class="mt-2 mb-4"
                     prepend-icon="$key"
-                    @click="validateRegister"
+                    type="submit"
                   >
                     {{ t('Register') }}
                   </v-btn>
