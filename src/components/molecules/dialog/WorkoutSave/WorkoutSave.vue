@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useWorkoutsStore } from '@/stores/workouts'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const { createUserWorkout, updateUserWorkout } = useWorkoutsStore()
 
@@ -10,7 +10,7 @@ const router = useRouter()
 
 const { t } = useI18n()
 
-const workout = defineModel<Workout>({ required: true })
+const workout = defineModel<IWorkout>({ required: true })
 
 const { showDialog = false } = defineProps<{
   showDialog?: boolean

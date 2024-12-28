@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 import InlineSvg from 'vue-inline-svg'
 import { useUserStore } from '@/stores/user'
-import { Exercise } from '@/interfaces/workouts.interface'
+import { IExercise } from '@/interfaces/workout.interface'
 
 const { getHangboardByIds } = useUserStore()
 
 // not required
-const exercise = defineModel<Exercise>()
+const exercise = defineModel<IExercise>()
 
 const { hangboard, edit = false } = defineProps<{
   hangboard: { hangboard: number; company: number }

@@ -147,7 +147,7 @@ export interface Country {
 /**
  * Represents a user profile.
  */
-export interface User {
+export interface IUser {
   /**
    * Details about workouts completed by the user.
    * Optional, present only if the user has completed workouts.

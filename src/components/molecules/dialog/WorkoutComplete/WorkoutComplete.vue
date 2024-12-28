@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import router from '@/router'
 import { time, useRandomImage } from '@/helpers'
 import { useAuthenticationStore } from '@/stores/authentication'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 
@@ -12,7 +12,7 @@ const emit = defineEmits(['show'])
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const workout = defineModel<Workout>({ required: true })
+const workout = defineModel<IWorkout>({ required: true })
 
 const {
   showDialog = false,

@@ -13,8 +13,8 @@ import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
 import { useActivitiesStore } from '@/stores/activities'
 import { useAuthenticationStore } from '@/stores/authentication'
 
-import { Activity } from '@/interfaces/activities.interface'
-import { Levels } from '@/interfaces/workouts.interface'
+import { IActivity } from '@/interfaces/activity.interface'
+import { Levels } from '@/interfaces/workout.interface'
 
 const { activities } = storeToRefs(useActivitiesStore())
 const { user } = storeToRefs(useAuthenticationStore())
@@ -33,7 +33,7 @@ const difficultyById = (id: number): string | undefined =>
   levels.find((level) => level.value === id)?.name
 
 const activitiesByDay = computed(() => {
-  return activities.value.reduce((days: Record<string, Activity[]>, activity: Activity) => {
+  return activities.value.reduce((days: Record<string, IActivity[]>, activity: IActivity) => {
     const dateString =
       activity.start_date_local?.toLocaleDateString(user?.value?.settings?.locale ?? 'en-US') || ''
     if (!days[dateString]) {
@@ -52,7 +52,7 @@ const activityDate = (date: string): string => {
   return date
 }
 
-const activityUrl = (activity: Activity): string => {
+const activityUrl = (activity: IActivity): string => {
   if (activity.company && activity.hangboard && activity.workout) {
     return `/workouts/${activity.company}/${activity.hangboard}/${activity.workout}`
   }

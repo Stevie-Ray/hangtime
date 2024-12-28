@@ -2,11 +2,11 @@
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import imgIconHang from '@/assets/icons/hand.svg'
-import { Exercise } from '@/interfaces/workouts.interface'
+import { IExercise } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 
-const exercise = defineModel<Exercise>({ required: true })
+const exercise = defineModel<IExercise>({ required: true })
 
 const { edit = false } = defineProps<{
   edit?: boolean

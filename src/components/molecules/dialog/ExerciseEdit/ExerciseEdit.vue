@@ -7,7 +7,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
-import { Workout, Exercise } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const { user } = storeToRefs(useAuthenticationStore())
 
@@ -19,7 +19,7 @@ const { t } = useI18n()
 
 const repType = ref('original')
 
-const workout = defineModel<Workout>({ required: true })
+const workout = defineModel<IWorkout>({ required: true })
 
 const { showDialog = false, index = 1 } = defineProps<{
   showDialog?: boolean
@@ -29,7 +29,7 @@ const { showDialog = false, index = 1 } = defineProps<{
 const emit = defineEmits(['update-time', 'update-index', 'show-dialog'])
 
 // const exercise = computed<Exercise | null>(() => workout.value?.exercises[index.value] ?? null)
-const exercise = computed<Exercise | undefined>(() => workout.value?.exercises[index])
+const exercise = computed(() => workout.value?.exercises[index])
 
 const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', time: number) => {
   if (!exercise.value) return

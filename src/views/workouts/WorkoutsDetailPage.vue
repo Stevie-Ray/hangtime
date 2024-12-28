@@ -17,7 +17,7 @@ import { useAuthenticationStore } from '@/stores/authentication'
 import { useUserStore } from '@/stores/user'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
-import { Exercise } from '@/interfaces/workouts.interface'
+import { IExercise } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 
@@ -49,7 +49,7 @@ const workoutSaveDialog = ref(false)
 
 const exerciseAdd = () => {
   // create in function
-  const exerciseNew: Exercise = {
+  const exerciseNew: IExercise = {
     exercise: 0,
     grip: 0,
     level: 0,

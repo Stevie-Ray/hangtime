@@ -6,13 +6,13 @@ import { reactive } from 'vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer.vue'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 
 const router = useRouter()
 
-const workout = reactive<Workout>({
+const workout = reactive<IWorkout>({
   name: 'Quick workout',
   description: 'Just a simple timer go get you going',
   exercises: [

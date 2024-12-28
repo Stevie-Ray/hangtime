@@ -6,13 +6,13 @@ import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
 import { useUserStore } from '@/stores/user'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 
 const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
-const workout = defineModel<Workout>({ required: true })
+const workout = defineModel<IWorkout>({ required: true })
 
 const { edit = false } = defineProps<{
   edit?: boolean

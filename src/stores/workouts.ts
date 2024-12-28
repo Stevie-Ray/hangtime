@@ -7,16 +7,16 @@ import i18n from '@/plugins/i18n'
 import { CommunityWorkoutsDB, UserSubscribedDB } from '@/plugins/firebase/users-workouts-db'
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
-import { Leaderboard, Workout } from '@/interfaces/workouts.interface'
-import { User } from '@/interfaces/authentication.interface'
+import { Leaderboard, IWorkout } from '@/interfaces/workout.interface'
+import { IUser } from '@/interfaces/authentication.interface'
 
 const userSubscribedDB = new UserSubscribedDB()
 const communityWorkoutsDB = new CommunityWorkoutsDB()
 const usersDB = new UsersDB()
 
 export const useWorkoutsStore = defineStore('workouts', () => {
-  const workouts = ref<Workout[]>([])
-  const workoutsCommunity = ref<Workout[]>([])
+  const workouts = ref<IWorkout[]>([])
+  const workoutsCommunity = ref<IWorkout[]>([])
   const workoutsCommunityFilter = ref({ filter: 'Last Modified', value: 'updateTimestamp' })
   const workoutsCommunityFilterDirection = ref<'desc' | 'asc'>('desc')
   const leaderboards = ref<Leaderboard[]>([])
@@ -77,11 +77,11 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   const fetchLeaderboard = async (rank = 'completed.amount') => {
     if (leaderboards.value.some((leaderboard) => leaderboard.rank === rank)) return
 
-    const leaderboard: User[] = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
+    const leaderboard: IUser[] = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
     leaderboards.value.push({ rank, leaderboard })
   }
 
-  const createUserWorkout = async (workout: Workout) => {
+  const createUserWorkout = async (workout: IWorkout) => {
     if (workoutDB) {
       const createdWorkout = await workoutDB.create(workout)
 
@@ -93,9 +93,9 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     }
   }
 
-  const updateUserWorkout = async (workout: Workout) => {
+  const updateUserWorkout = async (workout: IWorkout) => {
     if (workoutDB) {
-      await workoutDB.update(workout as Workout & { id: string })
+      await workoutDB.update(workout as IWorkout & { id: string })
     }
   }
 
@@ -113,12 +113,12 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   /**
    * Updates a workout of a gven user.
    */
-  const updateWorkout = async ({ userId, workout }: { userId: string; workout: Workout }) => {
+  const updateWorkout = async ({ userId, workout }: { userId: string; workout: IWorkout }) => {
     const userWorkoutsDb = new UserWorkoutsDB(userId)
-    await userWorkoutsDb.update(workout as Workout & { id: string })
+    await userWorkoutsDb.update(workout as IWorkout & { id: string })
   }
 
-  const getWorkoutById = computed(() => (id: string | string[]): Workout | undefined => {
+  const getWorkoutById = computed(() => (id: string | string[]): IWorkout | undefined => {
     let workout = workouts.value.find((workout) => workout.id === id)
     if (!workout) {
       workout = workoutsCommunity.value.find((workout) => workout.id === id)
@@ -127,7 +127,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
       const { getUserHangboard, getUserHangboardCompany } = useUserStore()
 
       if (user.value && getUserHangboard && getUserHangboardCompany) {
-        workout = reactive<Workout>({
+        workout = reactive<IWorkout>({
           name: i18n.global.t('New workout'),
           description: '',
           level: 1,

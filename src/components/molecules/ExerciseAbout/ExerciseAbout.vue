@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useExercises, useGrip } from '@/helpers'
-import { Exercise } from '@/interfaces/workouts.interface'
+import { IExercise } from '@/interfaces/workout.interface'
 
 const grip = useGrip()
 const exercises = useExercises()
 
-const exercise = defineModel<Exercise>({ required: true })
+const exercise = defineModel<IExercise>({ required: true })
 </script>
 
 <template>

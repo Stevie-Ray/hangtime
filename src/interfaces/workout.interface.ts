@@ -1,9 +1,9 @@
-import { User } from './authentication.interface'
+import { IUser } from './authentication.interface'
 
 /**
  * Represents an exercise in a hangboard workout.
  */
-export interface Exercise {
+export interface IExercise {
   /**
    * Number representing the exercise.
    * Unique identifier within the workout for this specific exercise.
@@ -110,7 +110,7 @@ export interface Exercise {
 /**
  * Represents a hangboard workout.
  */
-export interface Workout extends Record<string, unknown> {
+export interface IWorkout {
   /**
    * Unique identifier for the workout.
    * Optional, may not be present if the workout is not yet saved.
@@ -151,7 +151,7 @@ export interface Workout extends Record<string, unknown> {
    * List of exercises included in the workout.
    * An array of Exercise objects, detailing each step of the workout.
    */
-  exercises: Exercise[]
+  exercises: IExercise[]
 
   /**
    * Duration of the workout in minutes.
@@ -219,7 +219,7 @@ export interface Leaderboard {
    * List of entries in the leaderboard.
    * An array of objects representing the participants and their scores.
    */
-  leaderboard: User[]
+  leaderboard: IUser[]
 }
 
 /**

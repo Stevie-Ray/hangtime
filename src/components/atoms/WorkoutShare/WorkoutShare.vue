@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const router = useRouter()
 
@@ -11,7 +11,7 @@ const { online } = storeToRefs(useAppStore())
 
 const { getUserHangboardCompany, getUserHangboard } = storeToRefs(useUserStore())
 
-const workout = defineModel<Workout>({ required: true })
+const workout = defineModel<IWorkout>({ required: true })
 
 const { size = 'default' } = defineProps<{
   size?: string

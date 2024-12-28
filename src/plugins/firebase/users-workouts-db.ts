@@ -16,11 +16,11 @@ import {
 } from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const db: Firestore = getFirestore(firebaseApp)
 
-export default class UsersWorkoutsDB extends GenericDB<Workout> {
+export default class UsersWorkoutsDB extends GenericDB<IWorkout> {
   constructor() {
     super('users')
   }
@@ -38,7 +38,7 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
     order: string | null = null,
     direction: OrderByDirection = 'desc',
     amount: number | null = null
-  ): Promise<(Workout & { id: string })[]> {
+  ): Promise<(IWorkout & { id: string })[]> {
     // Do not fetch data if lastResult is true
     if (this.lastResult.value) {
       return []
@@ -81,10 +81,10 @@ export default class UsersWorkoutsDB extends GenericDB<Workout> {
           this.convertObjectTimestampPropertiesToDate({
             id: ref.id,
             ...ref.data()
-          }) as Workout
+          }) as unknown as IWorkout
       )
 
-    return formatResult(querySnapshot) as (Workout & { id: string })[]
+    return formatResult(querySnapshot) as (IWorkout & { id: string })[]
   }
 }
 

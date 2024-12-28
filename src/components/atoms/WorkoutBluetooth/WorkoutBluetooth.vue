@@ -2,7 +2,7 @@
 /// <reference types="web-bluetooth" />
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 import {
   Climbro,
@@ -18,7 +18,7 @@ import { useBluetoothStore } from '@/stores/bluetooth'
 
 const { device } = storeToRefs(useBluetoothStore())
 
-const workout = defineModel<Workout>()
+const workout = defineModel<IWorkout>()
 
 const { size = 'default' } = defineProps<{
   size?: string

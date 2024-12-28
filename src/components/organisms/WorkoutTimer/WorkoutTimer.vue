@@ -13,7 +13,7 @@ import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vu
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
 import SliderBluetooth from '@/components/atoms/SliderBluetooth/SliderBluetooth.vue'
-import { Workout, Exercise } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 import { time } from '@/helpers'
 
 import countSound from '@/assets/sound/count.wav'
@@ -36,7 +36,7 @@ const { createUserActivity } = useActivitiesStore()
 
 const { isSupported, isActive, request, release } = useWakeLock()
 
-const workout = defineModel<Workout>({ required: true })
+const workout = defineModel<IWorkout>({ required: true })
 
 const { quick = false } = defineProps<{
   quick?: boolean
@@ -82,11 +82,11 @@ onBeforeUnmount(() => {
   }
 })
 
-const exercise = computed<Exercise>(() => {
+const exercise = computed(() => {
   return workout.value.exercises[currentExercise.value]
 })
 
-const exerciseNext = computed<Exercise>(() => {
+const exerciseNext = computed(() => {
   return workout.value.exercises[currentExercise.value + 1]
 })
 

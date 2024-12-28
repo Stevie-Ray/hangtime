@@ -3,17 +3,17 @@ import { ref, Ref } from 'vue'
 import { loadLanguageAsync } from '@/plugins/i18n'
 import router from '@/router'
 import { User as FirebaseUser } from 'firebase/auth'
-import { User, UserSettings } from '@/interfaces/authentication.interface'
+import { IUser, UserSettings } from '@/interfaces/authentication.interface'
 import { FirebaseError } from 'firebase/app'
 
 export const useAuthenticationStore = defineStore('authentication', () => {
-  const user: Ref<User | null | undefined> = ref(undefined)
+  const user: Ref<IUser | null | undefined> = ref(undefined)
   const error: Ref<string | null> = ref(null)
 
   /**
    * Create new user from firebase auth user infos
    */
-  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser): Promise<User> {
+  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser): Promise<IUser> {
     let providerData = firebaseAuthUser.providerData[0]
     if (firebaseAuthUser.isAnonymous) {
       providerData = firebaseAuthUser
@@ -46,7 +46,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
       settings
     }
 
-    return usersDb.create(user as User, firebaseAuthUser.uid)
+    return usersDb.create(user as IUser, firebaseAuthUser.uid)
   }
   /**
    * Callback fired when user login

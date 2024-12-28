@@ -6,13 +6,13 @@ import { useI18n } from 'vue-i18n'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import { useAppStore } from '@/stores/app'
 import ExerciseEdit from '@/components/molecules/dialog/ExerciseEdit/ExerciseEdit.vue'
-import { Workout } from '@/interfaces/workouts.interface'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 
 const { online } = storeToRefs(useAppStore())
 
-const workout = defineModel<Workout>({ required: true })
+const workout = defineModel<IWorkout>({ required: true })
 
 const { edit = false } = defineProps<{
   edit?: boolean
