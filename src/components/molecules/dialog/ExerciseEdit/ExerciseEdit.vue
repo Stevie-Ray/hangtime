@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, toRaw } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useExercises, useGrip, weightConverter } from '@/helpers'
@@ -7,7 +7,7 @@ import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
-import { IWorkout } from '@/interfaces/workout.interface'
+import { Workout } from '@/models/workout.model'
 
 const { user } = storeToRefs(useAuthenticationStore())
 
@@ -19,7 +19,7 @@ const { t } = useI18n()
 
 const repType = ref('original')
 
-const workout = defineModel<IWorkout>({ required: true })
+const workout = defineModel<Workout>({ required: true })
 
 const { showDialog = false, index = 1 } = defineProps<{
   showDialog?: boolean
@@ -80,10 +80,10 @@ const exerciseMovement = computed({
 
 const exerciseRemove = () => {
   if (workout.value && workout.value.exercises[index]) {
-    const removedExercise = workout.value.exercises.splice(index, 1)[0]
+    workout.value.removeExercise(index)
 
-    if (workout.value?.time && removedExercise?.time) {
-      emit('update-time', workout.value.time - removedExercise.time)
+    if (workout.value?.time) {
+      emit('update-time', workout.value.time)
     }
 
     emit('update-index', 0)
@@ -93,11 +93,10 @@ const exerciseRemove = () => {
 
 const exerciseCopy = () => {
   if (workout.value) {
-    const newExercise = structuredClone(toRaw(workout.value.exercises[index]))
-    workout.value.exercises.splice(index, 0, newExercise)
+    workout.value.copyExercise(index)
 
-    if (workout.value?.time && newExercise?.time) {
-      emit('update-time', workout.value.time + newExercise.time)
+    if (workout.value?.time) {
+      emit('update-time', workout.value.time)
     }
 
     emit('update-index', 0)
@@ -135,9 +134,18 @@ const rules = {
         </v-toolbar-title>
 
         <v-toolbar-items>
-          <v-btn v-if="index !== 0" icon="$deleteOutline" @click="exerciseRemove" />
-          <v-btn icon="$contentCopy" @click="exerciseCopy" />
-          <v-btn icon="$contentSaveOutline" @click="emit('show-dialog', false)" />
+          <v-btn
+            v-if="index !== 0"
+            icon="$deleteOutline"
+            @click="exerciseRemove"
+            :title="t('Delete exercise')"
+          />
+          <v-btn icon="$contentCopy" @click="exerciseCopy" :title="t('Copy exercise')" />
+          <v-btn
+            icon="$contentSaveOutline"
+            @click="emit('show-dialog', false)"
+            :title="t('Save exercise')"
+          />
         </v-toolbar-items>
       </v-toolbar>
       <v-container>

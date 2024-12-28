@@ -63,7 +63,7 @@ const parseVideo = (video: string) => {
             <div>{{ workout.user.displayName }}</div>
           </div>
           <v-btn
-            v-if="!edit && getUserHangboard && getUserHangboardCompany && workout"
+            v-if="!edit && getUserHangboard && getUserHangboardCompany && workout?.id"
             :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
             class="mb-1"
             color="text"
@@ -73,7 +73,7 @@ const parseVideo = (video: string) => {
             {{ t('Start workout') }}
           </v-btn>
           <v-btn
-            v-else
+            v-else-if="edit"
             class="mb-1"
             color="text"
             size="large"

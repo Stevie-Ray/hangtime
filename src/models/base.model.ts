@@ -3,14 +3,13 @@ import type { IBase } from '@/interfaces/base.interface'
 export abstract class BaseModel {
   id?: string
 
-  createdAt?: Date
+  createTimestamp?: Date
 
-  updatedAt?: Date
+  updateTimestamp?: Date
 
   constructor(base: IBase) {
-    this.id = base.id ?? globalThis.crypto?.randomUUID()
-
-    this.createdAt = base.createdAt
-    this.updatedAt = base.updatedAt
+    this.id = base.id
+    this.createTimestamp = base.createdTimestamp
+    this.updateTimestamp = base.updateTimestamp
   }
 }

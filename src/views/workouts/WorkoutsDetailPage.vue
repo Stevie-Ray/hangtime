@@ -17,7 +17,6 @@ import { useAuthenticationStore } from '@/stores/authentication'
 import { useUserStore } from '@/stores/user'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
-import { IExercise } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 
@@ -39,50 +38,15 @@ const { fetchCommunityWorkouts, resetCommunityWorkouts, getWorkoutById, removeUs
 
 const { updateUser } = useAuthenticationStore()
 
-const workout = computed(() => getWorkoutById(route.params.id ? route.params.id : 'new'))
-
+const workout = getWorkoutById(route.params.id ? route.params.id : 'new')
 // workout - edit
 const edit = ref(false)
 
 // workout - save
 const workoutSaveDialog = ref(false)
 
-const exerciseAdd = () => {
-  // create in function
-  const exerciseNew: IExercise = {
-    exercise: 0,
-    grip: 0,
-    level: 0,
-    left: 0,
-    right: 0,
-    pause: 10,
-    hold: 7,
-    pullups: 1,
-    repeat: 0,
-    rest: 3,
-    weight: 0,
-    notes: ''
-  }
-  // remove first exercise pause
-  if (workout.value?.exercises?.length === 0) {
-    exerciseNew.pause = 0
-  }
-
-  exerciseNew.time =
-    (exerciseNew.hold + exerciseNew.rest) * (exerciseNew.repeat + 1) -
-    exerciseNew.rest +
-    exerciseNew.pause
-
-  if (workout.value) {
-    workout.value.time += exerciseNew.time
-
-    workout.value.exercises.push(exerciseNew)
-  }
-}
-
 onMounted(() => {
   if (route.path === '/workouts/new') {
-    exerciseAdd()
     edit.value = true
   }
 })
@@ -133,8 +97,8 @@ const onScroll = () => {
 }
 
 useHead({
-  title: () => workout.value?.name ?? '',
-  meta: [{ name: 'description', content: () => workout?.value?.description }]
+  title: () => workout?.name ?? '',
+  meta: [{ name: 'description', content: () => workout?.description }]
 })
 </script>
 
@@ -194,7 +158,7 @@ useHead({
 
           <v-col cols="12" md="7" order-md="first">
             <div class="workout">
-              <exercise-list v-model="workout" :edit="edit" @add="exerciseAdd" />
+              <exercise-list v-model="workout" :edit="edit" @add="workout?.addExercise()" />
 
               <!-- save dialog -->
               <workout-save
@@ -223,7 +187,7 @@ useHead({
       <div v-show="!edit" v-scroll="onScroll" class="hidden-md-and-up">
         <v-fab-transition>
           <v-fab
-            v-if="getUserHangboard && getUserHangboardCompany && workout"
+            v-if="getUserHangboard && getUserHangboardCompany && workout?.id"
             :active="startWorkoutButton"
             :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}/timer`"
             location="bottom end"

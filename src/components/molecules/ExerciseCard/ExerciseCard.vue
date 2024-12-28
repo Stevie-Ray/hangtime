@@ -43,7 +43,7 @@ const {
 
     <v-card :variant="variant" class="mb-8">
       <v-card-title v-if="exercise" class="d-flex justify-space-between">
-        <div v-if="index">
+        <div v-if="index !== undefined">
           <v-chip class="mr-2" color="primary">{{ index + 1 }}.</v-chip>
         </div>
 

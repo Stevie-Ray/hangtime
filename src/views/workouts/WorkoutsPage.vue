@@ -119,7 +119,7 @@ useHead({
     <template #title>
       <v-menu v-model="hangboardMenu">
         <template v-slot:activator="{ props }">
-          <div v-bind="props" class="hangboard-select">
+          <div v-bind="props" class="hangboard-select" :title="t('Select your hangboard')">
             <span v-if="getUserHangboardCompany && getUserHangboard">
               {{ `${getUserHangboardCompany.name} - ${getUserHangboard.name}` }}
             </span>
@@ -174,12 +174,19 @@ useHead({
     </template>
 
     <template #icons>
-      <v-btn v-if="isWorkoutsRoute" icon="$timerPlayOutline" color="text" to="/workouts/quick" />
+      <v-btn
+        v-if="isWorkoutsRoute"
+        icon="$timerPlayOutline"
+        color="text"
+        :title="t('Quick workout')"
+        to="/workouts/quick"
+      />
       <v-btn
         v-if="isWorkoutsRoute"
         :disabled="!online"
         icon="$plus"
         color="text"
+        :title="t('Add a workout')"
         to="/workouts/new"
       />
       <workout-community-filter v-if="isWorkoutsCommunityRoute" />

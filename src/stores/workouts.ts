@@ -1,14 +1,14 @@
-import { ref, computed, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 import { FieldPath, WhereFilterOp } from 'firebase/firestore/lite'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useUserStore } from '@/stores/user'
-import i18n from '@/plugins/i18n'
 import { CommunityWorkoutsDB, UserSubscribedDB } from '@/plugins/firebase/users-workouts-db'
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
 import { Leaderboard, IWorkout } from '@/interfaces/workout.interface'
 import { IUser } from '@/interfaces/authentication.interface'
+import { Workout } from '@/models/workout.model'
 
 const userSubscribedDB = new UserSubscribedDB()
 const communityWorkoutsDB = new CommunityWorkoutsDB()
@@ -83,6 +83,10 @@ export const useWorkoutsStore = defineStore('workouts', () => {
 
   const createUserWorkout = async (workout: IWorkout) => {
     if (workoutDB) {
+      // remove id if it is not set
+      if (workout.id === undefined || workout.id === null) {
+        delete workout.id
+      }
       const createdWorkout = await workoutDB.create(workout)
 
       workouts.value.unshift(createdWorkout)
@@ -118,36 +122,22 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     await userWorkoutsDb.update(workout as IWorkout & { id: string })
   }
 
-  const getWorkoutById = computed(() => (id: string | string[]): IWorkout | undefined => {
-    let workout = workouts.value.find((workout) => workout.id === id)
-    if (!workout) {
-      workout = workoutsCommunity.value.find((workout) => workout.id === id)
-    }
-    if (id === 'new') {
-      const { getUserHangboard, getUserHangboardCompany } = useUserStore()
+  const getWorkoutById = computed(() => (id: string | string[]): Workout | undefined => {
+    const workout = ref()
 
-      if (user.value && getUserHangboard && getUserHangboardCompany) {
-        workout = reactive<IWorkout>({
-          name: i18n.global.t('New workout'),
-          description: '',
-          level: 1,
-          hangboard: getUserHangboard.id,
-          company: getUserHangboardCompany.id,
-          exercises: [],
-          time: 0,
-          share: false,
-          video: '',
-          subscribers: [user.value.id],
-          user: {
-            displayName: user.value.displayName,
-            grade: user.value.settings?.grade,
-            id: user.value.id,
-            photoURL: user.value.photoURL
-          }
-        })
-      }
+    if (id === 'new') {
+      workout.value = new Workout()
+      workout.value.addExercise()
+      return workout.value
     }
-    return workout
+
+    if (workouts.value.find((workout) => workout.id === id)) {
+      return new Workout(workouts.value.find((workout) => workout.id === id))
+    }
+
+    if (workoutsCommunity.value.find((workout) => workout.id === id)) {
+      return new Workout(workoutsCommunity.value.find((workout) => workout.id === id))
+    }
   })
 
   /**
