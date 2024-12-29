@@ -295,6 +295,7 @@ const rules = {
                     :max="300"
                     :min="3"
                     :value="exercise.pause"
+                    timer
                     subtitle="Before hang"
                     title="Rest"
                     @input="(value) => exerciseEditTime('pause', value)"
@@ -316,6 +317,7 @@ const rules = {
                     v-if="exercise.exercise === 0 && repType !== 'max'"
                     :max="180"
                     :min="3"
+                    timer
                     :value="exercise.hold"
                     title="Hang"
                     @input="(value) => exerciseEditTime('hold', value)"

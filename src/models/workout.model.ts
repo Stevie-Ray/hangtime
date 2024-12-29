@@ -49,20 +49,20 @@ export class Workout extends BaseModel implements IWorkout {
    * Add an exercise to the workout.
    * @param exercise
    */
-  addExercise(exercise?: IExercise) {
-    const exerciseNew: IExercise = exercise || {
-      exercise: 0,
-      grip: 0,
-      level: 0,
-      left: 0,
-      right: 0,
-      pause: 10,
-      hold: 7,
-      pullups: 1,
-      repeat: 0,
-      rest: 3,
-      weight: 0,
-      notes: ''
+  addExercise(exercise?: Partial<IExercise>) {
+    const exerciseNew: IExercise = {
+      exercise: exercise?.exercise || 0,
+      grip: exercise?.grip || 0,
+      level: exercise?.level || 0,
+      left: exercise?.left || 0,
+      right: exercise?.right || 0,
+      pause: exercise?.pause || 10,
+      hold: exercise?.hold || 7,
+      pullups: exercise?.pullups || 1,
+      repeat: exercise?.repeat || 0,
+      rest: exercise?.rest || 3,
+      weight: exercise?.weight || 0,
+      notes: exercise?.notes || ''
     }
 
     // Remove pause for first exercise

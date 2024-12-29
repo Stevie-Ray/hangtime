@@ -1,49 +1,28 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { reactive } from 'vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer.vue'
-import { IWorkout } from '@/interfaces/workout.interface'
+import { Workout } from '@/models/workout.model'
 
 const { t } = useI18n()
 
 const router = useRouter()
 
-const workout = reactive<IWorkout>({
-  name: 'Quick workout',
-  description: 'Just a simple timer go get you going',
-  exercises: [
-    {
-      hold: 7,
-      rest: 3,
-      repeat: 9,
-      exercise: 0,
-      grip: 0,
-      level: 0,
-      left: 0,
-      right: 0,
-      pause: 0,
-      pullups: 0,
-      weight: 0,
-      notes: ''
-    }
-  ],
-  level: 1,
-  hangboard: 0,
-  company: 0,
-  time: 0,
-  share: false,
-  video: '',
-  subscribers: [],
-  user: {
-    displayName: '',
-    grade: 0,
-    id: '',
-    photoURL: ''
-  }
+const workout = reactive(
+  new Workout({
+    name: 'Quick workout',
+    description: 'Just a simple timer go get you going'
+  })
+)
+
+workout.addExercise({
+  pause: 0,
+  repeat: 9,
+  pullups: 0
 })
 
 useHead({
@@ -61,13 +40,14 @@ useHead({
     <template #title>{{ t('Quick workout') }}</template>
 
     <template #default>
-      <workout-timer v-if="workout?.exercises?.length" v-model="workout" :quick="true">
+      <workout-timer v-if="workout?.exercises?.length" v-model="workout" quick>
         <template #default>
           <exercise-counter
             title="Hang"
             :value="workout.exercises[0].hold"
             :min="3"
             :max="180"
+            timer
             @input="(value) => (workout.exercises[0].hold = value)"
           >
           </exercise-counter>
@@ -88,6 +68,7 @@ useHead({
             title="Rest"
             :value="workout.exercises[0].rest"
             :min="3"
+            timer
             :disabled="workout.exercises[0].repeat === 0"
             @input="(value) => (workout.exercises[0].rest = value)"
           >

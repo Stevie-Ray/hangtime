@@ -681,7 +681,7 @@ onMounted(() => {
     class="position-absolute h-100 px-0 py-0 progress"
   ></v-container>
   <v-container v-if="workout?.exercises" class="position-relative">
-    <v-row align="start" justify="center">
+    <v-row justify="center">
       <v-col cols="12" md="7" class="d-flex flex-column" style="min-height: 85vh">
         <v-row align="center" justify="center">
           <v-col class="text-center pb-4" cols="12" sm="8">
@@ -852,7 +852,7 @@ onMounted(() => {
         </v-row>
       </v-col>
 
-      <v-col cols="12" md="5">
+      <v-col v-if="!quick" cols="12" md="5">
         <v-card v-if="exerciseNext" class="mb-8">
           <v-card-title>{{ t('Next exercise') }}</v-card-title>
           <v-card-text>
@@ -868,7 +868,7 @@ onMounted(() => {
             />
           </v-card-text>
         </v-card>
-        <v-card v-if="exercise?.exercise !== null && !quick" class="mb-8">
+        <v-card v-if="exercise?.exercise !== null" class="mb-8">
           <v-card-title>{{ t('About the exercise') }}</v-card-title>
           <v-card-text>
             <exercise-about v-model="exercise" />
