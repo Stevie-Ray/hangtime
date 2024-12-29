@@ -18,7 +18,7 @@
     "format:check": "prettier --list-different src/"
   },
   "dependencies": {
-    "@fontsource/roboto": "^5.1.0",
+    "@fontsource/roboto": "^5.1.1",
     "@googlemaps/js-api-loader": "^1.16.8",
     "@hangtime/grip-connect": "^0.5.10",
     "@mdi/js": "^7.4.47",

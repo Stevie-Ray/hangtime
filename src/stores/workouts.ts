@@ -24,7 +24,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
 
   const { user } = storeToRefs(useAuthenticationStore())
 
-  if (user.value) {
+  if (user.value?.id) {
     workoutDB = new UserWorkoutsDB(user.value.id)
   }
 

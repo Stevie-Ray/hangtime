@@ -1,19 +1,19 @@
-import { defineStore } from 'pinia'
 import { ref, Ref } from 'vue'
-import { loadLanguageAsync } from '@/plugins/i18n'
+import { defineStore } from 'pinia'
 import router from '@/router'
+import { loadLanguageAsync } from '@/plugins/i18n'
 import { User as FirebaseUser } from 'firebase/auth'
-import { IUser, UserSettings } from '@/interfaces/authentication.interface'
 import { FirebaseError } from 'firebase/app'
+import { User } from '@/models/user.model'
 
 export const useAuthenticationStore = defineStore('authentication', () => {
-  const user: Ref<IUser | null | undefined> = ref(undefined)
+  const user: Ref<User | null | undefined> = ref(undefined)
   const error: Ref<string | null> = ref(null)
 
   /**
    * Create new user from firebase auth user infos
    */
-  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser): Promise<IUser> {
+  async function createNewUserFromFirebaseAuthUser(firebaseAuthUser: FirebaseUser): Promise<User> {
     let providerData = firebaseAuthUser.providerData[0]
     if (firebaseAuthUser.isAnonymous) {
       providerData = firebaseAuthUser
@@ -21,32 +21,18 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     const { displayName, photoURL, email } = providerData
     const { default: UsersDB } = await import('@/plugins/firebase/users-db')
     const usersDb = new UsersDB()
-    // default user settings
-    const settings: UserSettings = {
-      selected: 0,
-      hangboards: [
-        {
-          company: 1,
-          hangboard: 0
-        }
-      ],
-      scale: 'font',
-      grade: 12,
-      sound: true,
-      speak: false,
-      voice: 0,
-      vibrate: false,
-      walkthrough: false
+
+    const user = new User({
+      displayName: displayName || undefined,
+      photoURL: photoURL || undefined,
+      email: email || undefined
+    })
+    // remove id if it is not set
+    if (user.id === undefined || user.id === null) {
+      delete user.id
     }
 
-    const user = {
-      displayName,
-      photoURL,
-      email,
-      settings
-    }
-
-    return usersDb.create(user as IUser, firebaseAuthUser.uid)
+    return usersDb.create(user, firebaseAuthUser.uid)
   }
   /**
    * Callback fired when user login
@@ -58,10 +44,11 @@ export const useAuthenticationStore = defineStore('authentication', () => {
       const { default: UsersDB } = await import('@/plugins/firebase/users-db')
       const userFromFirebase = await new UsersDB().read(firebaseAuthUser.uid)
 
-      user.value =
+      user.value = new User(
         userFromFirebase === null || userFromFirebase === undefined
           ? await createNewUserFromFirebaseAuthUser(firebaseAuthUser)
           : userFromFirebase
+      )
 
       const { useWorkoutsStore } = await import('@/stores/workouts')
       const workouts = useWorkoutsStore()
@@ -110,10 +97,10 @@ export const useAuthenticationStore = defineStore('authentication', () => {
    * @return {Promise<void>}
    */
   async function updateUser() {
-    if (!user.value) return
+    if (!user.value?.id) return
     const { default: UsersDB } = await import('@/plugins/firebase/users-db')
     const usersDb = new UsersDB()
-    await usersDb.update(user.value)
+    await usersDb.update(user.value as User & { id: string })
   }
 
   return {

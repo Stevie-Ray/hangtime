@@ -9,8 +9,8 @@ export const useActivitiesStore = defineStore('activities', () => {
   const { user } = storeToRefs(useAuthenticationStore())
   let activitiesDB: UserActivitiesDB | null = null
 
-  if (user.value) {
-    activitiesDB = new UserActivitiesDB(user.value?.id)
+  if (user.value?.id) {
+    activitiesDB = new UserActivitiesDB(user.value.id)
   }
   // action
   /**

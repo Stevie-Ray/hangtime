@@ -22,12 +22,12 @@ const { size = 'default', clickable = true } = defineProps<{
 }>()
 
 const isHearted = computed(() => {
-  if (!workout.value || !workout.value.subscribers || !user.value) return false
+  if (!workout.value || !workout.value.subscribers || !user.value?.id) return false
   return workout.value.subscribers.includes(user.value.id)
 })
 
 const workoutSubscriber = () => {
-  if (!workout.value || !user.value) return
+  if (!workout.value || !user.value?.id) return
 
   const subscribers = [...workout.value.subscribers] // Create a copy for modification
   const userId = user.value.id

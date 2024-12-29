@@ -6,7 +6,6 @@ export class User extends BaseModel implements IUser {
   email: string
   photoURL: string
   settings: UserSettings
-  id: string
   completed?: {
     amount: number
     time: number
@@ -22,21 +21,30 @@ export class User extends BaseModel implements IUser {
   constructor(user: Partial<IUser>) {
     super(user)
 
-    this.displayName = user.displayName || ''
-    this.email = user.email || ''
-    this.photoURL = user.photoURL || ''
-    this.settings = user.settings || {
-      grade: 0,
-      hangboards: [],
-      scale: 'font',
-      selected: 0,
-      sound: true,
-      speak: false,
-      vibrate: true,
-      voice: 0,
-      walkthrough: false
+    if (!user.displayName || !user.email || !user.photoURL) {
+      throw new Error('displayName, email, and photoURL are required fields')
     }
-    this.id = user.id || ''
+
+    this.displayName = user.displayName
+    this.email = user.email
+    this.photoURL = user.photoURL
+    this.settings = {
+      grade: user.settings?.grade || 12,
+      hangboards: user.settings?.hangboards || [
+        // default hangboard: Beastmaker 1000 Series
+        {
+          company: 1,
+          hangboard: 0
+        }
+      ],
+      scale: user.settings?.scale || 'font',
+      selected: user.settings?.selected || 0,
+      sound: user.settings?.sound || true,
+      speak: user.settings?.speak || false,
+      vibrate: user.settings?.vibrate || false,
+      voice: user.settings?.voice || 0,
+      walkthrough: user.settings?.walkthrough || false
+    }
 
     // Initialize optional properties
     if (user.completed) this.completed = user.completed
