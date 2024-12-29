@@ -38,10 +38,10 @@ export class Workout extends BaseModel implements IWorkout {
     this.subscribers = workout?.subscribers || (user?.id ? [user?.id] : [])
     this.subscribers_count = workout?.subscribers_count || this.subscribers.length - 1 || 0
     this.user = {
-      displayName: user?.displayName || '',
-      grade: user?.settings?.grade || 0,
-      id: user?.id || '',
-      photoURL: user?.photoURL || ''
+      displayName: workout?.user?.displayName || user?.displayName || '',
+      grade: workout?.user?.grade || user?.settings?.grade || 0,
+      id: workout?.user?.id || user?.id || '',
+      photoURL: workout?.user?.photoURL || user?.photoURL || ''
     }
   }
 
