@@ -109,13 +109,13 @@ useHead({
                       <span class="d-inline-block" style="min-width: 30px">{{ index + 1 }}. </span>
                       <v-avatar size="small" color="grey-darken-1" class="mr-2">
                         <v-img
-                          :src="user.photoURL"
-                          :alt="user.displayName"
+                          :src="user.photoURL || undefined"
+                          :alt="user.displayName || undefined"
                           width="40"
                           height="40"
                         ></v-img>
                       </v-avatar>
-                      <span class="text-truncate">
+                      <span v-if="user.displayName" class="text-truncate">
                         {{ user.displayName }}
                       </span>
                     </td>

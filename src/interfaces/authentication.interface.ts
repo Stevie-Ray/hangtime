@@ -195,13 +195,13 @@ export interface IUser {
    * Display name of the user.
    * Can be null if the user has not set a display name.
    */
-  displayName: string
+  displayName: string | null
 
   /**
    * Email address of the user.
    * Can be null if the user has not set an email address.
    */
-  email: string
+  email: string | null
 
   /**
    * Gender of the user.
@@ -211,13 +211,14 @@ export interface IUser {
 
   /**
    * URL to the user's profile photo.
-   * Used for displaying the user's profile picture.
+   * Can be null if the user has not set a profile picture.
    */
-  photoURL: string
+  photoURL: string | null
 
   /**
    * URL to the user's profile photo.
    * Optional, used when a secondary profile picture is available.
+   * @deprecated
    */
   pictureURL?: string
 

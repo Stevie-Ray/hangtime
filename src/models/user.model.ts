@@ -2,9 +2,9 @@ import { Country, IUser, UserSettings } from '@/interfaces/authentication.interf
 import { BaseModel } from './base.model'
 
 export class User extends BaseModel implements IUser {
-  displayName: string
-  email: string
-  photoURL: string
+  displayName: string | null
+  email: string | null
+  photoURL: string | null
   settings: UserSettings
   completed?: {
     amount: number
@@ -21,13 +21,9 @@ export class User extends BaseModel implements IUser {
   constructor(user: Partial<IUser>) {
     super(user)
 
-    if (!user.displayName || !user.email || !user.photoURL) {
-      throw new Error('displayName, email, and photoURL are required fields')
-    }
-
-    this.displayName = user.displayName
-    this.email = user.email
-    this.photoURL = user.photoURL
+    this.displayName = user.displayName || null
+    this.email = user.email || null
+    this.photoURL = user.photoURL || null
     this.settings = {
       grade: user.settings?.grade || 12,
       hangboards: user.settings?.hangboards || [
