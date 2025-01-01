@@ -13,7 +13,6 @@ import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vu
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
 import SliderBluetooth from '@/components/atoms/SliderBluetooth/SliderBluetooth.vue'
-import { IWorkout } from '@/interfaces/workout.interface'
 import { time } from '@/helpers'
 
 import countSound from '@/assets/sound/count.wav'
@@ -23,6 +22,7 @@ import stopSound from '@/assets/sound/stop.wav'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useActivitiesStore } from '@/stores/activities'
 import { useBluetoothStore } from '@/stores/bluetooth'
+import { Workout } from '@/models/workout.model'
 
 const { device } = storeToRefs(useBluetoothStore())
 
@@ -36,7 +36,7 @@ const { createUserActivity } = useActivitiesStore()
 
 const { isSupported, isActive, request, release } = useWakeLock()
 
-const workout = defineModel<IWorkout>({ required: true })
+const workout = defineModel<Workout>({ required: true })
 
 const { quick = false } = defineProps<{
   quick?: boolean
