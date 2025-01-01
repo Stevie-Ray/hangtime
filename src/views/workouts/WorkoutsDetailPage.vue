@@ -10,13 +10,14 @@ import WorkoutSave from '@/components/molecules/dialog/WorkoutSave/WorkoutSave.v
 import MissingHangboard from '@/components/molecules/dialog/MissingHangboard/MissingHangboard.vue'
 import ExerciseList from '@/components/organisms/ExerciseList/ExerciseList.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
+import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
 
 import { useAppStore } from '@/stores/app'
 import { useWorkoutsStore } from '@/stores/workouts'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useUserStore } from '@/stores/user'
-import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
-import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
+import imgLogo from '@/assets/logo.svg'
 
 const { t } = useI18n()
 
@@ -172,7 +173,15 @@ useHead({
 
         <v-row v-else>
           <v-col cols="12">
-            {{ t('No workouts found') }}
+            <v-empty-state
+              to="/workouts/new"
+              headline="No workouts found"
+              title="Community-based hangboard app"
+              text="Our workouts are community-driven and unique for each hangboard. Explore the 'Community' tab or create your own to share with fellow climbers."
+              :image="imgLogo"
+              action-text="Create a Workout"
+              @click:action="router.push('/workouts/new')"
+            />
 
             <missing-hangboard
               v-model="missingHangboardDialog"

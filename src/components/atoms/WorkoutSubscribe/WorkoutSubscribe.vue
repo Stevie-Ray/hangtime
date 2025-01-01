@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useWorkoutsStore } from '@/stores/workouts'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useAppStore } from '@/stores/app'
-import { IWorkout } from '@/interfaces/workout.interface'
+import { Workout } from '@/models/workout.model'
 
 const { updateWorkout } = useWorkoutsStore()
 
@@ -14,7 +14,7 @@ const { online } = storeToRefs(useAppStore())
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const workout = defineModel<IWorkout>({ required: true })
+const workout = defineModel<Workout>({ required: true })
 
 const { size = 'default', clickable = true } = defineProps<{
   size?: string

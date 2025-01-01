@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 import { FieldPath, WhereFilterOp } from 'firebase/firestore/lite'
 import { useAuthenticationStore } from '@/stores/authentication'
@@ -123,20 +123,18 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   const getWorkoutById = computed(() => (id: string | string[]): Workout | undefined => {
-    const workout = ref()
-
     if (id === 'new') {
-      workout.value = new Workout()
-      workout.value.addExercise()
-      return workout.value
+      const newWorkout = new Workout()
+      newWorkout.addExercise()
+      return reactive(newWorkout)
     }
 
     if (workouts.value.find((workout) => workout.id === id)) {
-      return new Workout(workouts.value.find((workout) => workout.id === id))
+      return reactive(new Workout(workouts.value.find((workout) => workout.id === id)))
     }
 
     if (workoutsCommunity.value.find((workout) => workout.id === id)) {
-      return new Workout(workoutsCommunity.value.find((workout) => workout.id === id))
+      return reactive(new Workout(workoutsCommunity.value.find((workout) => workout.id === id)))
     }
   })
 

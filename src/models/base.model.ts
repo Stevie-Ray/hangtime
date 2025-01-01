@@ -9,7 +9,7 @@ export abstract class BaseModel {
 
   constructor(base: IBase) {
     this.id = base.id
-    this.createTimestamp = base.createdTimestamp
-    this.updateTimestamp = base.updateTimestamp
+    this.createTimestamp = base.createdTimestamp || new Date()
+    this.updateTimestamp = base.updateTimestamp || new Date()
   }
 }
