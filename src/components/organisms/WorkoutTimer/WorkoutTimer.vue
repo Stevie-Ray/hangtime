@@ -290,20 +290,12 @@ const updateUserCompleted = () => {
 
 const exerciseDone = () => {
   clockText.value = t('Done')
-  createUserActivity({
-    name: workout?.value?.name ? workout.value.name : '',
-    start_date_local: new Date(),
-    sport_type: 'Workout',
-    elapsed_time: workoutCompleteTimeTotal.value,
-    elapsed_time_hanging: workoutCompleteTimeHanging.value,
-    description: workout?.value?.description ? workout.value.description : '',
-    difficulty: workout?.value?.level !== undefined ? workout.value.level : null,
-    type: 'Hangboarding',
-    company: workout?.value?.company !== undefined ? workout.value.company : null,
-    hangboard: workout?.value?.hangboard !== undefined ? workout.value.hangboard : null,
-    user: workout?.value?.user?.id ? workout.value.user.id : '',
-    workout: workout?.value?.id ? workout.value.id : ''
-  })
+
+  createUserActivity(
+    workoutCompleteTimeTotal.value,
+    workoutCompleteTimeHanging.value,
+    workout.value
+  )
   updateUserCompleted()
   // open dialog
   dialogWorkoutComplete.value = true

@@ -1,5 +1,7 @@
 import { IActivity } from '@/interfaces/activity.interface'
 import { BaseModel } from './base.model'
+import { useAuthenticationStore } from '@/stores/authentication'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 export class Activity extends BaseModel implements IActivity {
   name: string
@@ -15,20 +17,22 @@ export class Activity extends BaseModel implements IActivity {
   user: string
   workout: string
 
-  constructor(activity: Partial<IActivity>) {
-    super(activity)
+  constructor(timeTotal: number, timeHanging: number, workout?: Partial<IWorkout>) {
+    super(workout || {})
 
-    this.name = activity.name || ''
-    this.start_date_local = activity.start_date_local || new Date()
-    this.sport_type = activity.sport_type || ''
-    this.elapsed_time = activity.elapsed_time || 0
-    this.elapsed_time_hanging = activity.elapsed_time_hanging || 0
-    this.description = activity.description || ''
-    this.difficulty = activity.difficulty || null
-    this.type = activity.type || ''
-    this.company = activity.company || null
-    this.hangboard = activity.hangboard || null
-    this.user = activity.user || ''
-    this.workout = activity.workout || ''
+    const { user } = useAuthenticationStore()
+
+    this.name = workout?.name || ''
+    this.start_date_local = new Date()
+    this.sport_type = 'Workout'
+    this.elapsed_time = timeTotal || 0
+    this.elapsed_time_hanging = timeHanging || 0
+    this.description = workout?.description || ''
+    this.difficulty = workout?.level !== undefined ? workout.level : null
+    this.type = 'Hangboarding'
+    this.company = workout?.company || null
+    this.hangboard = workout?.hangboard || null
+    this.user = workout?.user?.id || user?.id || ''
+    this.workout = workout?.id || ''
   }
 }

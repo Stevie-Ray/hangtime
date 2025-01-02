@@ -3,6 +3,8 @@ import { ref, Ref } from 'vue'
 import UserActivitiesDB from '@/plugins/firebase/user-activities-db'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { IActivity } from '@/interfaces/activity.interface'
+import { Activity } from '@/models/activity.model'
+import { IWorkout } from '@/interfaces/workout.interface'
 
 export const useActivitiesStore = defineStore('activities', () => {
   const activities: Ref<IActivity[]> = ref([])
@@ -25,11 +27,16 @@ export const useActivitiesStore = defineStore('activities', () => {
   }
   /**
    * Add a new workout for the user
-   * @param workout
+   * @param activity IActivity
    * @return {Promise<void>}
    */
-  async function createUserActivity(activity: IActivity) {
+  async function createUserActivity(
+    timeTotal: number,
+    timeHanging: number,
+    workout: IWorkout
+  ): Promise<void> {
     if (activitiesDB) {
+      const activity = new Activity(timeTotal, timeHanging, workout)
       const createdActivity = await activitiesDB.create(activity)
       // push to beginning of  workouts
       activities.value.unshift(createdActivity)
