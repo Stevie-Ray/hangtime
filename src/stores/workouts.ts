@@ -7,7 +7,7 @@ import { CommunityWorkoutsDB, UserSubscribedDB } from '@/plugins/firebase/users-
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
 import { Leaderboard, IWorkout } from '@/interfaces/workout.interface'
-import { IUser } from '@/interfaces/authentication.interface'
+import { IUser } from '@/interfaces/user.interface'
 import { Workout } from '@/models/workout.model'
 
 const userSubscribedDB = new UserSubscribedDB()
@@ -74,7 +74,9 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     workoutsCommunity.value.push(...newWorkouts)
   }
 
-  const fetchLeaderboard = async (rank = 'completed.amount') => {
+  const fetchLeaderboard = async (
+    rank: 'completed.amount' | 'completed.time' | 'completed.hold' = 'completed.amount'
+  ) => {
     if (leaderboards.value.some((leaderboard) => leaderboard.rank === rank)) return
 
     const leaderboard: IUser[] = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
@@ -152,7 +154,8 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   })
 
   const getLeaderboard = computed(
-    () => (rank: string) => leaderboards.value.find((leaderboard) => leaderboard.rank === rank)
+    () => (rank: 'completed.amount' | 'completed.time' | 'completed.hold') =>
+      leaderboards.value.find((leaderboard) => leaderboard.rank === rank)
   )
 
   return {

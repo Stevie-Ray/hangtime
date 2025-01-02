@@ -1,4 +1,4 @@
-import { Country } from '@/interfaces/authentication.interface'
+import { Country } from '@/interfaces/user.interface'
 
 const countries: Country[] = [
   {

@@ -12,7 +12,7 @@ const { fetchLeaderboard } = useWorkoutsStore()
 
 const { getLeaderboard } = useWorkoutsStore()
 
-const rank = ref('completed.amount')
+const rank = ref<'completed.amount' | 'completed.time' | 'completed.hold'>('completed.amount')
 
 watch(
   rank,

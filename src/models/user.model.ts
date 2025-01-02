@@ -1,4 +1,4 @@
-import { Country, IUser, UserSettings } from '@/interfaces/authentication.interface'
+import { Country, IUser, UserSettings } from '@/interfaces/user.interface'
 import { BaseModel } from './base.model'
 
 export class User extends BaseModel implements IUser {

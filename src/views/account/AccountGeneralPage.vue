@@ -10,7 +10,7 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useAppStore } from '@/stores/app'
 import { loadLanguageAsync } from '@/plugins/i18n'
-import { Theme } from '@/interfaces/authentication.interface'
+import { Theme } from '@/enums/theme'
 
 const scale = new IRCRA().scale()
 

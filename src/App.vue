@@ -13,7 +13,7 @@ import { useAppStore } from '@/stores/app'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
-import { Theme } from '@/interfaces/authentication.interface'
+import { Theme } from '@/enums/theme'
 
 // router
 const route = useRoute()

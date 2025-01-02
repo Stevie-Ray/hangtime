@@ -2,7 +2,7 @@ import { computed } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 import type { FeatureCollection } from 'geojson'
 import { useAuthenticationStore } from '@/stores/authentication'
-import { Company, Hangboard } from '@/interfaces/user.interface'
+import { Company, Hangboard } from '@/interfaces/company.interface'
 
 // Handle GeoJSON data
 import rawCompanyGeoJSON from '@/helpers/companies.geojson?raw'

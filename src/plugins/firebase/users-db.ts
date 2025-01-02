@@ -1,4 +1,4 @@
-import { IUser } from '@/interfaces/authentication.interface'
+import { IUser } from '@/interfaces/user.interface'
 import GenericDB from './generic-db'
 
 export default class UsersDB extends GenericDB<IUser> {

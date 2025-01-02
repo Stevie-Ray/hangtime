@@ -14,7 +14,7 @@ import { useActivitiesStore } from '@/stores/activities'
 import { useAuthenticationStore } from '@/stores/authentication'
 
 import { IActivity } from '@/interfaces/activity.interface'
-import { Levels } from '@/interfaces/workout.interface'
+import { Levels } from '@/enums/levels'
 
 const { activities } = storeToRefs(useActivitiesStore())
 const { user } = storeToRefs(useAuthenticationStore())

@@ -1,5 +1,5 @@
 import { BaseModel } from '@/models/base.model'
-import { Levels } from '@/interfaces/workout.interface'
+import { Levels } from '@/enums/levels'
 import type { IWorkout, IExercise } from '@/interfaces/workout.interface'
 import i18n from '@/plugins/i18n'
 import { useUserStore } from '@/stores/user'

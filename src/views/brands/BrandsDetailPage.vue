@@ -15,7 +15,7 @@ import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
 
 import { useAppStore } from '@/stores/app'
-import { Hangboard } from '@/interfaces/user.interface'
+import { Hangboard } from '@/interfaces/company.interface'
 
 const { t } = useI18n()
 

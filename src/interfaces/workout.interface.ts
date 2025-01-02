@@ -1,4 +1,5 @@
-import { IUser } from './authentication.interface'
+import { Levels } from '@/enums/levels'
+import { IUser } from './user.interface'
 
 /**
  * Represents an exercise in a hangboard workout.
@@ -222,33 +223,22 @@ export interface IWorkout {
 }
 
 /**
- * Represents a leaderboard for workouts.
+ * Represents a the leaderbord for a specific "rank" constraint.
  */
 export interface Leaderboard {
   /**
-   * Rank of the leaderboard entry.
-   * A string that represents the rank, such as "1st", "2nd", etc.
+   * Rank or constraint for fetching a leaderboard query
+   *
+   * @example
+   * 'completed.amount' - Fetch leaderboard by amount of workouts completed
+   * 'completed.time' - Fetch leaderboard by time spent in workouts
+   * 'completed.hold' - Fetch leaderboard by time spent holding the hangboard
    */
-  rank: string
+  rank: 'completed.amount' | 'completed.time' | 'completed.hold'
 
   /**
-   * List of entries in the leaderboard.
+   * List of user entries in the leaderboard.
    * An array of objects representing the participants and their scores.
    */
   leaderboard: IUser[]
-}
-
-/**
- * Levels of difficulty available for the workout.
- * This enum is used to categorize the workout by difficulty.
- */
-export enum Levels {
-  /** Easy level: Suitable for beginners or warm-up routines. */
-  Easy = 1,
-
-  /** Normal level: Intermediate difficulty for regular training. */
-  Normal,
-
-  /** Hard level: Advanced difficulty for intense training sessions. */
-  Hard
 }

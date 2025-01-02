@@ -11,7 +11,7 @@ import imgBackgroundDark4 from '@/assets/backgrounds/background-d4.png'
 import imgBackgroundDark5 from '@/assets/backgrounds/background-d5.png'
 import imgBackgroundDark6 from '@/assets/backgrounds/background-d6.png'
 import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
-import { IUser } from '@/interfaces/authentication.interface'
+import { IUser } from '@/interfaces/user.interface'
 
 /**
  *

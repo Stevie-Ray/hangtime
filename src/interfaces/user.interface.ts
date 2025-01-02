@@ -1,120 +1,256 @@
+import { Theme } from '@/enums/theme'
+
 /**
- * Represents a hangboard used for climbing training.
+ * Represents the settings configured by a user.
  */
-export interface Hangboard {
+export interface UserSettings {
   /**
-   * The name of the hangboard.
-   * Example: "1000 Series", "Kineboard", "Training Board".
+   * IRCRA climbing grade as number (1-32) of the user.
+   * Represents the user's climbing proficiency level.
+   * More info: https://www.ircra.rocks/single-post/2016/09/12/reporting-grades-in-climbing-research
    */
-  name: string
+  grade: number
 
   /**
-   * The unique identifier of the hangboard.
-   * Used to distinguish this hangboard from others in the system.
+   * The selected hangboard ID.
+   * Optional, may not be set if no hangboard is selected.
    */
-  id: number
+  hangboard?: number
 
   /**
-   * The image URL of the hangboard.
-   * A link to an image that visually represents the hangboard.
+   * List of hangboards owned by the user.
+   * Each hangboard is identified by a company ID and a hangboard ID.
    */
-  image: string
+  hangboards: Array<{ company: number; hangboard: number }>
 
   /**
-   * The dimensions of the hangboard in millimeters (x, y, z).
-   * Represents the width (x), height (y), and depth (z) of the hangboard.
-   * Values can be null if dimensions are not available.
+   * User's locale/language setting.
+   * Example values: 'en-US', 'de-DE', 'nl-NL'.
+   * Optional, may not be set if the user has not chosen a language.
    */
-  size: {
-    x: number | null
-    y: number | null
-    z: number | null
-  }
+  locale?: string
 
   /**
-   * The material type of the hangboard.
-   * Example: "wood", "plastic".
+   * IRCRA grade system selected by the user.
+   * More info: https://github.com/wulfmann/ircra
    */
-  type: string
+  scale:
+    | 'male'
+    | 'female'
+    | 'vermin'
+    | 'font'
+    | 'ircra'
+    | 'yds'
+    | 'sport'
+    | 'british'
+    | 'tech'
+    | 'ewbank'
+    | 'brz'
+    | 'uiaa'
+    | 'uiaa_metric'
+    | 'watts'
 
   /**
-   * The URL of the hangboard for more information.
-   * Optional, can be null if no additional information is available online.
+   * Index of the selected hangboard within the hangboards array.
+   * Helps identify which hangboard the user is currently using.
    */
-  url: string | null
+  selected: number
 
   /**
-   * The number of holds on the hangboard.
-   * Indicates the total number of distinct holds or grips available.
+   * Indicates if sound is enabled.
+   * True if sound effects are active during workouts.
    */
-  holds: number
+  sound: boolean
 
   /**
-   * Optional: Information about additional sides of the hangboard.
-   * Some hangboards have multiple sides, each with different holds and features.
-   * Each side is described by a name, image, and the number of holds.
+   * Indicates if voice guidance is enabled.
+   * True if voice prompts are active during workouts.
    */
-  sides?: Array<{ name: string; image: string; holds: number }>
+  speak: boolean
+
+  /**
+   * Theme ID representing the UI theme preference.
+   * 0: System theme, 1: Light theme, 2: Dark theme.
+   * Optional, defaults to system theme if not set.
+   */
+  theme?: Theme
+
+  /**
+   * Firebase Cloud Messaging token.
+   * Optional, used for push notifications.
+   */
+  token?: string
+
+  /**
+   * Indicates if vibration feedback is enabled.
+   * True if the device vibrates for notifications or feedback.
+   */
+  vibrate: boolean
+
+  /**
+   * Voice profile number for voice guidance.
+   * Determines the voice used for spoken instructions.
+   */
+  voice: number
+
+  /**
+   * Indicates if the walkthrough/tutorial has been seen.
+   * True if the user has completed the initial app walkthrough.
+   */
+  walkthrough: boolean
 }
 
 /**
- * Represents a company that produces hangboards.
+ * Represents the country configured by a user.
  */
-export interface Company {
+export interface Country {
   /**
-   * The name of the company.
-   * Example: "Beastmaker", "Metolius".
+   * ISO 3166-1 alpha-2 code.
+   * Example: 'US' for the United States.
+   */
+  alpha2: string
+
+  /**
+   * ISO 3166-1 alpha-3 code.
+   * Example: 'USA' for the United States.
+   */
+  alpha3: string
+
+  /**
+   * International dialing codes for the country.
+   * Example: ['+1'] for the United States.
+   */
+  countryCallingCodes: string[]
+
+  /**
+   * Currency codes used in the country.
+   * Example: ['USD'] for the United States Dollar.
+   */
+  currencies: string[]
+
+  /**
+   * Emoji flag representing the country.
+   * Optional, might not be set for all countries.
+   */
+  emoji?: string
+
+  /**
+   * International Olympic Committee (IOC) code.
+   * Example: 'USA' for the United States.
+   */
+  ioc: string
+
+  /**
+   * List of language codes spoken in the country.
+   * Example: ['eng'] for English.
+   */
+  languages: string[]
+
+  /**
+   * Full name of the country.
+   * Example: 'United States'.
    */
   name: string
 
   /**
-   * The description of the company.
-   * Provides an overview of the company's mission, history, or offerings.
+   * Status of the country.
+   * Example: 'assigned', 'deleted', 'reserved
    */
-  description: string
+  status: string
+}
 
+/**
+ * Represents a user profile.
+ */
+export interface IUser {
   /**
-   * The country ISO 3166-1 alpha-2 code where the company is located.
-   * Example: "GB", "US".
+   * Details about workouts completed by the user.
+   * Optional, present only if the user has completed workouts.
    */
-  country: string
+  completed?: {
+    /**
+     * Number of workouts completed by the user.
+     * Represents the total count of finished workouts.
+     */
+    amount: number
 
-  /**
-   * The geographical location of the company.
-   * Represents the latitude and longitude of the company's headquarters.
-   * Can be null if the location is not specified.
-   */
-  location: {
-    lat: string | null
-    lon: string | null
+    /**
+     * Total time spent working out in seconds.
+     * Includes all workouts the user has completed.
+     */
+    time: number
+
+    /**
+     * Total time spent on hangboard exercises in seconds.
+     * Measures time specifically on hangboard workouts.
+     */
+    hold: number
   }
 
   /**
-   * The unique identifier of the company.
-   * Used to distinguish this company from others in the system.
+   * Details about the user's country.
+   * Optional, present only if the user has set a country.
    */
-  id: number
+  country?: Country
 
   /**
-   * The website URL of the company.
-   * A link to the company's official website for more information.
-   * Optional, can be null if the company does not have a website.
+   * Display name of the user.
+   * Can be null if the user has not set a display name.
    */
-  url: string | null
+  displayName: string | null
 
   /**
-   * The social media links of the company.
-   * Includes links to the company's Facebook and Instagram pages.
-   * Optional, each link can be null if not available.
+   * Email address of the user.
+   * Can be null if the user has not set an email address.
    */
-  socials: {
-    facebook: string | null
-    instagram: string | null
-  }
+  email: string | null
 
   /**
-   * The list of hangboards offered by the company.
-   * An array of Hangboard objects, each representing a different product.
+   * Gender of the user.
+   * Optional, may not be set if the user has not specified gender.
    */
-  hangboards: Hangboard[]
+  gender?: string
+
+  /**
+   * URL to the user's profile photo.
+   * Can be null if the user has not set a profile picture.
+   */
+  photoURL: string | null
+
+  /**
+   * URL to the user's profile photo.
+   * Optional, used when a secondary profile picture is available.
+   * @deprecated
+   */
+  pictureURL?: string
+
+  /**
+   * Settings configured by the user.
+   * Includes preferences like locale, theme, and notifications.
+   */
+  settings: UserSettings
+
+  /**
+   * Unique identifier for the user.
+   * Optional, generated by the Firebase authentication system.
+   */
+  id?: string
+
+  /**
+   * Status of the user.
+   * Optional, can represent various states like active, inactive, etc.
+   */
+  status?: string
+
+  /**
+   * Indicates if the user is subscribed to a service.
+   * Optional, true if the user has an active subscription.
+   */
+  subscribed?: boolean
+
+  /**
+   * User's weight.
+   * Optional, can be used for personalized fitness calculations.
+   */
+  weight?: number
 }
