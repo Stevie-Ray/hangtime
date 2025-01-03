@@ -1,4 +1,4 @@
-import { Country, IUser, UserSettings } from '@/interfaces/user.interface'
+import type { Country, IUser, UserSettings } from '@/interfaces/user.interface'
 import { BaseModel } from './base.model'
 
 export class User extends BaseModel implements IUser {
@@ -39,16 +39,23 @@ export class User extends BaseModel implements IUser {
       speak: user.settings?.speak || false,
       vibrate: user.settings?.vibrate || false,
       voice: user.settings?.voice || 0,
+      locale: user.settings?.locale || 'en-US',
       walkthrough: user.settings?.walkthrough || false
     }
-
     // Initialize optional properties
     if (user.completed) this.completed = user.completed
+    else delete this.completed
     if (user.country) this.country = user.country
+    else delete this.country
     if (user.gender) this.gender = user.gender
+    else delete this.gender
     if (user.pictureURL) this.pictureURL = user.pictureURL
+    else delete this.pictureURL
     if (user.status) this.status = user.status
+    else delete this.status
     if (user.subscribed) this.subscribed = user.subscribed
+    else delete this.subscribed
     if (user.weight) this.weight = user.weight
+    else delete this.weight
   }
 }

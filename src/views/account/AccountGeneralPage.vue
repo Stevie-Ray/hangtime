@@ -75,13 +75,13 @@ const settingsLocale = computed({
 
     if (user?.value?.settings?.locale) return user.value.settings.locale
 
-    return i18n.locale.toString()
+    return i18n.fallbackLocale.value
   },
   set(value: string) {
     if (user.value) {
       user.value.settings.locale = value
-      loadLanguageAsync(value)
     }
+    loadLanguageAsync(value)
   }
 })
 
