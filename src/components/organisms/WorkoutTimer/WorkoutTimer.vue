@@ -395,7 +395,6 @@ onBeforeUnmount(() => {
       user?.completed.time / 60 > (subscribeLimit / 4) * 3
     "
     v-model="dialogWorkoutSubscribe"
-    :limit="subscribeLimit"
   />
   <workout-complete
     v-if="workout"
