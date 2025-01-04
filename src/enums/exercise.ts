@@ -31,3 +31,73 @@ export enum ExerciseState {
    */
   DONE
 }
+
+/**
+ * Enum for the various exercises.
+ */
+export enum Exercises {
+  /**
+   * Pull-up
+   */
+  PULLUP = 1,
+
+  /**
+   * Scap Pull
+   */
+  SCAP_PULL,
+
+  /**
+   * Negative Pull
+   */
+  NEGATIVE_PULL,
+
+  /**
+   * Typewriter
+   */
+  TYPEWRITER,
+
+  /**
+   * L-Hang
+   */
+  L_HANG,
+
+  /**
+   * Knees Raise
+   */
+  KNEES_RAISE
+}
+
+/**
+ * Enum for the various grips.
+ */
+export enum Grip {
+  /**
+   * Dead Hang
+   */
+  DEAD_HANG,
+
+  /**
+   * Lock-off 45
+   */
+  LOCK_OFF_45,
+
+  /**
+   * Lock-off 90
+   */
+  LOCK_OFF_90,
+
+  /**
+   * Lock-off Full
+   */
+  LOCK_OFF_FULL,
+
+  /**
+   * Front Lever
+   */
+  FRONT_LEVER,
+
+  /**
+   * No Hang
+   */
+  NO_HANG
+}

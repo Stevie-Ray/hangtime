@@ -12,6 +12,7 @@ import imgBackgroundDark5 from '@/assets/backgrounds/background-d5.png'
 import imgBackgroundDark6 from '@/assets/backgrounds/background-d6.png'
 import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
 import { IUser } from '@/interfaces/user.interface'
+import { Exercises, Grip } from '@/enums/exercise'
 
 /**
  *
@@ -47,15 +48,15 @@ export function time(item: number | undefined) {
 }
 
 /**
- *
- * @return {[{image: string, name: string, short: string, description: string, id: number},{image: string, name: string, short: string, description: string, id: number},{image: string, name: string, short: string, description: string, id: number},{disabledExercises: number[], image: string, name: string, short: string, description: string, id: number},{image: string, name: string, short: string, description: string, id: number},null]}
+ * Grip
+ * @returns {{name: string, short: string, id: number, image: string, description: string, steps: [{name: string, description: string}]}[]}
  */
 export function useGrip() {
   return [
     {
       name: 'Dead Hang',
       short: 'Dead Hang',
-      id: 0,
+      id: Grip.DEAD_HANG,
       image: 'exercises/deadhang.svg',
       description:
         "A deadhang is when you hang from a sturdy bar or a hangboard with your arms straight and your feet off the ground. It's a static exercise, meaning you stay still without moving. Keep your shoulders engaged and avoid swinging.",
@@ -85,7 +86,7 @@ export function useGrip() {
     {
       name: 'Lock off - 45°',
       short: '45°',
-      id: 1,
+      id: Grip.LOCK_OFF_45,
       image: 'exercises/bentarmhang.svg',
       description: 'When you hold a specific grip with your arm fully bent at a 45-degree angle.',
       steps: [
@@ -113,7 +114,7 @@ export function useGrip() {
     {
       name: 'Lock off - 90°',
       short: '90°',
-      id: 2,
+      id: Grip.LOCK_OFF_90,
       image: 'exercises/lhang.svg',
       description: 'When you hold a specific grip with your arm fully bent at a 90-degree angle.',
       steps: [
@@ -141,7 +142,7 @@ export function useGrip() {
     {
       name: 'Lock off - Full',
       short: 'Full',
-      id: 3,
+      id: Grip.LOCK_OFF_FULL,
       image: 'exercises/pullup.svg',
       description: 'When you hold a specific grip with your arm fully bent.',
       steps: [
@@ -165,12 +166,12 @@ export function useGrip() {
             'Hold the lock-off position for a set amount of time or for a specific number of seconds. The duration will depend on your current strength level and training goals. Initially, you may start with shorter durations and gradually increase them over time.'
         }
       ],
-      disabledExercises: [1, 2, 4]
+      disabledExercises: [Exercises.PULLUP, Exercises.SCAP_PULL, Exercises.TYPEWRITER]
     },
     {
       name: 'Front Lever',
       short: 'Front Lever',
-      id: 4,
+      id: Grip.FRONT_LEVER,
       image: 'exercises/frontlever.svg',
       description:
         'A Front Lever is an advanced exercise where you hang horizontally with your body parallel to the ground, using your core and upper body strength.',
@@ -208,7 +209,7 @@ export function useGrip() {
     {
       name: 'No Hang',
       short: 'No Hang',
-      id: 5,
+      id: Grip.NO_HANG,
       image: 'exercises/nohang.svg',
       description:
         'A no-hang involves using the holds with your feet on the ground or a support, rather than hanging from them. It helps train finger strength and grip without full-body weight.',
@@ -236,20 +237,27 @@ export function useGrip() {
             'After each repetition, gently lower yourself back to the starting position, ensuring you maintain control throughout the movement.'
         }
       ],
-      disabledExercises: [1, 2, 3, 4, 5, 6]
+      disabledExercises: [
+        Exercises.PULLUP,
+        Exercises.SCAP_PULL,
+        Exercises.NEGATIVE_PULL,
+        Exercises.TYPEWRITER,
+        Exercises.L_HANG,
+        Exercises.KNEES_RAISE
+      ]
     }
   ]
 }
 
 /**
- *
- * @return {[{name: string, description: string, id: number, type: string},{name: string, description: string, id: number, type: string},{name: string, description: string, id: number, type: string},{name: string, description: string, id: number, type: string},{name: string, description: string, id: number, type: string},null]}
+ * Exercises
+ * @returns [{name: string, id: number, type: string, description: string, steps: [{name: string, description: string}]}]
  */
 export function useExercises() {
   return [
     {
       name: 'Pull-up',
-      id: 1,
+      id: Exercises.PULLUP,
       type: 'arms',
       description:
         'A "Pull-up" involves grabbing holds and pulling your body upward while hanging from the holds.',
@@ -281,7 +289,7 @@ export function useExercises() {
     },
     {
       name: 'Scap Pull',
-      id: 2,
+      id: Exercises.SCAP_PULL,
       type: 'arms',
       description:
         'A "Scapular Pull-up" is an exercise that targets scapular (shoulder blade) strength and stability. Hang from the hold with straight arms and without bending your elbows, squeeze your shoulder blades together to lift your body slightly.',
@@ -310,7 +318,7 @@ export function useExercises() {
     },
     {
       name: 'Negative Pull',
-      id: 3,
+      id: Exercises.NEGATIVE_PULL,
       type: 'arms',
       description:
         'A "Negative Pull-up" involves starting at the top, gripping a hold, and then lowering your body slowly.',
@@ -344,7 +352,7 @@ export function useExercises() {
     },
     {
       name: 'Typewriter',
-      id: 4,
+      id: Exercises.TYPEWRITER,
       type: 'arms',
       description:
         'A "Typewriter" is when you move your hands horizontally between holds, like the keys of a typewriter.',
@@ -383,7 +391,7 @@ export function useExercises() {
     },
     {
       name: 'L-Hang',
-      id: 5,
+      id: Exercises.L_HANG,
       type: 'legs',
       description: 'An "L-Hang" is when you hang with your arms and legs forming an "L" shape.',
       steps: [
@@ -411,7 +419,7 @@ export function useExercises() {
     },
     {
       name: 'Knee raise',
-      id: 6,
+      id: Exercises.KNEES_RAISE,
       type: 'legs',
       description: 'A "Knee raise" involves raising your knees toward your chest while hanging.',
       steps: [
