@@ -71,6 +71,26 @@ export class Session extends BaseModel {
     this.user = user
   }
 
+  /** Helper to detect if exercise is a "max" or non-zero type. */
+  private get isMaxExerciseType() {
+    return !!(
+      this.exercise &&
+      (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
+    )
+  }
+
+  /**
+   * Helper to set this.clock correctly for “hold” states:
+   * If it’s a max type, clock = 0; otherwise, clock = hold - 1
+   */
+  private setClockForHold() {
+    if (this.isMaxExerciseType) {
+      this.clock = 0
+    } else if (this.exercise) {
+      this.clock = this.exercise.hold - 1
+    }
+  }
+
   /** Get current exercise */
   get exercise() {
     return this.workout.exercises[this.currentExercise]
@@ -82,7 +102,7 @@ export class Session extends BaseModel {
 
   /** If timer is paused */
   get isTimerActive() {
-    return Session.timer === null ? false : true
+    return Session.timer !== null
   }
 
   /** Setup timer: Countdown before workout starts, then start workout */
@@ -94,7 +114,6 @@ export class Session extends BaseModel {
       }
       Session.audio.autoplay = true
       Session.audio.preload = 'auto'
-      // audio.type = 'audio/wav'
       Session.audio.crossOrigin = 'anonymous'
       Session.audio.src =
         'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA'
@@ -104,32 +123,25 @@ export class Session extends BaseModel {
 
     // setup workout with initial countdown before workout start
     this.clock = Session.setupTime
+
     // start countdown
     Session.timer = window.setInterval(() => {
       if (!this.pauseTimer) {
         this.countDown()
         this.clock -= 1
+
         if (this.clock === -1) {
           if (Session.timer !== null) {
             clearInterval(Session.timer)
             Session.timer = null
           }
-          // max exercise or movement
-          if (
-            this.exercise &&
-            (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
-          ) {
-            this.clock = 0
-          } else {
-            if (this.exercise) {
-              this.clock = this.exercise.hold - 1
-            }
-          }
+          this.setClockForHold()
           // start when setup is done
           this.startWorkout()
         }
       }
     }, 1000)
+
     // set clock text
     if (!this.pauseTimer) {
       this.clockText = i18n.global.t('Get ready')
@@ -139,22 +151,22 @@ export class Session extends BaseModel {
   /** Start workout: Start workout timer */
   async startWorkout() {
     await this.requestWakeLock()
+
     // Setup timer / loop
     Session.timer = window.setInterval(() => {
       if (!this.pauseTimer) this.exerciseSteps()
     }, 1000)
+
     // Count up or down based on exercise type
-    if (
-      this.exercise &&
-      (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
-    ) {
+    if (this.isMaxExerciseType) {
       this.clock -= 1
     } else {
       this.clock += 1
     }
+
     // Set initial exercise state
     this.currentExerciseState = ExerciseState.HOLD
-    // Initally start exercise steps before loop starts
+    // Initially start exercise steps before loop starts
     this.exerciseSteps()
   }
 
@@ -170,21 +182,13 @@ export class Session extends BaseModel {
 
   /** Exercise hold */
   exerciseHold() {
-    if (
-      this.exercise &&
-      (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
-    ) {
+    if (this.isMaxExerciseType) {
       this.clockText = i18n.global.t('Go')
     } else {
       this.clockText = i18n.global.t('Hold')
     }
-    if (
-      this.clock === 1 &&
-      !(
-        this.exercise &&
-        (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
-      )
-    ) {
+
+    if (this.clock === 1 && !this.isMaxExerciseType) {
       this.vibratePhone()
       this.playSound(stopSound)
     }
@@ -197,7 +201,9 @@ export class Session extends BaseModel {
     } else {
       this.clockText = i18n.global.t('Get ready')
     }
+
     this.countDown()
+
     if (this.clock === 1) {
       if (this.exercise && this.currentExerciseStateRepeat - 1 !== this.exercise.repeat) {
         this.currentExerciseStateRepeat += 1
@@ -223,7 +229,6 @@ export class Session extends BaseModel {
   /** Exercise done: Set workout complete to true and stop timer */
   exerciseDone() {
     this.clockText = i18n.global.t('Done')
-
     this.workoutComplete = true
     this.stopTimer()
   }
@@ -245,23 +250,24 @@ export class Session extends BaseModel {
     }
 
     if (type === 'next') {
-      // if there is another exercise
-
       if (this.workout?.exercises && this.currentExercise !== this.workout.exercises.length - 1) {
         this.currentExercise += 1
-        setupTimers()
+        return setupTimers()
       }
     }
     if (type === 'prev') {
       if (this.currentExercise > 0) {
         this.currentExercise -= 1
-        setupTimers()
+        return setupTimers()
       }
     }
     return false
   }
 
-  /** Exercise steps: Go to all excerises in a workout and all there states / steps: PAUSE, HOLD, REST, REPEAT, DONE */
+  /**
+   * Exercise steps: Go through all exercises in a workout
+   * and all their states / steps: PAUSE, HOLD, REST, REPEAT, DONE
+   */
   exerciseSteps() {
     switch (this.currentExerciseState) {
       case ExerciseState.PAUSE:
@@ -271,28 +277,17 @@ export class Session extends BaseModel {
           this.clock -= 1
           break
         }
-        // reset skip
         this.isSkippingRest = false
-        if (
-          this.exercise &&
-          (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
-        ) {
-          this.clock = 0
-        } else {
-          if (this.exercise) {
-            this.clock = this.exercise.hold - 1
-          }
-        }
+        this.setClockForHold()
         this.currentExerciseState = ExerciseState.HOLD
         this.exerciseHold()
         break
+
       case ExerciseState.HOLD:
         this.workoutCompleteTimeTotal += 1
         this.workoutCompleteTimeHanging += 1
-        if (
-          this.exercise &&
-          (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
-        ) {
+
+        if (this.isMaxExerciseType) {
           this.exerciseHold()
           this.clock += 1
           break
@@ -313,24 +308,19 @@ export class Session extends BaseModel {
         }
         this.currentExerciseState = ExerciseState.DONE
         break
+
       case ExerciseState.REST:
         this.workoutCompleteTimeTotal += 1
+
         if (this.clock > 0) {
           this.exerciseRest()
           this.clock -= 1
           break
         }
-        // reset skip
         this.isSkippingRest = false
-        // repeat exercise
+
         if (this.exercise && this.exercise.repeat > 0) {
-          if (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0)) {
-            this.clock = 0
-          } else {
-            if (this.exercise) {
-              this.clock = this.exercise.hold - 1
-            }
-          }
+          this.setClockForHold()
           this.currentExerciseState = ExerciseState.REPEAT
           this.exerciseHold()
           break
@@ -340,13 +330,12 @@ export class Session extends BaseModel {
         }
         this.currentExerciseState = ExerciseState.DONE
         break
+
       case ExerciseState.REPEAT:
         this.workoutCompleteTimeTotal += 1
         this.workoutCompleteTimeHanging += 1
-        if (
-          this.exercise &&
-          (this.exercise.max || (this.exercise.exercise && this.exercise.exercise !== 0))
-        ) {
+
+        if (this.isMaxExerciseType) {
           this.clock += 1
           break
         }
@@ -358,7 +347,6 @@ export class Session extends BaseModel {
         if (this.exercise && this.currentExerciseStateRepeat !== this.exercise.repeat) {
           this.clock = this.exercise.rest - 1
           this.currentExerciseState = ExerciseState.REST
-
           this.exerciseRest()
           break
         }
@@ -367,9 +355,11 @@ export class Session extends BaseModel {
         }
         this.currentExerciseState = ExerciseState.DONE
         break
+
       case ExerciseState.DONE:
         this.exerciseDone()
         break
+
       default:
         break
     }
@@ -402,6 +392,7 @@ export class Session extends BaseModel {
   speakText(text: string) {
     if (this.user?.settings?.speak && 'speechSynthesis' in window) {
       let voiceList = window.speechSynthesis.getVoices()
+
       if (this.user?.settings?.locale) {
         voiceList = voiceList.filter((voice) => {
           if (this.user?.settings?.locale) {
@@ -412,6 +403,7 @@ export class Session extends BaseModel {
       } else {
         voiceList = voiceList.filter((voice) => /^(en|EN|US)/.test(voice.lang))
       }
+
       const utterance = new window.SpeechSynthesisUtterance()
       utterance.text = text
       utterance.voice = voiceList[this.user.settings.voice]
@@ -427,13 +419,14 @@ export class Session extends BaseModel {
   /** Play sound */
   playSound(path: string) {
     if (this.user?.settings?.sound && Session.audio) {
-      // Add error handling and remove event listener after play
       const playHandler = () => {
         Session.audio.play().catch((err: Error) => console.warn('Audio playback failed:', err))
         Session.audio.removeEventListener('canplaythrough', playHandler)
       }
+
       Session.audio.src = path
       Session.audio.addEventListener('canplaythrough', playHandler)
+
       // Add timeout to prevent hanging
       setTimeout(() => {
         Session.audio.removeEventListener('canplaythrough', playHandler)
@@ -444,7 +437,9 @@ export class Session extends BaseModel {
   /** Vibrate phone */
   vibratePhone() {
     if ('vibrate' in navigator) {
-      if (this.user?.settings?.vibrate) navigator.vibrate([80, 40, 120])
+      if (this.user?.settings?.vibrate) {
+        navigator.vibrate([80, 40, 120])
+      }
     }
   }
 
@@ -478,6 +473,7 @@ export class Session extends BaseModel {
   completeCurrentExercise() {
     this.vibratePhone()
     this.playSound(stopSound)
+
     if (this.currentExerciseState === ExerciseState.HOLD) {
       // check if exercise has to repeat
       if (this.exercise?.repeat > 0) {
