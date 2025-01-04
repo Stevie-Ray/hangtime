@@ -100,7 +100,7 @@ const closeModal = () => {
               <div class="text-h2 font-weight-bold">
                 {{ time(timeTotal) }}
               </div>
-              <div>{{ t('Hangboarding') }}: {{ time(timeHanging) }}</div>
+              <div>{{ t('Time hangboarding') }}: {{ time(timeHanging) }}</div>
             </div>
 
             <v-divider v-if="user?.completed" class="my-4"></v-divider>

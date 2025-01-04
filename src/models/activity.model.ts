@@ -3,6 +3,13 @@ import { BaseModel } from './base.model'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { IWorkout } from '@/interfaces/workout.interface'
 
+/**
+ * Activity model
+ * @class Activity
+ * @extends BaseModel
+ * @implements IActivity
+ * @description Represents an activity in the system with its properties
+ */
 export class Activity extends BaseModel implements IActivity {
   name: string
   start_date_local: Date

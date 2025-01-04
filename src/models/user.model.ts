@@ -1,6 +1,13 @@
 import type { Country, IUser, UserSettings } from '@/interfaces/user.interface'
 import { BaseModel } from './base.model'
 
+/**
+ * User model
+ * @class User
+ * @extends BaseModel
+ * @implements IUser
+ * @description Represents a user in the system with their profile information and settings
+ */
 export class User extends BaseModel implements IUser {
   displayName: string | null
   email: string | null

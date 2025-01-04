@@ -1,5 +1,11 @@
 import type { IBase } from '@/interfaces/base.interface'
 
+/**
+ * Base model
+ * @abstract
+ * @class BaseModel
+ * @description Represents a base model in the system with its properties
+ */
 export abstract class BaseModel {
   id?: string
 
