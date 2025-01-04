@@ -9,16 +9,18 @@ import { useAuthenticationStore } from '@/stores/authentication'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
 import { time } from '@/helpers'
+import { usePlayBilling } from '@/composables/usePlayBilling'
 
 const { t } = useI18n()
 
 const { user } = storeToRefs(useAuthenticationStore())
 const { updateUser } = useAuthenticationStore()
 
+const { hasDigitalGoodsService, subscribeLimit } = usePlayBilling()
+
 const debug = false
 const disabled = ref(true)
 const canSubscribe = window.getDigitalGoodsService
-const limit = 30
 const PAYMENT_METHOD = 'https://play.google.com/billing'
 
 let price = ''
@@ -32,7 +34,7 @@ const progressValue = computed(() => {
 
   if (!user || user?.value?.subscribed) time = 0
   const completedTime = user?.value?.completed?.time ? user.value.completed.time : 0
-  const value = ((completedTime / time) * 100) / limit
+  const value = ((completedTime / time) * 100) / subscribeLimit
   return value < 100 ? value : 100
 })
 
@@ -58,12 +60,7 @@ function checkSupport(): void {
   }
 }
 async function populatePrice(sku: string): Promise<boolean> {
-  if (canSubscribe === undefined) {
-    // Digital Goods API is not supported in this context.
-    log("window doesn't have getDigitalGoodsService.")
-
-    return false
-  }
+  if (!hasDigitalGoodsService()) return false
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
     if (service === null) {
@@ -106,11 +103,7 @@ async function loadSkus(): Promise<void> {
   }
 }
 async function listPurchases(): Promise<void> {
-  if (canSubscribe === undefined) {
-    // Digital Goods API is not supported in this context.
-    log("window doesn't have getDigitalGoodsService.")
-    return
-  }
+  if (!hasDigitalGoodsService()) return
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
     if (service === null) {
@@ -131,12 +124,7 @@ async function listPurchases(): Promise<void> {
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function acknowledge(token: string, type = 'repeatable', onComplete = () => {}) {
-  if (canSubscribe === undefined) {
-    // Digital Goods API is not supported in this context.
-    log("window doesn't have getDigitalGoodsService.")
-
-    return
-  }
+  if (!hasDigitalGoodsService()) return
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
     if (service === null) {
@@ -332,8 +320,10 @@ useHead({
               <v-card-text>
                 <div class="mb-4">
                   <span>HangTime gives you </span>
-                  <span style="text-decoration: line-through">{{ limit / 2 }} minutes</span>
-                  <strong>&nbsp;{{ limit }} minutes</strong> of free usage.
+                  <span style="text-decoration: line-through"
+                    >{{ subscribeLimit / 2 }} minutes</span
+                  >
+                  <strong>&nbsp;{{ subscribeLimit }} minutes</strong> of free usage.
                   <span>Want to do more? </span>
                   <span>Buy a subscription! After that it's free forever.</span>
                 </div>

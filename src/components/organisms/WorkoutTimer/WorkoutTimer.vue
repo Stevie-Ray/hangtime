@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { computed, ref, onBeforeUnmount, onMounted, useTemplateRef, reactive, watch } from 'vue'
-// import { ForceBoard, Motherboard, Progressor } from '@hangtime/grip-connect'
-import type { massObject } from '@hangtime/grip-connect/src/interfaces/callback.interface'
+import { computed, ref, onBeforeUnmount, useTemplateRef, reactive, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
+
+import { Workout } from '@/models/workout.model'
+import { Session } from '@/models/session.model'
+import { ExerciseState } from '@/enums/exercise'
+import { time } from '@/helpers'
 
 import WorkoutBluetooth from '@/components/atoms/WorkoutBluetooth/WorkoutBluetooth.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
@@ -13,19 +16,16 @@ import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vu
 import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/WorkoutComplete.vue'
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
 import SliderBluetooth from '@/components/atoms/SliderBluetooth/SliderBluetooth.vue'
-import { time } from '@/helpers'
 
 import { useAuthenticationStore } from '@/stores/authentication'
 import { useActivitiesStore } from '@/stores/activities'
-// import { useBluetoothStore } from '@/stores/bluetooth'
 
-import { Workout } from '@/models/workout.model'
-import { Session } from '@/models/session.model'
-import { ExerciseState } from '@/enums/exercise'
+import { usePlayBilling } from '@/composables/usePlayBilling'
+import { massObject } from '@hangtime/grip-connect/dist/interfaces/callback.interface'
+
+const { canSubscribePlayBilling, subscribeLimit } = usePlayBilling()
 
 const { t } = useI18n()
-
-// const { device } = storeToRefs(useBluetoothStore())
 
 const { user } = storeToRefs(useAuthenticationStore())
 
@@ -42,7 +42,8 @@ const { quick = false } = defineProps<{
 
 const session = reactive(new Session(workout.value, user.value))
 
-// complete
+// dialogs
+const dialogWorkoutSubscribe = ref(true)
 const dialogWorkoutComplete = ref(false)
 
 // bluetooth
@@ -147,43 +148,9 @@ watch(
   }
 )
 
-const dialogWorkoutSubscribe = ref(true)
-const canSubscribePlayBilling = ref(false)
-const subscribeLimit = 30
-const PAYMENT_METHOD = 'https://play.google.com/billing'
-const canSubscribe = window.getDigitalGoodsService
-
-async function canUsePlayBilling() {
-  if (canSubscribe === undefined) {
-    console.log("window doesn't have getDigitalGoodsService.")
-    return
-  }
-  try {
-    const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
-
-    console.log(service)
-    if (service === null) {
-      console.log('Play Billing is not available.')
-    } else {
-      const items = ['subscription']
-      const details = await service.getDetails(items)
-
-      console.log(details)
-      if (details === null) {
-        console.log('Are you running a Play Store build?')
-      } else if (details.length === 0) {
-        console.log('Are you running a Play Store build? 2')
-      } else {
-        canSubscribePlayBilling.value = true
-      }
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-onMounted(() => {
-  canUsePlayBilling()
+onBeforeUnmount(() => {
+  // make sure timer is disabled and speech is stopped
+  session.stopTimer()
 })
 </script>
 

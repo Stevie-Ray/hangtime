@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { purchase } from 'vue-gtag'
 import { useAuthenticationStore } from '@/stores/authentication'
-
+import { usePlayBilling } from '@/composables/usePlayBilling'
 import { time } from '@/helpers'
 
 const { t } = useI18n()
@@ -12,6 +12,8 @@ const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
 
 const { updateUser } = useAuthenticationStore()
+
+const { hasDigitalGoodsService } = usePlayBilling()
 
 const { limit = 30 } = defineProps<{
   limit?: number
@@ -60,12 +62,7 @@ function checkSupport(): void {
 }
 
 async function populatePrice(sku: string): Promise<boolean> {
-  if (canSubscribe === undefined) {
-    // Digital Goods API is not supported in this context.
-    log("window doesn't have getDigitalGoodsService.")
-
-    return false
-  }
+  if (!hasDigitalGoodsService()) return false
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
     if (service === null) {
@@ -109,11 +106,7 @@ async function loadSkus(): Promise<void> {
 }
 
 async function listPurchases(): Promise<void> {
-  if (canSubscribe === undefined) {
-    // Digital Goods API is not supported in this context.
-    log("window doesn't have getDigitalGoodsService.")
-    return
-  }
+  if (!hasDigitalGoodsService()) return
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
     if (service === null) {
@@ -134,11 +127,7 @@ async function listPurchases(): Promise<void> {
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function acknowledge(token: string, type = 'repeatable', onComplete = () => {}) {
-  if (canSubscribe === undefined) {
-    // Digital Goods API is not supported in this context.
-    log("window doesn't have getDigitalGoodsService.")
-    return
-  }
+  if (!hasDigitalGoodsService()) return
   try {
     const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
     if (service === null) {

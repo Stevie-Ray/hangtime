@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { getAuth, signOut } from 'firebase/auth'
 import { useI18n } from 'vue-i18n'
@@ -7,6 +7,9 @@ import { useHead } from '@unhead/vue'
 import { useAuthenticationStore } from '@/stores/authentication'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useAppStore } from '@/stores/app'
+import { usePlayBilling } from '@/composables/usePlayBilling'
+
+const { canSubscribePlayBilling } = usePlayBilling()
 
 const { t } = useI18n()
 
@@ -75,46 +78,11 @@ const items = computed<Item[]>(() => [
   }
 ])
 
-const canSubscribePlayBilling = ref(false)
-const PAYMENT_METHOD = 'https://play.google.com/billing'
-const canSubscribe = window.getDigitalGoodsService
-
-async function canUsePlayBilling() {
-  if (canSubscribe === undefined) {
-    console.log("window doesn't have getDigitalGoodsService.")
-    return
-  }
-  try {
-    const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
-
-    console.log(service)
-    if (service === null) {
-      console.log('Play Billing is not available.')
-    } else {
-      const items = ['subscription']
-      const details = await service.getDetails(items)
-      if (details === null) {
-        console.log('Are you running a Play Store build?')
-      } else if (details.length === 0) {
-        console.log('Are you running a Play Store build? 2')
-      } else {
-        canSubscribePlayBilling.value = true
-      }
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 function showAccountLink(item: Item) {
   if (item.title !== t('Subscription')) return true
   if (canSubscribePlayBilling.value && !user.value?.subscribed) return true
   return false
 }
-
-onMounted(() => {
-  canUsePlayBilling()
-})
 
 async function signOutUser() {
   const auth = getAuth()
