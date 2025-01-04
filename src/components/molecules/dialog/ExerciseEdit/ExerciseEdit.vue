@@ -341,6 +341,7 @@ const rules = {
                     :disabled="exercise.repeat === 0"
                     :max="180"
                     :min="3"
+                    timer
                     :value="exercise.rest"
                     subtitle="After repeats"
                     title="Rest"

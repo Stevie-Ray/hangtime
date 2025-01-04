@@ -75,7 +75,7 @@ const openExerciseEditDialog = (index: number) => {
     :index="exerciseIndex"
     @update-time="
       (time: number) => {
-        if (workout?.time !== undefined) workout.time = time
+        if (workout?.time !== undefined) workout.time = Math.max(0, time)
       }
     "
     @update-index="(index: number) => (exerciseIndex = index)"
