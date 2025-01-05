@@ -76,8 +76,7 @@ const fetchMoreWorkouts = async ({
       (isWorkoutsRoute.value && reachedLastUserWorkouts.value) ||
       (isWorkoutsCommunityRoute.value && reachedLastCommunityWorkouts.value)
     ) {
-      // BUG: done('empty')
-      done('ok')
+      done('empty')
       setTimeout(() => {
         showEmptySlot.value = false
       }, 2000)
@@ -210,7 +209,7 @@ useHead({
         <v-row>
           <v-col cols="12">
             <v-list lines="two" v-if="workoutsList.length">
-              <v-infinite-scroll :onLoad="fetchMoreWorkouts" side="end">
+              <v-infinite-scroll :onLoad="fetchMoreWorkouts" side="end" :key="route.path">
                 <template v-for="(workout, index) in workoutsList" :key="workout.id">
                   <v-list-item
                     v-if="getUserHangboard && getUserHangboardCompany && workout"
@@ -257,7 +256,7 @@ useHead({
                   <v-divider inset v-if="index !== workoutsList.length - 1"></v-divider>
                 </template>
                 <template v-slot:empty>
-                  <div v-if="showEmptySlot">{{ t('No workouts found') }}</div>
+                  <div v-show="showEmptySlot">{{ t('No more workouts found') }}</div>
                 </template>
               </v-infinite-scroll>
             </v-list>
@@ -292,9 +291,10 @@ useHead({
   }
 }
 .v-infinite-scroll {
-  &:deep(.v-infinite-scroll-intersect) {
-    height: auto;
-  }
+  overflow-y: hidden;
+}
+.v-list {
+  padding: 0;
 }
 .v-list-item {
   min-height: 64px;
