@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useWorkoutsStore } from '@/stores/workouts'
+import { useWorkoutsStore } from '@/stores/workouts.store'
 import { IWorkout } from '@/interfaces/workout.interface'
 
 const { createUserWorkout, updateUserWorkout } = useWorkoutsStore()

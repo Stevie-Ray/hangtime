@@ -1,7 +1,7 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { ref, Ref } from 'vue'
 import UserActivitiesDB from '@/plugins/firebase/user-activities-db'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import { IActivity } from '@/interfaces/activity.interface'
 import { Activity } from '@/models/activity.model'
 import { IWorkout } from '@/interfaces/workout.interface'

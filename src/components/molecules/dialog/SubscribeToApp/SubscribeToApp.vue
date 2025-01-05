@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import { usePlayBilling } from '@/composables/usePlayBilling'
 import { time } from '@/helpers'
 

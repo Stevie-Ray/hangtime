@@ -6,7 +6,7 @@ import { useExercises, useGrip, weightConverter } from '@/helpers'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import { Workout } from '@/models/workout.model'
 
 const { user } = storeToRefs(useAuthenticationStore())

@@ -4,9 +4,9 @@ import { storeToRefs } from 'pinia'
 import { getAuth, signOut } from 'firebase/auth'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app.store'
 import { usePlayBilling } from '@/composables/usePlayBilling'
 
 const { canSubscribePlayBilling } = usePlayBilling()

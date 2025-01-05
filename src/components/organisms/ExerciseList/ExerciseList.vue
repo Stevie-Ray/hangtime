@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app.store'
 import ExerciseEdit from '@/components/molecules/dialog/ExerciseEdit/ExerciseEdit.vue'
 import { Workout } from '@/models/workout.model'
 

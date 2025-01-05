@@ -4,7 +4,7 @@ import { useHead } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user.store'
 import { useRandomImage } from '@/helpers'
 import countries from '@/helpers/countries'
 
@@ -12,9 +12,9 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import MapContainer from '@/components/molecules/MapContainer/MapContainer.vue'
 
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app.store'
 import { Hangboard } from '@/interfaces/company.interface'
 
 const { t } = useI18n()

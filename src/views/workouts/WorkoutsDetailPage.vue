@@ -13,10 +13,10 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutShare from '@/components/atoms/WorkoutShare/WorkoutShare.vue'
 
-import { useAppStore } from '@/stores/app'
-import { useWorkoutsStore } from '@/stores/workouts'
-import { useAuthenticationStore } from '@/stores/authentication'
-import { useUserStore } from '@/stores/user'
+import { useAppStore } from '@/stores/app.store'
+import { useWorkoutsStore } from '@/stores/workouts.store'
+import { useAuthenticationStore } from '@/stores/authentication.store'
+import { useUserStore } from '@/stores/user.store'
 import imgLogo from '@/assets/logo.svg'
 
 const { t } = useI18n()

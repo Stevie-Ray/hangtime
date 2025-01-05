@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user.store'
 import countries from '@/helpers/countries'
 
 const { t } = useI18n()

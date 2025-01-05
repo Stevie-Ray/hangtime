@@ -50,9 +50,9 @@ export const useAuthenticationStore = defineStore('authentication', () => {
           : userFromFirebase
       )
 
-      const { useWorkoutsStore } = await import('@/stores/workouts')
+      const { useWorkoutsStore } = await import('@/stores/workouts.store')
       const workouts = useWorkoutsStore()
-      const { useActivitiesStore } = await import('@/stores/activities')
+      const { useActivitiesStore } = await import('@/stores/activities.store')
       const activities = useActivitiesStore()
 
       if (user.value?.settings?.locale) {

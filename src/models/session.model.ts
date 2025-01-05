@@ -4,13 +4,20 @@ import { Workout } from './workout.model'
 import { ExerciseState } from '@/enums/exercise'
 
 import { useWakeLock } from '@vueuse/core'
+import { useBluetooth } from '@/composables/useBluetooth'
 import i18n from '@/plugins/i18n'
 
 import countSound from '@/assets/sound/count.wav'
 import startSound from '@/assets/sound/start.wav'
 import stopSound from '@/assets/sound/stop.wav'
+import { useBluetoothStore } from '@/stores/bluetooth.store'
+import { storeToRefs } from 'pinia'
 
 const { isSupported, isActive, request, release } = useWakeLock()
+const { stream } = useBluetooth()
+
+const bluetoothStore = useBluetoothStore()
+const { bluetoothDevice, bluetoothOutput } = storeToRefs(bluetoothStore)
 
 /**
  * Session model
@@ -136,6 +143,8 @@ export class Session extends BaseModel {
             Session.timer = null
           }
           this.setClockForHold()
+          // start bluetooth stream
+          stream((this.exercise.hold - 1) * 1000)
           // start when setup is done
           this.startWorkout()
         }
@@ -224,6 +233,9 @@ export class Session extends BaseModel {
       window.speechSynthesis.cancel()
       window.speechSynthesis.resume()
     }
+    if (bluetoothDevice.value) {
+      // bluetoothDevice.value.disconnect()
+    }
   }
 
   /** Exercise done: Set workout complete to true and stop timer */
@@ -279,6 +291,8 @@ export class Session extends BaseModel {
         }
         this.isSkippingRest = false
         this.setClockForHold()
+        // start bluetooth stream
+        stream((this.exercise.hold - 1) * 1000)
         this.currentExerciseState = ExerciseState.HOLD
         this.exerciseHold()
         break
@@ -300,6 +314,9 @@ export class Session extends BaseModel {
         if (this.exercise && this.exercise.repeat > 0) {
           this.clock = this.exercise.rest - 1
           this.currentExerciseState = ExerciseState.REST
+          if (bluetoothDevice.value) {
+            bluetoothOutput.value = null
+          }
           this.exerciseRest()
           break
         }
@@ -321,6 +338,8 @@ export class Session extends BaseModel {
 
         if (this.exercise && this.exercise.repeat > 0) {
           this.setClockForHold()
+          // start bluetooth stream
+          stream((this.exercise.hold - 1) * 1000)
           this.currentExerciseState = ExerciseState.REPEAT
           this.exerciseHold()
           break
@@ -347,6 +366,9 @@ export class Session extends BaseModel {
         if (this.exercise && this.currentExerciseStateRepeat !== this.exercise.repeat) {
           this.clock = this.exercise.rest - 1
           this.currentExerciseState = ExerciseState.REST
+          if (bluetoothDevice.value) {
+            bluetoothOutput.value = null
+          }
           this.exerciseRest()
           break
         }

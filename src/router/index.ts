@@ -6,7 +6,7 @@ import {
   NavigationGuardNext
 } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 
 // 1. Define route components.
 // These can be imported from other files

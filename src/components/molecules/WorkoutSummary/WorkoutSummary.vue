@@ -4,7 +4,7 @@ import { ref, Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user.store'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
 import { IWorkout } from '@/interfaces/workout.interface'
 

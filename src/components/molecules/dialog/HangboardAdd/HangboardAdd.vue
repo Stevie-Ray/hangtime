@@ -4,10 +4,10 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { event } from 'vue-gtag'
 import HangboardSelect from '@/components/molecules/HangboardSelect/HangboardSelect.vue'
-import { useAppStore } from '@/stores/app'
-import { useUserStore } from '@/stores/user'
-import { useAuthenticationStore } from '@/stores/authentication'
-import { useWorkoutsStore } from '@/stores/workouts'
+import { useAppStore } from '@/stores/app.store'
+import { useUserStore } from '@/stores/user.store'
+import { useAuthenticationStore } from '@/stores/authentication.store'
+import { useWorkoutsStore } from '@/stores/workouts.store'
 
 const { t } = useI18n()
 

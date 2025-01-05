@@ -4,8 +4,8 @@ import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/user'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useUserStore } from '@/stores/user.store'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 
 const { getHangboardNameByIds } = useUserStore()
 

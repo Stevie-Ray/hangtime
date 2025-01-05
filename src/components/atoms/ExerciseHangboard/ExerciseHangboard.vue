@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import InlineSvg from 'vue-inline-svg'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user.store'
 import { IExercise } from '@/interfaces/workout.interface'
 
 const { getHangboardByIds } = useUserStore()

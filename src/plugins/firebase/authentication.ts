@@ -1,7 +1,7 @@
 import { onAuthStateChanged, getAuth, browserPopupRedirectResolver } from 'firebase/auth'
 // import { default as app } from '@/plugins/firebase'
 
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import { User as FirebaseUser } from 'firebase/auth'
 
 const { login, logout } = useAuthenticationStore()

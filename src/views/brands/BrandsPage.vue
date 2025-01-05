@@ -2,7 +2,7 @@
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user.store'
 import countries from '@/helpers/countries'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'

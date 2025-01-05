@@ -9,7 +9,7 @@ import { getMessaging, getToken, deleteToken, onMessage, MessagePayload } from '
 import firebaseApp from '@/plugins/firebase'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 
 const { updateUser } = useAuthenticationStore()
 

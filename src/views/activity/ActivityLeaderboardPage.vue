@@ -3,7 +3,7 @@ import { ref, watch, computed } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useWorkoutsStore } from '@/stores/workouts'
+import { useWorkoutsStore } from '@/stores/workouts.store'
 import { time } from '@/helpers'
 
 const { t } = useI18n()

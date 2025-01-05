@@ -1,6 +1,6 @@
 import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import { purchase } from 'vue-gtag'
 
 /**

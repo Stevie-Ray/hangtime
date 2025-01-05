@@ -1,6 +1,6 @@
 import { register } from 'register-service-worker'
 import { storeToRefs } from 'pinia'
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app.store'
 
 const { SWRegistrationForNewContent } = storeToRefs(useAppStore())
 const path = import.meta.env.MODE === 'production' ? '/service-worker.js' : '/dev-sw.js?dev-sw'

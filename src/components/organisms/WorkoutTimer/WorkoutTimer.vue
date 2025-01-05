@@ -17,21 +17,21 @@ import WorkoutComplete from '@/components/molecules/dialog/WorkoutComplete/Worko
 import SubscribeToApp from '@/components/molecules/dialog/SubscribeToApp/SubscribeToApp.vue'
 import SliderBluetooth from '@/components/atoms/SliderBluetooth/SliderBluetooth.vue'
 
-import { useAuthenticationStore } from '@/stores/authentication'
-import { useActivitiesStore } from '@/stores/activities'
+import { useAuthenticationStore } from '@/stores/authentication.store'
+import { useActivitiesStore } from '@/stores/activities.store'
+import { useBluetoothStore } from '@/stores/bluetooth.store'
 
 import { usePlayBilling } from '@/composables/usePlayBilling'
-import { massObject } from '@hangtime/grip-connect/dist/interfaces/callback.interface'
 
 const { canSubscribePlayBilling, subscribeLimit } = usePlayBilling()
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useAuthenticationStore())
-
 const { updateUser } = useAuthenticationStore()
-
 const { createUserActivity } = useActivitiesStore()
+
+const { user } = storeToRefs(useAuthenticationStore())
+const { bluetoothOutput } = storeToRefs(useBluetoothStore())
 
 const workout = defineModel<Workout>({ required: true })
 
@@ -45,18 +45,6 @@ const session = reactive(new Session(workout.value, user.value))
 // dialogs
 const dialogWorkoutSubscribe = ref(true)
 const dialogWorkoutComplete = ref(false)
-
-// bluetooth
-const bluetoothOutput = ref<massObject | null>(null)
-const deviceInUse = ref(false)
-
-const notify = (data: massObject) => {
-  bluetoothOutput.value = data
-}
-
-const active = (value: boolean) => {
-  deviceInUse.value = value
-}
 
 onBeforeUnmount(() => {
   // make sure timer is disabled and speech is stopped
@@ -349,8 +337,6 @@ onBeforeUnmount(() => {
                       v-model="workout"
                       size="small"
                       @start="!session.isTimerActive ? session.setupTimer() : null"
-                      @notify="notify"
-                      @active="active"
                     />
                     <workout-share v-model="workout" size="small" />
                   </div>

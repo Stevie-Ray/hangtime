@@ -9,10 +9,10 @@ import roboto400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff2'
 import roboto500 from '@fontsource/roboto/files/roboto-latin-500-normal.woff2'
 import roboto700 from '@fontsource/roboto/files/roboto-latin-700-normal.woff2'
 
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app.store'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable.vue'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import { Theme } from '@/enums/theme'
 
 // router

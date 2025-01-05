@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import { useAppStore } from '@/stores/app'
-import { useUserStore } from '@/stores/user'
+import { useAppStore } from '@/stores/app.store'
+import { useUserStore } from '@/stores/user.store'
 import { IWorkout } from '@/interfaces/workout.interface'
 
 const router = useRouter()

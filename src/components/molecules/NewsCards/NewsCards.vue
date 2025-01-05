@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRandomImage } from '@/helpers'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user.store'
 import countries from '@/helpers/countries'
 
 const { getCompanies } = useUserStore()

@@ -10,8 +10,8 @@ import imgLogo from '@/assets/logo.svg'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
 
-import { useActivitiesStore } from '@/stores/activities'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useActivitiesStore } from '@/stores/activities.store'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 
 import { IActivity } from '@/interfaces/activity.interface'
 import { Levels } from '@/enums/levels'

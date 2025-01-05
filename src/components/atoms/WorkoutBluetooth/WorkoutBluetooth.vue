@@ -3,6 +3,8 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { IWorkout } from '@/interfaces/workout.interface'
+import { useBluetooth } from '@/composables/useBluetooth'
+import { useBluetoothStore } from '@/stores/bluetooth.store'
 
 import {
   Climbro,
@@ -14,9 +16,13 @@ import {
   Progressor
 } from '@hangtime/grip-connect'
 
-import { useBluetoothStore } from '@/stores/bluetooth'
+const bluetoothStore = useBluetoothStore()
 
-const { device } = storeToRefs(useBluetoothStore())
+const { connect } = useBluetoothStore()
+
+const { bluetoothDevice, bluetoothError } = storeToRefs(bluetoothStore)
+
+const { isBluetoothSupported, isBluetoothAvailable } = useBluetooth()
 
 const workout = defineModel<IWorkout>()
 
@@ -24,9 +30,7 @@ const { size = 'default' } = defineProps<{
   size?: string
 }>()
 
-const emit = defineEmits(['notify', 'active', 'start'])
-
-const dialog = ref(false)
+const emit = defineEmits(['start'])
 
 const devices = [
   {
@@ -62,26 +66,7 @@ const devices = [
   }
 ]
 const dropdown = ref(workout.value?.company === 1 ? 'Motherboard' : 'Progressor')
-const output = ref()
-const errorElm = ref<Error | undefined>()
-const isBluetoothAvailable = ref(false)
-
-// check if the browser supports bluetooth
-const isBluetoothSupported = () => {
-  return 'bluetooth' in navigator
-}
-
-// check if the device has a Bluetooth adapter
-if (isBluetoothSupported()) {
-  navigator.bluetooth.getAvailability().then((isAvailable) => {
-    isBluetoothAvailable.value = !!isAvailable
-  })
-}
-
-const reset = () => {
-  device.value?.disconnect()
-  device.value = null
-}
+const dialog = ref(false)
 
 const setup = () => {
   const selectedDeviceClass = {
@@ -98,32 +83,19 @@ const setup = () => {
 
   const selectedDevice = new selectedDeviceClass()
 
-  selectedDevice.connect(
-    async () => {
-      device.value = selectedDevice
+  bluetoothDevice.value = selectedDevice
 
-      // Listen for notifications
-      selectedDevice.notify((data) => {
-        emit('notify', data)
-        // output.value = JSON.stringify(data)
-      })
+  connect(() => {
+    // Close Dialog
+    dialog.value = false
+    // Start workout
+    emit('start')
+  })
+}
 
-      selectedDevice.active(
-        (isActive: boolean) => {
-          emit('active', isActive)
-        },
-        { threshold: 2.5, duration: 1000 }
-      )
-
-      // Close Dialog
-      dialog.value = false
-      // Start workout
-      emit('start')
-    },
-    (error: Error) => {
-      errorElm.value = error
-    }
-  )
+const reset = () => {
+  bluetoothDevice.value?.disconnect()
+  bluetoothDevice.value = null
 }
 </script>
 
@@ -134,7 +106,7 @@ const setup = () => {
       :disabled="!isBluetoothAvailable"
       :size="size"
       color="text"
-      :icon="!device ? '$bluetooth' : '$bluetoothOff'"
+      :icon="!bluetoothDevice ? '$bluetooth' : '$bluetoothOff'"
       variant="text"
       @click="dialog = true"
     ></v-btn>
@@ -192,17 +164,22 @@ const setup = () => {
                     for greater efficiency and progress.
                   </p>
                   <v-select v-model="dropdown" :items="devices" :item-props="true"></v-select>
-                  <v-alert v-if="errorElm" closable type="error" :text="errorElm.message"></v-alert>
+                  <v-alert
+                    v-if="bluetoothError"
+                    closable
+                    type="error"
+                    :text="bluetoothError.message"
+                  ></v-alert>
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
                     :disabled="!isBluetoothAvailable"
-                    :prepend-icon="!device ? '$bluetooth' : '$bluetoothOff'"
+                    :prepend-icon="!bluetoothDevice ? '$bluetooth' : '$bluetoothOff'"
                     color="text"
                     variant="text"
-                    @click="!device ? setup() : reset()"
+                    @click="!bluetoothDevice ? setup() : reset()"
                   >
-                    {{ !device ? 'Connect' : 'Disconnect' }}
+                    {{ !bluetoothDevice ? 'Connect' : 'Disconnect' }}
                   </v-btn>
                   <v-btn
                     href="https://github.com/Stevie-Ray/hangtime-grip-connect"
@@ -215,11 +192,6 @@ const setup = () => {
                     Help development
                   </v-btn>
                 </v-card-actions>
-              </v-card>
-              <v-card v-if="output">
-                <v-card-text>
-                  {{ output }}
-                </v-card-text>
               </v-card>
             </v-col>
           </v-row>

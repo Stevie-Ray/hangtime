@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useWorkoutsStore } from '@/stores/workouts'
+import { useWorkoutsStore } from '@/stores/workouts.store'
 import { useI18n } from 'vue-i18n'
 
 const { workoutsCommunity, workoutsCommunityFilter, workoutsCommunityFilterDirection } =

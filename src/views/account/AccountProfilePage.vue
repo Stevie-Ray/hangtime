@@ -6,11 +6,11 @@ import { getAuth, linkWithPopup, GoogleAuthProvider, OAuthProvider } from 'fireb
 import IRCRA from 'ircra'
 import { Ref, computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { useAuthenticationStore } from '@/stores/authentication.store'
 import { weightConverter } from '@/helpers'
 import countries from '@/helpers/countries'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app.store'
 
 const { t } = useI18n()
 
