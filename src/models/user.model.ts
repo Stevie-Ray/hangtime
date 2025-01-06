@@ -50,19 +50,19 @@ export class User extends BaseModel implements IUser {
       walkthrough: user.settings?.walkthrough || false
     }
     // Initialize optional properties
-    if (user.completed) this.completed = user.completed
+    if (user.completed !== undefined) this.completed = user.completed
     else delete this.completed
-    if (user.country) this.country = user.country
+    if (user.country !== undefined) this.country = user.country
     else delete this.country
-    if (user.gender) this.gender = user.gender
+    if (user.gender !== undefined) this.gender = user.gender
     else delete this.gender
     if (user.pictureURL) this.pictureURL = user.pictureURL
     else delete this.pictureURL
-    if (user.status) this.status = user.status
+    if (user.status !== undefined) this.status = user.status
     else delete this.status
-    if (user.subscribed) this.subscribed = user.subscribed
+    if (user.subscribed !== undefined) this.subscribed = user.subscribed
     else delete this.subscribed
-    if (user.weight) this.weight = user.weight
+    if (user.weight !== undefined) this.weight = user.weight
     else delete this.weight
   }
 }

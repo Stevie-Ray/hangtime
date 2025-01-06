@@ -81,6 +81,33 @@ export function usePlayBilling() {
   }
 
   /**
+   * Check if Play Billing is available
+   * @returns {Promise<void>}
+   */
+  async function canUsePlayBilling(): Promise<void> {
+    if (!hasDigitalGoodsService()) return
+      try {
+        const service = await window.getDigitalGoodsService(PAYMENT_METHOD)
+        // console.log(service)
+        if (service === null) {
+          console.log('Play Billing is not available.')
+        } else {
+          const items = ['subscription']
+          const details = await service.getDetails(items)
+  
+          // console.log(details)
+          if (!details || details.length === 0) {
+            console.log('No subscription details found. Are you running a Play Store build?')
+          } else {
+            canSubscribePlayBilling.value = true
+          }
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+  /**
    * Retrieves and populates the price for a given SKU.
    * @async
    * @param {string} sku - The SKU for the subscription/product.
@@ -350,6 +377,7 @@ export function usePlayBilling() {
 
   onMounted(() => {
     loadSkus()
+    canUsePlayBilling()
   })
 
   return {
