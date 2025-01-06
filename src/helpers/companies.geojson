@@ -8363,6 +8363,42 @@
         "type": "Point",
         "coordinates": [-73.58532, 45.47027]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Polytalon",
+        "description": "Made in Germany, they give you talons like pliers and forearms like tree trunks with their own climbing holds and trainingsboards!",
+        "country": "DE",
+        "id": 133,
+        "url": "https://polytalon.com/",
+        "socials": {
+          "facebook": "https://www.facebook.com/Polytalon",
+          "instagram": "https://www.instagram.com/polytalon_climbing/"
+        },
+        "hangboards": [
+          {
+            "name": "Polyboard",
+            "id": 0,
+            "image": "hangboards/POLYTALONPOLYBOARD.svg",
+            "size": {
+              "x": 590,
+              "y": 180,
+              "z": 45
+            },
+            "type": "wood",
+            "url": "https://polytalon.com/product/polyboard-set/",
+            "holds": 5
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.1814925, 47.6726738]
+      }
     }
   ]
 }

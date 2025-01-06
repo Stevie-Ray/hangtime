@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="585px" height="364px" viewBox="0 0 585 364" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>POLYTALONPOLYBOARD</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="POLYTALONPOLYBOARD" transform="translate(1, 0)" fill="#FFFFFF" stroke="#000000">
+            <path d="M583.83697,363 L40,363 C17.90861,363 0,345.09139 0,323 L0,190 C0,167.90861 17.90861,150 40,150 L583.83697,150" id="board"></path>
+            <path d="M583.768707,261.449779 L40,261.449779 C17.90861,261.449779 0,243.541169 0,221.449779 L0,69 C0,46.90861 17.90861,29 40,29 L583.768707,29" id="board"></path>
+            <rect id="h2" x="18.5" y="294.5" width="179" height="52" rx="26"></rect>
+            <rect id="h3" x="18.5" y="190.5" width="179" height="52" rx="26"></rect>
+            <rect id="h4" x="245.5" y="190.5" width="179" height="52" rx="26"></rect>
+            <rect id="h6" x="292.5" y="294.5" width="179" height="52" rx="26"></rect>
+            <rect id="h2" x="245.5" y="37.5" width="179" height="141" rx="8"></rect>
+            <rect id="h1" x="18.5" y="0.5" width="179" height="173" rx="8"></rect>
+        </g>
+    </g>
+</svg>
