@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useHead } from '@unhead/vue'
-import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useAuthenticationStore } from '@/stores/authentication.store'
@@ -10,7 +9,6 @@ import { time } from '@/helpers'
 import { usePlayBilling } from '@/composables/usePlayBilling'
 
 const { t } = useI18n()
-const router = useRouter()
 const { user } = storeToRefs(useAuthenticationStore())
 
 const {
@@ -43,10 +41,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
+  <app-container toolbar-prepend toolbar-prepend-url="/account">
     <template #title>
       {{ t('Subscription') }}
     </template>

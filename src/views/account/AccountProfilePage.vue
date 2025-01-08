@@ -90,11 +90,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend toolbar-prepend-url="/account">
     <template #title>
       {{ t('Profile') }}
     </template>

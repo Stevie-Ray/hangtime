@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
-import { useRouter } from 'vue-router'
 import { onMounted, reactive, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
@@ -70,8 +69,6 @@ function greet(item: SpeechSynthesisVoice | undefined) {
   }
 }
 
-const router = useRouter()
-
 useHead({
   title: 'Workouts',
   meta: [{ name: 'description', content: '' }]
@@ -79,11 +76,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend toolbar-prepend-url="/account">
     <template #title>
       {{ t('Workouts') }}
     </template>

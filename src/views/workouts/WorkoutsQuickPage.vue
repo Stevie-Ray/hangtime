@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useHead } from '@unhead/vue'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
@@ -9,8 +8,6 @@ import WorkoutTimer from '@/components/organisms/WorkoutTimer/WorkoutTimer.vue'
 import { Workout } from '@/models/workout.model'
 
 const { t } = useI18n()
-
-const router = useRouter()
 
 const workout = reactive(
   new Workout({
@@ -32,11 +29,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend hide-footer>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend hide-footer>
     <template #title>{{ t('Quick workout') }}</template>
 
     <template #default>

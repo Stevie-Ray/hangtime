@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
-import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
@@ -45,8 +44,6 @@ const removeHangboard = (index: number) => {
   }
 }
 
-const router = useRouter()
-
 useHead({
   title: 'Hangboards',
   meta: [{ name: 'description', content: '' }]
@@ -54,11 +51,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend toolbar-prepend-url="/account">
     <template #title>
       {{ t('Hangboards') }}
     </template>

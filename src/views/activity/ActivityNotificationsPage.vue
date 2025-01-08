@@ -3,7 +3,6 @@ import { ref, Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
-import { useRouter } from 'vue-router'
 
 import { getMessaging, getToken, deleteToken, onMessage, MessagePayload } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
@@ -14,8 +13,6 @@ import { useAuthenticationStore } from '@/stores/authentication.store'
 const { updateUser } = useAuthenticationStore()
 
 const { user } = storeToRefs(useAuthenticationStore())
-
-const router = useRouter()
 
 const { t } = useI18n()
 
@@ -200,11 +197,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend toolbar-prepend-url="/account">
     <template #title>
       {{ t('Notifications') }}
     </template>

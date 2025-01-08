@@ -124,7 +124,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     await userWorkoutsDb.update(workout as IWorkout & { id: string })
   }
 
-  const getWorkoutById = computed(() => (id: string | string[]): Workout | undefined => {
+  const getWorkoutById = (id: string | string[]): Workout | undefined => {
     if (id === 'new') {
       const newWorkout = new Workout()
       newWorkout.addExercise()
@@ -138,7 +138,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     if (workoutsCommunity.value.find((workout) => workout.id === id)) {
       return reactive(new Workout(workoutsCommunity.value.find((workout) => workout.id === id)))
     }
-  })
+  }
 
   /**
    * Get the Users hangboards of a certain hangboard / company.

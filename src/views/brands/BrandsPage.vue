@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user.store'
 import countries from '@/helpers/countries'
 
@@ -12,8 +11,6 @@ const { t } = useI18n()
 
 const { getCompanies } = useUserStore()
 
-const router = useRouter()
-
 useHead({
   title: t('Supported Hangboards'),
   meta: [{ name: 'description', content: '' }]
@@ -21,16 +18,10 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend toolbar-prepend-url="/">
     <template #title>
       {{ t('Supported Hangboards') }}
     </template>
-
-    <template #icons> </template>
 
     <template #default>
       <v-container>

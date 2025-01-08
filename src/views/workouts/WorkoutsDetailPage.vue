@@ -39,7 +39,8 @@ const { fetchCommunityWorkouts, resetCommunityWorkouts, getWorkoutById, removeUs
 
 const { updateUser } = useAuthenticationStore()
 
-const workout = getWorkoutById(route.params.id ? route.params.id : 'new')
+const workout = computed(() => getWorkoutById(route.params.id ? route.params.id : 'new'))
+
 // workout - edit
 const edit = ref(false)
 
@@ -98,17 +99,21 @@ const onScroll = () => {
 }
 
 useHead({
-  title: () => workout?.name ?? '',
-  meta: [{ name: 'description', content: () => workout?.description }]
+  title: () => workout.value?.name ?? '',
+  meta: [{ name: 'description', content: () => workout.value?.description }]
 })
 </script>
-
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container
+    toolbar-prepend
+    :toolbar-prepend-url="
+      router.options.history.state.back &&
+      typeof router.options.history.state.back === 'string' &&
+      router.options.history.state.back.includes('community')
+        ? '/workouts/community'
+        : '/workouts'
+    "
+  >
     <template #title>
       <span v-if="workout">{{ workout.name }}</span>
       <span v-else>{{ t('No workouts found') }}</span>
@@ -175,7 +180,7 @@ useHead({
           <v-col cols="12">
             <v-empty-state
               to="/workouts/new"
-              headline="No workouts found"
+              headline="Workout not found"
               title="Community-based hangboard app"
               text="Our workouts are community-driven and unique for each hangboard. Explore the 'Community' tab or create your own to share with fellow climbers."
               :image="imgLogo"
@@ -220,10 +225,16 @@ useHead({
     top: 68px;
   }
 }
-
 .v-toolbar .v-btn--size-x-large {
   min-width: 64px;
   padding: 0 12px;
+}
+.v-theme--dark {
+  .v-empty-state {
+    &:deep(.v-empty-state__media) {
+      filter: invert(100%);
+    }
+  }
 }
 </style>
 

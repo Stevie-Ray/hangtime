@@ -4,7 +4,6 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 // import { useTheme } from 'vuetify'
 import { useHead } from '@unhead/vue'
-import { useRouter } from 'vue-router'
 import IRCRA from 'ircra'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useAuthenticationStore } from '@/stores/authentication.store'
@@ -25,8 +24,6 @@ const { online } = storeToRefs(useAppStore())
 const { updateUser } = useAuthenticationStore()
 
 // const theme = useTheme()
-
-const router = useRouter()
 
 const language = [
   {
@@ -127,11 +124,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.go(-1)">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend toolbar-prepend-url="/account">
     <template #title>
       {{ t('General') }}
     </template>

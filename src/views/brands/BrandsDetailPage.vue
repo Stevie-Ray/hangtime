@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/user.store'
 import { useRandomImage } from '@/helpers'
@@ -25,9 +25,8 @@ const { online } = storeToRefs(useAppStore())
 
 const { getCompanyByUrlKey, getHangboardByIds } = useUserStore()
 
-// router
+// route
 const route = useRoute()
-const router = useRouter()
 
 const getCompany = computed(() => getCompanyByUrlKey(route.params.id.toString()))
 
@@ -48,11 +47,7 @@ useHead({
 </script>
 
 <template>
-  <app-container prepend>
-    <template #prepend>
-      <v-icon @click="router.push('/brands')">$arrowLeft</v-icon>
-    </template>
-
+  <app-container toolbar-prepend toolbar-prepend-url="/brands">
     <template #title>
       {{
         `${

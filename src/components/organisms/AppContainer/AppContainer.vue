@@ -1,26 +1,36 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 
 const { t } = useI18n()
+const router = useRouter()
+
 const { user } = storeToRefs(useAuthenticationStore())
 
 const {
   extension = false,
-  prepend = false,
+  toolbarPrepend = false,
   hideFooter = false
 } = defineProps<{
   extension?: boolean
-  prepend?: boolean
+  toolbarPrepend?: boolean
+  toolbarPrependUrl?: string
   hideFooter?: boolean
 }>()
 </script>
 
 <template>
   <v-app-bar app>
-    <template v-if="prepend" #prepend>
-      <slot name="prepend"></slot>
+    <!--  toolbar prepend  -->
+    <template v-if="toolbarPrepend" #prepend>
+      <slot name="prepend">
+        <router-link v-if="toolbarPrependUrl" :to="toolbarPrependUrl" style="color: inherit">
+          <v-icon>$arrowLeft</v-icon>
+        </router-link>
+        <v-icon v-else @click="router.go(-1)">$arrowLeft</v-icon>
+      </slot>
     </template>
 
     <!--  toolbar titles  -->
