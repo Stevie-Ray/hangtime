@@ -46,10 +46,9 @@ export class User extends BaseModel implements IUser {
       speak: user.settings?.speak || false,
       vibrate: user.settings?.vibrate || false,
       voice: user.settings?.voice || 0,
-      locale: user.settings?.locale || 'en-US',
       walkthrough: user.settings?.walkthrough || false
     }
-    // Initialize optional properties
+    // Initialize optional properties, deleteing is required for Firebase
     if (user.completed !== undefined) this.completed = user.completed
     else delete this.completed
     if (user.country !== undefined) this.country = user.country
@@ -64,5 +63,14 @@ export class User extends BaseModel implements IUser {
     else delete this.subscribed
     if (user.weight !== undefined) this.weight = user.weight
     else delete this.weight
+    // Initialize optional setting properties, deleteing is required for Firebase
+    if (user.settings?.hangboard !== undefined) this.settings.hangboard = user.settings.hangboard
+    else delete this.settings.hangboard
+    if (user.settings?.locale !== undefined) this.settings.locale = user.settings.locale
+    else delete this.settings.locale
+    if (user.settings?.theme !== undefined) this.settings.theme = user.settings.theme
+    else delete this.settings.theme
+    if (user.settings?.token !== undefined) this.settings.token = user.settings.token
+    else delete this.settings.token
   }
 }
