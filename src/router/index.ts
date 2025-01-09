@@ -23,7 +23,6 @@ const AccountWorkoutsPage = () => import('@/views/account/AccountWorkoutsPage.vu
 // Activity
 const ActivityPage = () => import('@/views/activity/ActivityPage.vue')
 const ActivityLeaderboardPage = () => import('@/views/activity/ActivityLeaderboardPage.vue')
-const ActivityNotificationsPage = () => import('@/views/activity/ActivityNotificationsPage.vue')
 // Authentication
 const LoginPage = () => import('@/views/authentication/LoginPage.vue')
 const CheckLoginPage = () => import('@/views/authentication/CheckLoginPage.vue')
@@ -60,11 +59,6 @@ const routes: Array<RouteRecordRaw> = [
     meta: { public: true }
   },
   { path: '/activity', component: ActivityPage, name: 'ActivityPage' },
-  {
-    path: '/activity/notifications',
-    component: ActivityNotificationsPage,
-    name: 'ActivityNotificationsPage'
-  },
   {
     path: '/activity/leaderboard',
     component: ActivityLeaderboardPage,

@@ -48,7 +48,7 @@ const {
         </div>
 
         <div class="flex-grow-1 text-truncate" style="overflow: hidden">
-          <v-dialog width="500" v-if="!sort">
+          <v-dialog max-width="500" v-if="!sort">
             <template v-slot:activator="{ props }">
               <exercise-name v-model="exercise" v-bind="props" hide-repeat />
             </template>

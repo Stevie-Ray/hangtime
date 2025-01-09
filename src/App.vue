@@ -12,6 +12,8 @@ import roboto700 from '@fontsource/roboto/files/roboto-latin-700-normal.woff2'
 import { useAppStore } from '@/stores/app.store'
 
 import NewContentAvailable from '@/components/molecules/NewContentAvailable/NewContentAvailable.vue'
+import InAppNotification from '@/components/molecules/dialog/InAppNotification/InAppNotification.vue'
+
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { Theme } from '@/enums/theme'
 
@@ -82,6 +84,7 @@ watch(user, async (updatedUser): Promise<void> => {
       :refreshing-app="refreshingApp"
       @refresh="serviceWorkerSkipWaiting"
     ></new-content-available>
+    <in-app-notification />
   </v-app>
 </template>
 

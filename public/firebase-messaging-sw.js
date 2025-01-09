@@ -1,10 +1,10 @@
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here. Other Firebase libraries
 // are not available in the service worker.
- 
-importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js')
- 
-importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js')
+
+importScripts('https://www.gstatic.com/firebasejs/11.1.0/firebase-app-compat.js')
+
+importScripts('https://www.gstatic.com/firebasejs/11.1.0/firebase-messaging-compat.js')
 
 const config = {
   apiKey: 'AIzaSyDkE4T_MphbbPVq8gdnZjyRcLCDcqrheW8',
@@ -16,10 +16,8 @@ const config = {
   appId: '1:292866814265:web:0a256263a11f5eed'
 }
 
- 
 firebase.initializeApp(config)
 
- 
 const messaging = firebase.messaging()
 
 // If you would like to customize notifications that are received in the
@@ -35,7 +33,6 @@ messaging.onBackgroundMessage((payload) => {
     icon: 'img/icons/android-chrome-512x512.png'
   }
 
-   
   self.registration.showNotification(notificationTitle, notificationOptions)
 })
 // [END on_background_message]

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
@@ -9,6 +9,7 @@ import imgLogo from '@/assets/logo.svg'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
+import NotificationBell from '@/components/molecules/NotificationBell/NotificationBell.vue'
 
 import { useActivitiesStore } from '@/stores/activities.store'
 import { useAuthenticationStore } from '@/stores/authentication.store'
@@ -20,8 +21,6 @@ const { activities } = storeToRefs(useActivitiesStore())
 const { user } = storeToRefs(useAuthenticationStore())
 
 const { t } = useI18n()
-
-const notifications = ref(false)
 
 const levels = [
   { name: t('easy'), value: Levels.Easy },
@@ -85,17 +84,7 @@ useHead({
     </template>
 
     <template #icons>
-      <v-btn
-        class="text-none"
-        color="text"
-        :disabled="!notifications"
-        icon
-        :to="notifications ? '/activity/notifications' : undefined"
-      >
-        <v-badge dot color="secondary">
-          <v-icon>$bellOutline</v-icon>
-        </v-badge>
-      </v-btn>
+      <notification-bell />
     </template>
 
     <template #extension>
