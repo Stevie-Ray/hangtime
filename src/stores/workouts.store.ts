@@ -28,7 +28,10 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     workoutDB = new UserWorkoutsDB(user.value.id)
   }
 
-  const fetchUserWorkouts = async () => {
+  /**
+   * Get all workouts shared by the user.
+   */
+  const fetchSubscribedWorkouts = async () => {
     const newWorkouts = await userSubscribedDB.readAll(
       [['subscribers', 'array-contains', user.value?.id]],
       'updateTimestamp',
@@ -36,6 +39,16 @@ export const useWorkoutsStore = defineStore('workouts', () => {
       20
     )
     workouts.value.push(...newWorkouts)
+  }
+
+  /**
+   * Get all workouts created by the user.
+   */
+  const fetchUserWorkouts = async () => {
+    if (workoutDB) {
+      return await workoutDB.readAll()
+    }
+    return []
   }
 
   const reachedLastUserWorkouts = computed(() => {
@@ -54,6 +67,9 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     communityWorkoutsDB.resetLastVisible()
   }
 
+  /**
+   * Get all workouts shared by the user.
+   */
   const fetchCommunityWorkouts = async () => {
     const userStore = useUserStore()
     const constraints: [string | FieldPath, WhereFilterOp, unknown][] = [['share', '==', true]]
@@ -165,6 +181,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
     workoutsCommunityFilterDirection,
     leaderboards,
     fetchUserWorkouts,
+    fetchSubscribedWorkouts,
     fetchCommunityWorkouts,
     fetchLeaderboard,
     createUserWorkout,

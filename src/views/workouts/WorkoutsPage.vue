@@ -29,7 +29,8 @@ const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
 const { updateUser } = useAuthenticationStore()
 const { online } = storeToRefs(useAppStore())
-const { fetchCommunityWorkouts, fetchUserWorkouts, resetCommunityWorkouts } = useWorkoutsStore()
+const { fetchCommunityWorkouts, fetchSubscribedWorkouts, resetCommunityWorkouts } =
+  useWorkoutsStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -60,7 +61,7 @@ const fetchMoreWorkouts = async ({
 }) => {
   try {
     if (isWorkoutsRoute.value) {
-      await fetchUserWorkouts()
+      await fetchSubscribedWorkouts()
     } else if (isWorkoutsCommunityRoute.value) {
       await fetchCommunityWorkouts()
     }

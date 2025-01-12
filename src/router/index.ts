@@ -20,6 +20,7 @@ const AccountPrivacyPage = () => import('@/views/account/AccountPrivacyPage.vue'
 const AccountProfilePage = () => import('@/views/account/AccountProfilePage.vue')
 const AccountSubscriptionPage = () => import('@/views/account/AccountSubscriptionPage.vue')
 const AccountWorkoutsPage = () => import('@/views/account/AccountWorkoutsPage.vue')
+const AccountImportExportPage = () => import('@/views/account/AccountImportExportPage.vue')
 // Activity
 const ActivityPage = () => import('@/views/activity/ActivityPage.vue')
 const ActivityLeaderboardPage = () => import('@/views/activity/ActivityLeaderboardPage.vue')
@@ -110,6 +111,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/account/workouts',
     component: AccountWorkoutsPage,
     name: 'AccountWorkoutsPage'
+  },
+  {
+    path: '/account/import-export',
+    component: AccountImportExportPage,
+    name: 'AccountImportExportPage'
   },
   {
     path: '/account/subscription',

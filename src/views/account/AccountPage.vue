@@ -51,6 +51,12 @@ const items = computed<Item[]>(() => [
     link: '/account/workouts'
   },
   {
+    title: `${t('Import')} / ${t('Export')}`,
+    icon: '$swapVertical',
+    subtitle: `${t('Import')} / ${t('Export')} ${t('Workouts')}`,
+    link: '/account/import-export'
+  },
+  {
     title: t('Subscription'),
     icon: '$cashMultiple',
     subtitle: t('Unlimited workouts'),
