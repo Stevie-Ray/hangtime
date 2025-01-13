@@ -1,0 +1,19 @@
+{
+  "name": "Hanging L-Sit",
+  "force": "pull",
+  "level": "expert",
+  "mechanic": "isolation",
+  "equipment": "body only",
+  "primaryMuscles": ["abdominals"],
+  "secondaryMuscles": [],
+  "instructions": [
+    "Hang from a pull-up bar with your arms fully extended and your legs together.",
+    "Engage your core and slowly raise your legs until they’re parallel to the floor, forming an ‘L’ shape with your hips at a 90-degree angle.",
+    "Keep your legs straight and toes pointed, maintaining tension in your abdominal muscles.",
+    "Hold the position, focusing on keeping your shoulders down and back, and your abs braced.",
+    "Slowly lower your legs back to the starting position under control."
+  ],
+  "category": "strength",
+  "images": ["Hanging_L_Sit/0.jpg", "Hanging_L_Sit/1.jpg"],
+  "id": "Hanging_L_Sit"
+}

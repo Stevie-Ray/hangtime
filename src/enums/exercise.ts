@@ -39,32 +39,32 @@ export enum Exercises {
   /**
    * Pull-up
    */
-  PULLUP = 1,
+  PULLUP = 'Pullups',
 
   /**
    * Scap Pull
    */
-  SCAP_PULL,
+  SCAP_PULL = 'Scapular_Pull-Up',
 
   /**
    * Negative Pull
    */
-  NEGATIVE_PULL,
+  NEGATIVE_PULL = 'Negative_Pull-Up',
 
   /**
    * Typewriter
    */
-  TYPEWRITER,
+  TYPEWRITER = 'Typewriter_Pull-Up',
 
   /**
    * L-Hang
    */
-  L_HANG,
+  L_HANG = 'Hanging_L_Sit',
 
   /**
    * Knees Raise
    */
-  KNEES_RAISE
+  KNEES_RAISE = 'Hanging_Leg_Raise'
 }
 
 /**

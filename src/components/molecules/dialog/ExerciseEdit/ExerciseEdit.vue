@@ -8,12 +8,33 @@ import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { Workout } from '@/models/workout.model'
+import { Exercises } from '@/enums/exercise'
 
 const { user } = storeToRefs(useAuthenticationStore())
 
 // helpers
 const grip = useGrip()
-const exercises = useExercises()
+const exerciseList = useExercises()
+
+const exercises = computed(() => {
+  return exerciseList.map((exercise, index) => ({
+    ...exercise,
+    // start at 1, 0 is the default exercise (dead hang)
+    index: index + 1
+  }))
+})
+
+const exerciseFilter = computed(() => {
+  if (exercise.value && grip[exercise.value.grip].disabledExercises) {
+    return exercises.value.map((obj) => ({
+      ...obj,
+      disabled: exercise.value
+        ? grip[exercise.value.grip].disabledExercises?.includes(obj.id as Exercises)
+        : null
+    }))
+  }
+  return exercises.value
+})
 
 const { t } = useI18n()
 
@@ -48,35 +69,6 @@ const exerciseEditTime = (timer: 'hold' | 'rest' | 'repeat' | 'pause' | 'time', 
     emit('update-time', workout.value.time + exercise.value.time)
   }
 }
-
-const exerciseByType = (typeId: 'arms' | 'legs') =>
-  exercises.filter((exercise) => exercise.type === typeId)
-
-const exerciseFilter = (type: 'arms' | 'legs') => {
-  if (exercise.value && grip[exercise.value.grip].disabledExercises) {
-    return exerciseByType(type).map((obj) => ({
-      ...obj,
-      disabled: exercise.value
-        ? grip[exercise.value.grip].disabledExercises?.includes(obj.id)
-        : null
-    }))
-  }
-  return exerciseByType(type)
-}
-
-const exerciseMovement = computed({
-  // getter
-  get() {
-    if (exercise.value && exercise.value.exercise === 0) return null
-    return exercise.value ? exercise.value.exercise : null
-  },
-  // setter
-  set(newValue) {
-    if (exercise.value && newValue !== null) {
-      exercise.value.exercise = newValue
-    }
-  }
-})
 
 const exerciseRemove = () => {
   if (workout.value && workout.value.exercises[index]) {
@@ -198,55 +190,41 @@ const rules = {
                         item-title="name"
                         item-value="id"
                         required
+                        @update:modelValue="exercise.exercise = 0"
                       >
                       </v-select>
                     </v-col>
                   </v-row>
 
                   <v-row>
-                    <v-col cols="6">
-                      <div class="text-caption">{{ t('Movement') }} ({{ t('Optional') }})</div>
-                      <v-select
-                        v-model="exerciseMovement"
-                        :items="exerciseFilter('arms')"
-                        :label="t('Arms')"
-                        item-title="name"
-                        item-value="id"
-                        single-line
-                      >
-                        <template #selection="data">
+                    <v-col cols="12">
+                      <div class="d-flex justify-space-between">
+                        <div class="text-caption">{{ t('Movement') }} ({{ t('Optional') }})</div>
+                        <div class="text-caption text-right">
                           <span
-                            v-if="data.item.raw.type"
-                            class="text-truncate"
-                            v-text="data.item.title"
-                          ></span>
-                        </template>
-                      </v-select>
-                    </v-col>
-
-                    <v-col cols="6">
-                      <div class="text-caption text-right">
-                        <span
-                          v-if="exercise && exercise.exercise !== 0"
-                          @click="
-                            ;(exercise.exercise = 0), (exercise.pullups = 1), (exercise.max = false)
-                          "
-                        >
-                          {{ t('Reset') }}
-                        </span>
-                        <span v-else>&nbsp;</span>
+                            v-if="exercise && exercise.exercise !== 0"
+                            @click="
+                              ;(exercise.exercise = 0),
+                                (exercise.pullups = 1),
+                                (exercise.max = false)
+                            "
+                          >
+                            {{ t('Reset') }}
+                          </span>
+                          <span v-else>&nbsp;</span>
+                        </div>
                       </div>
                       <v-select
-                        v-model="exerciseMovement"
-                        :items="exerciseFilter('legs')"
-                        :label="t('Legs')"
+                        v-model="exercise.exercise"
+                        :items="exerciseFilter"
                         item-title="name"
-                        item-value="id"
-                        single-line
+                        item-value="index"
+                        item-disabled="disabled"
+                        item-props
                       >
                         <template #selection="data">
                           <span
-                            v-if="data.item.raw.type"
+                            v-if="data.item.value !== 0"
                             class="text-truncate"
                             v-text="data.item.title"
                           ></span>

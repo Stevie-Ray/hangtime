@@ -12,20 +12,20 @@ import imgBackgroundDark5 from '@/assets/backgrounds/background-d5.png'
 import imgBackgroundDark6 from '@/assets/backgrounds/background-d6.png'
 import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
 import { IUser } from '@/interfaces/user.interface'
+import { ExerciseJson } from '@/interfaces/exercise.json.interface'
 import { Exercises, Grip } from '@/enums/exercise'
 
 /**
- *
+ * Pad time with 0 if less than 10
  * @param time
  * @return {*}
  */
-
 function padTime(time: number) {
   return (time < 10 ? '0' : '') + time
 }
 
 /**
- *
+ * Format time
  * @param item
  * @returns
  */
@@ -249,203 +249,53 @@ export function useGrip() {
   ]
 }
 
+let cachedExercises: ExerciseJson[] | null = null
+
 /**
- * Exercises
- * @returns [{name: string, id: number, type: string, description: string, steps: [{name: string, description: string}]}]
+ * Get sorted exercises. Cached after initial load.
+ * @returns {ExerciseJson[]}
  */
-export function useExercises() {
-  return [
-    {
-      name: 'Pull-up',
-      id: Exercises.PULLUP,
-      type: 'arms',
-      description:
-        'A "Pull-up" involves grabbing holds and pulling your body upward while hanging from the holds.',
-      steps: [
-        {
-          name: 'Hang Position',
-          description:
-            'Hang from the selected holds with your arms fully extended, and your feet off the ground. Your body should be in a straight line from your head to your heels.'
-        },
-        {
-          name: 'Pull-up Movement',
-          description:
-            'Initiate the pull-up by bending your arms at the elbows, bringing your chest closer to the hangboard.\n' +
-            'Focus on engaging your back, shoulders, biceps, and finger strength as you pull your body upward.\n' +
-            'Aim to bring your chin above the level of the hangboard.\n' +
-            'Keep your core engaged and maintain a controlled, smooth movement throughout the pull-up.'
-        },
-        {
-          name: 'Hold the Top Position',
-          description:
-            "Once you've pulled yourself up, hold the top position briefly, maintaining the bent-arm position with your chin above the hangboard. This will help you work on static strength and control."
-        },
-        {
-          name: 'Lower Down',
-          description:
-            'Slowly extend your arms to lower yourself back to the starting position. Keep the movement controlled and avoid dropping suddenly.'
-        }
-      ]
-    },
-    {
-      name: 'Scap Pull',
-      id: Exercises.SCAP_PULL,
-      type: 'arms',
-      description:
-        'A "Scapular Pull-up" is an exercise that targets scapular (shoulder blade) strength and stability. Hang from the hold with straight arms and without bending your elbows, squeeze your shoulder blades together to lift your body slightly.',
-      steps: [
-        {
-          name: 'Grip the Hold',
-          description:
-            'Stand in front of the hangboard and reach up to grip the chosen hold with both hands. Your arms should be fully extended, and your palms should be facing away from you.'
-        },
-        {
-          name: 'Engage Your Scapulae',
-          description:
-            "This is the key part of the Scapular Pull-up. Without bending your arms, initiate the movement by engaging your shoulder blades (scapulae). Imagine trying to pinch your shoulder blades together and downward as if you're trying to squeeze a pencil between them. This will retract and depress your shoulder blades."
-        },
-        {
-          name: 'Pull Your Chest Towards the Hold',
-          description:
-            'As your scapulae engage, your chest should naturally move closer to the hold. This is the scapular pull-up motion. Focus on using your back muscles, particularly the muscles between your shoulder blades.'
-        },
-        {
-          name: 'Hold and Squeeze',
-          description:
-            'Once your shoulder blades are fully engaged, hold this position for a second or two, squeezing your shoulder blades together as hard as you can.'
-        }
-      ]
-    },
-    {
-      name: 'Negative Pull',
-      id: Exercises.NEGATIVE_PULL,
-      type: 'arms',
-      description:
-        'A "Negative Pull-up" involves starting at the top, gripping a hold, and then lowering your body slowly.',
-      steps: [
-        {
-          name: 'Grip the Hold',
-          description:
-            'Stand in front of the hangboard and reach up to grip the chosen hold with both hands. Your arms should be fully extended, and your palms should be facing away from you.'
-        },
-        {
-          name: 'Jump Up or Use a Step',
-          description:
-            'To get into the starting position for the negative pull-up, you can either jump up to the hold or use a step to assist you in reaching the hold. Your chin should be above the hangboard.'
-        },
-        {
-          name: 'Engage Your Muscles',
-          description:
-            'With your chin above the hangboard, engage your core and back muscles to maintain a stable position.'
-        },
-        {
-          name: 'Lower Slowly',
-          description:
-            'Now, slowly and in a controlled manner, lower your body down toward the ground. Focus on using your back and arm muscles to resist gravity. Your goal is to take about 5-10 seconds to lower your body completely.'
-        },
-        {
-          name: 'Full Extension',
-          description:
-            "When your arms are fully extended and you're hanging from the hold with straight arms, the negative pull-up is complete."
-        }
-      ]
-    },
-    {
-      name: 'Typewriter',
-      id: Exercises.TYPEWRITER,
-      type: 'arms',
-      description:
-        'A "Typewriter" is when you move your hands horizontally between holds, like the keys of a typewriter.',
-      steps: [
-        {
-          name: 'Shift to One Side',
-          description:
-            'Begin the Typewriter by shifting your body to one side while keeping your arms straight. The goal is to move your chest and head over one of the holds while maintaining a straight-arm hang on the other.'
-        },
-        {
-          name: 'Rotate Your Head and Chest',
-          description:
-            "As you shift your body to one side, start rotating your head and chest in that direction. Your goal is to get your head and chest directly above the hold you're moving toward."
-        },
-        {
-          name: 'Reach and Hold',
-          description:
-            'Once your head and chest are above the hold, reach out with your free hand and grip the hold firmly. Your other hand should still be holding the starting hold.'
-        },
-        {
-          name: 'Reverse the Movement',
-          description:
-            'Now, reverse the movement by shifting your body and rotating your head and chest back to the center position while maintaining a grip on both holds. Your arms should remain straight.'
-        },
-        {
-          name: 'Shift to the Other Side',
-          description:
-            'Repeat the process on the opposite side, shifting your body, rotating your head and chest, and reaching for the other hold.'
-        },
-        {
-          name: 'Continue Alternating',
-          description:
-            'Continue to alternate between the two holds, moving from side to side in a controlled and deliberate manner. Focus on maintaining stability and control throughout the exercise.'
-        }
-      ]
-    },
-    {
-      name: 'L-Hang',
-      id: Exercises.L_HANG,
-      type: 'legs',
-      description: 'An "L-Hang" is when you hang with your arms and legs forming an "L" shape.',
-      steps: [
-        {
-          name: 'Hanging Position',
-          description:
-            'Initially, hang with both feet on the ground to help you get into the correct position. Your body should form an "L" shape, with your legs extended horizontally and your torso hanging vertically.'
-        },
-        {
-          name: 'Lift Your Legs',
-          description:
-            "Once you're comfortable with the hanging position, slowly raise your legs, keeping them straight. Your goal is to bring them up to hip height or as close to forming an 'L' shape as possible. This engages your core and adds difficulty to the exercise."
-        },
-        {
-          name: 'Hold and Maintain',
-          description:
-            'Maintain the L-Hang position for as long as you can with proper form. Focus on keeping your arms straight and your core engaged. Aim to hold for at least 10-15 seconds when you start, and gradually increase the duration as you get stronger.'
-        },
-        {
-          name: 'Lower Your Legs',
-          description:
-            'Gently lower your legs back to the starting position, keeping them straight. Avoid swinging or using momentum during this phase.'
-        }
-      ]
-    },
-    {
-      name: 'Knee raise',
-      id: Exercises.KNEES_RAISE,
-      type: 'legs',
-      description: 'A "Knee raise" involves raising your knees toward your chest while hanging.',
-      steps: [
-        {
-          name: 'Hanging Position',
-          description:
-            'Hang from the holds with your arms fully extended, maintaining a straight body position.'
-        },
-        {
-          name: 'Raise Your Knees',
-          description:
-            'Begin the knee raise by slowly lifting your knees toward your chest. Aim to bring your knees as high as you can without compromising your form or swinging excessively.'
-        },
-        {
-          name: 'Controlled Movement',
-          description:
-            'Ensure that the knee raise is a controlled movement. Avoid using momentum or swinging your body during the exercise.'
-        },
-        {
-          name: 'Hold and Lowe',
-          description:
-            'Once your knees are at their highest point, hold the position for a second or two to engage your core further. Then, slowly lower your knees back to the starting position with your legs fully extended.'
-        }
-      ]
-    }
-  ]
+export function useExercises(): ExerciseJson[] {
+  // If exercises have been loaded and sorted before, return them directly.
+  if (cachedExercises) {
+    return cachedExercises
+  }
+
+  const modules = import.meta.glob('@/helpers/exercises/*.json', {
+    eager: true
+  })
+
+  // Convert the imported modules to an array of ExerciseJson objects
+  const exercises: ExerciseJson[] = Object.values(modules).map((mod) => {
+    return (mod as { default: ExerciseJson }).default
+  })
+
+  // Sort the exercises by id according to our custom logic
+  cachedExercises = sortExercises(exercises)
+
+  return cachedExercises
+}
+
+/**
+ * Sort exercises based on the legacy order.
+ */
+function sortExercises(exercises: ExerciseJson[]): ExerciseJson[] {
+  // Map each exercise id to a numeric order
+  const desiredOrder: Record<string, number> = {
+    Pullups: 0,
+    'Scapular_Pull-Up': 1,
+    'Negative_Pull-Up': 2,
+    'Typewriter_Pull-Up': 3,
+    Hanging_L_Sit: 4,
+    Hanging_Leg_Raise: 5
+  }
+
+  // Exercises not in desiredOrder will go to the end (Infinity).
+  return exercises.sort((a, b) => {
+    const orderA = desiredOrder[a.id] ?? Infinity
+    const orderB = desiredOrder[b.id] ?? Infinity
+    return orderA - orderB
+  })
 }
 
 /**

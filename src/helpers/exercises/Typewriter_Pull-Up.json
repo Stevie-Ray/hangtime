@@ -1,0 +1,19 @@
+{
+  "name": "Typewriter Pull-Up",
+  "force": "pull",
+  "level": "expert",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "primaryMuscles": ["lats"],
+  "secondaryMuscles": [],
+  "instructions": [
+    "Begin with a standard pull-up by gripping the bar slightly wider than shoulder-width apart.",
+    "Pull yourself up until your chin is above the bar.",
+    "Shift your body weight to the left, extending your right arm while keeping your left arm bent.",
+    "Shift smoothly to the right side, bending your right arm and extending the left arm.",
+    "Move back to center, then lower yourself under control to complete one repetition."
+  ],
+  "category": "strength",
+  "images": ["Typewriter_Pull-Up/0.jpg", "Typewriter_Pull-Up/1.jpg"],
+  "id": "Typewriter_Pull-Up"
+}

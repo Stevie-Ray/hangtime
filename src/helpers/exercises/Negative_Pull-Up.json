@@ -1,0 +1,19 @@
+{
+  "name": "Negative Pull-Up",
+  "force": "pull",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "primaryMuscles": ["lats"],
+  "secondaryMuscles": [],
+  "instructions": [
+    "Begin by standing on a box or bench to position yourself at the top of a pull-up with your chin over the bar.",
+    "Grasp the bar with an overhand grip, arms slightly wider than shoulder-width apart.",
+    "Engage your back and core, then slowly lower your body until your arms are fully extended.",
+    "Keep lowering yourself under control, aiming for a 3-5 second descent.",
+    "Step back onto the box or bench to reset and repeat for the desired number of repetitions."
+  ],
+  "category": "strength",
+  "images": ["Negative_Pull-Up/0.jpg", "Negative_Pull-Up/1.jpg"],
+  "id": "Negative_Pull-Up"
+}
