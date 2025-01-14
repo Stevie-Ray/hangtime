@@ -298,6 +298,27 @@ function sortExercises(exercises: ExerciseJson[]): ExerciseJson[] {
   })
 }
 
+// Make sure to declare the cache variable somewhere accessible.
+let cachedFitnessExercises: ExerciseJson[] | undefined
+
+/**
+ * Get fitness exercises. Cached after initial load.
+ * @returns {ExerciseJson[]}
+ */
+export function useFitnessExercises(): ExerciseJson[] {
+  if (cachedFitnessExercises) {
+    return cachedFitnessExercises
+  }
+  const modules = import.meta.glob('@/helpers/exercises.json', {
+    eager: true,
+    import: 'default'
+  })
+  const exercises = Object.values(modules)[0] as ExerciseJson[]
+
+  cachedFitnessExercises = exercises
+  return cachedFitnessExercises
+}
+
 /**
  *
  * @param dark
