@@ -37,21 +37,20 @@ useHead({
         <template #default>
           <exercise-counter
             title="Hang"
-            :value="workout.exercises[0].hold"
+            v-model="workout.exercises[0].hold"
             :min="3"
             :max="180"
             timer
-            @input="(value) => (workout.exercises[0].hold = value)"
+            @update:modelValue="(value) => (workout.exercises[0].hold = value)"
           >
           </exercise-counter>
 
           <exercise-counter
             title="Repeat"
-            :value="workout.exercises[0].repeat"
-            :timer="false"
+            v-model="workout.exercises[0].repeat"
             :min="0"
             :max="24"
-            @input="(value) => (workout.exercises[0].repeat = value)"
+            @update:modelValue="(value) => (workout.exercises[0].repeat = value)"
           >
             <template #default>{{ workout.exercises[0].repeat + 1 }}x</template>
           </exercise-counter>
@@ -59,11 +58,11 @@ useHead({
           <exercise-counter
             v-if="workout.exercises[0].repeat > 0"
             title="Rest"
-            :value="workout.exercises[0].rest"
+            v-model="workout.exercises[0].rest"
             :min="3"
             timer
             :disabled="workout.exercises[0].repeat === 0"
-            @input="(value) => (workout.exercises[0].rest = value)"
+            @update:modelValue="(value) => (workout.exercises[0].rest = value)"
           >
           </exercise-counter>
         </template>

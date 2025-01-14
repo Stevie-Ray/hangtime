@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+// import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { time } from '@/helpers'
+// import { VNumberInput } from 'vuetify/labs/VNumberInput'
 
 const { t } = useI18n()
-
-const emit = defineEmits(['input'])
 
 const {
   title = '',
   subtitle = '',
   suffix = 'x',
-  value,
   timer,
   min = 1,
   max = 300,
@@ -20,59 +18,63 @@ const {
   title?: string
   subtitle?: string
   suffix?: string
-  value?: number
   timer?: boolean
   min?: number
   max?: number
   disabled?: boolean
 }>()
 
-const count = computed({
-  get() {
-    return value
-  },
-  set(value) {
-    emit('input', value)
-  }
-})
-
-const steps = [1, 5, 15, 60, 180, 300]
+const count = defineModel<number>({ required: true, default: 0 })
 
 function increment() {
-  if (count.value !== undefined) {
-    if (count.value >= max) return
-    if (count.value < steps[2] || !timer) {
-      count.value += steps[0]
-    }
-    if (count.value >= steps[2] && count.value < steps[3] && timer) {
-      count.value += steps[1]
-    }
-    if (count.value >= steps[3] && count.value < steps[4] && timer) {
-      count.value += steps[2]
-    }
-    if (count.value >= steps[4] && count.value < steps[5] && timer) {
-      count.value += steps[3]
-    }
+  if (count.value >= max) return
+  if (count.value < steps[2] || !timer) {
+    count.value += steps[0]
+  }
+  if (count.value >= steps[2] && count.value < steps[3] && timer) {
+    count.value += steps[1]
+  }
+  if (count.value >= steps[3] && count.value < steps[4] && timer) {
+    count.value += steps[2]
+  }
+  if (count.value >= steps[4] && count.value < steps[5] && timer) {
+    count.value += steps[3]
   }
 }
 
 function decrement() {
-  if (count.value !== undefined) {
-    if (count.value <= min) return
-    if (count.value <= steps[2] || !timer) {
-      count.value -= steps[0]
-    }
-    if (count.value > steps[2] && count.value <= steps[3] && timer) {
-      count.value -= steps[1]
-    }
-    if (count.value > steps[3] && count.value <= steps[4] && timer) {
-      count.value -= steps[2]
-    }
-    if (count.value > steps[4] && count.value <= steps[5] && timer) {
-      count.value -= steps[3]
-    }
+  if (count.value <= min) return
+  if (count.value <= steps[2] || !timer) {
+    count.value -= steps[0]
+  }
+  if (count.value > steps[2] && count.value <= steps[3] && timer) {
+    count.value -= steps[1]
+  }
+  if (count.value > steps[3] && count.value <= steps[4] && timer) {
+    count.value -= steps[2]
+  }
+  if (count.value > steps[4] && count.value <= steps[5] && timer) {
+    count.value -= steps[3]
   }
 }
+
+const steps = [1, 5, 15, 60, 180, 300]
+
+// const step = computed(() => {
+//   if (count.value < steps[2] || !timer) {
+//     return steps[0]
+//   }
+//   if (count.value >= steps[2] && count.value < steps[3] && timer) {
+//     return steps[1]
+//   }
+//   if (count.value >= steps[3] && count.value < steps[4] && timer) {
+//     return steps[2]
+//   }
+//   if (count.value >= steps[4] && count.value <= steps[5] && timer) {
+//     return steps[3]
+//   }
+//   return steps[0]
+// })
 </script>
 
 <template>
@@ -101,7 +103,7 @@ function decrement() {
             </slot>
           </div>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="4" align="end">
           <v-btn
             :disabled="disabled"
             color="text"
@@ -112,6 +114,28 @@ function decrement() {
           ></v-btn>
         </v-col>
       </v-row>
+      <!-- <v-number-input
+        v-model="count"
+        variant="solo"
+        :value="timer ? time(count) : `${count}${suffix}`"
+        :min="min"
+        :max="max"
+        :step="step"
+        control-variant="split"
+        :disabled="disabled"
+        hide-details="auto"
+        flat
+        inset
+      >
+      </v-number-input> -->
     </v-col>
   </v-row>
 </template>
+
+<style scoped>
+/* .v-number-input:deep(.v-field__field) {
+  --v-field-input-padding-top: 12px;
+  --v-field-input-padding-bottom: 12px;
+  --v-input-control-height: 48px;
+} */
+</style>

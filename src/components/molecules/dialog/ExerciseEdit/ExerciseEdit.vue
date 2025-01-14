@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
-import { useExercises, useGrip, weightConverter } from '@/helpers'
+import { useExercises, useFitnessExercises, useGrip, weightConverter } from '@/helpers'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
@@ -15,6 +15,7 @@ const { user } = storeToRefs(useAuthenticationStore())
 // helpers
 const grip = useGrip()
 const exerciseList = useExercises()
+const fitnessExercises = useFitnessExercises()
 
 const exercises = computed(() => {
   return exerciseList.map((exercise, index) => ({
@@ -180,7 +181,7 @@ const rules = {
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
                   <v-row>
-                    <v-col cols="12">
+                    <v-col cols="12" md="6">
                       <div class="text-caption">
                         {{ t('Body position') }}
                       </div>
@@ -194,10 +195,7 @@ const rules = {
                       >
                       </v-select>
                     </v-col>
-                  </v-row>
-
-                  <v-row>
-                    <v-col cols="12">
+                    <v-col cols="12" md="6">
                       <div class="d-flex justify-space-between">
                         <div class="text-caption">{{ t('Movement') }} ({{ t('Optional') }})</div>
                         <div class="text-caption text-right">
@@ -230,6 +228,19 @@ const rules = {
                           ></span>
                         </template>
                       </v-select>
+                    </v-col>
+                  </v-row>
+
+                  <v-row v-if="false">
+                    <v-col cols="12">
+                      <div class="text-caption">
+                        {{ t('Exercise') }}
+                      </div>
+                      <v-autocomplete
+                        :items="fitnessExercises"
+                        item-title="name"
+                        item-value="id"
+                      ></v-autocomplete>
                     </v-col>
                   </v-row>
                 </v-expansion-panel-text>
@@ -272,11 +283,11 @@ const rules = {
                     v-if="index !== 0"
                     :max="300"
                     :min="3"
-                    :value="exercise.pause"
+                    v-model="exercise.pause"
                     timer
                     subtitle="Before hang"
                     title="Rest"
-                    @input="(value) => exerciseEditTime('pause', value)"
+                    @update:model-value="(value) => exerciseEditTime('pause', value)"
                   >
                   </exercise-counter>
 
@@ -284,10 +295,9 @@ const rules = {
                     v-if="exercise.exercise !== 0 && repType !== 'max'"
                     :disabled="exercise.exercise === 0"
                     :max="30"
-                    :timer="false"
                     :title="`${exercises[exercise.exercise - 1].name}s`"
-                    :value="exercise.pullups"
-                    @input="(value: number) => (exercise ? (exercise.pullups = value) : null)"
+                    v-model="exercise.pullups"
+                    @update:model-value="(value) => (exercise ? (exercise.pullups = value) : null)"
                   >
                   </exercise-counter>
 
@@ -296,20 +306,19 @@ const rules = {
                     :max="180"
                     :min="3"
                     timer
-                    :value="exercise.hold"
+                    v-model="exercise.hold"
                     title="Hang"
-                    @input="(value) => exerciseEditTime('hold', value)"
+                    @update:model-value="(value) => exerciseEditTime('hold', value)"
                   >
                   </exercise-counter>
 
                   <exercise-counter
                     :max="24"
                     :min="0"
-                    :timer="false"
-                    :value="exercise.repeat"
+                    :model-value="exercise.repeat"
                     subtitle="1x = No repeat"
                     title="Repeat"
-                    @input="(value) => exerciseEditTime('repeat', value)"
+                    @update:model-value="(value) => exerciseEditTime('repeat', value)"
                   >
                     <template #default>{{ exercise.repeat + 1 }}x</template>
                   </exercise-counter>
@@ -320,10 +329,10 @@ const rules = {
                     :max="180"
                     :min="3"
                     timer
-                    :value="exercise.rest"
+                    v-model="exercise.rest"
                     subtitle="After repeats"
                     title="Rest"
-                    @input="(value) => exerciseEditTime('rest', value)"
+                    @update:model-value="(value) => exerciseEditTime('rest', value)"
                   >
                   </exercise-counter>
                 </v-expansion-panel-text>
@@ -379,11 +388,10 @@ const rules = {
                   <exercise-counter
                     :max="50"
                     :min="-50"
-                    :timer="false"
-                    :value="exercise.weight"
+                    v-model="exercise.weight"
                     suffix="kg"
                     title="Weight"
-                    @input="(value: number) => (exercise ? (exercise.weight = value) : null)"
+                    @update:model-value="(value) => (exercise ? (exercise.weight = value) : null)"
                   >
                     <template #default>
                       <span v-if="user">{{ weightConverter(exercise.weight, user) }}kg</span>
