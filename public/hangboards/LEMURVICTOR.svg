@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="210px" height="327px" viewBox="0 0 210 327" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>LEMURVICTOR</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="LEMURVICTOR" transform="translate(1, 1)" fill="#FFFFFF" stroke="#000000">
+            <path d="M209,47 L5.68434189e-14,47 C5.68434189e-14,35.954305 25.792173,0 36.837868,0 L208.990719,0" id="h1"></path>
+            <path d="M208.990719,325 L20,325 C8.954305,325 0,316.045695 0,305 L0,47 C0,35.954305 8.954305,27 20,27 L208.990719,27" id="board"></path>
+            <path d="M209,200 L61,200 C56.581722,200 53,196.418278 53,192 L53,68 C53,63.581722 56.581722,60 61,60 L209,60" id="board"></path>
+            <path d="M209,297.26836 L61,297.26836 C56.581722,297.26836 53,293.686638 53,289.26836 L53,245 C53,240.581722 56.581722,237 61,237 L209,237" id="h4"></path>
+            <path d="M209,118.300548 L53,118.300548 L53,68 C53,63.581722 56.581722,60 61,60 L209,60" id="h3"></path>
+            <path d="M209,200 L61,200 C56.581722,200 53,196.418278 53,192 L53,142.05697 L208.990719,142.05697" id="h2"></path>
+        </g>
+    </g>
+</svg>

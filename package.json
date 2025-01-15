@@ -40,8 +40,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",
-    "@storybook/addon-essentials": "^8.4.7",
-    "@storybook/vue3-vite": "^8.4.7",
+    "@storybook/addon-essentials": "^8.5.0",
+    "@storybook/vue3-vite": "^8.5.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/digital-goods-browser": "^2.0.3",
     "@types/geojson": "^7946.0.15",

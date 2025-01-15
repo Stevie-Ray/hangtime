@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="560px" height="251px" viewBox="0 0 560 251" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>LEMURALANNAH</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="LEMURALANNAH" transform="translate(0.6414, 1)" fill="#FFFFFF" stroke="#000000">
+            <path d="M559.358585,67.4381872 L0,67.4381872 C0,39.8239497 40.8644685,2.27373675e-13 68.478706,2.27373675e-13 L559.358585,2.27373675e-13" id="h1"></path>
+            <path d="M559.358585,249 L50.3585855,249 C22.744348,249 0.358585488,226.614237 0.358585488,199 L0.358585488,74 C0.358585488,46.3857625 22.744348,24 50.3585855,24 L559.358585,24" id="board"></path>
+            <path d="M559.358585,200 L429.358585,200 C410.580904,200 395.358585,184.777681 395.358585,166 L395.358585,114 C395.358585,95.2223185 410.580904,80 429.358585,80 L559.358585,80" id="h3"></path>
+            <rect id="h2" x="100.858585" y="77.5" width="276" height="126" rx="29"></rect>
+        </g>
+    </g>
+</svg>

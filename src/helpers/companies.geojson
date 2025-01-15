@@ -6141,7 +6141,7 @@
           {
             "name": "Alannah Yip Portable Hangboard",
             "id": 1,
-            "image": "hangboards/NOTFOUND.svg",
+            "image": "hangboards/LEMURALANNAH.svg",
             "size": {
               "x": "",
               "y": "",
@@ -6149,12 +6149,12 @@
             },
             "type": "wood",
             "url": "https://www.lemurdesign.ca/products/poutre-de-traction-portable-alannah-yip",
-            "holds": 0
+            "holds": 2
           },
           {
             "name": "Victor Baudrand Pinch Bloc",
             "id": 2,
-            "image": "hangboards/NOTFOUND.svg",
+            "image": "hangboards/LEMURVICTOR.svg",
             "size": {
               "x": "",
               "y": "",
@@ -6162,7 +6162,7 @@
             },
             "type": "wood",
             "url": null,
-            "holds": 0
+            "holds": 3
           }
         ],
         "marker-color": "#012E40",
