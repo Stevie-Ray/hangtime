@@ -24,6 +24,7 @@
     "@hangtime/grip-connect": "^0.5.10",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^1.11.18",
+    "@vueuse/components": "^12.4.0",
     "@vueuse/core": "^12.4.0",
     "core-js": "^3.40.0",
     "firebase": "^11.2.0",

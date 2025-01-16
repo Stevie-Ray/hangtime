@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { time } from '@/helpers'
-import { onLongPress } from '@vueuse/core'
+import { vOnLongPress } from '@vueuse/components'
 
 // import { VNumberInput } from 'vuetify/labs/VNumberInput'
 
@@ -83,21 +82,6 @@ const stopLongPress = () => {
   }
 }
 
-const increment = ref<HTMLButtonElement | null>(null)
-const decrement = ref<HTMLButtonElement | null>(null)
-
-onLongPress(decrement, decrementLongPress, {
-  onMouseUp() {
-    stopLongPress()
-  }
-})
-
-onLongPress(increment, incrementLongPress, {
-  onMouseUp() {
-    stopLongPress()
-  }
-})
-
 // const step = computed(() => {
 //   if (count.value < steps[2] || !timer) {
 //     return steps[0]
@@ -126,7 +110,7 @@ onLongPress(increment, incrementLongPress, {
       <v-row align="center">
         <v-col cols="4">
           <v-btn
-            ref="decrement"
+            v-on-long-press="[decrementLongPress, { onMouseUp: stopLongPress }]"
             :disabled="disabled"
             color="text"
             icon="$minus"
@@ -144,7 +128,7 @@ onLongPress(increment, incrementLongPress, {
         </v-col>
         <v-col cols="4" align="end">
           <v-btn
-            ref="increment"
+            v-on-long-press="[incrementLongPress, { onMouseUp: stopLongPress }]"
             :disabled="disabled"
             color="text"
             icon="$plus"
