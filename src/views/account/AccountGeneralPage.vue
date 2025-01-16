@@ -10,6 +10,7 @@ import { useAuthenticationStore } from '@/stores/authentication.store'
 import { useAppStore } from '@/stores/app.store'
 import { loadLanguageAsync } from '@/plugins/i18n'
 import { Theme } from '@/enums/theme'
+import { Unit } from '@/enums/unit'
 
 const scale = new IRCRA().scale()
 
@@ -22,8 +23,6 @@ const { user } = storeToRefs(useAuthenticationStore())
 const { online } = storeToRefs(useAppStore())
 
 const { updateUser } = useAuthenticationStore()
-
-// const theme = useTheme()
 
 const language = [
   {
@@ -82,16 +81,14 @@ const settingsLocale = computed({
   }
 })
 
-const weight = [
+const units = [
   {
     title: t('Kilograms - Metric'),
-    short: 'kg',
-    value: 0
+    value: Unit.Metric
   },
   {
     title: t('Pounds - Imperial'),
-    short: 'lb',
-    value: 1
+    value: Unit.Imperial
   }
 ]
 
@@ -173,9 +170,9 @@ useHead({
 
                 <v-select
                   v-if="user"
-                  v-model="user.weight"
+                  v-model="user.settings.weight"
                   :disabled="!online"
-                  :items="weight"
+                  :items="units"
                   :label="t('Weight system')"
                   @update:modelValue="updateUser"
                 >

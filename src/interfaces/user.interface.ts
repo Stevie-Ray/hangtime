@@ -1,4 +1,5 @@
 import { Theme } from '@/enums/theme'
+import { Unit } from '@/enums/unit'
 
 /**
  * Represents the settings configured by a user.
@@ -98,6 +99,12 @@ export interface UserSettings {
    * True if the user has completed the initial app walkthrough.
    */
   walkthrough: boolean
+
+  /**
+   * Weight system used by the user.
+   * Optional, defaults to metric if not set.
+   */
+  weight?: Unit
 }
 
 /**
@@ -250,7 +257,7 @@ export interface IUser {
 
   /**
    * User's weight.
-   * Optional, can be used for personalized fitness calculations.
+   * Optional, can be used for personalized exercise calculations.
    */
   weight?: number
 }

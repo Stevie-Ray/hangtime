@@ -14,6 +14,7 @@ import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
 import { IUser } from '@/interfaces/user.interface'
 import { ExerciseJson } from '@/interfaces/exercise.json.interface'
 import { Exercises, Grip } from '@/enums/exercise'
+import { Unit } from '@/enums/unit'
 
 /**
  * Pad time with 0 if less than 10
@@ -369,8 +370,15 @@ export function useRandomImage(dark: boolean = false) {
 // }
 
 export function weightConverter(weight: number, user: IUser) {
-  if (user.weight === 1) {
+  if (user.settings?.weight === Unit.Imperial) {
     return Math.round(weight * 2.2046)
   }
   return weight
+}
+
+export function weightUnit(user: IUser) {
+  if (user.settings?.weight === Unit.Imperial) {
+    return 'lbs'
+  }
+  return 'kg'
 }

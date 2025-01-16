@@ -12,6 +12,7 @@
     "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
     "build-only": "vite build",
     "build-storybook": "storybook build",
+    "storybook": "storybook dev -p 6006",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",

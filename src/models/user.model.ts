@@ -72,5 +72,7 @@ export class User extends BaseModel implements IUser {
     else delete this.settings.theme
     if (user.settings?.token !== undefined) this.settings.token = user.settings.token
     else delete this.settings.token
+    if (user.settings?.weight !== undefined) this.settings.weight = user.settings.weight
+    else delete this.settings.weight
   }
 }

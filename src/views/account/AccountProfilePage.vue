@@ -7,7 +7,7 @@ import IRCRA from 'ircra'
 import { Ref, computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuthenticationStore } from '@/stores/authentication.store'
-import { weightConverter } from '@/helpers'
+import { weightConverter, weightUnit } from '@/helpers'
 import countries from '@/helpers/countries'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import { useAppStore } from '@/stores/app.store'
@@ -185,11 +185,11 @@ useHead({
                   @update:modelValue="updateUser"
                 >
                   <template #thumb-label="props">
-                    {{ weightConverter(props.modelValue, user) }}kg
+                    {{ weightConverter(props.modelValue, user) }}{{ weightUnit(user) }}
                   </template>
                   <template #append>
                     <v-label v-if="user && user.weight">
-                      {{ weightConverter(user.weight, user) }}kg
+                      {{ weightConverter(user.weight, user) }}{{ weightUnit(user) }}
                     </v-label>
                   </template>
                 </v-slider>

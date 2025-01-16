@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
-import { useExercises, useFitnessExercises, useGrip, weightConverter } from '@/helpers'
+import { useExercises, useFitnessExercises, useGrip, weightConverter, weightUnit } from '@/helpers'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
@@ -100,8 +100,8 @@ const exerciseCopy = () => {
 // workout - weight
 const weightLabel = computed(() => {
   if (user.value?.weight && exercise.value && exercise.value.weight !== 0) {
-    return `Your weight: ${user.value.weight}kg.
-     Training weight: ${user.value.weight + exercise.value.weight}kg.`
+    return `Your weight: ${weightConverter(user.value.weight, user.value)} ${weightUnit(user.value)}.
+     Training weight: ${weightConverter(user.value.weight + exercise.value.weight, user.value)} ${weightUnit(user.value)}.`
   }
   return 'Adjust using kettle/dumb-bells or pulley system'
 })
@@ -394,7 +394,9 @@ const rules = {
                     @update:model-value="(value) => (exercise ? (exercise.weight = value) : null)"
                   >
                     <template #default>
-                      <span v-if="user">{{ weightConverter(exercise.weight, user) }}kg</span>
+                      <span v-if="user">
+                        {{ weightConverter(exercise.weight, user) }}{{ weightUnit(user) }}
+                      </span>
                     </template>
                   </exercise-counter>
                 </v-expansion-panel-text>
