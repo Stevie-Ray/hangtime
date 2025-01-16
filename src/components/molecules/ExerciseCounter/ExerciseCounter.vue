@@ -1,7 +1,9 @@
 <script setup lang="ts">
-// import { computed } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { time } from '@/helpers'
+import { onLongPress } from '@vueuse/core'
+
 // import { VNumberInput } from 'vuetify/labs/VNumberInput'
 
 const { t } = useI18n()
@@ -26,7 +28,9 @@ const {
 
 const count = defineModel<number>({ required: true, default: 0 })
 
-function increment() {
+const steps = [1, 5, 15, 60, 180, 300]
+
+function incrementClick() {
   if (count.value >= max) return
   if (count.value < steps[2] || !timer) {
     count.value += steps[0]
@@ -42,7 +46,7 @@ function increment() {
   }
 }
 
-function decrement() {
+function decrementClick() {
   if (count.value <= min) return
   if (count.value <= steps[2] || !timer) {
     count.value -= steps[0]
@@ -58,7 +62,41 @@ function decrement() {
   }
 }
 
-const steps = [1, 5, 15, 60, 180, 300]
+let pressInterval: ReturnType<typeof setInterval> | null = null
+
+const decrementLongPress = () => {
+  pressInterval = setInterval(() => {
+    decrementClick()
+  }, 250)
+}
+
+const incrementLongPress = () => {
+  pressInterval = setInterval(() => {
+    incrementClick()
+  }, 250)
+}
+
+const stopLongPress = () => {
+  if (pressInterval) {
+    clearInterval(pressInterval)
+    pressInterval = null
+  }
+}
+
+const increment = ref<HTMLButtonElement | null>(null)
+const decrement = ref<HTMLButtonElement | null>(null)
+
+onLongPress(decrement, decrementLongPress, {
+  onMouseUp() {
+    stopLongPress()
+  }
+})
+
+onLongPress(increment, incrementLongPress, {
+  onMouseUp() {
+    stopLongPress()
+  }
+})
 
 // const step = computed(() => {
 //   if (count.value < steps[2] || !timer) {
@@ -88,11 +126,12 @@ const steps = [1, 5, 15, 60, 180, 300]
       <v-row align="center">
         <v-col cols="4">
           <v-btn
+            ref="decrement"
             :disabled="disabled"
             color="text"
             icon="$minus"
             variant="outlined"
-            @click="decrement"
+            @click="decrementClick"
             style="touch-action: manipulation"
           ></v-btn>
         </v-col>
@@ -105,11 +144,12 @@ const steps = [1, 5, 15, 60, 180, 300]
         </v-col>
         <v-col cols="4" align="end">
           <v-btn
+            ref="increment"
             :disabled="disabled"
             color="text"
             icon="$plus"
             variant="outlined"
-            @click="increment"
+            @click="incrementClick"
             style="touch-action: manipulation"
           ></v-btn>
         </v-col>
