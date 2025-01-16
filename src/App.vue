@@ -5,6 +5,7 @@ import { useTheme } from 'vuetify'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
+import { usePreferredDark } from '@vueuse/core'
 import roboto400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff2'
 import roboto500 from '@fontsource/roboto/files/roboto-latin-500-normal.woff2'
 import roboto700 from '@fontsource/roboto/files/roboto-latin-700-normal.woff2'
@@ -55,24 +56,27 @@ const { user } = storeToRefs(useAuthenticationStore())
 
 const theme = useTheme()
 
-const prefersDark: MediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
+const preferredDark = usePreferredDark()
 
-prefersDark.addEventListener('change', (): void => {
-  if (user.value?.settings?.theme && user.value.settings.theme > Theme.System) {
+watch(preferredDark, (): void => {
+  if (user.value?.settings?.theme !== undefined && user.value.settings.theme > Theme.System) {
     theme.global.name.value = user.value?.settings.theme === Theme.Dark ? 'dark' : 'light'
   } else {
-    theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
+    theme.global.name.value = preferredDark.value ? 'dark' : 'light'
   }
 })
 
-// watch works directly on a ref
-watch(user, async (updatedUser): Promise<void> => {
-  if (updatedUser?.settings?.theme && updatedUser.settings.theme > Theme.System) {
-    theme.global.name.value = updatedUser.settings.theme === Theme.Dark ? 'dark' : 'light'
-  } else {
-    theme.global.name.value = prefersDark.matches ? 'dark' : 'light'
-  }
-})
+watch(
+  user,
+  async (updatedUser): Promise<void> => {
+    if (updatedUser?.settings?.theme !== undefined && updatedUser.settings.theme > Theme.System) {
+      theme.global.name.value = updatedUser.settings.theme === Theme.Dark ? 'dark' : 'light'
+    } else {
+      theme.global.name.value = preferredDark.value ? 'dark' : 'light'
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <template>
