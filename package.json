@@ -30,7 +30,7 @@
     "firebase": "^11.2.0",
     "ircra": "^2.2.4",
     "js-video-url-parser": "^0.5.1",
-    "pinia": "^2.3.0",
+    "pinia": "^2.3.1",
     "register-service-worker": "^1.7.2",
     "vue": "^3.5.12",
     "vue-gtag": "^2.0.1",
@@ -38,7 +38,7 @@
     "vue-inline-svg": "^3.1.4",
     "vue-router": "^4.5.0",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.7.6"
+    "vuetify": "^3.7.7"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",
@@ -53,7 +53,7 @@
     "@types/web-bluetooth": "^0.0.20",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitest/eslint-plugin": "^1.1.25",
-    "@vue/eslint-config-prettier": "^10.1.0",
+    "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.3.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
@@ -67,11 +67,11 @@
     "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.83.4",
     "typescript": "^5.7.3",
-    "vite": "^6.0.7",
+    "vite": "^6.0.9",
     "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-vue-devtools": "^7.7.0",
     "vite-plugin-vuetify": "^2.0.4",
-    "vitest": "^3.0.1",
+    "vitest": "^3.0.2",
     "vue-tsc": "^2.2.0"
   }
 }
