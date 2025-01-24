@@ -1,26 +1,34 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useWebNotification } from '@vueuse/core'
 import { getMessaging, onMessage, NotificationPayload } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
+import { useFirebaseCloudMessaging } from '@/composables/useFirebaseCloudMessaging'
 
-const { isSupported } = useWebNotification()
+const { oniOSMessage } = useFirebaseCloudMessaging()
 
 const messaging = getMessaging(firebaseApp)
 
 const dialog = ref(false)
 const notification = ref<NotificationPayload | undefined>()
 
+const showNotification = (newNotification: NotificationPayload) => {
+  notification.value = newNotification
+  dialog.value = true
+}
+
 onMounted(() => {
   onMessage(messaging, (payload) => {
-    dialog.value = true
-    notification.value = payload.notification
+    showNotification(payload.notification as NotificationPayload)
+  })
+
+  oniOSMessage((payload: NotificationPayload) => {
+    showNotification(payload)
   })
 })
 </script>
 
 <template>
-  <div v-if="isSupported">
+  <div>
     <v-dialog v-if="notification" v-model="dialog" max-width="500">
       <v-card
         prepend-icon="$bellOutline"

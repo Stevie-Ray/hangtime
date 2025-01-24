@@ -1311,7 +1311,7 @@
           {
             "name": "Honestone",
             "id": 4,
-            "image": "hangboards/NOTFOUND.svg",
+            "image": "hangboards/TENSIONHONESTONE.svg",
             "size": {
               "x": 660,
               "y": 152,
@@ -1319,7 +1319,7 @@
             },
             "type": "wood",
             "url": "https://tensionclimbing.com/product/honestone/",
-            "holds": 0
+            "holds": 7
           },
           {
             "name": "Whetstone",

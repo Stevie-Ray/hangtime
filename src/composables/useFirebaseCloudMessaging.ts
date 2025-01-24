@@ -1,9 +1,8 @@
 import { storeToRefs } from 'pinia'
 import { ref, onMounted } from 'vue'
 import { usePermission, useSupported } from '@vueuse/core'
-import { getMessaging, getToken, deleteToken } from 'firebase/messaging'
+import { getMessaging, getToken, deleteToken, NotificationPayload } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
-const { updateUser } = useAuthenticationStore()
 import { useAuthenticationStore } from '@/stores/authentication.store'
 
 /**
@@ -20,6 +19,8 @@ declare global {
 export function useFirebaseCloudMessaging() {
   const iOSPushCapability = ref(false)
   const iOSNotificationAccess = ref<PermissionState>('prompt')
+
+  const { updateUser } = useAuthenticationStore()
 
   const { user } = storeToRefs(useAuthenticationStore())
 
@@ -148,7 +149,18 @@ export function useFirebaseCloudMessaging() {
     window.addEventListener('push-notification', (event: Event) => {
       const customEvent = event as CustomEvent
       if (customEvent?.detail) {
-        alert(customEvent.detail)
+        const payload = customEvent.detail
+        if (payload.aps?.alert) {
+          const notification = {
+            title: payload.aps.alert.title,
+            body: payload.aps.alert.body
+          }
+          // Call the oniOSMessage callback with the payload
+          oniOSMessageCallback(notification)
+        } else {
+          // Print payload if data is not an alert
+          alert(JSON.stringify(payload))
+        }
       }
     })
 
@@ -164,6 +176,17 @@ export function useFirebaseCloudMessaging() {
       }
     })
   })
+
+  // Simulate the onMessage callback
+  let oniOSMessageCallback: (payload: NotificationPayload) => void
+
+  /**
+   * Set the oniOSMessage callback
+   * @param callback - The callback to set
+   */
+  function oniOSMessage(callback: (payload: NotificationPayload) => void) {
+    oniOSMessageCallback = callback
+  }
 
   /**
    * Request native push permission from iOS app
@@ -221,6 +244,7 @@ export function useFirebaseCloudMessaging() {
     pushPermissionRequest,
     pushPermissionState,
     pushSubscribeTopic,
-    pushTokenRequest
+    pushTokenRequest,
+    oniOSMessage
   }
 }

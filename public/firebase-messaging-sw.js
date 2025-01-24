@@ -18,21 +18,26 @@ const config = {
 
 firebase.initializeApp(config)
 
-const messaging = firebase.messaging()
+// Check if messaging is supported
+if (firebase.messaging.isSupported()) {
+  // Retrieve an instance of Firebase Messaging so that it can handle background
+  // messages.
+  const messaging = firebase.messaging()
 
-// If you would like to customize notifications that are received in the
-// background (Web app is closed or not in browser focus) then you should
-// implement this optional method.
-// [START on_background_message]
-messaging.onBackgroundMessage((payload) => {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload)
-  // Customize notification here
-  const notificationTitle = payload.notification.title
-  const notificationOptions = {
-    body: payload.notification.body,
-    icon: 'img/icons/android-chrome-512x512.png'
-  }
+  // If you would like to customize notifications that are received in the
+  // background (Web app is closed or not in browser focus) then you should
+  // implement this optional method.
+  // [START on_background_message]
+  messaging.onBackgroundMessage((payload) => {
+    console.log('[firebase-messaging-sw.js] Received background message ', payload)
+    // Customize notification here
+    const notificationTitle = payload.notification.title
+    const notificationOptions = {
+      body: payload.notification.body,
+      icon: 'img/icons/android-chrome-512x512.png'
+    }
 
-  self.registration.showNotification(notificationTitle, notificationOptions)
-})
-// [END on_background_message]
+    self.registration.showNotification(notificationTitle, notificationOptions)
+  })
+  // [END on_background_message]
+}
