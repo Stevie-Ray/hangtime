@@ -70,7 +70,7 @@ const nextImage = () => {
     <div class="hangboard d-flex">
       <div class="hangboard--left">
         <inline-svg
-          @click="(e) => toggleHold('left', e)"
+          @click="(e: Event) => toggleHold('left', e)"
           :src="hangboardImage"
           :class="classHold('left')"
           class="hangboard__img hangboard__img--left w-100 h-100"
@@ -78,7 +78,7 @@ const nextImage = () => {
       </div>
       <div class="hangboard--right">
         <inline-svg
-          @click="(e) => toggleHold('right', e)"
+          @click="(e: Event) => toggleHold('right', e)"
           :src="hangboardImage"
           :class="classHold('right')"
           class="hangboard__img hangboard__img--left w-100 h-100"
