@@ -2,7 +2,7 @@ import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { purchase } from 'vue-gtag'
-import { EcommerceActionWithCurrency } from 'vue-gtag'
+// import { EcommerceActionWithCurrency } from 'vue-gtag'
 
 /**
  * Composable for handling Play Billing subscriptions via the Digital Goods API.
@@ -342,7 +342,7 @@ export function usePlayBilling() {
           transaction_id: token,
           affiliation: 'HangTime',
           value: Number(item?.price?.value),
-          currency: item?.price.currency as EcommerceActionWithCurrency['currency'], // ISO4217
+          // currency: item?.price.currency as EcommerceActionWithCurrency['currency'], // ISO4217
           tax: 0,
           shipping: 0,
           items: [
