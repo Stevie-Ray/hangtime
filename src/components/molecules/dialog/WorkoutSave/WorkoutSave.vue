@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useWorkoutsStore } from '@/stores/workouts.store'
 import { IWorkout } from '@/interfaces/workout.interface'
+import { computed } from 'vue'
 
 const { createUserWorkout, updateUserWorkout } = useWorkoutsStore()
 
@@ -33,6 +34,18 @@ const workoutSave = () => {
 
   router.push('/workouts')
 }
+
+// TODO: We have to wrap the workout to avoid TS errors
+const workoutShare = computed<boolean | null>({
+  get(): boolean {
+    return workout.value.share
+  },
+  set(value: boolean | null) {
+    if (typeof value === 'boolean') {
+      workout.value.share = value
+    }
+  }
+})
 
 const rules = {
   number: (v: number | string) => !isNaN(Number(v)) || 'NaN',
@@ -115,7 +128,7 @@ const rules = {
             </v-chip-group>
 
             <v-checkbox
-              v-model="workout.share"
+              v-model="workoutShare"
               :label="t('Share with the community')"
               hide-details="auto"
             ></v-checkbox>

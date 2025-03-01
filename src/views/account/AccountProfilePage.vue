@@ -83,6 +83,19 @@ const deleteAccount = async () => {
   }
 }
 
+// TODO: We have to wrap the user gender to avoid TS errors
+const userGender = computed<'male' | 'female' | 'other' | null>({
+  get(): 'male' | 'female' | 'other' | null {
+    return user.value?.gender ?? null
+  },
+  set(value: 'male' | 'female' | 'other' | null) {
+    if (!user.value) return
+    if (value === 'male' || value === 'female' || value === 'other') {
+      user.value.gender = value
+    }
+  }
+})
+
 useHead({
   title: 'Profile',
   meta: [{ name: 'description', content: '' }]
@@ -135,7 +148,7 @@ useHead({
 
                 <v-radio-group
                   v-if="user"
-                  v-model="user.gender"
+                  v-model="userGender"
                   :disabled="!online"
                   row
                   @update:modelValue="updateUser"
@@ -153,7 +166,7 @@ useHead({
 
                 <v-autocomplete
                   v-if="user"
-                  v-model="user.country"
+                  v-model="user!.country"
                   :disabled="!online"
                   :items="countries"
                   :label="t('Country')"
@@ -171,7 +184,8 @@ useHead({
                 </template>
 
                 <v-slider
-                  v-model="user.weight"
+                  v-if="user"
+                  v-model="user!.weight"
                   :disabled="!online"
                   :hint="t('Set your weight to use with a kettle/dumb-bells or pulley system')"
                   :label="t('Weight')"
@@ -202,7 +216,7 @@ useHead({
 
                 <v-select
                   v-if="user"
-                  v-model="user.settings.grade"
+                  v-model="user!.settings.grade"
                   :disabled="!online"
                   :hint="t('What grade are you currently climbing?')"
                   :item-title="user.settings.scale"
@@ -221,7 +235,7 @@ useHead({
 
                 <v-text-field
                   v-if="user && user.status"
-                  v-model="user.status"
+                  v-model="user!.status"
                   :disabled="!online"
                   :label="t('Status')"
                   :placeholder="t('In the climbing gym')"

@@ -8,7 +8,7 @@ import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 
 const { t } = useI18n()
 const workoutsStore = useWorkoutsStore()
-const fileInput = ref<File | null>(null)
+const fileInput = ref<File | File[] | null>(null)
 const importError = ref<string>('')
 const importSuccess = ref<string>('')
 
@@ -36,83 +36,85 @@ const handleImport = async () => {
   }
 
   try {
-    const fileContent = await fileInput.value.text()
-    const data = JSON.parse(fileContent)
+    if (!Array.isArray(fileInput.value)) {
+      const fileContent = await fileInput.value.text()
+      const data = JSON.parse(fileContent)
 
-    if (importSystem.value === 'HangTime') {
-      if (!Array.isArray(data)) return
-      // Convert each workout object to Workout instance and save
-      for (const workout of data) {
-        const newWorkout = new Workout(workout)
-        await workoutsStore.createUserWorkout(newWorkout)
-      }
-    } else if (importSystem.value === 'Linebreaker App') {
-      Object.keys(data).forEach(async (key) => {
-        // Skip "version" or anything that isn’t an array of workouts
-        if (key === 'version') return
-        if (!Array.isArray(data[key])) return
-
-        interface IExercise10A {
-          title: string
-          description: string
-          leftHand: number
-          rightHand: number
-          onTime: number
-          offTime: number
-          repetitions: number
-          pause: number
-        }
-
-        interface IWorkout10A {
-          title: string
-          description: string
-          mode?: 'hangboard'
-          exercises: IExercise10A[]
-        }
-
-        const companies: Record<string, { hangboard: number; company: number }> = {
-          LinebreakerBASE: { hangboard: 0, company: 14 },
-          LinebreakerPRO: { hangboard: 1, company: 14 },
-          LinebreakerAIR: { hangboard: 2, company: 14 },
-          LinebreakerCRIMP: { hangboard: 3, company: 14 },
-          LinebreakerRAIL: { hangboard: 4, company: 14 },
-          LinebreakerCUBE: { hangboard: 5, company: 14 },
-          beastmaker1000: { hangboard: 0, company: 1 },
-          beastmaker2000: { hangboard: 1, company: 1 }
-        }
-
-        const workouts = data[key] as IWorkout10A[]
-
-        for (const workout of workouts) {
-          const mappedWorkout: Partial<Workout> = {
-            name: workout.title,
-            description: workout.description,
-            hangboard: companies[key].hangboard,
-            company: companies[key].company,
-            exercises: workout.exercises?.map((exercise: IExercise10A) => ({
-              exercise: 0, // We can't map the name
-              grip: 0, // We can't map the grip
-              level: 0, // We can't map the level
-              pullups: 0, // We can't map the pullups
-              weight: 0, // We can't map the weight
-              hold: exercise.onTime,
-              rest: exercise.offTime,
-              left: exercise.leftHand,
-              right: exercise.rightHand,
-              repeat: exercise.repetitions,
-              pause: exercise.pause,
-              notes: exercise.description
-            }))
-          }
-          const newWorkout = new Workout(mappedWorkout)
+      if (importSystem.value === 'HangTime') {
+        if (!Array.isArray(data)) return
+        // Convert each workout object to Workout instance and save
+        for (const workout of data) {
+          const newWorkout = new Workout(workout)
           await workoutsStore.createUserWorkout(newWorkout)
         }
-      })
-    }
+      } else if (importSystem.value === 'Linebreaker App') {
+        Object.keys(data).forEach(async (key) => {
+          // Skip "version" or anything that isn’t an array of workouts
+          if (key === 'version') return
+          if (!Array.isArray(data[key])) return
 
-    importSuccess.value = t('Workouts imported successfully')
-    importError.value = ''
-    fileInput.value = null
+          interface IExercise10A {
+            title: string
+            description: string
+            leftHand: number
+            rightHand: number
+            onTime: number
+            offTime: number
+            repetitions: number
+            pause: number
+          }
+
+          interface IWorkout10A {
+            title: string
+            description: string
+            mode?: 'hangboard'
+            exercises: IExercise10A[]
+          }
+
+          const companies: Record<string, { hangboard: number; company: number }> = {
+            LinebreakerBASE: { hangboard: 0, company: 14 },
+            LinebreakerPRO: { hangboard: 1, company: 14 },
+            LinebreakerAIR: { hangboard: 2, company: 14 },
+            LinebreakerCRIMP: { hangboard: 3, company: 14 },
+            LinebreakerRAIL: { hangboard: 4, company: 14 },
+            LinebreakerCUBE: { hangboard: 5, company: 14 },
+            beastmaker1000: { hangboard: 0, company: 1 },
+            beastmaker2000: { hangboard: 1, company: 1 }
+          }
+
+          const workouts = data[key] as IWorkout10A[]
+
+          for (const workout of workouts) {
+            const mappedWorkout: Partial<Workout> = {
+              name: workout.title,
+              description: workout.description,
+              hangboard: companies[key].hangboard,
+              company: companies[key].company,
+              exercises: workout.exercises?.map((exercise: IExercise10A) => ({
+                exercise: 0, // We can't map the name
+                grip: 0, // We can't map the grip
+                level: 0, // We can't map the level
+                pullups: 0, // We can't map the pullups
+                weight: 0, // We can't map the weight
+                hold: exercise.onTime,
+                rest: exercise.offTime,
+                left: exercise.leftHand,
+                right: exercise.rightHand,
+                repeat: exercise.repetitions,
+                pause: exercise.pause,
+                notes: exercise.description
+              }))
+            }
+            const newWorkout = new Workout(mappedWorkout)
+            await workoutsStore.createUserWorkout(newWorkout)
+          }
+        })
+      }
+
+      importSuccess.value = t('Workouts imported successfully')
+      importError.value = ''
+      fileInput.value = null
+    }
   } catch (error) {
     console.error(error)
     importError.value = t('Error importing workouts: Invalid file format')

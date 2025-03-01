@@ -247,7 +247,7 @@ onBeforeUnmount(() => {
                 <slot>
                   <exercise-card
                     v-if="workout"
-                    v-model="session.exercise"
+                    :model-value="session.exercise"
                     :hangboard="{
                       hangboard: workout.hangboard,
                       company: workout.company
@@ -352,7 +352,7 @@ onBeforeUnmount(() => {
           <v-card-title>{{ t('Next exercise') }}</v-card-title>
           <v-card-text>
             <exercise-card
-              v-model="session.exerciseNext"
+              :model-value="session.exerciseNext"
               :hangboard="{
                 hangboard: workout.hangboard,
                 company: workout.company
@@ -366,7 +366,7 @@ onBeforeUnmount(() => {
         <v-card v-if="session.exercise?.exercise !== null" class="mb-8">
           <v-card-title>{{ t('About the exercise') }}</v-card-title>
           <v-card-text>
-            <exercise-about v-model="session.exercise" />
+            <exercise-about :model-value="session.exercise" />
           </v-card-text>
         </v-card>
       </v-col>

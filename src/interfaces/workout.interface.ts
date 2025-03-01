@@ -220,6 +220,24 @@ export interface IWorkout {
    * Optional field indicating when the workout was last modified.
    */
   updateTimestamp?: Date
+
+  /**
+   * Add an exercise to the workout.
+   * @param exercise
+   */
+  addExercise(exercise?: Partial<IExercise>): void
+
+  /**
+   * Remove an exercise from the workout.
+   * @param index
+   */
+  removeExercise(index: number): void
+
+  /**
+   * Copy an exercise from the workout.
+   * @param index
+   */
+  copyExercise(index: number): void
 }
 
 /**

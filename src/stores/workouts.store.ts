@@ -91,10 +91,10 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   }
 
   const fetchLeaderboard = async (
-    rank: 'completed.amount' | 'completed.time' | 'completed.hold' = 'completed.amount'
+    rank: 'completed.amount' | 'completed.time' | 'completed.hold' | null = 'completed.amount'
   ) => {
+    if (!rank) return
     if (leaderboards.value.some((leaderboard) => leaderboard.rank === rank)) return
-
     const leaderboard: IUser[] = await usersDB.readAll([[rank, '>', 0]], rank, 'desc', 15)
     leaderboards.value.push({ rank, leaderboard })
   }
@@ -170,7 +170,7 @@ export const useWorkoutsStore = defineStore('workouts', () => {
   })
 
   const getLeaderboard = computed(
-    () => (rank: 'completed.amount' | 'completed.time' | 'completed.hold') =>
+    () => (rank: 'completed.amount' | 'completed.time' | 'completed.hold' | null) =>
       leaderboards.value.find((leaderboard) => leaderboard.rank === rank)
   )
 

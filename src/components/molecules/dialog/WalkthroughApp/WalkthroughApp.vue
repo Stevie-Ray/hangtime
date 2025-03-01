@@ -212,10 +212,9 @@ const settingsGrade = computed({
                 {{ t("What's your current grade?") }}
               </v-card-title>
               <v-list two-line>
-                <v-list-item>
+                <v-list-item v-if="user">
                   <v-select
-                    v-if="user"
-                    v-model="user.settings.scale"
+                    v-model="user!.settings.scale"
                     :items="ircra.scale()"
                     :label="t('Grading scale')"
                     item-title="name"

@@ -216,7 +216,7 @@ export interface IUser {
    * Gender of the user.
    * Optional, may not be set if the user has not specified gender.
    */
-  gender?: string
+  gender?: 'male' | 'female' | 'other'
 
   /**
    * URL to the user's profile photo.

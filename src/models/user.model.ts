@@ -19,7 +19,7 @@ export class User extends BaseModel implements IUser {
     hold: number
   }
   country?: Country
-  gender?: string
+  gender?: 'male' | 'female' | 'other'
   pictureURL?: string
   status?: string
   subscribed?: boolean

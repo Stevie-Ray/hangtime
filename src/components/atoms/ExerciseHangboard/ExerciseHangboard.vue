@@ -7,7 +7,7 @@ import { IExercise } from '@/interfaces/workout.interface'
 const { getHangboardByIds } = useUserStore()
 
 // not required
-const exercise = defineModel<IExercise>()
+const exercise = defineModel<IExercise>({ required: false })
 
 const { hangboard, edit = false } = defineProps<{
   hangboard: { hangboard: number; company: number }

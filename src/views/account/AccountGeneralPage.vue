@@ -137,7 +137,7 @@ useHead({
                 </template>
                 <v-select
                   v-if="user"
-                  v-model="user.settings.scale"
+                  v-model="user!.settings.scale"
                   :disabled="!online"
                   :items="scale"
                   :label="t('Grading system')"
@@ -170,7 +170,7 @@ useHead({
 
                 <v-select
                   v-if="user"
-                  v-model="user.settings.weight"
+                  v-model="user!.settings.weight"
                   :disabled="!online"
                   :items="units"
                   :label="t('Weight system')"
@@ -186,7 +186,7 @@ useHead({
 
                 <v-select
                   v-if="user"
-                  v-model="user.settings.theme"
+                  v-model="user!.settings.theme"
                   :disabled="!online"
                   :items="themes"
                   :label="t('Theme')"

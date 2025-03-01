@@ -2,7 +2,7 @@
 /// <reference types="web-bluetooth" />
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { IWorkout } from '@/interfaces/workout.interface'
+import { Workout } from '@/models/workout.model'
 import { useBluetooth } from '@/composables/useBluetooth'
 import { useBluetoothStore } from '@/stores/bluetooth.store'
 
@@ -16,6 +16,8 @@ import {
   Progressor
 } from '@hangtime/grip-connect'
 
+const workout = defineModel<Workout>({ required: true })
+
 const bluetoothStore = useBluetoothStore()
 
 const { connect } = useBluetoothStore()
@@ -23,8 +25,6 @@ const { connect } = useBluetoothStore()
 const { bluetoothDevice, bluetoothError } = storeToRefs(bluetoothStore)
 
 const { isBluetoothSupported, isBluetoothAvailable } = useBluetooth()
-
-const workout = defineModel<IWorkout>()
 
 const { size = 'default' } = defineProps<{
   size?: string
