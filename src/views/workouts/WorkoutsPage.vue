@@ -103,20 +103,6 @@ const levels = computed(() => [
   { name: t('hard'), value: 3 }
 ])
 
-// TODO: We have to wrap the user settings selected to avoid TS errors
-const userSettingsSelected = computed<number | null>({
-  get(): number {
-    if (!user.value) return 0
-    return user.value.settings.selected
-  },
-  set(value: number | null) {
-    if (!user.value) return
-    if (typeof value === 'number') {
-      user.value.settings.selected = value
-    }
-  }
-})
-
 const difficultyById = (id: 1 | 2 | 3): string | undefined => {
   const level = levels.value.find((level) => level.value === id)
   return level ? level.name : undefined
@@ -159,7 +145,7 @@ useHead({
 
             <v-radio-group
               v-if="user && getUserHangboards?.length > 0"
-              v-model="userSettingsSelected"
+              v-model="user.settings.selected"
               :disabled="!online"
               @update:modelValue="setHangboard"
               mandatory

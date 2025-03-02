@@ -69,47 +69,6 @@ function greet(item: SpeechSynthesisVoice | undefined) {
   }
 }
 
-// TODO: We have to wrap the user settings sound to avoid TS errors
-const userSettingsSound = computed<boolean | null>({
-  get(): boolean {
-    if (!user.value) return false
-    return user.value.settings.sound
-  },
-  set(value: boolean | null) {
-    if (!user.value) return
-    if (typeof value === 'boolean') {
-      user.value.settings.sound = value
-    }
-  }
-})
-
-// TODO: We have to wrap the user settings speak to avoid TS errors
-const userSettingsSpeak = computed<boolean | null>({
-  get(): boolean {
-    if (!user.value) return false
-    return user.value.settings.speak
-  },
-  set(value: boolean | null) {
-    if (!user.value) return
-    if (typeof value === 'boolean') {
-      user.value.settings.speak = value
-    }
-  }
-})
-
-const userSettingsVibrate = computed<boolean | null>({
-  get(): boolean {
-    if (!user.value) return false
-    return user.value.settings.vibrate
-  },
-  set(value: boolean | null) {
-    if (!user.value) return
-    if (typeof value === 'boolean') {
-      user.value.settings.vibrate = value
-    }
-  }
-})
-
 useHead({
   title: 'Workouts',
   meta: [{ name: 'description', content: '' }]
@@ -140,7 +99,7 @@ useHead({
                 <template #append>
                   <v-checkbox
                     v-if="user"
-                    v-model="userSettingsSound"
+                    v-model="user.settings.sound"
                     color="text"
                     :disabled="!online"
                     @change="updateUser"
@@ -163,7 +122,7 @@ useHead({
                 <template #append>
                   <v-checkbox
                     v-if="user"
-                    v-model="userSettingsSpeak"
+                    v-model="user.settings.speak"
                     color="text"
                     :disabled="!online"
                     @change="updateUser"
@@ -204,7 +163,7 @@ useHead({
                 <template #append>
                   <v-checkbox
                     v-if="user"
-                    v-model="userSettingsVibrate"
+                    v-model="user.settings.vibrate"
                     color="text"
                     :disabled="!online"
                     @change="updateUser"

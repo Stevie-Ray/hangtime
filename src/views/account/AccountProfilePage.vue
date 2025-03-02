@@ -83,19 +83,6 @@ const deleteAccount = async () => {
   }
 }
 
-// TODO: We have to wrap the user gender to avoid TS errors
-const userGender = computed<'male' | 'female' | 'other' | null>({
-  get(): 'male' | 'female' | 'other' | null {
-    return user.value?.gender ?? null
-  },
-  set(value: 'male' | 'female' | 'other' | null) {
-    if (!user.value) return
-    if (value === 'male' || value === 'female' || value === 'other') {
-      user.value.gender = value
-    }
-  }
-})
-
 useHead({
   title: 'Profile',
   meta: [{ name: 'description', content: '' }]
@@ -148,7 +135,7 @@ useHead({
 
                 <v-radio-group
                   v-if="user"
-                  v-model="userGender"
+                  v-model="user.gender"
                   :disabled="!online"
                   row
                   @update:modelValue="updateUser"

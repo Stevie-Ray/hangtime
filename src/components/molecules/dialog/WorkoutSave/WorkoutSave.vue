@@ -35,18 +35,6 @@ const workoutSave = () => {
   router.push('/workouts')
 }
 
-// TODO: We have to wrap the workout to avoid TS errors
-const workoutShare = computed<boolean | null>({
-  get(): boolean {
-    return workout.value.share
-  },
-  set(value: boolean | null) {
-    if (typeof value === 'boolean') {
-      workout.value.share = value
-    }
-  }
-})
-
 const rules = {
   number: (v: number | string) => !isNaN(Number(v)) || 'NaN',
   required: (v: unknown) => !!v || 'This field is required',
@@ -128,7 +116,7 @@ const rules = {
             </v-chip-group>
 
             <v-checkbox
-              v-model="workoutShare"
+              v-model="workout.share"
               :label="t('Share with the community')"
               hide-details="auto"
             ></v-checkbox>
