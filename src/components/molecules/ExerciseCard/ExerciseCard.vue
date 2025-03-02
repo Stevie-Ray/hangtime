@@ -6,14 +6,10 @@ import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHang
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import { time } from '@/helpers'
 import { IExercise } from '@/interfaces/workout.interface'
-import { computed } from 'vue'
 
 const { t } = useI18n()
 
 const exercise = defineModel<IExercise>({ required: true })
-
-// TODO: We have to wrap the exercise to avoid TS errors
-const exerciseWrapped = computed<IExercise | undefined>(() => exercise.value)
 
 const emit = defineEmits(['left', 'right', 'rotate'])
 
@@ -118,7 +114,7 @@ const {
           <v-col cols="12">
             <exercise-hangboard
               v-if="hangboard"
-              v-model="exerciseWrapped"
+              v-model="exercise"
               :hangboard="{
                 hangboard: hangboard.hangboard,
                 company: hangboard.company
