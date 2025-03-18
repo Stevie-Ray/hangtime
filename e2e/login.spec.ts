@@ -5,48 +5,52 @@ test('visits the app login page and login', async ({ page }) => {
   await page.goto('/')
 
   // Check for the presence of "Hi there! 👋"
-  const hiThereText = page.locator('div.text-h5')
-  await expect(hiThereText).toHaveText('Hi there! 👋')
+  const hiThereText = page.getByText('Hi there! 👋')
+  await expect(hiThereText).toBeVisible()
 
   // Check for the presence of the logo
-  const logo = page.locator('img.logo')
+  const logo = page.getByRole('img', { name: 'HangTime Logo' })
   await expect(logo).toBeVisible()
 
-  // Check for the presence of the "HangTime" text
-  const hangTimeText = page.locator('h2.text-h4')
-  await expect(hangTimeText).toHaveText('HangTime')
+  // Check for the presence of the "HangTime" text next to the logo
+  const hangTimeText = page.getByText('HangTime', { exact: true })
+  await expect(hangTimeText).toBeVisible()
 
   // Check for the "Hangboard Training App" subtitle
-  const subtitleText = page.locator('h1.text-subtitle-2')
-  await expect(subtitleText).toHaveText('Hangboard Training App')
+  const subtitleText = page.getByText('Hangboard Training App', { exact: true })
+  await expect(subtitleText).toBeVisible()
 
   // Check for the presence of the login buttons
-  const facebookButton = page.locator('button:has-text("Sign in with Facebook")')
-  const googleButton = page.locator('button:has-text("Sign in with Google")')
-  const appleButton = page.locator('button:has-text("Sign in with Apple")')
-  await expect(facebookButton).toBeVisible()
+  const googleButton = page.getByRole('button', { name: 'Sign in with Google' })
   await expect(googleButton).toBeVisible()
+  await expect(googleButton).toBeEnabled()
+
+  const appleButton = page.getByRole('button', { name: 'Sign in with Apple' })
   await expect(appleButton).toBeVisible()
+  await expect(appleButton).toBeEnabled()
 
   // Check for the presence of the email input field
   const emailInput = page.getByLabel('E-mail', { exact: true })
   await expect(emailInput).toBeVisible()
+  await emailInput.fill('mail@stevie-ray.nl')
 
   // Check for the presence of the password input field
   const passwordInput = page.getByLabel('Password', { exact: true })
   await expect(passwordInput).toBeVisible()
+  await passwordInput.fill('8Ty>g{Q"F!#4')
 
   // Check for the presence of the login button
   const loginButton = page.getByRole('button', { name: 'Login' })
-  await expect(loginButton).toBeVisible()
   await expect(loginButton).toBeEnabled()
-
-  // Perform login with dummy account
-  await emailInput.fill('mail@stevie-ray.nl')
-  await passwordInput.fill('8Ty>g{Q"F!#4')
   await loginButton.click()
 
-  // Check if login was successful
-  const workoutTab = page.getByText('My Workouts')
-  await expect(workoutTab).toBeVisible()
+  // Check if the workout link is visible
+  const workoutLink = page.getByRole('link', { name: 'Workouts' })
+  await expect(workoutLink).toBeVisible({ timeout: 5000 }) // Wait for 5 seconds
+  await expect(workoutLink).toBeEnabled()
+
+  // Click the account link is visible
+  const accountLink = page.getByRole('link', { name: 'Account' })
+  await expect(accountLink).toBeVisible()
+  await expect(accountLink).toBeEnabled()
 })
