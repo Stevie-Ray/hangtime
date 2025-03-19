@@ -14,10 +14,10 @@ setup('authenticate', async ({ page }) => {
 
   // Fill in login credentials
   const emailInput = page.getByLabel('E-mail', { exact: true })
-  await emailInput.fill('mail@stevie-ray.nl')
+  await emailInput.fill(process.env.VITE_E2E_TEST_EMAIL || '')
 
   const passwordInput = page.getByLabel('Password', { exact: true })
-  await passwordInput.fill('8Ty>g{Q"F!#4')
+  await passwordInput.fill(process.env.VITE_E2E_TEST_PASSWORD || '')
 
   // Click login button
   const loginButton = page.getByRole('button', { name: 'Login' })

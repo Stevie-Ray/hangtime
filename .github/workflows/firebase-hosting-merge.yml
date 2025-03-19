@@ -8,6 +8,8 @@ name: Deploy to Firebase Hosting on merge
       - main
 env:
   CI: true
+  VITE_E2E_TEST_EMAIL: ${{ secrets.VITE_E2E_TEST_EMAIL }}
+  VITE_E2E_TEST_PASSWORD: ${{ secrets.VITE_E2E_TEST_PASSWORD }}
 jobs:
   tests:
     runs-on: ubuntu-latest
