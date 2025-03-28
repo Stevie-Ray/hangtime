@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { event } from 'vue-gtag'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/app.store'
 import { useUserStore } from '@/stores/user.store'
@@ -39,6 +40,7 @@ const shareWorkout = async () => {
 
   try {
     await navigator.share(shareData)
+    event('share', { source: 'workout_share_button' })
   } catch (err) {
     console.log(`Error: ${err}`)
   }

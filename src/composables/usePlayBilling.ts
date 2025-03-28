@@ -1,8 +1,7 @@
 import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthenticationStore } from '@/stores/authentication.store'
-import { purchase } from 'vue-gtag'
-import { EcommerceActionWithCurrency } from 'vue-gtag'
+import { ecommerce } from 'vue-gtag'
 
 /**
  * Composable for handling Play Billing subscriptions via the Digital Goods API.
@@ -338,20 +337,19 @@ export function usePlayBilling() {
           updateUser()
         }
         // gtag.js
-        purchase({
+        ecommerce('purchase', {
           transaction_id: token,
-          affiliation: 'HangTime',
           value: Number(item?.price?.value),
-          currency: item?.price.currency as EcommerceActionWithCurrency['currency'], // ISO4217
+          currency: item?.price.currency,
           tax: 0,
           shipping: 0,
           items: [
             {
-              id: 'subscription',
-              name: 'Subscription',
-              brand: 'HangTime',
-              // currency: item?.price.currency,
-              price: item?.price?.value,
+              item_id: 'subscription',
+              item_name: 'Subscription',
+              item_brand: 'HangTime',
+              affiliation: 'HangTime',
+              price: Number(item?.price?.value),
               quantity: 1
             }
           ]

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { event } from 'vue-gtag'
 import { storeToRefs } from 'pinia'
 import router from '@/router'
 import { time, useRandomImage } from '@/helpers'
@@ -49,6 +50,7 @@ const shareExternal = () => {
     })
     .then(() => {
       console.log('Thanks for sharing!')
+      event('share', { source: 'workout_complete_dialog' })
     })
     .catch(console.error)
 }
