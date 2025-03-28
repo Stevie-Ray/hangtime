@@ -16,6 +16,9 @@ import { App } from 'vue'
 const gtag = createGtag({
   tagId: 'G-D2DR5GPWS3',
   appName: 'HangTime',
+  resource: {
+    defer: true
+  },
   pageTracker: {
     router
   }
