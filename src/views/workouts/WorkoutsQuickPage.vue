@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
@@ -9,17 +9,17 @@ import { Workout } from '@/models/workout.model'
 
 const { t } = useI18n()
 
-const workout = reactive(
-  new Workout({
+const workout = computed(() => {
+  const newWorkout = new Workout({
     name: 'Quick workout',
     description: 'Just a simple timer go get you going'
   })
-)
-
-workout.addExercise({
-  pause: 0,
-  repeat: 9,
-  pullups: 0
+  newWorkout.addExercise({
+    pause: 0,
+    repeat: 9,
+    pullups: 0
+  })
+  return newWorkout
 })
 
 useHead({

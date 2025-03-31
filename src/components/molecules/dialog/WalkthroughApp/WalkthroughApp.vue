@@ -88,7 +88,7 @@ const updateSelected = () => {
   )
   if (!exists) {
     // measure selected hangboard data
-    event('select_content', {
+    event('add_hangboard', {
       hangboard: getHangboardNameByIds(selected.company, selected.hangboard)
     })
     // add the newly selected board and set it
@@ -203,7 +203,15 @@ const settingsGrade = computed({
                 </a>
               </v-card-subtitle>
               <v-card-text>
-                <hangboard-select v-model="selected" />
+                <hangboard-select
+                  :model-value="selected"
+                  @update:model-value="
+                    (val) => {
+                      selected.company = val.company
+                      selected.hangboard = val.hangboard
+                    }
+                  "
+                />
               </v-card-text>
             </v-card>
 

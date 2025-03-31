@@ -23,7 +23,7 @@ const dialog = ref(true)
 const addHangboard = () => {
   const company = parseInt(route.params.company.toString(), 10)
   const hangboard = parseInt(route.params.hangboard.toString(), 10)
-  event('select_content', {
+  event('add_hangboard', {
     hangboard: getHangboardNameByIds(company, hangboard)
   })
   // add the newly selected board and set it

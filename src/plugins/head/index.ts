@@ -1,3 +1,3 @@
-import { createHead } from '@unhead/vue'
+import { createHead } from '@unhead/vue/client'
 
 export default createHead()
