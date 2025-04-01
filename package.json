@@ -27,7 +27,7 @@
     "@vueuse/components": "^13.0.0",
     "@vueuse/core": "^13.0.0",
     "core-js": "^3.41.0",
-    "firebase": "^11.5.0",
+    "firebase": "^11.6.0",
     "ircra": "^2.2.4",
     "js-video-url-parser": "^0.5.1",
     "pinia": "^3.0.1",
@@ -38,7 +38,7 @@
     "vue-inline-svg": "^4.0.0",
     "vue-router": "^4.5.0",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.7.19"
+    "vuetify": "^3.8.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.1",
@@ -49,7 +49,7 @@
     "@types/geojson": "^7946.0.16",
     "@types/google.maps": "^3.58.1",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^20.17.28",
+    "@types/node": "^20.17.29",
     "@types/web-bluetooth": "^0.0.21",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vitest/eslint-plugin": "^1.1.38",
@@ -65,7 +65,7 @@
     "npm-run-all2": "^7.0.2",
     "prettier": "^3.5.3",
     "rollup-plugin-visualizer": "^5.14.0",
-    "sass": "^1.86.0",
+    "sass": "^1.86.1",
     "typescript": "^5.8.2",
     "vite": "^6.2.4",
     "vite-plugin-pwa": "^1.0.0",
