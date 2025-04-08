@@ -68,8 +68,6 @@ const devices = [
 const dropdown = ref(workout.value?.company === 1 ? 'Motherboard' : 'Progressor')
 const dialog = ref(false)
 
-console.log(dropdown.value)
-
 const setup = () => {
   const selectedDeviceClass = {
     Climbro: Climbro,
@@ -80,8 +78,6 @@ const setup = () => {
     Progressor: Progressor,
     WHC06: WHC06
   }[dropdown.value]
-
-  console.log(selectedDeviceClass)
 
   if (!selectedDeviceClass) return
 
