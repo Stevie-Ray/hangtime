@@ -35,38 +35,40 @@ const emit = defineEmits(['start'])
 const devices = [
   {
     title: 'Climbro',
-    type: 'Climbro',
+    value: 'Climbro',
     disabled: true
   },
   {
     title: 'Entralpi',
-    type: 'Entralpi'
+    value: 'Entralpi'
   },
   {
     title: 'ForceBoard',
-    type: 'ForceBoard'
+    value: 'ForceBoard'
   },
   {
     title: 'Motherboard',
-    type: 'Motherboard',
+    value: 'Motherboard',
     disabled: workout.value?.company !== 1
   },
   {
     title: 'mySmartBoard',
-    type: 'mySmartBoard',
+    value: 'mySmartBoard',
     disabled: true
   },
   {
     title: 'Progressor',
-    type: 'Progressor'
+    value: 'Progressor'
   },
   {
     title: 'WH-CO6',
-    type: 'WHC06'
+    value: 'WHC06'
   }
 ]
 const dropdown = ref(workout.value?.company === 1 ? 'Motherboard' : 'Progressor')
 const dialog = ref(false)
+
+console.log(dropdown.value)
 
 const setup = () => {
   const selectedDeviceClass = {
@@ -78,6 +80,8 @@ const setup = () => {
     Progressor: Progressor,
     WHC06: WHC06
   }[dropdown.value]
+
+  console.log(selectedDeviceClass)
 
   if (!selectedDeviceClass) return
 
