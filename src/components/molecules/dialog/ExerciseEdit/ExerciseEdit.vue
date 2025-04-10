@@ -320,7 +320,16 @@ const rules = {
                     title="Repeat"
                     @update:model-value="(value) => exerciseEditTime('repeat', value)"
                   >
-                    <template #default>{{ exercise.repeat + 1 }}x</template>
+                    <template #default>
+                      <input
+                        size="1"
+                        type="text"
+                        readonly
+                        inputmode="decimal"
+                        class="text-center"
+                        :value="`${exercise.repeat + 1}x`"
+                      />
+                    </template>
                   </exercise-counter>
 
                   <exercise-counter
