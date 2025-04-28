@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
@@ -9,17 +9,17 @@ import { Workout } from '@/models/workout.model'
 
 const { t } = useI18n()
 
-const workout = computed(() => {
-  const newWorkout = new Workout({
+const workout = ref(
+  new Workout({
     name: 'Quick workout',
     description: 'Just a simple timer go get you going'
   })
-  newWorkout.addExercise({
-    pause: 0,
-    repeat: 9,
-    pullups: 0
-  })
-  return newWorkout
+)
+
+workout.value.addExercise({
+  pause: 0,
+  repeat: 9,
+  pullups: 0
 })
 
 useHead({
@@ -52,7 +52,16 @@ useHead({
             :max="24"
             @update:modelValue="(value) => (workout.exercises[0].repeat = value)"
           >
-            <template #default>{{ workout.exercises[0].repeat + 1 }}x</template>
+            <template #default>
+              <input
+                size="1"
+                type="text"
+                readonly
+                inputmode="decimal"
+                class="text-center"
+                :value="`${workout.exercises[0].repeat + 1}x`"
+              />
+            </template>
           </exercise-counter>
 
           <exercise-counter
