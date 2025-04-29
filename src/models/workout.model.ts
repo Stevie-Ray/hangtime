@@ -33,7 +33,7 @@ export class Workout extends BaseModel implements IWorkout {
     this.company = workout?.company || getUserHangboardCompany?.id || 0
     this.exercises = workout?.exercises || []
     this.time = workout?.time || 0
-    this.share = workout?.share || false
+    this.share = workout?.share !== undefined ? workout.share : false
     this.video = workout?.video || ''
     this.subscribers = workout?.subscribers || (user?.id ? [user?.id] : [])
     this.subscribers_count = workout?.subscribers_count || this.subscribers.length - 1 || 0

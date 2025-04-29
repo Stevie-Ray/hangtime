@@ -42,11 +42,11 @@ export class User extends BaseModel implements IUser {
       ],
       scale: user.settings?.scale || 'font',
       selected: user.settings?.selected || 0,
-      sound: user.settings?.sound || true,
-      speak: user.settings?.speak || false,
-      vibrate: user.settings?.vibrate || false,
+      sound: user.settings?.sound !== undefined ? user.settings.sound : true,
+      speak: user.settings?.speak !== undefined ? user.settings.speak : false,
+      vibrate: user.settings?.vibrate !== undefined ? user.settings.vibrate : false,
       voice: user.settings?.voice || 0,
-      walkthrough: user.settings?.walkthrough || false
+      walkthrough: user.settings?.walkthrough !== undefined ? user.settings.walkthrough : false
     }
     // Initialize optional properties, deleteing is required for Firebase
     if (user.completed !== undefined) this.completed = user.completed
