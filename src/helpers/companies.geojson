@@ -8399,6 +8399,55 @@
         "type": "Point",
         "coordinates": [9.1814925, 47.6726738]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Treemers",
+        "description": "Forging climbing excellence with climbing accessories. because passion deserves quality.",
+        "country": "ES",
+        "id": 134,
+        "url": "https://treemers.com/",
+        "socials": {
+          "facebook": "https://www.facebook.com/treemers/",
+          "instagram": "https://www.instagram.com/treemers_climb/"
+        },
+        "hangboards": [
+          {
+            "name": "Treesmil",
+            "id": 0,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://treemers.com/shop/multipresa/treesmil-sense-barra/",
+            "holds": 0
+          },
+          {
+            "name": "Bonsai XL",
+            "id": 1,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://treemers.com/shop/multipresa/treesmil-sense-barra/",
+            "holds": 0
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.8602763, 41.7481117]
+      }
     }
   ]
 }
