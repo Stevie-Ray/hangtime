@@ -2,9 +2,9 @@
 // Note that you can only use Firebase Messaging here. Other Firebase libraries
 // are not available in the service worker.
 
-importScripts('https://www.gstatic.com/firebasejs/11.7.3/firebase-app-compat.js')
+importScripts('https://www.gstatic.com/firebasejs/11.8.1/firebase-app-compat.js')
 
-importScripts('https://www.gstatic.com/firebasejs/11.7.3/firebase-messaging-compat.js')
+importScripts('https://www.gstatic.com/firebasejs/11.8.1/firebase-messaging-compat.js')
 
 const config = {
   apiKey: 'AIzaSyDkE4T_MphbbPVq8gdnZjyRcLCDcqrheW8',
