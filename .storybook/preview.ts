@@ -1,13 +1,13 @@
+import type { Preview } from '@storybook/vue3-vite'
 import { setup } from '@storybook/vue3'
 import { registerPlugins } from '@/plugins'
-import { withVuetifyTheme } from './withVuetifyTheme.decorator';
+import { withVuetifyTheme } from './withVuetifyTheme.decorator'
 
 setup((app) => {
   registerPlugins(app)
 })
 
-/** @type { import('@storybook/vue3').Preview } */
-const preview = {
+const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
@@ -27,14 +27,14 @@ export const globalTypes = {
       // Array of plain string values or MenuItem shape
       items: [
         { value: 'light', title: 'Light', left: '🌞' },
-        { value: 'dark', title: 'Dark', left: '🌛' },
+        { value: 'dark', title: 'Dark', left: '🌛' }
       ],
       // Change title based on selected value
-      dynamicTitle: true,
-    },
-  },
-};
+      dynamicTitle: true
+    }
+  }
+}
+
+export const decorators = [withVuetifyTheme]
 
 export default preview
-
-export const decorators = [withVuetifyTheme];
