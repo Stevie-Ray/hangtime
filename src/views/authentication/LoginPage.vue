@@ -165,10 +165,13 @@ const connect = async (method: string) => {
         console.log(firebaseUser)
       })
       .catch((err) => {
+      if (err.code === 'auth/wrong-password') {
+        resetPassword.value = true
+      } else {
         error.value = err.message
-
-        console.log(err)
-      })
+      }
+      console.log(err)
+    })
   }
 
   if (method === 'register') {
@@ -407,10 +410,10 @@ useHead({
                   </v-btn>
                 </v-form>
 
-                <div v-if="resetPassword">
-                  <v-divider class="mt-2 mb-4"></v-divider>
-                  <div class="mb-2">Forgot your password?</div>
-                  <v-btn @click="connect('reset')">Reset password</v-btn>
+                <div v-if="resetPassword" class="mt-2">
+                  <v-btn variant="text" size="x-small" @click="connect('reset')">
+                    {{ t("Forgot your password?") }} {{ t('Reset password') }}
+                  </v-btn>
                 </div>
               </v-col>
             </v-row>
