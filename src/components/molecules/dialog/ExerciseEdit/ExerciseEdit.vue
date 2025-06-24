@@ -202,9 +202,9 @@ const rules = {
                           <span
                             v-if="exercise && exercise.exercise !== 0"
                             @click="
-                              ;(exercise.exercise = 0),
+                              ;((exercise.exercise = 0),
                                 (exercise.pullups = 1),
-                                (exercise.max = false)
+                                (exercise.max = false))
                             "
                           >
                             {{ t('Reset') }}
