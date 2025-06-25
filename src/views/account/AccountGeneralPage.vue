@@ -62,6 +62,10 @@ const language = [
   {
     title: 'Polski',
     value: 'pl-PL'
+  },
+  {
+    title: 'Čeština',
+    value: 'cs-CZ'
   }
 ]
 
