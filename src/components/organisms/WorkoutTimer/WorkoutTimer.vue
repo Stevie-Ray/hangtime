@@ -186,7 +186,7 @@ onBeforeUnmount(() => {
                           <span> {{ bluetoothOutput.massMax }} KG</span>
                         </div>
                       </v-col>
-                      <v-col v-if="workout?.exercises?.length > 1" class="text-center">
+                      <v-col class="text-center">
                         <div class="text-caption text-uppercase">
                           {{ t('Total') }}
                         </div>
@@ -194,7 +194,7 @@ onBeforeUnmount(() => {
                           <span> {{ bluetoothOutput.massTotal }} KG</span>
                         </div>
                       </v-col>
-                      <v-col v-if="workout?.exercises" class="text-center">
+                      <v-col class="text-center">
                         <div class="text-caption text-uppercase">
                           {{ t('Average') }}
                         </div>
