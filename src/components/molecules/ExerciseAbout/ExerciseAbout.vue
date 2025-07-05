@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useExercises, useGrip } from '@/helpers'
+import { useExercises, useGrip, useGripPosition } from '@/helpers'
 import { IExercise } from '@/interfaces/workout.interface'
 
 const grip = useGrip()
+const gripPosition = useGripPosition()
 const exercises = useExercises()
 
 const exercise = defineModel<IExercise>({ required: true })
@@ -14,6 +15,15 @@ const exercise = defineModel<IExercise>({ required: true })
       <div v-if="exercise.grip !== undefined">
         <div class="mb-8">
           {{ grip[exercise.grip].description }}
+          <div
+            v-if="exercise.gripPosition !== undefined && exercise.gripPosition !== null"
+            class="mt-4"
+          >
+            <strong>Grip Position:</strong> {{ gripPosition[exercise.gripPosition].name }}
+            <div class="text-caption mt-1">
+              {{ gripPosition[exercise.gripPosition].description }}
+            </div>
+          </div>
         </div>
         <v-expansion-panels>
           <v-expansion-panel
@@ -45,6 +55,15 @@ const exercise = defineModel<IExercise>({ required: true })
       <div v-if="exercise.grip !== undefined">
         <div class="mb-8">
           {{ grip[exercise.grip].description }}
+          <div
+            v-if="exercise.gripPosition !== undefined && exercise.gripPosition !== null"
+            class="mt-4"
+          >
+            <strong>Grip Position:</strong> {{ gripPosition[exercise.gripPosition].name }}
+            <div class="text-caption mt-1">
+              {{ gripPosition[exercise.gripPosition].description }}
+            </div>
+          </div>
         </div>
         <v-expansion-panels>
           <v-expansion-panel

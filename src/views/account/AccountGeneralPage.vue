@@ -26,17 +26,12 @@ const { updateUser } = useAuthenticationStore()
 
 const language = [
   {
-    title: '简体中文',
-    value: 'zh-CN',
-    disabled: true
+    title: 'Čeština',
+    value: 'cs-CZ'
   },
   {
     title: 'Deutsch',
     value: 'de-DE'
-  },
-  {
-    title: 'Français',
-    value: 'fr-FR'
   },
   {
     title: 'English',
@@ -47,13 +42,16 @@ const language = [
     value: 'es-ES'
   },
   {
+    title: 'Français',
+    value: 'fr-FR'
+  },
+  {
     title: 'Italiano',
     value: 'it-IT'
   },
   {
     title: '日本語',
-    value: 'ja-JP',
-    disabled: true
+    value: 'ja-JP'
   },
   {
     title: 'Nederlands',
@@ -64,8 +62,8 @@ const language = [
     value: 'pl-PL'
   },
   {
-    title: 'Čeština',
-    value: 'cs-CZ'
+    title: '简体中文',
+    value: 'zh-CN'
   }
 ]
 

@@ -13,7 +13,7 @@ import imgBackgroundDark6 from '@/assets/backgrounds/background-d6.png'
 import imgBackgroundDark7 from '@/assets/backgrounds/background-d7.png'
 import { IUser } from '@/interfaces/user.interface'
 import { ExerciseJson } from '@/interfaces/exercise.json.interface'
-import { Exercises, Grip } from '@/enums/exercise'
+import { Exercises, Grip, GripPosition } from '@/enums/exercise'
 import { Unit } from '@/enums/unit'
 
 /**
@@ -246,6 +246,33 @@ export function useGrip() {
         Exercises.L_HANG,
         Exercises.KNEES_RAISE
       ]
+    }
+  ]
+}
+
+/**
+ * Grip Position
+ * @returns {{name: string, id: number, description: string}[]}
+ */
+export function useGripPosition() {
+  return [
+    {
+      name: 'Open Handed',
+      id: GripPosition.OPEN_HANDED,
+      description:
+        'Fingers are extended and relaxed, with minimal flexion at the finger joints. This is the most natural and least stressful grip position.'
+    },
+    {
+      name: 'Half Crimp',
+      id: GripPosition.HALF_CRIMP,
+      description:
+        'Fingers are bent at the first joint (proximal interphalangeal joint) to approximately 90 degrees, while the second joint remains relatively straight.'
+    },
+    {
+      name: 'Full Crimp',
+      id: GripPosition.FULL_CRIMP,
+      description:
+        'Fingers are maximally bent at both the first and second joints, creating maximum tension and engagement of the finger flexors.'
     }
   ]
 }

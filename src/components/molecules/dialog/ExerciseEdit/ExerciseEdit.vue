@@ -2,7 +2,14 @@
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
-import { useExercises, useFitnessExercises, useGrip, weightConverter, weightUnit } from '@/helpers'
+import {
+  useExercises,
+  useFitnessExercises,
+  useGrip,
+  useGripPosition,
+  weightConverter,
+  weightUnit
+} from '@/helpers'
 import ExerciseCard from '@/components/molecules/ExerciseCard/ExerciseCard.vue'
 import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseCounter from '@/components/molecules/ExerciseCounter/ExerciseCounter.vue'
@@ -14,6 +21,7 @@ const { user } = storeToRefs(useAuthenticationStore())
 
 // helpers
 const grip = useGrip()
+const gripPosition = useGripPosition()
 const exerciseList = useExercises()
 const fitnessExercises = useFitnessExercises()
 
@@ -196,22 +204,7 @@ const rules = {
                       </v-select>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <div class="d-flex justify-space-between">
-                        <div class="text-caption">{{ t('Movement') }} ({{ t('Optional') }})</div>
-                        <div class="text-caption text-right">
-                          <span
-                            v-if="exercise && exercise.exercise !== 0"
-                            @click="
-                              ;((exercise.exercise = 0),
-                                (exercise.pullups = 1),
-                                (exercise.max = false))
-                            "
-                          >
-                            {{ t('Reset') }}
-                          </span>
-                          <span v-else>&nbsp;</span>
-                        </div>
-                      </div>
+                      <div class="text-caption">{{ t('Movement') }} ({{ t('Optional') }})</div>
                       <v-select
                         v-model="exercise.exercise"
                         :items="exerciseFilter"
@@ -219,6 +212,16 @@ const rules = {
                         item-value="index"
                         item-disabled="disabled"
                         item-props
+                        clearable
+                        @update:model-value="
+                          (value) => {
+                            if (value === null) {
+                              exercise.exercise = 0
+                              exercise.pullups = 1
+                              exercise.max = false
+                            }
+                          }
+                        "
                       >
                         <template #selection="data">
                           <span
@@ -363,6 +366,20 @@ const rules = {
                   >
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
+                  {{ exercise.gripPosition }}
+                  <v-row>
+                    <v-col cols="12">
+                      <div class="text-caption">{{ t('Grip position') }} ({{ t('Optional') }})</div>
+                      <v-select
+                        v-model="exercise.gripPosition"
+                        :items="gripPosition"
+                        item-title="name"
+                        item-value="id"
+                        clearable
+                      >
+                      </v-select>
+                    </v-col>
+                  </v-row>
                   <exercise-hand
                     v-model="exercise"
                     edit

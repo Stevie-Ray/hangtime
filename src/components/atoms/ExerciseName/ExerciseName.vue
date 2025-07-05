@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useExercises, useGrip } from '@/helpers'
+import { useExercises, useGrip, useGripPosition } from '@/helpers'
 import { IExercise } from '@/interfaces/workout.interface'
 
 const grip = useGrip()
+const gripPosition = useGripPosition()
 const exercises = useExercises()
 
 const exercise = defineModel<IExercise>({ required: true })
@@ -18,7 +19,10 @@ const { hideRepeat = false } = defineProps<{
     <span v-if="exercise.repeat > 0 && !hideRepeat && !exercise.max">
       {{ exercise.repeat + 1 }}x
     </span>
-    <span v-if="exercise.pullups > 1 && !exercise.max"> {{ exercise.pullups }}&nbsp;</span>
+    <span v-if="exercise.pullups > 1 && !exercise.max"> {{ exercise.pullups + ' ' }}</span>
+    <span v-if="exercise.gripPosition !== undefined && exercise.gripPosition !== null">
+      {{ gripPosition[exercise.gripPosition].name + ' ' }}
+    </span>
     <span v-if="exercise.left === null || exercise.right === null">One-Arm </span>
     <span v-if="exercise.exercise === 0">
       <span v-if="exercise.grip !== undefined">
@@ -28,7 +32,7 @@ const { hideRepeat = false } = defineProps<{
       <span v-else-if="grip[exercise.exercise] !== null">{{ grip[exercise.exercise].name }}</span>
     </span>
     <span v-else-if="exercise.grip !== 0">
-      <span v-if="exercise.grip !== undefined">{{ grip[exercise.grip].short }}&nbsp;</span>
+      <span v-if="exercise.grip !== undefined">{{ grip[exercise.grip].short + ' ' }}</span>
       <!-- fallback-->
       <span v-else-if="grip[exercise.exercise]">{{ grip[exercise.exercise].name }}</span>
     </span>

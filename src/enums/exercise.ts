@@ -101,3 +101,23 @@ export enum Grip {
    */
   NO_HANG
 }
+
+/**
+ * Enum for grip positions on holds.
+ */
+export enum GripPosition {
+  /**
+   * Open handed grip
+   */
+  OPEN_HANDED,
+
+  /**
+   * Half crimp grip
+   */
+  HALF_CRIMP,
+
+  /**
+   * Full crimp grip
+   */
+  FULL_CRIMP
+}

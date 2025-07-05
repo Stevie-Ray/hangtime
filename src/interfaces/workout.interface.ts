@@ -18,6 +18,12 @@ export interface IExercise {
   grip: number
 
   /**
+   * Grip position on the holds (open handed, half crimp, full crimp).
+   * Optional field to specify the specific grip position for the exercise.
+   */
+  gripPosition?: number
+
+  /**
    * Difficulty level of the exercise.
    * Typically a numeric scale where a higher number indicates greater difficulty.
    */
