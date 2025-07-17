@@ -21,7 +21,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.2.6",
     "@googlemaps/js-api-loader": "^1.16.10",
-    "@hangtime/grip-connect": "^0.8.3",
+    "@hangtime/grip-connect": "^0.8.4",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^2.0.12",
     "@vueuse/components": "^13.5.0",
@@ -34,11 +34,11 @@
     "register-service-worker": "^1.7.2",
     "vue": "^3.5.17",
     "vue-gtag": "^3.5.2",
-    "vue-i18n": "^11.1.9",
+    "vue-i18n": "^11.1.10",
     "vue-inline-svg": "^4.0.1",
     "vue-router": "^4.5.1",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.9.0"
+    "vuetify": "^3.9.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
@@ -75,7 +75,7 @@
     "sass": "^1.89.2",
     "storybook": "^9.0.17",
     "typescript": "^5.8.3",
-    "vite": "^7.0.4",
+    "vite": "^7.0.5",
     "vite-plugin-pwa": "^1.0.1",
     "vite-plugin-vue-devtools": "^7.7.7",
     "vite-plugin-vuetify": "^2.1.1",
