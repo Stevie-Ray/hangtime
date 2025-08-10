@@ -2,7 +2,7 @@
 <svg width="580px" height="268px" viewBox="0 0 580 268" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>TWALLTBONE</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="TWALLTBONE" transform="translate(0.7172, 1.0662)" fill="#FFFFFF" fill-rule="nonzero">
+        <g id="TWALLTBONE" transform="translate(289.9162, 134.0896) scale(1, -1) translate(-289.9162, -134.0896)translate(0.7172, 1.0662)" fill="#FFFFFF" fill-rule="nonzero">
             <path d="M578.282761,4.02281534 C518.375926,4.02281534 401.738191,42.516871 323.208958,42.516871 C286.612029,42.516871 259.05399,33.282914 231.220872,23.4215901 C199.330032,12.1226078 167.07806,0 120.454669,0 C33.1401469,0 0,27.4768065 0,93.9337624 C0,160.390718 30.7533491,247.967563 124.253349,247.967563 C217.753349,247.967563 213.497116,205.745753 311.033349,205.745753 C408.569581,205.745753 500.628026,266.046801 578.282761,266.046801" id="board" stroke="#000000"></path>
             <circle id="screw" stroke="#000000" cx="414.282761" cy="129.933762" r="11.5"></circle>
             <circle id="screw" stroke="#000000" cx="24.2827608" cy="76.9337624" r="11.5"></circle>
