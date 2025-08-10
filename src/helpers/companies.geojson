@@ -6753,6 +6753,18 @@
               "y": 90,
               "z": 40
             },
+            "sides": [
+              {
+                "name": "Easy",
+                "image": "hangboards/TWALLCRANK.svg",
+                "holds": 11
+              },
+              {
+                "name": "Hard",
+                "image": "hangboards/TWALLCRANKHARD.svg",
+                "holds": 11
+              }
+            ],  
             "type": "plastic",
             "url": "https://t-wall.com.pl/produkt/tw0102-chwytotablica-crank/",
             "holds": 11
@@ -6768,12 +6780,12 @@
             },
             "sides": [
               {
-                "name": "Default",
+                "name": "Easy",
                 "image": "hangboards/TWALLTBONE.svg",
                 "holds": 6
               },
               {
-                "name": "Rotated",
+                "name": "Hard",
                 "image": "hangboards/TWALLTBONEHARD.svg",
                 "holds": 6
               }
