@@ -561,6 +561,18 @@
               "y": 130,
               "z": 30
             },
+            "sides": [
+              {
+                "name": "Easy",
+                "image": "hangboards/MAXSPINCHSOLO-EASY.svg",
+                "holds": 13
+              },
+              {
+                "name": "Hard",
+                "image": "hangboards/MAXSPINCHSOLO-HARD.svg",
+                "holds": 13
+              }
+            ],
             "type": "plastic",
             "url": "https://www.maxclimbing.com/collections/hangboards/products/spinchboard-solo",
             "holds": 10
@@ -587,6 +599,18 @@
               "y": "",
               "z": ""
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/YYVERTICALBAGUETTE.svg",
+                "holds": 2
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/YYVERTICALBAGUETTEBACK.svg",
+                "holds": 3
+              }
+            ],
             "type": "wood",
             "url": "https://www.maxclimbing.com/products/one-finger-trainer",
             "holds": 6
@@ -789,6 +813,18 @@
               "y": 76,
               "z": 38
             },
+            "sides": [
+              {
+                "name": "Top",
+                "image": "hangboards/METOLIUSLIGHTRAIL.svg",
+                "holds": 3
+              },
+              {
+                "name": "Bottom",
+                "image": "hangboards/METOLIUSLIGHTRAIL180.svg",
+                "holds": 3
+              }
+            ],
             "type": "wood",
             "url": "https://www.metoliusclimbing.com/light-rail.html",
             "holds": 3
@@ -988,6 +1024,18 @@
               "y": 75,
               "z": 32
             },
+            "sides": [
+              {
+                "name": "Default",
+                "image": "hangboards/PROBLEMMOTION.svg",
+                "holds": 3
+              },
+              {
+                "name": "Rotated",
+                "image": "hangboards/PROBLEMMOTION-180.svg",
+                "holds": 3
+              }
+            ],
             "type": "wood",
             "url": "https://www.problemsolver.rocks/shop/problemsolver-motion",
             "holds": 3
@@ -1317,6 +1365,18 @@
               "y": 76,
               "z": 76
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/TENSIONFLASHFRONT.svg",
+                "holds": 3
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/TENSIONFLASHBACK.svg",
+                "holds": 4
+              }
+            ],
             "type": "wood",
             "url": "https://tensionclimbing.com/product/flash-board-2/",
             "holds": 7
@@ -1405,6 +1465,28 @@
               "y": 307,
               "z": ""
             },
+            "sides": [
+              {
+                "name": "0°",
+                "image": "hangboards/TRANGOROCKPIVOT.svg",
+                "holds": 12
+              },
+              {
+                "name": "90°",
+                "image": "hangboards/TRANGOROCKPIVOT-90.svg",
+                "holds": 12
+              },
+              {
+                "name": "180°",
+                "image": "hangboards/TRANGOROCKPIVOT-180.svg",
+                "holds": 12
+              },
+              {
+                "name": "270°",
+                "image": "hangboards/TRANGOROCKPIVOT-270.svg",
+                "holds": 12
+              }
+            ],
             "type": "plastic",
             "url": "https://trango.com/products/rock-prodigy-training-center",
             "holds": 11
@@ -1431,6 +1513,28 @@
               "y": "",
               "z": ""
             },
+            "sides": [
+              {
+                "name": "0°",
+                "image": "hangboards/TRANGOROCKPIVOT.svg",
+                "holds": 12
+              },
+              {
+                "name": "90°",
+                "image": "hangboards/TRANGOROCKPIVOT-90.svg",
+                "holds": 12
+              },
+              {
+                "name": "180°",
+                "image": "hangboards/TRANGOROCKPIVOT-180.svg",
+                "holds": 12
+              },
+              {
+                "name": "270°",
+                "image": "hangboards/TRANGOROCKPIVOT-270.svg",
+                "holds": 12
+              }
+            ],
             "type": "plastic",
             "url": "https://trango.com/products/rock-prodigy-pivot",
             "holds": 12
@@ -1666,6 +1770,28 @@
               "y": 58,
               "z": 58
             },
+            "sides": [
+              {
+                "name": "22mm + 30mm + 22mm",
+                "image": "hangboards/CRIMPTONITEMOBUL.svg",
+                "holds": 2
+              },
+              {
+                "name": "10mm + 10mm",
+                "image": "hangboards/CRIMPTONITEMOBUL1.svg",
+                "holds": 1
+              },
+              {
+                "name": "18mm + 20mm + 18mm",
+                "image": "hangboards/CRIMPTONITEMOBUL2.svg",
+                "holds": 2
+              },
+              {
+                "name": "14mm + 14mm",
+                "image": "hangboards/CRIMPTONITEMOBUL3.svg",
+                "holds": 1
+              }
+            ],
             "type": "wood",
             "url": "https://crimptonite.com/product/mobile-hangboard-ul-ultra-light/",
             "holds": 1
@@ -1764,6 +1890,18 @@
               "y": 405,
               "z": 105
             },
+            "sides": [
+              {
+                "name": "",
+                "image": "hangboards/CAPTAIN180.svg",
+                "holds": 4
+              },
+              {
+                "name": "Warm-up (180°)",
+                "image": "hangboards/CAPTAIN180.svg",
+                "holds": 4
+              }
+            ],
             "type": "plastic",
             "url": "https://captainfingerfood.rocks/products/180-hangboard",
             "holds": 8
@@ -3236,6 +3374,18 @@
               "y": 65,
               "z": 65
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/OWLPORTABLE.svg",
+                "holds": 3
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/OWLPORTABLEBACK.svg",
+                "holds": 3
+              }
+            ],
             "type": "wood",
             "url": "https://owlclimb.com/index.php/en/prds-2/portable/",
             "holds": 3
@@ -3416,6 +3566,18 @@
               "y": "",
               "z": ""
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/AWESOMEWOODYSCLIFF.svg",
+                "holds": 4
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/AWESOMEWOODYSCLIFFBACK.svg",
+                "holds": 7
+              }
+            ],
             "type": "wood",
             "url": null,
             "holds": 4
@@ -3429,6 +3591,18 @@
               "y": "",
               "z": ""
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/AWESOMEWOODYSCLIFFMICRO.svg",
+                "holds": 2
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/AWESOMEWOODYSCLIFFMICROBACK.svg",
+                "holds": 5
+              }
+            ],
             "type": "wood",
             "url": "https://awesomewoodys.com/collections/cliffboards/products/cliff-board-micro",
             "holds": 2
@@ -3442,6 +3616,18 @@
               "y": "",
               "z": ""
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/AWESOMEWOODYSCLIFFMINI.svg",
+                "holds": 4
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/AWESOMEWOODYSCLIFFMINIBACK.svg",
+                "holds": 6
+              }
+            ],
             "type": "wood",
             "url": "https://awesomewoodys.com/collections/cliffboards/products/cliff-board-mini",
             "holds": 4
@@ -3455,6 +3641,18 @@
               "y": "",
               "z": ""
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/AWESOMEWOODYSCLIFFWIDE.svg",
+                "holds": 5
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/AWESOMEWOODYSCLIFFWIDEBACK.svg",
+                "holds": 9
+              }
+            ],
             "type": "wood",
             "url": "https://awesomewoodys.com/collections/cliffboards/products/wide-boy",
             "holds": 5
@@ -3863,6 +4061,18 @@
               "y": 100,
               "z": 30
             },
+            "sides": [
+              {
+                "name": "Easy",
+                "image": "hangboards/WORK1950POCKET-EASY.svg",
+                "holds": 3
+              },
+              {
+                "name": "Hard",
+                "image": "hangboards/WORK1950POCKET-HARD.svg",
+                "holds": 3
+              }
+            ],
             "type": "wood",
             "url": "https://workshop1950.ru/fingerbordy-ru/PocketMaster",
             "holds": 3
@@ -5119,6 +5329,28 @@
               "y": "",
               "z": ""
             },
+            "sides": [
+              {
+                "name": "Front (Default)",
+                "image": "hangboards/PUCILLDOMANI.svg",
+                "holds": 0
+              },
+              {
+                "name": "Back (Hard)",
+                "image": "hangboards/PUCILLDOMANI.svg",
+                "holds": 0
+              },
+              {
+                "name": "Bottom",
+                "image": "hangboards/PUCILLDOMANIBOTTOM.svg",
+                "holds": 0
+              },
+              {
+                "name": "Rotated",
+                "image": "hangboards/PUCILLDOMANIROTATED.svg",
+                "holds": 0
+              }
+            ],
             "type": "wood",
             "url": "https://pucseries.myshopify.com/products/il-domani",
             "holds": 1
@@ -5269,6 +5501,18 @@
               "y": 120,
               "z": 50
             },
+            "sides": [
+              {
+                "name": "Default",
+                "image": "hangboards/NECONSIGHT.svg",
+                "holds": 4
+              },
+              {
+                "name": "Rotated",
+                "image": "hangboards/NECONSIGHT-180.svg",
+                "holds": 4
+              }
+            ],
             "type": "wood",
             "url": null,
             "holds": 4
@@ -5475,6 +5719,28 @@
               "y": 150,
               "z": 28
             },
+            "sides": [
+              {
+                "name": "0°",
+                "image": "hangboards/SCALLYDAPPER.svg",
+                "holds": 6
+              },
+              {
+                "name": "180°",
+                "image": "hangboards/SCALLYDAPPER180.svg",
+                "holds": 6
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/SCALLYDAPPERBACK.svg",
+                "holds": 1
+              },
+              {
+                "name": "Back 180°",
+                "image": "hangboards/SCALLYDAPPERBACK180.svg",
+                "holds": 1
+              }
+            ],
             "type": "wood",
             "url": "https://www.scallywagsclimbing.com/product/dapper-board/",
             "holds": 8
@@ -5488,6 +5754,23 @@
               "y": 105,
               "z": 30
             },
+            "sides": [
+              {
+                "name": "0°",
+                "image": "hangboards/SCALLYSWANK.svg",
+                "holds": 3
+              },
+              {
+                "name": "180°",
+                "image": "hangboards/SCALLYSWANK180.svg",
+                "holds": 3
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/SCALLYSWANKBACK.svg",
+                "holds": 1
+              }
+            ],
             "type": "wood",
             "url": "https://www.scallywagsclimbing.com/product/swank-board/",
             "holds": 2
@@ -5951,6 +6234,18 @@
               "y": 55,
               "z": 30
             },
+            "sides": [
+              {
+                "name": "Default",
+                "image": "hangboards/IURAWARMUP.svg",
+                "holds": 2
+              },
+              {
+                "name": "Rotated",
+                "image": "hangboards/IURAWARMUP180.svg",
+                "holds": 2
+              }
+            ],
             "type": "wood",
             "url": "https://iura.pl/en/home/46-warm-up-hangboard.html",
             "holds": 2
@@ -6245,6 +6540,18 @@
               "y": 40,
               "z": 40
             },
+            "sides": [
+              {
+                "name": "Front",
+                "image": "hangboards/YYVERTICALBAGUETTE.svg",
+                "holds": 2
+              },
+              {
+                "name": "Back",
+                "image": "hangboards/YYVERTICALBAGUETTEBACK.svg",
+                "holds": 3
+              }
+            ],
             "type": "wood",
             "url": "https://www.yyvertical.com/collections/tous-les-produits/products/la-baguette-poutre-escalade",
             "holds": 2
@@ -6258,6 +6565,18 @@
               "y": 100,
               "z": 30
             },
+            "sides": [
+              {
+                "name": "Default",
+                "image": "hangboards/YYVERTICALTRAVEL.svg",
+                "holds": 3
+              },
+              {
+                "name": "Rotated",
+                "image": "hangboards/YYVERTICALTRAVELBACK.svg",
+                "holds": 2
+              }
+            ],
             "type": "wood",
             "url": "https://www.yyvertical.com/collections/tous-les-produits/products/la-travelboard-poutre-dentrainement",
             "holds": 3
@@ -6447,6 +6766,18 @@
               "y": 120,
               "z": 50
             },
+            "sides": [
+              {
+                "name": "Default",
+                "image": "hangboards/TWALLTBONE.svg",
+                "holds": 6
+              },
+              {
+                "name": "Rotated",
+                "image": "hangboards/TWALLTBONEHARD.svg",
+                "holds": 6
+              }
+            ],
             "type": "plastic",
             "url": "https://t-wall.com.pl/produkt/tw0101-chwytotablica-t-bone/",
             "holds": 6
@@ -7302,6 +7633,18 @@
               "y": 89,
               "z": 45
             },
+            "sides": [
+              {
+                "name": "Default",
+                "image": "hangboards/FRICTITIOUSEZ.svg",
+                "holds": 2
+              },
+              {
+                "name": "Rotated",
+                "image": "hangboards/FRICTITIOUSEZ-180.svg",
+                "holds": 3
+              }
+            ],
             "type": "wood",
             "url": "https://frictitiousclimbing.com/products/ez-board",
             "holds": 2
