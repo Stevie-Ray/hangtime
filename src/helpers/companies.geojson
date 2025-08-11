@@ -8625,7 +8625,7 @@
             "holds": 8
           },
           {
-            "name": "Curve / Finger Crux 2.0",
+            "name": "Curve",
             "id": 2,
             "image": "hangboards/CRUXCURVE.svg",
             "size": {
@@ -8636,6 +8636,19 @@
             "type": "wood",
             "url": "https://www.cruxagarras.com.br/produtos/curve/",
             "holds": 5
+          },
+          {
+            "name": "Finger Crux 2.0",
+            "id": 3,
+            "image": "hangboards/CRUXFINGER2.svg",
+            "size": {
+              "x": 640,
+              "y": 200,
+              "z": 60
+            },
+            "type": "wood",
+            "url": null,
+            "holds": 10
           }
         ],
         "marker-color": "#012E40",
