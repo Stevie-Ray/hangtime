@@ -9,7 +9,7 @@ import type {
   mySmartBoard,
   Progressor
 } from '@hangtime/grip-connect'
-import { massObject } from '@hangtime/grip-connect/dist/interfaces/callback.interface'
+import type { massObject } from '@hangtime/grip-connect/src/interfaces/callback.interface.js'
 
 export const useBluetoothStore = defineStore('bluetooth', () => {
   // bluetooth device
