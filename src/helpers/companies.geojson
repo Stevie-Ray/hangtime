@@ -8868,6 +8868,42 @@
         "type": "Point",
         "coordinates": [1.8602763, 41.7481117]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "4Climb",
+        "description": "",
+        "country": "BR",
+        "id": 135,
+        "url": "https://www.4climb.com.br/",
+        "socials": {
+          "facebook": "https://www.facebook.com/4climb",
+          "instagram": "https://www.instagram.com/4climb/"
+        },
+        "hangboards": [
+          {
+            "name": "ALL-IN",
+            "id": 0,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 700,
+              "y": 170,
+              "z": 60
+            },
+            "type": "wood",
+            "url": null,
+            "holds": 0
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-43.9300562, -19.898173]
+      }
     }
   ]
 }
