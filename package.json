@@ -21,7 +21,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.2.6",
     "@googlemaps/js-api-loader": "^1.16.10",
-    "@hangtime/grip-connect": "^0.8.7",
+    "@hangtime/grip-connect": "^0.9.0",
     "@mdi/js": "^7.4.47",
     "@unhead/vue": "^2.0.14",
     "@vueuse/components": "^13.6.0",
@@ -53,7 +53,7 @@
     "@types/geojson": "^7946.0.16",
     "@types/google.maps": "^3.58.1",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^20.19.10",
+    "@types/node": "^20.19.11",
     "@types/web-bluetooth": "^0.0.21",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/browser": "^3.2.1",

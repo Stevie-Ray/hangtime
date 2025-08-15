@@ -35,8 +35,7 @@ const emit = defineEmits(['start'])
 const devices = [
   {
     title: 'Climbro',
-    value: 'Climbro',
-    disabled: true
+    value: 'Climbro'
   },
   {
     title: 'Entralpi',
@@ -65,7 +64,13 @@ const devices = [
     value: 'WHC06'
   }
 ]
-const dropdown = ref(workout.value?.company === 1 ? 'Motherboard' : 'Progressor')
+const dropdown = ref(
+  workout.value?.company === 1
+    ? 'Motherboard'
+    : workout.value?.company === 136
+      ? 'Climbro'
+      : 'Progressor'
+)
 const dialog = ref(false)
 
 const setup = () => {

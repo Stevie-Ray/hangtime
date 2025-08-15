@@ -8885,7 +8885,7 @@
           {
             "name": "ALL-IN",
             "id": 0,
-            "image": "hangboards/NOTFOUND.svg",
+            "image": "hangboards/4CLIMBALLIN.svg",
             "size": {
               "x": 700,
               "y": 170,
@@ -8893,7 +8893,7 @@
             },
             "type": "wood",
             "url": null,
-            "holds": 0
+            "holds": 12
           }
         ],
         "marker-color": "#012E40",
@@ -8903,6 +8903,42 @@
       "geometry": {
         "type": "Point",
         "coordinates": [-43.9300562, -19.898173]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Climbro",
+        "description": "A highly efficient smart hangboard that blends science and technology to boost your climbing performance.",
+        "country": "",
+        "id": 136,
+        "url": "https://climbro.com/",
+        "socials": {
+          "facebook": "https://www.facebook.com/ClimbroBoards",
+          "instagram": "https://www.instagram.com/climbroboards/"
+        },
+        "hangboards": [
+          {
+            "name": "Climbro",
+            "id": 0,
+            "image": "hangboards/CLIMBRO.svg",
+            "size": {
+              "x": 650,
+              "y": 240,
+              "z": 120
+            },
+            "type": "wood",
+            "url": "https://climbro.com/",
+            "holds": 2
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.3302528, 42.6806146]
       }
     }
   ]
