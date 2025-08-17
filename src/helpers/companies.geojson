@@ -8894,6 +8894,31 @@
             "type": "wood",
             "url": null,
             "holds": 12
+          },
+          {
+            "name": "BigFish",
+            "id": 1,
+            "image": "hangboards/4CLIMBBIGFISH.svg",
+            "size": {
+              "x": 197,
+              "y": 138,
+              "z": 40
+            },
+            "sides": [
+              {
+                "name": "Easy",
+                "image": "hangboards/4CLIMBBIGFISH.svg",
+                "holds": 13
+              },
+              {
+                "name": "Hard",
+                "image": "hangboards/4CLIMBBIGFISHHARD.svg",
+                "holds": 13
+              }
+            ],
+            "type": "wood",
+            "url": null,
+            "holds": 0
           }
         ],
         "marker-color": "#012E40",

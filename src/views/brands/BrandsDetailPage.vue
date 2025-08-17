@@ -129,31 +129,29 @@ useHead({
                 {{ getCompany.name }}
               </v-card-subtitle>
               <v-card-actions>
-                <template v-if="!user || hangboard.url">
-                  <v-btn color="text" disabled v-if="hangboard.size">
-                    <div class="text-caption">
-                      <span v-if="hangboard.size.x"> {{ hangboard.size.x }}mm </span>
-                      <span v-if="hangboard.size.y">
-                        &nbsp;x
-                        {{ hangboard.size.y }}mm
-                      </span>
-                      <span v-if="hangboard.size.z">
-                        &nbsp;x
-                        {{ hangboard.size.z }}mm
-                      </span>
-                    </div>
-                  </v-btn>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    size="small"
-                    v-if="hangboard.url"
-                    color="text"
-                    icon="$openInNew"
-                    :href="hangboard.url"
-                    target="_blank"
-                  >
-                  </v-btn>
-                </template>
+                <v-btn color="text" disabled v-if="hangboard.size">
+                  <div class="text-caption">
+                    <span v-if="hangboard.size.x"> {{ hangboard.size.x }}mm </span>
+                    <span v-if="hangboard.size.y">
+                      &nbsp;x
+                      {{ hangboard.size.y }}mm
+                    </span>
+                    <span v-if="hangboard.size.z">
+                      &nbsp;x
+                      {{ hangboard.size.z }}mm
+                    </span>
+                  </div>
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn
+                  size="small"
+                  v-if="hangboard.url"
+                  color="text"
+                  icon="$openInNew"
+                  :href="hangboard.url"
+                  target="_blank"
+                >
+                </v-btn>
               </v-card-actions>
             </v-card>
             <!-- company map -->

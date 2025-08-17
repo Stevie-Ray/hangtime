@@ -35,7 +35,8 @@ const emit = defineEmits(['start'])
 const devices = [
   {
     title: 'Climbro',
-    value: 'Climbro'
+    value: 'Climbro',
+    disabled: workout.value?.company !== 136
   },
   {
     title: 'Entralpi',
