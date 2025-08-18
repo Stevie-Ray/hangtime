@@ -30,7 +30,8 @@ TypeScript Usage
 
 Syntax and Formatting
 
-- Use the "function" keyword for pure functions to benefit from hoisting and clarity.
+- Use the "function" keyword for exported functions, composables, and complex utility functions to benefit from hoisting and clarity.
+- Use arrow functions for component methods, event handlers, and simple utility functions.
 - Always use the Vue Composition API script setup style.
 - Use proper JSDoc comments for classes and complex functions.
 
@@ -53,9 +54,17 @@ Performance Optimization
 Database and State Management
 
 - Use Pinia for global state management.
-- Implement proper Firebase integration with GenericDB base class.
+- Use GenericDB base class for all Firebase database operations.
+- Implement proper offline/online synchronization with Firebase.
+- Follow Firebase security best practices.
 - Use composables for reusable logic (useBluetooth, usePlayBilling).
 - Follow proper error handling patterns for async operations.
+
+Testing and Documentation
+
+- Use Storybook for component documentation and testing
+- Write unit tests with Vitest for composables and utilities
+- Use Playwright for E2E testing of critical user flows
 
 Key Conventions
 
@@ -66,6 +75,11 @@ Key Conventions
 - Follow Vue 3 Composition API best practices.
 - Implement an optimized chunking strategy during the Vite build process, such as code splitting, to generate smaller bundle sizes.
 
-Key Conventions
+Used libraries
 
-- Optimize Web Vitals (LCP, CLS, FID) using tools like Lighthouse or WebPageTest.
+- Use @hangtime/grip-connect for Bluetooth device integration
+- Implement Google Maps integration with @googlemaps/js-api-loader
+- Use IRCRA for climbing grade calculations and display
+- Implement analytics tracking with vue-gtag
+- Use @unhead/vue for dynamic head management
+- Leverage vuedraggable for drag-and-drop functionality
