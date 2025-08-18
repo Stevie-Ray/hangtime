@@ -4,19 +4,18 @@ import {
   getDocs,
   query,
   where,
-  WhereFilterOp,
   orderBy,
   limit,
   startAfter,
   Firestore,
   QueryConstraint,
-  OrderByDirection,
   QueryDocumentSnapshot,
   FieldPath
 } from 'firebase/firestore/lite'
+import type { OrderByDirection, WhereFilterOp } from 'firebase/firestore/lite'
 import firebaseApp from '@/plugins/firebase'
 import GenericDB from '@/plugins/firebase/generic-db'
-import { IWorkout } from '@/interfaces/workout.interface'
+import type { IWorkout } from '@/interfaces/workout.interface'
 
 const db: Firestore = getFirestore(firebaseApp)
 

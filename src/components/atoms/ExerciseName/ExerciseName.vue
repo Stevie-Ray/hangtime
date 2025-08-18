@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useExercises, useGrip, useGripPosition } from '@/helpers'
-import { IExercise } from '@/interfaces/workout.interface'
+import type { IExercise } from '@/interfaces/workout.interface'
 
 const grip = useGrip()
 const gripPosition = useGripPosition()

@@ -12,7 +12,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import manifest from './manifest.json' assert { type: 'json' }
 const manifestTyped = manifest as Partial<ManifestOptions>
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue({

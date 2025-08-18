@@ -14,7 +14,7 @@ import NotificationBell from '@/components/molecules/NotificationBell/Notificati
 import { useActivitiesStore } from '@/stores/activities.store'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 
-import { IActivity } from '@/interfaces/activity.interface'
+import type { IActivity } from '@/interfaces/activity.interface'
 import { Levels } from '@/enums/levels'
 
 const { activities } = storeToRefs(useActivitiesStore())

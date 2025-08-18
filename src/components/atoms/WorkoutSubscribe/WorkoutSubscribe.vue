@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useWorkoutsStore } from '@/stores/workouts.store'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { useAppStore } from '@/stores/app.store'
-import { IWorkout } from '@/interfaces/workout.interface'
+import type { IWorkout } from '@/interfaces/workout.interface'
 
 const { updateWorkout } = useWorkoutsStore()
 

@@ -1,10 +1,10 @@
 import { defineStore, storeToRefs } from 'pinia'
-import { ref, Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import UserActivitiesDB from '@/plugins/firebase/user-activities-db'
 import { useAuthenticationStore } from '@/stores/authentication.store'
-import { IActivity } from '@/interfaces/activity.interface'
+import type { IActivity } from '@/interfaces/activity.interface'
 import { Activity } from '@/models/activity.model'
-import { IWorkout } from '@/interfaces/workout.interface'
+import type { IWorkout } from '@/interfaces/workout.interface'
 
 export const useActivitiesStore = defineStore('activities', () => {
   const activities: Ref<IActivity[]> = ref([])

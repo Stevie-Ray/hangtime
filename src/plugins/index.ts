@@ -11,7 +11,7 @@ import i18n from '@/plugins/i18n'
 import pinia from '@/plugins/pinia'
 import vuetify from '@/plugins/vuetify'
 import router from '@/router'
-import { App } from 'vue'
+import type { App } from 'vue'
 
 const gtag = createGtag({
   tagId: 'G-D2DR5GPWS3',

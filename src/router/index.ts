@@ -1,10 +1,5 @@
-import {
-  createRouter,
-  createWebHistory,
-  RouteRecordRaw,
-  RouteLocationNormalized,
-  NavigationGuardNext
-} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw, RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 

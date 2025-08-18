@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getMessaging, onMessage, NotificationPayload } from 'firebase/messaging'
+import { getMessaging, onMessage, type NotificationPayload } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
 import { useFirebaseCloudMessaging } from '@/composables/useFirebaseCloudMessaging'
 

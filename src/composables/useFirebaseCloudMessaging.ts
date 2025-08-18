@@ -1,7 +1,7 @@
 import { storeToRefs } from 'pinia'
 import { ref, onMounted } from 'vue'
 import { usePermission, useSupported } from '@vueuse/core'
-import { getMessaging, getToken, deleteToken, NotificationPayload } from 'firebase/messaging'
+import { getMessaging, getToken, deleteToken, type NotificationPayload } from 'firebase/messaging'
 import firebaseApp from '@/plugins/firebase'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 

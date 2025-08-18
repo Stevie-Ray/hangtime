@@ -4,7 +4,7 @@ import { event } from 'vue-gtag'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/app.store'
 import { useUserStore } from '@/stores/user.store'
-import { IWorkout } from '@/interfaces/workout.interface'
+import type { IWorkout } from '@/interfaces/workout.interface'
 
 const router = useRouter()
 

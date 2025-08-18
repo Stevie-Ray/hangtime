@@ -1,9 +1,9 @@
-import { ref, Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import router from '@/router'
 import { loadLanguageAsync } from '@/plugins/i18n'
-import { User as FirebaseUser } from 'firebase/auth'
-import { FirebaseError } from 'firebase/app'
+import type { User as FirebaseUser } from 'firebase/auth'
+import type { FirebaseError } from 'firebase/app'
 import { User } from '@/models/user.model'
 
 export const useAuthenticationStore = defineStore('authentication', () => {

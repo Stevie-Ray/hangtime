@@ -1,4 +1,4 @@
-import { IWorkout } from '@/interfaces/workout.interface'
+import type { IWorkout } from '@/interfaces/workout.interface'
 import GenericDB from './generic-db'
 
 export default class UserWorkoutsDB extends GenericDB<IWorkout> {

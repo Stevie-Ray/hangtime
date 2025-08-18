@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import urlParser from 'js-video-url-parser'
-import { ref, Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { time, useRandomImage } from '@/helpers'
 import { useUserStore } from '@/stores/user.store'
 import ExerciseName from '@/components/atoms/ExerciseName/ExerciseName.vue'
-import { IWorkout } from '@/interfaces/workout.interface'
+import type { IWorkout } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 

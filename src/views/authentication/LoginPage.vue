@@ -23,7 +23,7 @@ import { useAppStore } from '@/stores/app.store'
 import { useUserStore } from '@/stores/user.store'
 import imgLogo from '@/assets/logo.svg'
 import { VForm } from 'vuetify/components'
-import { SubmitEventPromise } from 'vuetify'
+import type { SubmitEventPromise } from 'vuetify'
 
 const { t } = useI18n()
 

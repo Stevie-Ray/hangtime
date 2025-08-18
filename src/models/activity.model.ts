@@ -1,7 +1,7 @@
-import { IActivity } from '@/interfaces/activity.interface'
+import type { IActivity } from '@/interfaces/activity.interface'
 import { BaseModel } from './base.model'
 import { useAuthenticationStore } from '@/stores/authentication.store'
-import { IWorkout } from '@/interfaces/workout.interface'
+import type { IWorkout } from '@/interfaces/workout.interface'
 
 /**
  * Activity model

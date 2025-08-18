@@ -1,5 +1,5 @@
 import { Levels } from '@/enums/levels'
-import { IUser } from './user.interface'
+import type { IUser } from './user.interface'
 
 /**
  * Represents an exercise in a hangboard workout.

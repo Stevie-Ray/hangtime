@@ -5,7 +5,7 @@ import ExerciseHand from '@/components/atoms/ExerciseHand/ExerciseHand.vue'
 import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import ExerciseAbout from '@/components/molecules/ExerciseAbout/ExerciseAbout.vue'
 import { time } from '@/helpers'
-import { IExercise } from '@/interfaces/workout.interface'
+import type { IExercise } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 

@@ -17,13 +17,11 @@ import {
   Firestore,
   CollectionReference,
   DocumentReference,
-  WhereFilterOp,
-  OrderByDirection,
   DocumentSnapshot,
   startAfter,
-  QuerySnapshot,
-  DocumentData
+  QuerySnapshot
 } from 'firebase/firestore/lite'
+import type { WhereFilterOp, OrderByDirection, DocumentData } from 'firebase/firestore/lite'
 import { toRaw, isRef, isReactive, isProxy, ref } from 'vue'
 import firebaseApp from '@/plugins/firebase'
 

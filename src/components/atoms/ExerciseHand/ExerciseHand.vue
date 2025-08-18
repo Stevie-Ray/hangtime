@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import imgIconHang from '@/assets/icons/hand.svg'
-import { IExercise } from '@/interfaces/workout.interface'
+import type { IExercise } from '@/interfaces/workout.interface'
 
 const { t } = useI18n()
 

@@ -1,13 +1,13 @@
 import { ref, computed, reactive } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
-import { FieldPath, WhereFilterOp } from 'firebase/firestore/lite'
+import { FieldPath, type WhereFilterOp } from 'firebase/firestore/lite'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { useUserStore } from '@/stores/user.store'
 import { CommunityWorkoutsDB, UserSubscribedDB } from '@/plugins/firebase/users-workouts-db'
 import UserWorkoutsDB from '@/plugins/firebase/user-workouts-db'
 import UsersDB from '@/plugins/firebase/users-db'
-import { Leaderboard, IWorkout } from '@/interfaces/workout.interface'
-import { IUser } from '@/interfaces/user.interface'
+import type { Leaderboard, IWorkout } from '@/interfaces/workout.interface'
+import type { IUser } from '@/interfaces/user.interface'
 import { Workout } from '@/models/workout.model'
 
 const userSubscribedDB = new UserSubscribedDB()
