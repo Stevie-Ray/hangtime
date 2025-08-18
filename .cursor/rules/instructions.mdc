@@ -62,9 +62,9 @@ Database and State Management
 
 Testing and Documentation
 
-- Use Storybook for component documentation and testing
-- Write unit tests with Vitest for composables and utilities
-- Use Playwright for E2E testing of critical user flows
+- Use Storybook for component documentation and testing.
+- Write unit tests with Vitest for composables and utilities.
+- Use Playwright for E2E testing of critical user flows.
 
 Key Conventions
 
@@ -77,9 +77,9 @@ Key Conventions
 
 Used libraries
 
-- Use @hangtime/grip-connect for Bluetooth device integration
-- Implement Google Maps integration with @googlemaps/js-api-loader
-- Use IRCRA for climbing grade calculations and display
-- Implement analytics tracking with vue-gtag
-- Use @unhead/vue for dynamic head management
-- Leverage vuedraggable for drag-and-drop functionality
+- Use @hangtime/grip-connect for Bluetooth device integration.
+- Implement Google Maps integration with @googlemaps/js-api-loader.
+- Use IRCRA for climbing grade calculations and display.
+- Implement analytics tracking with vue-gtag.
+- Use @unhead/vue for dynamic head management.
+- Leverage vuedraggable for drag-and-drop functionality.
