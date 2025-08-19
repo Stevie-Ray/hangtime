@@ -8965,6 +8965,42 @@
         "type": "Point",
         "coordinates": [23.3302528, 42.6806146]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sapo Agarras",
+        "description": "Largest manufacturer of climbing holds, climbing walls, and modules in Brazil.",
+        "country": "BR",
+        "id": 137,
+        "url": "https://www.sapoagarras.com.br/",
+        "socials": {
+          "facebook": "https://www.facebook.com/sapoagarras",
+          "instagram": "https://www.instagram.com/sapo_agarras/"
+        },
+        "hangboards": [
+          {
+            "name": "Finger Tendon",
+            "id": 0,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 570,
+              "y": 190,
+              "z": 70
+            },
+            "type": "plastic",
+            "url": "https://www.sapoagarras.com.br/produtos/finger-tendon/",
+            "holds": 0
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-48.774679, -28.4824764]
+      }
     }
   ]
 }
