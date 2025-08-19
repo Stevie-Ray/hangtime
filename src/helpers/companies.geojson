@@ -9001,6 +9001,107 @@
         "type": "Point",
         "coordinates": [-48.774679, -28.4824764]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Edge Climbing",
+        "description": "Edge climbing specialize in designing training gear to help you climb stronger",
+        "country": "ZA",
+        "id": 138,
+        "url": "https://www.edgeclimbing.co.za/",
+        "socials": {
+          "facebook": "https://www.facebook.com/EDGEClimbing",
+          "instagram": "https://www.instagram.com/edge_climbing/"
+        },
+        "hangboards": [
+          {
+            "name": "Edge+",
+            "id": 0,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://www.edgeclimbing.co.za/product/edge/",
+            "holds": 0
+          },
+          {
+            "name": "Edge Pocket",
+            "id": 1,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://www.edgeclimbing.co.za/product/edge-pocket/",
+            "holds": 0
+          },
+          {
+            "name": "Edge Nomad",
+            "id": 2,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://www.edgeclimbing.co.za/product/edge-nomad/",
+            "holds": 0
+          },
+          {
+            "name": "Edge Travel",
+            "id": 3,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://www.edgeclimbing.co.za/product/edge-travel/",
+            "holds": 0
+          },
+          {
+            "name": "Edge Summit",
+            "id": 4,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://www.edgeclimbing.co.za/product/edge-summit/",
+            "holds": 0
+          },
+          {
+            "name": "Edge Unleashed",
+            "id": 5,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": "",
+              "y": "",
+              "z": ""
+            },
+            "type": "wood",
+            "url": "https://www.edgeclimbing.co.za/product/edge-unleashed/",
+            "holds": 0
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.4387161, -33.9079804]
+      }
     }
   ]
 }
