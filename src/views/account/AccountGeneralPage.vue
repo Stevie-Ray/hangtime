@@ -11,6 +11,7 @@ import { useAppStore } from '@/stores/app.store'
 import { loadLanguageAsync } from '@/plugins/i18n'
 import { Theme } from '@/enums/theme'
 import { Unit } from '@/enums/unit'
+import countries from '@/helpers/countries'
 
 const scale = new IRCRA().scale()
 
@@ -27,47 +28,58 @@ const { updateUser } = useAuthenticationStore()
 const language = [
   {
     title: 'Čeština',
-    value: 'cs-CZ'
+    value: 'cs-CZ',
+    country: 'CZ'
   },
   {
     title: 'Deutsch',
-    value: 'de-DE'
+    value: 'de-DE',
+    country: 'DE'
   },
   {
     title: 'English',
-    value: 'en-US'
+    value: 'en-US',
+    country: 'US'
   },
   {
     title: 'Español',
-    value: 'es-ES'
+    value: 'es-ES',
+    country: 'ES'
   },
   {
     title: 'Français',
-    value: 'fr-FR'
+    value: 'fr-FR',
+    country: 'FR'
   },
   {
     title: 'Italiano',
-    value: 'it-IT'
+    value: 'it-IT',
+    country: 'IT'
   },
   {
     title: '日本語',
-    value: 'ja-JP'
+    value: 'ja-JP',
+    country: 'JP'
   },
   {
     title: 'Nederlands',
-    value: 'nl-NL'
+    value: 'nl-NL',
+    country: 'NL'
   },
   {
     title: 'Polski',
-    value: 'pl-PL'
+    value: 'pl-PL',
+    country: 'PL'
   },
   {
     title: 'Português',
-    value: 'pt-PT'
+    value: 'pt-PT',
+    country: 'PT'
   },
   {
     title: '简体中文',
-    value: 'zh-CN'
+    value: 'zh-CN',
+    country: 'CN'
   }
 ]
 
@@ -166,7 +178,22 @@ useHead({
                   :item-props="true"
                   :label="t('Language')"
                   @update:modelValue="updateUser"
-                ></v-select>
+                >
+                  <template #item="{ item, props }">
+                    <v-list-item v-bind="props">
+                      <template #title>
+                        <span>
+                          {{
+                            item.raw.country
+                              ? countries.find((country) => country.alpha2 === item.raw.country)
+                                  ?.emoji
+                              : ''
+                          }}&nbsp;{{ item.title }}</span
+                        >
+                      </template>
+                    </v-list-item>
+                  </template>
+                </v-select>
               </v-list-item>
 
               <v-list-item>
