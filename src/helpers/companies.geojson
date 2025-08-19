@@ -8982,7 +8982,7 @@
           {
             "name": "Finger Tendon",
             "id": 0,
-            "image": "hangboards/NOTFOUND.svg",
+            "image": "hangboards/SAPOTENDON.svg",
             "size": {
               "x": 570,
               "y": 190,
@@ -8990,7 +8990,7 @@
             },
             "type": "plastic",
             "url": "https://www.sapoagarras.com.br/produtos/finger-tendon/",
-            "holds": 0
+            "holds": 9
           }
         ],
         "marker-color": "#012E40",
