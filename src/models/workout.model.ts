@@ -88,7 +88,7 @@ export class Workout extends BaseModel implements IWorkout {
    * @param index
    */
   removeExercise(index: number) {
-    if (this.exercises[index].time) {
+    if (this.exercises[index]?.time) {
       this.time -= this.exercises[index].time
     }
     this.exercises.splice(index, 1)
@@ -99,11 +99,11 @@ export class Workout extends BaseModel implements IWorkout {
    * @param index
    */
   copyExercise(index: number) {
-    if (this.exercises[index].time) {
+    if (this.exercises[index]?.time) {
       this.time += this.exercises[index].time
     }
     // if the first exercise is removed, add a pause of 10 seconds to the new exercise
-    if (index === 0) {
+    if (index === 0 && this.exercises[index]) {
       this.exercises[index].pause = 10
     }
     this.exercises.splice(index, 0, JSON.parse(JSON.stringify(this.exercises[index])))

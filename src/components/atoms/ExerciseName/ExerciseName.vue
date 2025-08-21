@@ -20,24 +20,36 @@ const { hideRepeat = false } = defineProps<{
       {{ exercise.repeat + 1 }}x
     </span>
     <span v-if="exercise.pullups > 1 && !exercise.max"> {{ exercise.pullups + ' ' }}</span>
-    <span v-if="exercise.gripPosition !== undefined && exercise.gripPosition !== null">
-      {{ gripPosition[exercise.gripPosition].name + ' ' }}
+    <span
+      v-if="
+        exercise.gripPosition !== undefined &&
+        exercise.gripPosition !== null &&
+        gripPosition[exercise.gripPosition]
+      "
+    >
+      {{ gripPosition[exercise.gripPosition]?.name + ' ' }}
     </span>
     <span v-if="exercise.left === null || exercise.right === null">One-Arm </span>
     <span v-if="exercise.exercise === 0">
-      <span v-if="exercise.grip !== undefined">
-        {{ grip[exercise.grip].name }}
+      <span v-if="exercise.grip !== undefined && grip[exercise.grip]">
+        {{ grip[exercise.grip]?.name }}
       </span>
       <!-- fallback-->
-      <span v-else-if="grip[exercise.exercise] !== null">{{ grip[exercise.exercise].name }}</span>
+      <span v-else-if="grip[exercise.exercise] && grip[exercise.exercise] !== null">{{
+        grip[exercise.exercise]?.name
+      }}</span>
     </span>
     <span v-else-if="exercise.grip !== 0">
-      <span v-if="exercise.grip !== undefined">{{ grip[exercise.grip].short + ' ' }}</span>
+      <span v-if="exercise.grip !== undefined && grip[exercise.grip]">{{
+        grip[exercise.grip]?.short + ' '
+      }}</span>
       <!-- fallback-->
-      <span v-else-if="grip[exercise.exercise]">{{ grip[exercise.exercise].name }}</span>
+      <span v-else-if="grip[exercise.exercise] && grip[exercise.exercise]">{{
+        grip[exercise.exercise]?.name
+      }}</span>
     </span>
     <span v-if="exercise.pullups > 0 && exercise.exercise > 0">
-      {{ exercises[exercise.exercise - 1].name }}
+      {{ exercises[exercise.exercise - 1]?.name }}
     </span>
     <span
       v-if="

@@ -49,7 +49,7 @@ export function usePlayBilling() {
    */
   function getChromeVersion(): number | false {
     const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)
-    return raw ? parseInt(raw[2], 10) : false
+    return raw && raw[2] ? parseInt(raw[2], 10) : false
   }
 
   /**
@@ -128,14 +128,16 @@ export function usePlayBilling() {
       }
       log(JSON.stringify(details, null, 2))
 
-      item = details[0]
-      const { value, currency } = item.price
+      item = details[0] || null
+      if (item) {
+        const { value, currency } = item.price
 
-      price.value = new Intl.NumberFormat(navigator.language, {
-        style: 'currency',
-        currency
-      }).format(Number(value))
-      return true
+        price.value = new Intl.NumberFormat(navigator.language, {
+          style: 'currency',
+          currency
+        }).format(Number(value))
+        return true
+      }
     } catch (error) {
       if (error instanceof Error) {
         log(error.message)

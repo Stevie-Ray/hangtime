@@ -88,8 +88,8 @@ const handleImport = async () => {
             const mappedWorkout: Partial<Workout> = {
               name: workout.title,
               description: workout.description,
-              hangboard: companies[key].hangboard,
-              company: companies[key].company,
+              hangboard: companies[key]?.hangboard,
+              company: companies[key]?.company,
               exercises: workout.exercises?.map((exercise: IExercise10A) => ({
                 exercise: 0, // We can't map the name
                 grip: 0, // We can't map the grip

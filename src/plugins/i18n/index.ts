@@ -35,7 +35,11 @@ export async function loadLanguageAsync(locale: string) {
   const modules = import.meta.glob('@/i18n/*.json')
   const loadLanguage = async (path: string) => {
     try {
-      const messages = (await modules[path]()) as { default: Record<string, string> }
+      const module = modules[path]
+      if (!module) {
+        throw new Error(`Module not found for path: ${path}`)
+      }
+      const messages = (await module()) as { default: Record<string, string> }
       i18n.global.setLocaleMessage(locale, messages.default)
       loadedLanguages.push(locale)
       return setI18nLanguage(locale)
@@ -54,7 +58,7 @@ export async function loadLanguageAsync(locale: string) {
   }
 
   // Load the first matching language file
-  return loadLanguage(matchingPaths[0])
+  return loadLanguage(matchingPaths[0] || '')
 }
 
 export default i18n

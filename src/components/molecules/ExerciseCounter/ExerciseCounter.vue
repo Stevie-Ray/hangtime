@@ -25,22 +25,24 @@ const {
 
 const count = defineModel<number>({ required: true, default: 0 })
 
-const steps = [1, 5, 15, 60, 180, 300]
+const [STEP_SLOWEST, STEP_SLOWER, STEP_SLOW, STEP_FAST, STEP_FASTER, STEP_FASTEST] = [
+  1, 5, 15, 60, 180, 300
+]
 
 const step = computed(() => {
-  if (count.value < steps[2] || !timer) {
-    return steps[0]
+  if (count.value < STEP_SLOW || !timer) {
+    return STEP_SLOWEST
   }
-  if (count.value >= steps[2] && count.value < steps[3] && timer) {
-    return steps[1]
+  if (count.value >= STEP_SLOW && count.value < STEP_FAST && timer) {
+    return STEP_SLOWER
   }
-  if (count.value >= steps[3] && count.value < steps[4] && timer) {
-    return steps[2]
+  if (count.value >= STEP_FAST && count.value < STEP_FASTER && timer) {
+    return STEP_SLOW
   }
-  if (count.value >= steps[4] && count.value <= steps[5] && timer) {
-    return steps[3]
+  if (count.value >= STEP_FASTER && count.value <= STEP_FASTEST && timer) {
+    return STEP_FAST
   }
-  return steps[0]
+  return STEP_SLOWEST
 })
 </script>
 

@@ -165,7 +165,7 @@ const parseVideo = (video: string) => {
                   </div>
                   <div class="v-list-item-subtitle">
                     <span v-if="workout.exercises[index + 1]">
-                      {{ t('Pause') }}: {{ time(workout.exercises[index + 1].pause) }}
+                      {{ t('Pause') }}: {{ time(workout.exercises[index + 1]?.pause) }}
                     </span>
                     <span v-else>
                       {{ t('Done') }}

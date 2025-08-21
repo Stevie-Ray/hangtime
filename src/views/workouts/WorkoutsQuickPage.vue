@@ -36,24 +36,35 @@ useHead({
       <workout-timer v-if="workout?.exercises?.length" v-model="workout" quick>
         <template #default>
           <exercise-counter
+            v-if="workout.exercises[0]"
             title="Hang"
             v-model="workout.exercises[0].hold"
             :min="3"
             :max="180"
             timer
-            @update:modelValue="(value) => (workout.exercises[0].hold = value)"
+            @update:modelValue="
+              (value) => {
+                if (workout.exercises[0]) workout.exercises[0].hold = value
+              }
+            "
           >
           </exercise-counter>
 
           <exercise-counter
+            v-if="workout.exercises[0]"
             title="Repeat"
             v-model="workout.exercises[0].repeat"
             :min="0"
             :max="24"
-            @update:modelValue="(value) => (workout.exercises[0].repeat = value)"
+            @update:modelValue="
+              (value) => {
+                if (workout.exercises[0]) workout.exercises[0].repeat = value
+              }
+            "
           >
             <template #default>
               <input
+                v-if="workout.exercises[0]"
                 size="1"
                 type="text"
                 readonly
@@ -65,13 +76,17 @@ useHead({
           </exercise-counter>
 
           <exercise-counter
-            v-if="workout.exercises[0].repeat > 0"
+            v-if="workout.exercises[0] && workout.exercises[0].repeat > 0"
             title="Rest"
             v-model="workout.exercises[0].rest"
             :min="3"
             timer
             :disabled="workout.exercises[0].repeat === 0"
-            @update:modelValue="(value) => (workout.exercises[0].rest = value)"
+            @update:modelValue="
+              (value) => {
+                if (workout.exercises[0]) workout.exercises[0].rest = value
+              }
+            "
           >
           </exercise-counter>
         </template>

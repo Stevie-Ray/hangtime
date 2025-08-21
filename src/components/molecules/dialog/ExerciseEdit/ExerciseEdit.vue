@@ -34,11 +34,11 @@ const exercises = computed(() => {
 })
 
 const exerciseFilter = computed(() => {
-  if (exercise.value && grip[exercise.value.grip].disabledExercises) {
+  if (exercise.value && grip[exercise.value.grip]?.disabledExercises) {
     return exercises.value.map((obj) => ({
       ...obj,
       disabled: exercise.value
-        ? grip[exercise.value.grip].disabledExercises?.includes(obj.id as Exercises)
+        ? grip[exercise.value.grip]?.disabledExercises?.includes(obj.id as Exercises)
         : null
     }))
   }
@@ -215,7 +215,7 @@ const rules = {
                         clearable
                         @update:model-value="
                           (value) => {
-                            if (value === null) {
+                            if (value === null && exercise) {
                               exercise.exercise = 0
                               exercise.pullups = 1
                               exercise.max = false
@@ -298,7 +298,7 @@ const rules = {
                     v-if="exercise.exercise !== 0 && repType !== 'max'"
                     :disabled="exercise.exercise === 0"
                     :max="30"
-                    :title="`${exercises[exercise.exercise - 1].name}s`"
+                    :title="`${exercises[exercise.exercise - 1]?.name}s`"
                     v-model="exercise.pullups"
                     @update:model-value="(value) => (exercise ? (exercise.pullups = value) : null)"
                   >

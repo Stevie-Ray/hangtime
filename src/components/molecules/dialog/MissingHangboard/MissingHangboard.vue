@@ -21,8 +21,8 @@ const route = useRoute()
 const dialog = ref(true)
 
 const addHangboard = () => {
-  const company = parseInt(route.params.company.toString(), 10)
-  const hangboard = parseInt(route.params.hangboard.toString(), 10)
+  const company = parseInt(route.params.company?.toString() || '0', 10)
+  const hangboard = parseInt(route.params.hangboard?.toString() || '0', 10)
   event('add_hangboard', {
     hangboard: getHangboardNameByIds(company, hangboard)
   })

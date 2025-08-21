@@ -18,7 +18,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     if (firebaseAuthUser.isAnonymous) {
       providerData = firebaseAuthUser
     }
-    const { displayName, photoURL, email } = providerData
+    const { displayName, photoURL, email } = providerData || {}
     const { default: UsersDB } = await import('@/plugins/firebase/users-db')
     const usersDb = new UsersDB()
 

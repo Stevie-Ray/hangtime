@@ -124,7 +124,7 @@ export const useUserStore = defineStore('user', () => {
     if (!userHangboards || !userHangboards[selectedId]) return null
     return (
       company.hangboards.find(
-        (hangboard: Hangboard) => hangboard.id === userHangboards[selectedId].hangboard
+        (hangboard: Hangboard) => hangboard.id === userHangboards[selectedId]?.hangboard
       ) || null
     )
   })

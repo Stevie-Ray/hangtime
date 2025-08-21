@@ -144,7 +144,7 @@ export class Session extends BaseModel {
           }
           this.setClockForHold()
           // start bluetooth stream
-          stream((this.exercise.hold - 1) * 1000)
+          stream((this.exercise?.hold ? this.exercise.hold - 1 : 0) * 1000)
           // start when setup is done
           this.startWorkout()
         }
@@ -292,7 +292,7 @@ export class Session extends BaseModel {
         this.isSkippingRest = false
         this.setClockForHold()
         // start bluetooth stream
-        stream((this.exercise.hold - 1) * 1000)
+        stream((this.exercise?.hold ? this.exercise.hold - 1 : 0) * 1000)
         this.currentExerciseState = ExerciseState.HOLD
         this.exerciseHold()
         break
@@ -339,7 +339,7 @@ export class Session extends BaseModel {
         if (this.exercise && this.exercise.repeat > 0) {
           this.setClockForHold()
           // start bluetooth stream
-          stream((this.exercise.hold - 1) * 1000)
+          stream((this.exercise?.hold ? this.exercise.hold - 1 : 0) * 1000)
           this.currentExerciseState = ExerciseState.REPEAT
           this.exerciseHold()
           break
@@ -428,7 +428,7 @@ export class Session extends BaseModel {
 
       const utterance = new window.SpeechSynthesisUtterance()
       utterance.text = text
-      utterance.voice = voiceList[this.user.settings.voice]
+      utterance.voice = voiceList[this.user.settings.voice] || null
 
       try {
         window.speechSynthesis.speak(utterance)
@@ -498,15 +498,15 @@ export class Session extends BaseModel {
 
     if (this.currentExerciseState === ExerciseState.HOLD) {
       // check if exercise has to repeat
-      if (this.exercise?.repeat > 0) {
-        this.clock = this.exercise.rest - 1
+      if (this.exercise?.repeat && this.exercise.repeat > 0) {
+        this.clock = this.exercise.rest ? this.exercise.rest - 1 : 0
         this.currentExerciseState = ExerciseState.REST
         return
       }
     }
     if (this.currentExerciseState === ExerciseState.REPEAT) {
       if (this.exercise && this.currentExerciseStateRepeat !== this.exercise?.repeat) {
-        this.clock = this.exercise.rest - 1
+        this.clock = this.exercise.rest ? this.exercise.rest - 1 : 0
         this.currentExerciseState = ExerciseState.REST
         return
       }

@@ -55,7 +55,7 @@ onMounted(() => {
 
 // workout - remove
 const removeWorkout = () => {
-  removeUserWorkoutById(route.params.id.toString())
+  removeUserWorkoutById(route.params.id?.toString() || '')
   router.push('/workouts')
 }
 

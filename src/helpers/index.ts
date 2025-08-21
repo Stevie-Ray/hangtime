@@ -375,7 +375,8 @@ export function useRandomImage(dark: boolean = false) {
     ]
   }
 
-  return images[Math.floor(Math.random() * images.length)]
+  const randomIndex = Math.floor(Math.random() * images.length)
+  return images[randomIndex] || images[0] || ''
 }
 
 // export function sound(audio) {

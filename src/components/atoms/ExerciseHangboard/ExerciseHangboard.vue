@@ -22,7 +22,7 @@ const hangboardImage = computed(() => {
   const sides = getHangboard.value?.sides || []
   const rotateIndex = exercise.value?.rotate || 0
 
-  if (sides.length) {
+  if (sides.length && sides[rotateIndex]) {
     return `/${sides[rotateIndex].image}`
   }
 

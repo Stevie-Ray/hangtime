@@ -10,7 +10,7 @@ const route = useRoute()
 
 const { getWorkoutById } = useWorkoutsStore()
 
-const workout = computed(() => getWorkoutById(route.params.id))
+const workout = computed(() => getWorkoutById(route.params.id || ''))
 
 useHead({
   title: () => workout.value?.name ?? '',
