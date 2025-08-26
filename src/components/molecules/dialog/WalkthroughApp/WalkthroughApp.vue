@@ -207,6 +207,7 @@ const settingsGrade = computed({
                   :items="language"
                   :label="t('Language')"
                   :item-props="true"
+                  class="pt-2"
                 >
                   <template #item="{ item, props }">
                     <v-list-item v-bind="props">
@@ -252,7 +253,7 @@ const settingsGrade = computed({
               <v-card-title>
                 {{ t("What's your current grade?") }}
               </v-card-title>
-              <v-list two-line>
+              <v-list lines="two">
                 <v-list-item v-if="user">
                   <v-select
                     v-model="user!.settings.scale"
@@ -260,6 +261,7 @@ const settingsGrade = computed({
                     :label="t('Grading scale')"
                     item-title="name"
                     item-value="value"
+                    class="pt-2"
                   >
                     <template #prepend>
                       <v-icon color="primary lighten-1" icon="$chartGantt"> </v-icon>
@@ -273,6 +275,7 @@ const settingsGrade = computed({
                     :items="grades"
                     :label="t('Grade')"
                     item-value="ircra"
+                    class="pt-2"
                   >
                     <template #prepend>
                       <v-icon color="primary lighten-1" icon="$chartTimelineVariant"></v-icon>

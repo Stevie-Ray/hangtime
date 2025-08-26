@@ -157,11 +157,11 @@ useHead({
                   :disabled="!online"
                   :items="countries"
                   :label="t('Country')"
-                  class="mt-1 pt-0"
                   item-title="name"
                   item-value="alpha2"
                   return-object
                   @update:modelValue="updateUser"
+                  class="pt-2"
                 ></v-autocomplete>
               </v-list-item>
 
@@ -212,6 +212,7 @@ useHead({
                   item-value="ircra"
                   persistent-hint
                   @update:modelValue="updateUser"
+                  class="pt-2"
                 ></v-select>
               </v-list-item>
 
@@ -230,6 +231,7 @@ useHead({
                   counter="24"
                   required
                   @update:modelValue="updateUser"
+                  class="pt-2"
                 >
                 </v-text-field>
               </v-list-item>

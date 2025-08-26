@@ -162,6 +162,7 @@ useHead({
                   item-title="name"
                   item-value="value"
                   @update:modelValue="updateUser"
+                  class="pt-2"
                 ></v-select>
               </v-list-item>
 
@@ -178,6 +179,7 @@ useHead({
                   :item-props="true"
                   :label="t('Language')"
                   @update:modelValue="updateUser"
+                  class="pt-2"
                 >
                   <template #item="{ item, props }">
                     <v-list-item v-bind="props">
@@ -208,6 +210,7 @@ useHead({
                   :items="units"
                   :label="t('Weight system')"
                   @update:modelValue="updateUser"
+                  class="pt-2"
                 >
                 </v-select>
               </v-list-item>
@@ -224,6 +227,7 @@ useHead({
                   :items="themes"
                   :label="t('Theme')"
                   @update:modelValue="setTheme"
+                  class="pt-2"
                 >
                 </v-select>
               </v-list-item>

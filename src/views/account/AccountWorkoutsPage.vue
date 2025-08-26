@@ -85,7 +85,7 @@ useHead({
       <v-container>
         <v-row>
           <v-col cols="12">
-            <v-list two-line>
+            <v-list lines="two">
               <v-list-item>
                 <template #prepend>
                   <v-icon>$volumeHigh</v-icon>
@@ -103,6 +103,7 @@ useHead({
                     color="text"
                     :disabled="!online"
                     @change="updateUser"
+                    hide-details="auto"
                   ></v-checkbox>
                 </template>
               </v-list-item>
@@ -126,6 +127,7 @@ useHead({
                     color="text"
                     :disabled="!online"
                     @change="updateUser"
+                    hide-details="auto"
                   ></v-checkbox>
                 </template>
               </v-list-item>
@@ -146,6 +148,7 @@ useHead({
                   :label="t('Select voice')"
                   return-object
                   @update:modelValue="(item) => greet(item)"
+                  class="pt-2"
                 >
                 </v-select>
               </v-list-item>
@@ -167,6 +170,7 @@ useHead({
                     color="text"
                     :disabled="!online"
                     @change="updateUser"
+                    hide-details="auto"
                   ></v-checkbox>
                 </template>
               </v-list-item>

@@ -116,7 +116,7 @@ useHead({
               <v-card-title>
                 {{ t('Purchases') }}
               </v-card-title>
-              <v-list-item v-for="(purchase, index) in purchasesList" :key="index" two-line>
+              <v-list-item v-for="(purchase, index) in purchasesList" :key="index" lines="two">
                 <v-list-item-title>ItemId: {{ purchase.itemId }}</v-list-item-title>
                 <v-list-item-subtitle>
                   purchaseToken: {{ purchase.purchaseToken }}
