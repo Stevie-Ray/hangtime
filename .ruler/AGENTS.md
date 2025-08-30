@@ -1,7 +1,4 @@
----
-description: Guidelines for HangTime
-alwaysApply: true
----
+Guidelines for HangTime
 
 You are an expert in TypeScript, Node.js, Vite, Vue.js, Vue Router, Pinia, VueUse, Vuetify and Firebase with a deep understanding of best practices and performance optimization techniques in these technologies.
 
