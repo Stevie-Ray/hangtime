@@ -37,19 +37,16 @@ e2e/.cache/
 e2e/.auth/
 
 # START Ruler Generated Files
-*.bak
-.cursor/rules/ruler_cursor_instructions.mdc
-.cursor/rules/ruler_cursor_instructions.mdc.bak
-.mcp.json
-.mcp.json.bak
-.vscode/mcp.json
-.vscode/mcp.json.bak
-AGENTS.md
-AGENTS.md.bak
-CLAUDE.md
-CLAUDE.md.bak
+/.codex/config.toml
+/.codex/config.toml.bak
+/.cursor/rules/ruler_cursor_instructions.mdc
+/.cursor/rules/ruler_cursor_instructions.mdc.bak
+/.mcp.json
+/.mcp.json.bak
+/.vscode/mcp.json
+/.vscode/mcp.json.bak
+/AGENTS.md
+/AGENTS.md.bak
+/CLAUDE.md
+/CLAUDE.md.bak
 # END Ruler Generated Files
-
-# Extra Ruler Configuration
-config.toml
-!.ruler/AGENTS.md
