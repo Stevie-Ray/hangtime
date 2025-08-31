@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="579px" height="231px" viewBox="0 0 579 231" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>LATTICEMXEDGESWITCH</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="LATTICEMXEDGESWITCH" transform="translate(1, 1)" fill="#FFFFFF" stroke="#000000">
+            <path d="M578,52 L0,52 L0,32 C0,14.326888 14.326888,0 32,0 L578,0" id="h1"></path>
+            <path d="M578,229 L32,229 C14.326888,229 0,214.673112 0,197 L0,52 C0,34.326888 14.326888,20 32,20 L578,20" id="board"></path>
+            <path d="M578,182 L93,182 C75.326888,182 61,167.673112 61,150 L61,110 C61,92.326888 75.326888,78 93,78 L578,78" id="h2"></path>
+            <rect id="h3" x="348.5" y="58.5" width="108" height="150" rx="32"></rect>
+        </g>
+    </g>
+</svg>

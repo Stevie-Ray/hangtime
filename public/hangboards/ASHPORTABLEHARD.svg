@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="579px" height="259px" viewBox="0 0 579 259" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ASHPORTABLEHARD</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ASHPORTABLEHARD" transform="translate(290, 129.5) scale(1, -1) translate(-290, -129.5)translate(1, 1)" fill="#FFFFFF" stroke="#979797">
+            <path d="M578,257 C192.666667,257 0,257 0,257 L0,220 C0,184.653776 28.653776,156 64,156 L578,156" id="h1" transform="translate(289, 206.5) scale(1, -1) translate(-289, -206.5)"></path>
+            <path d="M578,220 L64,220 C28.653776,220 0,191.346224 0,156 L0,64 C0,28.653776 28.653776,0 64,0 L578,0" id="board"></path>
+            <rect id="h4" x="76.5" y="36.5" width="264" height="143" rx="48"></rect>
+            <rect id="h3" x="76.5" y="36.5" width="264" height="73" rx="36.5"></rect>
+            <path d="M578,184 L484.5,184 C459.923329,184 440,164.076671 440,139.5 C440,114.923329 459.923329,95 484.5,95 L578,95" id="h2"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="592px" height="241px" viewBox="0 0 592 241" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>MUTANTPOLARIS</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MUTANTPOLARIS" transform="translate(1, 1)" fill="#FFFFFF" stroke="#000000">
+            <path d="M591,63 C197,63 0,63 0,63 C0,63 0,0 32,0 L591,0" id="h1"></path>
+            <path d="M591,239 L32,239 C14.326888,239 2.84217094e-13,224.673112 2.84217094e-13,207 L2.84217094e-13,69 C2.84217094e-13,51.326888 14.326888,37 32,37 L591,37" id="board"></path>
+            <rect id="board" x="303.5" y="202.5" width="141" height="23" rx="11.5"></rect>
+            <rect id="board" x="81.5" y="202.5" width="141" height="23" rx="11.5"></rect>
+            <rect id="board" x="81.5" y="51.5" width="141" height="23" rx="11.5"></rect>
+            <rect id="board" x="303.5" y="51.5" width="141" height="23" rx="11.5"></rect>
+            <path d="M591,75 L532,75 C525.372583,75 520,69.627417 520,63 C520,56.372583 525.372583,51 532,51 L591,51" id="Path"></path>
+            <path d="M591,226 L532,226 C525.372583,226 520,220.627417 520,214 C520,207.372583 525.372583,202 532,202 L591,202" id="Path"></path>
+            <rect id="h2" x="56.5" y="93.5" width="492" height="90" rx="32"></rect>
+            <rect id="h3" x="56.5" y="93.5" width="263" height="90" rx="32"></rect>
+            <rect id="h4" x="56.5" y="93.5" width="157" height="90" rx="32"></rect>
+        </g>
+    </g>
+</svg>

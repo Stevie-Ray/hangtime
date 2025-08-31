@@ -39,6 +39,8 @@ e2e/.auth/
 # START Ruler Generated Files
 /.codex/config.toml
 /.codex/config.toml.bak
+/.cursor/mcp.json
+/.cursor/mcp.json.bak
 /.cursor/rules/ruler_cursor_instructions.mdc
 /.cursor/rules/ruler_cursor_instructions.mdc.bak
 /.mcp.json

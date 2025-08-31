@@ -599,34 +599,9 @@
               "y": "",
               "z": ""
             },
-            "sides": [
-              {
-                "name": "Front",
-                "image": "hangboards/YYVERTICALBAGUETTE.svg",
-                "holds": 2
-              },
-              {
-                "name": "Back",
-                "image": "hangboards/YYVERTICALBAGUETTEBACK.svg",
-                "holds": 3
-              }
-            ],
             "type": "wood",
             "url": "https://www.maxclimbing.com/products/one-finger-trainer",
             "holds": 6
-          },
-          {
-            "name": "La Baguette",
-            "id": 3,
-            "image": "hangboards/YYVERTICALBAGUETTE.svg",
-            "size": {
-              "x": 470,
-              "y": 40,
-              "z": 40
-            },
-            "type": "wood",
-            "url": "https://www.maxclimbing.com/products/one-finger-trainer",
-            "holds": 2
           }
         ],
         "marker-color": "#012E40",
@@ -5131,7 +5106,7 @@
               "z": 72
             },
             "type": "wood",
-            "url": "https://rustamclimbing.com/shop/hangboards/bombita/",
+            "url": "https://rustamclimbing.com/shop/training/hangboards/bombita/",
             "holds": 11
           },
           {
@@ -5144,7 +5119,7 @@
               "z": 72
             },
             "type": "wood",
-            "url": "https://rustamclimbing.com/shop/hangboards/pinchette/",
+            "url": "https://rustamclimbing.com/shop/training/hangboards/pinchette/",
             "holds": 4
           },
           {
@@ -5157,7 +5132,7 @@
               "z": 65
             },
             "type": "wood",
-            "url": "https://rustamclimbing.com/shop/hangboards/ultimate/",
+            "url": "https://rustamclimbing.com/shop/training/hangboards/ultimate/",
             "holds": 0
           },
           {
@@ -5170,7 +5145,7 @@
               "z": 43
             },
             "type": "wood",
-            "url": "https://rustamclimbing.com/shop/hangboards/moro/",
+            "url": "https://rustamclimbing.com/shop/training/hangboards/moro/",
             "holds": 0
           },
           {
@@ -5183,7 +5158,7 @@
               "z": 50
             },
             "type": "wood",
-            "url": "https://rustamclimbing.com/shop/hangboards/jokko/",
+            "url": "https://rustamclimbing.com/shop/training/hangboards/jokko/",
             "holds": 0
           },
           {
@@ -5196,8 +5171,21 @@
               "z": 32
             },
             "type": "wood",
-            "url": "https://rustamclimbing.com/shop/hangboards/playmate/",
+            "url": "https://rustamclimbing.com/shop/training/hangboards/playmate/",
             "holds": 2
+          },
+          {
+            "name": "Fusion",
+            "id": 6,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 690,
+              "y": 135,
+              "z": 56
+            },
+            "type": "plastic",
+            "url": "https://rustamclimbing.com/shop/training/hangboards/fusion/",
+            "holds": 0
           }
         ],
         "marker-color": "#012E40",
@@ -5295,6 +5283,31 @@
             },
             "type": "wood",
             "url": "https://latticetraining.com/product/lattice-triple-rung-wooden-hangboard/",
+            "holds": 2
+          },
+          {
+            "name": "MXEdge Switch",
+            "id": 2,
+            "image": "hangboards/LATTICEMXEDGESWITCH.svg",
+            "size": {
+              "x": 480,
+              "y": 90,
+              "z": 45
+            },
+            "sides": [
+              {
+                "name": "Easy",
+                "image": "hangboards/LATTICEMXEDGESWITCH.svg",
+                "holds": 2
+              },
+              {
+                "name": "Hard",
+                "image": "hangboards/LATTICEMXEDGESWITCH.svg",
+                "holds": 2
+              }
+            ],
+            "type": "wood",
+            "url": "https://latticetraining.com/product/mxedge-switch/",
             "holds": 2
           }
         ],
@@ -6645,6 +6658,19 @@
             "type": "wood",
             "url": "https://www.yyvertical.com/products/verticalboard-light",
             "holds": 7
+          },
+          {
+            "name": "Baguette Evo",
+            "id": 7,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 520,
+              "y": 50,
+              "z": 50
+            },
+            "type": "wood",
+            "url": "https://www.yyvertical.com/products/baguette-evo",
+            "holds": 0
           }
         ],
         "marker-color": "#012E40",
@@ -9101,6 +9127,155 @@
       "geometry": {
         "type": "Point",
         "coordinates": [18.4387161, -33.9079804]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mutant Fingers",
+        "description": "Hangboards designed for and by male and female climbers of all levels. Train anywhere and begin your mutation!",
+        "country": "ES",
+        "id": 139,
+        "url": "https://mutantfingers.com/",
+        "socials": {
+          "facebook": "https://www.facebook.com/mutant.fingers.96",
+          "instagram": "https://www.instagram.com/mutantfingers/"
+        },
+        "hangboards": [
+          {
+            "name": "Polaris",
+            "id": 0,
+            "image": "hangboards/MUTANTPOLARIS.svg",
+            "size": {
+              "x": 380,
+              "y": 65,
+              "z": 30
+            },
+            "type": "wood",
+            "url": "https://mutantfingers.com/producto/polaris/",
+            "holds": 3
+          },
+          {
+            "name": "Trance",
+            "id": 1,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 400,
+              "y": 85,
+              "z": 30
+            },
+            "type": "wood",
+            "url": "https://mutantfingers.com/producto/trance/",
+            "holds": 0
+          },
+          {
+            "name": "Pyro",
+            "id": 2,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 650,
+              "y": 115,
+              "z": 50
+            },
+            "type": "wood",
+            "url": "https://mutantfingers.com/producto/pyro/",
+            "holds": 0
+          },
+          {
+            "name": "Siroco",
+            "id": 3,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 680,
+              "y": 170,
+              "z": 47
+            },
+            "type": "wood",
+            "url": "https://mutantfingers.com/producto/siroco/",
+            "holds": 0
+          },
+          {
+            "name": "Bishop",
+            "id": 4,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 680,
+              "y": 170,
+              "z": 46
+            },
+            "type": "wood",
+            "url": "https://mutantfingers.com/producto/bishop/",
+            "holds": 0
+          },
+          {
+            "name": "Katana",
+            "id": 5,
+            "image": "hangboards/NOTFOUND.svg",
+            "size": {
+              "x": 500,
+              "y": 60,
+              "z": 33
+            },
+            "type": "wood",
+            "url": "https://mutantfingers.com/producto/katana/",
+            "holds": 0
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.6070912, 16, 37.1734563]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ash Climbing",
+        "description": "Climbing products and traning aids hand made in Sheffield",
+        "country": "GB",
+        "id": 140,
+        "url": "https://ashclimbing.bigcartel.com",
+        "socials": {
+          "facebook": "https://www.facebook.com/p/ash_climbing_products-100065598935492/",
+          "instagram": "https://www.instagram.com/ash_climbing_products"
+        },
+        "hangboards": [
+          {
+            "name": "Portable Hangboard",
+            "id": 0,
+            "image": "hangboards/ASHPORTABLE.svg",
+            "size": {
+              "x": 400,
+              "y": 74,
+              "z": 25
+            },
+            "sides": [
+              {
+                "name": "Easy",
+                "image": "hangboards/ASHPORTABLE.svg",
+                "holds": 3
+              },
+              {
+                "name": "Hard",
+                "image": "hangboards/ASHPORTABLEHARD.svg",
+                "holds": 3
+              }
+            ],
+            "type": "wood",
+            "url": "https://ashclimbing.bigcartel.com/product/portable-hangboard",
+            "holds": 3
+          }
+        ],
+        "marker-color": "#012E40",
+        "marker-size": "medium",
+        "marker-symbol": "commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-1.4702651, 53.3811426]
       }
     }
   ]
