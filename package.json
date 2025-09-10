@@ -39,11 +39,11 @@
     "vue-inline-svg": "^4.0.1",
     "vue-router": "^4.5.1",
     "vuedraggable": "^4.1.0",
-    "vuetify": "^3.9.7"
+    "vuetify": "^3.10.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.1",
-    "@intellectronica/ruler": "^0.3.6",
+    "@intellectronica/ruler": "^0.3.8",
     "@playwright/test": "^1.55.0",
     "@storybook/addon-a11y": "^9.1.5",
     "@storybook/addon-docs": "^9.1.5",
