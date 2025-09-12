@@ -47,6 +47,8 @@ e2e/.auth/
 /.cursor/rules/ruler_cursor_instructions.mdc.bak
 /.github/copilot-instructions.md
 /.github/copilot-instructions.md.bak
+/.idx/airules.md
+/.idx/airules.md.bak
 /.mcp.json
 /.mcp.json.bak
 /.vscode/mcp.json

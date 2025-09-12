@@ -3,7 +3,7 @@
 
 # To specify which agents are active by default when --agents is not used,
 # uncomment and populate the following line. If omitted, all agents are active.
-default_agents = ["copilot", "claude", "cursor", "codex"]
+default_agents = ["copilot", "claude", "cursor", "codex", "firebase"]
 
 # Enable nested rule loading from nested .ruler directories
 # When enabled, ruler will search for and process .ruler directories throughout the project hierarchy
@@ -42,3 +42,14 @@ default_agents = ["copilot", "claude", "cursor", "codex"]
 [mcp_servers.vuetify]
 command = "npx"
 args = ["-y", "@vuetify/mcp"]
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]
+
+[mcp_servers.firebase]
+command = "npx"
+args = ["-y", "firebase-tools@latest", "experimental:mcp", "--only", "auth,firestore"]
+
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp/"

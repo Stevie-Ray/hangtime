@@ -60,9 +60,9 @@ const preferredDark = usePreferredDark()
 
 watch(preferredDark, (): void => {
   if (user.value?.settings?.theme !== undefined && user.value.settings.theme > Theme.System) {
-    theme.global.name.value = user.value?.settings.theme === Theme.Dark ? 'dark' : 'light'
+    theme.change(user.value?.settings.theme === Theme.Dark ? 'dark' : 'light')
   } else {
-    theme.global.name.value = preferredDark.value ? 'dark' : 'light'
+    theme.change(preferredDark.value ? 'dark' : 'light')
   }
 })
 
@@ -70,9 +70,9 @@ watch(
   user,
   async (updatedUser): Promise<void> => {
     if (updatedUser?.settings?.theme !== undefined && updatedUser.settings.theme > Theme.System) {
-      theme.global.name.value = updatedUser.settings.theme === Theme.Dark ? 'dark' : 'light'
+      theme.change(updatedUser.settings.theme === Theme.Dark ? 'dark' : 'light')
     } else {
-      theme.global.name.value = preferredDark.value ? 'dark' : 'light'
+      theme.change(preferredDark.value ? 'dark' : 'light')
     }
   },
   { deep: true }
