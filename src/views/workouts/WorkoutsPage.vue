@@ -209,6 +209,14 @@ useHead({
       <v-container>
         <v-row>
           <v-col cols="12">
+            <v-alert icon="$forumOutline" variant="tonal" type="info">
+              We are on Discord!
+              <template #append>
+                <v-btn color="info" href="https://discord.gg/f7QQnEBQQt" target="_blank"
+                  >Join
+                </v-btn>
+              </template>
+            </v-alert>
             <v-list lines="two" v-if="workoutsList.length">
               <v-infinite-scroll :onLoad="fetchMoreWorkouts" side="end" :key="route.path">
                 <template v-for="(workout, index) in workoutsList" :key="workout.id">
