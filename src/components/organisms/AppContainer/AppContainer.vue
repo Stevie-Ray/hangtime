@@ -3,18 +3,15 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication.store'
+import InlineSvg from 'vue-inline-svg'
+import imgLogo from '@/assets/logo.svg'
 
 const { t } = useI18n()
 const router = useRouter()
 
 const { user } = storeToRefs(useAuthenticationStore())
 
-const {
-  extension = false,
-  toolbarPrepend = false,
-  hideFooter = false
-} = defineProps<{
-  extension?: boolean
+const { toolbarPrepend = false, hideFooter = false } = defineProps<{
   toolbarPrepend?: boolean
   toolbarPrependUrl?: string
   hideFooter?: boolean
@@ -44,14 +41,14 @@ const {
     </template>
 
     <!--  toolbar tabs  -->
-    <template v-if="extension && $slots.extension" #extension>
+    <template v-if="$slots.extension" #extension>
       <slot name="extension" />
     </template>
   </v-app-bar>
 
   <v-navigation-drawer width="244">
     <v-sheet class="d-flex justify-center align-center" height="128" width="100%">
-      <v-img height="64" src="@/assets/logo.svg" width="100%" />
+      <inline-svg height="64" :src="imgLogo" width="100%" />
     </v-sheet>
 
     <v-list>

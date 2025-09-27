@@ -5,7 +5,6 @@ import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import InlineSvg from 'vue-inline-svg'
 import { time } from '@/helpers'
-import imgLogo from '@/assets/logo.svg'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
@@ -65,45 +64,12 @@ useHead({
 </script>
 
 <template>
-  <app-container extension>
-    <template #title>
-      <div class="d-flex align-center">
-        <div>
-          <div
-            class="v-responsive v-img"
-            aria-label="logo"
-            role="img"
-            style="height: 28px; width: 28px"
-          >
-            <div class="v-responsive__sizer" style="padding-bottom: 100%"></div>
-            <inline-svg class="v-img__img v-img__img--contain" :src="imgLogo" alt="logo" />
-          </div>
-        </div>
-        <div>HangTime</div>
-      </div>
-    </template>
-
-    <template #icons>
-      <notification-bell />
-    </template>
-
-    <template #extension>
-      <v-tabs grow>
-        <v-tab to="/activity" color="text">
-          <v-icon class="mr-1">$clipboardTextClock</v-icon>
-          <span>{{ t('History') }}</span>
-        </v-tab>
-        <v-tab to="/activity/leaderboard" color="text">
-          <v-icon class="mr-1">$podiumGold</v-icon>
-          <span>{{ t('Leaderboard') }}</span>
-        </v-tab>
-      </v-tabs>
-    </template>
-
+  <app-container>
     <template #default>
       <v-container>
         <v-row>
           <v-col cols="12">
+            <notification-bell />
             <news-cards />
           </v-col>
         </v-row>

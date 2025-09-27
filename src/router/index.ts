@@ -30,6 +30,8 @@ const WorkoutsPage = () => import('@/views/workouts/WorkoutsPage.vue')
 const WorkoutsDetailPage = () => import('@/views/workouts/WorkoutsDetailPage.vue')
 const WorkoutsTimerPage = () => import('@/views/workouts/WorkoutsTimerPage.vue')
 const WorkoutsQuickPage = () => import('@/views/workouts/WorkoutsQuickPage.vue')
+// Quests
+const QuestsPage = () => import('@/views/quests/QuestsPage.vue')
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -86,6 +88,7 @@ const routes: Array<RouteRecordRaw> = [
     component: WorkoutsPage,
     name: 'WorkoutsCommunityPage'
   },
+  { path: '/quests', component: QuestsPage, name: 'QuestsPage' },
   { path: '/settings', component: AccountPage, name: 'AccountPage' },
   {
     path: '/profile',

@@ -43,53 +43,34 @@ useHead({
 </script>
 
 <template>
-  <app-container extension>
-    <template #title>
-      <v-menu v-model="leaderboardMenu">
-        <template v-slot:activator="{ props }">
-          <div v-bind="props" class="leaderboard-select">
-            <span v-if="selectedHeader">{{ t(selectedHeader.text) }}</span>
-            <span v-if="leaderboardMenu"><v-icon>$chevronUp</v-icon></span>
-            <span v-else><v-icon>$chevronDown</v-icon></span>
-          </div>
-        </template>
-
-        <v-card>
-          <v-card-text>
-            <v-radio-group v-model="rank" mandatory>
-              <v-radio
-                v-for="(header, index) in tableHeaders"
-                :key="index"
-                :label="t(header.text)"
-                :value="header.value"
-              ></v-radio>
-            </v-radio-group>
-          </v-card-text>
-        </v-card>
-      </v-menu>
-    </template>
-
-    <template #icons>
-      <!--      <v-btn class="text-none" icon="$helpCircleOutline"></v-btn>-->
-    </template>
-
-    <template #extension>
-      <v-tabs grow>
-        <v-tab to="/activity" color="text">
-          <v-icon class="mr-1">$clipboardTextClock</v-icon>
-          <span>{{ t('History') }}</span>
-        </v-tab>
-        <v-tab to="/activity/leaderboard" color="text">
-          <v-icon class="mr-1">$podiumGold</v-icon>
-          <span>{{ t('Leaderboard') }}</span>
-        </v-tab>
-      </v-tabs>
-    </template>
-
+  <app-container>
     <template #default>
       <v-container>
         <v-row>
           <v-col cols="12">
+            <v-menu v-model="leaderboardMenu">
+              <template v-slot:activator="{ props }">
+                <div v-bind="props" class="leaderboard-select">
+                  <span v-if="selectedHeader">{{ t(selectedHeader.text) }}</span>
+                  <span v-if="leaderboardMenu"><v-icon>$chevronUp</v-icon></span>
+                  <span v-else><v-icon>$chevronDown</v-icon></span>
+                </div>
+              </template>
+
+              <v-card>
+                <v-card-text>
+                  <v-radio-group v-model="rank" mandatory>
+                    <v-radio
+                      v-for="(header, index) in tableHeaders"
+                      :key="index"
+                      :label="t(header.text)"
+                      :value="header.value"
+                    ></v-radio>
+                  </v-radio-group>
+                </v-card-text>
+              </v-card>
+            </v-menu>
+
             <v-table>
               <v-table>
                 <thead class="d-none">
