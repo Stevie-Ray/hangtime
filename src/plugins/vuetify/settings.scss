@@ -1,4 +1,18 @@
+@use 'sass:math';
+
+$_body-font-family: 'Montserrat';
+$_heading-font-family: 'Lekton';
+$_root-font-size: 16;
+
 @forward 'vuetify' with (
+  $body-font-family: $_body-font-family,
+  $border-radius-root: 0,
+  // $button-font-weight: 700,
+  // $button-icon-font-size: #{math.div(14, $_root-font-size)}rem,
+  // $button-border-width: 2px,
+  // $dialog-elevation: 0,
+  $heading-font-family: $_heading-font-family,
+
   $utilities: (
     'align-content': false,
     'align-items': (

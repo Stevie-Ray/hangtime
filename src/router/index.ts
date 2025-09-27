@@ -54,9 +54,9 @@ const routes: Array<RouteRecordRaw> = [
     name: 'CheckLoginPage',
     meta: { public: true }
   },
-  { path: '/activity', component: ActivityPage, name: 'ActivityPage' },
+  { path: '/feed', component: ActivityPage, name: 'ActivityPage' },
   {
-    path: '/activity/leaderboard',
+    path: '/leaderboard',
     component: ActivityLeaderboardPage,
     name: 'ActivityLeaderboardPage'
   },
@@ -86,9 +86,9 @@ const routes: Array<RouteRecordRaw> = [
     component: WorkoutsPage,
     name: 'WorkoutsCommunityPage'
   },
-  { path: '/account', component: AccountPage, name: 'AccountPage' },
+  { path: '/settings', component: AccountPage, name: 'AccountPage' },
   {
-    path: '/account/profile',
+    path: '/profile',
     component: AccountProfilePage,
     name: 'AccountProfilePage'
   },

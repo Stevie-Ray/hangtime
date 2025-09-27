@@ -22,7 +22,7 @@ const {
 </script>
 
 <template>
-  <v-app-bar app>
+  <v-app-bar app v-if="$slots.title || $slots.icons || $slots.extension">
     <!--  toolbar prepend  -->
     <template v-if="toolbarPrepend" #prepend>
       <slot name="prepend">
@@ -34,45 +34,77 @@ const {
     </template>
 
     <!--  toolbar titles  -->
-    <v-toolbar-title>
+    <v-toolbar-title v-if="$slots.title">
       <slot name="title"></slot>
     </v-toolbar-title>
 
     <!--  toolbar icons  -->
-    <template #append>
+    <template #append v-if="$slots.icons">
       <slot name="icons"></slot>
     </template>
 
     <!--  toolbar tabs  -->
-    <template v-if="extension" #extension>
+    <template v-if="extension && $slots.extension" #extension>
       <slot name="extension" />
     </template>
   </v-app-bar>
 
+  <v-navigation-drawer width="244">
+    <v-sheet class="d-flex justify-center align-center" height="128" width="100%">
+      <v-img height="64" src="@/assets/logo.svg" width="100%" />
+    </v-sheet>
+
+    <v-list>
+      <v-list>
+        <v-list-item link prepend-icon="mdi-home" title="Feed" :to="'/feed'" />
+        <v-list-item link prepend-icon="mdi-dumbbell" title="Trainen" :to="'/'" />
+        <v-list-item link prepend-icon="mdi-podium" title="Competitie" :to="'/leaderboard'" />
+        <v-list-item link prepend-icon="mdi-calendar" title="Missies" :to="'/quests'" />
+        <v-list-item link prepend-icon="mdi-account" title="Profiel" :to="'/profile'" />
+        <v-list-item link prepend-icon="mdi-cog" title="Instellingen" :to="'/settings'" />
+      </v-list>
+    </v-list>
+  </v-navigation-drawer>
+
   <v-main>
     <!-- router-view -->
-    <slot></slot>
+    <v-container max-width="1056">
+      <v-row>
+        <v-col cols="12" :md="$slots.sidebar ? 8 : 12">
+          <!-- router-view -->
+          <slot />
+        </v-col>
+
+        <v-col v-if="$slots.sidebar" class="d-none d-md-block" cols="12" md="4">
+          <slot name="sidebar" />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-main>
 
-  <slot name="fab"></slot>
+  <slot name="fab" />
 
-  <v-footer v-if="user && !hideFooter" app class="py-0">
+  <footer v-if="user && !hideFooter" app class="d-md-none">
     <!-- bottom navigation -->
-    <v-bottom-navigation grow mandatory style="bottom: 0">
-      <v-btn to="/activity">
+    <v-bottom-navigation grow mandatory>
+      <v-btn :title="t('Feed')" :to="'/feed'">
+        <v-icon>$home</v-icon>
+        <span class="d-sr-only">{{ t('Feed') }}</span>
+      </v-btn>
+      <v-btn :title="t('Stats')" to="/activity">
         <v-icon>$clipboardTextMultiple</v-icon>
-        <span>{{ t('Stats') }}</span>
+        <span class="d-sr-only">{{ t('Stats') }}</span>
       </v-btn>
-      <v-btn to="/workouts">
+      <v-btn :title="t('Workouts')" to="/workouts">
         <v-icon>$timer</v-icon>
-        <span>{{ t('Workouts') }}</span>
+        <span class="d-sr-only">{{ t('Workouts') }}</span>
       </v-btn>
-      <v-btn to="/account">
+      <v-btn :title="t('Account')" to="/account">
         <v-icon>$accountBox</v-icon>
-        <span>{{ t('Account') }}</span>
+        <span class="d-sr-only">{{ t('Account') }}</span>
       </v-btn>
     </v-bottom-navigation>
-  </v-footer>
+  </footer>
 </template>
 
 <style lang="scss">
