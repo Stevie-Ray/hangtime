@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import { useWorkoutsStore } from '@/stores/workouts.store'
 import { Workout } from '@/models/workout.model'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import AccountMenu from '@/components/molecules/AccountMenu/AccountMenu.vue'
 
 const { t } = useI18n()
 const workoutsStore = useWorkoutsStore()
@@ -157,60 +158,66 @@ const handleExport = async () => {
     <template #title> {{ t('Import') }} / {{ t('Export') }} {{ t('Workouts') }}</template>
 
     <template #default>
-      <v-container>
-        <v-row>
-          <v-col cols="12" md="6">
-            <v-alert v-if="importError" type="error" :text="importError" class="mb-4" />
-            <v-alert v-if="importSuccess" type="success" :text="importSuccess" class="mb-4" />
-            <v-card>
-              <v-card-title>{{ t('Import') }}</v-card-title>
-              <v-card-text>
-                <p class="mb-4">
-                  {{
-                    t(
-                      'If you have workouts from a different system, Hangtime can import them into this account. To get started select the system to import from and click the button below.'
-                    )
-                  }}
-                </p>
-                <v-select
-                  :item-props="true"
-                  :label="t('System')"
-                  v-model="importSystem"
-                  :items="importSystems"
-                ></v-select>
-                <v-file-input
-                  v-model="fileInput"
-                  :label="`${t('Import')} ${t('Workouts')}`"
-                  accept="application/json"
-                />
-              </v-card-text>
-              <v-card-actions>
-                <v-btn color="primary" :disabled="!fileInput" @click="handleImport">
-                  {{ t('Import') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-
-          <v-col cols="12" md="6">
-            <v-card>
-              <v-card-title>{{ t('Export') }}</v-card-title>
-              <v-card-text>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-alert v-if="importError" type="error" :text="importError" class="mb-4" />
+          <v-alert v-if="importSuccess" type="success" :text="importSuccess" class="mb-4" />
+          <v-card>
+            <v-card-title>{{ t('Import') }}</v-card-title>
+            <v-card-text>
+              <p class="mb-4">
                 {{
                   t(
-                    'When you click the button below HangTime will create an JSON file for you to save to your device. This file will contain your workout name, description, exercises, and other workout data. Once you’ve saved the downloaded file, you can use the Import function in another HangTime account to import the workouts. '
+                    'If you have workouts from a different system, Hangtime can import them into this account. To get started select the system to import from and click the button below.'
                   )
                 }}
-              </v-card-text>
-              <v-card-actions>
-                <v-btn color="primary" @click="handleExport">
-                  {{ t('Download Export File') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+              </p>
+              <v-select
+                :item-props="true"
+                :label="t('System')"
+                v-model="importSystem"
+                :items="importSystems"
+              ></v-select>
+              <v-file-input
+                v-model="fileInput"
+                :label="`${t('Import')} ${t('Workouts')}`"
+                accept="application/json"
+              />
+            </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" :disabled="!fileInput" @click="handleImport">
+                {{ t('Import') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+
+        <v-col cols="12" md="6">
+          <v-card>
+            <v-card-title>{{ t('Export') }}</v-card-title>
+            <v-card-text>
+              {{
+                t(
+                  'When you click the button below HangTime will create an JSON file for you to save to your device. This file will contain your workout name, description, exercises, and other workout data. Once you’ve saved the downloaded file, you can use the Import function in another HangTime account to import the workouts. '
+                )
+              }}
+            </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" @click="handleExport">
+                {{ t('Download Export File') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </template>
+
+    <template #sidebar>
+      <v-row>
+        <v-col cols="12">
+          <account-menu />
+        </v-col>
+      </v-row>
     </template>
   </app-container>
 </template>

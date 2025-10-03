@@ -19,6 +19,23 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
 </script>
 
 <template>
+  <v-app-bar flat app color="#5865f2">
+    <v-list-item link href="https://discord.gg/f7QQnEBQQt" target="_blank" class="flex-grow-1 py-6">
+      <template v-slot:prepend>
+        <v-avatar color="white">
+          <v-icon color="#5865f2">$forumOutline</v-icon>
+        </v-avatar>
+      </template>
+      <v-list-item-title>We are on Discord!</v-list-item-title>
+      <v-list-item-subtitle>
+        Join our Discord server to get the latest news and updates.
+      </v-list-item-subtitle>
+      <template v-slot:append>
+        <v-btn variant="flat" color="white" append-icon="$openInNew"> Join </v-btn>
+      </template>
+    </v-list-item>
+  </v-app-bar>
+
   <v-app-bar app v-if="$slots.title || $slots.icons || $slots.extension">
     <!--  toolbar prepend  -->
     <template v-if="toolbarPrepend" #prepend>
@@ -53,17 +70,25 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
 
     <v-list>
       <v-list>
-        <v-list-item link prepend-icon="mdi-home" title="Feed" :to="'/feed'" />
-        <v-list-item link prepend-icon="mdi-dumbbell" title="Trainen" :to="'/'" />
-        <v-list-item link prepend-icon="mdi-podium" title="Competitie" :to="'/leaderboard'" />
-        <v-list-item link prepend-icon="mdi-calendar" title="Missies" :to="'/quests'" />
-        <v-list-item link prepend-icon="mdi-account" title="Profiel" :to="'/profile'" />
-        <v-list-item link prepend-icon="mdi-cog" title="Instellingen" :to="'/settings'" />
+        <v-list-item link prepend-icon="$clipboardTextMultiple" title="Feed" :to="'/feed'" />
+        <v-list-item link prepend-icon="$timer" title="Trainen" :to="'/'" />
+        <v-list-item link prepend-icon="$trophy" title="Competitie" :to="'/leaderboard'" />
+        <v-list-item link prepend-icon="$calendar" title="Missies" :to="'/quests'" />
+        <v-list-item link prepend-icon="$account" title="Profiel" :to="'/profile'" />
+        <v-list-item link prepend-icon="$cog" title="Instellingen" :to="'/settings'" />
       </v-list>
     </v-list>
   </v-navigation-drawer>
 
   <v-main>
+    <div
+      v-if="$slots.sticky"
+      class="position-sticky bg-surface top-0 pa-3 mt-2 d-md-none"
+      style="z-index: 1"
+    >
+      <slot name="sticky" />
+    </div>
+
     <!-- router-view -->
     <v-container max-width="1056">
       <v-row>
@@ -85,47 +110,23 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
     <!-- bottom navigation -->
     <v-bottom-navigation grow mandatory>
       <v-btn :title="t('Feed')" :to="'/feed'">
-        <v-icon>$home</v-icon>
+        <v-icon>$clipboardTextMultiple</v-icon>
         <span class="d-sr-only">{{ t('Feed') }}</span>
       </v-btn>
-      <v-btn :title="t('Stats')" to="/activity">
-        <v-icon>$clipboardTextMultiple</v-icon>
-        <span class="d-sr-only">{{ t('Stats') }}</span>
-      </v-btn>
-      <v-btn :title="t('Workouts')" to="/workouts">
+      <v-btn :title="t('Workouts')" to="/">
         <v-icon>$timer</v-icon>
         <span class="d-sr-only">{{ t('Workouts') }}</span>
       </v-btn>
-      <v-btn :title="t('Account')" to="/account">
-        <v-icon>$accountBox</v-icon>
+      <v-btn :title="t('Competition')" to="/leaderboard">
+        <v-icon>$trophy</v-icon>
+        <span class="d-sr-only">{{ t('Competition') }}</span>
+      </v-btn>
+      <v-btn :title="t('Account')" to="/settings">
+        <v-icon>$cog</v-icon>
         <span class="d-sr-only">{{ t('Account') }}</span>
       </v-btn>
     </v-bottom-navigation>
   </footer>
 </template>
 
-<style lang="scss">
-.v-toolbar {
-  &__content,
-  &__extension {
-    margin-left: auto;
-    margin-right: auto;
-    @media (min-width: 960px) {
-      max-width: 900px;
-    }
-    @media (min-width: 1280px) {
-      max-width: 1200px;
-    }
-    @media (min-width: 1920px) {
-      max-width: 1800px;
-    }
-    @media (min-width: 2560px) {
-      max-width: 2400px;
-    }
-  }
-  &__extension {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-</style>
+<style lang="scss"></style>

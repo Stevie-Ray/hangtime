@@ -7,7 +7,7 @@ import { useAuthenticationStore } from '@/stores/authentication.store'
 // These can be imported from other files
 
 // Account
-const AccountPage = () => import('@/views/account/AccountPage.vue')
+// const AccountPage = () => import('@/views/account/AccountPage.vue')
 const AccountGeneralPage = () => import('@/views/account/AccountGeneralPage.vue')
 const AccountHangboardsPage = () => import('@/views/account/AccountHangboardsPage.vue')
 const AccountHelpPage = () => import('@/views/account/AccountHelpPage.vue')
@@ -32,6 +32,8 @@ const WorkoutsTimerPage = () => import('@/views/workouts/WorkoutsTimerPage.vue')
 const WorkoutsQuickPage = () => import('@/views/workouts/WorkoutsQuickPage.vue')
 // Quests
 const QuestsPage = () => import('@/views/quests/QuestsPage.vue')
+// Profile
+const ProfilePage = () => import('@/views/profile/ProfilePage.vue')
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -89,9 +91,10 @@ const routes: Array<RouteRecordRaw> = [
     name: 'WorkoutsCommunityPage'
   },
   { path: '/quests', component: QuestsPage, name: 'QuestsPage' },
-  { path: '/settings', component: AccountPage, name: 'AccountPage' },
+  { path: '/profile', component: ProfilePage, name: 'ProfilePage' },
+  { path: '/settings', redirect: '/account/general', name: 'AccountPage' },
   {
-    path: '/profile',
+    path: '/account/profile',
     component: AccountProfilePage,
     name: 'AccountProfilePage'
   },

@@ -3,12 +3,16 @@ import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
-import InlineSvg from 'vue-inline-svg'
 import { time } from '@/helpers'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
 import NotificationBell from '@/components/molecules/NotificationBell/NotificationBell.vue'
+import SidebarStatistics from '@/components/molecules/SidebarStatistics/SidebarStatistics.vue'
+import SidebarPremium from '@/components/molecules/SidebarPremium/SidebarPremium.vue'
+import SidebarQuests from '@/components/molecules/SidebarQuests/SidebarQuests.vue'
+import SidebarLeaderboard from '@/components/molecules/SidebarLeaderboard/SidebarLeaderboard.vue'
+import SidebarLinks from '@/components/molecules/SidebarLinks/SidebarLinks.vue'
 
 import { useActivitiesStore } from '@/stores/activities.store'
 import { useAuthenticationStore } from '@/stores/authentication.store'
@@ -65,6 +69,10 @@ useHead({
 
 <template>
   <app-container>
+    <template #sticky>
+      <sidebar-statistics />
+    </template>
+
     <template #default>
       <v-container>
         <v-row>
@@ -107,6 +115,26 @@ useHead({
           </v-col>
         </v-row>
       </v-container>
+    </template>
+
+    <template #sidebar>
+      <v-row>
+        <v-col cols="12">
+          <sidebar-statistics />
+        </v-col>
+        <v-col cols="12">
+          <sidebar-premium />
+        </v-col>
+        <v-col cols="12">
+          <sidebar-leaderboard />
+        </v-col>
+        <v-col cols="12">
+          <sidebar-quests />
+        </v-col>
+        <v-col cols="12">
+          <sidebar-links />
+        </v-col>
+      </v-row>
     </template>
   </app-container>
 </template>

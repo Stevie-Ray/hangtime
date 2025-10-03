@@ -13,6 +13,11 @@ import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscri
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
 import WalkthroughApp from '@/components/molecules/dialog/WalkthroughApp/WalkthroughApp.vue'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import SidebarStatistics from '@/components/molecules/SidebarStatistics/SidebarStatistics.vue'
+import SidebarPremium from '@/components/molecules/SidebarPremium/SidebarPremium.vue'
+import SidebarQuests from '@/components/molecules/SidebarQuests/SidebarQuests.vue'
+import SidebarLeaderboard from '@/components/molecules/SidebarLeaderboard/SidebarLeaderboard.vue'
+import SidebarLinks from '@/components/molecules/SidebarLinks/SidebarLinks.vue'
 import imgLogo from '@/assets/logo.svg'
 
 import { time } from '@/helpers'
@@ -116,11 +121,11 @@ useHead({
 
 <template>
   <app-container>
-    <template #default>
-      <div class="position-sticky bg-surface top-0 pa-3 mt-2 d-md-none" style="z-index: 1">
-        Sticky content
-      </div>
+    <template #sticky>
+      <sidebar-statistics />
+    </template>
 
+    <template #default>
       <v-row>
         <v-col>
           <v-menu v-model="hangboardMenu">
@@ -215,12 +220,6 @@ useHead({
 
       <v-row>
         <v-col cols="12">
-          <v-alert icon="$forumOutline" variant="tonal" type="info">
-            We are on Discord!
-            <template #append>
-              <v-btn color="info" href="https://discord.gg/f7QQnEBQQt" target="_blank">Join </v-btn>
-            </template>
-          </v-alert>
           <v-list lines="two" v-if="workoutsList.length">
             <v-infinite-scroll :onLoad="fetchMoreWorkouts" side="end" :key="route.path">
               <template v-for="(workout, index) in workoutsList" :key="workout.id">
@@ -292,65 +291,20 @@ useHead({
     <template #sidebar>
       <v-row>
         <v-col cols="12">
-          <v-card>
-            <v-card-title> Probeer Premium gratis </v-card-title>
-            <v-card-text>
-              Geen advertenties, persoonlijke oefeningen en onbeperkt Legendarisch!
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="secondary" variant="elevated"> Probeer 30 minuten gratis </v-btn>
-            </v-card-actions>
-          </v-card>
+          <sidebar-statistics />
         </v-col>
         <v-col cols="12">
-          <v-card class="mx-auto">
-            <template #prepend>
-              <v-icon>mdi-trophy</v-icon>
-            </template>
-
-            <template #title>
-              <span>Je staat op plek #1</span>
-            </template>
-
-            <v-card-text> Je hebt deze week tot nu toe 336 punten verdiend </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" to="/leaderboard"> Ranglijst bekijken </v-btn>
-            </v-card-actions>
-          </v-card>
+          <sidebar-premium />
         </v-col>
         <v-col cols="12">
-          <v-card>
-            <v-card-title> Weekelijkse missies </v-card-title>
-            <v-card-text>
-              <div class="text-h6">Doe 3 workouts</div>
-              <v-progress-linear color="primary" height="24" :model-value="(2 / 3) * 100">
-                <template #default="{ value }">
-                  <strong>{{ Math.ceil(value) }}%</strong>
-                </template>
-              </v-progress-linear>
-
-              <div class="my-2" />
-              <div class="text-h6">Train 30 minuten</div>
-              <v-progress-linear color="primary" height="24" :model-value="(24 / 30) * 100">
-                <template #default="{ value }">
-                  <strong>{{ Math.ceil(value) }}%</strong>
-                </template>
-              </v-progress-linear>
-
-              <div class="my-2" />
-              <div class="text-h6">Doe 50 pullups</div>
-              <v-progress-linear color="primary" height="24" :model-value="(16 / 50) * 100">
-                <template #default="{ value }">
-                  <strong>{{ Math.ceil(value) }}%</strong>
-                </template>
-              </v-progress-linear>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" to="/quests"> Bekijk alle </v-btn>
-            </v-card-actions>
-          </v-card>
+          <sidebar-leaderboard />
         </v-col>
-        <v-col cols="12"> Voorwaarden </v-col>
+        <v-col cols="12">
+          <sidebar-quests />
+        </v-col>
+        <v-col cols="12">
+          <sidebar-links />
+        </v-col>
       </v-row>
     </template>
   </app-container>
