@@ -42,12 +42,57 @@ useHead({
   title: 'Leaderboard',
   meta: [{ name: 'description', content: '' }]
 })
+
+// DUMMY DATA
+const ranks = [
+  // Local → National
+  { name: 'Gym Competition', icon: '$medalOutline', color: 'grey-lighten-1' },
+  { name: 'Regional Competition', icon: '$medal', color: 'blue-lighten-2' },
+  { name: 'National Cup', icon: '$trophyAward', color: 'teal' },
+  { name: 'National Championship', icon: '$trophy', color: 'teal-darken-2' },
+
+  // Continental
+  { name: 'Continental Cup', icon: '$trophyAward', color: 'indigo' },
+  { name: 'Continental Championship', icon: '$trophy', color: 'indigo-darken-2' },
+
+  // World
+  { name: 'IFSC World Cup', icon: '$trophyAward', color: 'deep-purple' },
+  { name: 'IFSC World Championship', icon: '$trophy', color: 'deep-purple-darken-2' },
+
+  // Olympic track
+  { name: 'Olympic Qualifier Series', icon: '$torch', color: 'orange-darken-1' },
+  { name: 'Olympic Games', icon: '$torch', color: 'amber-accent-3' }
+]
+const currentRank = 4
 </script>
 
 <template>
   <app-container>
     <template #default>
       <v-row>
+        <v-col align="center" cols="12">
+          <div class="d-flex overflow-hidden position-relative" style="height: 80px">
+            <div class="grid" :style="{ '--offset': currentRank }">
+              <div v-for="(rank, index) in ranks" :key="rank.name">
+                <v-icon
+                  :color="currentRank >= index && false ? rank.color : undefined"
+                  :disabled="index > currentRank"
+                  :icon="rank.icon"
+                  :size="index === currentRank ? 80 : 48"
+                  :title="rank.name"
+                />
+              </div>
+            </div>
+          </div>
+        </v-col>
+        <v-col align="center" cols="12">
+          <div class="text-h4 text-secondary">{{ ranks[currentRank]?.name ?? '' }}</div>
+          <div class="text-h6 py-4 d-none d-md-block">
+            De top 5 gaan door naar de volgende divisie
+          </div>
+          <strong class="py-4 d-none d-md-block">2 dagen, 3 uur</strong>
+        </v-col>
+
         <v-col cols="12">
           <v-menu v-model="leaderboardMenu">
             <template v-slot:activator="{ props }">
@@ -74,19 +119,6 @@ useHead({
 
           <v-table>
             <v-table>
-              <thead class="d-none">
-                <tr>
-                  <th>&nbsp;</th>
-                  <th
-                    v-for="header in tableHeaders"
-                    :key="header.value"
-                    class="text-left d-non"
-                    :class="{ 'd-none': header.value !== rank }"
-                  >
-                    <span>{{ t(header.text) }}</span>
-                  </th>
-                </tr>
-              </thead>
               <tbody v-if="selectedLeaderboard">
                 <tr v-for="(user, index) in selectedLeaderboard.leaderboard" :key="user.id">
                   <td>
@@ -144,5 +176,17 @@ useHead({
       line-height: 1.5rem;
     }
   }
+}
+
+.grid {
+  align-items: center;
+  bottom: 0;
+  display: grid;
+  gap: 52px;
+  grid-template-columns: repeat(11, min-content);
+  justify-content: space-between;
+  left: calc(50% - 40px - var(--offset) * 100px);
+  position: absolute;
+  top: 0;
 }
 </style>

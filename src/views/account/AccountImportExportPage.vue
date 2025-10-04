@@ -159,7 +159,7 @@ const handleExport = async () => {
 
     <template #default>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col cols="12">
           <v-alert v-if="importError" type="error" :text="importError" class="mb-4" />
           <v-alert v-if="importSuccess" type="success" :text="importSuccess" class="mb-4" />
           <v-card>
@@ -192,7 +192,7 @@ const handleExport = async () => {
           </v-card>
         </v-col>
 
-        <v-col cols="12" md="6">
+        <v-col cols="12">
           <v-card>
             <v-card-title>{{ t('Export') }}</v-card-title>
             <v-card-text>

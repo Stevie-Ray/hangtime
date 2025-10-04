@@ -211,7 +211,7 @@ useHead({
         </v-col>
         <!-- Tabs -->
         <v-col cols="12">
-          <v-tabs grow bg-color="primary">
+          <v-tabs grow>
             <v-tab to="/workouts" color="text">
               <v-icon class="mr-1">$account</v-icon>
               <span>{{ t('My Workouts') }}</span>

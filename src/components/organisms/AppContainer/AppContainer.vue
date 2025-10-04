@@ -3,6 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication.store'
+import TopBanner from '@/components/molecules/TopBanner/TopBanner.vue'
 import InlineSvg from 'vue-inline-svg'
 import imgLogo from '@/assets/logo.svg'
 
@@ -19,24 +20,9 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
 </script>
 
 <template>
-  <v-app-bar flat app color="#5865f2">
-    <v-list-item link href="https://discord.gg/f7QQnEBQQt" target="_blank" class="flex-grow-1 py-6">
-      <template v-slot:prepend>
-        <v-avatar color="white">
-          <v-icon color="#5865f2">$forumOutline</v-icon>
-        </v-avatar>
-      </template>
-      <v-list-item-title>We are on Discord!</v-list-item-title>
-      <v-list-item-subtitle>
-        Join our Discord server to get the latest news and updates.
-      </v-list-item-subtitle>
-      <template v-slot:append>
-        <v-btn variant="flat" color="white" append-icon="$openInNew"> Join </v-btn>
-      </template>
-    </v-list-item>
-  </v-app-bar>
+  <top-banner />
 
-  <v-app-bar app v-if="$slots.title || $slots.icons || $slots.extension">
+  <v-toolbar app v-if="$slots.title || $slots.icons || $slots.extension" class="d-md-none">
     <!--  toolbar prepend  -->
     <template v-if="toolbarPrepend" #prepend>
       <slot name="prepend">
@@ -61,7 +47,7 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
     <template v-if="$slots.extension" #extension>
       <slot name="extension" />
     </template>
-  </v-app-bar>
+  </v-toolbar>
 
   <v-navigation-drawer width="244">
     <v-sheet class="d-flex justify-center align-center" height="128" width="100%">
@@ -71,11 +57,11 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
     <v-list>
       <v-list>
         <v-list-item link prepend-icon="$clipboardTextMultiple" title="Feed" :to="'/feed'" />
-        <v-list-item link prepend-icon="$timer" title="Trainen" :to="'/'" />
+        <v-list-item link prepend-icon="$timer" title="Trainen" :to="'/workouts'" />
         <v-list-item link prepend-icon="$trophy" title="Competitie" :to="'/leaderboard'" />
         <v-list-item link prepend-icon="$calendar" title="Missies" :to="'/quests'" />
         <v-list-item link prepend-icon="$account" title="Profiel" :to="'/profile'" />
-        <v-list-item link prepend-icon="$cog" title="Instellingen" :to="'/settings'" />
+        <v-list-item link prepend-icon="$cog" title="Instellingen" :to="'/account/general'" />
       </v-list>
     </v-list>
   </v-navigation-drawer>
@@ -121,7 +107,7 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
         <v-icon>$trophy</v-icon>
         <span class="d-sr-only">{{ t('Competition') }}</span>
       </v-btn>
-      <v-btn :title="t('Account')" to="/settings">
+      <v-btn :title="t('Account')" to="/account">
         <v-icon>$cog</v-icon>
         <span class="d-sr-only">{{ t('Account') }}</span>
       </v-btn>

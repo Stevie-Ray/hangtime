@@ -30,7 +30,7 @@
         <v-col cols="6">
           <v-sheet border class="pa-4" rounded>
             <div class="d-flex ga-4">
-              <div><v-icon icon="$cash" size="40" /></div>
+              <div><v-icon icon="$cashMultiple" size="40" /></div>
               <div>
                 <div class="text-h6">3846</div>
                 <div class="text-caption">Punten</div>

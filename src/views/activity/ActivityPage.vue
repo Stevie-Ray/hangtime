@@ -7,7 +7,6 @@ import { time } from '@/helpers'
 
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import NewsCards from '@/components/molecules/NewsCards/NewsCards.vue'
-import NotificationBell from '@/components/molecules/NotificationBell/NotificationBell.vue'
 import SidebarStatistics from '@/components/molecules/SidebarStatistics/SidebarStatistics.vue'
 import SidebarPremium from '@/components/molecules/SidebarPremium/SidebarPremium.vue'
 import SidebarQuests from '@/components/molecules/SidebarQuests/SidebarQuests.vue'
@@ -76,7 +75,6 @@ useHead({
     <template #default>
       <v-row>
         <v-col cols="12">
-          <notification-bell />
           <news-cards />
         </v-col>
       </v-row>

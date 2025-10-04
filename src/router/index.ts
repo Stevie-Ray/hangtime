@@ -7,10 +7,10 @@ import { useAuthenticationStore } from '@/stores/authentication.store'
 // These can be imported from other files
 
 // Account
-// const AccountPage = () => import('@/views/account/AccountPage.vue')
+const AccountPage = () => import('@/views/account/AccountPage.vue')
 const AccountGeneralPage = () => import('@/views/account/AccountGeneralPage.vue')
 const AccountHangboardsPage = () => import('@/views/account/AccountHangboardsPage.vue')
-const AccountHelpPage = () => import('@/views/account/AccountHelpPage.vue')
+const AccountNotificationsPage = () => import('@/views/account/AccountNotificationsPage.vue')
 const AccountPrivacyPage = () => import('@/views/account/AccountPrivacyPage.vue')
 const AccountProfilePage = () => import('@/views/account/AccountProfilePage.vue')
 const AccountSubscriptionPage = () => import('@/views/account/AccountSubscriptionPage.vue')
@@ -92,16 +92,21 @@ const routes: Array<RouteRecordRaw> = [
   },
   { path: '/quests', component: QuestsPage, name: 'QuestsPage' },
   { path: '/profile', component: ProfilePage, name: 'ProfilePage' },
-  { path: '/settings', redirect: '/account/general', name: 'AccountPage' },
+  { path: '/account', component: AccountPage, name: 'AccountPage' },
+  {
+    path: '/account/general',
+    component: AccountGeneralPage,
+    name: 'AccountGeneralPage'
+  },
   {
     path: '/account/profile',
     component: AccountProfilePage,
     name: 'AccountProfilePage'
   },
   {
-    path: '/account/general',
-    component: AccountGeneralPage,
-    name: 'AccountGeneralPage'
+    path: '/account/notifications',
+    component: AccountNotificationsPage,
+    name: 'AccountNotificationsPage'
   },
   {
     path: '/account/hangboards',
@@ -122,11 +127,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/account/subscription',
     component: AccountSubscriptionPage,
     name: 'AccountSubscriptionPage'
-  },
-  {
-    path: '/account/help',
-    component: AccountHelpPage,
-    name: 'AccountHelpPage'
   },
   {
     path: '/brands',
