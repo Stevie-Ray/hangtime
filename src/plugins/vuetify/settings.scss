@@ -108,12 +108,12 @@ $_root-font-size: 16;
     //"padding-top": false,
     //"padding-x": false,
     //"padding-y": false,
-    'padding': false,
+    // 'padding': false,
     'position': (
-      property: position,
-      class: position,
-      values: relative fixed absolute sticky
-    ),
+        property: position,
+        class: position,
+        values: relative fixed absolute sticky
+      ),
     'rounded-bottom-end': false,
     'rounded-bottom-start': false,
     'rounded-bottom': false,

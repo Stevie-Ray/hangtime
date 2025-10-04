@@ -74,47 +74,45 @@ useHead({
     </template>
 
     <template #default>
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <notification-bell />
-            <news-cards />
-          </v-col>
-        </v-row>
+      <v-row>
+        <v-col cols="12">
+          <notification-bell />
+          <news-cards />
+        </v-col>
+      </v-row>
 
-        <v-row>
-          <v-col cols="12">
-            <v-card v-for="(dates, date) in activitiesByDay" :key="date" class="mb-4 pb-2">
-              <v-list lines="two">
-                <v-list-subheader>{{ activityDate(date) }}</v-list-subheader>
-                <template v-for="(activity, j) in dates" :key="j">
-                  <v-list-item :to="activityUrl(activity)">
-                    <template #prepend>
-                      <v-avatar color="grey-darken-1"></v-avatar>
-                    </template>
+      <v-row>
+        <v-col cols="12">
+          <v-card v-for="(dates, date) in activitiesByDay" :key="date" class="mb-4 pb-2">
+            <v-list lines="two">
+              <v-list-subheader>{{ activityDate(date) }}</v-list-subheader>
+              <template v-for="(activity, j) in dates" :key="j">
+                <v-list-item :to="activityUrl(activity)">
+                  <template #prepend>
+                    <v-avatar color="grey-darken-1"></v-avatar>
+                  </template>
 
-                    <template v-if="activity.type !== 'quick'" #append>
-                      <div class="d-flex flex-column">
-                        <v-chip v-if="activity.difficulty" size="x-small" variant="outlined">
-                          {{ difficultyById(activity.difficulty) }}
-                        </v-chip>
-                      </div>
-                    </template>
+                  <template v-if="activity.type !== 'quick'" #append>
+                    <div class="d-flex flex-column">
+                      <v-chip v-if="activity.difficulty" size="x-small" variant="outlined">
+                        {{ difficultyById(activity.difficulty) }}
+                      </v-chip>
+                    </div>
+                  </template>
 
-                    <v-list-item-title>{{ activity.name }}</v-list-item-title>
+                  <v-list-item-title>{{ activity.name }}</v-list-item-title>
 
-                    <v-list-item-subtitle
-                      >{{ time(activity.elapsed_time) }} -
-                      {{ activity.description }}</v-list-item-subtitle
-                    >
-                  </v-list-item>
-                  <v-divider inset v-if="j !== dates.length - 1"></v-divider>
-                </template>
-              </v-list>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+                  <v-list-item-subtitle
+                    >{{ time(activity.elapsed_time) }} -
+                    {{ activity.description }}</v-list-item-subtitle
+                  >
+                </v-list-item>
+                <v-divider inset v-if="j !== dates.length - 1"></v-divider>
+              </template>
+            </v-list>
+          </v-card>
+        </v-col>
+      </v-row>
     </template>
 
     <template #sidebar>

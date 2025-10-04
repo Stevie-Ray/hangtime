@@ -83,7 +83,7 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
   <v-main>
     <div
       v-if="$slots.sticky"
-      class="position-sticky bg-surface top-0 pa-3 mt-2 d-md-none"
+      class="position-sticky bg-surface top-0 pa-3 d-md-none"
       style="z-index: 1"
     >
       <slot name="sticky" />

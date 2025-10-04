@@ -45,7 +45,7 @@ watch(
 <template>
   <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
     <template v-slot:activator="{ props }">
-      <v-btn variant="text" color="text" icon="$tuneVariant" v-bind="props"></v-btn>
+      <v-btn variant="text" color="text" size="small" icon="$tuneVariant" v-bind="props"></v-btn>
     </template>
     <v-card>
       <v-toolbar>

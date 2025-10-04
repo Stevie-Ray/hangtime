@@ -1,12 +1,22 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+</script>
 
 <template>
   <footer>
     <v-row>
       <v-col cols="12">
-        <v-btn size="x-small" variant="plain"> Over </v-btn>
-        <v-btn size="x-small" variant="plain"> Voorwaarden </v-btn>
-        <v-btn size="x-small" variant="plain"> Privacy </v-btn>
+        <v-btn href="mailto:mail@stevie-ray.nl" size="x-small" variant="plain">
+          {{ t('Help') }}
+        </v-btn>
+        <v-btn to="/brands" size="x-small" variant="plain">
+          {{ t('Hangboards') }}
+        </v-btn>
+        <v-btn to="/privacy" size="x-small" variant="plain">
+          {{ t('Privacy') }}
+        </v-btn>
       </v-col>
     </v-row>
   </footer>
