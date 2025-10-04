@@ -4,7 +4,7 @@ import { useLocalStorage } from '@vueuse/core'
 const items = [
   {
     title: 'We are on Discord!',
-    subtitle: 'Join our Discord server to get the latest news and updates.',
+    subtitle: 'Join to get the latest news and updates.',
     link: 'https://discord.gg/f7QQnEBQQt',
     color: '#5865f2',
     icon: '$forumOutline',
@@ -35,7 +35,7 @@ const show = useLocalStorage('topBannerVisible', true)
         {{ item.subtitle }}
       </v-list-item-subtitle>
       <template v-slot:append>
-        <v-btn variant="flat" color="white" append-icon="$openInNew" class="me-2">
+        <v-btn variant="flat" color="white" append-icon="$openInNew" class="me-2 d-none d-md-flex">
           {{ item.buttonText }}
         </v-btn>
         <v-btn icon="$close" size="x-small" class="me-2 ms-6" @click.stop.prevent="show = false" />

@@ -4,11 +4,9 @@ import { computed, ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { useUserStore } from '@/stores/user.store'
 import { useWorkoutsStore } from '@/stores/workouts.store'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { useAppStore } from '@/stores/app.store'
-import ExerciseHangboard from '@/components/atoms/ExerciseHangboard/ExerciseHangboard.vue'
 import WorkoutSubscribe from '@/components/atoms/WorkoutSubscribe/WorkoutSubscribe.vue'
 import WorkoutCommunityFilter from '@/components/molecules/dialog/WorkoutCommunityFilter/WorkoutCommunityFilter.vue'
 import WalkthroughApp from '@/components/molecules/dialog/WalkthroughApp/WalkthroughApp.vue'
@@ -18,24 +16,21 @@ import SidebarPremium from '@/components/molecules/SidebarPremium/SidebarPremium
 import SidebarQuests from '@/components/molecules/SidebarQuests/SidebarQuests.vue'
 import SidebarLeaderboard from '@/components/molecules/SidebarLeaderboard/SidebarLeaderboard.vue'
 import SidebarLinks from '@/components/molecules/SidebarLinks/SidebarLinks.vue'
+import SelectHangboard from '@/components/molecules/SelectHangboard/SelectHangboard.vue'
 import imgLogo from '@/assets/logo.svg'
 
 import { time } from '@/helpers'
 
-const { getUserHangboardCompany, getUserHangboard, getUserHangboards } = storeToRefs(useUserStore())
 const {
   workoutsCommunity,
   getWorkoutsBySelectedHangboard,
   reachedLastUserWorkouts,
   reachedLastCommunityWorkouts
 } = storeToRefs(useWorkoutsStore())
-const { getHangboardNameByIds } = useUserStore()
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
-const { updateUser } = useAuthenticationStore()
 const { online } = storeToRefs(useAppStore())
-const { fetchCommunityWorkouts, fetchSubscribedWorkouts, resetCommunityWorkouts } =
-  useWorkoutsStore()
+const { fetchCommunityWorkouts, fetchSubscribedWorkouts } = useWorkoutsStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -93,15 +88,6 @@ const fetchMoreWorkouts = async ({
   }
 }
 
-const hangboardMenu = ref(false)
-
-const setHangboard = async () => {
-  updateUser()
-  workoutsCommunity.value = []
-  resetCommunityWorkouts()
-  await fetchCommunityWorkouts()
-}
-
 const levels = computed(() => [
   { name: t('easy'), value: 1 },
   { name: t('normal'), value: 2 },
@@ -128,90 +114,37 @@ useHead({
     <template #default>
       <v-row>
         <!-- Hangboard -->
-        <v-col align-self="center">
-          <v-menu v-model="hangboardMenu">
-            <template v-slot:activator="{ props }">
-              <div v-bind="props" class="hangboard-select" :title="t('Select your hangboard')">
-                <span v-if="getUserHangboardCompany && getUserHangboard">
-                  {{ `${getUserHangboardCompany.name} - ${getUserHangboard.name}` }}
-                </span>
-                <span v-if="hangboardMenu && getUserHangboards?.length > 1"
-                  ><v-icon>$chevronUp</v-icon></span
-                >
-                <span v-if="!hangboardMenu && getUserHangboards?.length > 1"
-                  ><v-icon>$chevronDown</v-icon></span
-                >
-              </div>
-            </template>
-
-            <v-card v-if="getUserHangboards?.length > 1" :max-width="600">
-              <v-card-text>
-                <exercise-hangboard
-                  v-if="getUserHangboard && getUserHangboardCompany"
-                  :hangboard="{
-                    hangboard: getUserHangboard.id,
-                    company: getUserHangboardCompany.id
-                  }"
-                />
-                <v-divider class="my-4" />
-
-                <v-radio-group
-                  v-if="user && getUserHangboards?.length > 0"
-                  v-model="user.settings.selected"
-                  :disabled="!online"
-                  @update:modelValue="setHangboard"
-                  mandatory
-                >
-                  <v-radio
-                    v-for="(hangboard, index) in getUserHangboards"
-                    :key="index"
-                    :label="getHangboardNameByIds(hangboard.company, hangboard.hangboard)"
-                    :value="index"
-                  ></v-radio>
-                </v-radio-group>
-
-                <v-btn
-                  variant="outlined"
-                  color="text"
-                  size="small"
-                  class="mr-2"
-                  to="/account/hangboards"
-                >
-                  <v-icon class="mr-1">$keyboardOutline</v-icon>
-                  <span>{{ t('Hangboards') }}</span>
-                </v-btn>
-              </v-card-text>
-            </v-card>
-          </v-menu>
+        <v-col cols="auto" class="flex-grow-1 w-0">
+          <select-hangboard />
         </v-col>
-        <v-col cols="3" md="2">
-          <div class="d-flex justify-end align-center ga-2 h-100">
+        <v-col cols="auto" class="flex-shrink-0">
+          <div class="d-flex ga-6">
             <v-btn
               v-if="isWorkoutsRoute"
-              icon="$timerPlayOutline"
-              size="small"
-              variant="text"
-              color="text"
+              prepend-icon="$timerPlayOutline"
+              color="surface"
               :title="t('Quick workout')"
               to="/workouts/quick"
-            />
+            >
+              <span class="d-none d-md-block">{{ t('Quick sesh') }}</span>
+            </v-btn>
             <v-btn
               v-if="isWorkoutsRoute"
               :disabled="!online"
-              icon="$plus"
-              size="small"
-              variant="text"
-              color="text"
+              prepend-icon="$plus"
+              color="surface"
               :title="t('Add a workout')"
               to="/workouts/new"
               class="d-none d-md-flex"
-            />
+            >
+              {{ t('Workout') }}
+            </v-btn>
             <workout-community-filter v-if="isWorkoutsCommunityRoute" />
           </div>
         </v-col>
         <!-- Tabs -->
         <v-col cols="12">
-          <v-tabs grow>
+          <v-tabs grow bg-color="surface">
             <v-tab to="/workouts" color="text">
               <v-icon class="mr-1">$account</v-icon>
               <span>{{ t('My Workouts') }}</span>
@@ -227,9 +160,9 @@ useHead({
               <v-infinite-scroll :onLoad="fetchMoreWorkouts" side="end" :key="route.path">
                 <template v-for="(workout, index) in workoutsList" :key="workout.id">
                   <v-list-item
-                    v-if="getUserHangboard && getUserHangboardCompany && workout"
+                    v-if="workout"
                     :class="`v-list-item-${index}`"
-                    :to="`/workouts/${getUserHangboard.id}/${getUserHangboardCompany.id}/${workout.id}`"
+                    :to="`/workouts/${workout.hangboard}/${workout.company}/${workout.id}`"
                   >
                     <template #prepend>
                       <v-avatar v-if="workout.user" color="grey-darken-1">
@@ -325,9 +258,6 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-.hangboard-select {
-  cursor: pointer;
-}
 .v-theme--dark {
   .v-empty-state {
     &:deep(.v-empty-state__media) {
