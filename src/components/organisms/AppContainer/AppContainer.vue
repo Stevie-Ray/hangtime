@@ -62,24 +62,24 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
 
     <v-list>
       <v-list>
-        <v-list-item link prepend-icon="$clipboardTextMultiple" title="Feed" :to="'/feed'" />
-        <v-list-item link prepend-icon="$timer" title="Trainen" :to="'/workouts'" />
-        <v-list-item link prepend-icon="$trophy" title="Competitie" :to="'/leaderboard'" />
+        <v-list-item link prepend-icon="$clipboardTextMultiple" :title="t('Feed')" :to="'/feed'" />
+        <v-list-item link prepend-icon="$timer" :title="t('Workouts')" :to="'/workouts'" />
+        <v-list-item link prepend-icon="$trophy" :title="t('Competition')" :to="'/leaderboard'" />
         <v-list-item
           link
           prepend-icon="$calendar"
-          title="Missies"
+          :title="t('Quests')"
           :to="'/quests'"
           v-if="isDevelopment()"
         />
         <v-list-item
           link
           prepend-icon="$account"
-          title="Profiel"
+          :title="t('Profile')"
           :to="'/profile'"
           v-if="isDevelopment()"
         />
-        <v-list-item link prepend-icon="$cog" title="Instellingen" :to="'/account/general'" />
+        <v-list-item link prepend-icon="$cog" :title="t('Settings')" :to="'/account/general'" />
       </v-list>
     </v-list>
   </v-navigation-drawer>

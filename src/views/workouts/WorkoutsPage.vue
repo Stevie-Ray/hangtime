@@ -126,7 +126,7 @@ useHead({
               :title="t('Quick workout')"
               to="/workouts/quick"
             >
-              <span class="d-none d-md-block">{{ t('Quick sesh') }}</span>
+              <span class="d-none d-md-block">{{ t('Quick session') }}</span>
             </v-btn>
             <v-btn
               v-if="isWorkoutsRoute"

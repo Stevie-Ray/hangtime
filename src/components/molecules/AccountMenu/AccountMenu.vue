@@ -78,7 +78,7 @@ const cards = computed<{ title: string; items: Item[] }[]>(() => [
     title: t('Subscription'),
     items: [
       {
-        title: t('HangTime Premium'),
+        title: t('Subscription'),
         icon: '$cashMultiple',
         subtitle: t('Unlimited workouts'),
         link: '/account/subscription'
@@ -96,7 +96,7 @@ const cards = computed<{ title: string; items: Item[] }[]>(() => [
         external: true
       },
       {
-        title: t('Discord'),
+        title: 'Discord',
         icon: '$forumOutline',
         subtitle: t('Chat, support, feedback'),
         link: 'https://discord.gg/f7QQnEBQQt',
