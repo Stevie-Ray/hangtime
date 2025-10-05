@@ -3,12 +3,12 @@ import { isDevelopment } from '@/helpers'
 </script>
 
 <template>
-  <v-row v-if="isDevelopment()">
+  <v-row v-if="isDevelopment()" no-gutters>
     <v-col cols="12">
-      <div class="d-flex justify-space-between">
-        <v-btn prepend-icon="$calendar" variant="flat">2</v-btn>
-        <v-btn prepend-icon="$trophy" variant="flat">1</v-btn>
-        <v-btn prepend-icon="$cashMultiple" variant="flat">3846</v-btn>
+      <div class="d-flex justify-space-between py-1 py-md-0">
+        <v-btn prepend-icon="$calendar" variant="flat" color="surface">2</v-btn>
+        <v-btn prepend-icon="$trophy" variant="flat" color="surface">1</v-btn>
+        <v-btn prepend-icon="$cashMultiple" variant="flat" color="surface">3846</v-btn>
       </div>
     </v-col>
   </v-row>

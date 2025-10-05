@@ -23,19 +23,24 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
 <template>
   <top-banner />
 
-  <v-toolbar app v-if="$slots.title || $slots.icons || $slots.extension" class="d-md-none">
+  <v-app-bar
+    color="surface"
+    app
+    v-if="($slots.title || $slots.icons || $slots.extension) && $vuetify.display.smAndDown"
+    class="d-md-none"
+  >
     <!--  toolbar prepend  -->
     <template v-if="toolbarPrepend" #prepend>
       <slot name="prepend">
-        <router-link v-if="toolbarPrependUrl" :to="toolbarPrependUrl" style="color: inherit">
-          <v-icon>$arrowLeft</v-icon>
-        </router-link>
-        <v-icon v-else @click="router.go(-1)">$arrowLeft</v-icon>
+        <v-btn
+          icon="$arrowLeft"
+          @click="toolbarPrependUrl ? router.push(toolbarPrependUrl) : router.go(-1)"
+        />
       </slot>
     </template>
 
     <!--  toolbar titles  -->
-    <v-toolbar-title v-if="$slots.title">
+    <v-toolbar-title v-if="$slots.title" style="margin-inline-start: 0">
       <slot name="title"></slot>
     </v-toolbar-title>
 
@@ -48,9 +53,9 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
     <template v-if="$slots.extension" #extension>
       <slot name="extension" />
     </template>
-  </v-toolbar>
+  </v-app-bar>
 
-  <v-navigation-drawer width="244">
+  <v-navigation-drawer width="244" :rail="$vuetify.display.md" :permanent="$vuetify.display.md">
     <v-sheet class="d-flex justify-center align-center" height="128" width="100%">
       <inline-svg height="64" :src="imgLogo" width="100%" />
     </v-sheet>
@@ -82,7 +87,7 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
   <v-main>
     <div
       v-if="$slots.sticky"
-      class="position-sticky bg-surface top-0 pa-3 d-md-none"
+      class="position-sticky bg-surface top-0 px-4 d-md-none"
       style="z-index: 1"
     >
       <slot name="sticky" />
@@ -112,7 +117,7 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
         <v-icon>$clipboardTextMultiple</v-icon>
         <span class="d-sr-only">{{ t('Feed') }}</span>
       </v-btn>
-      <v-btn :title="t('Workouts')" to="/">
+      <v-btn :title="t('Workouts')" to="/workouts">
         <v-icon>$timer</v-icon>
         <span class="d-sr-only">{{ t('Workouts') }}</span>
       </v-btn>

@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <v-container
+  <v-row
     ref="progress"
     v-if="workout?.exercises"
     :class="{
@@ -157,221 +157,221 @@ onBeforeUnmount(() => {
     }"
     :style="{ transition: progressTransition }"
     class="position-absolute h-100 px-0 py-0 progress"
-  ></v-container>
-  <v-container v-if="workout?.exercises" class="position-relative">
-    <v-row justify="center">
-      <v-col cols="12" md="7" class="d-flex flex-column" style="min-height: 85vh">
-        <v-row align="center" justify="center">
-          <v-col class="text-center pb-4" cols="12" sm="8">
-            <v-row align="center">
-              <v-col cols="12" class="d-flex justify-space-between align-center">
-                <slider-bluetooth
-                  v-if="bluetoothOutput?.massLeft"
-                  :stream="bluetoothOutput.massLeft"
-                />
-                <div class="timer w-100">
-                  <div class="text-h1">
-                    {{ time(session.clock) }}
-                  </div>
-                  <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
-                    {{ session.clockText }}
-                  </div>
-                  <div v-if="bluetoothOutput?.massTotal" style="overflow: hidden">
-                    <v-row align="center" justify="space-evenly">
-                      <v-col class="text-center">
-                        <div class="text-caption text-uppercase">
-                          {{ t('Max') }}
-                        </div>
-                        <div class="text-h6">
-                          <span> {{ bluetoothOutput.massMax }} KG</span>
-                        </div>
-                      </v-col>
-                      <v-col class="text-center">
-                        <div class="text-caption text-uppercase">
-                          {{ t('Total') }}
-                        </div>
-                        <div class="text-h6">
-                          <span> {{ bluetoothOutput.massTotal }} KG</span>
-                        </div>
-                      </v-col>
-                      <v-col class="text-center">
-                        <div class="text-caption text-uppercase">
-                          {{ t('Average') }}
-                        </div>
-                        <div class="text-h6">
-                          <span> {{ bluetoothOutput.massAverage }} KG</span>
-                        </div>
-                      </v-col>
-                    </v-row>
-                  </div>
-                </div>
-                <slider-bluetooth
-                  v-if="bluetoothOutput?.massRight"
-                  :stream="bluetoothOutput.massRight"
-                />
-              </v-col>
-            </v-row>
-            <v-row class="timer" align="center" justify="space-evenly">
-              <v-col class="text-center">
-                <div class="text-caption text-uppercase">
-                  {{ t('Time') }}
-                </div>
-                <div class="text-h6">
-                  <span v-if="session.clockText === t('Go')">∞</span>
-                  <span v-else>{{ time(exerciseTime) }}</span>
-                </div>
-              </v-col>
-              <v-col v-if="workout?.exercises?.length > 1" class="text-center">
-                <div class="text-caption text-uppercase">
-                  {{ t('Exercise') }}
-                </div>
-                <div class="text-h6">
-                  {{ session.currentExercise + 1 }}/{{ workout?.exercises.length }}
-                </div>
-              </v-col>
-              <v-col v-if="workout?.exercises" class="text-center">
-                <div class="text-caption text-uppercase">
-                  {{ t('Repeat') }}
-                </div>
-                <div v-if="session.exercise" class="text-h6">
-                  {{ session.currentExerciseStateRepeat + 1 }}/{{ session.exercise.repeat + 1 }}
-                </div>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-        <v-row class="flex-grow-0">
-          <v-col cols="12">
-            <v-card class="mb-4">
-              <v-card-text>
-                <slot>
-                  <exercise-card
-                    v-if="workout"
-                    :model-value="session.exercise!"
-                    :hangboard="{
-                      hangboard: workout.hangboard,
-                      company: workout.company
-                    }"
-                    :index="session.currentExercise"
-                    hide-rest
-                    variant="flat"
-                  >
-                  </exercise-card>
-                </slot>
-              </v-card-text>
-            </v-card>
+  ></v-row>
 
-            <v-row class="blend">
-              <v-col cols="12">
-                <div class="d-flex align-center justify-space-between w-100 ga-1 mb-2">
+  <v-row justify="center" v-if="workout?.exercises" class="position-relative">
+    <v-col cols="12" md="7" class="d-flex flex-column" style="min-height: 85vh">
+      <v-row align="center" justify="center">
+        <v-col class="text-center pb-4" cols="12" sm="8">
+          <v-row align="center">
+            <v-col cols="12" class="d-flex justify-space-between align-center">
+              <slider-bluetooth
+                v-if="bluetoothOutput?.massLeft"
+                :stream="bluetoothOutput.massLeft"
+              />
+              <div class="timer w-100">
+                <div class="text-h1">
+                  {{ time(session.clock) }}
+                </div>
+                <div class="text-h6 pt-2 mb-4" style="font-size: 1.5rem !important">
+                  {{ session.clockText }}
+                </div>
+                <div v-if="bluetoothOutput?.massTotal" style="overflow: hidden">
+                  <v-row align="center" justify="space-evenly">
+                    <v-col class="text-center">
+                      <div class="text-caption text-uppercase">
+                        {{ t('Max') }}
+                      </div>
+                      <div class="text-h6">
+                        <span> {{ bluetoothOutput.massMax }} KG</span>
+                      </div>
+                    </v-col>
+                    <v-col class="text-center">
+                      <div class="text-caption text-uppercase">
+                        {{ t('Total') }}
+                      </div>
+                      <div class="text-h6">
+                        <span> {{ bluetoothOutput.massTotal }} KG</span>
+                      </div>
+                    </v-col>
+                    <v-col class="text-center">
+                      <div class="text-caption text-uppercase">
+                        {{ t('Average') }}
+                      </div>
+                      <div class="text-h6">
+                        <span> {{ bluetoothOutput.massAverage }} KG</span>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </div>
+              </div>
+              <slider-bluetooth
+                v-if="bluetoothOutput?.massRight"
+                :stream="bluetoothOutput.massRight"
+              />
+            </v-col>
+          </v-row>
+          <v-row class="timer" align="center" justify="space-evenly">
+            <v-col class="text-center">
+              <div class="text-caption text-uppercase">
+                {{ t('Time') }}
+              </div>
+              <div class="text-h6">
+                <span v-if="session.clockText === t('Go')">∞</span>
+                <span v-else>{{ time(exerciseTime) }}</span>
+              </div>
+            </v-col>
+            <v-col v-if="workout?.exercises?.length > 1" class="text-center">
+              <div class="text-caption text-uppercase">
+                {{ t('Exercise') }}
+              </div>
+              <div class="text-h6">
+                {{ session.currentExercise + 1 }}/{{ workout?.exercises.length }}
+              </div>
+            </v-col>
+            <v-col v-if="workout?.exercises" class="text-center">
+              <div class="text-caption text-uppercase">
+                {{ t('Repeat') }}
+              </div>
+              <div v-if="session.exercise" class="text-h6">
+                {{ session.currentExerciseStateRepeat + 1 }}/{{ session.exercise.repeat + 1 }}
+              </div>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-row class="flex-grow-0">
+        <v-col cols="12">
+          <v-card class="mb-4">
+            <v-card-text>
+              <slot>
+                <exercise-card
+                  v-if="workout"
+                  :model-value="session.exercise!"
+                  :hangboard="{
+                    hangboard: workout.hangboard,
+                    company: workout.company
+                  }"
+                  :index="session.currentExercise"
+                  hide-rest
+                  variant="flat"
+                >
+                </exercise-card>
+              </slot>
+            </v-card-text>
+          </v-card>
+
+          <v-row class="blend">
+            <v-col cols="12">
+              <div class="d-flex align-center justify-space-between w-100 ga-1 mb-2">
+                <v-btn
+                  :disabled="!!session.completeCurrentExerciseDisabled()"
+                  :class="{ pulse: !session.completeCurrentExerciseDisabled() }"
+                  icon="$timerCheckOutline"
+                  size="x-large"
+                  class="rounded-circle"
+                  variant="text"
+                  color="text"
+                  :title="!!!session.completeCurrentExerciseDisabled() ? t('Done') : undefined"
+                  @click="session.completeCurrentExercise()"
+                />
+                <div class="d-flex align-center justify-center ga-4">
                   <v-btn
-                    :disabled="!!session.completeCurrentExerciseDisabled()"
-                    :class="{ pulse: !session.completeCurrentExerciseDisabled() }"
-                    icon="$timerCheckOutline"
+                    :disabled="session.currentExercise <= 0"
+                    icon="$skipPrevious"
                     size="x-large"
-                    class="rounded-circle"
                     variant="text"
                     color="text"
-                    :title="!!!session.completeCurrentExerciseDisabled() ? t('Done') : undefined"
-                    @click="session.completeCurrentExercise()"
+                    class="rounded-circle"
+                    :title="session.currentExercise <= 0 ? undefined : t('Previous exercise')"
+                    @click="session.hasExercise('prev')"
                   />
-                  <div class="d-flex align-center justify-center ga-4">
-                    <v-btn
-                      :disabled="session.currentExercise <= 0"
-                      icon="$skipPrevious"
-                      size="x-large"
-                      variant="text"
-                      color="text"
-                      class="rounded-circle"
-                      :title="session.currentExercise <= 0 ? undefined : t('Previous exercise')"
-                      @click="session.hasExercise('prev')"
-                    />
-                    <v-btn
-                      :icon="
-                        !session.isTimerActive ? '$play' : session.pauseTimer ? '$play' : '$pause'
-                      "
-                      size="x-large"
-                      variant="flat"
-                      class="rounded-circle"
-                      :title="
-                        !session.isTimerActive ? t('Go') : session.pauseTimer ? t('Go') : t('Pause')
-                      "
-                      @click="!session.isTimerActive ? session.setupTimer() : toggleWorkout()"
-                    ></v-btn>
-                    <v-btn
-                      :disabled="session.currentExercise >= workout?.exercises?.length - 1"
-                      size="x-large"
-                      class="rounded-circle"
-                      icon="$skipNext"
-                      variant="text"
-                      color="text"
-                      :title="
-                        session.currentExercise >= workout?.exercises?.length - 1
-                          ? undefined
-                          : t('Next exercise')
-                      "
-                      @click="session.hasExercise('next')"
-                    />
-                  </div>
                   <v-btn
-                    :disabled="session.skipRestDisabled()"
-                    icon="$skipForward"
+                    :icon="
+                      !session.isTimerActive ? '$play' : session.pauseTimer ? '$play' : '$pause'
+                    "
+                    size="x-large"
+                    variant="flat"
+                    class="rounded-circle"
+                    :title="
+                      !session.isTimerActive ? t('Go') : session.pauseTimer ? t('Go') : t('Pause')
+                    "
+                    @click="!session.isTimerActive ? session.setupTimer() : toggleWorkout()"
+                  ></v-btn>
+                  <v-btn
+                    :disabled="session.currentExercise >= workout?.exercises?.length - 1"
                     size="x-large"
                     class="rounded-circle"
+                    icon="$skipNext"
                     variant="text"
                     color="text"
                     :title="
-                      session.skipRestDisabled()
+                      session.currentExercise >= workout?.exercises?.length - 1
                         ? undefined
-                        : t('Skip {time}', { time: session.clock })
+                        : t('Next exercise')
                     "
-                    @click="session.skipRest()"
+                    @click="session.hasExercise('next')"
                   />
                 </div>
-                <div class="d-flex justify-space-between align-center w-100 px-2">
-                  <div class="d-flex">
-                    <workout-subscribe v-if="!quick" v-model="workout" />
-                  </div>
-                  <div class="d-flex">
-                    <workout-bluetooth
-                      v-model="workout"
-                      size="small"
-                      @start="!session.isTimerActive ? session.setupTimer() : null"
-                    />
-                    <workout-share v-model="workout" size="small" />
-                  </div>
+                <v-btn
+                  :disabled="session.skipRestDisabled()"
+                  icon="$skipForward"
+                  size="x-large"
+                  class="rounded-circle"
+                  variant="text"
+                  color="text"
+                  :title="
+                    session.skipRestDisabled()
+                      ? undefined
+                      : t('Skip {time}', { time: session.clock })
+                  "
+                  @click="session.skipRest()"
+                />
+              </div>
+              <div class="d-flex justify-space-between align-center w-100 px-2">
+                <div class="d-flex">
+                  <workout-subscribe v-if="!quick" v-model="workout" />
                 </div>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-col>
+                <div class="d-flex">
+                  <workout-bluetooth
+                    v-model="workout"
+                    size="small"
+                    @start="!session.isTimerActive ? session.setupTimer() : null"
+                  />
+                  <workout-share v-model="workout" size="small" />
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-col>
 
-      <v-col v-if="!quick" cols="12" md="5">
-        <v-card v-if="session.exerciseNext" class="mb-8">
-          <v-card-title>{{ t('Next exercise') }}</v-card-title>
-          <v-card-text>
-            <exercise-card
-              :model-value="session.exerciseNext"
-              :hangboard="{
-                hangboard: workout.hangboard,
-                company: workout.company
-              }"
-              :index="session.currentExercise + 1"
-              hide-rest
-              variant="flat"
-            />
-          </v-card-text>
-        </v-card>
-        <v-card v-if="session.exercise?.exercise !== null" class="mb-8">
-          <v-card-title>{{ t('About the exercise') }}</v-card-title>
-          <v-card-text>
-            <exercise-about :model-value="session.exercise!" />
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-col v-if="!quick" cols="12" md="5">
+      <v-card v-if="session.exerciseNext" class="mb-8">
+        <v-card-title>{{ t('Next exercise') }}</v-card-title>
+        <v-card-text>
+          <exercise-card
+            :model-value="session.exerciseNext"
+            :hangboard="{
+              hangboard: workout.hangboard,
+              company: workout.company
+            }"
+            :index="session.currentExercise + 1"
+            hide-rest
+            variant="flat"
+          />
+        </v-card-text>
+      </v-card>
+      <v-card v-if="session.exercise?.exercise !== null" class="mb-8">
+        <v-card-title>{{ t('About the exercise') }}</v-card-title>
+        <v-card-text>
+          <exercise-about :model-value="session.exercise!" />
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+
   <!-- Show subscribe wall -->
   <subscribe-to-app
     v-if="

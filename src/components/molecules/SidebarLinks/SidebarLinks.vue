@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { isDevelopment } from '@/helpers'
 
 const { t } = useI18n()
 </script>
 
 <template>
-  <footer>
+  <footer v-if="isDevelopment()">
     <v-row>
       <v-col cols="12">
         <v-btn href="mailto:mail@stevie-ray.nl" size="x-small" variant="plain">

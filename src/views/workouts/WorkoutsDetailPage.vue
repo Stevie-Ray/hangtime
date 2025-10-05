@@ -156,7 +156,7 @@ useHead({
     <template #default>
       <v-row v-if="workout">
         <v-col cols="12" md="5" order-md="last">
-          <div class="sticky">
+          <div class="position-sticky top-0">
             <workout-summary v-model="workout" :edit="edit" @save="workoutSaveDialog = true" />
           </div>
         </v-col>
@@ -217,12 +217,6 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-.sticky {
-  @media (min-width: 960px) {
-    position: sticky;
-    top: 68px;
-  }
-}
 .v-toolbar .v-btn--size-x-large {
   min-width: 64px;
   padding: 0 12px;
@@ -236,13 +230,20 @@ useHead({
 }
 </style>
 
-<style lang="scss">
-.v-fab__container {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  align-self: initial !important;
-  justify-content: flex-end;
+<style lang="scss" scoped>
+// @use '@/plugins/vuetify/settings' as settings;
+
+.v-fab {
+  :deep(.v-fab__container) {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    align-self: initial !important;
+    justify-content: flex-end;
+  }
+  &--extended :deep(.v-btn) {
+    border-radius: 0 !important;
+  }
 }
 </style>

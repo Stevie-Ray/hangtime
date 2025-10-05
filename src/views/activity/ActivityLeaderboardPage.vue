@@ -97,11 +97,15 @@ const currentRank = 4
         <v-col cols="12">
           <v-menu v-model="leaderboardMenu">
             <template v-slot:activator="{ props }">
-              <div v-bind="props" class="leaderboard-select">
+              <v-btn
+                color="surface"
+                class="justify-space-between"
+                v-bind="props"
+                block
+                :append-icon="leaderboardMenu ? '$chevronDown' : '$chevronUp'"
+              >
                 <span v-if="selectedHeader">{{ t(selectedHeader.text) }}</span>
-                <span v-if="leaderboardMenu"><v-icon>$chevronUp</v-icon></span>
-                <span v-else><v-icon>$chevronDown</v-icon></span>
-              </div>
+              </v-btn>
             </template>
 
             <v-card>
@@ -117,7 +121,8 @@ const currentRank = 4
               </v-card-text>
             </v-card>
           </v-menu>
-
+        </v-col>
+        <v-col cols="12">
           <v-table>
             <v-table>
               <tbody v-if="selectedLeaderboard">
