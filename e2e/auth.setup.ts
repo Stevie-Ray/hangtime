@@ -1,9 +1,12 @@
 import { test as setup, expect } from '@playwright/test'
 import path from 'path'
+import dotenv from 'dotenv'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
 const authFile = path.join(__dirname, '../e2e/.auth/user.json')
 
@@ -24,7 +27,7 @@ setup('authenticate', async ({ page }) => {
   await loginButton.click()
 
   // Wait for successful login
-  const workoutLink = page.getByRole('link', { name: 'Workouts' })
+  const workoutLink = page.getByRole('listitem').filter({ hasText: 'Workouts' })
   await expect(workoutLink).toBeVisible({ timeout: 10000 })
 
   // Copy the data in IndexedDB to the local storage
