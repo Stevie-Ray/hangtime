@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
 import IRCRA from 'ircra'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
+import AccountMenu from '@/components/molecules/AccountMenu/AccountMenu.vue'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { useAppStore } from '@/stores/app.store'
 import { loadLanguageAsync } from '@/plugins/i18n'
@@ -145,96 +146,102 @@ useHead({
     </template>
 
     <template #default>
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <v-list lines="two">
-              <v-list-item>
-                <template #prepend>
-                  <v-icon>$chartGantt</v-icon>
+      <v-row>
+        <v-col cols="12">
+          <v-list lines="two">
+            <v-list-item>
+              <template #prepend>
+                <v-icon>$chartGantt</v-icon>
+              </template>
+              <v-select
+                v-if="user"
+                v-model="user!.settings.scale"
+                :disabled="!online"
+                :items="scale"
+                :label="t('Grading system')"
+                item-title="name"
+                item-value="value"
+                @update:modelValue="updateUser"
+                class="pt-2"
+              ></v-select>
+            </v-list-item>
+
+            <v-list-item>
+              <template #prepend>
+                <v-icon>$translate</v-icon>
+              </template>
+
+              <v-select
+                v-if="user"
+                v-model="settingsLocale"
+                :disabled="!online"
+                :items="language"
+                :item-props="true"
+                :label="t('Language')"
+                @update:modelValue="updateUser"
+                class="pt-2"
+              >
+                <template #item="{ item, props }">
+                  <v-list-item v-bind="props">
+                    <template #title>
+                      <span>
+                        {{
+                          item.raw.country
+                            ? countries.find((country) => country.alpha2 === item.raw.country)
+                                ?.emoji
+                            : ''
+                        }}&nbsp;{{ item.title }}</span
+                      >
+                    </template>
+                  </v-list-item>
                 </template>
-                <v-select
-                  v-if="user"
-                  v-model="user!.settings.scale"
-                  :disabled="!online"
-                  :items="scale"
-                  :label="t('Grading system')"
-                  item-title="name"
-                  item-value="value"
-                  @update:modelValue="updateUser"
-                  class="pt-2"
-                ></v-select>
-              </v-list-item>
+              </v-select>
+            </v-list-item>
 
-              <v-list-item>
-                <template #prepend>
-                  <v-icon>$translate</v-icon>
-                </template>
+            <v-list-item>
+              <template #prepend>
+                <v-icon>$weight</v-icon>
+              </template>
 
-                <v-select
-                  v-if="user"
-                  v-model="settingsLocale"
-                  :disabled="!online"
-                  :items="language"
-                  :item-props="true"
-                  :label="t('Language')"
-                  @update:modelValue="updateUser"
-                  class="pt-2"
-                >
-                  <template #item="{ item, props }">
-                    <v-list-item v-bind="props">
-                      <template #title>
-                        <span>
-                          {{
-                            item.raw.country
-                              ? countries.find((country) => country.alpha2 === item.raw.country)
-                                  ?.emoji
-                              : ''
-                          }}&nbsp;{{ item.title }}</span
-                        >
-                      </template>
-                    </v-list-item>
-                  </template>
-                </v-select>
-              </v-list-item>
+              <v-select
+                v-if="user"
+                v-model="user!.settings.weight"
+                :disabled="!online"
+                :items="units"
+                :label="t('Weight system')"
+                @update:modelValue="updateUser"
+                class="pt-2"
+              >
+              </v-select>
+            </v-list-item>
 
-              <v-list-item>
-                <template #prepend>
-                  <v-icon>$weight</v-icon>
-                </template>
+            <v-list-item>
+              <template #prepend>
+                <v-icon>$themeLightDark</v-icon>
+              </template>
 
-                <v-select
-                  v-if="user"
-                  v-model="user!.settings.weight"
-                  :disabled="!online"
-                  :items="units"
-                  :label="t('Weight system')"
-                  @update:modelValue="updateUser"
-                  class="pt-2"
-                >
-                </v-select>
-              </v-list-item>
+              <v-select
+                v-if="user"
+                v-model="user!.settings.theme"
+                :disabled="!online"
+                :items="themes"
+                :label="t('Theme')"
+                @update:modelValue="setTheme"
+                class="pt-2"
+              >
+              </v-select>
+            </v-list-item>
+          </v-list>
+        </v-col>
+      </v-row>
+    </template>
 
-              <v-list-item>
-                <template #prepend>
-                  <v-icon>$themeLightDark</v-icon>
-                </template>
-
-                <v-select
-                  v-if="user"
-                  v-model="user!.settings.theme"
-                  :disabled="!online"
-                  :items="themes"
-                  :label="t('Theme')"
-                  @update:modelValue="setTheme"
-                  class="pt-2"
-                >
-                </v-select>
-              </v-list-item>
-            </v-list>
-          </v-col>
-        </v-row>
-      </v-container>
+    <template #sidebar>
+      <v-row>
+        <v-col cols="12">
+          <account-menu />
+        </v-col>
+      </v-row>
     </template>
   </app-container>
 </template>

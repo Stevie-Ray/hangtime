@@ -63,7 +63,7 @@ useHead({
       <v-container>
         <v-row :class="!user ? 'mb-10' : 'mb-4'">
           <v-col cols="12" md="5" order-md="last">
-            <div class="sticky">
+            <div class="position-sticky top-0">
               <v-card class="mx-auto" max-width="100%" theme="light">
                 <v-img :src="useRandomImage()" cover>
                   <v-card-text style="height: 112px">
@@ -182,12 +182,6 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-.sticky {
-  @media (min-width: 960px) {
-    position: sticky;
-    top: 68px;
-  }
-}
 .v-responsive:deep(.v-responsive__content) {
   display: flex;
   flex-direction: column;

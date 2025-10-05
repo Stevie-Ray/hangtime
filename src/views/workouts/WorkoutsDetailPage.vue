@@ -154,47 +154,45 @@ useHead({
     </template>
 
     <template #default>
-      <v-container>
-        <v-row v-if="workout">
-          <v-col cols="12" md="5" order-md="last">
-            <div class="sticky">
-              <workout-summary v-model="workout" :edit="edit" @save="workoutSaveDialog = true" />
-            </div>
-          </v-col>
+      <v-row v-if="workout">
+        <v-col cols="12" md="5" order-md="last">
+          <div class="position-sticky top-0">
+            <workout-summary v-model="workout" :edit="edit" @save="workoutSaveDialog = true" />
+          </div>
+        </v-col>
 
-          <v-col cols="12" md="7" order-md="first">
-            <div class="workout">
-              <exercise-list v-model="workout" :edit="edit" @add="workout?.addExercise()" />
+        <v-col cols="12" md="7" order-md="first">
+          <div class="workout">
+            <exercise-list v-model="workout" :edit="edit" @add="workout?.addExercise()" />
 
-              <!-- save dialog -->
-              <workout-save
-                :show-dialog="workoutSaveDialog"
-                v-model="workout"
-                @toggle-dialog="workoutSaveDialog = !workoutSaveDialog"
-              />
-            </div>
-          </v-col>
-        </v-row>
-
-        <v-row v-else>
-          <v-col cols="12">
-            <v-empty-state
-              to="/workouts/new"
-              headline="Workout not found"
-              title="Community-based hangboard app"
-              text="Our workouts are community-driven and unique for each hangboard. Explore the 'Community' tab or create your own to share with fellow climbers."
-              :image="imgLogo"
-              action-text="Create a Workout"
-              @click:action="router.push('/workouts/new')"
+            <!-- save dialog -->
+            <workout-save
+              :show-dialog="workoutSaveDialog"
+              v-model="workout"
+              @toggle-dialog="workoutSaveDialog = !workoutSaveDialog"
             />
+          </div>
+        </v-col>
+      </v-row>
 
-            <missing-hangboard
-              v-model="missingHangboardDialog"
-              @show="missingHangboardDialog = !missingHangboardDialog"
-            />
-          </v-col>
-        </v-row>
-      </v-container>
+      <v-row v-else>
+        <v-col cols="12">
+          <v-empty-state
+            to="/workouts/new"
+            headline="Workout not found"
+            title="Community-based hangboard app"
+            text="Our workouts are community-driven and unique for each hangboard. Explore the 'Community' tab or create your own to share with fellow climbers."
+            :image="imgLogo"
+            action-text="Create a Workout"
+            @click:action="router.push('/workouts/new')"
+          />
+
+          <missing-hangboard
+            v-model="missingHangboardDialog"
+            @show="missingHangboardDialog = !missingHangboardDialog"
+          />
+        </v-col>
+      </v-row>
     </template>
 
     <template #fab>
@@ -219,12 +217,6 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-.sticky {
-  @media (min-width: 960px) {
-    position: sticky;
-    top: 68px;
-  }
-}
 .v-toolbar .v-btn--size-x-large {
   min-width: 64px;
   padding: 0 12px;
@@ -238,13 +230,20 @@ useHead({
 }
 </style>
 
-<style lang="scss">
-.v-fab__container {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  align-self: initial !important;
-  justify-content: flex-end;
+<style lang="scss" scoped>
+// @use '@/plugins/vuetify/settings' as settings;
+
+.v-fab {
+  :deep(.v-fab__container) {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    align-self: initial !important;
+    justify-content: flex-end;
+  }
+  &--extended :deep(.v-btn) {
+    border-radius: 0 !important;
+  }
 }
 </style>

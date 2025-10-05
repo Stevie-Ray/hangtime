@@ -27,7 +27,7 @@ useHead({
       <v-container>
         <v-row>
           <v-col cols="12" md="5" order-md="last">
-            <div class="sticky">
+            <div class="position-sticky top-0">
               <map-container :zoom="1" />
             </div>
           </v-col>
@@ -70,11 +70,4 @@ useHead({
   </app-container>
 </template>
 
-<style lang="scss" scoped>
-.sticky {
-  @media (min-width: 960px) {
-    position: sticky;
-    top: 68px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

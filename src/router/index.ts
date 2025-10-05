@@ -10,7 +10,7 @@ import { useAuthenticationStore } from '@/stores/authentication.store'
 const AccountPage = () => import('@/views/account/AccountPage.vue')
 const AccountGeneralPage = () => import('@/views/account/AccountGeneralPage.vue')
 const AccountHangboardsPage = () => import('@/views/account/AccountHangboardsPage.vue')
-const AccountHelpPage = () => import('@/views/account/AccountHelpPage.vue')
+const AccountNotificationsPage = () => import('@/views/account/AccountNotificationsPage.vue')
 const AccountPrivacyPage = () => import('@/views/account/AccountPrivacyPage.vue')
 const AccountProfilePage = () => import('@/views/account/AccountProfilePage.vue')
 const AccountSubscriptionPage = () => import('@/views/account/AccountSubscriptionPage.vue')
@@ -30,6 +30,10 @@ const WorkoutsPage = () => import('@/views/workouts/WorkoutsPage.vue')
 const WorkoutsDetailPage = () => import('@/views/workouts/WorkoutsDetailPage.vue')
 const WorkoutsTimerPage = () => import('@/views/workouts/WorkoutsTimerPage.vue')
 const WorkoutsQuickPage = () => import('@/views/workouts/WorkoutsQuickPage.vue')
+// Quests
+const QuestsPage = () => import('@/views/quests/QuestsPage.vue')
+// Profile
+const ProfilePage = () => import('@/views/profile/ProfilePage.vue')
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -54,9 +58,9 @@ const routes: Array<RouteRecordRaw> = [
     name: 'CheckLoginPage',
     meta: { public: true }
   },
-  { path: '/activity', component: ActivityPage, name: 'ActivityPage' },
+  { path: '/feed', component: ActivityPage, name: 'ActivityPage' },
   {
-    path: '/activity/leaderboard',
+    path: '/leaderboard',
     component: ActivityLeaderboardPage,
     name: 'ActivityLeaderboardPage'
   },
@@ -86,16 +90,23 @@ const routes: Array<RouteRecordRaw> = [
     component: WorkoutsPage,
     name: 'WorkoutsCommunityPage'
   },
+  { path: '/quests', component: QuestsPage, name: 'QuestsPage' },
+  { path: '/profile', component: ProfilePage, name: 'ProfilePage' },
   { path: '/account', component: AccountPage, name: 'AccountPage' },
+  {
+    path: '/account/general',
+    component: AccountGeneralPage,
+    name: 'AccountGeneralPage'
+  },
   {
     path: '/account/profile',
     component: AccountProfilePage,
     name: 'AccountProfilePage'
   },
   {
-    path: '/account/general',
-    component: AccountGeneralPage,
-    name: 'AccountGeneralPage'
+    path: '/account/notifications',
+    component: AccountNotificationsPage,
+    name: 'AccountNotificationsPage'
   },
   {
     path: '/account/hangboards',
@@ -116,11 +127,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/account/subscription',
     component: AccountSubscriptionPage,
     name: 'AccountSubscriptionPage'
-  },
-  {
-    path: '/account/help',
-    component: AccountHelpPage,
-    name: 'AccountHelpPage'
   },
   {
     path: '/brands',
