@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { isDevelopment } from '@/helpers'
+</script>
 
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto" v-if="isDevelopment()">
     <template #prepend>
       <v-icon>$trophy</v-icon>
     </template>

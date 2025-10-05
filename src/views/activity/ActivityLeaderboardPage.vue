@@ -42,6 +42,7 @@ useHead({
   title: 'Leaderboard',
   meta: [{ name: 'description', content: '' }]
 })
+import { isDevelopment } from '@/helpers'
 
 // DUMMY DATA
 const ranks = [
@@ -70,7 +71,7 @@ const currentRank = 4
   <app-container>
     <template #default>
       <v-row>
-        <v-col align="center" cols="12">
+        <v-col align="center" cols="12" v-if="isDevelopment()">
           <div class="d-flex overflow-hidden position-relative" style="height: 80px">
             <div class="grid" :style="{ '--offset': currentRank }">
               <div v-for="(rank, index) in ranks" :key="rank.name">
@@ -85,7 +86,7 @@ const currentRank = 4
             </div>
           </div>
         </v-col>
-        <v-col align="center" cols="12">
+        <v-col align="center" cols="12" v-if="isDevelopment()">
           <div class="text-h4 text-secondary">{{ ranks[currentRank]?.name ?? '' }}</div>
           <div class="text-h6 py-4 d-none d-md-block">
             De top 5 gaan door naar de volgende divisie

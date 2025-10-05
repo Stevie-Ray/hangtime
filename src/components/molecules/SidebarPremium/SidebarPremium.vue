@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { isDevelopment } from '@/helpers'
+</script>
 
 <template>
-  <v-card>
+  <v-card v-if="isDevelopment()">
     <v-card-title> Probeer Premium gratis </v-card-title>
     <v-card-text>
       Geen advertenties, persoonlijke oefeningen en onbeperkt Legendarisch!

@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { isDevelopment } from '@/helpers'
+</script>
 
 <template>
-  <v-row>
+  <v-row v-if="isDevelopment()">
     <v-col cols="12">
       <div class="d-flex justify-space-between">
         <v-btn prepend-icon="$calendar" variant="flat">2</v-btn>

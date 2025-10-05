@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { isDevelopment } from '@/helpers'
+</script>
 
 <template>
-  <v-card>
+  <v-card v-if="isDevelopment()">
     <v-card-title> Weekelijkse missies </v-card-title>
     <v-card-text>
       <div class="text-h6">Doe 3 workouts</div>

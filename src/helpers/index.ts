@@ -410,3 +410,7 @@ export function weightUnit(user: IUser) {
   }
   return 'kg'
 }
+
+export function isDevelopment() {
+  return import.meta.env.DEV
+}

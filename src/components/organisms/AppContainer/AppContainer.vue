@@ -6,6 +6,7 @@ import { useAuthenticationStore } from '@/stores/authentication.store'
 import TopBanner from '@/components/molecules/TopBanner/TopBanner.vue'
 import InlineSvg from 'vue-inline-svg'
 import imgLogo from '@/assets/logo.svg'
+import { isDevelopment } from '@/helpers'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -59,8 +60,20 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
         <v-list-item link prepend-icon="$clipboardTextMultiple" title="Feed" :to="'/feed'" />
         <v-list-item link prepend-icon="$timer" title="Trainen" :to="'/workouts'" />
         <v-list-item link prepend-icon="$trophy" title="Competitie" :to="'/leaderboard'" />
-        <v-list-item link prepend-icon="$calendar" title="Missies" :to="'/quests'" />
-        <v-list-item link prepend-icon="$account" title="Profiel" :to="'/profile'" />
+        <v-list-item
+          link
+          prepend-icon="$calendar"
+          title="Missies"
+          :to="'/quests'"
+          v-if="isDevelopment()"
+        />
+        <v-list-item
+          link
+          prepend-icon="$account"
+          title="Profiel"
+          :to="'/profile'"
+          v-if="isDevelopment()"
+        />
         <v-list-item link prepend-icon="$cog" title="Instellingen" :to="'/account/general'" />
       </v-list>
     </v-list>
