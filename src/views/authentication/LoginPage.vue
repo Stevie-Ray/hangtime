@@ -444,7 +444,7 @@ useHead({
           </v-card-subtitle>
           <v-card-text>
             <v-list :items="usps" item-props lines="three" aria-labelledby="usp-title" tabindex="0">
-              <v-list-item v-for="(usp, index) in usps" :value="usp" :key="index" role="option">
+              <v-list-item v-for="(usp, index) in usps" :value="usp" :key="index">
                 <template v-slot:prepend>
                   <v-icon :icon="usp.prependIcon"></v-icon>
                 </template>
