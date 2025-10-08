@@ -11,7 +11,7 @@ const { user } = storeToRefs(useAuthenticationStore())
 <template>
   <v-card v-if="isDevelopment()">
     <!-- Non-subscribed state -->
-    <template v-if="user?.subscribed">
+    <template v-if="!user?.subscribed">
       <v-card-title> Try Premium </v-card-title>
       <v-card-subtitle> Unlock all features </v-card-subtitle>
 
