@@ -41,13 +41,17 @@ export default defineConfig({
     {
       name: 'auth',
       testMatch: /.*auth\.setup\.ts/,
-      dependencies: ['login']
+      dependencies: ['login'],
+      use: {
+        viewport: { width: 1280, height: 720 }
+      }
     },
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: 'e2e/.auth/user.json'
+        storageState: 'e2e/.auth/user.json',
+        viewport: { width: 1280, height: 720 }
       },
       dependencies: ['auth'],
       testMatch: /.*\.spec\.ts/

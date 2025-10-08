@@ -27,7 +27,7 @@ setup('authenticate', async ({ page }) => {
   await loginButton.click()
 
   // Wait for successful login
-  const workoutLink = page.getByRole('listitem').filter({ hasText: 'Workouts' })
+  const workoutLink = page.getByRole('link', { name: 'Workouts' })
   await expect(workoutLink).toBeVisible({ timeout: 10000 })
 
   // Copy the data in IndexedDB to the local storage
