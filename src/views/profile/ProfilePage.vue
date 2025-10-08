@@ -21,8 +21,8 @@
             <div class="d-flex ga-4">
               <div><v-icon icon="$calendar" size="40" /></div>
               <div>
-                <div class="text-h6">2</div>
-                <div class="text-caption">Weekreeks</div>
+                <div class="text-h6">{{ weekStreak }}</div>
+                <div class="text-caption">{{ t('Week streak') }}</div>
               </div>
             </div>
           </v-sheet>
@@ -81,12 +81,14 @@ import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useAuthenticationStore } from '@/stores/authentication.store'
+import { useActivitiesStore } from '@/stores/activities.store'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import SidebarStatistics from '@/components/molecules/SidebarStatistics/SidebarStatistics.vue'
 import SidebarLinks from '@/components/molecules/SidebarLinks/SidebarLinks.vue'
 
 const { t } = useI18n()
 const { user } = storeToRefs(useAuthenticationStore())
+const { weekStreak } = useActivitiesStore()
 
 const formattedRegistrationDate = computed(() => {
   if (!user.value?.createTimestamp) return t('unknown', 'onbekend')

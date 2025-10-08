@@ -1,5 +1,5 @@
 import { defineStore, storeToRefs } from 'pinia'
-import { ref, type Ref } from 'vue'
+import { ref, computed, type Ref } from 'vue'
 import UserActivitiesDB from '@/plugins/firebase/user-activities-db'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import type { IActivity } from '@/interfaces/activity.interface'
@@ -43,9 +43,76 @@ export const useActivitiesStore = defineStore('activities', () => {
     }
   }
 
+  /**
+   * Calculate the current week streak based on activities
+   * @return {number} The current week streak count
+   */
+  const weekStreak = computed((): number => {
+    if (!activities.value.length) return 0
+
+    // Sort activities by date (most recent first)
+    const sortedActivities = [...activities.value].sort(
+      (a, b) => new Date(b.start_date_local).getTime() - new Date(a.start_date_local).getTime()
+    )
+
+    let streak = 0
+    const today = new Date()
+    const currentWeekStart = getWeekStart(today)
+
+    // Check if there's an activity this week
+    const hasActivityThisWeek = sortedActivities.some((activity) => {
+      const activityDate = new Date(activity.start_date_local)
+      return activityDate >= currentWeekStart
+    })
+
+    if (!hasActivityThisWeek) return 0
+
+    streak = 1 // Count current week
+
+    // Check previous weeks
+    let checkDate = new Date(currentWeekStart)
+    checkDate.setDate(checkDate.getDate() - 7) // Go back one week
+
+    const lastActivity = sortedActivities[sortedActivities.length - 1]
+    const lastActivityDate = lastActivity ? new Date(lastActivity.start_date_local) : new Date()
+
+    while (checkDate >= lastActivityDate) {
+      const weekStart = getWeekStart(checkDate)
+      const weekEnd = new Date(weekStart)
+      weekEnd.setDate(weekEnd.getDate() + 6)
+
+      const hasActivityInWeek = sortedActivities.some((activity) => {
+        const activityDate = new Date(activity.start_date_local)
+        return activityDate >= weekStart && activityDate <= weekEnd
+      })
+
+      if (hasActivityInWeek) {
+        streak++
+        checkDate = new Date(checkDate.getTime() - 7 * 24 * 60 * 60 * 1000) // Go back another week
+      } else {
+        break
+      }
+    }
+
+    return streak
+  })
+
+  /**
+   * Get the start of the week (Monday) for a given date
+   * @param date The date to get the week start for
+   * @return {Date} The start of the week
+   */
+  function getWeekStart(date: Date): Date {
+    const d = new Date(date)
+    const day = d.getDay()
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1) // Adjust when day is Sunday
+    return new Date(d.setDate(diff))
+  }
+
   return {
     activities,
     createUserActivity,
-    fetchUserActivity
+    fetchUserActivity,
+    weekStreak
   }
 })

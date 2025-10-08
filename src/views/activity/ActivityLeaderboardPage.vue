@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
@@ -10,20 +10,23 @@ import { time } from '@/helpers'
 
 const { t } = useI18n()
 
-const { fetchLeaderboard } = useWorkoutsStore()
-
-const { getLeaderboard } = useWorkoutsStore()
+const { fetchLeaderboard, getLeaderboard } = useWorkoutsStore()
 
 const rank = ref<'completed.amount' | 'completed.time' | 'completed.hold' | null>(
   'completed.amount'
 )
 
+// Fetch initial leaderboard data on component mount
+onMounted(async () => {
+  await fetchLeaderboard(rank.value)
+})
+
 watch(
   rank,
-  () => {
-    fetchLeaderboard(rank.value)
+  async () => {
+    await fetchLeaderboard(rank.value)
   },
-  { immediate: true }
+  { immediate: false }
 )
 
 const selectedLeaderboard = computed(() => getLeaderboard(rank.value))
@@ -125,7 +128,7 @@ const currentRank = 4
         <v-col cols="12">
           <v-table>
             <v-table>
-              <tbody v-if="selectedLeaderboard">
+              <tbody v-if="selectedLeaderboard && selectedLeaderboard.leaderboard">
                 <tr v-for="(user, index) in selectedLeaderboard.leaderboard" :key="user.id">
                   <td>
                     <span class="d-inline-block" style="min-width: 30px">{{ index + 1 }}. </span>
