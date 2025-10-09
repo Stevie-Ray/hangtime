@@ -56,8 +56,9 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
   </v-app-bar>
 
   <v-navigation-drawer width="244" :rail="$vuetify.display.md" :permanent="$vuetify.display.md">
-    <v-sheet class="d-flex justify-center align-center" height="128" width="100%">
+    <v-sheet class="d-flex justify-center align-center flex-column" height="128" width="100%">
       <inline-svg height="64" :src="imgLogo" width="100%" />
+      <span class="font-weight-bold d-none d-lg-block" style="user-select: none">HangTime</span>
     </v-sheet>
 
     <v-list>

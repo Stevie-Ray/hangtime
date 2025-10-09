@@ -130,19 +130,21 @@ const currentRank = 4
             <v-table>
               <tbody v-if="selectedLeaderboard && selectedLeaderboard.leaderboard">
                 <tr v-for="(user, index) in selectedLeaderboard.leaderboard" :key="user.id">
-                  <td>
+                  <td class="text-truncate w-100" style="max-width: 0">
                     <span class="d-inline-block" style="min-width: 30px">{{ index + 1 }}. </span>
                     <v-avatar size="small" color="grey-darken-1" class="mr-2">
                       <v-img
+                        :title="user.id"
                         :src="user.photoURL || undefined"
                         :alt="user.displayName || undefined"
                         width="40"
                         height="40"
                       ></v-img>
                     </v-avatar>
-                    <span v-if="user.displayName" class="text-truncate">
-                      {{ user.displayName }}
-                    </span>
+                    <span>{{ user.displayName }}</span>
+                  </td>
+                  <td :title="user.country?.name">
+                    {{ user.country?.emoji }}
                   </td>
                   <td v-if="rank === 'completed.amount'" class="text-right">
                     {{ user.completed?.amount }}
@@ -175,18 +177,6 @@ const currentRank = 4
 </template>
 
 <style lang="scss" scoped>
-.v-table > .v-table__wrapper > table {
-  & > tbody,
-  & > thead,
-  & > tfoot {
-    & > tr > td {
-      font-size: 1rem;
-      letter-spacing: 0.009375em;
-      line-height: 1.5rem;
-    }
-  }
-}
-
 .grid {
   align-items: center;
   bottom: 0;
