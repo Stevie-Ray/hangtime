@@ -3,8 +3,8 @@ import { useLocalStorage } from '@vueuse/core'
 
 const items = [
   {
-    title: 'We are on Discord!',
-    subtitle: 'Join to get the latest news and updates.',
+    title: 'We’ve got a HangTime Discord!',
+    subtitle: 'Come hang out, share feedback, talk training and request new boards.',
     link: 'https://discord.gg/f7QQnEBQQt',
     color: '#5865f2',
     icon: '$forumOutline',
@@ -24,13 +24,16 @@ const show = useLocalStorage('topBannerVisible', true)
       class="flex-grow-1 py-6"
       v-for="item in items"
       :key="item.title"
+      lines="two"
     >
       <template v-slot:prepend>
         <v-avatar color="white">
           <v-icon :color="item.color">{{ item.icon }}</v-icon>
         </v-avatar>
       </template>
-      <v-list-item-title>{{ item.title }}</v-list-item-title>
+      <v-list-item-title class="text-subtitle-2 text-md-subtitle-1 font-weight-medium">{{
+        item.title
+      }}</v-list-item-title>
       <v-list-item-subtitle>
         {{ item.subtitle }}
       </v-list-item-subtitle>

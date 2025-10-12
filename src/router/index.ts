@@ -91,7 +91,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'WorkoutsCommunityPage'
   },
   { path: '/quests', component: QuestsPage, name: 'QuestsPage' },
-  { path: '/profile', component: ProfilePage, name: 'ProfilePage' },
+  { path: '/profile/:userId', component: ProfilePage, name: 'ProfilePage' },
   { path: '/account', component: AccountPage, name: 'AccountPage' },
   {
     path: '/account/general',

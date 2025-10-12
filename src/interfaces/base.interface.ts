@@ -10,7 +10,7 @@ export interface IBase {
   /**
    * The date and time when the entity was created (optional).
    */
-  createdTimestamp?: Date
+  createTimestamp?: Date
 
   /**
    * The date and time when the entity was last updated (optional).

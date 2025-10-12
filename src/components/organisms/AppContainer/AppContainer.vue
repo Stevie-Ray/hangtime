@@ -77,7 +77,7 @@ const { toolbarPrepend = false, hideFooter = false } = defineProps<{
           link
           prepend-icon="$account"
           :title="t('Profile')"
-          :to="'/profile'"
+          :to="`/profile/${user?.id}`"
           v-if="isDevelopment()"
         />
         <v-list-item link prepend-icon="$cog" :title="t('Settings')" :to="'/account/general'" />

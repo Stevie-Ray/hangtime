@@ -8,9 +8,10 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 // Used Icons
 import {
   mdiAccount,
-  mdiAccountBox,
+  mdiAccountCheck,
   mdiAccountGroup,
   mdiAccountMultiple,
+  mdiAccountPlus,
   mdiAccountVoice,
   mdiApple,
   mdiArrowDown,
@@ -113,9 +114,10 @@ export default createVuetify({
     aliases: {
       ...aliases,
       account: mdiAccount,
-      accountBox: mdiAccountBox,
+      accountCheck: mdiAccountCheck,
       accountGroup: mdiAccountGroup,
       accountMultiple: mdiAccountMultiple,
+      accountPlus: mdiAccountPlus,
       accountVoice: mdiAccountVoice,
       apple: mdiApple,
       arrowDown: mdiArrowDown,

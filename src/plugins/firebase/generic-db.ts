@@ -19,20 +19,19 @@ import {
   DocumentReference,
   DocumentSnapshot,
   startAfter,
-  QuerySnapshot
+  QueryConstraint
 } from 'firebase/firestore/lite'
-import type { WhereFilterOp, OrderByDirection, DocumentData } from 'firebase/firestore/lite'
+import type { WhereFilterOp, OrderByDirection, DocumentData, Query } from 'firebase/firestore/lite'
 import { toRaw, isRef, isReactive, isProxy, ref } from 'vue'
 import firebaseApp from '@/plugins/firebase'
+// FIX: Timestamp
+import { getAuth } from 'firebase/auth'
+const auth = getAuth(firebaseApp)
 
 export function deepToRaw(sourceObj: unknown): unknown {
   const objectIterator = (input: unknown): unknown => {
-    if (Array.isArray(input)) {
-      return input.map((item) => objectIterator(item))
-    }
-    if (isRef(input) || isReactive(input) || isProxy(input)) {
-      return objectIterator(toRaw(input))
-    }
+    if (Array.isArray(input)) return input.map(objectIterator)
+    if (isRef(input) || isReactive(input) || isProxy(input)) return objectIterator(toRaw(input))
     if (input && typeof input === 'object') {
       return Object.keys(input as object).reduce(
         (acc, key) => {
@@ -44,23 +43,28 @@ export function deepToRaw(sourceObj: unknown): unknown {
     }
     return input
   }
-
   return objectIterator(sourceObj)
 }
 
 const db: Firestore = getFirestore(firebaseApp)
 
-export default class GenericDB<T> {
+/**
+ * Checks whether a document needs a fixed createTimestamp.
+ */
+function needsCreateFix(raw: Record<string, unknown>): boolean {
+  const v = raw?.createTimestamp
+  return !(v instanceof Timestamp)
+}
+
+export default class GenericDB<T extends DocumentData> {
   /**
    * Path of the collection.
    */
   public collectionPath: string
-
   /**
    * Stores the last visible document for pagination.
    */
-  protected lastVisible: DocumentSnapshot | null = null
-
+  protected lastVisible: DocumentSnapshot<T> | null = null
   /**
    * Indicates if the last result set is smaller than the requested amount.
    */
@@ -80,61 +84,76 @@ export default class GenericDB<T> {
 
   /**
    * Create a document in the collection.
-   * @param data
-   * @param id
+   * @param data - The data to create the document with.
+   * @param id - The ID of the document to create.
+   * @returns The created document.
    */
   async create(data: Partial<T>, id?: string | null): Promise<T & { id: string }> {
-    const collectionRef = collection(db, this.collectionPath)
-    const serverTimestampValue = serverTimestamp()
+    const colRef = collection(db, this.collectionPath) as CollectionReference<T>
+    const payload = {
+      ...(data as T),
+      createTimestamp: serverTimestamp(),
+      updateTimestamp: serverTimestamp()
+    } as T
 
-    const dataToCreate = {
-      ...data,
-      createTimestamp: serverTimestampValue,
-      updateTimestamp: serverTimestampValue
+    let docRef: DocumentReference<T>
+    if (id == null) {
+      docRef = await addDoc(colRef, payload)
+    } else {
+      docRef = doc(colRef, id)
+      await setDoc(docRef, payload, { merge: false })
     }
 
-    const createPromise =
-      id === null || id === undefined
-        ? // Create doc with generated id
-          addDoc(collectionRef, dataToCreate).then((doc) => doc.id)
-        : // Create doc with custom id
-          setDoc(doc(collectionRef, id), dataToCreate).then(() => id)
+    const snap = await getDoc(docRef)
+    const snapData = snap.data()
+    if (!snapData) return { id: docRef.id, ...(data as T) }
 
-    const docId = await createPromise
-
-    return {
-      id: docId,
-      ...data,
-      createTimestamp: new Date(),
-      updateTimestamp: new Date()
-    } as unknown as T & { id: string }
+    const converted = this.convertObjectTimestampPropertiesToDate(snapData) as T
+    return { id: docRef.id, ...converted }
   }
 
   /**
-   * Read a document in the collection
-   * @param id
+   * Checks if the document is owned by the current user.
+   * @param id - The ID of the document to check.
+   * @returns True if the document is owned by the current user, false otherwise.
+   */
+  isOwnDocument(id: string): boolean {
+    return id === auth.currentUser?.uid
+  }
+
+  /**
+   * Read a document in the collection.
+   * @param id - The ID of the document to read.
+   * @returns The document.
    */
   async read(id: string): Promise<(T & { id: string }) | null> {
-    const docRef: DocumentReference = doc(db, this.collectionPath, id)
+    const docRef = doc(db, this.collectionPath, id) as DocumentReference<T>
     const result = await getDoc(docRef)
+    if (!result.exists()) return null
 
-    const data = result.exists() ? result.data() : null
+    const raw = result.data() as Record<string, unknown>
 
-    if (data === null || data === undefined) return null
+    // FIX: if createTimestamp is missing or broken, reset it.
+    if (needsCreateFix(raw) && this.isOwnDocument(id)) {
+      try {
+        await updateDoc(docRef, { createTimestamp: serverTimestamp() })
+        raw.createTimestamp = serverTimestamp()
+      } catch {
+        // ignore if permissions fail
+      }
+    }
 
-    this.convertObjectTimestampPropertiesToDate(data)
-
-    return { id, ...data } as T & { id: string }
+    const converted = this.convertObjectTimestampPropertiesToDate(raw) as T
+    return { id, ...converted }
   }
 
   /**
    * Retrieves all documents from the Firestore collection.
-   *
-   * @param {Array<[string, WhereFilterOp, unknown]> | null} constraints - Array of constraints for the query.
-   * @param {string | null} order - Field to sort the results by.
-   * @param {OrderByDirection} direction - Field to manage the order direction.
-   * @param {number | null} amount - Maximum number of documents to retrieve.
-   * @returns {Promise<(T & { id: string })[]>} - Array of documents retrieved.
+   * @param constraints - Array of constraints for the query.
+   * @param order - Field to sort the results by.
+   * @param direction - Order direction.
+   * @param amount - Maximum number of documents to retrieve.
+   * @returns Array of documents retrieved.
    */
   async readAll(
     constraints: Array<[string, WhereFilterOp, unknown]> | null = null,
@@ -142,71 +161,55 @@ export default class GenericDB<T> {
     direction: OrderByDirection = 'desc',
     amount: number | null = null
   ): Promise<(T & { id: string })[]> {
-    // Do not fetch data if lastResult is true
-    if (this.lastResult.value) {
-      return []
-    }
+    if (this.lastResult.value) return []
 
-    const collectionRef: CollectionReference = collection(db, this.collectionPath)
+    const colRef = collection(db, this.collectionPath) as CollectionReference<T>
+    let q: Query<T> = query(colRef) as Query<T>
+    const combinedQuery: QueryConstraint[] = []
 
-    let q = query(collectionRef)
-
-    const combinedQuery = []
-
-    // Add query constraints if set
     if (constraints) {
-      constraints.forEach(([field, op, value]) => combinedQuery.push(where(field, op, value)))
+      constraints.forEach(([field, op, value]) =>
+        combinedQuery.push(where(field as string, op, value))
+      )
     }
 
-    // Order query by if set
-    if (order) {
-      combinedQuery.push(orderBy(order, direction))
-    }
+    if (order) combinedQuery.push(orderBy(order, direction))
+    if (this.lastVisible && amount !== null) combinedQuery.push(startAfter(this.lastVisible))
+    if (amount !== null) combinedQuery.push(limit(amount))
 
-    // Start query at if set
-    if (this.lastVisible) {
-      combinedQuery.push(startAfter(this.lastVisible))
-    }
-
-    // limit query if set
-    if (amount !== null) {
-      combinedQuery.push(limit(amount))
-    }
-
-    if (combinedQuery.length > 0) {
-      q = query(collectionRef, ...combinedQuery)
-    }
+    if (combinedQuery.length > 0) q = query(colRef, ...combinedQuery)
 
     const querySnapshot = await getDocs(q)
-
-    // Return the last document
-    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
-
-    // Check if fewer results than requested are returned
+    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] ?? null
     this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
-    const formatResult = (result: QuerySnapshot<DocumentData>): (T & { id: string })[] =>
-      result.docs.map(
-        (ref: DocumentSnapshot<DocumentData>) =>
-          this.convertObjectTimestampPropertiesToDate({
-            id: ref.id,
-            ...ref.data()
-          }) as T & { id: string }
-      )
+    const result: (T & { id: string })[] = []
+    for (const refSnap of querySnapshot.docs) {
+      const raw = refSnap.data() as Record<string, unknown>
 
-    return formatResult(querySnapshot)
+      const converted = this.convertObjectTimestampPropertiesToDate(raw) as T
+      result.push({ id: refSnap.id, ...converted })
+    }
+
+    return result
   }
 
   /**
    * Update a document in the collection
-   * @param data
+   * @param data - The data to update the document with.
+   * @returns The ID of the updated document.
    */
   async update(data: T & { id: string }): Promise<string> {
     const { id } = data
-    const clonedData = structuredClone(deepToRaw(data))
-    delete (clonedData as Partial<T & { id: string }>).id
+    const clonedData = structuredClone(deepToRaw(data)) as Partial<T & { id: string }>
+    delete clonedData.id
 
-    const docRef: DocumentReference = doc(db, this.collectionPath, id)
+    // FIX: Never update createTimestamp
+    if (clonedData && Object.prototype.hasOwnProperty.call(clonedData, 'createTimestamp')) {
+      delete (clonedData as Record<string, unknown>).createTimestamp
+    }
+
+    const docRef = doc(db, this.collectionPath, id) as DocumentReference<T>
     await updateDoc(docRef, {
       ...(clonedData as object),
       updateTimestamp: serverTimestamp()
@@ -217,33 +220,30 @@ export default class GenericDB<T> {
 
   /**
    * Delete a document in the collection
-   * @param id
+   * @param id - The ID of the document to delete.
    */
   async delete(id: string): Promise<void> {
-    const docRef: DocumentReference = doc(db, this.collectionPath, id)
+    const docRef = doc(db, this.collectionPath, id) as DocumentReference<T>
     await deleteDoc(docRef)
   }
 
   /**
    * Convert all object Timestamp properties to date
-   * @param obj
+   * @param input - The input to convert.
+   * @returns The converted input.
    */
-  convertObjectTimestampPropertiesToDate(obj: Record<string, unknown>): Record<string, unknown> {
-    const newObj: Record<string, unknown> = {}
-
-    Object.keys(obj)
-      .filter((prop) => obj[prop] instanceof Object)
-      .forEach((prop) => {
-        if (obj[prop] instanceof Timestamp) {
-          obj[prop] = (obj[prop] as Timestamp).toDate()
-        } else {
-          this.convertObjectTimestampPropertiesToDate(obj[prop] as Record<string, unknown>)
-        }
-      })
-
-    return {
-      ...obj,
-      ...newObj
+  convertObjectTimestampPropertiesToDate(input: unknown): unknown {
+    if (input instanceof Timestamp) return input.toDate()
+    if (Array.isArray(input))
+      return input.map((v) => this.convertObjectTimestampPropertiesToDate(v))
+    if (input && typeof input === 'object') {
+      const obj = input as Record<string, unknown>
+      const out: Record<string, unknown> = {}
+      for (const k of Object.keys(obj)) {
+        out[k] = this.convertObjectTimestampPropertiesToDate(obj[k])
+      }
+      return out
     }
+    return input
   }
 }

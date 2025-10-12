@@ -74,7 +74,15 @@ const currentRank = 4
   <app-container>
     <template #default>
       <v-row>
-        <v-col align="center" cols="12" v-if="isDevelopment()">
+        <v-col
+          class="d-flex justify-space-between align-center d-md-none"
+          cols="12"
+          v-if="isDevelopment()"
+        >
+          <div class="text-h6 text-secondary">{{ ranks[currentRank]?.name ?? '' }}</div>
+          <div class="font-weight-bold">2 dagen, 3 uur</div>
+        </v-col>
+        <v-col cols="12" v-if="isDevelopment()">
           <div class="d-flex overflow-hidden position-relative" style="height: 80px">
             <div class="grid" :style="{ '--offset': currentRank }">
               <div v-for="(rank, index) in ranks" :key="rank.name">
@@ -89,12 +97,10 @@ const currentRank = 4
             </div>
           </div>
         </v-col>
-        <v-col align="center" cols="12" v-if="isDevelopment()">
+        <v-col class="d-none d-md-flex flex-column align-center" cols="12" v-if="isDevelopment()">
           <div class="text-h4 text-secondary">{{ ranks[currentRank]?.name ?? '' }}</div>
-          <div class="text-h6 py-4 d-none d-md-block">
-            De top 5 gaan door naar de volgende divisie
-          </div>
-          <strong class="py-4 d-none d-md-block">2 dagen, 3 uur</strong>
+          <div class="text-h6 py-4">De top 5 gaan door naar de volgende divisie</div>
+          <div class="font-weight-bold py-4">2 dagen, 3 uur</div>
         </v-col>
 
         <v-col cols="12">
@@ -102,7 +108,7 @@ const currentRank = 4
             <template v-slot:activator="{ props }">
               <v-btn
                 color="surface"
-                class="justify-space-between"
+                class="justify-space-between mb-1"
                 v-bind="props"
                 block
                 :append-icon="leaderboardMenu ? '$chevronDown' : '$chevronUp'"
@@ -124,41 +130,48 @@ const currentRank = 4
               </v-card-text>
             </v-card>
           </v-menu>
-        </v-col>
-        <v-col cols="12">
-          <v-table>
-            <v-table>
-              <tbody v-if="selectedLeaderboard && selectedLeaderboard.leaderboard">
-                <tr v-for="(user, index) in selectedLeaderboard.leaderboard" :key="user.id">
-                  <td class="text-truncate w-100" style="max-width: 0">
-                    <span class="d-inline-block" style="min-width: 30px">{{ index + 1 }}. </span>
-                    <v-avatar size="small" color="grey-darken-1" class="mr-2">
-                      <v-img
-                        :title="user.id"
-                        :src="user.photoURL || undefined"
-                        :alt="user.displayName || undefined"
-                        width="40"
-                        height="40"
-                      ></v-img>
-                    </v-avatar>
-                    <span>{{ user.displayName }}</span>
-                  </td>
-                  <td :title="user.country?.name">
+
+          <v-list v-if="selectedLeaderboard && selectedLeaderboard.leaderboard" lines="one">
+            <v-list-item
+              v-for="(user, index) in selectedLeaderboard.leaderboard"
+              :key="user.id"
+              :to="isDevelopment() ? `/profile/${user.id}` : undefined"
+            >
+              <template #prepend>
+                <span class="d-inline-block" style="min-width: 30px">{{ index + 1 }}. </span>
+                <v-avatar size="small" color="grey-darken-1" class="mr-2">
+                  <v-img
+                    :title="user.id"
+                    :src="user.photoURL || undefined"
+                    :alt="user.displayName || undefined"
+                    width="40"
+                    height="40"
+                  ></v-img>
+                </v-avatar>
+              </template>
+
+              <template #title>
+                <span>{{ user.displayName }}</span>
+              </template>
+
+              <template #append>
+                <div class="d-flex items-center ga-4">
+                  <div :title="user.country?.name">
                     {{ user.country?.emoji }}
-                  </td>
-                  <td v-if="rank === 'completed.amount'" class="text-right">
+                  </div>
+                  <div v-if="rank === 'completed.amount'" class="text-right">
                     {{ user.completed?.amount }}
-                  </td>
-                  <td v-if="rank === 'completed.time'" class="text-right">
+                  </div>
+                  <div v-if="rank === 'completed.time'" class="text-right">
                     {{ time(user.completed?.time) }}
-                  </td>
-                  <td v-if="rank === 'completed.hold'" class="text-right">
+                  </div>
+                  <div v-if="rank === 'completed.hold'" class="text-right">
                     {{ time(user.completed?.hold) }}
-                  </td>
-                </tr>
-              </tbody>
-            </v-table>
-          </v-table>
+                  </div>
+                </div>
+              </template>
+            </v-list-item>
+          </v-list>
         </v-col>
       </v-row>
     </template>
