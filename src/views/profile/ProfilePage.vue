@@ -62,7 +62,7 @@
                 {{ $t('Follow') }}
               </v-btn>
               <v-btn v-else variant="flat" prepend-icon="$accountPlus" color="primary">
-                {{ $t('Invite fiends') }}
+                {{ $t('Invite friends') }}
               </v-btn>
             </div>
           </v-col>

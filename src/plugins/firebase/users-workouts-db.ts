@@ -10,6 +10,7 @@ import {
   Firestore,
   QueryConstraint,
   QueryDocumentSnapshot,
+  DocumentSnapshot,
   FieldPath
 } from 'firebase/firestore/lite'
 import type { OrderByDirection, WhereFilterOp } from 'firebase/firestore/lite'
@@ -70,7 +71,8 @@ export default class UsersWorkoutsDB extends GenericDB<IWorkout> {
 
     const querySnapshot = await getDocs(q)
 
-    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1] || null
+    this.lastVisible =
+      (querySnapshot.docs[querySnapshot.docs.length - 1] as DocumentSnapshot<IWorkout>) || null
 
     this.lastResult.value = amount !== null ? querySnapshot.docs.length < amount : false
 
