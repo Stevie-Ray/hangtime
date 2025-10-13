@@ -50,11 +50,12 @@ const shareWorkout = async () => {
 <template>
   <v-btn
     v-if="workout?.share"
-    :disabled="!online || !navigatorShare"
     color="text"
-    variant="text"
-    :size="size"
     icon="$shareVariant"
+    variant="text"
+    :disabled="!online || !navigatorShare"
+    :size="size"
+    :title="$t('Share')"
     @click="shareWorkout"
   ></v-btn>
 </template>

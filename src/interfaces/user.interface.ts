@@ -260,4 +260,28 @@ export interface IUser {
    * Optional, can be used for personalized exercise calculations.
    */
   weight?: number
+
+  /**
+   * Array of user IDs that this user follows.
+   * Optional, present only if the user follows other users.
+   */
+  following?: string[]
+
+  /**
+   * Array of user IDs that follow this user.
+   * Optional, present only if the user has followers.
+   */
+  followers?: string[]
+
+  /**
+   * Count of users this user follows.
+   * Optional, derived from the following array length.
+   */
+  followingCount?: number
+
+  /**
+   * Count of users following this user.
+   * Optional, derived from the followers array length.
+   */
+  followersCount?: number
 }

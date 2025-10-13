@@ -50,20 +50,44 @@
               </v-avatar>
             </v-sheet>
 
-            <div class="text-h4">{{ displayUser.displayName || $t('Anonymous User') }}</div>
-            <div>{{ $t('Joined') }} {{ formattedRegistrationDate }}</div>
-            <div>
+            <div class="text-h4 d-flex ga-2">
+              <span>{{ displayUser.displayName || $t('Anonymous User') }}</span>
+              <span :title="displayUser.country?.name" class="mt-1">
+                {{ displayUser.country?.emoji }}
+              </span>
+            </div>
+            <div class="mb-2">{{ $t('Joined') }} {{ formattedRegistrationDate }}</div>
+            <div class="mb-2">
+              <v-btn variant="text" color="primary" size="small">
+                {{ displayUser.followingCount || 0 }} {{ $t('Following') }}
+              </v-btn>
+              <v-btn variant="text" color="primary" size="small">
+                {{ displayUser.followersCount || 0 }} {{ $t('Followers') }}
+              </v-btn>
+            </div>
+            <div class="d-flex ga-2">
               <v-btn
                 v-if="displayUser.id !== currentUser?.id"
                 variant="flat"
                 prepend-icon="$accountPlus"
-                color="primary"
+                :color="isFollowingUser ? 'surface' : 'primary'"
+                :loading="isFollowLoading"
+                :disabled="isFollowLoading"
+                @click="handleFollowToggle"
+                style="flex-grow: 1"
               >
-                {{ $t('Follow') }}
+                {{ isFollowingUser ? $t('Following') : $t('Follow') }}
               </v-btn>
-              <v-btn v-else variant="flat" prepend-icon="$accountPlus" color="primary">
+              <v-btn
+                v-else
+                variant="flat"
+                prepend-icon="$accountPlus"
+                color="primary"
+                style="flex-grow: 1"
+              >
                 {{ $t('Invite friends') }}
               </v-btn>
+              <v-btn prepend-icon="$shareVariant" color="surface" />
             </div>
           </v-col>
         </v-row>
@@ -128,6 +152,14 @@
           <sidebar-statistics />
         </v-col>
         <v-col cols="12">
+          <sidebar-followers
+            :following-count="displayUser?.followingCount || 0"
+            :followers-count="displayUser?.followersCount || 0"
+            :following-users="followingUsers"
+            :followers-users="followersUsers"
+          />
+        </v-col>
+        <v-col cols="12">
           <sidebar-links />
         </v-col>
       </v-row>
@@ -143,8 +175,10 @@ import { useRoute, useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication.store'
 import { useActivitiesStore } from '@/stores/activities.store'
 import { useUserProfile } from '@/composables/useUserProfile'
+import { useFollow } from '@/composables/useFollow'
 import AppContainer from '@/components/organisms/AppContainer/AppContainer.vue'
 import SidebarStatistics from '@/components/molecules/SidebarStatistics/SidebarStatistics.vue'
+import SidebarFollowers from '@/components/molecules/SidebarFollowers/SidebarFollowers.vue'
 import SidebarLinks from '@/components/molecules/SidebarLinks/SidebarLinks.vue'
 
 const { t } = useI18n()
@@ -153,6 +187,14 @@ const router = useRouter()
 const { user: currentUser } = storeToRefs(useAuthenticationStore())
 const { weekStreak } = useActivitiesStore()
 const { user: profileUser, isLoading, error, fetchCurrentUser } = useUserProfile()
+const {
+  isLoading: isFollowLoading,
+  isFollowing,
+  toggleFollow,
+  followingUsers,
+  followersUsers,
+  fetchFollowData
+} = useFollow()
 
 // Determine which user to display
 const displayUser = computed(() => {
@@ -177,12 +219,33 @@ const formattedRegistrationDate = computed(() => {
   })
 })
 
+// Handle follow/unfollow action
+async function handleFollowToggle() {
+  if (!displayUser.value?.id) return
+
+  try {
+    await toggleFollow(displayUser.value.id)
+    // Optionally refresh the user data to get updated counts
+    await fetchCurrentUser()
+  } catch (err) {
+    console.error('Error toggling follow:', err)
+  }
+}
+
+// Check if current user is following the displayed user
+const isFollowingUser = computed(() => {
+  if (!displayUser.value?.id) return false
+  return isFollowing(displayUser.value.id)
+})
+
 // Watch for route changes to fetch user data when userId changes
 watch(
   () => route.params.userId,
   async (newUserId) => {
     if (newUserId) {
       await fetchCurrentUser()
+      // Fetch follow data for the user
+      await fetchFollowData(newUserId as string)
     }
   },
   { immediate: true }
@@ -192,6 +255,7 @@ watch(
 onMounted(async () => {
   if (route.params.userId) {
     await fetchCurrentUser()
+    await fetchFollowData(route.params.userId as string)
   }
 })
 </script>

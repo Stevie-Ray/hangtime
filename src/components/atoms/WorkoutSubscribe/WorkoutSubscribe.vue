@@ -63,6 +63,7 @@ const workoutSubscriber = () => {
     color="text"
     variant="text"
     :size="size"
+    :title="isHearted ? $t('Unsubscribe') : $t('Subscribe')"
     @click="clickable ? workoutSubscriber() : null"
   >
     {{ workout.subscribers_count ? workout.subscribers_count : workout.subscribers.length - 1 }}

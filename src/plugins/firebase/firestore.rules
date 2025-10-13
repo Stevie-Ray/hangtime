@@ -9,6 +9,14 @@ service cloud.firestore {
       allow create: if authenticated() && request.auth.uid == userId;
       allow update, delete: if authenticated() && request.auth.uid == userId;
     }
+    
+    // Allow authenticated users to update any user document for follow operations
+    match /users/{userId} {
+      allow update: if authenticated() && 
+        (request.auth.uid == userId || 
+         // Allow follow/unfollow operations on followers and following arrays
+         (request.resource.data.keys().hasAny(['followers', 'following', 'followersCount', 'followingCount'])));
+    }
 
     match /{path=**}/workouts/{workoutId} {
       allow read: if authenticated()

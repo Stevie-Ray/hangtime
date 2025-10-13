@@ -24,6 +24,10 @@ export class User extends BaseModel implements IUser {
   status?: string
   subscribed?: boolean
   weight?: number
+  following?: string[]
+  followers?: string[]
+  followingCount?: number
+  followersCount?: number
 
   constructor(user: Partial<IUser>) {
     super(user)
@@ -63,6 +67,14 @@ export class User extends BaseModel implements IUser {
     else delete this.subscribed
     if (user.weight !== undefined) this.weight = user.weight
     else delete this.weight
+    if (user.following !== undefined) this.following = user.following
+    else delete this.following
+    if (user.followers !== undefined) this.followers = user.followers
+    else delete this.followers
+    if (user.followingCount !== undefined) this.followingCount = user.followingCount
+    else delete this.followingCount
+    if (user.followersCount !== undefined) this.followersCount = user.followersCount
+    else delete this.followersCount
     // Initialize optional setting properties, deleteing is required for Firebase
     if (user.settings?.hangboard !== undefined) this.settings.hangboard = user.settings.hangboard
     else delete this.settings.hangboard
