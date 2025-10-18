@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { Loader } from '@googlemaps/js-api-loader'
+import { onMounted } from 'vue'
+import { setOptions, importLibrary } from '@googlemaps/js-api-loader'
 import rawCompanyGeoJSON from '@/helpers/companies.geojson?raw'
+
 const companyGeoJSON = JSON.parse(rawCompanyGeoJSON) as GeoJSON.FeatureCollection
 
 const {
@@ -13,139 +15,148 @@ const {
   zoom?: number
 }>()
 
-const loader = new Loader({
-  apiKey: 'AIzaSyAR46a4_gq6kCubEmnCvwcLfuaR8DIHOp8',
-  version: 'weekly'
+setOptions({
+  key: 'AIzaSyAR46a4_gq6kCubEmnCvwcLfuaR8DIHOp8',
+  v: 'weekly'
 })
 
 /* eslint no-undef: 0 */
-loader.load().then(async () => {
-  const { Map } = (await google.maps.importLibrary('maps')) as google.maps.MapsLibrary
+async function initMap() {
+  try {
+    const { Map } = await importLibrary('maps')
 
-  const map = new Map(document.querySelector('.map') as HTMLElement, {
-    zoom: zoom,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    mapTypeControl: false,
-    streetViewControl: false,
-    scaleControl: false,
-    zoomControlOptions: {
-      // style: google.maps.ZoomControlStyle.LARGE
-    },
-    styles: [
-      {
-        featureType: 'administrative',
-        elementType: 'all',
-        stylers: [{ saturation: '-100' }]
+    const map = new Map(document.querySelector('.map') as HTMLElement, {
+      zoom: zoom,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false,
+      streetViewControl: false,
+      scaleControl: false,
+      zoomControlOptions: {
+        // style: google.maps.ZoomControlStyle.LARGE
       },
-      {
-        featureType: 'administrative.province',
-        elementType: 'all',
-        stylers: [{ visibility: 'off' }]
-      },
-      {
-        featureType: 'landscape',
-        elementType: 'all',
-        stylers: [{ saturation: -100 }, { lightness: 65 }, { visibility: 'on' }]
-      },
-      {
-        featureType: 'poi',
-        elementType: 'all',
-        stylers: [{ saturation: -100 }, { lightness: '50' }, { visibility: 'simplified' }]
-      },
-      {
-        featureType: 'road',
-        elementType: 'all',
-        stylers: [{ saturation: '-100' }]
-      },
-      {
-        featureType: 'road.highway',
-        elementType: 'all',
-        stylers: [{ visibility: 'simplified' }]
-      },
-      {
-        featureType: 'road.arterial',
-        elementType: 'all',
-        stylers: [{ lightness: '30' }]
-      },
-      {
-        featureType: 'road.local',
-        elementType: 'all',
-        stylers: [{ lightness: '40' }]
-      },
-      {
-        featureType: 'transit',
-        elementType: 'all',
-        stylers: [{ saturation: -100 }, { visibility: 'simplified' }]
-      },
-      {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{ hue: '#ffff00' }, { lightness: -25 }, { saturation: -97 }]
-      },
-      {
-        featureType: 'water',
-        elementType: 'labels',
-        stylers: [{ lightness: -25 }, { saturation: -100 }]
+      styles: [
+        {
+          featureType: 'administrative',
+          elementType: 'all',
+          stylers: [{ saturation: '-100' }]
+        },
+        {
+          featureType: 'administrative.province',
+          elementType: 'all',
+          stylers: [{ visibility: 'off' }]
+        },
+        {
+          featureType: 'landscape',
+          elementType: 'all',
+          stylers: [{ saturation: -100 }, { lightness: 65 }, { visibility: 'on' }]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'all',
+          stylers: [{ saturation: -100 }, { lightness: '50' }, { visibility: 'simplified' }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'all',
+          stylers: [{ saturation: '-100' }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'all',
+          stylers: [{ visibility: 'simplified' }]
+        },
+        {
+          featureType: 'road.arterial',
+          elementType: 'all',
+          stylers: [{ lightness: '30' }]
+        },
+        {
+          featureType: 'road.local',
+          elementType: 'all',
+          stylers: [{ lightness: '40' }]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'all',
+          stylers: [{ saturation: -100 }, { visibility: 'simplified' }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [{ hue: '#ffff00' }, { lightness: -25 }, { saturation: -97 }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels',
+          stylers: [{ lightness: -25 }, { saturation: -100 }]
+        }
+      ]
+    })
+    const bounds = new google.maps.LatLngBounds()
+    const infowindow = new google.maps.InfoWindow()
+
+    // Apply the filter only if companyId is defined, otherwise show all features
+    const filteredGeoJSON = {
+      type: 'FeatureCollection',
+      features: companyId
+        ? companyGeoJSON.features.filter((feature) => feature.properties?.id === companyId)
+        : companyGeoJSON.features
+    }
+
+    // Add the filtered or full GeoJSON to the map
+    map.data.addGeoJson(filteredGeoJSON)
+
+    // Extend bounds for each feature to ensure the map fits all data
+    map.data.forEach((feature) => {
+      const geometry = feature.getGeometry()
+      if (geometry) {
+        geometry.forEachLatLng((latLng) => {
+          bounds.extend(latLng)
+        })
       }
-    ]
-  })
-  const bounds = new google.maps.LatLngBounds()
-  const infowindow = new google.maps.InfoWindow()
+    })
 
-  // Apply the filter only if companyId is defined, otherwise show all features
-  const filteredGeoJSON = {
-    type: 'FeatureCollection',
-    features: companyId
-      ? companyGeoJSON.features.filter((feature) => feature.properties?.id === companyId)
-      : companyGeoJSON.features
+    map.data.setStyle({
+      icon: {
+        url: '/img/icons/favicon.svg',
+        scaledSize: new google.maps.Size(20, 20),
+        anchor: new google.maps.Point(10, 10)
+      }
+    })
+
+    map.data.addListener('click', (event: google.maps.Data.MouseEvent) => {
+      const feature: google.maps.Data.Feature = event.feature
+
+      const name: string | undefined = feature.getProperty('name') as string
+      const latLng = event.latLng
+
+      if (!latLng || !name) {
+        return
+      }
+      bounds.extend(latLng)
+
+      const infoWindowContent = `<a href="/brands/${encodeURIComponent(
+        name.replace(/\s+/g, '-').toLowerCase()
+      )}">${name}</a>`
+
+      infowindow.setContent(infoWindowContent)
+      infowindow.setPosition(latLng)
+      infowindow.open(map)
+    })
+    map.fitBounds(bounds)
+    // restore the zoom level after the map is done scaling
+    const listener = google.maps.event.addListener(map, 'idle', () => {
+      map.setZoom(zoom)
+      google.maps.event.removeListener(listener)
+    })
+  } catch (error) {
+    console.error('Error loading Google Maps:', error)
   }
+}
 
-  // Add the filtered or full GeoJSON to the map
-  map.data.addGeoJson(filteredGeoJSON)
-
-  // Extend bounds for each feature to ensure the map fits all data
-  map.data.forEach((feature) => {
-    const geometry = feature.getGeometry()
-    if (geometry) {
-      geometry.forEachLatLng((latLng) => {
-        bounds.extend(latLng)
-      })
-    }
-  })
-
-  map.data.setStyle({
-    icon: {
-      url: '/img/icons/favicon.svg',
-      scaledSize: new google.maps.Size(20, 20),
-      anchor: new google.maps.Point(10, 10)
-    }
-  })
-
-  map.data.addListener('click', (event: google.maps.Data.MouseEvent) => {
-    const feature: google.maps.Data.Feature = event.feature
-
-    const name: string | undefined = feature.getProperty('name') as string
-    const latLng = event.latLng
-
-    if (!latLng || !name) {
-      return
-    }
-    bounds.extend(latLng)
-
-    const infoWindowContent = `<a href="/brands/${encodeURIComponent(
-      name.replace(/\s+/g, '-').toLowerCase()
-    )}">${name}</a>`
-
-    infowindow.setContent(infoWindowContent)
-    infowindow.setPosition(latLng)
-    infowindow.open(map)
-  })
-  map.fitBounds(bounds)
-  // restore the zoom level after the map is done scaling
-  const listener = google.maps.event.addListener(map, 'idle', () => {
-    map.setZoom(zoom)
-    google.maps.event.removeListener(listener)
-  })
+// Initialize the map when component is mounted
+onMounted(() => {
+  initMap()
 })
 </script>
 
